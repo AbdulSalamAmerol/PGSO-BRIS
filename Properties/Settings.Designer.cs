@@ -26,8 +26,8 @@ namespace pgso.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-DG6NT1C;Initial Catalog=db_pgso;Integrated Security=True;Trus" +
-            "tServerCertificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=KIMABZ\\SQL;Initial Catalog=BRIS;Integrated Security=True;Encrypt=Fals" +
+            "e;TrustServerCertificate=True")]
         public string strCon {
             get {
                 return ((string)(this["strCon"]));
