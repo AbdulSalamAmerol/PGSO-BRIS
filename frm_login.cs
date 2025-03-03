@@ -35,7 +35,7 @@ namespace pgso
         {
           
 
-            strSQL = "SELECT * FROM tbl_user WHERE username='" + txtuname.Text + "' AND password='" + txtpassword.Text + "'";
+            strSQL = "SELECT * FROM users WHERE name='" + txtuname.Text + "' AND password='" + txtpassword.Text + "'";
 
             cmd = new SqlCommand(strSQL, con.strCon);
             cmd.CommandTimeout = 360;
