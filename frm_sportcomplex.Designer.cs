@@ -86,7 +86,7 @@
             // txt_activity
             // 
             this.txt_activity.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_activity.Location = new System.Drawing.Point(73, 99);
+            this.txt_activity.Location = new System.Drawing.Point(73, 89);
             this.txt_activity.Multiline = true;
             this.txt_activity.Name = "txt_activity";
             this.txt_activity.Size = new System.Drawing.Size(452, 29);
@@ -97,7 +97,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(3, 106);
+            this.label10.Location = new System.Drawing.Point(3, 96);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(68, 17);
             this.label10.TabIndex = 22;
@@ -265,7 +265,7 @@
             // txt_address
             // 
             this.txt_address.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_address.Location = new System.Drawing.Point(73, 64);
+            this.txt_address.Location = new System.Drawing.Point(73, 54);
             this.txt_address.Multiline = true;
             this.txt_address.Name = "txt_address";
             this.txt_address.Size = new System.Drawing.Size(452, 29);
@@ -276,7 +276,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(3, 64);
+            this.label2.Location = new System.Drawing.Point(3, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 17);
             this.label2.TabIndex = 2;
