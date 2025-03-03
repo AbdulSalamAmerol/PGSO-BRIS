@@ -45,5 +45,13 @@ namespace pgso
             frm.FormClosed += (s, args) => this.Show();
             frm.ShowDialog();
         }
+        //Clissoc
+      private void button4_Click(object sender, EventArgs e)
+        {
+            frm_sportcomplex frm = new frm_sportcomplex();
+            this.Hide();
+            frm.FormClosed += (s, args) => this.Show();
+            frm.ShowDialog();
+        }
     }
 }
