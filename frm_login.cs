@@ -10,7 +10,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 // GIT TEST 
-// git test 2
 namespace pgso
 {
     public partial class frm_login: Form
