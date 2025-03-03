@@ -22,5 +22,10 @@ namespace pgso
             frm_choosevenues frm = new frm_choosevenues();
             frm.ShowDialog();
         }
+
+        private void frm_dashboard_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
