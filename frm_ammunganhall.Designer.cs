@@ -170,6 +170,7 @@
             this.btn_submit.TabIndex = 16;
             this.btn_submit.Text = "SUBMIT";
             this.btn_submit.UseVisualStyleBackColor = false;
+            this.btn_submit.Click += new System.EventHandler(this.btn_submit_Click);
             // 
             // date_of_use
             // 
@@ -310,6 +311,7 @@
             this.Name = "frm_ammunganhall";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AMMUNGAN HALL";
+            this.Load += new System.EventHandler(this.frm_ammunganhall_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_participants)).EndInit();
