@@ -6,10 +6,11 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
- // IGNORE THIS MESSAGE
+// IGNORE THIS MESSAGE
 namespace pgso
 {
     public partial class frm_login: Form
@@ -34,7 +35,7 @@ namespace pgso
         {
           
 
-            strSQL = "SELECT * FROM users WHERE name='" + txtuname.Text + "' AND password='" + txtpassword.Text + "'";
+            strSQL = "SELECT * FROM users WHERE name='" + combouname.Text + "' AND password='" + txtpassword.Text + "'";
 
             cmd = new SqlCommand(strSQL, con.strCon);
             cmd.CommandTimeout = 360;
@@ -56,7 +57,7 @@ namespace pgso
 
             else
             {
-                MessageBox.Show("walang nahanap");
+                MessageBox.Show("Invalid username or password");
 
             }
         }
@@ -68,15 +69,95 @@ namespace pgso
 
        
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        
 
         private void lbl_register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frm_register frm = new frm_register();
             frm.ShowDialog();
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        //private void timer1_Tick(object sender, EventArgs e)
+        /*{
+            int HH = DateTime.Now.Hour;
+            int MM = DateTime.Now.Minute;
+            int SS = DateTime.Now.Second;
+            string TIME = $"{HH:D2}:{MM:D2}:{SS:D2}";
+            lbl_dateandtime.Text = TIME;
+
+            if (HH < 10)
+            {
+                TIME = "0" + HH;
+            }
+            else
+            {
+                if (HH > 12)
+                {
+                    HH -= 12;
+                }
+                TIME = HH.ToString();
+            }
+            TIME += ":";
+            if (MM < 10)
+            {
+                TIME += "0" + MM;
+            }
+            else
+            {
+                TIME += MM.ToString();
+            }
+            TIME += ":";
+            if (SS < 10)
+            {
+                TIME += "0" + SS;
+            }
+            else
+            {
+                TIME += SS.ToString();
+            }
+            lbl_dateandtime.Text = TIME;*/
+       // }
+
+        private void lbl_dateandtime_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtpassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btneye_Click(object sender, EventArgs e)
+        {
+
+        }
     }
-    }
+}
