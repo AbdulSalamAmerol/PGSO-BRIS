@@ -20,6 +20,7 @@ namespace pgso
         string strSQL;
         SqlDataAdapter da;
         DataTable dt;
+        //taetae
         public frm_login()
         {
             InitializeComponent();
