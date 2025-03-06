@@ -10,7 +10,8 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-// IGNORE THIS MESSAGE
+using System.Diagnostics;
+
 namespace pgso
 {
     public partial class frm_login: Form
@@ -26,10 +27,17 @@ namespace pgso
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void frm_login_Load(object sender, EventArgs e)
         {
-
-    }
+            // SKIPS LOGIN in DEBUG MODE / Auto-login when running inside Visual Studio Debug Mode
+            if (Debugger.IsAttached)
+            {
+                this.Hide();
+                frm_dashboard dashboard = new frm_dashboard();
+                dashboard.ShowDialog();
+                this.Close();
+            }
+        }
         //improve ito soon.Pansamantala muna to. basta makalogin muna
         private void button1_Click(object sender, EventArgs e)
         {
@@ -83,48 +91,6 @@ namespace pgso
         }
 
 
-
-        //private void timer1_Tick(object sender, EventArgs e)
-        /*{
-            int HH = DateTime.Now.Hour;
-            int MM = DateTime.Now.Minute;
-            int SS = DateTime.Now.Second;
-            string TIME = $"{HH:D2}:{MM:D2}:{SS:D2}";
-            lbl_dateandtime.Text = TIME;
-
-            if (HH < 10)
-            {
-                TIME = "0" + HH;
-            }
-            else
-            {
-                if (HH > 12)
-                {
-                    HH -= 12;
-                }
-                TIME = HH.ToString();
-            }
-            TIME += ":";
-            if (MM < 10)
-            {
-                TIME += "0" + MM;
-            }
-            else
-            {
-                TIME += MM.ToString();
-            }
-            TIME += ":";
-            if (SS < 10)
-            {
-                TIME += "0" + SS;
-            }
-            else
-            {
-                TIME += SS.ToString();
-            }
-            lbl_dateandtime.Text = TIME;*/
-       // }
-
         private void lbl_dateandtime_Click(object sender, EventArgs e)
         {
 
@@ -156,6 +122,11 @@ namespace pgso
         }
 
         private void btneye_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

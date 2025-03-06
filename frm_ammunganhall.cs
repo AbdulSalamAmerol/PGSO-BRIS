@@ -16,5 +16,10 @@ namespace pgso
         {
             InitializeComponent();
         }
+
+        private void frm_ammunganhall_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
