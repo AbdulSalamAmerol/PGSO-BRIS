@@ -147,11 +147,11 @@
     <Compile Include="frm_convention.Designer.cs">
       <DependentUpon>frm_convention.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_login.cs">
+    <Compile Include="frm_Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_login.Designer.cs">
-      <DependentUpon>frm_login.cs</DependentUpon>
+    <Compile Include="frm_Login.Designer.cs">
+      <DependentUpon>frm_Login.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_dashboard.cs">
       <SubType>Form</SubType>
@@ -159,11 +159,11 @@
     <Compile Include="frm_dashboard.Designer.cs">
       <DependentUpon>frm_dashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_pasalubong.cs">
+    <Compile Include="frm_Pasalubong.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_pasalubong.Designer.cs">
-      <DependentUpon>frm_pasalubong.cs</DependentUpon>
+    <Compile Include="frm_Pasalubong.Designer.cs">
+      <DependentUpon>frm_Pasalubong.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_register.cs">
       <SubType>Form</SubType>
@@ -179,11 +179,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="frm_choosevenues.cs">
+    <Compile Include="frm_reservation_forms.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_choosevenues.Designer.cs">
-      <DependentUpon>frm_choosevenues.cs</DependentUpon>
+    <Compile Include="frm_reservation_forms.Designer.cs">
+      <DependentUpon>frm_reservation_forms.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="frm_ammunganhall.resx">
       <DependentUpon>frm_ammunganhall.cs</DependentUpon>
@@ -191,15 +191,15 @@
     <EmbeddedResource Include="frm_convention.resx">
       <DependentUpon>frm_convention.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_login.resx">
-      <DependentUpon>frm_login.cs</DependentUpon>
+    <EmbeddedResource Include="frm_Login.resx">
+      <DependentUpon>frm_Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_dashboard.resx">
       <DependentUpon>frm_dashboard.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_pasalubong.resx">
-      <DependentUpon>frm_pasalubong.cs</DependentUpon>
+    <EmbeddedResource Include="frm_Pasalubong.resx">
+      <DependentUpon>frm_Pasalubong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_register.resx">
       <DependentUpon>frm_register.cs</DependentUpon>
@@ -216,8 +216,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="frm_choosevenues.resx">
-      <DependentUpon>frm_choosevenues.cs</DependentUpon>
+    <EmbeddedResource Include="frm_reservation_forms.resx">
+      <DependentUpon>frm_reservation_forms.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
