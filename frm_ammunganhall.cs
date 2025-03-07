@@ -18,14 +18,12 @@ namespace pgso
         private SqlCommand cmd;
         public frm_ammunganhall()
         {
-
             InitializeComponent();
         }
 
-        private void frm_ammunganhall_Load(object sender, EventArgs e)
-        {
+        // Removed duplicate method
+        
 
-        }
         private void DBConnect()
         {
             try
@@ -51,34 +49,34 @@ namespace pgso
         {
             try
             {
-                DBConnect(); //open connection
-                cmd = new SqlCommand("INSERT INTO tbl_ammungan (requesting_person, address, activity, contact, participants, date_of_use, time_start, time_end) VALUES (@requesting_person, @address, @activity, @contact, @participants, @date_of_use, @time_start, @time_end)", conn);
-                cmd.Parameters.AddWithValue("requesting_person", txt_requestingperson.Text);
-                cmd.Parameters.AddWithValue("address", txt_address.Text);
-                cmd.Parameters.AddWithValue("activity", txt_activity.Text);
-                cmd.Parameters.AddWithValue("contact", txt_contact.Text);
-                cmd.Parameters.AddWithValue("participants", num_participants.Value);
-                cmd.Parameters.AddWithValue("date_of_use", date_of_use.Value);
-                cmd.Parameters.AddWithValue("time_start", TimeStart.Value.TimeOfDay);
-                cmd.Parameters.AddWithValue("time_end", TimeEnd.Value.TimeOfDay);
-
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Data Submitted Successfully");
-                DBClose(); //close connection
+                DBConnect();
+                using (cmd = new SqlCommand("INSERT INTO tbl_ammungan (...) VALUES (...)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@requesting_person", txt_requestingperson.Text);
+                    cmd.Parameters.AddWithValue("@address", txt_address.Text);
+                    cmd.Parameters.AddWithValue("@activity", txt_activity.Text);
+                    cmd.Parameters.AddWithValue("@contact", txt_contact.Text);
+                    cmd.Parameters.AddWithValue("@participants", num_participants.Value);
+                    cmd.Parameters.AddWithValue("@date_of_use", date_of_use.Value);
+                    cmd.Parameters.AddWithValue("@time_start", TimeStart.Value.TimeOfDay);
+                    cmd.Parameters.AddWithValue("@time_end", TimeEnd.Value.TimeOfDay);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Data Submitted Successfully");
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
-                MessageBoxButtons.OKCancel.ToString();
             }
             finally
             {
-                cmd.Dispose();
                 DBClose();
             }
-
-            //to submit data in the database
-
         }
+
+
+        //to submit data in the database
+
     }
 }
+
