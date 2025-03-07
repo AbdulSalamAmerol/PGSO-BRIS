@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Connection.cs
+/frm_ammunganhall.Designer.cs
+/frm_login.cs
+/.gitignore
