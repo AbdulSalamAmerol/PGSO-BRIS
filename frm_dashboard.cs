@@ -196,5 +196,10 @@ namespace pgso
             frm.Text = $"Choose Venue - {currentMonth}/{day}/{currentYear}";
             frm.ShowDialog();
         }
+
+        private void frm_dashboard_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
