@@ -34,7 +34,6 @@ namespace pgso
             }
             catch (Exception ex)
             {
-            //error pag di nagkonek
                 MessageBox.Show("Error Connection: " + ex.Message);
                 MessageBoxButtons.OKCancel.ToString();
             }
@@ -45,12 +44,12 @@ namespace pgso
             conn.Close(); //close connection
             conn.Dispose(); //dispose connection
         }
-//Button SUBMIT
+
         private void btn_submit_Click(object sender, EventArgs e)
         {
             try
             {
-                DBConnect(); //open DB connection
+                DBConnect(); //open connection
                 cmd = new SqlCommand("INSERT INTO tbl_ammungan (requesting_person, address, activity, contact, participants, date_of_use, time_start, time_end) VALUES (@requesting_person, @address, @activity, @contact, @participants, @date_of_use, @time_start, @time_end)", conn);
                 cmd.Parameters.AddWithValue("requesting_person", txt_requestingperson.Text);
                 cmd.Parameters.AddWithValue("address", txt_address.Text);
