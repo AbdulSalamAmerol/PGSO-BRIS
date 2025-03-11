@@ -1,6 +1,6 @@
 ﻿namespace pgso
 {
-    partial class frm_pasalubong
+    partial class frm_Pasalubong
     {
         /// <summary>
         /// Required designer variable.

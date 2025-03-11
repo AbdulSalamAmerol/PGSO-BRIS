@@ -21,21 +21,22 @@ namespace pgso
 
         private void InitializeComponent()
         {
-            this.components = new Container();
             this.SuspendLayout();
-
+            // 
             // frm_dashboard
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.BackgroundImageLayout = ImageLayout.Stretch;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1280, 720);
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frm_dashboard";
-            this.StartPosition = FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frm_dashboard_admin";
-            this.WindowState = FormWindowState.Maximized;
-
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frm_dashboard_Load);
             this.ResumeLayout(false);
+
         }
 
         #endregion

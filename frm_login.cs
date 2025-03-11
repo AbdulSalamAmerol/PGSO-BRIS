@@ -14,7 +14,7 @@ using System.Diagnostics;
 
 namespace pgso
 {
-    public partial class frm_login: Form
+    public partial class frm_Login: Form
     {
         Connection con = new Connection();
 
@@ -22,7 +22,7 @@ namespace pgso
         string strSQL;
         SqlDataAdapter da;
         DataTable dt;
-        public frm_login()
+        public frm_Login()
         {
             InitializeComponent();
         }

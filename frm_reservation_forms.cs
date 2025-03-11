@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace pgso
 {
-    public partial class frm_Pasalubong: Form
+    public partial class frm_reservation_forms: Form
     {
-        public frm_Pasalubong()
+        public frm_reservation_forms()
         {
             InitializeComponent();
+        }
+      
+        // event ito ng combo box na selected index changed
+        private void cmb_ReservationType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

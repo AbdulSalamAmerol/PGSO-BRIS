@@ -1,4 +1,6 @@
-﻿namespace pgso
+﻿using System;
+
+namespace pgso
 {
     partial class frm_ammunganhall
     {
@@ -28,6 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+
             this.panel1 = new System.Windows.Forms.Panel();
             this.txt_activity = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -339,6 +342,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_participants)).EndInit();
             this.ResumeLayout(false);
 
+        }
+        private void frm_ammunganhall_Load(object sender, EventArgs e)
+        {
+            // Add your load event logic here
         }
 
         #endregion
