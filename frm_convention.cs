@@ -38,5 +38,10 @@ namespace pgso
             dateTimePickerEnd.Format = DateTimePickerFormat.Time;
             dateTimePickerEnd.ShowUpDown = true; // Removes calendar dropdown
         }
+
+        private void frm_convention_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

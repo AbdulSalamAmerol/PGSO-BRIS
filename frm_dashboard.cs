@@ -16,12 +16,14 @@ namespace pgso
         private ComboBox cmbMonth;
         private NumericUpDown numYear;
 
+
+        //dashboard
         public frm_dashboard()
         {
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.WindowState = FormWindowState.Maximized;
-            this.MaximizeBox = false;
+            this.MaximizeBox = true;
 
             currentYear = DateTime.Now.Year;
             currentMonth = DateTime.Now.Month;
@@ -79,7 +81,73 @@ namespace pgso
             };
             numYear.ValueChanged += NumYear_ValueChanged;
             sideMenu.Controls.Add(numYear);
+
+            // Button Venue
+            Button Venues = new Button
+            {
+                Text = "Manage Reservations",
+                Size = new Size(180, 30),
+                Location = new Point(10, 130),
+                BackColor = Color.LightGray,
+                ForeColor = Color.Black,
+                Font = new Font("Centruy Gothic", 10, FontStyle.Regular)
+            };
+            Venues.Click += Venues_Click;
+            sideMenu.Controls.Add(Venues);
+
+            this.Controls.Add(sideMenu);
+
+            // Button Acts
+            Button Activity_Logs = new Button
+            {
+                Text = "View Activity Logs",
+                Size = new Size(180, 30),
+                Location = new Point(10, 170),
+                BackColor = Color.LightGray,
+                ForeColor = Color.Black,
+                Font = new Font("Centruy Gothic", 10, FontStyle.Regular)
+
+            };
+            Activity_Logs.Click += Activity_Logs_Click;
+            sideMenu.Controls.Add(Activity_Logs);
+
+            this.Controls.Add(sideMenu);
+
+            // Button reports
+            Button Manage_Reports = new Button
+            {
+                Text = "Manage Reports",
+                Size = new Size(180, 30),
+                Location = new Point(10, 210),
+                BackColor = Color.LightGray,
+                ForeColor = Color.Black,
+                Font = new Font("Centruy Gothic", 10, FontStyle.Regular)
+
+            };
+            Manage_Reports.Click += Manage_Reports_Click;
+            sideMenu.Controls.Add(Manage_Reports);
+
+            this.Controls.Add(sideMenu);
         }
+
+        // Event handler for button veneus click
+        private void Venues_Click(object sender, EventArgs e)
+        {
+            // MessageBox.Show("Button clicked!", "Notification");
+            frm_mngreservation frm_mngreservation = new frm_mngreservation();
+            frm_mngreservation.ShowDialog();
+        }
+
+        //button utilities
+        private void Activity_Logs_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Button clicked!", "Notification");
+        }
+        private void Manage_Reports_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Button clicked!", "Notification");
+        }
+
 
         private void CmbMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -106,7 +174,7 @@ namespace pgso
             {
                 Font = new Font("Arial", 16, FontStyle.Bold),
                 AutoSize = false,
-                TextAlign = ContentAlignment.MiddleCenter,
+                TextAlign = ContentAlignment.TopLeft,
                 Dock = DockStyle.Top,
                 Height = 40
             };
@@ -129,6 +197,8 @@ namespace pgso
             mainContent.Controls.Add(tablePanel);
         }
 
+
+        //ito yung parang header niya
         private void UpdateCalendar()
         {
             tablePanel.Controls.Clear();
@@ -141,7 +211,7 @@ namespace pgso
                 Label lblDay = new Label
                 {
                     Text = dayNames[i],
-                    TextAlign = ContentAlignment.MiddleCenter,
+                    TextAlign = ContentAlignment.BottomCenter,
                     Dock = DockStyle.Fill,
                     Font = new Font("Arial", 12, FontStyle.Bold),
                     BackColor = Color.DarkSlateGray,
@@ -163,11 +233,13 @@ namespace pgso
                 DateTime currentDate = new DateTime(currentYear, currentMonth, day);
                 bool isPast = currentDate < today;
 
+
+                //para idisplay ang mga dates sa calendar
                 Label lblDayNum = new Label
                 {
                     Text = day.ToString(),
                     Dock = DockStyle.Fill,
-                    TextAlign = ContentAlignment.MiddleCenter,
+                    TextAlign = ContentAlignment.TopLeft,
                     Font = new Font("Arial", 12, FontStyle.Bold),
                     ForeColor = isPast ? Color.Gray : Color.Black, // Gray out past dates
                     BorderStyle = BorderStyle.FixedSingle,
