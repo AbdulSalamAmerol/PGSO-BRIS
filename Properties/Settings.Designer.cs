@@ -26,8 +26,8 @@ namespace pgso.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=172.17.16.13;Initial Catalog=BRIS;Persist Security Info=True;User ID=" +
-            "nvsuojt;Password=ojt_nvsu00!;Encrypt=False;TrustServerCertificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-DG6NT1C;Initial Catalog=db_pgso;Integrated Security=True;Encr" +
+            "ypt=False;TrustServerCertificate=True")]
         public string strCon {
             get {
                 return ((string)(this["strCon"]));

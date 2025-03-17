@@ -94,6 +94,7 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.Primitives.5.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -135,11 +136,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection.cs" />
-    <Compile Include="frm_ammunganhall.cs">
+    <Compile Include="frm_createutilityreservation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_ammunganhall.Designer.cs">
-      <DependentUpon>frm_ammunganhall.cs</DependentUpon>
+    <Compile Include="frm_createutilityreservation.Designer.cs">
+      <DependentUpon>frm_createutilityreservation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_createvenuereservation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_createvenuereservation.Designer.cs">
+      <DependentUpon>frm_createvenuereservation.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_convention.cs">
       <SubType>Form</SubType>
@@ -159,11 +166,17 @@
     <Compile Include="frm_dashboard.Designer.cs">
       <DependentUpon>frm_dashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_Pasalubong.cs">
+    <Compile Include="frm_mngreservation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_Pasalubong.Designer.cs">
-      <DependentUpon>frm_Pasalubong.cs</DependentUpon>
+    <Compile Include="frm_mngreservation.Designer.cs">
+      <DependentUpon>frm_mngreservation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Venues.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Venues.Designer.cs">
+      <DependentUpon>frm_Venues.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_register.cs">
       <SubType>Form</SubType>
@@ -185,8 +198,11 @@
     <Compile Include="frm_reservation_forms.Designer.cs">
       <DependentUpon>frm_reservation_forms.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="frm_ammunganhall.resx">
-      <DependentUpon>frm_ammunganhall.cs</DependentUpon>
+    <EmbeddedResource Include="frm_createutilityreservation.resx">
+      <DependentUpon>frm_createutilityreservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_createvenuereservation.resx">
+      <DependentUpon>frm_createvenuereservation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_convention.resx">
       <DependentUpon>frm_convention.cs</DependentUpon>
@@ -198,8 +214,11 @@
       <DependentUpon>frm_dashboard.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_Pasalubong.resx">
-      <DependentUpon>frm_Pasalubong.cs</DependentUpon>
+    <EmbeddedResource Include="frm_mngreservation.resx">
+      <DependentUpon>frm_mngreservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Venues.resx">
+      <DependentUpon>frm_Venues.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_register.resx">
       <DependentUpon>frm_register.cs</DependentUpon>
