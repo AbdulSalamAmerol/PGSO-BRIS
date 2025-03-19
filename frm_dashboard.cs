@@ -1,4 +1,7 @@
-﻿using System;
+﻿using pgso_connect;
+using System;
+using System.Data.SqlClient;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -7,6 +10,7 @@ namespace pgso
 {
     public partial class frm_dashboard : Form
     {
+        //fied
         private Panel sideMenu;
         private Panel mainContent;
         private TableLayoutPanel tablePanel;
@@ -17,7 +21,7 @@ namespace pgso
         private NumericUpDown numYear;
 
 
-        //dashboard
+        //dashboard properties
         public frm_dashboard()
         {
             InitializeComponent();
@@ -97,7 +101,7 @@ namespace pgso
 
             this.Controls.Add(sideMenu);
 
-            // Button Acts
+            // Button Acts. hindi muna siya working
             Button Activity_Logs = new Button
             {
                 Text = "View Activity Logs",
@@ -113,7 +117,7 @@ namespace pgso
 
             this.Controls.Add(sideMenu);
 
-            // Button reports
+            // Button reports. Not wrking muna
             Button Manage_Reports = new Button
             {
                 Text = "Manage Reports",
@@ -160,6 +164,42 @@ namespace pgso
             currentYear = (int)numYear.Value;
             UpdateCalendar();
         }
+
+        private DataTable GetReservationsForMonth(int year, int month)
+        {
+            DataTable reservations = new DataTable();
+            try
+            {
+                Connection db = new Connection();
+                db.strCon.Open();
+
+                string query = @"
+            SELECT fld_Activity_Name, fld_Start_Date, fld_End_Date, fld_Reservation_Status
+            FROM tbl_Reservation
+            WHERE ((YEAR(fld_Start_Date) = @Year AND MONTH(fld_Start_Date) = @Month)
+               OR (YEAR(fld_End_Date) = @Year AND MONTH(fld_End_Date) = @Month))
+              AND fld_Reservation_Status IN ('Confirmed', 'Pending')";
+
+                using (SqlCommand cmd = new SqlCommand(query, db.strCon))
+                {
+                    cmd.Parameters.AddWithValue("@Year", year);
+                    cmd.Parameters.AddWithValue("@Month", month);
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(reservations);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading reservations: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return reservations;
+        }
+
+
+
 
         private void CreateMainContent()
         {
@@ -228,13 +268,24 @@ namespace pgso
             int col = startDay;
             DateTime today = DateTime.Today;
 
+            DataTable reservations = GetReservationsForMonth(currentYear, currentMonth);
+
             for (int day = 1; day <= daysInMonth; day++)
             {
                 DateTime currentDate = new DateTime(currentYear, currentMonth, day);
                 bool isPast = currentDate < today;
 
+                // Find reservations for the current date
+                var activities = reservations.AsEnumerable()
+                    .Where(r => currentDate >= r.Field<DateTime>("fld_Start_Date") && currentDate <= r.Field<DateTime>("fld_End_Date"))
+                    .Select(r => new
+                    {
+                        ActivityName = r.Field<string>("fld_Activity_Name"),
+                        Status = r.Field<string>("fld_Reservation_Status")
+                    })
+                    .ToList();
 
-                //para idisplay ang mga dates sa calendar
+                // Display the date and activities
                 Label lblDayNum = new Label
                 {
                     Text = day.ToString(),
@@ -249,6 +300,19 @@ namespace pgso
                     Enabled = !isPast
                 };
 
+                if (activities.Any())
+                {
+                    lblDayNum.Text += "\n" + string.Join("\n", activities.Select(a => a.ActivityName));
+                    if (isPast)
+                    {
+                        lblDayNum.BackColor = Color.Orange; // Past reservations that are already done
+                    }
+                    else
+                    {
+                        lblDayNum.BackColor = activities.Any(a => a.Status == "Pending") ? Color.Red : Color.Green; // Pending is red, Approved is green
+                    }
+                }
+
                 if (!isPast)
                     lblDayNum.Click += (s, e) => OpenChooseVenuesForm(day);
 
@@ -261,6 +325,9 @@ namespace pgso
                 }
             }
         }
+
+
+
 
         private void OpenChooseVenuesForm(int day)
         {
@@ -275,3 +342,4 @@ namespace pgso
         }
     }
 }
+

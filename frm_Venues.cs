@@ -17,16 +17,19 @@ namespace pgso
     //NAKA LOCAL HOST LANG YUNG DATABASE KO. PALITAN LATUR.
     public partial class frm_Venues : Form
     {
+        //fields
         private Connection db = new Connection(); // Use the Connection class
         private SqlCommand cmd;
         private SqlDataAdapter da;
         private DataTable dt = new DataTable();
+
 
         public frm_Venues()
         {
             InitializeComponent();
         }
         
+        //methods 
         private void frm_Venues_Load(object sender, EventArgs e)
         {
             RefreshData();
@@ -39,43 +42,79 @@ namespace pgso
                 if (db.strCon.State == ConnectionState.Closed)
                     db.strCon.Open(); // Open the database connection if not already open
 
-                // Queries to retrieve records based on their status
-                //para sa approved
-                /*string queryApproved = "SELECT ControlNumber, RequestingPerson, Address, Contact, Participants, DateStart, DateEnd, TimeStart, TimeEnd " +
-                                       "FROM Reservations WHERE status = 'Approved'";*/
+
+                //ididsplay nito yung mga approved na reservation
+                //++ NAME NG NARESERVE NA VENUE AND YUNG SCOPE NIYA (MAIN HALL, LOBBY...). PATI CANCEL AT PENDING
+                string queryApproved = @"
+                SELECT 
+                    r.fld_Control_number, 
+                    r.fld_Start_Date, 
+                    r.fld_End_Date, 
+                    r.fld_Start_Time, 
+                    r.fld_End_Time,
+                    r.fld_Reservation_Status,
+                    r.fld_Activity_Name,
+                    r.fld_Total_Amount,
+                    rp.fld_First_Name,
+                    rp.fld_Contact_Number
+                FROM 
+                    tbl_Reservation r
+                LEFT JOIN 
+                    tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                WHERE 
+                    r.fld_Reservation_Status = 'Confirmed'";
 
 
                 //para sa pendings
+                //Dagdagan, para maipakita yung reserved venues. pero mamaya na
                 string queryPending = @"
-            SELECT 
-                r.ControlNumber, 
-                r.StartDate, 
-                r.EndDate, 
-                r.StartTime, 
-                r.EndTime, 
-                r.NumberOfParticipants, 
-                r.Status,
-               
-                rp.FirstName,
-                rp.Address,
-                rp.ContactNumber,
-                rp.RequestOrigin
-            FROM 
-                Reservations r
-            JOIN 
-                RequestingPerson rp ON r.PersonID = rp.PersonID
-            WHERE 
-                r.Status = 'Pending'";
+                SELECT 
+                    r.fld_Control_number, 
+                    r.fld_Start_Date, 
+                    r.fld_End_Date, 
+                    r.fld_Start_Time, 
+                    r.fld_End_Time, 
+                    r.fld_Number_Of_Participants, 
+                    r.fld_Reservation_Status,
+                    r.fld_Total_Amount,
+                    r.fld_Activity_Name,
+                    r.fld_Total_Amount,
+                    rp.fld_First_Name,
+                    rp.fld_Requesting_Person_Address,
+                    rp.fld_Contact_Number
+                FROM 
+                    tbl_Reservation r
+                LEFT JOIN 
+                    tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                WHERE 
+                    r.fld_Reservation_Status = 'Pending'";
+
+
+
 
                 //=======================================END==========================================
                 //PARA SA CANCEL
-                string queryCanceled = "SELECT control_number, requesting_person, address, activity, participants " +
-                                       "FROM tbl_ammungan WHERE status = 'Canceled'";
+                string queryCanceled = @"
+                SELECT 
+                    r.fld_Control_number, 
+                    r.fld_Number_Of_Participants, 
+                    r.fld_Reservation_Status,
+                    r.fld_Total_Amount,
+                    r.fld_Activity_Name,
+                   
+                    rp.fld_First_Name,
+                    rp.fld_Requesting_Person_Address
+                FROM 
+                    tbl_Reservation r
+                LEFT JOIN 
+                    tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                WHERE 
+                    r.fld_Reservation_Status = 'Cancelled'";
 
-                // Load data into respective DataGridViews
-                //LoadData(queryApproved, dt_approved, "Approved");
+                
+                LoadData(queryApproved, dt_approved, "Confirmed");
                 LoadData(queryPending, dt_pendings, "Pending");
-                LoadData(queryCanceled, dt_canceled, "Canceled");
+                LoadData(queryCanceled, dt_canceled, "Cancelled");
             }
             catch (Exception ex)
             {
@@ -88,7 +127,8 @@ namespace pgso
             }
         }
 
-        // Helper method to execute a query and bind data to a DataGridView
+
+        // Helper METHOD to execute a query and bind data to a DataGridView
         private void LoadData(string query, DataGridView dataGridView, string status)
         {
             try
@@ -124,7 +164,7 @@ namespace pgso
 
 
 
-
+        //methods
         private void Btn_Create_Click(object sender, EventArgs e)
         {
             frm_createvenuereservation frm_Create = new frm_createvenuereservation();
@@ -152,10 +192,13 @@ namespace pgso
 
         }
 
+        
+
         private void dt_pendings_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            // Your existing code here
         }
+
 
         private void Btn_Approved_Click(object sender, EventArgs e)
         {
@@ -179,7 +222,7 @@ namespace pgso
         }
 
 
-        //cancellation of reservation using dialog box
+        //method cancellation of reservation using dialog box
         private void Btn_Cancel_Click_1(object sender, EventArgs e)
         {
             // Input Control Number
@@ -192,7 +235,20 @@ namespace pgso
                 try
                 {
                     // Retrieve Data from db
-                    string query = "SELECT * FROM tbl_ammungan WHERE control_number = @ControlNumber";
+                    string query = @"
+                    SELECT 
+                        r.fld_Start_Date,
+                        r.fld_End_Date,
+                        r.fld_Activity_Name,
+                        rp.fld_First_Name,
+                        rp.fld_Surname,
+                        r.fld_Total_Amount
+                    FROM 
+                        tbl_Reservation r
+                    LEFT JOIN 
+                        tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                    WHERE 
+                        r.fld_Control_Number = @ControlNumber";
 
                     using (SqlCommand cmd = new SqlCommand(query, db.strCon))
                     {
@@ -219,7 +275,7 @@ namespace pgso
                                 Dock = DockStyle.Top,
                                 ReadOnly = true,
                                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                                Height = 200
+                                Height = 90
                             };
 
                             Button btnCancel = new Button()
@@ -231,38 +287,26 @@ namespace pgso
                             // Cancel Button Click Event (Update Status)
                             btnCancel.Click += (s, ev) =>
                             {
-                                // Reason for Cancellation Dialog
-                                string reason = Microsoft.VisualBasic.Interaction.InputBox(
-                                    "Enter Reason for Cancellation:", "Cancellation Reason", "");
+                                // Confirm Cancellation
+                                DialogResult result = MessageBox.Show(
+                                    "Are you sure you want to mark this record as canceled?",
+                                    "Confirm Cancellation",
+                                    MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Warning
+                                );
 
-                                if (!string.IsNullOrEmpty(reason))
+                                if (result == DialogResult.Yes)
                                 {
-                                    // Confirm Cancellation
-                                    DialogResult result = MessageBox.Show(
-                                        "Are you sure you want to mark this record as canceled?",
-                                        "Confirm Cancellation",
-                                        MessageBoxButtons.YesNo,
-                                        MessageBoxIcon.Warning
-                                    );
-
-                                    if (result == DialogResult.Yes)
+                                    // Update Status to "Canceled"
+                                    string updateQuery = "UPDATE tbl_Reservation SET fld_Reservation_Status = 'Cancelled' WHERE fld_Control_Number = @ControlNumber";
+                                    using (SqlCommand updateCmd = new SqlCommand(updateQuery, db.strCon))
                                     {
-                                        // Update Status to "Canceled" and save reason
-                                        string updateQuery = "UPDATE tbl_ammungan SET Status = 'Canceled', CancellationReason = @Reason WHERE control_number = @ControlNumber";
-                                        using (SqlCommand updateCmd = new SqlCommand(updateQuery, db.strCon))
-                                        {
-                                            updateCmd.Parameters.AddWithValue("@ControlNumber", controlNumber);
-                                            updateCmd.Parameters.AddWithValue("@Reason", reason);
-                                            updateCmd.ExecuteNonQuery();
-                                        }
-
-                                        MessageBox.Show("Record marked as canceled!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                        dataDialog.Close(); // Close the dialog after marking
+                                        updateCmd.Parameters.AddWithValue("@ControlNumber", controlNumber);
+                                        updateCmd.ExecuteNonQuery();
                                     }
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Please enter a reason for cancellation.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                                    MessageBox.Show("Record marked as canceled!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    dataDialog.Close(); // Close the dialog after marking
                                 }
                             };
 
@@ -312,7 +356,21 @@ namespace pgso
                 try
                 {
                     // Retrieve Data from db
-                    string query = "SELECT * FROM tbl_ammungan WHERE control_number = @ControlNumber";
+                    string query = @"
+                    SELECT 
+                        r.fld_Start_Date,
+                        r.fld_End_Date,
+                        r.fld_Activity_Name,
+                        rp.fld_First_Name,
+                        rp.fld_Surname,
+                        r.fld_Total_Amount
+                    FROM 
+                        tbl_Reservation r
+                    LEFT JOIN 
+                        tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                    WHERE 
+                        r.fld_Control_Number = @ControlNumber";
+
 
                     using (SqlCommand cmd = new SqlCommand(query, db.strCon))
                     {
@@ -329,7 +387,7 @@ namespace pgso
                             Form dataDialog = new Form()
                             {
                                 Text = "Record Details",
-                                Size = new System.Drawing.Size(500, 300),
+                                Size = new System.Drawing.Size(500, 200),
                                 StartPosition = FormStartPosition.CenterScreen
                             };
 
@@ -339,7 +397,7 @@ namespace pgso
                                 Dock = DockStyle.Top,
                                 ReadOnly = true,
                                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                                Height = 200
+                                Height = 90
                             };
 
                             Button btnApprove = new Button()
@@ -361,14 +419,14 @@ namespace pgso
                                 if (result == DialogResult.Yes)
                                 {
                                     // approve Status to "Approved"
-                                    string updateQuery = "UPDATE tbl_ammungan SET Status = 'Approved' WHERE control_number = @ControlNumber";
+                                    string updateQuery = "UPDATE tbl_Reservation SET fld_Reservation_Status = 'Confirmed' WHERE fld_Control_Number = @ControlNumber";
                                     using (SqlCommand updateCmd = new SqlCommand(updateQuery, db.strCon))
                                     {
                                         updateCmd.Parameters.AddWithValue("@ControlNumber", controlNumber);
                                         updateCmd.ExecuteNonQuery();
                                     }
 
-                                    MessageBox.Show("Record marked as canceled!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    MessageBox.Show("Record marked as Approved/Confirmed!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     dataDialog.Close(); // Close the dialog after marking
                                 }
                             };
@@ -401,6 +459,7 @@ namespace pgso
             }
         }
 
+        //methods
         private void Btn_Refresh_Click(object sender, EventArgs e)
         {
             RefreshData();
