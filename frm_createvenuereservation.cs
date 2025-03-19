@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
-using iText.Forms.Form.Element;
 using pgso_connect;
 
 namespace pgso
@@ -12,20 +12,25 @@ namespace pgso
     {
         private SqlConnection conn;
         private SqlCommand cmd;
+        private int selectedVenueID;  // Class-level variable to store selected venue ID
+        private List<DateTime> reservedDates; // List to store reserved dates
 
         public frm_createvenuereservation()
         {
             InitializeComponent();
-            // Add A and B directly to combo_chooseset
-            //combo_chooseSet.Items.Add("A");
-           // combo_chooseSet.Items.Add("B");
-            //combo_chooseSet.SelectedIndexChanged += combo_chooseset_SelectedIndexChanged;
             // Set the DateTimePicker format to display only hour, minute, and AM/PM
             TimeStart.Format = DateTimePickerFormat.Custom;
             TimeStart.CustomFormat = "hh:mm tt";
             TimeEnd.Format = DateTimePickerFormat.Custom;
             TimeEnd.CustomFormat = "hh:mm tt";
-        
+            LoadVenues();
+        }
+
+        private void frm_createvenuereservation_Load(object sender, EventArgs e)
+        {
+            LoadVenues();
+            date_of_use_start.ValueChanged += date_of_use_start_ValueChanged;
+            date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
         }
 
         // Open database connection
@@ -53,20 +58,7 @@ namespace pgso
             }
         }
 
-        // Event: When combo_chooseset changes (A/B)
-        /*private void combo_chooseset_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (combo_chooseSet.SelectedItem != null)
-            {
-                string selectedSet = combo_chooseSet.SelectedItem.ToString();
-                LoadVenues(selectedSet);
-
-                // Disable panel_faci if "B" is selected
-                panel_faci.Enabled = selectedSet != "B";
-            }
-        }
-        */
-        // Load venues based on the selected venue_set (A/B)
+        // Load venues and populate combo_venues
         private void LoadVenues()
         {
             try
@@ -94,14 +86,133 @@ namespace pgso
             }
         }
 
+        // Load venue scope for selected venue
+        private void LoadVenueScope(int venueID)
+        {
+            try
+            {
+                DBConnect();
+                cmd = new SqlCommand(@"
+            SELECT DISTINCT vs.pk_Venue_ScopeID, vs.fld_Venue_Scope_Name 
+            FROM tbl_Venue_Pricing vp
+            INNER JOIN tbl_Venue_Scope vs ON vp.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
+            WHERE vp.fk_VenueID = @VenueID", conn);
 
+                cmd.Parameters.AddWithValue("@VenueID", venueID);
+                SqlDataReader reader = cmd.ExecuteReader();
 
+                DataTable dt = new DataTable();
+                dt.Load(reader);
 
+                combo_scope.DataSource = dt;
+                combo_scope.ValueMember = "pk_Venue_ScopeID";  // Hidden ID
+                combo_scope.DisplayMember = "fld_Venue_Scope_Name";  // Display Name
 
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading venue scope: " + ex.Message);
+            }
+            finally
+            {
+                DBClose();
+            }
+        }
 
-        // Submit data to tbl_ammungan
-        // Submit data to tbl_ammungan
-        // Submit data to tbl_ammungan
+        // Load reservation types based on selected venue
+        private void LoadReservationTypesByVenue(int venueID)
+        {
+            try
+            {
+                DBConnect();
+                cmd = new SqlCommand("SELECT DISTINCT fld_Rate_Type FROM tbl_Venue_Pricing WHERE fk_VenueID = @VenueID", conn);
+                cmd.Parameters.AddWithValue("@VenueID", venueID);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+
+                combo_ReservationType.DataSource = dt;
+                combo_ReservationType.ValueMember = "fld_Rate_Type";
+                combo_ReservationType.DisplayMember = "fld_Rate_Type";
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading reservation types: " + ex.Message);
+            }
+            finally
+            {
+                DBClose();
+            }
+        }
+
+        // When venue selection changes, load reservation types and venue scope accordingly
+        private void combo_venues_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (combo_venues.SelectedValue != null)
+            {
+                if (int.TryParse(combo_venues.SelectedValue.ToString(), out selectedVenueID))
+                {
+                    LoadReservationTypesByVenue(selectedVenueID);
+                    LoadVenueScope(selectedVenueID);
+                    LoadReservedDates(selectedVenueID); // Load reserved dates for the selected venue
+                }
+            }
+        }
+
+        // Check if both reservation type and venue scope are selected
+        private bool IsReservationTypeAndScopeSelected()
+        {
+            return combo_ReservationType.SelectedValue != null && combo_scope.SelectedValue != null;
+        }
+
+        // Load rate based on selected venue, venue scope, reservation type, and aircon selection
+        private void LoadRate()
+        {
+            try
+            {
+                if (!IsReservationTypeAndScopeSelected())
+                {
+                    return;
+                }
+
+                bool usesAircon = radio_Yes.Checked;
+
+                DBConnect();
+                string rateQuery = @"
+                SELECT fld_First4Hrs_Rate 
+                FROM tbl_Venue_Pricing 
+                WHERE fld_Rate_Type = @RateType 
+                AND fk_VenueID = @VenueID 
+                AND fk_Venue_ScopeID = @VenueScopeID 
+                AND fld_Aircon = @UsesAircon";
+
+                using (SqlCommand rateCmd = new SqlCommand(rateQuery, conn))
+                {
+                    rateCmd.Parameters.AddWithValue("@RateType", combo_ReservationType.SelectedValue.ToString());
+                    rateCmd.Parameters.AddWithValue("@VenueID", selectedVenueID);
+                    rateCmd.Parameters.AddWithValue("@VenueScopeID", combo_scope.SelectedValue);
+                    rateCmd.Parameters.AddWithValue("@UsesAircon", usesAircon);
+
+                    object result = rateCmd.ExecuteScalar();
+                    string rate = (result != null) ? result.ToString() : "0.00";
+                    txt_rate.Text = rate;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading rate: " + ex.Message);
+            }
+            finally
+            {
+                DBClose();
+            }
+        }
+
+        // Submit data to tbl_Reservation
         private void btn_submit_Click(object sender, EventArgs e)
         {
             SqlTransaction transaction = null;
@@ -119,7 +230,8 @@ namespace pgso
                 }
 
                 // Step 1: Insert into RequestingPerson
-                cmd = new SqlCommand("INSERT INTO tbl_RequestingPerson (Surname, FirstName, Address, ContactNumber, RequestOrigin) OUTPUT INSERTED.PersonID VALUES (@Surname, @FirstName, @Address, @ContactNumber, @RequestOrigin)", conn, transaction);
+                cmd = new SqlCommand("INSERT INTO tbl_Requesting_Person (fld_Surname, fld_First_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin) OUTPUT INSERTED.pk_Requesting_PersonID VALUES (@Surname, @FirstName, @Address, @ContactNumber, @RequestOrigin)", conn, transaction);
+
                 cmd.Parameters.AddWithValue("@Surname", txt_surname.Text);
                 cmd.Parameters.AddWithValue("@FirstName", txt_firstname.Text);
                 cmd.Parameters.AddWithValue("@Address", txt_address.Text);
@@ -137,25 +249,50 @@ namespace pgso
 
                 int personID = (int)cmd.ExecuteScalar();
 
-                // Step 2: Insert into Reservations
-                cmd = new SqlCommand("INSERT INTO Reservations (ControlNumber, StartDate, EndDate, StartTime, EndTime, NumberOfParticipants, Status, PersonID) OUTPUT INSERTED.ReservationID VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @NumberOfParticipants, @Status, @PersonID)", conn, transaction);
-                cmd.Parameters.AddWithValue("@ControlNumber", txt_controlnum.Text);
-                cmd.Parameters.AddWithValue("@StartDate", date_of_use_start.Value);
-                cmd.Parameters.AddWithValue("@EndDate", date_of_use_end.Value);
-                cmd.Parameters.AddWithValue("@StartTime", TimeStart.Value.TimeOfDay);
-                cmd.Parameters.AddWithValue("@EndTime", TimeEnd.Value.TimeOfDay);
-                cmd.Parameters.AddWithValue("@NumberOfParticipants", num_participants.Value);
-                cmd.Parameters.AddWithValue("@Status", "Pending");
-                cmd.Parameters.AddWithValue("@PersonID", personID);
+                // Step 2: Retrieve fk_VenueID, fk_Venue_PricingID, fk_Venue_ScopeID
+                int venueID = selectedVenueID;
+                int venueScopeID = (int)combo_scope.SelectedValue;
+                string reservationType = combo_ReservationType.SelectedValue.ToString();
+                bool usesAircon = radio_Yes.Checked;
+
+                cmd = new SqlCommand(@"
+                SELECT pk_Venue_PricingID 
+                FROM tbl_Venue_Pricing 
+                WHERE fk_VenueID = @VenueID 
+                AND fk_Venue_ScopeID = @VenueScopeID 
+                AND fld_Rate_Type = @RateType 
+                AND fld_Aircon = @UsesAircon", conn, transaction);
+
+                cmd.Parameters.AddWithValue("@VenueID", venueID);
+                cmd.Parameters.AddWithValue("@VenueScopeID", venueScopeID);
+                cmd.Parameters.AddWithValue("@RateType", reservationType);
+                cmd.Parameters.AddWithValue("@UsesAircon", usesAircon);
+
+                int venuePricingID = (int)cmd.ExecuteScalar();
+
+                // Step 3: Insert into Reservations
+                cmd = new SqlCommand(@"
+                INSERT INTO tbl_Reservation 
+                (fld_Control_Number, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time, fld_Activity_Name, fld_Number_Of_Participants, fld_Reservation_Status, fld_Reservation_Type, fld_Total_Amount, fk_Requesting_PersonID, fk_VenueID, fk_Venue_PricingID, fk_Venue_ScopeID) 
+                OUTPUT INSERTED.pk_ReservationID 
+                VALUES (@fld_Control_Number, @fld_Start_Date, @fld_End_Date, @fld_Start_Time, @fld_End_Time, @fld_Activity_Name, @fld_Number_Of_Participants, @fld_Reservation_Status, @fld_Reservation_Type, @Total_Amount, @Requesting_PersonID, @VenueID, @VenuePricingID, @VenueScopeID)", conn, transaction);
+
+                cmd.Parameters.AddWithValue("@fld_Control_Number", txt_controlnum.Text);
+                cmd.Parameters.AddWithValue("@fld_Start_Date", date_of_use_start.Value);
+                cmd.Parameters.AddWithValue("@fld_End_Date", date_of_use_end.Value);
+                cmd.Parameters.AddWithValue("@fld_Start_Time", TimeStart.Value.TimeOfDay);
+                cmd.Parameters.AddWithValue("@fld_End_Time", TimeEnd.Value.TimeOfDay);
+                cmd.Parameters.AddWithValue("@fld_Activity_Name", txt_activity.Text);
+                cmd.Parameters.AddWithValue("@fld_Reservation_Type", txt_revtype.Text);
+                cmd.Parameters.AddWithValue("@fld_Number_Of_Participants", num_participants.Value);
+                cmd.Parameters.AddWithValue("@Total_Amount", txt_rate.Text);
+                cmd.Parameters.AddWithValue("@fld_Reservation_Status", "Pending");
+                cmd.Parameters.AddWithValue("@Requesting_PersonID", personID);
+                cmd.Parameters.AddWithValue("@VenueID", venueID);
+                cmd.Parameters.AddWithValue("@VenuePricingID", venuePricingID);
+                cmd.Parameters.AddWithValue("@VenueScopeID", venueScopeID);
 
                 int reservationID = (int)cmd.ExecuteScalar();
-
-                // Step 3: Insert into VenueReservations
-                cmd = new SqlCommand("INSERT INTO VenueReservations (ReservationID, UsesAircon) VALUES (@ReservationID, @UsesAircon)", conn, transaction);
-                cmd.Parameters.AddWithValue("@ReservationID", reservationID);
-                //cmd.Parameters.AddWithValue("@VenueID", combo_venues.SelectedValue);
-                cmd.Parameters.AddWithValue("@UsesAircon", radio_Yes.Checked);
-                cmd.ExecuteNonQuery();
 
                 // Commit the transaction
                 transaction.Commit();
@@ -171,7 +308,7 @@ namespace pgso
                 }
                 if (ex.Number == 547) // Check constraint violation
                 {
-                    MessageBox.Show("Error: " + ex.Message + "\nPlease ensure all data meets the required constraints.", "Constraint Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error: " + ex.Message + " Please ensure all data meets the required constraints.", "Constraint Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -193,50 +330,155 @@ namespace pgso
             }
         }
 
-
-
-        // Helper method to validate the contact number
-        private bool IsValidContactNumber(string contactNumber)
+        private void combo_ReservationType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Example validation: Ensure the contact number is 10-15 digits long and may contain spaces, dashes, and parentheses
-            string cleanedContactNumber = new string(contactNumber.Where(char.IsDigit).ToArray());
-            return cleanedContactNumber.Length >= 10 && cleanedContactNumber.Length <= 15;
+            if (IsReservationTypeAndScopeSelected())
+            {
+                LoadRate();
+            }
         }
 
-
-
-
-
-
-
-
-        private void combo_venues_SelectedIndexChanged(object sender, EventArgs e)
+        private void combo_scope_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Optional: Add any specific logic when venues change if needed
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-        private void panel_faci_Paint(object sender, PaintEventArgs e)
-        {
-            // Some code (probably empty)
-        }
-
-        private void txt_controlnum_TextChanged(object sender, EventArgs e)
-        {
-
+            if (IsReservationTypeAndScopeSelected())
+            {
+                LoadRate();
+            }
         }
 
         private void TimeStart_ValueChanged(object sender, EventArgs e)
         {
-            DateTime selectedTime = TimeStart.Value;
-            string hourAndMinute = selectedTime.ToString("HH:mm tt");
-            // You can now use the hourAndMinute variable as needed
-           // MessageBox.Show("Selected Time: " + hourAndMinute);
+            if (IsReservationTypeAndScopeSelected())
+            {
+                LoadRate();
+            }
         }
 
+        private void TimeEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if (IsReservationTypeAndScopeSelected())
+            {
+                LoadRate();
+            }
+        }
 
+        private void radio_aircon_CheckedChanged(object sender, EventArgs e)
+        {
+            if (IsReservationTypeAndScopeSelected())
+            {
+                LoadRate();
+            }
+        }
+
+        // Helper method to validate the contact number
+        private bool IsValidContactNumber(string contactNumber)
+        {
+            // validation
+            // Ensure the contact number is 10-15 digits long and may contain spaces, dashes, and parentheses
+            string cleanedContactNumber = new string(contactNumber.Where(char.IsDigit).ToArray());
+            return cleanedContactNumber.Length >= 10 && cleanedContactNumber.Length <= 15;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e) { }
+
+        private void panel_faci_Paint(object sender, PaintEventArgs e) { }
+
+        private void txt_controlnum_TextChanged(object sender, EventArgs e) { }
+
+        private void btn_clearform_Click(object sender, EventArgs e)
+        {
+            // Clear textboxes
+            txt_surname.Clear();
+            txt_firstname.Clear();
+            txt_address.Clear();
+            txt_contact.Clear();
+            txt_requestorigin.Clear();
+            txt_controlnum.Clear();
+            txt_activity.Clear();
+            txt_rate.Clear();
+
+            // Reset DateTimePickers to current date and time
+            date_of_use_start.Value = DateTime.Now;
+            date_of_use_end.Value = DateTime.Now;
+            TimeStart.Value = DateTime.Now;
+            TimeEnd.Value = DateTime.Now;
+
+            // Reset ComboBoxes to default selection
+            if (combo_venues.Items.Count > 0)
+                combo_venues.SelectedIndex = 0;
+            if (combo_scope.Items.Count > 0)
+                combo_scope.SelectedIndex = 0;
+            if (combo_ReservationType.Items.Count > 0)
+                combo_ReservationType.SelectedIndex = 0;
+
+            // Reset RadioButtons
+            radio_Yes.Checked = false;
+            radio_No.Checked = false;
+
+            // Optionally, reset any other controls as needed
+        }
+
+        // Load reserved dates from the database
+        private void LoadReservedDates(int venueID)
+        {
+            reservedDates = new List<DateTime>();
+            try
+            {
+                DBConnect();
+                cmd = new SqlCommand("SELECT fld_Start_Date, fld_End_Date FROM tbl_Reservation WHERE fk_VenueID = @VenueID", conn);
+                cmd.Parameters.AddWithValue("@VenueID", venueID);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    DateTime startDate = reader.GetDateTime(0);
+                    DateTime endDate = reader.GetDateTime(1);
+                    for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+                    {
+                        reservedDates.Add(date);
+                    }
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading reserved dates: " + ex.Message);
+            }
+            finally
+            {
+                DBClose();
+            }
+        }
+
+        private void date_of_use_start_ValueChanged(object sender, EventArgs e)
+        {
+            // Check if the selected date is reserved
+            if (reservedDates.Contains(date_of_use_start.Value.Date))
+            {
+                MessageBox.Show("The selected start date is already reserved for this venue. Please choose another date.", "Date Reserved", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Temporarily unsubscribe from the event
+                date_of_use_start.ValueChanged -= date_of_use_start_ValueChanged;
+                date_of_use_start.Value = DateTime.Now; // Reset to current date
+                // Re-subscribe to the event
+                date_of_use_start.ValueChanged += date_of_use_start_ValueChanged;
+            }
+        }
+
+        private void date_of_use_end_ValueChanged(object sender, EventArgs e)
+        {
+            // Check if the selected date is reserved
+            if (reservedDates.Contains(date_of_use_end.Value.Date))
+            {
+                MessageBox.Show("The selected end date is already reserved for this venue. Please choose another date.", "Date Reserved", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Temporarily unsubscribe from the event
+                date_of_use_end.ValueChanged -= date_of_use_end_ValueChanged;
+                date_of_use_end.Value = DateTime.Now; // Reset to current date
+                // Re-subscribe to the event
+                date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
+            }
+        }
     }
 }
