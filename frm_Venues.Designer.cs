@@ -44,9 +44,28 @@
             this.Btn_Cancel = new System.Windows.Forms.Button();
             this.Btn_Create = new System.Windows.Forms.Button();
             this.dt_approved = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Contact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_approved = new System.Windows.Forms.Label();
             this.lbl_pending = new System.Windows.Forms.Label();
             this.dt_pendings = new System.Windows.Forms.DataGridView();
+            this.lbl_canceled = new System.Windows.Forms.Label();
+            this.dt_canceled = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,25 +77,7 @@
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lbl_canceled = new System.Windows.Forms.Label();
-            this.dt_canceled = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Contact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dt_approved)).BeginInit();
@@ -211,16 +212,14 @@
             this.dt_approved.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
-            this.Column3,
             this.Column8,
             this.Contact,
-            this.Column4,
             this.Column6,
             this.Column10,
             this.Column7,
             this.Column9,
-            this.Column12,
-            this.Column5});
+            this.Column5,
+            this.Column13});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -237,6 +236,66 @@
             this.dt_approved.Size = new System.Drawing.Size(1135, 153);
             this.dt_approved.TabIndex = 1;
             this.dt_approved.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtvenuereservation_CellContentClick);
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "fld_Control_Number";
+            this.Column1.HeaderText = "Control No.";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "fld_First_Name";
+            this.Column2.HeaderText = "Requestor";
+            this.Column2.Name = "Column2";
+            // 
+            // Column8
+            // 
+            this.Column8.DataPropertyName = "fld_Activity_Name";
+            this.Column8.HeaderText = "Activity";
+            this.Column8.Name = "Column8";
+            // 
+            // Contact
+            // 
+            this.Contact.DataPropertyName = "fld_Contact_Number";
+            this.Contact.HeaderText = "Contact";
+            this.Contact.Name = "Contact";
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "fld_Start_Date";
+            this.Column6.HeaderText = "Date Start";
+            this.Column6.Name = "Column6";
+            // 
+            // Column10
+            // 
+            this.Column10.DataPropertyName = "fld_End_Date";
+            this.Column10.HeaderText = "Date End";
+            this.Column10.Name = "Column10";
+            // 
+            // Column7
+            // 
+            this.Column7.DataPropertyName = "fld_Start_Time";
+            this.Column7.HeaderText = "Time Start";
+            this.Column7.Name = "Column7";
+            // 
+            // Column9
+            // 
+            this.Column9.DataPropertyName = "fld_End_Time";
+            this.Column9.HeaderText = "Time End";
+            this.Column9.Name = "Column9";
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "fld_Reservation_Status";
+            this.Column5.HeaderText = "Status";
+            this.Column5.Name = "Column5";
+            // 
+            // Column13
+            // 
+            this.Column13.DataPropertyName = "fld_Total_Amount";
+            this.Column13.HeaderText = "Total";
+            this.Column13.Name = "Column13";
             // 
             // lbl_approved
             // 
@@ -283,7 +342,8 @@
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8,
             this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10});
+            this.dataGridViewTextBoxColumn10,
+            this.Column14});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -300,72 +360,6 @@
             this.dt_pendings.Size = new System.Drawing.Size(1135, 152);
             this.dt_pendings.TabIndex = 4;
             this.dt_pendings.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_pendings_CellContentClick);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "control_number";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Control No.";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "requesting_person";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Requestor";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "address";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Address";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "activity";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Activity";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "contact";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Contact";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "participants";
-            this.dataGridViewTextBoxColumn6.HeaderText = "Participants";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
-            // Column11
-            // 
-            this.Column11.DataPropertyName = "date_start";
-            this.Column11.HeaderText = "Dat Start";
-            this.Column11.Name = "Column11";
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "date_end";
-            this.dataGridViewTextBoxColumn7.HeaderText = "Date End";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "time_start";
-            this.dataGridViewTextBoxColumn8.HeaderText = "Time Start";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "time_end";
-            this.dataGridViewTextBoxColumn9.HeaderText = "Time End";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "status";
-            this.dataGridViewTextBoxColumn10.HeaderText = "Status";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             // 
             // lbl_canceled
             // 
@@ -396,7 +390,9 @@
             this.dataGridViewTextBoxColumn12,
             this.dataGridViewTextBoxColumn13,
             this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15});
+            this.dataGridViewTextBoxColumn15,
+            this.Column15,
+            this.Column16});
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -415,104 +411,117 @@
             // 
             // dataGridViewTextBoxColumn11
             // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "control_number";
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "fld_Control_Number";
             this.dataGridViewTextBoxColumn11.HeaderText = "Control Number";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             // 
             // dataGridViewTextBoxColumn12
             // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "requesting_person";
-            this.dataGridViewTextBoxColumn12.HeaderText = "Requestor";
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "fld_First_Name";
+            this.dataGridViewTextBoxColumn12.HeaderText = "First Name";
             this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             // 
             // dataGridViewTextBoxColumn13
             // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "address";
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "fld_Requesting_Person_Address";
             this.dataGridViewTextBoxColumn13.HeaderText = "Address";
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             // 
             // dataGridViewTextBoxColumn14
             // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "activity";
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "fld_Activity_Name";
             this.dataGridViewTextBoxColumn14.HeaderText = "Activity";
             this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
             // 
             // dataGridViewTextBoxColumn15
             // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "participants";
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "fld_Number_Of_Participants";
             this.dataGridViewTextBoxColumn15.HeaderText = "Participants";
             this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
             // 
-            // Column1
+            // Column15
             // 
-            this.Column1.DataPropertyName = "ControlNumber";
-            this.Column1.HeaderText = "Control No.";
-            this.Column1.Name = "Column1";
+            this.Column15.DataPropertyName = "fld_Reservation_Status";
+            this.Column15.HeaderText = "Status";
+            this.Column15.Name = "Column15";
             // 
-            // Column2
+            // Column16
             // 
-            this.Column2.DataPropertyName = "Surname";
-            this.Column2.HeaderText = "Requestor";
-            this.Column2.Name = "Column2";
+            this.Column16.DataPropertyName = "fld_Total_Amount";
+            this.Column16.HeaderText = "Total";
+            this.Column16.Name = "Column16";
             // 
-            // Column3
+            // dataGridViewTextBoxColumn1
             // 
-            this.Column3.DataPropertyName = "Address";
-            this.Column3.HeaderText = "Address";
-            this.Column3.Name = "Column3";
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "fld_Control_Number";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Control No.";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
-            // Column8
+            // dataGridViewTextBoxColumn2
             // 
-            this.Column8.HeaderText = "Activity";
-            this.Column8.Name = "Column8";
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "fld_First_Name";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Requestor";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
-            // Contact
+            // dataGridViewTextBoxColumn3
             // 
-            this.Contact.DataPropertyName = "ContactNumber";
-            this.Contact.HeaderText = "Contact";
-            this.Contact.Name = "Contact";
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "fld_Requesting_Person_Address";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Address";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
-            // Column4
+            // dataGridViewTextBoxColumn4
             // 
-            this.Column4.DataPropertyName = "NumberOfParticipants";
-            this.Column4.HeaderText = "Participants";
-            this.Column4.Name = "Column4";
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "fld_Activity_Name";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Activity";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
-            // Column6
+            // dataGridViewTextBoxColumn5
             // 
-            this.Column6.DataPropertyName = "StartDate";
-            this.Column6.HeaderText = "Date Start";
-            this.Column6.Name = "Column6";
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "fld_Contact_Number";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Contact";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
-            // Column10
+            // dataGridViewTextBoxColumn6
             // 
-            this.Column10.DataPropertyName = "EndDate";
-            this.Column10.HeaderText = "Date End";
-            this.Column10.Name = "Column10";
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "fld_Number_Of_Participants";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Participants";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
-            // Column7
+            // Column11
             // 
-            this.Column7.DataPropertyName = "StartTime";
-            this.Column7.HeaderText = "Time Start";
-            this.Column7.Name = "Column7";
+            this.Column11.DataPropertyName = "fld_Start_Date";
+            this.Column11.HeaderText = "Date Start";
+            this.Column11.Name = "Column11";
             // 
-            // Column9
+            // dataGridViewTextBoxColumn7
             // 
-            this.Column9.DataPropertyName = "EndTime";
-            this.Column9.HeaderText = "Time End";
-            this.Column9.Name = "Column9";
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "fld_End_Date";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Date End";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
-            // Column12
+            // dataGridViewTextBoxColumn8
             // 
-            this.Column12.DataPropertyName = "RequestOrigin";
-            this.Column12.HeaderText = "Request Origin";
-            this.Column12.Name = "Column12";
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "fld_Start_Time";
+            this.dataGridViewTextBoxColumn8.HeaderText = "Time Start";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             // 
-            // Column5
+            // dataGridViewTextBoxColumn9
             // 
-            this.Column5.DataPropertyName = "Status";
-            this.Column5.HeaderText = "Status";
-            this.Column5.Name = "Column5";
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "fld_End_Time";
+            this.dataGridViewTextBoxColumn9.HeaderText = "Time End";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "fld_Reservation_Status";
+            this.dataGridViewTextBoxColumn10.HeaderText = "Status";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            // 
+            // Column14
+            // 
+            this.Column14.DataPropertyName = "fld_Total_Amount";
+            this.Column14.HeaderText = "Total";
+            this.Column14.Name = "Column14";
             // 
             // frm_Venues
             // 
@@ -557,6 +566,26 @@
         private System.Windows.Forms.DataGridView dt_canceled;
         private System.Windows.Forms.Button Btn_Canceled;
         private System.Windows.Forms.Button Btn_Cancel;
+        private System.Windows.Forms.Button btn_approvependings;
+        private System.Windows.Forms.Button Btn_Refresh;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Contact;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -568,25 +597,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.Button btn_approvependings;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private System.Windows.Forms.Button Btn_Refresh;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Contact;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
     }
 }

@@ -31,6 +31,15 @@ namespace pgso
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txt_revtype = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.radio_Yes = new System.Windows.Forms.RadioButton();
+            this.label22 = new System.Windows.Forms.Label();
+            this.radio_No = new System.Windows.Forms.RadioButton();
+            this.combo_scope = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.combo_ReservationType = new System.Windows.Forms.ComboBox();
             this.txt_requestorigin = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -41,13 +50,8 @@ namespace pgso
             this.radio_soundsystem = new System.Windows.Forms.RadioButton();
             this.radio_chair = new System.Windows.Forms.RadioButton();
             this.radio_Tables = new System.Windows.Forms.RadioButton();
-            this.label17 = new System.Windows.Forms.Label();
-            this.combo_chooseSet = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.combo_venues = new System.Windows.Forms.ComboBox();
-            this.radio_No = new System.Windows.Forms.RadioButton();
-            this.radio_Yes = new System.Windows.Forms.RadioButton();
-            this.label15 = new System.Windows.Forms.Label();
             this.txt_rate = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -82,19 +86,23 @@ namespace pgso
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Khaki;
+            this.panel1.Controls.Add(this.txt_revtype);
+            this.panel1.Controls.Add(this.label15);
+            this.panel1.Controls.Add(this.radio_Yes);
+            this.panel1.Controls.Add(this.label22);
+            this.panel1.Controls.Add(this.radio_No);
+            this.panel1.Controls.Add(this.combo_scope);
+            this.panel1.Controls.Add(this.label21);
+            this.panel1.Controls.Add(this.label17);
+            this.panel1.Controls.Add(this.combo_ReservationType);
             this.panel1.Controls.Add(this.txt_requestorigin);
             this.panel1.Controls.Add(this.label20);
             this.panel1.Controls.Add(this.label19);
             this.panel1.Controls.Add(this.label18);
             this.panel1.Controls.Add(this.txt_surname);
             this.panel1.Controls.Add(this.panel_faci);
-            this.panel1.Controls.Add(this.label17);
-            this.panel1.Controls.Add(this.combo_chooseSet);
             this.panel1.Controls.Add(this.label16);
             this.panel1.Controls.Add(this.combo_venues);
-            this.panel1.Controls.Add(this.radio_No);
-            this.panel1.Controls.Add(this.radio_Yes);
-            this.panel1.Controls.Add(this.label15);
             this.panel1.Controls.Add(this.txt_rate);
             this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.label13);
@@ -127,10 +135,105 @@ namespace pgso
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // txt_revtype
+            // 
+            this.txt_revtype.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_revtype.Location = new System.Drawing.Point(260, 232);
+            this.txt_revtype.Name = "txt_revtype";
+            this.txt_revtype.Size = new System.Drawing.Size(162, 24);
+            this.txt_revtype.TabIndex = 54;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Black;
+            this.label15.Location = new System.Drawing.Point(130, 138);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(117, 20);
+            this.label15.TabIndex = 31;
+            this.label15.Text = "Airconditioned";
+            // 
+            // radio_Yes
+            // 
+            this.radio_Yes.AutoSize = true;
+            this.radio_Yes.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radio_Yes.Location = new System.Drawing.Point(281, 138);
+            this.radio_Yes.Name = "radio_Yes";
+            this.radio_Yes.Size = new System.Drawing.Size(50, 24);
+            this.radio_Yes.TabIndex = 32;
+            this.radio_Yes.TabStop = true;
+            this.radio_Yes.Text = "Yes";
+            this.radio_Yes.UseVisualStyleBackColor = true;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ForeColor = System.Drawing.Color.Black;
+            this.label22.Location = new System.Drawing.Point(109, 232);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(137, 20);
+            this.label22.TabIndex = 53;
+            this.label22.Text = "Reservation Type:";
+            // 
+            // radio_No
+            // 
+            this.radio_No.AutoSize = true;
+            this.radio_No.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radio_No.Location = new System.Drawing.Point(337, 138);
+            this.radio_No.Name = "radio_No";
+            this.radio_No.Size = new System.Drawing.Size(48, 24);
+            this.radio_No.TabIndex = 33;
+            this.radio_No.TabStop = true;
+            this.radio_No.Text = "No";
+            this.radio_No.UseVisualStyleBackColor = true;
+            // 
+            // combo_scope
+            // 
+            this.combo_scope.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.combo_scope.FormattingEnabled = true;
+            this.combo_scope.Location = new System.Drawing.Point(490, 49);
+            this.combo_scope.Name = "combo_scope";
+            this.combo_scope.Size = new System.Drawing.Size(162, 28);
+            this.combo_scope.TabIndex = 52;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.Black;
+            this.label21.Location = new System.Drawing.Point(433, 57);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(60, 20);
+            this.label21.TabIndex = 51;
+            this.label21.Text = "Scope:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.Black;
+            this.label17.Location = new System.Drawing.Point(61, 171);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(185, 20);
+            this.label17.TabIndex = 49;
+            this.label17.Text = "Regular/Special/PGNV?";
+            // 
+            // combo_ReservationType
+            // 
+            this.combo_ReservationType.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.combo_ReservationType.FormattingEnabled = true;
+            this.combo_ReservationType.Location = new System.Drawing.Point(261, 168);
+            this.combo_ReservationType.Name = "combo_ReservationType";
+            this.combo_ReservationType.Size = new System.Drawing.Size(164, 28);
+            this.combo_ReservationType.TabIndex = 48;
+            this.combo_ReservationType.SelectedIndexChanged += new System.EventHandler(this.combo_ReservationType_SelectedIndexChanged);
+            // 
             // txt_requestorigin
             // 
             this.txt_requestorigin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_requestorigin.Location = new System.Drawing.Point(261, 270);
+            this.txt_requestorigin.Location = new System.Drawing.Point(261, 300);
             this.txt_requestorigin.Name = "txt_requestorigin";
             this.txt_requestorigin.Size = new System.Drawing.Size(199, 24);
             this.txt_requestorigin.TabIndex = 47;
@@ -140,7 +243,7 @@ namespace pgso
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.Color.Black;
-            this.label20.Location = new System.Drawing.Point(125, 274);
+            this.label20.Location = new System.Drawing.Point(125, 304);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(115, 20);
             this.label20.TabIndex = 46;
@@ -151,7 +254,7 @@ namespace pgso
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Century Gothic", 9F);
             this.label19.ForeColor = System.Drawing.Color.Black;
-            this.label19.Location = new System.Drawing.Point(467, 152);
+            this.label19.Location = new System.Drawing.Point(467, 116);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(60, 17);
             this.label19.TabIndex = 45;
@@ -162,7 +265,7 @@ namespace pgso
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Century Gothic", 9F);
             this.label18.ForeColor = System.Drawing.Color.Black;
-            this.label18.Location = new System.Drawing.Point(300, 152);
+            this.label18.Location = new System.Drawing.Point(300, 116);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(70, 17);
             this.label18.TabIndex = 44;
@@ -171,7 +274,7 @@ namespace pgso
             // txt_surname
             // 
             this.txt_surname.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_surname.Location = new System.Drawing.Point(431, 125);
+            this.txt_surname.Location = new System.Drawing.Point(431, 89);
             this.txt_surname.Name = "txt_surname";
             this.txt_surname.Size = new System.Drawing.Size(158, 24);
             this.txt_surname.TabIndex = 43;
@@ -186,6 +289,7 @@ namespace pgso
             this.panel_faci.Name = "panel_faci";
             this.panel_faci.Size = new System.Drawing.Size(522, 57);
             this.panel_faci.TabIndex = 42;
+            this.panel_faci.Visible = false;
             this.panel_faci.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_faci_Paint);
             // 
             // label7
@@ -235,33 +339,12 @@ namespace pgso
             this.radio_Tables.Text = "Tables";
             this.radio_Tables.UseVisualStyleBackColor = true;
             // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.Black;
-            this.label17.Location = new System.Drawing.Point(3, 24);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(76, 17);
-            this.label17.TabIndex = 40;
-            this.label17.Text = "Choose Set";
-            // 
-            // combo_chooseSet
-            // 
-            this.combo_chooseSet.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.combo_chooseSet.FormattingEnabled = true;
-            this.combo_chooseSet.Location = new System.Drawing.Point(84, 13);
-            this.combo_chooseSet.Name = "combo_chooseSet";
-            this.combo_chooseSet.Size = new System.Drawing.Size(121, 28);
-            this.combo_chooseSet.TabIndex = 39;
-            this.combo_chooseSet.SelectedIndexChanged += new System.EventHandler(this.combo_chooseset_SelectedIndexChanged);
-            // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.Color.Black;
-            this.label16.Location = new System.Drawing.Point(122, 93);
+            this.label16.Location = new System.Drawing.Point(122, 57);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(125, 20);
             this.label16.TabIndex = 38;
@@ -271,54 +354,19 @@ namespace pgso
             // 
             this.combo_venues.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combo_venues.FormattingEnabled = true;
-            this.combo_venues.Location = new System.Drawing.Point(263, 85);
+            this.combo_venues.Location = new System.Drawing.Point(263, 49);
             this.combo_venues.Name = "combo_venues";
-            this.combo_venues.Size = new System.Drawing.Size(327, 28);
+            this.combo_venues.Size = new System.Drawing.Size(162, 28);
             this.combo_venues.TabIndex = 37;
             this.combo_venues.SelectedIndexChanged += new System.EventHandler(this.combo_venues_SelectedIndexChanged);
-            // 
-            // radio_No
-            // 
-            this.radio_No.AutoSize = true;
-            this.radio_No.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radio_No.Location = new System.Drawing.Point(339, 527);
-            this.radio_No.Name = "radio_No";
-            this.radio_No.Size = new System.Drawing.Size(48, 24);
-            this.radio_No.TabIndex = 33;
-            this.radio_No.TabStop = true;
-            this.radio_No.Text = "No";
-            this.radio_No.UseVisualStyleBackColor = true;
-            // 
-            // radio_Yes
-            // 
-            this.radio_Yes.AutoSize = true;
-            this.radio_Yes.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radio_Yes.Location = new System.Drawing.Point(283, 527);
-            this.radio_Yes.Name = "radio_Yes";
-            this.radio_Yes.Size = new System.Drawing.Size(50, 24);
-            this.radio_Yes.TabIndex = 32;
-            this.radio_Yes.TabStop = true;
-            this.radio_Yes.Text = "Yes";
-            this.radio_Yes.UseVisualStyleBackColor = true;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.Black;
-            this.label15.Location = new System.Drawing.Point(132, 527);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(117, 20);
-            this.label15.TabIndex = 31;
-            this.label15.Text = "Airconditioned";
             // 
             // txt_rate
             // 
             this.txt_rate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_rate.Location = new System.Drawing.Point(264, 481);
+            this.txt_rate.Location = new System.Drawing.Point(264, 511);
             this.txt_rate.Multiline = true;
             this.txt_rate.Name = "txt_rate";
-            this.txt_rate.Size = new System.Drawing.Size(328, 29);
+            this.txt_rate.Size = new System.Drawing.Size(180, 29);
             this.txt_rate.TabIndex = 30;
             // 
             // label14
@@ -326,7 +374,7 @@ namespace pgso
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.Black;
-            this.label14.Location = new System.Drawing.Point(206, 490);
+            this.label14.Location = new System.Drawing.Point(206, 520);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(43, 20);
             this.label14.TabIndex = 29;
@@ -337,7 +385,7 @@ namespace pgso
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(211, 337);
+            this.label13.Location = new System.Drawing.Point(211, 367);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(36, 20);
             this.label13.TabIndex = 28;
@@ -348,7 +396,7 @@ namespace pgso
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(206, 305);
+            this.label12.Location = new System.Drawing.Point(206, 335);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(41, 20);
             this.label12.TabIndex = 27;
@@ -357,7 +405,7 @@ namespace pgso
             // date_of_use_end
             // 
             this.date_of_use_end.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.date_of_use_end.Location = new System.Drawing.Point(261, 335);
+            this.date_of_use_end.Location = new System.Drawing.Point(261, 365);
             this.date_of_use_end.Name = "date_of_use_end";
             this.date_of_use_end.Size = new System.Drawing.Size(227, 22);
             this.date_of_use_end.TabIndex = 26;
@@ -367,7 +415,7 @@ namespace pgso
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(123, 59);
+            this.label11.Location = new System.Drawing.Point(123, 23);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(125, 20);
             this.label11.TabIndex = 25;
@@ -376,7 +424,7 @@ namespace pgso
             // txt_controlnum
             // 
             this.txt_controlnum.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_controlnum.Location = new System.Drawing.Point(263, 55);
+            this.txt_controlnum.Location = new System.Drawing.Point(263, 19);
             this.txt_controlnum.Name = "txt_controlnum";
             this.txt_controlnum.Size = new System.Drawing.Size(139, 24);
             this.txt_controlnum.TabIndex = 24;
@@ -385,7 +433,7 @@ namespace pgso
             // txt_activity
             // 
             this.txt_activity.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_activity.Location = new System.Drawing.Point(261, 391);
+            this.txt_activity.Location = new System.Drawing.Point(261, 421);
             this.txt_activity.Multiline = true;
             this.txt_activity.Name = "txt_activity";
             this.txt_activity.Size = new System.Drawing.Size(328, 29);
@@ -396,7 +444,7 @@ namespace pgso
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(168, 400);
+            this.label10.Location = new System.Drawing.Point(168, 430);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(78, 20);
             this.label10.TabIndex = 22;
@@ -407,7 +455,7 @@ namespace pgso
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(396, 368);
+            this.label9.Location = new System.Drawing.Point(396, 398);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(26, 17);
             this.label9.TabIndex = 21;
@@ -418,7 +466,7 @@ namespace pgso
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(198, 362);
+            this.label8.Location = new System.Drawing.Point(198, 392);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(48, 20);
             this.label8.TabIndex = 20;
@@ -428,7 +476,7 @@ namespace pgso
             // 
             this.TimeEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TimeEnd.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.TimeEnd.Location = new System.Drawing.Point(428, 363);
+            this.TimeEnd.Location = new System.Drawing.Point(428, 393);
             this.TimeEnd.Name = "TimeEnd";
             this.TimeEnd.ShowUpDown = true;
             this.TimeEnd.Size = new System.Drawing.Size(106, 22);
@@ -438,7 +486,7 @@ namespace pgso
             // 
             this.TimeStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TimeStart.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.TimeStart.Location = new System.Drawing.Point(261, 363);
+            this.TimeStart.Location = new System.Drawing.Point(261, 393);
             this.TimeStart.Name = "TimeStart";
             this.TimeStart.ShowUpDown = true;
             this.TimeStart.Size = new System.Drawing.Size(106, 22);
@@ -457,6 +505,7 @@ namespace pgso
             this.btn_clearform.TabIndex = 17;
             this.btn_clearform.Text = "CLEAR FORM";
             this.btn_clearform.UseVisualStyleBackColor = false;
+            this.btn_clearform.Click += new System.EventHandler(this.btn_clearform_Click);
             // 
             // btn_submit
             // 
@@ -475,15 +524,16 @@ namespace pgso
             // date_of_use_start
             // 
             this.date_of_use_start.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.date_of_use_start.Location = new System.Drawing.Point(262, 303);
+            this.date_of_use_start.Location = new System.Drawing.Point(262, 333);
             this.date_of_use_start.Name = "date_of_use_start";
             this.date_of_use_start.Size = new System.Drawing.Size(227, 22);
             this.date_of_use_start.TabIndex = 14;
+            this.date_of_use_start.ValueChanged += new System.EventHandler(this.date_of_use_start_ValueChanged);
             // 
             // num_participants
             // 
             this.num_participants.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.num_participants.Location = new System.Drawing.Point(261, 428);
+            this.num_participants.Location = new System.Drawing.Point(261, 458);
             this.num_participants.Name = "num_participants";
             this.num_participants.Size = new System.Drawing.Size(81, 24);
             this.num_participants.TabIndex = 11;
@@ -493,7 +543,7 @@ namespace pgso
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(37, 432);
+            this.label6.Location = new System.Drawing.Point(37, 462);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(203, 20);
             this.label6.TabIndex = 9;
@@ -502,7 +552,7 @@ namespace pgso
             // txt_contact
             // 
             this.txt_contact.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_contact.Location = new System.Drawing.Point(262, 237);
+            this.txt_contact.Location = new System.Drawing.Point(262, 267);
             this.txt_contact.Name = "txt_contact";
             this.txt_contact.Size = new System.Drawing.Size(125, 24);
             this.txt_contact.TabIndex = 5;
@@ -512,7 +562,7 @@ namespace pgso
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(63, 362);
+            this.label5.Location = new System.Drawing.Point(63, 392);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(100, 20);
             this.label5.TabIndex = 8;
@@ -523,7 +573,7 @@ namespace pgso
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(133, 239);
+            this.label3.Location = new System.Drawing.Point(133, 269);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(114, 20);
             this.label3.TabIndex = 4;
@@ -534,7 +584,7 @@ namespace pgso
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(64, 305);
+            this.label4.Location = new System.Drawing.Point(64, 335);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(102, 20);
             this.label4.TabIndex = 5;
@@ -543,10 +593,9 @@ namespace pgso
             // txt_address
             // 
             this.txt_address.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_address.Location = new System.Drawing.Point(261, 172);
-            this.txt_address.Multiline = true;
+            this.txt_address.Location = new System.Drawing.Point(261, 202);
             this.txt_address.Name = "txt_address";
-            this.txt_address.Size = new System.Drawing.Size(328, 59);
+            this.txt_address.Size = new System.Drawing.Size(391, 24);
             this.txt_address.TabIndex = 3;
             // 
             // label2
@@ -554,7 +603,7 @@ namespace pgso
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(169, 172);
+            this.label2.Location = new System.Drawing.Point(169, 202);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 20);
             this.label2.TabIndex = 2;
@@ -563,7 +612,7 @@ namespace pgso
             // txt_firstname
             // 
             this.txt_firstname.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_firstname.Location = new System.Drawing.Point(263, 125);
+            this.txt_firstname.Location = new System.Drawing.Point(263, 89);
             this.txt_firstname.Name = "txt_firstname";
             this.txt_firstname.Size = new System.Drawing.Size(162, 24);
             this.txt_firstname.TabIndex = 1;
@@ -573,7 +622,7 @@ namespace pgso
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(34, 125);
+            this.label1.Location = new System.Drawing.Point(34, 89);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(223, 20);
             this.label1.TabIndex = 0;
@@ -642,13 +691,17 @@ namespace pgso
         private System.Windows.Forms.RadioButton radio_Yes;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox combo_venues;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox combo_chooseSet;
         private System.Windows.Forms.Panel panel_faci;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox txt_surname;
         private System.Windows.Forms.TextBox txt_requestorigin;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ComboBox combo_ReservationType;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ComboBox combo_scope;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox txt_revtype;
+        private System.Windows.Forms.Label label22;
     }
 }
