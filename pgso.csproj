@@ -8,10 +8,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>pgso</RootNamespace>
     <AssemblyName>pgso</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -135,13 +138,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connection.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="pgso_Billing\Models\Billing.cs" />
+    <Compile Include="pgso_Billing\Repositories\Billing_Repository.cs" />
+    <Compile Include="Billing_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Billing_Form.Designer.cs">
+      <DependentUpon>Billing_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Connection.cs" />
     <Compile Include="frm_createutilityreservation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +209,14 @@
     <Compile Include="frm_reservation_forms.Designer.cs">
       <DependentUpon>frm_reservation_forms.cs</DependentUpon>
     </Compile>
+    <Compile Include="_BRIS_EXPERIMENT_3_0DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_BRIS_EXPERIMENT_3_0DataSet.xsd</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Billing_Form.resx">
+      <DependentUpon>Billing_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_createutilityreservation.resx">
       <DependentUpon>frm_createutilityreservation.cs</DependentUpon>
     </EmbeddedResource>
@@ -240,6 +253,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="frm_reservation_forms.resx">
       <DependentUpon>frm_reservation_forms.cs</DependentUpon>
@@ -254,10 +268,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="_BRIS_EXPERIMENT_3_0DataSet.xsc">
+      <DependentUpon>_BRIS_EXPERIMENT_3_0DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="_BRIS_EXPERIMENT_3_0DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_BRIS_EXPERIMENT_3_0DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_BRIS_EXPERIMENT_3_0DataSet.xss">
+      <DependentUpon>_BRIS_EXPERIMENT_3_0DataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
