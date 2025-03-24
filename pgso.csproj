@@ -138,12 +138,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pgso_Billing\Models\Billing.cs" />
-    <Compile Include="pgso_Billing\Repositories\Billing_Repository.cs" />
-    <Compile Include="Billing_Form.cs">
+    <Compile Include="pgso_Billing\Models\Equipment_Billing.cs" />
+    <Compile Include="pgso_Billing\Models\Venue_Billing.cs" />
+    <Compile Include="pgso_Billing\Repositories\Equipment_Repo.cs" />
+    <Compile Include="pgso_Billing\Repositories\Venue_Repo.cs" />
+    <Compile Include="pgso_Billing\Forms\Billing_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Billing_Form.Designer.cs">
+    <Compile Include="pgso_Billing\Forms\Billing_Form.Designer.cs">
       <DependentUpon>Billing_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
@@ -214,7 +216,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_BRIS_EXPERIMENT_3_0DataSet.xsd</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Billing_Form.resx">
+    <EmbeddedResource Include="pgso_Billing\Forms\Billing_Form.resx">
       <DependentUpon>Billing_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_createutilityreservation.resx">
