@@ -33,5 +33,16 @@ namespace pgso.Properties {
                 return ((string)(this["strCon"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=ab" +
+            "z123;Encrypt=False;TrustServerCertificate=True")]
+        public string BRIS_EXPERIMENT_3_0ConnectionString {
+            get {
+                return ((string)(this["BRIS_EXPERIMENT_3_0ConnectionString"]));
+            }
+        }
     }
 }
