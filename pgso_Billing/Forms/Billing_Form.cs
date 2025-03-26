@@ -6,6 +6,8 @@ using System;
 using System.Globalization;
 using System.Linq;
 using pgso.pgso_Billing.Repositories;
+using System.Drawing.Drawing2D;
+using System.Drawing;
 
 namespace pgso
 {
@@ -26,6 +28,10 @@ namespace pgso
         {
             InitializeComponent();
         }
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
 
         private void Billing_Form_Load(object sender, EventArgs e)
         {
@@ -40,6 +46,7 @@ namespace pgso
                 MessageBox.Show("Failed to load billing records: " + ex.Message);
                 return; // Exit early if there's an error
             }
+
 
             // Set up DataGridView for Venue Billing Records
             dgv_Venue_Billing_Records.AutoGenerateColumns = false;
@@ -56,6 +63,18 @@ namespace pgso
             {
                 MessageBox.Show("No billing records found.");
             }
+
+            // 🔹 Correctly reference the FlowLayoutPanel controls
+            flowLayoutPanel1.Dock = DockStyle.Top;
+            flowLayoutPanel2.Dock = DockStyle.Left;
+            flowLayoutPanel3.Dock = DockStyle.Right;
+            flowLayoutPanel3.MinimumSize = new Size(900, 0);
+
+            // 🔹 Ensure that tableLayoutPanel1 fills the remaining space
+            tlp_Venue_Billing_UControls.Dock = DockStyle.Fill;
+
+            // 🔹 Bring the table layout panel to the front
+            tlp_Venue_Billing_UControls.BringToFront();
 
             // Attach event handlers for both search bars
             Equipment_Search_Bar.TextChanged += Equipment_Search_Bar_TextChanged;  // Equipment search
@@ -102,10 +121,57 @@ namespace pgso
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
+           
+        }
+
+       
+
+        private void Venue_Search_Bar_TextChanged_1(object sender, EventArgs e)
+        {
 
         }
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        private void dgv_Venue_Billing_Records_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanel1_Paint_1(object sender, PaintEventArgs e)
+        {
+           
+        }
+
+        private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanel3_Paint(object sender, PaintEventArgs e)
         {
 
         }
