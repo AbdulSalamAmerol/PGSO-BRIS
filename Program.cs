@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SqlServerTypes;
 
 namespace pgso
 {
@@ -14,6 +15,7 @@ namespace pgso
         [STAThread]
         static void Main()
         {
+            Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Billing_Form());

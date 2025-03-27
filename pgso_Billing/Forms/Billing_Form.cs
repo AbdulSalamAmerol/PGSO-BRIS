@@ -8,6 +8,8 @@ using System.Linq;
 using pgso.pgso_Billing.Repositories;
 using System.Drawing.Drawing2D;
 using System.Drawing;
+using Microsoft.Reporting.WinForms;
+
 
 namespace pgso
 {
@@ -20,16 +22,13 @@ namespace pgso
         private List<class_Venue_Billing> allVenueBillings = new List<class_Venue_Billing>();
         private List<class_Equipment_Billing> allEquipmentBillings = new List<class_Equipment_Billing>();
 
-        // 🔹 ADD THIS LINE HERE 👇
+        // Binding sources for DataGridViews
         private BindingSource venueBillingBindingSource = new BindingSource();
         private BindingSource equipmentBillingBindingSource = new BindingSource();
 
         public Billing_Form()
         {
-            InitializeComponent();
-        }
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
+            InitializeComponent(); // Initialize first
 
         }
 
@@ -47,7 +46,6 @@ namespace pgso
                 return; // Exit early if there's an error
             }
 
-
             // Set up DataGridView for Venue Billing Records
             dgv_Venue_Billing_Records.AutoGenerateColumns = false;
             venueBillingBindingSource.DataSource = allVenueBillings;
@@ -64,22 +62,28 @@ namespace pgso
                 MessageBox.Show("No billing records found.");
             }
 
-            // 🔹 Correctly reference the FlowLayoutPanel controls
-            flowLayoutPanel1.Dock = DockStyle.Top;
-            flowLayoutPanel2.Dock = DockStyle.Left;
-            flowLayoutPanel3.Dock = DockStyle.Right;
-            flowLayoutPanel3.MinimumSize = new Size(900, 0);
+            // 🔹 BIND REPORT VIEWER DATA SOURCES
+            reportViewer1.LocalReport.DataSources.Clear();  // Clear old data
 
-            // 🔹 Ensure that tableLayoutPanel1 fills the remaining space
-            tlp_Venue_Billing_UControls.Dock = DockStyle.Fill;
+            if (allVenueBillings.Count > 0)
+            {
+                ReportDataSource venueDataSource = new ReportDataSource("VenueBillingDataSet", allVenueBillings);
+                reportViewer1.LocalReport.DataSources.Add(venueDataSource);
+            }
 
-            // 🔹 Bring the table layout panel to the front
-            tlp_Venue_Billing_UControls.BringToFront();
+            if (allEquipmentBillings.Count > 0)
+            {
+                ReportDataSource equipmentDataSource = new ReportDataSource("EquipmentBillingDataSet", allEquipmentBillings);
+                reportViewer1.LocalReport.DataSources.Add(equipmentDataSource);
+            }
 
+           
             // Attach event handlers for both search bars
             Equipment_Search_Bar.TextChanged += Equipment_Search_Bar_TextChanged;  // Equipment search
             Venue_Search_Bar.TextChanged += Venue_Search_Bar_TextChanged;  // Venue search
+          
         }
+
 
         // 🔹 Equipment search/filter method
         private void Equipment_Search_Bar_TextChanged(object sender, EventArgs e)
@@ -98,6 +102,9 @@ namespace pgso
                 equipmentBillingBindingSource.DataSource = allEquipmentBillings;
             else
                 equipmentBillingBindingSource.DataSource = filteredEquipmentList;
+
+            // 🔹 Refresh DataGridView
+            equipmentBillingBindingSource.ResetBindings(false);
         }
 
         // 🔹 Venue search/filter method
@@ -119,61 +126,82 @@ namespace pgso
                 venueBillingBindingSource.DataSource = filteredVenueList;
         }
 
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+
+        // Store selected billing data
+        private object selectedBillingData = null;
+
+        private void dgv_Venue_Billing_Records_SelectionChanged(object sender, EventArgs e)
         {
-           
+            if (dgv_Venue_Billing_Records.Focused && dgv_Venue_Billing_Records.SelectedRows.Count > 0)
+            {
+                dgv_Equipment_Billing_Records.ClearSelection();
+                selectedBillingData = dgv_Venue_Billing_Records.SelectedRows[0].DataBoundItem;
+                flowLayoutPanel2.Invalidate(); // Trigger repaint
+            }
         }
 
-       
+        private void dgv_Equipment_Billing_Records_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgv_Equipment_Billing_Records.Focused && dgv_Equipment_Billing_Records.SelectedRows.Count > 0)
+            {
+                dgv_Venue_Billing_Records.ClearSelection();
+                selectedBillingData = dgv_Equipment_Billing_Records.SelectedRows[0].DataBoundItem;
+                flowLayoutPanel2.Invalidate(); // Trigger repaint
+            }
+        }
+
+        private void LoadReport()
+{
+    reportViewer1.LocalReport.DataSources.Clear(); // Clear previous data sources
+    
+    // 🔹 Set the correct RDLC file path
+    reportViewer1.LocalReport.ReportPath = @"C:\Users\amero\source\repos\pgso\Report1.rdlc";
+
+    if (dgv_Venue_Billing_Records.SelectedRows.Count > 0) // Venue selected
+    {
+        var venueBilling = dgv_Venue_Billing_Records.SelectedRows[0].DataBoundItem as class_Venue_Billing;
+        if (venueBilling != null)
+        {
+            List<class_Venue_Billing> venueBillingList = new List<class_Venue_Billing> { venueBilling };
+            reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("VenueBillingDataSet", venueBillingList));
+        }
+    }
+    else if (dgv_Equipment_Billing_Records.SelectedRows.Count > 0) // Equipment selected
+    {
+        var equipmentBilling = dgv_Equipment_Billing_Records.SelectedRows[0].DataBoundItem as class_Equipment_Billing;
+        if (equipmentBilling != null)
+        {
+            List<class_Equipment_Billing> equipmentBillingList = new List<class_Equipment_Billing> { equipmentBilling };
+            reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("EquipmentBillingDataSet", equipmentBillingList));
+        }
+    }
+    else
+    {
+        MessageBox.Show("Please select a billing record first.");
+        return;
+    }
+
+    reportViewer1.LocalReport.Refresh(); // Ensure the local report is updated
+    reportViewer1.RefreshReport(); // Force UI refresh
+}
+
+
 
         private void Venue_Search_Bar_TextChanged_1(object sender, EventArgs e)
         {
-
+            // Filter filter feature
         }
 
-        private void dgv_Venue_Billing_Records_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        private void dgv_Venue_Billing_Records_CellContentClick(object sender, DataGridViewCellEventArgs e){}
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e){}
+        private void flowLayoutPanel3_Paint_1(object sender, PaintEventArgs e){}
+        private void panel4_Paint(object sender, PaintEventArgs e){}
+        private void panel5_Paint(object sender, PaintEventArgs e) {}
+        private void btn_Generate_Billing_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel5_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel1_Paint_1(object sender, PaintEventArgs e)
-        {
-           
-        }
-
-        private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void flowLayoutPanel3_Paint(object sender, PaintEventArgs e)
-        {
-
+            LoadReport();
+            reportViewer1.RefreshReport();
         }
     }
 }
