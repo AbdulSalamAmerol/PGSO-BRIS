@@ -18,18 +18,17 @@ namespace pgso
         private Venue_Repository venueRepo = new Venue_Repository();
         private Equipment_Repo equipmentRepo = new Equipment_Repo();
 
-        // 🔹 Add global lists to hold all billing records
+        //   global lists to hold all billing records
         private List<class_Venue_Billing> allVenueBillings = new List<class_Venue_Billing>();
         private List<class_Equipment_Billing> allEquipmentBillings = new List<class_Equipment_Billing>();
 
-        // Binding sources for DataGridViews
+        // Binding sources ito for DataGridViews
         private BindingSource venueBillingBindingSource = new BindingSource();
         private BindingSource equipmentBillingBindingSource = new BindingSource();
 
         public Billing_Form()
         {
-            InitializeComponent(); // Initialize first
-
+            InitializeComponent(); 
         }
 
         private void Billing_Form_Load(object sender, EventArgs e)
@@ -43,15 +42,15 @@ namespace pgso
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to load billing records: " + ex.Message);
-                return; // Exit early if there's an error
+                return; 
             }
 
-            // Set up DataGridView for Venue Billing Records
+            //DataGridView ng Venue Billing 
             dgv_Venue_Billing_Records.AutoGenerateColumns = false;
             venueBillingBindingSource.DataSource = allVenueBillings;
             dgv_Venue_Billing_Records.DataSource = venueBillingBindingSource;
 
-            // Set up DataGridView for Equipment Billing Records
+            // DataGridView ng Equipment Billing 
             dgv_Equipment_Billing_Records.AutoGenerateColumns = false;
             equipmentBillingBindingSource.DataSource = allEquipmentBillings;
             dgv_Equipment_Billing_Records.DataSource = equipmentBillingBindingSource;
@@ -61,8 +60,11 @@ namespace pgso
             {
                 MessageBox.Show("No billing records found.");
             }
+            // Searchbar
+            Equipment_Search_Bar.TextChanged += Equipment_Search_Bar_TextChanged;  // Equipment search
+            Venue_Search_Bar.TextChanged += Venue_Search_Bar_TextChanged;  // Venue search
 
-            // 🔹 BIND REPORT VIEWER DATA SOURCES
+            /*  BIND REPORT VIEWER DATA SOURCES 
             reportViewer1.LocalReport.DataSources.Clear();  // Clear old data
 
             if (allVenueBillings.Count > 0)
@@ -70,22 +72,16 @@ namespace pgso
                 ReportDataSource venueDataSource = new ReportDataSource("VenueBillingDataSet", allVenueBillings);
                 reportViewer1.LocalReport.DataSources.Add(venueDataSource);
             }
-
             if (allEquipmentBillings.Count > 0)
             {
                 ReportDataSource equipmentDataSource = new ReportDataSource("EquipmentBillingDataSet", allEquipmentBillings);
                 reportViewer1.LocalReport.DataSources.Add(equipmentDataSource);
-            }
+            }*/
 
-           
-            // Attach event handlers for both search bars
-            Equipment_Search_Bar.TextChanged += Equipment_Search_Bar_TextChanged;  // Equipment search
-            Venue_Search_Bar.TextChanged += Venue_Search_Bar_TextChanged;  // Venue search
-          
         }
 
 
-        // 🔹 Equipment search/filter method
+        //  Equipment search/filter method
         private void Equipment_Search_Bar_TextChanged(object sender, EventArgs e)
         {
             string searchTerm = Equipment_Search_Bar.Text.Trim().ToLower();
@@ -96,18 +92,15 @@ namespace pgso
                 b.fld_Full_Name.ToLower().Contains(searchTerm) ||
                 b.fld_Total_Equipment_Cost.ToString().ToLower().Contains(searchTerm)
             ).ToList();
-
-            // Conditionally set the data source based on the search term
+            // set the data source based on the search term
             if (string.IsNullOrEmpty(searchTerm))
                 equipmentBillingBindingSource.DataSource = allEquipmentBillings;
             else
                 equipmentBillingBindingSource.DataSource = filteredEquipmentList;
-
-            // 🔹 Refresh DataGridView
+            //  Refresh DataGridView
             equipmentBillingBindingSource.ResetBindings(false);
         }
-
-        // 🔹 Venue search/filter method
+        //  Venue search/filter method
         private void Venue_Search_Bar_TextChanged(object sender, EventArgs e)
         {
             string searchTerm = Venue_Search_Bar.Text.Trim().ToLower();
@@ -118,16 +111,18 @@ namespace pgso
                 b.fld_Full_Name.ToLower().Contains(searchTerm) ||
                 b.fld_Payment_Status.ToLower().Contains(searchTerm)
             ).ToList();
-
-            // Conditionally set the data source based on the search term
+            //  set the data source based on the search term
             if (string.IsNullOrEmpty(searchTerm))
                 venueBillingBindingSource.DataSource = allVenueBillings;
             else
                 venueBillingBindingSource.DataSource = filteredVenueList;
+            //refresh
+            venueBillingBindingSource.ResetBindings(false );
         }
 
 
-        // Store selected billing data
+        // Store selected billing data 
+     
         private object selectedBillingData = null;
 
         private void dgv_Venue_Billing_Records_SelectionChanged(object sender, EventArgs e)
@@ -150,40 +145,40 @@ namespace pgso
             }
         }
 
-        private void LoadReport()
-{
-    reportViewer1.LocalReport.DataSources.Clear(); // Clear previous data sources
+            private void LoadReport()
+            {  
+                reportViewer1.LocalReport.DataSources.Clear(); // Clear previous data sources
     
-    // 🔹 Set the correct RDLC file path
-    reportViewer1.LocalReport.ReportPath = @"C:\Users\amero\source\repos\pgso\Report1.rdlc";
+                // RDLC file path
+                reportViewer1.LocalReport.ReportPath = @"C:\Users\amero\source\repos\pgso\Report1.rdlc";
 
-    if (dgv_Venue_Billing_Records.SelectedRows.Count > 0) // Venue selected
-    {
-        var venueBilling = dgv_Venue_Billing_Records.SelectedRows[0].DataBoundItem as class_Venue_Billing;
-        if (venueBilling != null)
-        {
-            List<class_Venue_Billing> venueBillingList = new List<class_Venue_Billing> { venueBilling };
-            reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("VenueBillingDataSet", venueBillingList));
-        }
-    }
-    else if (dgv_Equipment_Billing_Records.SelectedRows.Count > 0) // Equipment selected
-    {
-        var equipmentBilling = dgv_Equipment_Billing_Records.SelectedRows[0].DataBoundItem as class_Equipment_Billing;
-        if (equipmentBilling != null)
-        {
-            List<class_Equipment_Billing> equipmentBillingList = new List<class_Equipment_Billing> { equipmentBilling };
-            reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("EquipmentBillingDataSet", equipmentBillingList));
-        }
-    }
-    else
-    {
-        MessageBox.Show("Please select a billing record first.");
-        return;
-    }
-
-    reportViewer1.LocalReport.Refresh(); // Ensure the local report is updated
-    reportViewer1.RefreshReport(); // Force UI refresh
-}
+                if (dgv_Venue_Billing_Records.SelectedRows.Count > 0) // Venue selected
+                {
+                    var venueBilling = dgv_Venue_Billing_Records.SelectedRows[0].DataBoundItem as class_Venue_Billing;
+                    if (venueBilling != null)
+                    {
+                        List<class_Venue_Billing> venueBillingList = new List<class_Venue_Billing> { venueBilling };
+                        reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("VenueBillingDataSet", venueBillingList));
+                    }
+                }
+                else if (dgv_Equipment_Billing_Records.SelectedRows.Count > 0) // Equipment selected
+                {
+                    var equipmentBilling = dgv_Equipment_Billing_Records.SelectedRows[0].DataBoundItem as class_Equipment_Billing;
+                    if (equipmentBilling != null)
+                    {
+                        List<class_Equipment_Billing> equipmentBillingList = new List<class_Equipment_Billing> { equipmentBilling };
+                        reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("EquipmentBillingDataSet", equipmentBillingList));
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a billing record first.");
+                    return;
+                }
+                //force refresh
+                reportViewer1.LocalReport.Refresh(); 
+                reportViewer1.RefreshReport(); 
+            }
 
 
 

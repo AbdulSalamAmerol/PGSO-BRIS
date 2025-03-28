@@ -230,6 +230,14 @@
       <DependentUpon>frm_reservation_forms.cs</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="Venue_Data_Source.cs">
+      <DependentUpon>Venue_Data_Source.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Venue_Data_Source.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Venue_Data_Source.xsd</DependentUpon>
+    </Compile>
     <Compile Include="_BRIS_EXPERIMENT_3_0DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -292,6 +300,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Venue_Data_Source.xsc">
+      <DependentUpon>Venue_Data_Source.xsd</DependentUpon>
+    </None>
+    <None Include="Venue_Data_Source.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Venue_Data_Source.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Venue_Data_Source.xss">
+      <DependentUpon>Venue_Data_Source.xsd</DependentUpon>
+    </None>
     <None Include="_BRIS_EXPERIMENT_3_0DataSet.xsc">
       <DependentUpon>_BRIS_EXPERIMENT_3_0DataSet.xsd</DependentUpon>
     </None>
@@ -325,6 +344,10 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="pgso_Billing\Image Asset\" />
+    <Folder Include="pgso_Billing\Queries\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets" Condition="Exists('packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" />

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this._BRIS_EXPERIMENT_3_0DataSet1 = new pgso._BRIS_EXPERIMENT_3_0DataSet();
             this.tlp_Venue_Billing_UControls = new System.Windows.Forms.TableLayoutPanel();
             this.Panel_Of_tpl_dgvVenue = new System.Windows.Forms.Panel();
@@ -49,10 +49,11 @@
             this.fld_Equipment_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Formatted_Total_Equipment_Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btn_Generate_Billing = new System.Windows.Forms.Button();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btn_Generate_Billing = new System.Windows.Forms.Button();
+            this.btn_Generate_Report = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet1)).BeginInit();
             this.tlp_Venue_Billing_UControls.SuspendLayout();
             this.Panel_Of_tpl_dgvVenue.SuspendLayout();
@@ -77,14 +78,14 @@
             this.tlp_Venue_Billing_UControls.Controls.Add(this.dgv_Venue_Billing_Records, 0, 1);
             this.tlp_Venue_Billing_UControls.Controls.Add(this.dgv_Equipment_Billing_Records, 0, 3);
             this.tlp_Venue_Billing_UControls.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_Venue_Billing_UControls.Location = new System.Drawing.Point(200, 100);
+            this.tlp_Venue_Billing_UControls.Location = new System.Drawing.Point(152, 100);
             this.tlp_Venue_Billing_UControls.Name = "tlp_Venue_Billing_UControls";
             this.tlp_Venue_Billing_UControls.RowCount = 4;
             this.tlp_Venue_Billing_UControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.5F));
             this.tlp_Venue_Billing_UControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.5F));
             this.tlp_Venue_Billing_UControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.5F));
             this.tlp_Venue_Billing_UControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.5F));
-            this.tlp_Venue_Billing_UControls.Size = new System.Drawing.Size(632, 804);
+            this.tlp_Venue_Billing_UControls.Size = new System.Drawing.Size(680, 804);
             this.tlp_Venue_Billing_UControls.TabIndex = 4;
             this.tlp_Venue_Billing_UControls.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
@@ -160,8 +161,8 @@
             this.dgv_Venue_Billing_Records.AllowUserToOrderColumns = true;
             this.dgv_Venue_Billing_Records.AllowUserToResizeColumns = false;
             this.dgv_Venue_Billing_Records.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgv_Venue_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgv_Venue_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgv_Venue_Billing_Records.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -179,7 +180,7 @@
             this.dgv_Venue_Billing_Records.MultiSelect = false;
             this.dgv_Venue_Billing_Records.Name = "dgv_Venue_Billing_Records";
             this.dgv_Venue_Billing_Records.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Venue_Billing_Records.Size = new System.Drawing.Size(626, 367);
+            this.dgv_Venue_Billing_Records.Size = new System.Drawing.Size(674, 367);
             this.dgv_Venue_Billing_Records.TabIndex = 0;
             this.dgv_Venue_Billing_Records.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Venue_Billing_Records_CellContentClick);
             this.dgv_Venue_Billing_Records.SelectionChanged += new System.EventHandler(this.dgv_Venue_Billing_Records_SelectionChanged);
@@ -226,8 +227,8 @@
             this.dgv_Equipment_Billing_Records.AllowUserToOrderColumns = true;
             this.dgv_Equipment_Billing_Records.AllowUserToResizeColumns = false;
             this.dgv_Equipment_Billing_Records.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgv_Equipment_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgv_Equipment_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgv_Equipment_Billing_Records.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -243,7 +244,7 @@
             this.dgv_Equipment_Billing_Records.MultiSelect = false;
             this.dgv_Equipment_Billing_Records.Name = "dgv_Equipment_Billing_Records";
             this.dgv_Equipment_Billing_Records.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Equipment_Billing_Records.Size = new System.Drawing.Size(626, 369);
+            this.dgv_Equipment_Billing_Records.Size = new System.Drawing.Size(674, 369);
             this.dgv_Equipment_Billing_Records.TabIndex = 2;
             this.dgv_Equipment_Billing_Records.SelectionChanged += new System.EventHandler(this.dgv_Equipment_Billing_Records_SelectionChanged);
             // 
@@ -271,11 +272,22 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.btn_Generate_Billing);
+            this.flowLayoutPanel1.Controls.Add(this.btn_Generate_Report);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1832, 100);
             this.flowLayoutPanel1.TabIndex = 5;
+            // 
+            // btn_Generate_Billing
+            // 
+            this.btn_Generate_Billing.Location = new System.Drawing.Point(3, 3);
+            this.btn_Generate_Billing.Name = "btn_Generate_Billing";
+            this.btn_Generate_Billing.Size = new System.Drawing.Size(123, 23);
+            this.btn_Generate_Billing.TabIndex = 0;
+            this.btn_Generate_Billing.Text = "Generate Billing";
+            this.btn_Generate_Billing.UseVisualStyleBackColor = true;
+            this.btn_Generate_Billing.Click += new System.EventHandler(this.btn_Generate_Billing_Click);
             // 
             // reportViewer1
             // 
@@ -283,7 +295,7 @@
             this.reportViewer1.Location = new System.Drawing.Point(3, 3);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(985, 730);
+            this.reportViewer1.Size = new System.Drawing.Size(1088, 730);
             this.reportViewer1.TabIndex = 0;
             // 
             // flowLayoutPanel2
@@ -291,8 +303,6 @@
             this.flowLayoutPanel2.Controls.Add(this.reportViewer1);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(832, 100);
-            this.flowLayoutPanel2.MaximumSize = new System.Drawing.Size(1000, 0);
-            this.flowLayoutPanel2.MinimumSize = new System.Drawing.Size(1000, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(1000, 804);
             this.flowLayoutPanel2.TabIndex = 0;
@@ -303,18 +313,17 @@
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 100);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(200, 804);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(152, 804);
             this.flowLayoutPanel3.TabIndex = 0;
             // 
-            // btn_Generate_Billing
+            // btn_Generate_Report
             // 
-            this.btn_Generate_Billing.Location = new System.Drawing.Point(3, 3);
-            this.btn_Generate_Billing.Name = "btn_Generate_Billing";
-            this.btn_Generate_Billing.Size = new System.Drawing.Size(75, 23);
-            this.btn_Generate_Billing.TabIndex = 0;
-            this.btn_Generate_Billing.Text = "Generate Billing";
-            this.btn_Generate_Billing.UseVisualStyleBackColor = true;
-            this.btn_Generate_Billing.Click += new System.EventHandler(this.btn_Generate_Billing_Click);
+            this.btn_Generate_Report.Location = new System.Drawing.Point(132, 3);
+            this.btn_Generate_Report.Name = "btn_Generate_Report";
+            this.btn_Generate_Report.Size = new System.Drawing.Size(123, 23);
+            this.btn_Generate_Report.TabIndex = 1;
+            this.btn_Generate_Report.Text = "Generate Report";
+            this.btn_Generate_Report.UseVisualStyleBackColor = true;
             // 
             // Billing_Form
             // 
@@ -367,5 +376,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.Windows.Forms.Button btn_Generate_Billing;
+        private System.Windows.Forms.Button btn_Generate_Report;
     }
 }
