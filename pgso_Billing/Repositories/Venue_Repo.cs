@@ -8,9 +8,9 @@ namespace pgso.Billing.Repositories
     {
         private string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;Persist Security Info=True;User ID=sa;Password=abz123;Encrypt=False;";
 
-        public List<class_Venue_Billing> GetAllBillingRecords()
+        public List<Billing_Model> GetAllBillingRecords()
         {
-            List<class_Venue_Billing> billings = new List<class_Venue_Billing>();
+            List<Billing_Model> billings = new List<Billing_Model>();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -47,7 +47,7 @@ namespace pgso.Billing.Repositories
                     {
                         while (reader.Read())
                         {
-                            class_Venue_Billing billing = new class_Venue_Billing
+                            Billing_Model billing = new Billing_Model
                             {
                                 fld_Control_Number = reader.GetString(0),
                                 fld_Payment_Status = reader.GetString(1),

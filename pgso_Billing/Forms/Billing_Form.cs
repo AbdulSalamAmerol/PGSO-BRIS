@@ -19,7 +19,7 @@ namespace pgso
         private Equipment_Repo equipmentRepo = new Equipment_Repo();
 
         //   global lists to hold all billing records
-        private List<class_Venue_Billing> allVenueBillings = new List<class_Venue_Billing>();
+        private List<Billing_Model> allVenueBillings = new List<Billing_Model>();
         private List<class_Equipment_Billing> allEquipmentBillings = new List<class_Equipment_Billing>();
 
         // Binding sources ito for DataGridViews
@@ -154,10 +154,10 @@ namespace pgso
 
                 if (dgv_Venue_Billing_Records.SelectedRows.Count > 0) // Venue selected
                 {
-                    var venueBilling = dgv_Venue_Billing_Records.SelectedRows[0].DataBoundItem as class_Venue_Billing;
+                    var venueBilling = dgv_Venue_Billing_Records.SelectedRows[0].DataBoundItem as Billing_Model;
                     if (venueBilling != null)
                     {
-                        List<class_Venue_Billing> venueBillingList = new List<class_Venue_Billing> { venueBilling };
+                        List<Billing_Model> venueBillingList = new List<Billing_Model> { venueBilling };
                         reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("VenueBillingDataSet", venueBillingList));
                     }
                 }
