@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this._BRIS_EXPERIMENT_3_0DataSet1 = new pgso._BRIS_EXPERIMENT_3_0DataSet();
             this.tlp_Venue_Billing_UControls = new System.Windows.Forms.TableLayoutPanel();
             this.Panel_Of_tpl_dgvVenue = new System.Windows.Forms.Panel();
@@ -50,10 +50,10 @@
             this.fld_Formatted_Total_Equipment_Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btn_Generate_Billing = new System.Windows.Forms.Button();
+            this.btn_Generate_Report = new System.Windows.Forms.Button();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btn_Generate_Report = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet1)).BeginInit();
             this.tlp_Venue_Billing_UControls.SuspendLayout();
             this.Panel_Of_tpl_dgvVenue.SuspendLayout();
@@ -161,8 +161,8 @@
             this.dgv_Venue_Billing_Records.AllowUserToOrderColumns = true;
             this.dgv_Venue_Billing_Records.AllowUserToResizeColumns = false;
             this.dgv_Venue_Billing_Records.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgv_Venue_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgv_Venue_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_Venue_Billing_Records.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -227,8 +227,8 @@
             this.dgv_Equipment_Billing_Records.AllowUserToOrderColumns = true;
             this.dgv_Equipment_Billing_Records.AllowUserToResizeColumns = false;
             this.dgv_Equipment_Billing_Records.AllowUserToResizeRows = false;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgv_Equipment_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgv_Equipment_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgv_Equipment_Billing_Records.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -289,6 +289,15 @@
             this.btn_Generate_Billing.UseVisualStyleBackColor = true;
             this.btn_Generate_Billing.Click += new System.EventHandler(this.btn_Generate_Billing_Click);
             // 
+            // btn_Generate_Report
+            // 
+            this.btn_Generate_Report.Location = new System.Drawing.Point(132, 3);
+            this.btn_Generate_Report.Name = "btn_Generate_Report";
+            this.btn_Generate_Report.Size = new System.Drawing.Size(123, 23);
+            this.btn_Generate_Report.TabIndex = 1;
+            this.btn_Generate_Report.Text = "Generate Report";
+            this.btn_Generate_Report.UseVisualStyleBackColor = true;
+            // 
             // reportViewer1
             // 
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "pgso.Report1.rdlc";
@@ -315,15 +324,6 @@
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(152, 804);
             this.flowLayoutPanel3.TabIndex = 0;
-            // 
-            // btn_Generate_Report
-            // 
-            this.btn_Generate_Report.Location = new System.Drawing.Point(132, 3);
-            this.btn_Generate_Report.Name = "btn_Generate_Report";
-            this.btn_Generate_Report.Size = new System.Drawing.Size(123, 23);
-            this.btn_Generate_Report.TabIndex = 1;
-            this.btn_Generate_Report.Text = "Generate Report";
-            this.btn_Generate_Report.UseVisualStyleBackColor = true;
             // 
             // Billing_Form
             // 
