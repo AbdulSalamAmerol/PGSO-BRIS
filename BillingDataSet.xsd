@@ -58,6 +58,7 @@
               <xs:element name="Formatted_Start_Date" msprop:Generator_ColumnPropNameInRow="Formatted_Start_Date" msprop:Generator_ColumnPropNameInTable="Formatted_Start_DateColumn" msprop:Generator_ColumnVarNameInTable="columnFormatted_Start_Date" msprop:Generator_UserColumnName="Formatted_Start_Date" type="xs:string" minOccurs="0" />
               <xs:element name="Formatted_End_Date" msprop:Generator_ColumnPropNameInRow="Formatted_End_Date" msprop:Generator_ColumnPropNameInTable="Formatted_End_DateColumn" msprop:Generator_ColumnVarNameInTable="columnFormatted_End_Date" msprop:Generator_UserColumnName="Formatted_End_Date" type="xs:string" minOccurs="0" />
               <xs:element name="Formatted_Created_At" msprop:Generator_ColumnPropNameInRow="Formatted_Created_At" msprop:Generator_ColumnPropNameInTable="Formatted_Created_AtColumn" msprop:Generator_ColumnVarNameInTable="columnFormatted_Created_At" msprop:Generator_UserColumnName="Formatted_Created_At" type="xs:string" minOccurs="0" />
+              <xs:element name="DataColumn1" msprop:Generator_ColumnPropNameInRow="DataColumn1" msprop:Generator_ColumnPropNameInTable="DataColumn1Column" msprop:Generator_ColumnVarNameInTable="columnDataColumn1" msprop:Generator_UserColumnName="DataColumn1" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
