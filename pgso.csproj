@@ -156,15 +156,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pgso_Billing\Models\Equipment_Billing.cs" />
-    <Compile Include="pgso_Billing\Models\Venue_Billing.cs" />
-    <Compile Include="pgso_Billing\Repositories\Equipment_Repo.cs" />
-    <Compile Include="pgso_Billing\Repositories\Venue_Repo.cs" />
-    <Compile Include="pgso_Billing\Forms\Billing_Form.cs">
+    <Compile Include="BillingDataSet.cs">
+      <DependentUpon>BillingDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BillingDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BillingDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Print_Billing.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="pgso_Billing\Forms\Billing_Form.Designer.cs">
-      <DependentUpon>Billing_Form.cs</DependentUpon>
+    <Compile Include="pgso_Billing\Forms\frm_Print_Billing.Designer.cs">
+      <DependentUpon>frm_Print_Billing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pgso_Billing\Models\Equipment_Billing.cs" />
+    <Compile Include="pgso_Billing\Models\Model_Billing.cs" />
+    <Compile Include="pgso_Billing\Repositories\Equipment_Repo.cs" />
+    <Compile Include="pgso_Billing\Repositories\Repository_Billing.cs" />
+    <Compile Include="pgso_Billing\Forms\frm_Billing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Billing.Designer.cs">
+      <DependentUpon>frm_Billing.cs</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
     <Compile Include="frm_createutilityreservation.cs">
@@ -229,6 +243,11 @@
     <Compile Include="frm_reservation_forms.Designer.cs">
       <DependentUpon>frm_reservation_forms.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Venue_Data_Source.cs">
       <DependentUpon>Venue_Data_Source.xsd</DependentUpon>
@@ -243,8 +262,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_BRIS_EXPERIMENT_3_0DataSet.xsd</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="pgso_Billing\Forms\Billing_Form.resx">
-      <DependentUpon>Billing_Form.cs</DependentUpon>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Billing.resx">
+      <DependentUpon>frm_Billing.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_createutilityreservation.resx">
       <DependentUpon>frm_createutilityreservation.cs</DependentUpon>
@@ -274,20 +293,31 @@
     <EmbeddedResource Include="frm_sportcomplex.resx">
       <DependentUpon>frm_sportcomplex.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Print_Billing.resx">
+      <DependentUpon>frm_Print_Billing.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="frm_reservation_forms.resx">
       <DependentUpon>frm_reservation_forms.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report1.rdlc" />
+    <EmbeddedResource Include="pgso_Billing\Forms\Print_Billing.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="BillingDataSet.xsc">
+      <DependentUpon>BillingDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="BillingDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BillingDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="BillingDataSet.xss">
+      <DependentUpon>BillingDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\pgso.Billing.Models.class_Equipment_Billing.datasource" />
     <None Include="Properties\DataSources\pgso.Billing.Models.class_Venue_Billing.datasource" />
@@ -328,6 +358,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
+    <None Include="pgso_Billing\Image Asset\print.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -346,7 +377,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="pgso_Billing\Image Asset\" />
     <Folder Include="pgso_Billing\Queries\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
