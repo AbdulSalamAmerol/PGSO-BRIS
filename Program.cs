@@ -18,7 +18,7 @@ namespace pgso
             Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Billing_Form());
+            Application.Run(new frm_Billing());
         }
     }
 }

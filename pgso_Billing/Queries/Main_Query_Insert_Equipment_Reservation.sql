@@ -10,11 +10,11 @@ INSERT INTO dbo.tbl_Requesting_Person (
     fld_Request_Origin
 )
 VALUES (
-    'Amerol 43',
-    'Abdul Salam 43',
+    'Amerol 45',
+    'Abdul Salam 45',
     'M',
-    'Main Street, City 43',
-    '09123456043',
+    'Main Street, City 45',
+    '09123456045',
     'Walk In'
 );
 
@@ -37,10 +37,10 @@ INSERT INTO dbo.tbl_Reservation (
 VALUES (
     @NewRequestingPersonID,
     1,
-    'CN-20250401-0043',
+    'CN-20250401-0045',
     'Equipment',
-    '2025-05-13',
-    '2025-05-14',
+    '2025-05-20',
+    '2025-05-21',
     '08:00:00',
     '17:00:00',
     'Equipment Rental Event 0013',
@@ -52,7 +52,7 @@ DECLARE @NewReservationID INT = SCOPE_IDENTITY();
 DECLARE @Days INT = 2;
 
 -- Change the Equipment Pricing ID here
-DECLARE @pk_Equipment_PricingID INT = 12; -- Change this value to auto-match related data ##
+DECLARE @pk_Equipment_PricingID INT = 3; -- Change this value to auto-match related data ##
 
 DECLARE @EquipmentID INT, @EquipmentPrice DECIMAL(10,2), @EquipmentPriceSubsequent DECIMAL(10,2);
 

@@ -5,6 +5,9 @@ namespace pgso.Billing.Models
 {
     public class Billing_Model
     {
+        // 🔸 Computed Full Name (Not in Database)
+        public string fld_Full_Name => $"{fld_First_Name} {(string.IsNullOrEmpty(fld_Middle_Name) ? "" : fld_Middle_Name + " ")}{fld_Surname}".Trim();
+
         // Requesting Person Details
         public int pk_Requesting_PersonID { get; set; }
         public string fld_Surname { get; set; }
@@ -70,9 +73,9 @@ namespace pgso.Billing.Models
 
         public string Formatted_Payment_Status => fld_Payment_Status switch
         {
-            "Paid" => "✅ Paid",
-            "Unpaid" => "❌ Unpaid",
-            "Partial" => "🟡 Partial",
+            "Confirmed" => "✅ Confirmed",
+            "Pending" => "❌ Pending",
+            "Cancelled" => "🟡 Cancelled",
             _ => fld_Payment_Status
         };
     }
