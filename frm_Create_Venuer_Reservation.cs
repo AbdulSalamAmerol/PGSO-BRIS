@@ -5,17 +5,17 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 using pgso_connect;
-
+// Pushing Jaymar_Branch
 namespace pgso
 {
-    public partial class frm_createvenuereservation : Form
+    public partial class frm_Create_Venuer_Reservation : Form
     {
         private SqlConnection conn;
         private SqlCommand cmd;
         private int selectedVenueID;  // Class-level variable to store selected venue ID
         private List<DateTime> reservedDates; // List to store reserved dates
 
-        public frm_createvenuereservation()
+        public frm_Create_Venuer_Reservation()
         {
             InitializeComponent();
             // Set the DateTimePicker format to display only hour, minute, and AM/PM
@@ -24,8 +24,12 @@ namespace pgso
             TimeEnd.Format = DateTimePickerFormat.Custom;
             TimeEnd.CustomFormat = "hh:mm tt";
             LoadVenues();
-        }
 
+            LoadUtilities();
+
+
+            CalculateTotalAmount();
+        }
         private void frm_createvenuereservation_Load(object sender, EventArgs e)
         {
             LoadVenues();
@@ -159,6 +163,16 @@ namespace pgso
                     LoadReservationTypesByVenue(selectedVenueID);
                     LoadVenueScope(selectedVenueID);
                     LoadReservedDates(selectedVenueID); // Load reserved dates for the selected venue
+                    // Check if the selected venue is "Ammungan Hall"
+                    string selectedVenueName = combo_venues.Text;
+                    if (selectedVenueName == "Ammungan Hall")
+                    {
+                        panel_night_time.Enabled = true;
+                    }
+                    else
+                    {
+                        panel_night_time.Enabled = false;
+                    }
                 }
             }
         }
@@ -168,6 +182,100 @@ namespace pgso
         {
             return combo_ReservationType.SelectedValue != null && combo_scope.SelectedValue != null;
         }
+
+        // Load the facilities
+        private void LoadUtilities()
+        {
+            try
+            {
+                DBConnect();
+                string query = "SELECT pk_EquipmentID, fld_Equipment_Name FROM tbl_Equipment";
+                cmd = new SqlCommand(query, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+
+                
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading utilities: " + ex.Message);
+            }
+            finally
+            {
+                DBClose();
+            }
+        }
+
+        // Load utility details and set rate
+        private void LoadUtilityDetails(int utilityId)
+        {
+            try
+            {
+                DBConnect();
+                string query = @"
+                    SELECT 
+                        ep.fld_Equipment_Price
+                    FROM 
+                        tbl_Equipment e
+                    LEFT JOIN 
+                        tbl_Equipment_Pricing ep ON e.pk_EquipmentID = ep.fk_EquipmentID
+                    WHERE 
+                        e.pk_EquipmentID = @UtilityId";
+
+                cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@UtilityId", utilityId);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read() && !reader.IsDBNull(0))
+                {
+                    txt_rate.Tag = reader["fld_Equipment_Price"].ToString(); // Store price in Tag
+                }
+                else
+                {
+                    txt_rate.Tag = null; // No price
+                    txt_rate.Text = "0.00";
+                }
+
+                reader.Close();
+                CalculateTotalAmount();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading utility details: " + ex.Message);
+            }
+            finally
+            {
+                DBClose();
+            }
+        }
+
+        // Calculate total amount
+        private void CalculateTotalAmount()
+        {
+            decimal rate = 0;
+            if (txt_rate.Tag != null && decimal.TryParse(txt_rate.Tag.ToString(), out rate))
+            {
+                txt_rate.Text = rate.ToString("0.00");
+            }
+            else
+            {
+                txt_rate.Text = "0.00";
+            }
+        }
+
+
+
+        // Event handlers
+        private void txt_Quantity_TextChanged(object sender, EventArgs e)
+        {
+            CalculateTotalAmount();
+        }
+
+       
 
         // Load rate based on selected venue, venue scope, reservation type, and aircon selection
         private void LoadRate()
@@ -236,6 +344,10 @@ namespace pgso
                 cmd.Parameters.AddWithValue("@FirstName", txt_firstname.Text);
                 cmd.Parameters.AddWithValue("@Address", txt_address.Text);
 
+
+                //insert to equipment
+
+
                 // Validate the contact number
                 string contactNumber = txt_contact.Text;
                 if (string.IsNullOrEmpty(contactNumber) || !IsValidContactNumber(contactNumber))
@@ -283,7 +395,7 @@ namespace pgso
                 cmd.Parameters.AddWithValue("@fld_Start_Time", TimeStart.Value.TimeOfDay);
                 cmd.Parameters.AddWithValue("@fld_End_Time", TimeEnd.Value.TimeOfDay);
                 cmd.Parameters.AddWithValue("@fld_Activity_Name", txt_activity.Text);
-                cmd.Parameters.AddWithValue("@fld_Reservation_Type", txt_revtype.Text);
+                cmd.Parameters.AddWithValue("@fld_Reservation_Type", "Venue");
                 cmd.Parameters.AddWithValue("@fld_Number_Of_Participants", num_participants.Value);
                 cmd.Parameters.AddWithValue("@Total_Amount", txt_rate.Text);
                 cmd.Parameters.AddWithValue("@fld_Reservation_Status", "Pending");
@@ -293,6 +405,9 @@ namespace pgso
                 cmd.Parameters.AddWithValue("@VenueScopeID", venueScopeID);
 
                 int reservationID = (int)cmd.ExecuteScalar();
+
+
+
 
                 // Commit the transaction
                 transaction.Commit();
@@ -479,6 +594,59 @@ namespace pgso
                 // Re-subscribe to the event
                 date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
             }
+        }
+       /* private void LoadReservationTypes()
+        {
+            combo_Reservation_Type.Items.Add("Venue");
+            combo_Reservation_Type.Items.Add("Equipment");
+            combo_Reservation_Type.SelectedIndexChanged += combo_Reservation_Type_SelectedIndexChanged;
+        }
+       */
+       /* private void combo_Reservation_Type_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (combo_Reservation_Type.SelectedItem != null)
+            {
+                string selectedType = combo_Reservation_Type.SelectedItem.ToString();
+                if (selectedType == "Equipment")
+                {
+                    panel_Rev_Type.Enabled = true;
+                    panel_Venue.Enabled = false;
+                }
+                else
+                {
+                    panel_Rev_Type.Enabled = false;
+                    panel_Venue.Enabled = true;
+
+
+                }
+            }
+        }*/
+
+        private void txt_rate_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        private void combo_Utility_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel_Rev_Type_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel_Venue_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void txt_Reservation_Type_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

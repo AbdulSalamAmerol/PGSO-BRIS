@@ -32,8 +32,14 @@ namespace pgso
 
         private void btn_rentals_Click(object sender, EventArgs e)
         {
-            frm_createutilityreservation frm_createutilityreservation = new frm_createutilityreservation();
-            frm_createutilityreservation.ShowDialog();
+            frm_Equipment frm_Equipment = new frm_Equipment();
+            frm_Equipment.ShowDialog();
+        }
+
+        private void btn_Manage_Facilities_Click(object sender, EventArgs e)
+        {
+            frm_Manage_Facilities frm_Manage_Facilities = new frm_Manage_Facilities();
+            frm_Manage_Facilities.ShowDialog();
         }
     }
 }
