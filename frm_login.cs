@@ -34,7 +34,7 @@ namespace pgso
             if (Debugger.IsAttached)
             {
                 this.Hide();
-                frm_dashboard dashboard = new frm_dashboard();
+                frm_Dashboard dashboard = new frm_Dashboard();
                 dashboard.ShowDialog();
                 this.Close();
             }
@@ -58,7 +58,7 @@ namespace pgso
                 DataRow row = dt.Rows[0];
                 this.Hide();
 
-                frm_dashboard frm = new frm_dashboard();
+                frm_Dashboard frm = new frm_Dashboard();
                 frm.ShowDialog();
 
             }

@@ -30,6 +30,7 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.btn_rentals = new System.Windows.Forms.Button();
+            this.btn_Manage_Facilities = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -56,11 +57,24 @@
             this.btn_rentals.UseVisualStyleBackColor = true;
             this.btn_rentals.Click += new System.EventHandler(this.btn_rentals_Click);
             // 
+            // btn_Manage_Facilities
+            // 
+            this.btn_Manage_Facilities.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_Manage_Facilities.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Manage_Facilities.Location = new System.Drawing.Point(55, 173);
+            this.btn_Manage_Facilities.Name = "btn_Manage_Facilities";
+            this.btn_Manage_Facilities.Size = new System.Drawing.Size(147, 44);
+            this.btn_Manage_Facilities.TabIndex = 2;
+            this.btn_Manage_Facilities.Text = "Rentals";
+            this.btn_Manage_Facilities.UseVisualStyleBackColor = true;
+            this.btn_Manage_Facilities.Click += new System.EventHandler(this.btn_Manage_Facilities_Click);
+            // 
             // frm_mngreservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(269, 187);
+            this.ClientSize = new System.Drawing.Size(269, 229);
+            this.Controls.Add(this.btn_Manage_Facilities);
             this.Controls.Add(this.btn_rentals);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
@@ -77,5 +91,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btn_rentals;
+        private System.Windows.Forms.Button btn_Manage_Facilities;
     }
 }

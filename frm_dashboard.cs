@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace pgso
 {
-    public partial class frm_dashboard : Form
+    public partial class frm_Dashboard : Form
     {
-        //fied
+        //fields
         private Panel sideMenu;
         private Panel mainContent;
         private TableLayoutPanel tablePanel;
@@ -20,9 +20,8 @@ namespace pgso
         private ComboBox cmbMonth;
         private NumericUpDown numYear;
 
-
         //dashboard properties
-        public frm_dashboard()
+        public frm_Dashboard()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -38,10 +37,10 @@ namespace pgso
         private void SetupUI()
         {
             CreateSideMenu();
-            CreateMainContent();
+          //  CreateMainContent();
             this.Controls.Add(mainContent);
             this.Controls.Add(sideMenu);
-            UpdateCalendar();
+           // UpdateCalendar();
         }
 
         private void CreateSideMenu()
@@ -53,7 +52,7 @@ namespace pgso
                 BackColor = Color.DarkSlateGray,
                 Padding = new Padding(10)
             };
-
+/*
             Label menuLabel = new Label
             {
                 Text = "Select Month & Year",
@@ -85,7 +84,7 @@ namespace pgso
             };
             numYear.ValueChanged += NumYear_ValueChanged;
             sideMenu.Controls.Add(numYear);
-
+*/
             // Button Venue
             Button Venues = new Button
             {
@@ -94,77 +93,55 @@ namespace pgso
                 Location = new Point(10, 130),
                 BackColor = Color.LightGray,
                 ForeColor = Color.Black,
-                Font = new Font("Centruy Gothic", 10, FontStyle.Regular)
+                Font = new Font("Century Gothic", 10, FontStyle.Regular)
             };
             Venues.Click += Venues_Click;
             sideMenu.Controls.Add(Venues);
 
-            this.Controls.Add(sideMenu);
+           
 
-            // Button Acts. hindi muna siya working
-            Button Activity_Logs = new Button
-            {
-                Text = "View Activity Logs",
-                Size = new Size(180, 30),
-                Location = new Point(10, 170),
-                BackColor = Color.LightGray,
-                ForeColor = Color.Black,
-                Font = new Font("Centruy Gothic", 10, FontStyle.Regular)
-
-            };
-            Activity_Logs.Click += Activity_Logs_Click;
-            sideMenu.Controls.Add(Activity_Logs);
-
-            this.Controls.Add(sideMenu);
-
-            // Button reports. Not wrking muna
-            Button Manage_Reports = new Button
-            {
-                Text = "Manage Reports",
-                Size = new Size(180, 30),
-                Location = new Point(10, 210),
-                BackColor = Color.LightGray,
-                ForeColor = Color.Black,
-                Font = new Font("Centruy Gothic", 10, FontStyle.Regular)
-
-            };
-            Manage_Reports.Click += Manage_Reports_Click;
-            sideMenu.Controls.Add(Manage_Reports);
-
-            this.Controls.Add(sideMenu);
+            
         }
 
-        // Event handler for button veneus click
+        // Event handler for button venues click
         private void Venues_Click(object sender, EventArgs e)
         {
-            // MessageBox.Show("Button clicked!", "Notification");
-            frm_mngreservation frm_mngreservation = new frm_mngreservation();
-            frm_mngreservation.ShowDialog();
+            //uncomment ako later
+            frm_mngreservation frm_venues = new frm_mngreservation();
+            //frm_venues.DashboardRefreshRequested += Frm_venues_DashboardRefreshRequested;
+            frm_venues.ShowDialog();
         }
+
+        private void Frm_venues_DashboardRefreshRequested(object sender, EventArgs e)
+        {
+           // UpdateCalendar();
+        }
+
+        
 
         //button utilities
         private void Activity_Logs_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Button clicked!", "Notification");
         }
+
         private void Manage_Reports_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Button clicked!", "Notification");
         }
 
-
         private void CmbMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
             currentMonth = cmbMonth.SelectedIndex + 1;
-            UpdateCalendar();
+           // UpdateCalendar();
         }
 
         private void NumYear_ValueChanged(object sender, EventArgs e)
         {
             currentYear = (int)numYear.Value;
-            UpdateCalendar();
+           // UpdateCalendar();
         }
-
+        /*
         private DataTable GetReservationsForMonth(int year, int month)
         {
             DataTable reservations = new DataTable();
@@ -197,9 +174,6 @@ namespace pgso
             }
             return reservations;
         }
-
-
-
 
         private void CreateMainContent()
         {
@@ -237,8 +211,6 @@ namespace pgso
             mainContent.Controls.Add(tablePanel);
         }
 
-
-        //ito yung parang header niya
         private void UpdateCalendar()
         {
             tablePanel.Controls.Clear();
@@ -324,10 +296,7 @@ namespace pgso
                     row++;
                 }
             }
-        }
-
-
-
+        }*/
 
         private void OpenChooseVenuesForm(int day)
         {
@@ -340,6 +309,95 @@ namespace pgso
         {
 
         }
+
+        //CREATE RESERVATION START
+        private void venueToolStripMenuItem_Click(Object sender, EventArgs e)
+        {
+            frm_Create_Venuer_Reservation Venue = new frm_Create_Venuer_Reservation();
+            Venue.TopLevel = false;
+            Venue.FormBorderStyle = FormBorderStyle.None;
+            Venue.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(Venue);
+            Venue.Show();
+        }
+
+        private void equipmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_Create_Utility_Reservation Utility = new frm_Create_Utility_Reservation();
+            Utility.TopLevel = false;
+            Utility.FormBorderStyle = FormBorderStyle.None;
+            Utility.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(Utility);
+            Utility.Show();
+        }
+        //CREATE RESERVATION END
+        //
+        //MANAGE RESERVATION START
+        private void venueToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            /*frm_Venues Venues = new frm_Venues();
+            Venues.TopLevel = false;
+            Venues.FormBorderStyle = FormBorderStyle.None;
+            Venues.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(Venues);
+            Venues.Show();*/
+        }
+
+        private void approvedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_Approved_Venue AprVenue = new frm_Approved_Venue();
+            AprVenue.TopLevel = false;
+            AprVenue.FormBorderStyle = FormBorderStyle.None;
+            AprVenue.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(AprVenue);
+            AprVenue.Show();
+        }
+        private void equipmentToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frm_Equipment Equipment = new frm_Equipment();
+            Equipment.TopLevel = false;
+            Equipment.FormBorderStyle = FormBorderStyle.None;
+            Equipment.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(Equipment);
+            Equipment.Show();
+        }
+
+        //MANAGE RESERVATION END
+
+        //Manage FACILITIES START
+        private void manageFacilitiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_Manage_Facilities Facilities = new frm_Manage_Facilities();
+            Facilities.TopLevel = false;
+            Facilities.FormBorderStyle = FormBorderStyle.None;
+            Facilities.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(Facilities);
+            Facilities.Show();
+        }
+
+        private void pendingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_Pending_Venues PenVenues = new frm_Pending_Venues();
+            PenVenues.TopLevel = false;
+            PenVenues.FormBorderStyle = FormBorderStyle.None;
+            PenVenues.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(PenVenues);
+            PenVenues.Show();
+        }
+
+        private void cancelledToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        //Manage Facilities End
     }
 }
-
