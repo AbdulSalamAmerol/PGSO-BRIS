@@ -181,17 +181,35 @@
       <DependentUpon>frm_Billing.cs</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
-    <Compile Include="frm_createutilityreservation.cs">
+    <Compile Include="frm_Add_Equipment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_createutilityreservation.Designer.cs">
-      <DependentUpon>frm_createutilityreservation.cs</DependentUpon>
+    <Compile Include="frm_Add_Equipment.Designer.cs">
+      <DependentUpon>frm_Add_Equipment.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_createvenuereservation.cs">
+    <Compile Include="frm_Add_Venues.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_createvenuereservation.Designer.cs">
-      <DependentUpon>frm_createvenuereservation.cs</DependentUpon>
+    <Compile Include="frm_Add_Venues.Designer.cs">
+      <DependentUpon>frm_Add_Venues.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Approved_Venue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Approved_Venue.Designer.cs">
+      <DependentUpon>frm_Approved_Venue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Create_Utility_Reservation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Create_Utility_Reservation.Designer.cs">
+      <DependentUpon>frm_Create_Utility_Reservation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Create_Venuer_Reservation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Create_Venuer_Reservation.Designer.cs">
+      <DependentUpon>frm_Create_Venuer_Reservation.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_convention.cs">
       <SubType>Form</SubType>
@@ -199,23 +217,47 @@
     <Compile Include="frm_convention.Designer.cs">
       <DependentUpon>frm_convention.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_Equipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Equipment.Designer.cs">
+      <DependentUpon>frm_Equipment.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_Login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_Login.Designer.cs">
       <DependentUpon>frm_Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_dashboard.cs">
+    <Compile Include="frm_Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_dashboard.Designer.cs">
-      <DependentUpon>frm_dashboard.cs</DependentUpon>
+    <Compile Include="frm_Dashboard.Designer.cs">
+      <DependentUpon>frm_Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Manage_Facilities.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Manage_Facilities.Designer.cs">
+      <DependentUpon>frm_Manage_Facilities.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_mngreservation.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_mngreservation.Designer.cs">
       <DependentUpon>frm_mngreservation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Pending_Venues.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Pending_Venues.Designer.cs">
+      <DependentUpon>frm_Pending_Venues.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Print_Reservation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Print_Reservation.Designer.cs">
+      <DependentUpon>frm_Print_Reservation.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_Venues.cs">
       <SubType>Form</SubType>
@@ -243,6 +285,10 @@
     <Compile Include="frm_reservation_forms.Designer.cs">
       <DependentUpon>frm_reservation_forms.cs</DependentUpon>
     </Compile>
+ Jaymar_Branch
+    <EmbeddedResource Include="frm_Add_Equipment.resx">
+      <DependentUpon>frm_Add_Equipment.cs</DependentUpon>
+
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -267,22 +313,44 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_createutilityreservation.resx">
       <DependentUpon>frm_createutilityreservation.cs</DependentUpon>
+ master
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_createvenuereservation.resx">
-      <DependentUpon>frm_createvenuereservation.cs</DependentUpon>
+    <EmbeddedResource Include="frm_Add_Venues.resx">
+      <DependentUpon>frm_Add_Venues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Approved_Venue.resx">
+      <DependentUpon>frm_Approved_Venue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Create_Utility_Reservation.resx">
+      <DependentUpon>frm_Create_Utility_Reservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Create_Venuer_Reservation.resx">
+      <DependentUpon>frm_Create_Venuer_Reservation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_convention.resx">
       <DependentUpon>frm_convention.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frm_Equipment.resx">
+      <DependentUpon>frm_Equipment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_Login.resx">
       <DependentUpon>frm_Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_dashboard.resx">
-      <DependentUpon>frm_dashboard.cs</DependentUpon>
+    <EmbeddedResource Include="frm_Dashboard.resx">
+      <DependentUpon>frm_Dashboard.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Manage_Facilities.resx">
+      <DependentUpon>frm_Manage_Facilities.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_mngreservation.resx">
       <DependentUpon>frm_mngreservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Pending_Venues.resx">
+      <DependentUpon>frm_Pending_Venues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Print_Reservation.resx">
+      <DependentUpon>frm_Print_Reservation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Venues.resx">
       <DependentUpon>frm_Venues.cs</DependentUpon>
