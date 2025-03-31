@@ -71,19 +71,13 @@ namespace pgso
                 MessageBox.Show("Failed to load billing records: " + ex.Message);
             }
         }
-
-        private void Billing_Search_Bar_TextChanged(object sender, EventArgs e) { }
         private void dgv_Billing_Records_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return; // Ignore header clicks
-
             Console.WriteLine($"Clicked Column: {dgv_Billing_Records.Columns[e.ColumnIndex].Name}, Row: {e.RowIndex}");
-
             // Ensure the click is on the "Print" column
             if (dgv_Billing_Records.Columns[e.ColumnIndex].Name == "col_Print")
             {
-                Console.WriteLine("✅ Print button clicked!");
-
                 // Get the selected row's reservation ID
                 int reservationId = Convert.ToInt32(dgv_Billing_Records.Rows[e.RowIndex].Cells["pk_ReservationID"].Value);
 
@@ -93,27 +87,11 @@ namespace pgso
             }
         }
 
-
-
-
-        private void btn_Print_Billing_Click(object sender, EventArgs e)
+        private void btn_Reports_Click(object sender, EventArgs e)
         {
-            if (dgv_Billing_Records.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Please select a record to print.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            frm_Report_Billing reportBillingForm = new frm_Report_Billing();
+            reportBillingForm.ShowDialog(); // Opens the form as a modal dialog
 
-            // Get the selected row's reservation ID
-            int reservationId = Convert.ToInt32(dgv_Billing_Records.SelectedRows[0].Cells["pk_ReservationID"].Value);
-
-            // Open the print form and pass only the reservation ID
-            frm_Print_Billing printBillingForm = new frm_Print_Billing(reservationId);
-            printBillingForm.ShowDialog();
         }
-
-
-
-
     }
 }
