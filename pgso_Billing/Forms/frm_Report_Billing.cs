@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace pgso.pgso_Billing.Forms
@@ -15,44 +8,44 @@ namespace pgso.pgso_Billing.Forms
         public frm_Report_Billing()
         {
             InitializeComponent();
-            
         }
 
-        private void cmb_Include_Columns_SelectedIndexChanged(object sender, EventArgs e)
+        private void btn_Generate_Report_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void cmb_Venue_Or_Equipment_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Get the selected value
-            string selectedType = cmb_Venue_Or_Equipment.SelectedItem.ToString();
-
-            // Define the valid items for each selection
-            string[] venueItems = { "Control Number", "Venue", "Name of Requesting Party", "Date Requested",
-                            "Purpose", "Duration", "Origin of Reservation", "In Charge",
-                            "Total Amount", "Payment Status" };
-              
-            string[] equipmentItems = { "Control Number", "Equipment", "Equipment Quantity", "Name of Requesting Party",
-                                "Date Requested", "Duration", "In Charge",
-                                "Payment Status", "Total Amount" };
-
-            // Loop through all items in the CheckedListBox
-            for (int i = 0; i < clb_Include_Columns.Items.Count; i++)
+            // Ensure a report is selected
+            if (cmb_Choose_Report.SelectedItem == null)
             {
-                string itemText = clb_Include_Columns.Items[i].ToString();
+                MessageBox.Show("Please select a report type.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-                // Determine if the item should be shown
-                bool shouldShow = (selectedType == "Venue" && venueItems.Contains(itemText)) ||
-                                  (selectedType == "Equipment" && equipmentItems.Contains(itemText)) ||
-                                  (selectedType == "ALL"); // Show everything when "ALL" is selected
+            string selectedReport = cmb_Choose_Report.SelectedItem.ToString().Trim();
+            DateTime startDate = dtp_Start_Date.Value.Date;
+            DateTime endDate = dtp_End_Date.Value.Date;
 
-                // Set visibility (Indeterminate = hidden, Unchecked = visible)
-                clb_Include_Columns.SetItemCheckState(i, shouldShow ? CheckState.Unchecked : CheckState.Indeterminate);
+            // Ensure start date is not after end date
+            if (startDate > endDate)
+            {
+                MessageBox.Show("Start Date cannot be after End Date.", "Invalid Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Get selected payment status (default to "All" if nothing is selected)
+            string paymentStatus = cmb_Payment_Status.SelectedItem?.ToString().Trim() ?? "All";
+
+            // Get selected reservation type (default to "All" if nothing is selected)
+            string reservationType = cmb_Venue_Or_Equipment.SelectedItem?.ToString().Trim() ?? "All";
+
+            if (selectedReport == "Revenue By Reservation Type")
+            {
+                frm_Report_Revenue_By_Reservation_Type reportForm =
+                    new frm_Report_Revenue_By_Reservation_Type(startDate, endDate, paymentStatus, reservationType);
+                reportForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a valid report.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
     }
-
 }
-

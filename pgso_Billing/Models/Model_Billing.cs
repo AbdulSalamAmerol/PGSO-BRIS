@@ -15,6 +15,7 @@ namespace pgso.Billing.Models
         public string fld_Middle_Name { get; set; }
         public string fld_Requesting_Person_Address { get; set; }
         public string fld_Contact_Number { get; set; }
+        public string fld_Request_Origin { get; set; }
 
         // Reservation Details
         public int pk_ReservationID { get; set; }

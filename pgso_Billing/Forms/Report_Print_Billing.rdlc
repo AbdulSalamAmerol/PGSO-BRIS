@@ -54,11 +54,29 @@
                 </Style>
               </TextRun>
               <TextRun>
-                <Value>
-PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
+                <Value xml:space="preserve">
+</Value>
                 <Style>
                   <FontFamily>Verdana</FontFamily>
                   <FontSize>9pt</FontSize>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>PGSO Email Address: </Value>
+                <Style>
+                  <FontFamily>Verdana</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>plgunuevavizcaya.pgso@gmail.com</Value>
+                <Style>
+                  <FontFamily>Verdana</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>Underline</TextDecoration>
+                  <Color>Blue</Color>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -73,6 +91,7 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
                 <Style>
                   <FontFamily>Verdana</FontFamily>
                   <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -80,9 +99,9 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
           </Paragraph>
         </Paragraphs>
         <Top>0.82021cm</Top>
-        <Left>3.64321cm</Left>
-        <Height>3.27735cm</Height>
-        <Width>9.72621cm</Width>
+        <Left>4.71036cm</Left>
+        <Height>2.40423cm</Height>
+        <Width>10.14955cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -94,7 +113,7 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
         <Value>Logo_Collection_Slip_1</Value>
         <Sizing>FitProportional</Sizing>
         <Top>0.82021cm</Top>
-        <Left>13.36942cm</Left>
+        <Left>14.85991cm</Left>
         <Height>1.64042cm</Height>
         <Width>1.905cm</Width>
         <ZIndex>1</ZIndex>
@@ -108,7 +127,7 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
         <Source>Embedded</Source>
         <Value>Logo_Collection_Slip_2</Value>
         <Top>0.82021cm</Top>
-        <Left>1.70293cm</Left>
+        <Left>2.80536cm</Left>
         <Height>1.64042cm</Height>
         <Width>1.905cm</Width>
         <ZIndex>2</ZIndex>
@@ -134,8 +153,8 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>5.07683cm</Top>
-        <Left>0.34078cm</Left>
+        <Top>4.12433cm</Top>
+        <Left>2.24578cm</Left>
         <Height>0.6cm</Height>
         <Width>0.9125cm</Width>
         <ZIndex>3</ZIndex>
@@ -207,8 +226,8 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>5.07683cm</Top>
-        <Left>1.42967cm</Left>
+        <Top>4.12433cm</Top>
+        <Left>3.33467cm</Left>
         <Height>0.6cm</Height>
         <Width>3.50542cm</Width>
         <ZIndex>4</ZIndex>
@@ -236,7 +255,7 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>5.07683cm</Top>
+        <Top>4.12433cm</Top>
         <Left>12.55161cm</Left>
         <Height>0.6cm</Height>
         <Width>1.70625cm</Width>
@@ -251,7 +270,7 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.53313cm</Width>
+              <Width>2.99174cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -309,10 +328,10 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>5.07683cm</Top>
-        <Left>14.43425cm</Left>
+        <Top>4.12433cm</Top>
+        <Left>14.29314cm</Left>
         <Height>0.6cm</Height>
-        <Width>2.53313cm</Width>
+        <Width>2.99174cm</Width>
         <ZIndex>6</ZIndex>
         <Style>
           <Border>
@@ -348,8 +367,8 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>6.42042cm</Top>
-        <Left>0.34078cm</Left>
+        <Top>5.15042cm</Top>
+        <Left>2.24578cm</Left>
         <Height>0.81167cm</Height>
         <Width>3.58465cm</Width>
         <ZIndex>7</ZIndex>
@@ -375,8 +394,8 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>7.84917cm</Top>
-        <Left>0.34078cm</Left>
+        <Top>6.57917cm</Top>
+        <Left>2.24578cm</Left>
         <Height>0.6cm</Height>
         <Width>3.92875cm</Width>
         <ZIndex>8</ZIndex>
@@ -390,7 +409,7 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>6.48895cm</Width>
+              <Width>6.59479cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -448,10 +467,10 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>7.84917cm</Top>
-        <Left>4.26953cm</Left>
+        <Top>6.57917cm</Top>
+        <Left>6.17453cm</Left>
         <Height>0.6cm</Height>
-        <Width>6.48895cm</Width>
+        <Width>6.59479cm</Width>
         <ZIndex>9</ZIndex>
         <Style>
           <Border>
@@ -475,8 +494,8 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>8.62556cm</Top>
-        <Left>0.34078cm</Left>
+        <Top>7.35556cm</Top>
+        <Left>2.24578cm</Left>
         <Height>0.6cm</Height>
         <Width>1.33583cm</Width>
         <ZIndex>10</ZIndex>
@@ -490,7 +509,7 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>9.08186cm</Width>
+              <Width>9.18771cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -548,10 +567,10 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>8.62556cm</Top>
-        <Left>1.67661cm</Left>
+        <Top>7.35556cm</Top>
+        <Left>3.58161cm</Left>
         <Height>0.6cm</Height>
-        <Width>9.08186cm</Width>
+        <Width>9.18771cm</Width>
         <ZIndex>11</ZIndex>
         <Style>
           <Border>
@@ -575,8 +594,8 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>10.17833cm</Top>
-        <Left>0.34078cm</Left>
+        <Top>8.90833cm</Top>
+        <Left>2.24578cm</Left>
         <Height>0.6cm</Height>
         <Width>1.89146cm</Width>
         <ZIndex>12</ZIndex>
@@ -648,8 +667,8 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>10.17835cm</Top>
-        <Left>2.23224cm</Left>
+        <Top>8.90835cm</Top>
+        <Left>4.13724cm</Left>
         <Height>0.6cm</Height>
         <Width>2.15605cm</Width>
         <ZIndex>13</ZIndex>
@@ -677,8 +696,8 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>10.17835cm</Top>
-        <Left>4.38829cm</Left>
+        <Top>8.90835cm</Top>
+        <Left>6.29329cm</Left>
         <Height>0.6cm</Height>
         <Width>0.2cm</Width>
         <ZIndex>14</ZIndex>
@@ -750,8 +769,8 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>10.17835cm</Top>
-        <Left>4.58829cm</Left>
+        <Top>8.90835cm</Top>
+        <Left>6.49329cm</Left>
         <Height>0.6cm</Height>
         <Width>2.89688cm</Width>
         <ZIndex>15</ZIndex>
@@ -823,8 +842,8 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>10.21362cm</Top>
-        <Left>16.42529cm</Left>
+        <Top>8.94362cm</Top>
+        <Left>16.74279cm</Left>
         <Height>0.56472cm</Height>
         <Width>0.54209cm</Width>
         <ZIndex>16</ZIndex>
@@ -850,8 +869,8 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>9.40194cm</Top>
-        <Left>0.34079cm</Left>
+        <Top>8.13194cm</Top>
+        <Left>2.24579cm</Left>
         <Height>0.6cm</Height>
         <Width>3.71708cm</Width>
         <ZIndex>17</ZIndex>
@@ -923,8 +942,8 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>9.40194cm</Top>
-        <Left>4.05787cm</Left>
+        <Top>8.13194cm</Top>
+        <Left>5.96287cm</Left>
         <Height>0.6cm</Height>
         <Width>6.80645cm</Width>
         <ZIndex>18</ZIndex>
@@ -950,8 +969,8 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>10.95472cm</Top>
-        <Left>0.34079cm</Left>
+        <Top>9.68472cm</Top>
+        <Left>2.24579cm</Left>
         <Height>0.6cm</Height>
         <Width>2.1825cm</Width>
         <ZIndex>19</ZIndex>
@@ -1023,8 +1042,8 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>10.21363cm</Top>
-        <Left>13.61661cm</Left>
+        <Top>8.94363cm</Top>
+        <Left>13.93411cm</Left>
         <Height>0.56472cm</Height>
         <Width>2.73813cm</Width>
         <ZIndex>20</ZIndex>
@@ -1038,16 +1057,16 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>5.15265cm</Width>
+              <Width>4.51766cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.5147cm</Width>
+              <Width>2.99473cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.2133cm</Width>
+              <Width>1.68413cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.99559cm</Width>
+              <Width>5.04473cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1362,7 +1381,7 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
                           <Style>Solid</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingRight>5pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                         <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
@@ -1396,10 +1415,10 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>11.70465cm</Top>
-        <Left>2.09113cm</Left>
+        <Top>10.43465cm</Top>
+        <Left>3.04363cm</Left>
         <Height>1.49104cm</Height>
-        <Width>14.87625cm</Width>
+        <Width>14.24125cm</Width>
         <ZIndex>21</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) OR Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, True, False)</Hidden>
@@ -1417,10 +1436,10 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.49208cm</Width>
+              <Width>1.91364cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.50352cm</Width>
+              <Width>3.13109cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1444,7 +1463,7 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Right</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -1485,6 +1504,10 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>5pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
                         <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
@@ -1512,10 +1535,10 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>14.39569cm</Top>
-        <Left>12.97179cm</Left>
+        <Top>13.12569cm</Top>
+        <Left>12.24015cm</Left>
         <Height>0.63528cm</Height>
-        <Width>3.99559cm</Width>
+        <Width>5.04473cm</Width>
         <ZIndex>22</ZIndex>
         <Style>
           <Border>
@@ -1527,10 +1550,10 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>10.88066cm</Width>
+              <Width>9.19652cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.99559cm</Width>
+              <Width>5.04473cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1598,7 +1621,7 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
                           <Style>Solid</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingRight>5pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
@@ -1671,7 +1694,7 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
                           <Style>Solid</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingRight>5pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
@@ -1699,10 +1722,10 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>13.19569cm</Top>
-        <Left>2.09113cm</Left>
+        <Top>11.92569cm</Top>
+        <Left>3.04363cm</Left>
         <Height>1.2cm</Height>
-        <Width>14.87625cm</Width>
+        <Width>14.24125cm</Width>
         <ZIndex>23</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) OR Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
@@ -1731,8 +1754,8 @@ PGSO Email Address: plgunuevavizcaya.pgso@gmail.com</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>15.02516cm</Top>
-        <Left>0.34079cm</Left>
+        <Top>13.75516cm</Top>
+        <Left>2.24579cm</Left>
         <Height>0.635cm</Height>
         <Width>3.92875cm</Width>
         <ZIndex>24</ZIndex>
@@ -1765,8 +1788,8 @@ Acting Chief SOD / AO-I</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>16.45708cm</Top>
-        <Left>2.02043cm</Left>
+        <Top>15.18708cm</Top>
+        <Left>3.92543cm</Left>
         <Height>0.89958cm</Height>
         <Width>4.7625cm</Width>
         <ZIndex>25</ZIndex>
@@ -1796,8 +1819,8 @@ Acting Chief SOD / AO-I</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>15.02516cm</Top>
-        <Left>11.97147cm</Left>
+        <Top>13.75516cm</Top>
+        <Left>11.70179cm</Left>
         <Height>0.635cm</Height>
         <Width>1.75917cm</Width>
         <ZIndex>26</ZIndex>
@@ -1843,8 +1866,8 @@ Acting Chief SOD / AO-I</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>16.45709cm</Top>
-        <Left>13.2991cm</Left>
+        <Top>15.18708cm</Top>
+        <Left>13.6166cm</Left>
         <Height>0.89958cm</Height>
         <Width>3.66828cm</Width>
         <ZIndex>27</ZIndex>
@@ -1856,24 +1879,75 @@ Acting Chief SOD / AO-I</Value>
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox1">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>COLLECTION SLIP</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>1.28335in</Top>
+        <Left>3.16542in</Left>
+        <Height>0.25in</Height>
+        <Width>1.33425in</Width>
+        <ZIndex>28</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Line Name="Line2">
+        <Top>1.26946in</Top>
+        <Left>0.89458in</Left>
+        <Height>0in</Height>
+        <Width>5.91049in</Width>
+        <ZIndex>29</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+            <Width>2pt</Width>
+          </Border>
+        </Style>
+      </Line>
     </ReportItems>
-    <Height>11.69in</Height>
+    <Height>10in</Height>
     <Style>
       <Border>
         <Style>None</Style>
+        <Width>0.25pt</Width>
       </Border>
     </Style>
   </Body>
-  <Width>8.27in</Width>
+  <Width>7.6in</Width>
   <Page>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>
-    <LeftMargin>0.7874in</LeftMargin>
-    <RightMargin>0.7874in</RightMargin>
-    <TopMargin>0.7874in</TopMargin>
-    <BottomMargin>0.7874in</BottomMargin>
+    <LeftMargin>0.25in</LeftMargin>
+    <RightMargin>0.25in</RightMargin>
+    <TopMargin>0.25in</TopMargin>
+    <BottomMargin>0.25in</BottomMargin>
     <ColumnSpacing>0.05118in</ColumnSpacing>
-    <Style />
+    <Style>
+      <Border>
+        <Style>None</Style>
+        <Width>0.25pt</Width>
+      </Border>
+    </Style>
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>

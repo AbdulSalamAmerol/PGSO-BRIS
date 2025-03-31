@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using pgso.pgso_Billing.Forms;
 using SqlServerTypes;
 
 namespace pgso
@@ -18,7 +19,7 @@ namespace pgso
             Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frm_Billing());
+            Application.Run(new frm_Dashboard());
         }
     }
 }

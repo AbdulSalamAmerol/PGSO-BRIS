@@ -182,6 +182,12 @@
     <Compile Include="pgso_Billing\Forms\frm_Print_Billing.Designer.cs">
       <DependentUpon>frm_Print_Billing.cs</DependentUpon>
     </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Report_Revenue_By_Reservation Type.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Report_Revenue_By_Reservation Type.Designer.cs">
+      <DependentUpon>frm_Report_Revenue_By_Reservation Type.cs</DependentUpon>
+    </Compile>
     <Compile Include="pgso_Billing\Models\Equipment_Billing.cs" />
     <Compile Include="pgso_Billing\Models\Model_Billing.cs" />
     <Compile Include="pgso_Billing\Repositories\Equipment_Repo.cs" />
@@ -297,10 +303,9 @@
     <Compile Include="frm_reservation_forms.Designer.cs">
       <DependentUpon>frm_reservation_forms.cs</DependentUpon>
     </Compile>
- Jaymar_Branch
     <EmbeddedResource Include="frm_Add_Equipment.resx">
       <DependentUpon>frm_Add_Equipment.cs</DependentUpon>
-
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -322,10 +327,6 @@
     </Compile>
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Billing.resx">
       <DependentUpon>frm_Billing.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_createutilityreservation.resx">
-      <DependentUpon>frm_createutilityreservation.cs</DependentUpon>
- master
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Add_Venues.resx">
       <DependentUpon>frm_Add_Venues.cs</DependentUpon>
@@ -379,6 +380,9 @@
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Print_Billing.resx">
       <DependentUpon>frm_Print_Billing.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Report_Revenue_By_Reservation Type.resx">
+      <DependentUpon>frm_Report_Revenue_By_Reservation Type.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -387,7 +391,10 @@
     <EmbeddedResource Include="frm_reservation_forms.resx">
       <DependentUpon>frm_reservation_forms.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pgso_Billing\Forms\Print_Billing.rdlc">
+    <EmbeddedResource Include="pgso_Billing\Forms\Report_Print_Billing.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\Report_Revenue_By_Reservation_Type.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Include="BillingDataSet.xsc">

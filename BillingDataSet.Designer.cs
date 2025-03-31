@@ -365,6 +365,8 @@ namespace pgso {
             
             private global::System.Data.DataColumn columnFormatted_Created_At;
             
+            private global::System.Data.DataColumn columnfld_Request_Origin;
+            
             private global::System.Data.DataColumn columnDataColumn1;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -746,6 +748,14 @@ namespace pgso {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn fld_Request_OriginColumn {
+                get {
+                    return this.columnfld_Request_Origin;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public global::System.Data.DataColumn DataColumn1Column {
                 get {
                     return this.columnDataColumn1;
@@ -833,6 +843,7 @@ namespace pgso {
                         string Formatted_Start_Date, 
                         string Formatted_End_Date, 
                         string Formatted_Created_At, 
+                        string fld_Request_Origin, 
                         string DataColumn1) {
                 BillingDataTableRow rowBillingDataTableRow = ((BillingDataTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -879,6 +890,7 @@ namespace pgso {
                         Formatted_Start_Date,
                         Formatted_End_Date,
                         Formatted_Created_At,
+                        fld_Request_Origin,
                         DataColumn1};
                 rowBillingDataTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBillingDataTableRow);
@@ -945,6 +957,7 @@ namespace pgso {
                 this.columnFormatted_Start_Date = base.Columns["Formatted_Start_Date"];
                 this.columnFormatted_End_Date = base.Columns["Formatted_End_Date"];
                 this.columnFormatted_Created_At = base.Columns["Formatted_Created_At"];
+                this.columnfld_Request_Origin = base.Columns["fld_Request_Origin"];
                 this.columnDataColumn1 = base.Columns["DataColumn1"];
             }
             
@@ -1037,6 +1050,8 @@ namespace pgso {
                 base.Columns.Add(this.columnFormatted_End_Date);
                 this.columnFormatted_Created_At = new global::System.Data.DataColumn("Formatted_Created_At", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFormatted_Created_At);
+                this.columnfld_Request_Origin = new global::System.Data.DataColumn("fld_Request_Origin", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfld_Request_Origin);
                 this.columnDataColumn1 = new global::System.Data.DataColumn("DataColumn1", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDataColumn1);
             }
@@ -1881,6 +1896,22 @@ namespace pgso {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string fld_Request_Origin {
+                get {
+                    try {
+                        return ((string)(this[this.tableBillingDataTable.fld_Request_OriginColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'fld_Request_Origin\' in table \'BillingDataTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBillingDataTable.fld_Request_OriginColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string DataColumn1 {
                 get {
                     try {
@@ -2409,6 +2440,18 @@ namespace pgso {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetFormatted_Created_AtNull() {
                 this[this.tableBillingDataTable.Formatted_Created_AtColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isfld_Request_OriginNull() {
+                return this.IsNull(this.tableBillingDataTable.fld_Request_OriginColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setfld_Request_OriginNull() {
+                this[this.tableBillingDataTable.fld_Request_OriginColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

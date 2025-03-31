@@ -41,7 +41,7 @@ namespace pgso.pgso_Billing.Forms
 
             if (billingRecords == null || billingRecords.Count == 0)
             {
-                MessageBox.Show("No billing details found for this reservation.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No revenue details found for this reservation.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 this.Close();
             }
             else
@@ -54,6 +54,11 @@ namespace pgso.pgso_Billing.Forms
         {
             if (_billingData == null || _billingData.Count == 0) return;
 
+            // Set the report definition path or embedded resource
+            //Print_Billing_Report_Viewer.LocalReport.ReportPath = @"C:\Users\amero\source\repos\pgso\pgso_Billing\Forms\Print_Billing.rdlc";
+            // Or, if embedded:
+             Print_Billing_Report_Viewer.LocalReport.ReportEmbeddedResource = "pgso.pgso_Billing.Forms.Report_Print_Billing.rdlc";
+
             // Prepare Report Data Source
             ReportDataSource rds = new ReportDataSource("BillingDataset", _billingData);
 
@@ -64,6 +69,7 @@ namespace pgso.pgso_Billing.Forms
             // Refresh Report Viewer
             Print_Billing_Report_Viewer.RefreshReport();
         }
+
 
 
 
