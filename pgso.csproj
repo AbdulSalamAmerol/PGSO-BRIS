@@ -164,6 +164,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BillingDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Report_Billing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Report_Billing.Designer.cs">
+      <DependentUpon>frm_Report_Billing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Details_Billing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Details_Billing.Designer.cs">
+      <DependentUpon>frm_Details_Billing.cs</DependentUpon>
+    </Compile>
     <Compile Include="pgso_Billing\Forms\frm_Print_Billing.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -292,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_sportcomplex.resx">
       <DependentUpon>frm_sportcomplex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Report_Billing.resx">
+      <DependentUpon>frm_Report_Billing.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Print_Billing.resx">
       <DependentUpon>frm_Print_Billing.cs</DependentUpon>

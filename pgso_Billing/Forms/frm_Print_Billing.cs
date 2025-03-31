@@ -50,10 +50,6 @@ namespace pgso.pgso_Billing.Forms
             }
         }
 
-
-
-
-
         private void DisplayReport()
         {
             if (_billingData == null || _billingData.Count == 0) return;
