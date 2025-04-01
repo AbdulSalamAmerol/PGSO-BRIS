@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.Revenu_Report_Viewer = new Microsoft.Reporting.WinForms.ReportViewer();
             this.SuspendLayout();
             // 
-            // reportViewer1
+            // Revenu_Report_Viewer
             // 
-            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "pgso.Report_Revenue_By_Reservation_Type.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(0, 0);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(965, 772);
-            this.reportViewer1.TabIndex = 0;
+            this.Revenu_Report_Viewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Revenu_Report_Viewer.LocalReport.ReportEmbeddedResource = "pgso.Report_Revenue_By_Reservation_Type.rdlc";
+            this.Revenu_Report_Viewer.Location = new System.Drawing.Point(0, 0);
+            this.Revenu_Report_Viewer.Name = "Revenu_Report_Viewer";
+            this.Revenu_Report_Viewer.ServerReport.BearerToken = null;
+            this.Revenu_Report_Viewer.Size = new System.Drawing.Size(965, 772);
+            this.Revenu_Report_Viewer.TabIndex = 0;
             // 
             // frm_Report_Revenue_By_Reservation_Type
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(965, 772);
-            this.Controls.Add(this.reportViewer1);
+            this.Controls.Add(this.Revenu_Report_Viewer);
             this.Name = "frm_Report_Revenue_By_Reservation_Type";
             this.Text = "frm_Report_Revenue_By_Reservation_Type";
             this.Load += new System.EventHandler(this.frm_Report_Revenue_By_Reservation_Type_Load);
@@ -56,6 +56,6 @@
 
         #endregion
 
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private Microsoft.Reporting.WinForms.ReportViewer Revenu_Report_Viewer;
     }
 }

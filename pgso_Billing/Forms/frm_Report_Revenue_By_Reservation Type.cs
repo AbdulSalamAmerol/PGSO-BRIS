@@ -40,7 +40,6 @@ namespace pgso.pgso_Billing.Forms
                 this.Close(); // Close form if there is an issue
             }
         }
-
         private void LoadRevenueData()
         {
             _revenueData = repo_Billing.GetRevenueByFilters(_startDate, _endDate, _paymentStatus, _reservationType);
@@ -52,22 +51,17 @@ namespace pgso.pgso_Billing.Forms
             }
         }
 
-
         private void DisplayReport()
         {
             if (_revenueData == null || _revenueData.Count == 0) return;
 
-            reportViewer1.LocalReport.DataSources.Clear();
-
-            // ✅ Set the correct RDLC report file path
-            reportViewer1.LocalReport.ReportEmbeddedResource = "pgso.pgso_Billing.Forms.Report_Revenue_By_Reservation_Type.rdlc";
-            
+            Revenu_Report_Viewer.LocalReport.DataSources.Clear();
+            Revenu_Report_Viewer.LocalReport.ReportEmbeddedResource = "pgso.pgso_Billing.Forms.Report_Revenue_By_Reservation_Type.rdlc"; //##
             // ✅ Bind data source
             ReportDataSource rds = new ReportDataSource("BillingDataset", _revenueData);
-            reportViewer1.LocalReport.DataSources.Add(rds);
-
+            Revenu_Report_Viewer.LocalReport.DataSources.Add(rds); 
             // ✅ Refresh the report
-            reportViewer1.RefreshReport();
+            Revenu_Report_Viewer.RefreshReport(); 
         }
 
 

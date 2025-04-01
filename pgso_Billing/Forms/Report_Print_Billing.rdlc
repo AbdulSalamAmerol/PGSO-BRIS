@@ -1108,6 +1108,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -2158,6 +2159,18 @@ Acting Chief SOD / AO-I</Value>
         <Field Name="Formatted_Created_At">
           <DataField>Formatted_Created_At</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fld_Request_Origin">
+          <DataField>fld_Request_Origin</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fld_Rate_Type">
+          <DataField>fld_Rate_Type</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fld_Aircon">
+          <DataField>fld_Aircon</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

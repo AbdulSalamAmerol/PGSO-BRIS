@@ -29,12 +29,14 @@ namespace pgso.Billing.Models
         public int fld_Number_Of_Participants { get; set; }
         public string fld_Reservation_Status { get; set; }
         public decimal fld_Total_Amount { get; set; }
+        
 
         // Venue Details
         public int? pk_VenueID { get; set; }
         public string fld_Venue_Name { get; set; }
         public int? pk_Venue_ScopeID { get; set; }
         public string fld_Venue_Scope_Name { get; set; }
+        
 
         // Venue Pricing
         public int? pk_Venue_PricingID { get; set; }
