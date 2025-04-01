@@ -369,6 +369,8 @@ namespace pgso {
             
             private global::System.Data.DataColumn columnfld_Aircon;
             
+            private global::System.Data.DataColumn columnfld_Rate_Type;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public BillingDataTableDataTable() {
@@ -764,6 +766,14 @@ namespace pgso {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn fld_Rate_TypeColumn {
+                get {
+                    return this.columnfld_Rate_Type;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -844,7 +854,8 @@ namespace pgso {
                         string Formatted_End_Date, 
                         string Formatted_Created_At, 
                         string fld_Request_Origin, 
-                        bool fld_Aircon) {
+                        bool fld_Aircon, 
+                        string fld_Rate_Type) {
                 BillingDataTableRow rowBillingDataTableRow = ((BillingDataTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         pk_ReservationID,
@@ -891,7 +902,8 @@ namespace pgso {
                         Formatted_End_Date,
                         Formatted_Created_At,
                         fld_Request_Origin,
-                        fld_Aircon};
+                        fld_Aircon,
+                        fld_Rate_Type};
                 rowBillingDataTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBillingDataTableRow);
                 return rowBillingDataTableRow;
@@ -959,6 +971,7 @@ namespace pgso {
                 this.columnFormatted_Created_At = base.Columns["Formatted_Created_At"];
                 this.columnfld_Request_Origin = base.Columns["fld_Request_Origin"];
                 this.columnfld_Aircon = base.Columns["fld_Aircon"];
+                this.columnfld_Rate_Type = base.Columns["fld_Rate_Type"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1054,6 +1067,8 @@ namespace pgso {
                 base.Columns.Add(this.columnfld_Request_Origin);
                 this.columnfld_Aircon = new global::System.Data.DataColumn("fld_Aircon", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfld_Aircon);
+                this.columnfld_Rate_Type = new global::System.Data.DataColumn("fld_Rate_Type", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfld_Rate_Type);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1928,6 +1943,22 @@ namespace pgso {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string fld_Rate_Type {
+                get {
+                    try {
+                        return ((string)(this[this.tableBillingDataTable.fld_Rate_TypeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'fld_Rate_Type\' in table \'BillingDataTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBillingDataTable.fld_Rate_TypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Ispk_ReservationIDNull() {
                 return this.IsNull(this.tableBillingDataTable.pk_ReservationIDColumn);
             }
@@ -2464,6 +2495,18 @@ namespace pgso {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setfld_AirconNull() {
                 this[this.tableBillingDataTable.fld_AirconColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isfld_Rate_TypeNull() {
+                return this.IsNull(this.tableBillingDataTable.fld_Rate_TypeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setfld_Rate_TypeNull() {
+                this[this.tableBillingDataTable.fld_Rate_TypeColumn] = global::System.Convert.DBNull;
             }
         }
         
