@@ -44,6 +44,7 @@ namespace pgso.Billing.Models
         public decimal fld_Hourly_Rate { get; set; }
         public bool fld_Aircon { get; set; }
         public string fld_Rate_Type { get; set; }
+        public decimal fld_Additional_Charge { get; set; }
 
         // Reserved Equipment Details
         public int? fk_EquipmentID { get; set; }

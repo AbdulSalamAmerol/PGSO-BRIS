@@ -364,7 +364,8 @@ namespace pgso.Billing.Repositories
                             p.fld_Payment_Date,
                             rp.fld_Request_Origin,
                             vp.fld_Aircon,
-                            vp.fld_Rate_Type
+                            vp.fld_Rate_Type,
+                            vp.fld_Additional_Charge
 
                         FROM dbo.tbl_Reservation r
                         LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
@@ -443,7 +444,8 @@ namespace pgso.Billing.Repositories
                                     fld_Payment_Date = reader.IsDBNull(37) ? DateTime.MinValue : reader.GetDateTime(37),
                                     fld_Request_Origin = reader.IsDBNull(38) ? " " : reader.GetString(38),
                                     fld_Aircon = reader.IsDBNull(39) ? false : reader.GetBoolean(39),
-                                    fld_Rate_Type = reader.IsDBNull(40) ? " " : reader.GetString(40)    
+                                    fld_Rate_Type = reader.IsDBNull(40) ? " " : reader.GetString(40),
+                                    fld_Additional_Charge = reader.IsDBNull(41) ? 0 : reader.GetDecimal(41) 
                                 });
                             }
                         }
