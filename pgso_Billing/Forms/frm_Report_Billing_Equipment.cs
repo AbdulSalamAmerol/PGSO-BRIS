@@ -73,6 +73,8 @@ namespace pgso.pgso_Billing.Forms
             Report_Viewer_Equipment_Revenue.LocalReport.DataSources.Add(rds);
 
 
+
+
             // ✅ Refresh the report to apply changes
             Report_Viewer_Equipment_Revenue.RefreshReport();
         }
