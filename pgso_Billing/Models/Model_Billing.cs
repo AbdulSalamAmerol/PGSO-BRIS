@@ -42,6 +42,7 @@ namespace pgso.Billing.Models
         public int? pk_Venue_PricingID { get; set; }
         public decimal fld_First4Hrs_Rate { get; set; }
         public decimal fld_Hourly_Rate { get; set; }
+        public bool fld_Aircon { get; set; }
 
         // Reserved Equipment Details
         public int? fk_EquipmentID { get; set; }

@@ -275,7 +275,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>fld Aircon</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -525,21 +525,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox5">
+                    <Textbox Name="fld_Aircon">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!fld_Aircon.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox5</rd:DefaultName>
+                      <rd:DefaultName>fld_Aircon</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -800,6 +800,10 @@
         <Field Name="fld_Request_Origin">
           <DataField>fld_Request_Origin</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fld_Aircon">
+          <DataField>fld_Aircon</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

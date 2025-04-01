@@ -59,6 +59,7 @@
               <xs:element name="Formatted_End_Date" msprop:Generator_ColumnPropNameInTable="Formatted_End_DateColumn" msprop:Generator_ColumnPropNameInRow="Formatted_End_Date" msprop:Generator_UserColumnName="Formatted_End_Date" msprop:Generator_ColumnVarNameInTable="columnFormatted_End_Date" type="xs:string" minOccurs="0" />
               <xs:element name="Formatted_Created_At" msprop:Generator_ColumnPropNameInTable="Formatted_Created_AtColumn" msprop:Generator_ColumnPropNameInRow="Formatted_Created_At" msprop:Generator_UserColumnName="Formatted_Created_At" msprop:Generator_ColumnVarNameInTable="columnFormatted_Created_At" type="xs:string" minOccurs="0" />
               <xs:element name="fld_Request_Origin" msprop:Generator_ColumnPropNameInTable="fld_Request_OriginColumn" msprop:Generator_ColumnPropNameInRow="fld_Request_Origin" msprop:Generator_UserColumnName="fld_Request_Origin" msprop:Generator_ColumnVarNameInTable="columnfld_Request_Origin" type="xs:string" minOccurs="0" />
+              <xs:element name="fld_Aircon" msprop:Generator_ColumnPropNameInRow="fld_Aircon" msprop:Generator_ColumnPropNameInTable="fld_AirconColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Aircon" msprop:Generator_UserColumnName="fld_Aircon" type="xs:boolean" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -345,6 +345,7 @@ namespace pgso.Billing.Repositories
                             vp.pk_Venue_PricingID,
                             vp.fld_First4Hrs_Rate,
                             vp.fld_Hourly_Rate,
+                            
 
                             re.fk_EquipmentID,
                             e.fld_Equipment_Name,
@@ -361,7 +362,8 @@ namespace pgso.Billing.Repositories
                             p.fld_Amount_Paid,
                             p.fld_Payment_Status,
                             p.fld_Payment_Date,
-                            rp.fld_Request_Origin 
+                            rp.fld_Request_Origin,
+                            vp.fld_Aircon
 
                         FROM dbo.tbl_Reservation r
                         LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
@@ -438,7 +440,8 @@ namespace pgso.Billing.Repositories
                                     fld_Amount_Paid = reader.IsDBNull(35) ? 0 : reader.GetDecimal(35),
                                     fld_Payment_Status = reader.IsDBNull(36) ? "Unknown" : reader.GetString(36),
                                     fld_Payment_Date = reader.IsDBNull(37) ? DateTime.MinValue : reader.GetDateTime(37),
-                                    fld_Request_Origin = reader.IsDBNull(38) ? " " : reader.GetString(38)
+                                    fld_Request_Origin = reader.IsDBNull(38) ? " " : reader.GetString(38),
+                                    fld_Aircon = reader.IsDBNull(39) ? false : reader.GetBoolean(39)
                                 });
                             }
                         }
