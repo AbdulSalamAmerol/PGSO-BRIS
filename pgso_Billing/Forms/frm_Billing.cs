@@ -89,7 +89,7 @@ namespace pgso
 
         private void btn_Reports_Click(object sender, EventArgs e)
         {
-            frm_Report_Billing reportBillingForm = new frm_Report_Billing();
+            frm_Report_Billing_Main reportBillingForm = new frm_Report_Billing_Main();
             reportBillingForm.ShowDialog(); // Opens the form as a modal dialog
 
         }

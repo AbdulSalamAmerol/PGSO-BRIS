@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using pgso.Billing.Models;
 using pgso.Billing.Repositories;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace pgso.pgso_Billing.Forms
 {
-    public partial class frm_Report_Revenue_By_Reservation_Type : Form
+    public partial class frm_Report_Billing_Venue : Form
     {
         private List<Billing_Model> _revenueData;
         private Repo_Billing repo_Billing = new Repo_Billing(); // Repository instance
@@ -17,8 +22,7 @@ namespace pgso.pgso_Billing.Forms
         private DateTime _endDate;
         private string _paymentStatus;
         private string _reservationType;
-
-        public frm_Report_Revenue_By_Reservation_Type(DateTime startDate, DateTime endDate, string paymentStatus, string reservationType)
+        public frm_Report_Billing_Venue(DateTime startDate, DateTime endDate, string paymentStatus, string reservationType)
         {
             InitializeComponent();
             _startDate = startDate;
@@ -27,8 +31,9 @@ namespace pgso.pgso_Billing.Forms
             _reservationType = reservationType;
         }
 
-        private void frm_Report_Revenue_By_Reservation_Type_Load(object sender, EventArgs e)
+        private void frm_Report_Billing_Venue_Load(object sender, EventArgs e)
         {
+
             try
             {
                 LoadRevenueData();  // Fetch data first
@@ -40,6 +45,7 @@ namespace pgso.pgso_Billing.Forms
                 this.Close(); // Close form if there is an issue
             }
         }
+
         private void LoadRevenueData()
         {
             _revenueData = repo_Billing.GetRevenueByFilters(_startDate, _endDate, _paymentStatus, _reservationType);
@@ -50,20 +56,27 @@ namespace pgso.pgso_Billing.Forms
                 this.Close();
             }
         }
-
         private void DisplayReport()
         {
+
+
             if (_revenueData == null || _revenueData.Count == 0) return;
 
-            Revenu_Report_Viewer.LocalReport.DataSources.Clear();
-            Revenu_Report_Viewer.LocalReport.ReportEmbeddedResource = "pgso.pgso_Billing.Forms.Report_Revenue_By_Reservation_Type.rdlc"; //##
-            // ✅ Bind data source
+            // ✅ Clear existing data sources
+            Report_Viewer_Venue_Revenue.LocalReport.DataSources.Clear();
+            Report_Viewer_Venue_Revenue.LocalReport.ReportEmbeddedResource = "pgso.pgso_Billing.Forms.Report_Billing_Venue.rdlc";
+
+            // ✅ Add the dataset to the report
             ReportDataSource rds = new ReportDataSource("BillingDataset", _revenueData);
-            Revenu_Report_Viewer.LocalReport.DataSources.Add(rds); 
-            // ✅ Refresh the report
-            Revenu_Report_Viewer.RefreshReport(); 
+            Report_Viewer_Venue_Revenue.LocalReport.DataSources.Add(rds);
+
+            Report_Viewer_Venue_Revenue.LocalReport.SetParameters(new ReportParameter("StartDate", _startDate.ToString("MMMM dd, yyyy")));
+            Report_Viewer_Venue_Revenue.LocalReport.SetParameters(new ReportParameter("EndDate", _endDate.ToString("MMMM dd, yyyy")));
+            Report_Viewer_Venue_Revenue.LocalReport.SetParameters(new ReportParameter("PaymentStatus", _paymentStatus));
+            Report_Viewer_Venue_Revenue.LocalReport.SetParameters(new ReportParameter("ReservationType", _reservationType));
+
+            // ✅ Refresh the report to apply changes
+            Report_Viewer_Venue_Revenue.RefreshReport();
         }
-
-
     }
 }

@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace pgso.pgso_Billing.Forms
 {
-    public partial class frm_Report_Billing : Form
+    public partial class frm_Report_Billing_Main : Form
     {
-        public frm_Report_Billing()
+        public frm_Report_Billing_Main()
         {
             InitializeComponent();
         }
@@ -36,11 +36,30 @@ namespace pgso.pgso_Billing.Forms
             // Get selected reservation type (default to "All" if nothing is selected)
             string reservationType = cmb_Venue_Or_Equipment.SelectedItem?.ToString().Trim() ?? "All";
 
-            if (selectedReport == "Revenue By Reservation Type")
+            if (selectedReport == "Revenue Report")
             {
-                frm_Report_Revenue_By_Reservation_Type reportForm =
-                    new frm_Report_Revenue_By_Reservation_Type(startDate, endDate, paymentStatus, reservationType);
-                reportForm.ShowDialog();
+                if (reservationType == "Venue")
+                {
+                    frm_Report_Billing_Venue reportForm =
+                        new frm_Report_Billing_Venue(startDate, endDate, paymentStatus, reservationType);
+                    reportForm.ShowDialog();
+                }
+                else if (reservationType == "Equipment")
+                {
+                    frm_Report_Billing_Equipment reportForm =
+                        new frm_Report_Billing_Equipment(startDate, endDate, paymentStatus, reservationType);
+                    reportForm.ShowDialog();
+                }
+                else if (reservationType == "ALL")
+                {
+                    frm_Report_Billing_Venue_And_Equipment reportForm =
+                        new frm_Report_Billing_Venue_And_Equipment(startDate, endDate, paymentStatus, reservationType);
+                    reportForm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid reservation type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {

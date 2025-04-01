@@ -1,6 +1,6 @@
 ﻿namespace pgso.pgso_Billing.Forms
 {
-    partial class frm_Report_Billing
+    partial class frm_Report_Billing_Main
     {
         /// <summary>
         /// Required designer variable.
@@ -89,7 +89,7 @@
             "ALL",
             "Venue",
             "Equipment"});
-            this.cmb_Venue_Or_Equipment.Location = new System.Drawing.Point(169, 153);
+            this.cmb_Venue_Or_Equipment.Location = new System.Drawing.Point(169, 163);
             this.cmb_Venue_Or_Equipment.Name = "cmb_Venue_Or_Equipment";
             this.cmb_Venue_Or_Equipment.Size = new System.Drawing.Size(200, 21);
             this.cmb_Venue_Or_Equipment.TabIndex = 4;
@@ -98,7 +98,7 @@
             // 
             this.tb_Venue_Or_Equipment.BackColor = System.Drawing.SystemColors.Control;
             this.tb_Venue_Or_Equipment.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_Venue_Or_Equipment.Location = new System.Drawing.Point(23, 153);
+            this.tb_Venue_Or_Equipment.Location = new System.Drawing.Point(23, 163);
             this.tb_Venue_Or_Equipment.Name = "tb_Venue_Or_Equipment";
             this.tb_Venue_Or_Equipment.Size = new System.Drawing.Size(137, 13);
             this.tb_Venue_Or_Equipment.TabIndex = 5;
@@ -109,7 +109,7 @@
             // 
             this.tb_Payment_Status.BackColor = System.Drawing.SystemColors.Control;
             this.tb_Payment_Status.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_Payment_Status.Location = new System.Drawing.Point(26, 114);
+            this.tb_Payment_Status.Location = new System.Drawing.Point(26, 132);
             this.tb_Payment_Status.Name = "tb_Payment_Status";
             this.tb_Payment_Status.Size = new System.Drawing.Size(137, 13);
             this.tb_Payment_Status.TabIndex = 6;
@@ -126,7 +126,7 @@
             "Confirmed",
             "Pending",
             "Cancelled"});
-            this.cmb_Payment_Status.Location = new System.Drawing.Point(169, 114);
+            this.cmb_Payment_Status.Location = new System.Drawing.Point(169, 132);
             this.cmb_Payment_Status.Name = "cmb_Payment_Status";
             this.cmb_Payment_Status.Size = new System.Drawing.Size(200, 21);
             this.cmb_Payment_Status.TabIndex = 7;
@@ -145,7 +145,7 @@
             // 
             this.tb_Choose_Report.BackColor = System.Drawing.SystemColors.Control;
             this.tb_Choose_Report.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_Choose_Report.Location = new System.Drawing.Point(26, 188);
+            this.tb_Choose_Report.Location = new System.Drawing.Point(26, 102);
             this.tb_Choose_Report.Name = "tb_Choose_Report";
             this.tb_Choose_Report.Size = new System.Drawing.Size(137, 13);
             this.tb_Choose_Report.TabIndex = 11;
@@ -157,13 +157,13 @@
             this.cmb_Choose_Report.BackColor = System.Drawing.SystemColors.Control;
             this.cmb_Choose_Report.FormattingEnabled = true;
             this.cmb_Choose_Report.Items.AddRange(new object[] {
-            "Revenue By Reservation Type"});
-            this.cmb_Choose_Report.Location = new System.Drawing.Point(169, 188);
+            "Revenue Report"});
+            this.cmb_Choose_Report.Location = new System.Drawing.Point(169, 102);
             this.cmb_Choose_Report.Name = "cmb_Choose_Report";
             this.cmb_Choose_Report.Size = new System.Drawing.Size(200, 21);
             this.cmb_Choose_Report.TabIndex = 12;
             // 
-            // frm_Report_Billing
+            // frm_Report_Billing_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -181,7 +181,7 @@
             this.Controls.Add(this.dtp_Start_Date);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frm_Report_Billing";
+            this.Name = "frm_Report_Billing_Main";
             this.Text = "frm_Report_Billing";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,6 +1,6 @@
 ﻿namespace pgso.pgso_Billing.Forms
 {
-    partial class frm_Report_Revenue_By_Reservation_Type
+    partial class frm_Report_Billing_Equipment
     {
         /// <summary>
         /// Required designer variable.
@@ -28,34 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Revenu_Report_Viewer = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.Report_Viewer_Equipment_Revenue = new Microsoft.Reporting.WinForms.ReportViewer();
             this.SuspendLayout();
             // 
-            // Revenu_Report_Viewer
+            // Report_Viewer_Equipment_Revenue
             // 
-            this.Revenu_Report_Viewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Revenu_Report_Viewer.LocalReport.ReportEmbeddedResource = "pgso.Report_Revenue_By_Reservation_Type.rdlc";
-            this.Revenu_Report_Viewer.Location = new System.Drawing.Point(0, 0);
-            this.Revenu_Report_Viewer.Name = "Revenu_Report_Viewer";
-            this.Revenu_Report_Viewer.ServerReport.BearerToken = null;
-            this.Revenu_Report_Viewer.Size = new System.Drawing.Size(965, 772);
-            this.Revenu_Report_Viewer.TabIndex = 0;
+            this.Report_Viewer_Equipment_Revenue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Report_Viewer_Equipment_Revenue.Location = new System.Drawing.Point(0, 0);
+            this.Report_Viewer_Equipment_Revenue.Name = "Report_Viewer_Equipment_Revenue";
+            this.Report_Viewer_Equipment_Revenue.ServerReport.BearerToken = null;
+            this.Report_Viewer_Equipment_Revenue.Size = new System.Drawing.Size(800, 450);
+            this.Report_Viewer_Equipment_Revenue.TabIndex = 0;
             // 
-            // frm_Report_Revenue_By_Reservation_Type
+            // frm_Report_Billing_Equipment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(965, 772);
-            this.Controls.Add(this.Revenu_Report_Viewer);
-            this.Name = "frm_Report_Revenue_By_Reservation_Type";
-            this.Text = "frm_Report_Revenue_By_Reservation_Type";
-            this.Load += new System.EventHandler(this.frm_Report_Revenue_By_Reservation_Type_Load);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Report_Viewer_Equipment_Revenue);
+            this.Name = "frm_Report_Billing_Equipment";
+            this.Text = "frm_Report_Billing_Equipment";
+            this.Load += new System.EventHandler(this.frm_Report_Billing_Equipment_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Microsoft.Reporting.WinForms.ReportViewer Revenu_Report_Viewer;
+        private Microsoft.Reporting.WinForms.ReportViewer Report_Viewer_Equipment_Revenue;
     }
 }

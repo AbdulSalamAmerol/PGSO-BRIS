@@ -164,11 +164,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BillingDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="pgso_Billing\Forms\frm_Report_Billing.cs">
+    <Compile Include="pgso_Billing\Forms\frm_Report_Billing_Equipment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="pgso_Billing\Forms\frm_Report_Billing.Designer.cs">
-      <DependentUpon>frm_Report_Billing.cs</DependentUpon>
+    <Compile Include="pgso_Billing\Forms\frm_Report_Billing_Equipment.Designer.cs">
+      <DependentUpon>frm_Report_Billing_Equipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Report_Billing_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Report_Billing_Main.Designer.cs">
+      <DependentUpon>frm_Report_Billing_Main.cs</DependentUpon>
     </Compile>
     <Compile Include="pgso_Billing\Forms\frm_Details_Billing.cs">
       <SubType>Form</SubType>
@@ -182,11 +188,17 @@
     <Compile Include="pgso_Billing\Forms\frm_Print_Billing.Designer.cs">
       <DependentUpon>frm_Print_Billing.cs</DependentUpon>
     </Compile>
-    <Compile Include="pgso_Billing\Forms\frm_Report_Revenue_By_Reservation Type.cs">
+    <Compile Include="pgso_Billing\Forms\frm_Report_Billing_Venue.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="pgso_Billing\Forms\frm_Report_Revenue_By_Reservation Type.Designer.cs">
-      <DependentUpon>frm_Report_Revenue_By_Reservation Type.cs</DependentUpon>
+    <Compile Include="pgso_Billing\Forms\frm_Report_Billing_Venue.Designer.cs">
+      <DependentUpon>frm_Report_Billing_Venue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Report_Billing_Venue_And_Equipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Report_Billing_Venue_And_Equipment.Designer.cs">
+      <DependentUpon>frm_Report_Billing_Venue_And_Equipment.cs</DependentUpon>
     </Compile>
     <Compile Include="pgso_Billing\Models\Equipment_Billing.cs" />
     <Compile Include="pgso_Billing\Models\Model_Billing.cs" />
@@ -374,15 +386,23 @@
     <EmbeddedResource Include="frm_sportcomplex.resx">
       <DependentUpon>frm_sportcomplex.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pgso_Billing\Forms\frm_Report_Billing.resx">
-      <DependentUpon>frm_Report_Billing.cs</DependentUpon>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Report_Billing_Equipment.resx">
+      <DependentUpon>frm_Report_Billing_Equipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Report_Billing_Main.resx">
+      <DependentUpon>frm_Report_Billing_Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Print_Billing.resx">
       <DependentUpon>frm_Print_Billing.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pgso_Billing\Forms\frm_Report_Revenue_By_Reservation Type.resx">
-      <DependentUpon>frm_Report_Revenue_By_Reservation Type.cs</DependentUpon>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Report_Billing_Venue.resx">
+      <DependentUpon>frm_Report_Billing_Venue.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Report_Billing_Venue_And_Equipment.resx">
+      <DependentUpon>frm_Report_Billing_Venue_And_Equipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\Report_Billing_Equipment.rdlc" />
+    <EmbeddedResource Include="pgso_Billing\Forms\Report_Billing_Venue.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -394,7 +414,7 @@
     <EmbeddedResource Include="pgso_Billing\Forms\Report_Print_Billing.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="pgso_Billing\Forms\Report_Revenue_By_Reservation_Type.rdlc">
+    <EmbeddedResource Include="pgso_Billing\Forms\Report_Billing_Venue_And_Equipment.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Include="BillingDataSet.xsc">
