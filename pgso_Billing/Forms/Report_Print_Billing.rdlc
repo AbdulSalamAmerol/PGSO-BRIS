@@ -1108,7 +1108,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -2164,13 +2163,17 @@ Acting Chief SOD / AO-I</Value>
           <DataField>fld_Request_Origin</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="fld_Aircon">
+          <DataField>fld_Aircon</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
         <Field Name="fld_Rate_Type">
           <DataField>fld_Rate_Type</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="fld_Aircon">
-          <DataField>fld_Aircon</DataField>
-          <rd:TypeName>System.Boolean</rd:TypeName>
+        <Field Name="fld_Additional_Charge">
+          <DataField>fld_Additional_Charge</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
