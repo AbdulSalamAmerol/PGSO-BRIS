@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this._BRIS_EXPERIMENT_3_0DataSet1 = new pgso._BRIS_EXPERIMENT_3_0DataSet();
             this.tlp_Billing_UControls = new System.Windows.Forms.TableLayoutPanel();
             this.dgv_Billing_Records = new System.Windows.Forms.DataGridView();
@@ -95,18 +95,18 @@
             this.dgv_Billing_Records.AllowUserToOrderColumns = true;
             this.dgv_Billing_Records.AllowUserToResizeColumns = false;
             this.dgv_Billing_Records.AllowUserToResizeRows = false;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgv_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgv_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_Billing_Records.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_Billing_Records.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Billing_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Billing_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_Billing_Records.ColumnHeadersHeight = 40;
             this.dgv_Billing_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_Billing_Records.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -214,8 +214,8 @@
             // 
             this.pk_ReservationID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.pk_ReservationID.DataPropertyName = "pk_ReservationID";
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.pk_ReservationID.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.pk_ReservationID.DefaultCellStyle = dataGridViewCellStyle3;
             this.pk_ReservationID.FillWeight = 5F;
             this.pk_ReservationID.HeaderText = "Reservation ID";
             this.pk_ReservationID.MinimumWidth = 10;
@@ -228,8 +228,8 @@
             // 
             this.fld_Control_Number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.fld_Control_Number.DataPropertyName = "fld_Control_Number";
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.fld_Control_Number.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.fld_Control_Number.DefaultCellStyle = dataGridViewCellStyle4;
             this.fld_Control_Number.FillWeight = 15F;
             this.fld_Control_Number.HeaderText = "CONTROL NUMBER";
             this.fld_Control_Number.Name = "fld_Control_Number";
@@ -240,8 +240,8 @@
             // 
             this.fld_Full_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.fld_Full_Name.DataPropertyName = "fld_Full_Name";
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.fld_Full_Name.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.fld_Full_Name.DefaultCellStyle = dataGridViewCellStyle5;
             this.fld_Full_Name.FillWeight = 15F;
             this.fld_Full_Name.HeaderText = "Requesting Person";
             this.fld_Full_Name.Name = "fld_Full_Name";
@@ -252,8 +252,8 @@
             // 
             this.col_Reservation_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_Reservation_Type.DataPropertyName = "fld_Reservation_Type";
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Reservation_Type.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Reservation_Type.DefaultCellStyle = dataGridViewCellStyle6;
             this.col_Reservation_Type.FillWeight = 10F;
             this.col_Reservation_Type.HeaderText = "Reservation Type";
             this.col_Reservation_Type.Name = "col_Reservation_Type";
@@ -264,8 +264,8 @@
             // 
             this.col_Venue_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_Venue_Name.DataPropertyName = "fld_Venue_Name";
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Venue_Name.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Venue_Name.DefaultCellStyle = dataGridViewCellStyle7;
             this.col_Venue_Name.FillWeight = 15F;
             this.col_Venue_Name.HeaderText = "Venue Name";
             this.col_Venue_Name.Name = "col_Venue_Name";
@@ -276,8 +276,8 @@
             // 
             this.col_Equipment_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_Equipment_Name.DataPropertyName = "fld_Equipment_Name";
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Equipment_Name.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Equipment_Name.DefaultCellStyle = dataGridViewCellStyle8;
             this.col_Equipment_Name.FillWeight = 10F;
             this.col_Equipment_Name.HeaderText = "Equipment Name";
             this.col_Equipment_Name.Name = "col_Equipment_Name";
@@ -288,10 +288,10 @@
             // 
             this.col_Start_Date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_Start_Date.DataPropertyName = "fld_Start_Date";
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Start_Date.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Start_Date.DefaultCellStyle = dataGridViewCellStyle9;
             this.col_Start_Date.FillWeight = 10F;
-            this.col_Start_Date.HeaderText = "Start Date";
+            this.col_Start_Date.HeaderText = "Reservation Date";
             this.col_Start_Date.Name = "col_Start_Date";
             this.col_Start_Date.ReadOnly = true;
             this.col_Start_Date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
@@ -300,8 +300,8 @@
             // 
             this.col_Amount_Due.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_Amount_Due.DataPropertyName = "fld_Amount_Due";
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Amount_Due.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Amount_Due.DefaultCellStyle = dataGridViewCellStyle10;
             this.col_Amount_Due.FillWeight = 10F;
             this.col_Amount_Due.HeaderText = "Amount Due";
             this.col_Amount_Due.Name = "col_Amount_Due";
@@ -312,8 +312,8 @@
             // 
             this.col_Payment_Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_Payment_Status.DataPropertyName = "fld_Payment_Status";
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Payment_Status.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Payment_Status.DefaultCellStyle = dataGridViewCellStyle11;
             this.col_Payment_Status.FillWeight = 7F;
             this.col_Payment_Status.HeaderText = "Payment Status";
             this.col_Payment_Status.Name = "col_Payment_Status";
