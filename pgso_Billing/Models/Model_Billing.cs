@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace pgso.Billing.Models
@@ -84,5 +85,25 @@ namespace pgso.Billing.Models
             "Cancelled" => "🟡 Cancelled",
             _ => fld_Payment_Status
         };
+
+        public string DisplayReservationName
+        {
+            get
+            {
+                // Ensure it checks for venue and returns fld_Venue_Name, otherwise return equipment names
+                return fld_Reservation_Type == "Venue"
+                    ? fld_Venue_Name
+                    : string.Join(", ", EquipmentNames); // Merge equipment names if it's equipment type
+            }
+        }
+
+
+        // Add a new property to store merged equipment names
+        public List<string> EquipmentNames { get; set; } = new List<string>();
+
+
+      
+
+
     }
 }
