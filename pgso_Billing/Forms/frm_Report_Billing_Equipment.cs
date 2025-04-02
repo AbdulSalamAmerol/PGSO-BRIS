@@ -72,7 +72,10 @@ namespace pgso.pgso_Billing.Forms
             ReportDataSource rds = new ReportDataSource("BillingDataset", _revenueData);
             Report_Viewer_Equipment_Revenue.LocalReport.DataSources.Add(rds);
 
-
+            Report_Viewer_Equipment_Revenue.LocalReport.SetParameters(new ReportParameter("StartDate", _startDate.ToString("MMMM dd, yyyy")));
+            Report_Viewer_Equipment_Revenue.LocalReport.SetParameters(new ReportParameter("EndDate", _endDate.ToString("MMMM dd, yyyy")));
+            Report_Viewer_Equipment_Revenue.LocalReport.SetParameters(new ReportParameter("PaymentStatus", _paymentStatus));
+            Report_Viewer_Equipment_Revenue.LocalReport.SetParameters(new ReportParameter("ReservationType", _reservationType));
 
 
             // ✅ Refresh the report to apply changes
