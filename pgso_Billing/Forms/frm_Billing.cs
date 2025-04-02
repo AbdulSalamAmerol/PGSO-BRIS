@@ -93,5 +93,28 @@ namespace pgso
             reportBillingForm.ShowDialog(); // Opens the form as a modal dialog
 
         }
+
+        private void sb_Billing_Search_Bar_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = sb_Billing_Search_Bar.Text.Trim().ToLower(); // Convert search term to lowercase
+
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                dgv_billing_binding_source.DataSource = all_billing_model;
+            }
+            else
+            {
+                var filteredData = all_billing_model.Where(item =>
+                    item.fld_Control_Number.ToLower().Contains(searchTerm) ||
+                    item.fld_Full_Name.ToLower().Contains(searchTerm) ||
+                    item.fld_Venue_Name.ToLower().Contains(searchTerm) ||
+                    item.fld_Reservation_Type.ToLower().Contains(searchTerm) ||
+                    item.fld_Equipment_Name.ToLower().Contains(searchTerm) ||
+                    item.fld_Payment_Status.ToLower().Contains(searchTerm)
+                ).ToList();
+
+                dgv_billing_binding_source.DataSource = filteredData;
+            }
+        }
     }
 }
