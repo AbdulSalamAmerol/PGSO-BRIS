@@ -158,6 +158,7 @@ namespace pgso
         }
 
         // Calculate total amount
+        // Calculate total amount
         private void CalculateTotalAmount()
         {
             if (txt_Total.Tag == null)
@@ -170,8 +171,15 @@ namespace pgso
             {
                 if (int.TryParse(txt_Quantity.Text, out int quantity) && quantity > 0)
                 {
-                    decimal totalAmount = rate * quantity;
-                    txt_Total.Text = totalAmount.ToString("0.00");
+                    if (int.TryParse(txt_Days_Of_Use.Text, out int numberOfDays) && numberOfDays > 0)
+                    {
+                        decimal totalAmount = rate * quantity * numberOfDays;
+                        txt_Total.Text = totalAmount.ToString("0.00");
+                    }
+                    else
+                    {
+                        txt_Total.Text = (rate * quantity).ToString("0.00");
+                    }
                 }
                 else
                 {
@@ -183,6 +191,7 @@ namespace pgso
                 txt_Total.Text = "0.00";
             }
         }
+
 
         // Event handlers
         private void txt_Quantity_TextChanged(object sender, EventArgs e)
@@ -451,6 +460,9 @@ namespace pgso
 
         }
 
+        private void txt_Days_Of_Use_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }

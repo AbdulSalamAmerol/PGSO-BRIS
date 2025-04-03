@@ -1,6 +1,6 @@
 ﻿namespace pgso
 {
-    partial class frm_Pending_Venues
+    partial class frm_Venue_Pending
     {
         /// <summary>
         /// Required designer variable.
@@ -98,7 +98,7 @@
             this.dt_pendings.ReadOnly = true;
             this.dt_pendings.RowHeadersVisible = false;
             this.dt_pendings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.dt_pendings.Size = new System.Drawing.Size(1334, 383);
+            this.dt_pendings.Size = new System.Drawing.Size(1334, 544);
             this.dt_pendings.TabIndex = 6;
             // 
             // lbl_pending

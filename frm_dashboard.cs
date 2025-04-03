@@ -30,8 +30,9 @@ namespace pgso
 
             currentYear = DateTime.Now.Year;
             currentMonth = DateTime.Now.Month;
-
+            DisplayCalendar();
             SetupUI();
+            this.Load += frm_Dashboard_Load;
         }
 
         private void SetupUI()
@@ -42,16 +43,26 @@ namespace pgso
             this.Controls.Add(sideMenu);
            // UpdateCalendar();
         }
+        private void DisplayCalendar()
+        {
+            frm_Calendar calendar = new frm_Calendar();
+            calendar.TopLevel = false;
+            calendar.FormBorderStyle = FormBorderStyle.None;
+            calendar.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(calendar);
+            calendar.Show();
+        }
 
         private void CreateSideMenu()
         {
-            sideMenu = new Panel
+            /*sideMenu = new Panel
             {
                 Size = new Size(200, this.ClientSize.Height),
                 Dock = DockStyle.Left,
                 BackColor = Color.DarkSlateGray,
                 Padding = new Padding(10)
-            };
+            };*/
 /*
             Label menuLabel = new Label
             {
@@ -86,6 +97,7 @@ namespace pgso
             sideMenu.Controls.Add(numYear);
 */
             // Button Venue
+            /*
             Button Venues = new Button
             {
                 Text = "Manage Reservations",
@@ -97,7 +109,7 @@ namespace pgso
             };
             Venues.Click += Venues_Click;
             sideMenu.Controls.Add(Venues);
-
+            */
            
 
             
@@ -117,7 +129,12 @@ namespace pgso
            // UpdateCalendar();
         }
 
-        
+        private void frm_Dashboard_Load(object sender, EventArgs e)
+        {
+            // Display frm_Calendar upon opening
+            DisplayCalendar();
+        }
+        /*
 
         //button utilities
         private void Activity_Logs_Click(object sender, EventArgs e)
@@ -140,7 +157,7 @@ namespace pgso
         {
             currentYear = (int)numYear.Value;
            // UpdateCalendar();
-        }
+        }*/
         /*
         private DataTable GetReservationsForMonth(int year, int month)
         {
@@ -173,8 +190,8 @@ namespace pgso
                 MessageBox.Show("Error loading reservations: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return reservations;
-        }
-
+        }*/
+        /*
         private void CreateMainContent()
         {
             mainContent = new Panel
@@ -314,22 +331,12 @@ namespace pgso
         private void venueToolStripMenuItem_Click(Object sender, EventArgs e)
         {
             frm_Create_Venuer_Reservation Venue = new frm_Create_Venuer_Reservation();
-            Venue.TopLevel = false;
-            Venue.FormBorderStyle = FormBorderStyle.None;
-            Venue.Dock = DockStyle.Fill;
-            this.panel_Display.Controls.Clear();
-            this.panel_Display.Controls.Add(Venue);
             Venue.Show();
         }
 
         private void equipmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frm_Create_Utility_Reservation Utility = new frm_Create_Utility_Reservation();
-            Utility.TopLevel = false;
-            Utility.FormBorderStyle = FormBorderStyle.None;
-            Utility.Dock = DockStyle.Fill;
-            this.panel_Display.Controls.Clear();
-            this.panel_Display.Controls.Add(Utility);
             Utility.Show();
         }
         //CREATE RESERVATION END
@@ -337,18 +344,18 @@ namespace pgso
         //MANAGE RESERVATION START
         private void venueToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            /*frm_Venues Venues = new frm_Venues();
+            frm_Venues Venues = new frm_Venues();
             Venues.TopLevel = false;
             Venues.FormBorderStyle = FormBorderStyle.None;
             Venues.Dock = DockStyle.Fill;
             this.panel_Display.Controls.Clear();
             this.panel_Display.Controls.Add(Venues);
-            Venues.Show();*/
+            Venues.Show();
         }
 
         private void approvedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frm_Approved_Venue AprVenue = new frm_Approved_Venue();
+            frm_Venue_Approved AprVenue = new frm_Venue_Approved();
             AprVenue.TopLevel = false;
             AprVenue.FormBorderStyle = FormBorderStyle.None;
             AprVenue.Dock = DockStyle.Fill;
@@ -358,13 +365,6 @@ namespace pgso
         }
         private void equipmentToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            frm_Equipment Equipment = new frm_Equipment();
-            Equipment.TopLevel = false;
-            Equipment.FormBorderStyle = FormBorderStyle.None;
-            Equipment.Dock = DockStyle.Fill;
-            this.panel_Display.Controls.Clear();
-            this.panel_Display.Controls.Add(Equipment);
-            Equipment.Show();
         }
 
         //MANAGE RESERVATION END
@@ -383,7 +383,7 @@ namespace pgso
 
         private void pendingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frm_Pending_Venues PenVenues = new frm_Pending_Venues();
+            frm_Venue_Pending PenVenues = new frm_Venue_Pending();
             PenVenues.TopLevel = false;
             PenVenues.FormBorderStyle = FormBorderStyle.None;
             PenVenues.Dock = DockStyle.Fill;
@@ -393,6 +393,61 @@ namespace pgso
         }
 
         private void cancelledToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_Venues VenCancelled = new frm_Venues();
+            VenCancelled.TopLevel = false;
+            VenCancelled.FormBorderStyle = FormBorderStyle.None;
+            VenCancelled.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(VenCancelled);
+            VenCancelled.Show();
+        }
+
+        private void pendingReservationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_Equipment_Pending EqPending = new frm_Equipment_Pending();
+            EqPending.TopLevel = false;
+            EqPending.FormBorderStyle = FormBorderStyle.None;
+            EqPending.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(EqPending);
+            EqPending.Show();
+        }
+
+        private void approvedReservationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_Equipment_Approved EqApproved = new frm_Equipment_Approved();
+            EqApproved.TopLevel = false;
+            EqApproved.FormBorderStyle = FormBorderStyle.None;
+            EqApproved.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(EqApproved);
+            EqApproved.Show();
+        }
+
+        private void cancelledReservationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_Equipment_Cancelled EqCancelled = new frm_Equipment_Cancelled();
+            EqCancelled.TopLevel = false;
+            EqCancelled.FormBorderStyle = FormBorderStyle.None;
+            EqCancelled.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(EqCancelled);
+            EqCancelled.Show();
+        }
+
+        private void calendarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_Calendar Calendar = new frm_Calendar();
+            Calendar.TopLevel = false;
+            Calendar.FormBorderStyle = FormBorderStyle.None;
+            Calendar.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(Calendar);
+            Calendar.Show();
+        }
+
+        private void panel_Display_Paint(object sender, PaintEventArgs e)
         {
 
         }
