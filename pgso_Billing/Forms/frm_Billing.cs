@@ -39,6 +39,9 @@ namespace pgso
             }
         }
 
+        private List<Billing_Model> groupedBillingData; // Store grouped data globally
+
+
         private void frm_Billing_Load(object sender, EventArgs e)
         {
             try
@@ -46,17 +49,15 @@ namespace pgso
                 // Get all billing records
                 all_billing_model = repo_billing.GetAllBillingRecords() ?? new List<Billing_Model>();
 
-                // Show the count of retrieved records
-                Console.WriteLine($"Billing Records Count: {all_billing_model.Count}");
-
                 if (all_billing_model.Count == 0)
                 {
+                    dgv_Billing_Records.DataSource = null; // Clear DataGridView if no data
                     MessageBox.Show("No billing records found.");
                     return;
                 }
 
                 // ✅ Group reservations by control number and merge equipment names
-                var groupedData = all_billing_model
+                groupedBillingData = all_billing_model
                     .GroupBy(item => new
                     {
                         item.fld_Control_Number,
@@ -67,16 +68,14 @@ namespace pgso
                     })
                     .Select(group =>
                     {
-                        var billingRecord = group.First(); // Get the first item in the group
+                        var billingRecord = group.First(); // Keep only the first record per control number
 
-                        // Set EquipmentNames property correctly
+                        // Merge equipment names
                         billingRecord.EquipmentNames = group
                             .Select(x => x.fld_Equipment_Name)
                             .Where(name => !string.IsNullOrEmpty(name))
+                            .Distinct()
                             .ToList();
-
-                        // Don't try to assign to DisplayReservationName; it computes its value automatically
-                        // DisplayReservationName will automatically show the correct value based on the reservation type
 
                         return billingRecord;
                     })
@@ -85,14 +84,13 @@ namespace pgso
                 // ✅ Ensure "Reservation Name" column exists
                 if (!dgv_Billing_Records.Columns.Contains("col_Reservation_Name"))
                 {
-                    DataGridViewTextBoxColumn reservationNameColumn = new DataGridViewTextBoxColumn
+                    dgv_Billing_Records.Columns.Add(new DataGridViewTextBoxColumn
                     {
                         Name = "col_Reservation_Name",
                         HeaderText = "Reservation",
-                        DataPropertyName = "DisplayReservationName", // Bind to the computed property
+                        DataPropertyName = "DisplayReservationName",
                         AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-                    };
-                    dgv_Billing_Records.Columns.Add(reservationNameColumn);
+                    });
                 }
 
                 // ✅ Ensure the print button column icon is set
@@ -105,18 +103,44 @@ namespace pgso
                 dgv_Billing_Records.AutoGenerateColumns = false;
 
                 // ✅ Bind the corrected data source
-                dgv_billing_binding_source.DataSource = groupedData;
+                dgv_billing_binding_source.DataSource = groupedBillingData;
                 dgv_Billing_Records.DataSource = dgv_billing_binding_source;
 
-                // ✅ Adjust the display order of columns
+                // ✅ Adjust column display order
                 dgv_Billing_Records.Columns["col_Reservation_Name"].DisplayIndex = 2;
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to load billing records: " + ex.Message);
             }
         }
+
+        // 🔍 Fixed Search Method
+        private void sb_Billing_Search_Bar_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = sb_Billing_Search_Bar.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                // ✅ Restore the grouped dataset (prevents missing equipment names)
+                dgv_billing_binding_source.DataSource = groupedBillingData;
+            }
+            else
+            {
+                var filteredData = groupedBillingData.Where(item =>
+                    (item.fld_Control_Number?.ToLower().Contains(searchTerm) ?? false) ||
+                    (item.fld_Full_Name?.ToLower().Contains(searchTerm) ?? false) ||
+                    (item.fld_Venue_Name?.ToLower().Contains(searchTerm) ?? false) ||
+                    (item.fld_Reservation_Type?.ToLower().Contains(searchTerm) ?? false) ||
+                    (item.fld_Payment_Status?.ToLower().Contains(searchTerm) ?? false) ||
+                    item.EquipmentNames.Any(equipment => equipment.ToLower().Contains(searchTerm))
+                ).ToList();
+
+                dgv_billing_binding_source.DataSource = filteredData;
+            }
+        }
+
+
 
 
 
@@ -143,28 +167,7 @@ namespace pgso
 
         }
 
-        private void sb_Billing_Search_Bar_TextChanged(object sender, EventArgs e)
-        {
-            string searchTerm = sb_Billing_Search_Bar.Text.Trim().ToLower(); // Convert search term to lowercase
-
-            if (string.IsNullOrEmpty(searchTerm))
-            {
-                dgv_billing_binding_source.DataSource = all_billing_model;
-            }
-            else
-            {
-                var filteredData = all_billing_model.Where(item =>
-                    item.fld_Control_Number.ToLower().Contains(searchTerm) ||  // Search by control number
-                    item.fld_Full_Name.ToLower().Contains(searchTerm) ||     // Search by full name
-                    item.fld_Venue_Name.ToLower().Contains(searchTerm) ||    // Search by venue name
-                    item.fld_Reservation_Type.ToLower().Contains(searchTerm) || // Search by reservation type
-                    item.fld_Payment_Status.ToLower().Contains(searchTerm) || // Search by payment status
-                    item.EquipmentNames.Any(equipment => equipment.ToLower().Contains(searchTerm)) // Search within merged equipment names
-                ).ToList();
-
-                dgv_billing_binding_source.DataSource = filteredData;
-            }
-        }
+        
 
 
         private void textBox2_TextChanged(object sender, EventArgs e)
