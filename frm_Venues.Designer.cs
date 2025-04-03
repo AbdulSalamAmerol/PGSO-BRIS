@@ -28,224 +28,54 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btn_ToDashboard = new System.Windows.Forms.Button();
-            this.dt_approved = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Contact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Total_Amount1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lbl_approved = new System.Windows.Forms.Label();
-            this.lbl_pending = new System.Windows.Forms.Label();
-            this.dt_pendings = new System.Windows.Forms.DataGridView();
-            this.lbl_canceled = new System.Windows.Forms.Label();
-            this.dt_canceled = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Total_Amount3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Total_Amount2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Action = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Cancel = new System.Windows.Forms.DataGridViewButtonColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dt_approved)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dt_pendings)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dt_canceled)).BeginInit();
+            this.dt_all = new System.Windows.Forms.DataGridView();
+            this.panel_Information = new System.Windows.Forms.Panel();
+            this.btn_Cancel = new System.Windows.Forms.Button();
+            this.btn_Approve = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txt_Total = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txt_Status = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txt_Num_Participants = new System.Windows.Forms.TextBox();
+            this.txt_HourEnd = new System.Windows.Forms.TextBox();
+            this.txt_DateEnd = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txt_Activity_Name = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txt_HourStart = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txt_Date_Start = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txt_Venue_Scope = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txt_Venue_Name = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txt_Address = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txt_Fname = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txt_CN = new System.Windows.Forms.TextBox();
+            this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Venue_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Reservation_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Total_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txt_Sname = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dt_all)).BeginInit();
+            this.panel_Information.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btn_ToDashboard
+            // dt_all
             // 
-            this.btn_ToDashboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_ToDashboard.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_ToDashboard.Location = new System.Drawing.Point(1256, 4);
-            this.btn_ToDashboard.Name = "btn_ToDashboard";
-            this.btn_ToDashboard.Size = new System.Drawing.Size(118, 33);
-            this.btn_ToDashboard.TabIndex = 10;
-            this.btn_ToDashboard.Text = "To Dashboard";
-            this.btn_ToDashboard.UseVisualStyleBackColor = true;
-            this.btn_ToDashboard.Click += new System.EventHandler(this.btn_ToDashboard_Click);
-            // 
-            // dt_approved
-            // 
-            this.dt_approved.AllowUserToDeleteRows = false;
-            this.dt_approved.AllowUserToResizeRows = false;
-            this.dt_approved.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dt_all.AllowUserToDeleteRows = false;
+            this.dt_all.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dt_approved.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dt_approved.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dt_approved.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dt_approved.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column13,
-            this.Column8,
-            this.Contact,
-            this.Column6,
-            this.Column10,
-            this.Column7,
-            this.Column9,
-            this.Column5,
-            this.fld_Total_Amount1});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dt_approved.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dt_approved.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dt_approved.Location = new System.Drawing.Point(15, 40);
-            this.dt_approved.Name = "dt_approved";
-            this.dt_approved.ReadOnly = true;
-            this.dt_approved.RowHeadersVisible = false;
-            this.dt_approved.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.dt_approved.Size = new System.Drawing.Size(1341, 179);
-            this.dt_approved.TabIndex = 1;
-            this.dt_approved.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtvenuereservation_CellContentClick);
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "fld_Control_Number";
-            this.Column1.HeaderText = "Control No.";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "fld_First_Name";
-            this.Column2.HeaderText = "First Name";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column13
-            // 
-            this.Column13.DataPropertyName = "fld_Surname";
-            this.Column13.HeaderText = "Last Name";
-            this.Column13.Name = "Column13";
-            this.Column13.ReadOnly = true;
-            // 
-            // Column8
-            // 
-            this.Column8.DataPropertyName = "fld_Activity_Name";
-            this.Column8.HeaderText = "Activity";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            // 
-            // Contact
-            // 
-            this.Contact.DataPropertyName = "fld_Contact_Number";
-            this.Contact.HeaderText = "Contact";
-            this.Contact.Name = "Contact";
-            this.Contact.ReadOnly = true;
-            // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "fld_Start_Date";
-            this.Column6.HeaderText = "Date Start";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            // 
-            // Column10
-            // 
-            this.Column10.DataPropertyName = "fld_End_Date";
-            this.Column10.HeaderText = "Date End";
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            // 
-            // Column7
-            // 
-            this.Column7.DataPropertyName = "fld_Start_Time";
-            this.Column7.HeaderText = "Time Start";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            // 
-            // Column9
-            // 
-            this.Column9.DataPropertyName = "fld_End_Time";
-            this.Column9.HeaderText = "Time End";
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "fld_Reservation_Status";
-            this.Column5.HeaderText = "Status";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // fld_Total_Amount1
-            // 
-            this.fld_Total_Amount1.DataPropertyName = "fld_Total_Amount";
-            this.fld_Total_Amount1.HeaderText = "Total";
-            this.fld_Total_Amount1.Name = "fld_Total_Amount1";
-            this.fld_Total_Amount1.ReadOnly = true;
-            // 
-            // lbl_approved
-            // 
-            this.lbl_approved.AutoSize = true;
-            this.lbl_approved.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_approved.Location = new System.Drawing.Point(12, 16);
-            this.lbl_approved.Name = "lbl_approved";
-            this.lbl_approved.Size = new System.Drawing.Size(97, 21);
-            this.lbl_approved.TabIndex = 2;
-            this.lbl_approved.Text = "APPROVED";
-            this.lbl_approved.Click += new System.EventHandler(this.lbl_approved_Click);
-            // 
-            // lbl_pending
-            // 
-            this.lbl_pending.AutoSize = true;
-            this.lbl_pending.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_pending.Location = new System.Drawing.Point(12, 241);
-            this.lbl_pending.Name = "lbl_pending";
-            this.lbl_pending.Size = new System.Drawing.Size(86, 21);
-            this.lbl_pending.TabIndex = 3;
-            this.lbl_pending.Text = "PENDNGS";
-            this.lbl_pending.Click += new System.EventHandler(this.lbl_pending_Click);
-            // 
-            // dt_pendings
-            // 
-            this.dt_pendings.AllowUserToAddRows = false;
-            this.dt_pendings.AllowUserToDeleteRows = false;
-            this.dt_pendings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dt_pendings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dt_all.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -253,25 +83,13 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dt_pendings.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dt_pendings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dt_pendings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Control_Number,
-            this.dataGridViewTextBoxColumn2,
-            this.Column3,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.Column4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.Column11,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10,
-            this.fld_Total_Amount2,
-            this.Action,
-            this.Cancel});
+            this.dt_all.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dt_all.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dt_all.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.fld_Control_Number,
+            this.fld_Venue_Name,
+            this.fld_Reservation_Status,
+            this.fld_Total_Amount});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -279,320 +97,416 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dt_pendings.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dt_pendings.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dt_pendings.Location = new System.Drawing.Point(12, 265);
-            this.dt_pendings.Name = "dt_pendings";
-            this.dt_pendings.ReadOnly = true;
-            this.dt_pendings.RowHeadersVisible = false;
-            this.dt_pendings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.dt_pendings.Size = new System.Drawing.Size(1341, 173);
-            this.dt_pendings.TabIndex = 4;
-            this.dt_pendings.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_pendings_CellContentClick);
+            this.dt_all.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dt_all.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dt_all.Location = new System.Drawing.Point(12, 64);
+            this.dt_all.Name = "dt_all";
+            this.dt_all.ReadOnly = true;
+            this.dt_all.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            this.dt_all.Size = new System.Drawing.Size(875, 521);
+            this.dt_all.TabIndex = 6;
+            this.dt_all.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_canceled_CellContentClick);
             // 
-            // lbl_canceled
+            // panel_Information
             // 
-            this.lbl_canceled.AutoSize = true;
-            this.lbl_canceled.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_canceled.Location = new System.Drawing.Point(12, 466);
-            this.lbl_canceled.Name = "lbl_canceled";
-            this.lbl_canceled.Size = new System.Drawing.Size(98, 21);
-            this.lbl_canceled.TabIndex = 5;
-            this.lbl_canceled.Text = "CANCELED";
-            this.lbl_canceled.Click += new System.EventHandler(this.lbl_canceled_Click);
-            // 
-            // dt_canceled
-            // 
-            this.dt_canceled.AllowUserToDeleteRows = false;
-            this.dt_canceled.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel_Information.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dt_canceled.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dt_canceled.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.dt_canceled.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dt_canceled.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn12,
-            this.Column14,
-            this.dataGridViewTextBoxColumn13,
-            this.Column12,
-            this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15,
-            this.Column15,
-            this.fld_Total_Amount3});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dt_canceled.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dt_canceled.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dt_canceled.Location = new System.Drawing.Point(16, 490);
-            this.dt_canceled.Name = "dt_canceled";
-            this.dt_canceled.ReadOnly = true;
-            this.dt_canceled.RowHeadersVisible = false;
-            this.dt_canceled.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.dt_canceled.Size = new System.Drawing.Size(1341, 181);
-            this.dt_canceled.TabIndex = 6;
-            this.dt_canceled.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_canceled_CellContentClick);
+            this.panel_Information.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel_Information.Controls.Add(this.txt_Sname);
+            this.panel_Information.Controls.Add(this.btn_Cancel);
+            this.panel_Information.Controls.Add(this.btn_Approve);
+            this.panel_Information.Controls.Add(this.label11);
+            this.panel_Information.Controls.Add(this.txt_Total);
+            this.panel_Information.Controls.Add(this.label10);
+            this.panel_Information.Controls.Add(this.txt_Status);
+            this.panel_Information.Controls.Add(this.label9);
+            this.panel_Information.Controls.Add(this.txt_Num_Participants);
+            this.panel_Information.Controls.Add(this.txt_HourEnd);
+            this.panel_Information.Controls.Add(this.txt_DateEnd);
+            this.panel_Information.Controls.Add(this.label8);
+            this.panel_Information.Controls.Add(this.txt_Activity_Name);
+            this.panel_Information.Controls.Add(this.label7);
+            this.panel_Information.Controls.Add(this.txt_HourStart);
+            this.panel_Information.Controls.Add(this.label6);
+            this.panel_Information.Controls.Add(this.txt_Date_Start);
+            this.panel_Information.Controls.Add(this.label5);
+            this.panel_Information.Controls.Add(this.txt_Venue_Scope);
+            this.panel_Information.Controls.Add(this.label4);
+            this.panel_Information.Controls.Add(this.txt_Venue_Name);
+            this.panel_Information.Controls.Add(this.label3);
+            this.panel_Information.Controls.Add(this.txt_Address);
+            this.panel_Information.Controls.Add(this.label2);
+            this.panel_Information.Controls.Add(this.txt_Fname);
+            this.panel_Information.Controls.Add(this.label1);
+            this.panel_Information.Controls.Add(this.txt_CN);
+            this.panel_Information.Location = new System.Drawing.Point(903, 12);
+            this.panel_Information.Name = "panel_Information";
+            this.panel_Information.Size = new System.Drawing.Size(332, 573);
+            this.panel_Information.TabIndex = 7;
             // 
-            // dataGridViewTextBoxColumn11
+            // btn_Cancel
             // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "fld_Control_Number";
-            this.dataGridViewTextBoxColumn11.HeaderText = "Control Number";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            this.btn_Cancel.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Cancel.Location = new System.Drawing.Point(136, 509);
+            this.btn_Cancel.Name = "btn_Cancel";
+            this.btn_Cancel.Size = new System.Drawing.Size(75, 33);
+            this.btn_Cancel.TabIndex = 25;
+            this.btn_Cancel.Text = "Cancel";
+            this.btn_Cancel.UseVisualStyleBackColor = true;
+            this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click_1);
             // 
-            // dataGridViewTextBoxColumn12
+            // btn_Approve
             // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "fld_First_Name";
-            this.dataGridViewTextBoxColumn12.HeaderText = "First Name";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            this.btn_Approve.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Approve.Location = new System.Drawing.Point(228, 509);
+            this.btn_Approve.Name = "btn_Approve";
+            this.btn_Approve.Size = new System.Drawing.Size(75, 33);
+            this.btn_Approve.TabIndex = 24;
+            this.btn_Approve.Text = "Approve";
+            this.btn_Approve.UseVisualStyleBackColor = true;
+            this.btn_Approve.Click += new System.EventHandler(this.btn_Approve_Click);
             // 
-            // Column14
+            // label11
             // 
-            this.Column14.DataPropertyName = "fld_Surname";
-            this.Column14.HeaderText = "Surname";
-            this.Column14.Name = "Column14";
-            this.Column14.ReadOnly = true;
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(16, 457);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(43, 17);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Total:";
             // 
-            // dataGridViewTextBoxColumn13
+            // txt_Total
             // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "fld_Requesting_Person_Address";
-            this.dataGridViewTextBoxColumn13.HeaderText = "Address";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            this.txt_Total.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Total.Location = new System.Drawing.Point(19, 477);
+            this.txt_Total.Name = "txt_Total";
+            this.txt_Total.ReadOnly = true;
+            this.txt_Total.Size = new System.Drawing.Size(153, 26);
+            this.txt_Total.TabIndex = 22;
             // 
-            // Column12
+            // label10
             // 
-            this.Column12.DataPropertyName = "fld_Venue_Name";
-            this.Column12.HeaderText = "Venue";
-            this.Column12.Name = "Column12";
-            this.Column12.ReadOnly = true;
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(16, 408);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(50, 17);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Status:";
             // 
-            // dataGridViewTextBoxColumn14
+            // txt_Status
             // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "fld_Activity_Name";
-            this.dataGridViewTextBoxColumn14.HeaderText = "Activity";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            this.txt_Status.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Status.Location = new System.Drawing.Point(19, 428);
+            this.txt_Status.Name = "txt_Status";
+            this.txt_Status.ReadOnly = true;
+            this.txt_Status.Size = new System.Drawing.Size(286, 26);
+            this.txt_Status.TabIndex = 20;
             // 
-            // dataGridViewTextBoxColumn15
+            // label9
             // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "fld_Number_Of_Participants";
-            this.dataGridViewTextBoxColumn15.HeaderText = "Participants";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(15, 359);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(84, 17);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "Participants";
             // 
-            // Column15
+            // txt_Num_Participants
             // 
-            this.Column15.DataPropertyName = "fld_Reservation_Status";
-            this.Column15.HeaderText = "Status";
-            this.Column15.Name = "Column15";
-            this.Column15.ReadOnly = true;
+            this.txt_Num_Participants.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Num_Participants.Location = new System.Drawing.Point(19, 379);
+            this.txt_Num_Participants.Name = "txt_Num_Participants";
+            this.txt_Num_Participants.ReadOnly = true;
+            this.txt_Num_Participants.Size = new System.Drawing.Size(286, 26);
+            this.txt_Num_Participants.TabIndex = 18;
             // 
-            // fld_Total_Amount3
+            // txt_HourEnd
             // 
-            this.fld_Total_Amount3.DataPropertyName = "fld_Total_Amount";
-            this.fld_Total_Amount3.HeaderText = "Total";
-            this.fld_Total_Amount3.Name = "fld_Total_Amount3";
-            this.fld_Total_Amount3.ReadOnly = true;
+            this.txt_HourEnd.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_HourEnd.Location = new System.Drawing.Point(189, 274);
+            this.txt_HourEnd.Name = "txt_HourEnd";
+            this.txt_HourEnd.ReadOnly = true;
+            this.txt_HourEnd.Size = new System.Drawing.Size(114, 26);
+            this.txt_HourEnd.TabIndex = 17;
             // 
-            // Control_Number
+            // txt_DateEnd
             // 
-            this.Control_Number.DataPropertyName = "fld_Control_Number";
-            this.Control_Number.HeaderText = "Control No.";
-            this.Control_Number.Name = "Control_Number";
-            this.Control_Number.ReadOnly = true;
+            this.txt_DateEnd.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_DateEnd.Location = new System.Drawing.Point(190, 242);
+            this.txt_DateEnd.Name = "txt_DateEnd";
+            this.txt_DateEnd.ReadOnly = true;
+            this.txt_DateEnd.Size = new System.Drawing.Size(114, 26);
+            this.txt_DateEnd.TabIndex = 16;
             // 
-            // dataGridViewTextBoxColumn2
+            // label8
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "fld_First_Name";
-            this.dataGridViewTextBoxColumn2.HeaderText = "First Name";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(16, 310);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(59, 17);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Activity:";
             // 
-            // Column3
+            // txt_Activity_Name
             // 
-            this.Column3.DataPropertyName = "fld_Surname";
-            this.Column3.HeaderText = "Last Name";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
+            this.txt_Activity_Name.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Activity_Name.Location = new System.Drawing.Point(18, 330);
+            this.txt_Activity_Name.Name = "txt_Activity_Name";
+            this.txt_Activity_Name.ReadOnly = true;
+            this.txt_Activity_Name.Size = new System.Drawing.Size(286, 26);
+            this.txt_Activity_Name.TabIndex = 14;
             // 
-            // dataGridViewTextBoxColumn3
+            // label7
             // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "fld_Requesting_Person_Address";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Address";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(12, 281);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(47, 17);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Hours:";
             // 
-            // dataGridViewTextBoxColumn4
+            // txt_HourStart
             // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "fld_Activity_Name";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Event";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.txt_HourStart.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_HourStart.Location = new System.Drawing.Point(69, 275);
+            this.txt_HourStart.Name = "txt_HourStart";
+            this.txt_HourStart.ReadOnly = true;
+            this.txt_HourStart.Size = new System.Drawing.Size(114, 26);
+            this.txt_HourStart.TabIndex = 12;
             // 
-            // Column4
+            // label6
             // 
-            this.Column4.DataPropertyName = "fld_Venue_Name";
-            this.Column4.HeaderText = "Venue";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(15, 248);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 17);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Date:";
             // 
-            // dataGridViewTextBoxColumn5
+            // txt_Date_Start
             // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "fld_Contact_Number";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Contact";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.txt_Date_Start.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Date_Start.Location = new System.Drawing.Point(69, 242);
+            this.txt_Date_Start.Name = "txt_Date_Start";
+            this.txt_Date_Start.ReadOnly = true;
+            this.txt_Date_Start.Size = new System.Drawing.Size(114, 26);
+            this.txt_Date_Start.TabIndex = 10;
             // 
-            // dataGridViewTextBoxColumn6
+            // label5
             // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "fld_Number_Of_Participants";
-            this.dataGridViewTextBoxColumn6.HeaderText = "Audience";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(14, 190);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(97, 17);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Venue Scope:";
             // 
-            // Column11
+            // txt_Venue_Scope
             // 
-            this.Column11.DataPropertyName = "fld_Start_Date";
-            this.Column11.HeaderText = "Date Start";
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
+            this.txt_Venue_Scope.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Venue_Scope.Location = new System.Drawing.Point(17, 210);
+            this.txt_Venue_Scope.Name = "txt_Venue_Scope";
+            this.txt_Venue_Scope.ReadOnly = true;
+            this.txt_Venue_Scope.Size = new System.Drawing.Size(286, 26);
+            this.txt_Venue_Scope.TabIndex = 8;
             // 
-            // dataGridViewTextBoxColumn7
+            // label4
             // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "fld_End_Date";
-            this.dataGridViewTextBoxColumn7.HeaderText = "Date End";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(14, 144);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 17);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Venue";
             // 
-            // dataGridViewTextBoxColumn8
+            // txt_Venue_Name
             // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "fld_Start_Time";
-            this.dataGridViewTextBoxColumn8.HeaderText = "Time Start";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.txt_Venue_Name.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Venue_Name.Location = new System.Drawing.Point(17, 164);
+            this.txt_Venue_Name.Name = "txt_Venue_Name";
+            this.txt_Venue_Name.ReadOnly = true;
+            this.txt_Venue_Name.Size = new System.Drawing.Size(286, 26);
+            this.txt_Venue_Name.TabIndex = 6;
             // 
-            // dataGridViewTextBoxColumn9
+            // label3
             // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "fld_End_Time";
-            this.dataGridViewTextBoxColumn9.HeaderText = "Time End";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(14, 98);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 17);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Address";
             // 
-            // dataGridViewTextBoxColumn10
+            // txt_Address
             // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "fld_Reservation_Status";
-            this.dataGridViewTextBoxColumn10.HeaderText = "Status";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            this.txt_Address.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Address.Location = new System.Drawing.Point(17, 118);
+            this.txt_Address.Name = "txt_Address";
+            this.txt_Address.ReadOnly = true;
+            this.txt_Address.Size = new System.Drawing.Size(286, 26);
+            this.txt_Address.TabIndex = 4;
             // 
-            // fld_Total_Amount2
+            // label2
             // 
-            this.fld_Total_Amount2.DataPropertyName = "fld_Total_Amount";
-            this.fld_Total_Amount2.HeaderText = "Total";
-            this.fld_Total_Amount2.Name = "fld_Total_Amount2";
-            this.fld_Total_Amount2.ReadOnly = true;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(14, 52);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 17);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Name:";
             // 
-            // Action
+            // txt_Fname
             // 
-            this.Action.HeaderText = "";
-            this.Action.Name = "Action";
-            this.Action.ReadOnly = true;
-            this.Action.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Action.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Action.Text = "Approve";
-            this.Action.UseColumnTextForButtonValue = true;
+            this.txt_Fname.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Fname.Location = new System.Drawing.Point(17, 72);
+            this.txt_Fname.Name = "txt_Fname";
+            this.txt_Fname.ReadOnly = true;
+            this.txt_Fname.Size = new System.Drawing.Size(128, 26);
+            this.txt_Fname.TabIndex = 2;
             // 
-            // Cancel
+            // label1
             // 
-            this.Cancel.HeaderText = "";
-            this.Cancel.Name = "Cancel";
-            this.Cancel.ReadOnly = true;
-            this.Cancel.Text = "Cancel";
-            this.Cancel.UseColumnTextForButtonValue = true;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(14, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(117, 17);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Control Number:";
+            // 
+            // txt_CN
+            // 
+            this.txt_CN.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_CN.Location = new System.Drawing.Point(17, 26);
+            this.txt_CN.Name = "txt_CN";
+            this.txt_CN.ReadOnly = true;
+            this.txt_CN.Size = new System.Drawing.Size(286, 26);
+            this.txt_CN.TabIndex = 0;
+            // 
+            // fld_Control_Number
+            // 
+            this.fld_Control_Number.DataPropertyName = "fld_Control_Number";
+            this.fld_Control_Number.HeaderText = "Control Number";
+            this.fld_Control_Number.Name = "fld_Control_Number";
+            this.fld_Control_Number.ReadOnly = true;
+            // 
+            // fld_Venue_Name
+            // 
+            this.fld_Venue_Name.DataPropertyName = "fld_Venue_Name";
+            this.fld_Venue_Name.HeaderText = "Venue";
+            this.fld_Venue_Name.Name = "fld_Venue_Name";
+            this.fld_Venue_Name.ReadOnly = true;
+            // 
+            // fld_Reservation_Status
+            // 
+            this.fld_Reservation_Status.DataPropertyName = "fld_Reservation_Status";
+            this.fld_Reservation_Status.HeaderText = "Status";
+            this.fld_Reservation_Status.Name = "fld_Reservation_Status";
+            this.fld_Reservation_Status.ReadOnly = true;
+            // 
+            // fld_Total_Amount
+            // 
+            this.fld_Total_Amount.DataPropertyName = "fld_Total_Amount";
+            this.fld_Total_Amount.HeaderText = "Total";
+            this.fld_Total_Amount.Name = "fld_Total_Amount";
+            this.fld_Total_Amount.ReadOnly = true;
+            // 
+            // txt_Sname
+            // 
+            this.txt_Sname.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Sname.Location = new System.Drawing.Point(175, 72);
+            this.txt_Sname.Name = "txt_Sname";
+            this.txt_Sname.ReadOnly = true;
+            this.txt_Sname.Size = new System.Drawing.Size(128, 26);
+            this.txt_Sname.TabIndex = 26;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(13, 18);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(137, 26);
+            this.textBox1.TabIndex = 8;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(156, 18);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 31);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Search";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // frm_Venues
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(1386, 683);
-            this.Controls.Add(this.btn_ToDashboard);
-            this.Controls.Add(this.dt_canceled);
-            this.Controls.Add(this.lbl_canceled);
-            this.Controls.Add(this.dt_pendings);
-            this.Controls.Add(this.lbl_pending);
-            this.Controls.Add(this.lbl_approved);
-            this.Controls.Add(this.dt_approved);
+            this.ClientSize = new System.Drawing.Size(1259, 597);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.panel_Information);
+            this.Controls.Add(this.dt_all);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frm_Venues";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VENUES";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frm_Venues_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dt_approved)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dt_pendings)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dt_canceled)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dt_all)).EndInit();
+            this.panel_Information.ResumeLayout(false);
+            this.panel_Information.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dt_approved;
-        private System.Windows.Forms.Label lbl_approved;
-        private System.Windows.Forms.Label lbl_pending;
-        private System.Windows.Forms.DataGridView dt_pendings;
-        private System.Windows.Forms.Label lbl_canceled;
-        private System.Windows.Forms.DataGridView dt_canceled;
-        private System.Windows.Forms.Button btn_ToDashboard;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Contact;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Total_Amount1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Total_Amount3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Control_Number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Total_Amount2;
-        private System.Windows.Forms.DataGridViewButtonColumn Action;
-        private System.Windows.Forms.DataGridViewButtonColumn Cancel;
+        private System.Windows.Forms.DataGridView dt_all;
+        private System.Windows.Forms.Panel panel_Information;
+        private System.Windows.Forms.TextBox txt_CN;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txt_Activity_Name;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txt_HourStart;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txt_Date_Start;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txt_Venue_Scope;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txt_Venue_Name;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txt_Address;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txt_Fname;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txt_DateEnd;
+        private System.Windows.Forms.TextBox txt_HourEnd;
+        private System.Windows.Forms.Button btn_Cancel;
+        private System.Windows.Forms.Button btn_Approve;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txt_Total;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txt_Status;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txt_Num_Participants;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Control_Number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Venue_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Reservation_Status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Total_Amount;
+        private System.Windows.Forms.TextBox txt_Sname;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
     }
 }

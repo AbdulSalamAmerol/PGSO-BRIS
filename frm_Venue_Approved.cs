@@ -15,7 +15,7 @@ namespace pgso
 {
 
     //NAKA LOCAL HOST LANG YUNG DATABASE KO. PALITAN LATUR.
-    public partial class frm_Approved_Venue : Form
+    public partial class frm_Venue_Approved : Form
     {
         //fields
         private Connection db = new Connection(); // Use the Connection class
@@ -25,7 +25,7 @@ namespace pgso
       
 
 
-        public frm_Approved_Venue()
+        public frm_Venue_Approved()
         {
             InitializeComponent();
         }

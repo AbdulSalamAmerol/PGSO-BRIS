@@ -1,6 +1,6 @@
 ﻿namespace pgso
 {
-    partial class frm_Approved_Venue
+    partial class frm_Venue_Approved
     {
         /// <summary>
         /// Required designer variable.
