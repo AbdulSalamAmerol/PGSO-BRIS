@@ -9,9 +9,6 @@ using System.Drawing;
 using pgso.Properties;
 using System.IO;
 
-
-// 4/2/2025 - Fix. When search control number - shows back all 3 control numbers
-
 namespace pgso
 {
     public partial class frm_Billing : Form
@@ -67,7 +64,7 @@ namespace pgso
                         item.fld_Control_Number,
                         item.fld_Reservation_Type,
                         item.fld_Start_Date,
-                        item.fld_Amount_Due,
+                        item.fld_Total_Amount,
                         item.fld_Payment_Status
                     })
                     .Select(group =>
@@ -93,7 +90,7 @@ namespace pgso
                         Name = "col_Reservation_Name",
                         HeaderText = "Reservation",
                         DataPropertyName = "DisplayReservationName",
-                        AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader
                     });
                 }
 
@@ -146,23 +143,63 @@ namespace pgso
 
 
 
-
+        private Billing_Model GetBillingDetailsByReservationID(int reservationID)
+        {
+            // Assuming repo_billing has a method like GetBillingDetailsByReservationID
+            // If it's not there, you can implement it in the Repo_Billing class.
+            return repo_billing.GetBillingDetailsByReservationID(reservationID);
+        }
 
         private void dgv_Billing_Records_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            // Ensure the click is not on the header row
             if (e.RowIndex < 0) return; // Ignore header clicks
             Console.WriteLine($"Clicked Column: {dgv_Billing_Records.Columns[e.ColumnIndex].Name}, Row: {e.RowIndex}");
-            // Ensure the click is on the "Print" column
+
+            // Get the selected row's reservation ID
+            int reservationID = Convert.ToInt32(dgv_Billing_Records.Rows[e.RowIndex].Cells["pk_ReservationID"].Value);
+
+            // Check if reservationID is valid (greater than 0)
+            if (reservationID > 0)
+            {
+                // Get billing details by reservation ID
+                var billingDetails = GetBillingDetailsByReservationID(reservationID);
+
+                // If billing details are found, display them in the panel
+                if (billingDetails != null)
+                {
+                    DisplayBillingDetailsInPanel(billingDetails);
+                }
+                else
+                {
+                    MessageBox.Show("No billing details found for this reservation.");
+                }
+            }
+            else
+            {
+                // Optional: Handle invalid Reservation ID here
+                MessageBox.Show("Invalid Reservation ID.");
+            }
+
+            // Additional logic for specific columns (e.g., Print column)
             if (dgv_Billing_Records.Columns[e.ColumnIndex].Name == "col_Print")
             {
-                // Get the selected row's reservation ID
-                int reservationId = Convert.ToInt32(dgv_Billing_Records.Rows[e.RowIndex].Cells["pk_ReservationID"].Value);
-
                 // Open frm_Print_Billing and pass reservation ID
-                frm_Print_Billing printBillingForm = new frm_Print_Billing(reservationId);
+                frm_Print_Billing printBillingForm = new frm_Print_Billing(reservationID);
                 printBillingForm.ShowDialog();
             }
         }
+        private void DisplayBillingDetailsInPanel(Billing_Model billingDetails)
+        {
+            pnl_Billing_Details.Visible = true;
+            // Example: Populate controls on the panel to show the billing details
+
+            // Assuming you have Labels like lbl_ControlNumber, lbl_ActivityName, etc., in the panel
+            lbl_Control_Number.Text = billingDetails.fld_Control_Number;
+          
+        }
+
+
 
         private void btn_Reports_Click(object sender, EventArgs e)
         {
@@ -170,9 +207,6 @@ namespace pgso
             reportBillingForm.ShowDialog(); // Opens the form as a modal dialog
 
         }
-
-        
-
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {

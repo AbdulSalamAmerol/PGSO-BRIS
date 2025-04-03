@@ -202,7 +202,6 @@
     </Compile>
     <Compile Include="pgso_Billing\Models\Equipment_Billing.cs" />
     <Compile Include="pgso_Billing\Models\Model_Billing.cs" />
-    <Compile Include="pgso_Billing\Repositories\Equipment_Repo.cs" />
     <Compile Include="pgso_Billing\Repositories\Repository_Billing.cs" />
     <Compile Include="pgso_Billing\Forms\frm_Billing.cs">
       <SubType>Form</SubType>
@@ -459,14 +458,12 @@
     <EmbeddedResource Include="frm_reservation_forms.resx">
       <DependentUpon>frm_reservation_forms.cs</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="UserControlBlank.resx">
       <DependentUpon>UserControlBlank.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControlDays.resx">
       <DependentUpon>UserControlDays.cs</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="pgso_Billing\Forms\Report_Print_Billing.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -484,7 +481,6 @@
     <None Include="BillingDataSet.xss">
       <DependentUpon>BillingDataSet.xsd</DependentUpon>
     </None>
-
     <None Include="packages.config" />
     <None Include="Properties\DataSources\pgso.Billing.Models.class_Equipment_Billing.datasource" />
     <None Include="Properties\DataSources\pgso.Billing.Models.class_Venue_Billing.datasource" />
