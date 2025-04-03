@@ -9,10 +9,14 @@ using System.Drawing;
 using pgso.Properties;
 using System.IO;
 
+
+// 4/2/2025 - Fix. When search control number - shows back all 3 control numbers
+
 namespace pgso
 {
     public partial class frm_Billing : Form
     {
+        
         private Repo_Billing repo_billing = new Repo_Billing();
 
         // Global list to hold all billing records

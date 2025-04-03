@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Windows.Forms;
 using pgso_connect;
-// Pushing Jaymar_Branch
+
 namespace pgso
 {
     public partial class frm_Create_Venuer_Reservation : Form
@@ -24,19 +24,28 @@ namespace pgso
             TimeEnd.Format = DateTimePickerFormat.Custom;
             TimeEnd.CustomFormat = "hh:mm tt";
             LoadVenues();
-
-            LoadUtilities();
-
-
+            //CalculateNumberOfDays();
+            CalculateNumberOfHour();
+           // date_of_use_start.ValueChanged += Date_ValueChanged;
+            //date_of_use_end.ValueChanged += Date_ValueChanged;
+            TimeStart.ValueChanged += Time_ValueChanged;
+            TimeEnd.ValueChanged += Time_ValueChanged;
+            txt_rate.TextChanged += (sender, e) => CalculateTotalAmount();
+            txtx_Num_Hours.TextChanged += (sender, e) => CalculateTotalAmount();
+            txt_Hourly_Rate.TextChanged += (sender, e) => CalculateTotalAmount();
+            combo_Request.Items.Add("Call");
+            combo_Request.Items.Add("Letter");
+            combo_Request.Items.Add("Walk-In");
             CalculateTotalAmount();
         }
         private void frm_createvenuereservation_Load(object sender, EventArgs e)
         {
             LoadVenues();
-            date_of_use_start.ValueChanged += date_of_use_start_ValueChanged;
-            date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
+          //  date_of_use_start.ValueChanged += date_of_use_start_ValueChanged;
+            //date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
+            TimeStart.ValueChanged += TimeStart_ValueChanged;
+            TimeEnd.ValueChanged += TimeEnd_ValueChanged;
         }
-
         // Open database connection
         private void DBConnect()
         {
@@ -62,6 +71,25 @@ namespace pgso
             }
         }
 
+        // Calculate the number of hours
+        private void Time_ValueChanged(object sender, EventArgs e)
+        {
+            CalculateNumberOfHour();
+        }
+
+        private void CalculateNumberOfHour()
+        {
+            DateTime startDateTime = date_of_use_start.Value.Date + TimeStart.Value.TimeOfDay;
+            DateTime endDateTime = date_of_use_end.Value.Date + TimeEnd.Value.TimeOfDay;
+
+            TimeSpan difference = endDateTime - startDateTime;
+            double numberOfHours = difference.TotalHours;
+
+            txtx_Num_Hours.Text = numberOfHours.ToString("0.00");
+
+            // Force calculation after updating hours
+            CalculateTotalAmount();
+        }
         // Load venues and populate combo_venues
         private void LoadVenues()
         {
@@ -183,120 +211,50 @@ namespace pgso
             return combo_ReservationType.SelectedValue != null && combo_scope.SelectedValue != null;
         }
 
-        // Load the facilities
-        private void LoadUtilities()
-        {
-            try
-            {
-                DBConnect();
-                string query = "SELECT pk_EquipmentID, fld_Equipment_Name FROM tbl_Equipment";
-                cmd = new SqlCommand(query, conn);
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                DataTable dt = new DataTable();
-                dt.Load(reader);
-
-                
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error loading utilities: " + ex.Message);
-            }
-            finally
-            {
-                DBClose();
-            }
-        }
-
-        // Load utility details and set rate
-        private void LoadUtilityDetails(int utilityId)
-        {
-            try
-            {
-                DBConnect();
-                string query = @"
-                    SELECT 
-                        ep.fld_Equipment_Price
-                    FROM 
-                        tbl_Equipment e
-                    LEFT JOIN 
-                        tbl_Equipment_Pricing ep ON e.pk_EquipmentID = ep.fk_EquipmentID
-                    WHERE 
-                        e.pk_EquipmentID = @UtilityId";
-
-                cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@UtilityId", utilityId);
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.Read() && !reader.IsDBNull(0))
-                {
-                    txt_rate.Tag = reader["fld_Equipment_Price"].ToString(); // Store price in Tag
-                }
-                else
-                {
-                    txt_rate.Tag = null; // No price
-                    txt_rate.Text = "0.00";
-                }
-
-                reader.Close();
-                CalculateTotalAmount();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error loading utility details: " + ex.Message);
-            }
-            finally
-            {
-                DBClose();
-            }
-        }
-
         // Calculate total amount
         private void CalculateTotalAmount()
         {
-            decimal rate = 0;
-            if (txt_rate.Tag != null && decimal.TryParse(txt_rate.Tag.ToString(), out rate))
+            if (decimal.TryParse(txt_rate.Text, out decimal initialRate) &&
+                double.TryParse(txtx_Num_Hours.Text, out double numberOfHours) &&
+                decimal.TryParse(txt_Hourly_Rate.Text, out decimal hourlyRate))
             {
-                txt_rate.Text = rate.ToString("0.00");
+                decimal totalAmount;
+
+                if (numberOfHours > 4)
+                {
+                    totalAmount = initialRate + (hourlyRate * (decimal)(numberOfHours - 4));
+                }
+                else
+                {
+                    totalAmount = initialRate;
+                }
+
+                // Update the txt_Total with the calculated total amount
+                txt_Total.Text = totalAmount.ToString("0.00");
             }
             else
             {
-                txt_rate.Text = "0.00";
+                txt_Total.Text = "0.00";
             }
         }
-
-
-
-        // Event handlers
-        private void txt_Quantity_TextChanged(object sender, EventArgs e)
-        {
-            CalculateTotalAmount();
-        }
-
-       
 
         // Load rate based on selected venue, venue scope, reservation type, and aircon selection
         private void LoadRate()
         {
             try
             {
-                if (!IsReservationTypeAndScopeSelected())
-                {
-                    return;
-                }
+                if (!IsReservationTypeAndScopeSelected()) return;
 
                 bool usesAircon = radio_Yes.Checked;
 
                 DBConnect();
                 string rateQuery = @"
-                SELECT fld_First4Hrs_Rate 
-                FROM tbl_Venue_Pricing 
-                WHERE fld_Rate_Type = @RateType 
-                AND fk_VenueID = @VenueID 
-                AND fk_Venue_ScopeID = @VenueScopeID 
-                AND fld_Aircon = @UsesAircon";
+            SELECT fld_First4Hrs_Rate, fld_Hourly_Rate 
+            FROM tbl_Venue_Pricing 
+            WHERE fld_Rate_Type = @RateType 
+            AND fk_VenueID = @VenueID 
+            AND fk_Venue_ScopeID = @VenueScopeID 
+            AND fld_Aircon = @UsesAircon";
 
                 using (SqlCommand rateCmd = new SqlCommand(rateQuery, conn))
                 {
@@ -305,10 +263,23 @@ namespace pgso
                     rateCmd.Parameters.AddWithValue("@VenueScopeID", combo_scope.SelectedValue);
                     rateCmd.Parameters.AddWithValue("@UsesAircon", usesAircon);
 
-                    object result = rateCmd.ExecuteScalar();
-                    string rate = (result != null) ? result.ToString() : "0.00";
-                    txt_rate.Text = rate;
+                    using (SqlDataReader reader = rateCmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            txt_rate.Text = reader["fld_First4Hrs_Rate"].ToString();
+                            txt_Hourly_Rate.Text = reader["fld_Hourly_Rate"].ToString();
+                        }
+                        else
+                        {
+                            txt_rate.Text = "0.00";
+                            txt_Hourly_Rate.Text = "0.00";
+                        }
+                    }
                 }
+
+                // Force calculation after updating rates
+                CalculateTotalAmount();
             }
             catch (Exception ex)
             {
@@ -344,9 +315,7 @@ namespace pgso
                 cmd.Parameters.AddWithValue("@FirstName", txt_firstname.Text);
                 cmd.Parameters.AddWithValue("@Address", txt_address.Text);
 
-
                 //insert to equipment
-
 
                 // Validate the contact number
                 string contactNumber = txt_contact.Text;
@@ -357,7 +326,7 @@ namespace pgso
                 }
 
                 cmd.Parameters.AddWithValue("@ContactNumber", contactNumber);
-                cmd.Parameters.AddWithValue("@RequestOrigin", txt_requestorigin.Text);
+                cmd.Parameters.AddWithValue("@RequestOrigin", combo_Request.Text);
 
                 int personID = (int)cmd.ExecuteScalar();
 
@@ -397,7 +366,7 @@ namespace pgso
                 cmd.Parameters.AddWithValue("@fld_Activity_Name", txt_activity.Text);
                 cmd.Parameters.AddWithValue("@fld_Reservation_Type", "Venue");
                 cmd.Parameters.AddWithValue("@fld_Number_Of_Participants", num_participants.Value);
-                cmd.Parameters.AddWithValue("@Total_Amount", txt_rate.Text);
+                cmd.Parameters.AddWithValue("@Total_Amount", txt_Total.Text);
                 cmd.Parameters.AddWithValue("@fld_Reservation_Status", "Pending");
                 cmd.Parameters.AddWithValue("@Requesting_PersonID", personID);
                 cmd.Parameters.AddWithValue("@VenueID", venueID);
@@ -405,9 +374,6 @@ namespace pgso
                 cmd.Parameters.AddWithValue("@VenueScopeID", venueScopeID);
 
                 int reservationID = (int)cmd.ExecuteScalar();
-
-
-
 
                 // Commit the transaction
                 transaction.Commit();
@@ -444,7 +410,6 @@ namespace pgso
                 DBClose(); // Close Connection
             }
         }
-
         private void combo_ReservationType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (IsReservationTypeAndScopeSelected())
@@ -452,7 +417,6 @@ namespace pgso
                 LoadRate();
             }
         }
-
         private void combo_scope_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (IsReservationTypeAndScopeSelected())
@@ -460,7 +424,6 @@ namespace pgso
                 LoadRate();
             }
         }
-
         private void TimeStart_ValueChanged(object sender, EventArgs e)
         {
             if (IsReservationTypeAndScopeSelected())
@@ -468,7 +431,6 @@ namespace pgso
                 LoadRate();
             }
         }
-
         private void TimeEnd_ValueChanged(object sender, EventArgs e)
         {
             if (IsReservationTypeAndScopeSelected())
@@ -484,7 +446,6 @@ namespace pgso
                 LoadRate();
             }
         }
-
         // Helper method to validate the contact number
         private bool IsValidContactNumber(string contactNumber)
         {
@@ -493,7 +454,6 @@ namespace pgso
             string cleanedContactNumber = new string(contactNumber.Where(char.IsDigit).ToArray());
             return cleanedContactNumber.Length >= 10 && cleanedContactNumber.Length <= 15;
         }
-
         private void panel1_Paint(object sender, PaintEventArgs e) { }
 
         private void panel_faci_Paint(object sender, PaintEventArgs e) { }
@@ -507,7 +467,7 @@ namespace pgso
             txt_firstname.Clear();
             txt_address.Clear();
             txt_contact.Clear();
-            txt_requestorigin.Clear();
+           
             txt_controlnum.Clear();
             txt_activity.Clear();
             txt_rate.Clear();
@@ -568,6 +528,12 @@ namespace pgso
 
         private void date_of_use_start_ValueChanged(object sender, EventArgs e)
         {
+            // Ensure reservedDates is initialized
+            if (reservedDates == null)
+            {
+                reservedDates = new List<DateTime>();
+            }
+
             // Check if the selected date is reserved
             if (reservedDates.Contains(date_of_use_start.Value.Date))
             {
@@ -576,13 +542,19 @@ namespace pgso
                 // Temporarily unsubscribe from the event
                 date_of_use_start.ValueChanged -= date_of_use_start_ValueChanged;
                 date_of_use_start.Value = DateTime.Now; // Reset to current date
-                // Re-subscribe to the event
+                                                        // Re-subscribe to the event
                 date_of_use_start.ValueChanged += date_of_use_start_ValueChanged;
             }
         }
 
         private void date_of_use_end_ValueChanged(object sender, EventArgs e)
         {
+            // Ensure reservedDates is initialized
+            if (reservedDates == null)
+            {
+                reservedDates = new List<DateTime>();
+            }
+
             // Check if the selected date is reserved
             if (reservedDates.Contains(date_of_use_end.Value.Date))
             {
@@ -591,62 +563,36 @@ namespace pgso
                 // Temporarily unsubscribe from the event
                 date_of_use_end.ValueChanged -= date_of_use_end_ValueChanged;
                 date_of_use_end.Value = DateTime.Now; // Reset to current date
-                // Re-subscribe to the event
+                                                      // Re-subscribe to the event
                 date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
             }
         }
-       /* private void LoadReservationTypes()
+        private void txt_rate_TextChanged(object sender, EventArgs e){}
+        private void combo_Utility_SelectedIndexChanged_1(object sender, EventArgs e){ }
+        private void panel_Rev_Type_Paint(object sender, PaintEventArgs e){}
+        private void panel_Venue_Paint(object sender, PaintEventArgs e){}
+        private void txt_Reservation_Type_TextChanged(object sender, EventArgs e){}
+        private void txtx_Num_Hours_TextChanged(object sender, EventArgs e)
+        {}
+
+        private void combo_Request_SelectedIndexChanged(object sender, EventArgs e)
         {
-            combo_Reservation_Type.Items.Add("Venue");
-            combo_Reservation_Type.Items.Add("Equipment");
-            combo_Reservation_Type.SelectedIndexChanged += combo_Reservation_Type_SelectedIndexChanged;
-        }
-       */
-       /* private void combo_Reservation_Type_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (combo_Reservation_Type.SelectedItem != null)
+            if (combo_Request.SelectedItem == null)
             {
-                string selectedType = combo_Reservation_Type.SelectedItem.ToString();
-                if (selectedType == "Equipment")
-                {
-                    panel_Rev_Type.Enabled = true;
-                    panel_Venue.Enabled = false;
-                }
-                else
-                {
-                    panel_Rev_Type.Enabled = false;
-                    panel_Venue.Enabled = true;
-
-
-                }
+                return;
             }
-        }*/
 
-        private void txt_rate_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void combo_Utility_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel_Rev_Type_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel_Venue_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void txt_Reservation_Type_TextChanged(object sender, EventArgs e)
-        {
-
+            switch (combo_Request.SelectedItem.ToString())
+            {
+                case "Call":
+                    break;
+                case "Letter":
+                    break;
+                case "Walk-In":
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

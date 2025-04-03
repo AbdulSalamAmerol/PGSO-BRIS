@@ -15,7 +15,7 @@ namespace pgso
 {
 
     //NAKA LOCAL HOST LANG YUNG DATABASE KO. PALITAN LATUR.
-    public partial class frm_Pending_Venues : Form
+    public partial class frm_Venue_Pending : Form
     {
         //fields
         private Connection db = new Connection(); // Use the Connection class
@@ -34,7 +34,7 @@ namespace pgso
 
        
 
-        public frm_Pending_Venues()
+        public frm_Venue_Pending()
         {
             InitializeComponent();
             // dt_pendings.CellContentClick += dt_pendings_CellContentClick;

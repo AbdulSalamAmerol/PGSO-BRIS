@@ -223,11 +223,35 @@
     <Compile Include="frm_Add_Venues.Designer.cs">
       <DependentUpon>frm_Add_Venues.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_Approved_Venue.cs">
+    <Compile Include="frm_Calendar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_Approved_Venue.Designer.cs">
-      <DependentUpon>frm_Approved_Venue.cs</DependentUpon>
+    <Compile Include="frm_Calendar.Designer.cs">
+      <DependentUpon>frm_Calendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Equipment_Approved.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Equipment_Approved.Designer.cs">
+      <DependentUpon>frm_Equipment_Approved.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Equipment_Cancelled.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Equipment_Cancelled.Designer.cs">
+      <DependentUpon>frm_Equipment_Cancelled.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Equipment_Pending.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Equipment_Pending.Designer.cs">
+      <DependentUpon>frm_Equipment_Pending.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Venue_Approved.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Venue_Approved.Designer.cs">
+      <DependentUpon>frm_Venue_Approved.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_Create_Utility_Reservation.cs">
       <SubType>Form</SubType>
@@ -277,11 +301,11 @@
     <Compile Include="frm_mngreservation.Designer.cs">
       <DependentUpon>frm_mngreservation.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_Pending_Venues.cs">
+    <Compile Include="frm_Venue_Pending.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_Pending_Venues.Designer.cs">
-      <DependentUpon>frm_Pending_Venues.cs</DependentUpon>
+    <Compile Include="frm_Venue_Pending.Designer.cs">
+      <DependentUpon>frm_Venue_Pending.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_Print_Reservation.cs">
       <SubType>Form</SubType>
@@ -315,6 +339,18 @@
     <Compile Include="frm_reservation_forms.Designer.cs">
       <DependentUpon>frm_reservation_forms.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControlBlank.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlBlank.Designer.cs">
+      <DependentUpon>UserControlBlank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlDays.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlDays.Designer.cs">
+      <DependentUpon>UserControlDays.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frm_Add_Equipment.resx">
       <DependentUpon>frm_Add_Equipment.cs</DependentUpon>
     </EmbeddedResource>
@@ -343,8 +379,20 @@
     <EmbeddedResource Include="frm_Add_Venues.resx">
       <DependentUpon>frm_Add_Venues.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_Approved_Venue.resx">
-      <DependentUpon>frm_Approved_Venue.cs</DependentUpon>
+    <EmbeddedResource Include="frm_Calendar.resx">
+      <DependentUpon>frm_Calendar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Equipment_Approved.resx">
+      <DependentUpon>frm_Equipment_Approved.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Equipment_Cancelled.resx">
+      <DependentUpon>frm_Equipment_Cancelled.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Equipment_Pending.resx">
+      <DependentUpon>frm_Equipment_Pending.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Venue_Approved.resx">
+      <DependentUpon>frm_Venue_Approved.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Create_Utility_Reservation.resx">
       <DependentUpon>frm_Create_Utility_Reservation.cs</DependentUpon>
@@ -371,8 +419,8 @@
     <EmbeddedResource Include="frm_mngreservation.resx">
       <DependentUpon>frm_mngreservation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_Pending_Venues.resx">
-      <DependentUpon>frm_Pending_Venues.cs</DependentUpon>
+    <EmbeddedResource Include="frm_Venue_Pending.resx">
+      <DependentUpon>frm_Venue_Pending.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Print_Reservation.resx">
       <DependentUpon>frm_Print_Reservation.cs</DependentUpon>
@@ -411,6 +459,14 @@
     <EmbeddedResource Include="frm_reservation_forms.resx">
       <DependentUpon>frm_reservation_forms.cs</DependentUpon>
     </EmbeddedResource>
+
+    <EmbeddedResource Include="UserControlBlank.resx">
+      <DependentUpon>UserControlBlank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlDays.resx">
+      <DependentUpon>UserControlDays.cs</DependentUpon>
+    </EmbeddedResource>
+
     <EmbeddedResource Include="pgso_Billing\Forms\Report_Print_Billing.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -428,6 +484,7 @@
     <None Include="BillingDataSet.xss">
       <DependentUpon>BillingDataSet.xsd</DependentUpon>
     </None>
+
     <None Include="packages.config" />
     <None Include="Properties\DataSources\pgso.Billing.Models.class_Equipment_Billing.datasource" />
     <None Include="Properties\DataSources\pgso.Billing.Models.class_Venue_Billing.datasource" />
