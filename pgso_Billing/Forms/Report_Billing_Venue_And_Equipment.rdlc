@@ -366,7 +366,6 @@
           </Textbox>
           <Line Name="Line2">
             <Top>1.0434in</Top>
-            <Left>0cm</Left>
             <Height>0in</Height>
             <Width>12in</Width>
             <ZIndex>3</ZIndex>
@@ -906,7 +905,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!fld_Amount_Paid.Value)</Value>
+                                  <Value>=Sum(Fields!fld_Amount_Paid.Value, "BillingDataset")</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <Format>'₱'#,0.00</Format>
@@ -930,6 +929,7 @@
                             <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -1136,7 +1136,7 @@
             </TablixRowHierarchy>
             <Top>1.4427in</Top>
             <Height>0.25in</Height>
-            <Width>12in</Width>
+            <Width>11.99993in</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -1169,8 +1169,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox35</rd:DefaultName>
-            <Top>2.20659in</Top>
-            <Left>11.21126in</Left>
+            <Top>2.24826in</Top>
+            <Left>11.21122in</Left>
             <Height>0.19792in</Height>
             <Width>0.78871in</Width>
             <ZIndex>7</ZIndex>
@@ -1734,9 +1734,8 @@
             </TablixRowHierarchy>
             <DataSetName>BillingDataset</DataSetName>
             <Top>1.70659in</Top>
-            <Left>0in</Left>
             <Height>0.5in</Height>
-            <Width>12in</Width>
+            <Width>12.00002in</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -1746,14 +1745,14 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>2.5in</Height>
+        <Height>2.44618in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>12in</Width>
+      <Width>12.00002in</Width>
       <Page>
         <PageFooter>
           <Height>0.31944in</Height>

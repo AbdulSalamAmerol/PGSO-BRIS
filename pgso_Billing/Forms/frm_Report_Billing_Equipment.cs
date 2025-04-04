@@ -63,9 +63,10 @@ namespace pgso.pgso_Billing.Forms
 
 
             if (_revenueData == null || _revenueData.Count == 0) return;
-
-            // ✅ Clear existing data sources
-            Report_Viewer_Equipment_Revenue.LocalReport.DataSources.Clear();
+            try
+            {
+                // ✅ Clear existing data sources
+                Report_Viewer_Equipment_Revenue.LocalReport.DataSources.Clear();
             Report_Viewer_Equipment_Revenue.LocalReport.ReportEmbeddedResource = "pgso.pgso_Billing.Forms.Report_Billing_Equipment.rdlc";
 
             // ✅ Add the dataset to the report
@@ -80,6 +81,16 @@ namespace pgso.pgso_Billing.Forms
 
             // ✅ Refresh the report to apply changes
             Report_Viewer_Equipment_Revenue.RefreshReport();
+            }
+            catch (LocalProcessingException ex)
+            {
+                Console.WriteLine("Error loading report: " + ex.Message);
+                Console.WriteLine("Stack Trace: " + ex.StackTrace);
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine("Inner Exception: " + ex.InnerException.Message);
+                }
+            }
         }
     }
 }

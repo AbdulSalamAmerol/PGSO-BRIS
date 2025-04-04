@@ -8,6 +8,7 @@ using pgso.pgso_Billing.Forms;
 using System.Drawing;
 using pgso.Properties;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace pgso
 {
@@ -143,32 +144,42 @@ namespace pgso
 
 
 
+        private Dictionary<int, Billing_Model> billingDetailsCache = new Dictionary<int, Billing_Model>();
+
         private Billing_Model GetBillingDetailsByReservationID(int reservationID)
         {
-            // Assuming repo_billing has a method like GetBillingDetailsByReservationID
-            // If it's not there, you can implement it in the Repo_Billing class.
-            return repo_billing.GetBillingDetailsByReservationID(reservationID);
+            if (billingDetailsCache.ContainsKey(reservationID))
+            {
+                return billingDetailsCache[reservationID];
+            }
+
+            // Fetch the billing details from the database/repository if not in cache
+            var billingDetails = repo_billing.GetBillingDetailsByReservationID(reservationID);
+
+            // Cache the result for future use
+            if (billingDetails != null)
+            {
+                billingDetailsCache[reservationID] = billingDetails;
+            }
+
+            return billingDetails;
         }
 
-        private void dgv_Billing_Records_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // Ensure the click is not on the header row
-            if (e.RowIndex < 0) return; // Ignore header clicks
-            Console.WriteLine($"Clicked Column: {dgv_Billing_Records.Columns[e.ColumnIndex].Name}, Row: {e.RowIndex}");
 
-            // Get the selected row's reservation ID
+        private async void dgv_Billing_Records_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return; // Ignore header clicks
+
             int reservationID = Convert.ToInt32(dgv_Billing_Records.Rows[e.RowIndex].Cells["pk_ReservationID"].Value);
 
-            // Check if reservationID is valid (greater than 0)
             if (reservationID > 0)
             {
-                // Get billing details by reservation ID
-                var billingDetails = GetBillingDetailsByReservationID(reservationID);
+                var billingDetails = await Task.Run(() => repo_billing.GetBillingDetailsByReservationID(reservationID));
 
-                // If billing details are found, display them in the panel
                 if (billingDetails != null)
                 {
-                    DisplayBillingDetailsInPanel(billingDetails);
+                    // Update UI on the main thread
+                    Invoke(new Action(() => DisplayBillingDetailsInPanel(billingDetails)));
                 }
                 else
                 {
@@ -177,27 +188,73 @@ namespace pgso
             }
             else
             {
-                // Optional: Handle invalid Reservation ID here
                 MessageBox.Show("Invalid Reservation ID.");
             }
 
-            // Additional logic for specific columns (e.g., Print column)
+            // Handle other column clicks like Print
             if (dgv_Billing_Records.Columns[e.ColumnIndex].Name == "col_Print")
             {
-                // Open frm_Print_Billing and pass reservation ID
                 frm_Print_Billing printBillingForm = new frm_Print_Billing(reservationID);
                 printBillingForm.ShowDialog();
             }
         }
+
         private void DisplayBillingDetailsInPanel(Billing_Model billingDetails)
         {
             pnl_Billing_Details.Visible = true;
-            // Example: Populate controls on the panel to show the billing details
 
-            // Assuming you have Labels like lbl_ControlNumber, lbl_ActivityName, etc., in the panel
+            // Populate the labels with values from the billingDetails model
+
             lbl_Control_Number.Text = billingDetails.fld_Control_Number;
-          
+            lbl_Activity_Name.Text = billingDetails.fld_Activity_Name;
+            lbl_Requesting_Person.Text = $"{billingDetails.fld_First_Name} {billingDetails.fld_Middle_Name} {billingDetails.fld_Surname}";
+            lbl_Requesting_Office.Text = billingDetails.fld_Requesting_Person_Address;
+            lbl_Origin_Request.Text = billingDetails.fld_Request_Origin;
+            lbl_Contact_Number.Text = billingDetails.fld_Contact_Number;
+            lbl_Address.Text = billingDetails.fld_Requesting_Person_Address;
+
+            // Format reservation dates (start and end)
+            lbl_Reservation_Dates.Text = $"{billingDetails.fld_Start_Date.ToString("MM/dd/yyyy")} - {billingDetails.fld_End_Date.ToString("MM/dd/yyyy")}";
+
+            // Format reservation times (start and end)
+            lbl_Reservation_Time.Text = $"{billingDetails.fld_Start_Time.ToString(@"hh\:mm")} - {billingDetails.fld_End_Time.ToString(@"hh\:mm")}";
+
+            lbl_Number_Of_Participants.Text = billingDetails.fld_Number_Of_Participants.ToString();
+            lbl_Reservation_Status.Text = billingDetails.fld_Reservation_Status;
+
+            // Venue details
+            lbl_Venue_Name.Text = billingDetails.fld_Venue_Name;
+            lbl_Venue_Scope.Text = billingDetails.fld_Venue_Scope_Name;
+            lbl_Rate_Type.Text = billingDetails.fld_Rate_Type;
+
+            // Venue pricing details (based on hourly charges, etc.)
+            lbl_Base_Charge_Amount.Text = billingDetails.fld_First4Hrs_Rate.ToString("C");
+            lbl_Additional_Hourly_Charge.Text = billingDetails.fld_Hourly_Rate.ToString("C");
+            lbl_Additional_Charge.Text = billingDetails.fld_Additional_Charge.ToString("C");
+            lbl_Total_Hour.Text = (billingDetails.Total_Hours - 4).ToString("F0");
+            lbl_Additional_Hours_Amount.Text =  (billingDetails.fld_Hourly_Rate * (decimal)(billingDetails.Total_Hours - 4)).ToString("C");
+
+
+
+            // If you are showing equipment details (if available)
+            lbl_Venue_Name_Transact.Text = billingDetails.fld_Equipment_Name;
+            lbl_Venue_Scope_Transact.Text = billingDetails.fld_Venue_Scope_Name;
+
+            // Calculated charges based on overtime
+            
+            lbl_OT_Hours.Text = billingDetails.fld_OT_Hours.ToString();
+            lbl_OT_Hourly_Charge.Text = billingDetails.fld_Hourly_Rate.ToString("C");
+            lbl_OT_Hours_Amount.Text = (billingDetails.fld_OT_Hours * billingDetails.fld_Hourly_Rate).ToString("C");
+
+            // Cancellation charge (if applicable)
+            //    lbl_Cancel_Charge_Amount.Text = billingDetails.fld_Cancellation_Charge.ToString("C");
+
+            // Payment details
+            lbl_Paid_Amount.Text = billingDetails.fld_Amount_Paid.ToString("C");
+            lbl_Total_Amount.Text = billingDetails.fld_Total_Amount.ToString("C");
+            lbl_Balance.Text = (billingDetails.fld_Total_Amount - billingDetails.fld_Amount_Paid).ToString("C");
         }
+
 
 
 

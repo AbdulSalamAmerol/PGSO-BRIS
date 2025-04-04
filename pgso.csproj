@@ -200,7 +200,6 @@
     <Compile Include="pgso_Billing\Forms\frm_Report_Billing_Venue_And_Equipment.Designer.cs">
       <DependentUpon>frm_Report_Billing_Venue_And_Equipment.cs</DependentUpon>
     </Compile>
-    <Compile Include="pgso_Billing\Models\Equipment_Billing.cs" />
     <Compile Include="pgso_Billing\Models\Model_Billing.cs" />
     <Compile Include="pgso_Billing\Repositories\Repository_Billing.cs" />
     <Compile Include="pgso_Billing\Forms\frm_Billing.cs">
