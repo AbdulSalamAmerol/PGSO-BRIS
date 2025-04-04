@@ -521,6 +521,8 @@
   <ItemGroup>
     <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
     <None Include="pgso_Billing\Image Asset\print.png" />
+    <None Include="pgso_Billing\Image Asset\Cancelled_Icon.png" />
+    <None Include="pgso_Billing\Image Asset\Approved_Icon.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

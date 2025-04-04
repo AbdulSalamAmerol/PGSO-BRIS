@@ -14,7 +14,8 @@ namespace pgso
 {
     public partial class frm_Billing : Form
     {
-        
+        private Dictionary<int, Billing_Model> billingDetailsCache = new Dictionary<int, Billing_Model>(); //for cache
+        private List<Billing_Model> groupedBillingData; // Store grouped data globally
         private Repo_Billing repo_billing = new Repo_Billing();
 
         // Global list to hold all billing records
@@ -40,9 +41,6 @@ namespace pgso
                 return Image.FromStream(ms);
             }
         }
-
-        private List<Billing_Model> groupedBillingData; // Store grouped data globally
-
 
         private void frm_Billing_Load(object sender, EventArgs e)
         {
@@ -101,6 +99,15 @@ namespace pgso
                     imgCol.Image = ResizeImage(ByteArrayToImage(Properties.Resources.Printer_Icon), 24, 24);
                 }
 
+                if (dgv_Billing_Records.Columns["col_Cancel"] is DataGridViewImageColumn imgCol_Cancel)
+                {
+                    imgCol_Cancel.Image = ResizeImage(Properties.Resources.Cancelled_Icon, 24, 24);
+                }
+                if (dgv_Billing_Records.Columns["col_Approved"] is DataGridViewImageColumn imgCol_Approved)
+                {
+                    imgCol_Approved.Image = ResizeImage(Properties.Resources.Approved_Icon, 24, 24);
+                }
+
                 // ✅ Disable auto-generation of columns
                 dgv_Billing_Records.AutoGenerateColumns = false;
 
@@ -142,10 +149,7 @@ namespace pgso
             }
         }
 
-
-
-        private Dictionary<int, Billing_Model> billingDetailsCache = new Dictionary<int, Billing_Model>();
-
+        
         private Billing_Model GetBillingDetailsByReservationID(int reservationID)
         {
             if (billingDetailsCache.ContainsKey(reservationID))
@@ -165,7 +169,7 @@ namespace pgso
             return billingDetails;
         }
 
-
+        // Datagrid Cell Content Click
         private async void dgv_Billing_Records_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return; // Ignore header clicks
@@ -198,7 +202,7 @@ namespace pgso
                 printBillingForm.ShowDialog();
             }
         }
-
+        //Details Panel
         private void DisplayBillingDetailsInPanel(Billing_Model billingDetails)
         {
             pnl_Billing_Details.Visible = true;
@@ -235,7 +239,6 @@ namespace pgso
             lbl_Additional_Hours_Amount.Text =  (billingDetails.fld_Hourly_Rate * (decimal)(billingDetails.Total_Hours - 4)).ToString("C");
 
 
-
             // If you are showing equipment details (if available)
             lbl_Venue_Name_Transact.Text = billingDetails.fld_Equipment_Name;
             lbl_Venue_Scope_Transact.Text = billingDetails.fld_Venue_Scope_Name;
@@ -254,9 +257,6 @@ namespace pgso
             lbl_Total_Amount.Text = billingDetails.fld_Total_Amount.ToString("C");
             lbl_Balance.Text = (billingDetails.fld_Total_Amount - billingDetails.fld_Amount_Paid).ToString("C");
         }
-
-
-
 
         private void btn_Reports_Click(object sender, EventArgs e)
         {
