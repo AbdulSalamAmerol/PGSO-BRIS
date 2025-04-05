@@ -42,6 +42,7 @@ namespace pgso
         {
             try
             {
+
                 // Get all billing records
                 all_billing_model = repo_billing.GetAllBillingRecords() ?? new List<Billing_Model>();
 
@@ -137,7 +138,7 @@ namespace pgso
             switch (columnName)
             {
                 case "col_Print":
-                    PrintBilling(reservationID);
+                    await PrintBilling(reservationID, currentStatus);
                     break;
 
                 case "col_Approved":
@@ -147,33 +148,101 @@ namespace pgso
                 case "col_Cancel":
                     await HandleCancellationAsync(reservationID, currentStatus);
                     break;
-                
-              
+
+                case "col_Extend":
+                    HandleExtension(reservationID, e.RowIndex);
+                    break;
+
             }
         }
 
-        private void PrintBilling(int reservationID) // Print Collection Slip
+        private async Task PrintBilling(int reservationID, string currentStatus) // Print Collection Slip
         {
+            // Check if the reservation status is "Pending"
+            if (currentStatus != "Pending")
+            {
+                MessageBox.Show("Only 'Pending' reservations can be printed.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // If the status is "Pending", print the collection slip
             frm_Print_Billing printBillingForm = new frm_Print_Billing(reservationID);
             printBillingForm.ShowDialog();
         }
 
-        
+
+
+        private void HandleExtension(int reservationID, int rowIndex)
+        {
+            // Get reservation status from the selected row
+            string reservationStatus = dgv_Billing_Records.Rows[rowIndex].Cells["col_Payment_Status"].Value.ToString();
+
+            // Check if the reservation status is not "Confirmed"
+            if (reservationStatus == "Cancelled" || reservationStatus == "Pending")
+            {
+                MessageBox.Show("Only Confirmed reservations can be extended.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; // Stop further processing if the status is "Cancelled" or "Pending"
+            }
+
+            // Get reservation type from the selected row
+            string reservationType = dgv_Billing_Records.Rows[rowIndex].Cells["col_Reservation_Type"].Value.ToString();
+
+            if (reservationType == "Venue")
+            {
+                // Open frm_Extend_Venue if reservation type is "Venue"
+                OpenExtendVenueForm(reservationID);
+            }
+            else if (reservationType == "Equipment")
+            {
+                // Open frm_Extend_Equipment if reservation type is "Equipment"
+                frm_Extend_Equipment extendEquipmentForm = new frm_Extend_Equipment(reservationID);
+                extendEquipmentForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Reservation type is not valid for extension.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
         private async Task HandleApprovalAsync(int reservationID, string currentStatus)
         {
+            // Check if the reservation status is "Pending"
             if (currentStatus != "Pending")
             {
                 MessageBox.Show("Only 'Pending' reservations can be approved.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            // Confirm approval
             if (MessageBox.Show("Are you sure you want to approve this reservation?",
                                 "Confirm Approval", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                // Perform the approval operation asynchronously
                 bool success = await UpdateReservationStatusAsync(reservationID, "Confirmed");
+
+                // Show status message for the approval outcome
                 ShowStatusMessage(success, "Confirmed");
+
+                if (success)
+                {
+                    // If successful, refresh the billing records and highlight the approved reservation row
+                    MessageBox.Show("Reservation approved successfully. Refreshing billing records...");
+
+                    // Refresh the grid and select the updated row
+                    RefreshBillingRecords(reservationID);
+
+                    // Optionally, display updated billing details in the panel
+                    Billing_Model updatedDetails = all_billing_model.FirstOrDefault(r => r.pk_ReservationID == reservationID);
+                    if (updatedDetails != null)
+                    {
+                        DisplayBillingDetailsInPanel(updatedDetails);
+                    }
+                }
             }
         }
+
 
         private async Task HandleCancellationAsync(int reservationID, string currentStatus)
         {
@@ -302,6 +371,7 @@ namespace pgso
             lbl_OT_Hours.Text = billingDetails.fld_OT_Hours.ToString();
             lbl_OT_Hourly_Charge.Text = billingDetails.fld_Hourly_Rate.ToString("C");
             lbl_OT_Hours_Amount.Text = (billingDetails.fld_OT_Hours * billingDetails.fld_Hourly_Rate).ToString("C");
+            Console.WriteLine($"OT Hours: {billingDetails.fld_OT_Hours}");
 
             // Cancellation charge (if applicable)
             //    lbl_Cancel_Charge_Amount.Text = billingDetails.fld_Cancellation_Charge.ToString("C");
@@ -318,12 +388,13 @@ namespace pgso
             reportBillingForm.ShowDialog(); // Opens the form as a modal dialog
 
         }
-
-        private void RefreshBillingRecords()
+        
+        private void RefreshBillingRecords(int? highlightReservationID = null)
         {
             try
             {
-                // Re-fetch all billing records
+                MessageBox.Show("Refreshing billing records...");
+
                 all_billing_model = repo_billing.GetAllBillingRecords() ?? new List<Billing_Model>();
 
                 if (all_billing_model.Count == 0)
@@ -333,17 +404,62 @@ namespace pgso
                     return;
                 }
 
-                // Group and format billing data, with UI updates handled inside GroupAndFormatBillingData
+                // Group the data
                 groupedBillingData = GroupAndFormatBillingData(all_billing_model);
-
-                // Refresh the DataGridView display
+                dgv_Billing_Records.DataSource = groupedBillingData;
                 dgv_Billing_Records.Refresh();
+
+                MessageBox.Show($"Refreshed data. Total records: {groupedBillingData.Count}");
+
+                // Reselect the row if a reservation ID is passed
+                if (highlightReservationID.HasValue)
+                {
+                    bool rowFound = false;
+                    foreach (DataGridViewRow row in dgv_Billing_Records.Rows)
+                    {
+                        if (Convert.ToInt32(row.Cells["pk_ReservationID"].Value) == highlightReservationID.Value)
+                        {
+                            row.Selected = true; // Select the entire row
+
+                            // Set the CurrentCell to any visible cell (avoiding invisible cells)
+                            dgv_Billing_Records.CurrentCell = row.Cells.Cast<DataGridViewCell>()
+                                .FirstOrDefault(c => c.Visible); // Ensure we use a visible cell
+
+                            rowFound = true;
+                            break;
+                        }
+                    }
+
+                    if (rowFound)
+                    {
+                        // Scroll to the selected row
+                        var selectedRow = dgv_Billing_Records.Rows
+                            .Cast<DataGridViewRow>()
+                            .FirstOrDefault(r => r.Selected);
+
+                        if (selectedRow != null)
+                        {
+                            dgv_Billing_Records.FirstDisplayedScrollingRowIndex = selectedRow.Index;
+                            MessageBox.Show("Row selected and scrolled into view.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("The selected row could not be found.");
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to refresh billing records: " + ex.Message);
             }
         }
+
+
+
+
+
+
 
 
         private List<Billing_Model> GroupAndFormatBillingData(List<Billing_Model> billingData)
@@ -429,6 +545,62 @@ namespace pgso
             if (dgv_Billing_Records.Columns["col_Extend"] is DataGridViewImageColumn imgCol_Extend)
             {
                 imgCol_Extend.Image = ResizeImage(Properties.Resources.Extend_Icon, 24, 24);
+            }
+        }
+
+
+        private void OpenExtendVenueForm(int reservationID)
+        {
+            MessageBox.Show("Opening Extend Venue Form...");
+
+            frm_Extend_Venue extendForm = new frm_Extend_Venue(reservationID);
+
+            // Subscribe to the event BEFORE showing the form
+            extendForm.OnExtensionSuccessful += () =>
+            {
+                MessageBox.Show("Event triggered: Reservation extended. Refreshing billing records...");
+
+                // Re-fetch and refresh the data with the row selected
+                RefreshBillingRecords(reservationID); // This will refresh the grid and reselect the row
+
+                // Ensure we get the updated details of the reservation after it is extended
+                Billing_Model updatedDetails = all_billing_model.FirstOrDefault(r => r.pk_ReservationID == reservationID);
+                if (updatedDetails != null)
+                {
+                    MessageBox.Show("Updated billing details found, updating the panel...");
+                    DisplayBillingDetailsInPanel(updatedDetails); // ✅ Update panel with new data
+                }
+                else
+                {
+                    MessageBox.Show("Updated billing details not found for the reservation.");
+                }
+            };
+
+            extendForm.ShowDialog();
+
+            // After the dialog closes, you can refresh the data again in case the event wasn't triggered
+            RefreshBillingRecords(reservationID);
+        }
+
+
+
+
+
+
+
+
+
+        private void btn_Extend_Venue_Click(object sender, EventArgs e)
+        {
+            if (dgv_Billing_Records.CurrentRow != null)
+            {
+                int reservationID = Convert.ToInt32(dgv_Billing_Records.CurrentRow.Cells["pk_ReservationID"].Value);
+                MessageBox.Show($"Opening Extend Venue Form for Reservation ID: {reservationID}");
+                OpenExtendVenueForm(reservationID);
+            }
+            else
+            {
+                MessageBox.Show("Please select a reservation first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

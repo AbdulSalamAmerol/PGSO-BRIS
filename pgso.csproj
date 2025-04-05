@@ -447,6 +447,9 @@
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Extend_Equipment.resx">
       <DependentUpon>frm_Extend_Equipment.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Extend_Venue.resx">
+      <DependentUpon>frm_Extend_Venue.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Report_Billing_Equipment.resx">
       <DependentUpon>frm_Report_Billing_Equipment.cs</DependentUpon>
     </EmbeddedResource>

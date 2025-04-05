@@ -33,6 +33,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.lbl_Extend_Equipment = new System.Windows.Forms.TextBox();
+            this.btn_Extend_Equipment = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -43,17 +44,18 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(353, 45);
+            this.panel1.Size = new System.Drawing.Size(372, 45);
             this.panel1.TabIndex = 0;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btn_Extend_Equipment);
             this.panel2.Controls.Add(this.lbl_Extend_Equipment);
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 45);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(353, 85);
+            this.panel2.Size = new System.Drawing.Size(372, 106);
             this.panel2.TabIndex = 1;
             // 
             // textBox3
@@ -98,13 +100,21 @@
             this.lbl_Extend_Equipment.ReadOnly = true;
             this.lbl_Extend_Equipment.Size = new System.Drawing.Size(180, 30);
             this.lbl_Extend_Equipment.TabIndex = 4;
-            this.lbl_Extend_Equipment.Text = "Extension ( Day/s )";
+            // 
+            // btn_Extend_Equipment
+            // 
+            this.btn_Extend_Equipment.Location = new System.Drawing.Point(274, 59);
+            this.btn_Extend_Equipment.Name = "btn_Extend_Equipment";
+            this.btn_Extend_Equipment.Size = new System.Drawing.Size(70, 35);
+            this.btn_Extend_Equipment.TabIndex = 5;
+            this.btn_Extend_Equipment.Text = "Enter";
+            this.btn_Extend_Equipment.UseVisualStyleBackColor = true;
             // 
             // frm_Extend_Equipment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(353, 130);
+            this.ClientSize = new System.Drawing.Size(372, 151);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "frm_Extend_Equipment";
@@ -124,5 +134,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox lbl_Extend_Equipment;
+        private System.Windows.Forms.Button btn_Extend_Equipment;
     }
 }

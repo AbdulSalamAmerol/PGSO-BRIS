@@ -1,11 +1,16 @@
 ﻿SELECT 
     -- Requesting Person Details
     rp.pk_Requesting_PersonID,
+    r.fld_OT_Hours,
+    r.fld_Total_Amount,
+    vp.fld_Hourly_Rate,
+    vp.fld_First4Hrs_Rate,
     rp.fld_Surname,
     rp.fld_First_Name,
     rp.fld_Middle_Name,
     rp.fld_Requesting_Person_Address,
     rp.fld_Contact_Number,
+
     
     -- Reservation Details
     r.pk_ReservationID,
@@ -18,7 +23,8 @@
     r.fld_Activity_Name,
     r.fld_Number_Of_Participants,
     r.fld_Reservation_Status,
-    r.fld_Total_Amount,
+    
+    
     
     -- Venue Details (if applicable)
     v.pk_VenueID,
@@ -28,8 +34,8 @@
     
     -- Venue Pricing (if applicable)
     vp.pk_Venue_PricingID,
-    vp.fld_First4Hrs_Rate,
-    vp.fld_Hourly_Rate,
+    
+    
 
     -- Reserved Equipment Details (if applicable)
     re.fk_EquipmentID,

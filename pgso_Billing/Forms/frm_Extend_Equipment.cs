@@ -12,9 +12,13 @@ namespace pgso.pgso_Billing.Forms
 {
     public partial class frm_Extend_Equipment : Form
     {
-        public frm_Extend_Equipment()
+        private int reservationID;
+
+        public frm_Extend_Equipment(int reservationID)
         {
             InitializeComponent();
+            this.reservationID = reservationID;
+
         }
     }
 }
