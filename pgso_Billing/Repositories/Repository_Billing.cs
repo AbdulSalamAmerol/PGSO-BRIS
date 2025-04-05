@@ -679,8 +679,8 @@ namespace pgso.Billing.Repositories
                         if (totalAmount > 0)
                         {
                             string paymentQuery = @"
-                        INSERT INTO tbl_Payment (fk_ReservationID, fld_Payment_Status, fld_Amount_Due, fld_Amount_Paid, fld_Payment_Date, fld_Created_At)
-                        VALUES (@ReservationID, 'Confirmed', @AmountDue, @AmountPaid, @PaymentDate, @CreatedAt)";
+                        INSERT INTO tbl_Payment (fk_ReservationID, fld_Payment_Status, fld_Amount_Due, fld_Amount_Paid, fld_Payment_Date, fld_Created_At, fld_Final_Amount_Paid)
+                        VALUES (@ReservationID, 'Confirmed', @AmountDue, @AmountPaid, @PaymentDate, @CreatedAt, @FinalAmountPaid)";
 
                             using (SqlCommand paymentCmd = new SqlCommand(paymentQuery, conn))
                             {
@@ -689,7 +689,7 @@ namespace pgso.Billing.Repositories
                                 paymentCmd.Parameters.Add("@AmountPaid", SqlDbType.Decimal).Value = totalAmount; // Paid amount is the same as the total amount
                                 paymentCmd.Parameters.Add("@PaymentDate", SqlDbType.Date).Value = DateTime.Today; // Payment Date is today's date
                                 paymentCmd.Parameters.Add("@CreatedAt", SqlDbType.DateTime).Value = DateTime.Now; // Created At is the current date and time
-
+                                paymentCmd.Parameters.Add("@FinalAmountPaid", SqlDbType.Decimal).Value = totalAmount; // Final Amount Paid is the same as the total amount  
                                 paymentCmd.ExecuteNonQuery();
                             }
                         }
@@ -707,10 +707,16 @@ namespace pgso.Billing.Repositories
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
+
                 string query = @"
-            UPDATE tbl_Reservation
-            SET fld_Total_Amount = fld_Total_Amount * 0.05
-            WHERE pk_ReservationID = @ReservationID";
+        UPDATE p
+        SET 
+            p.fld_Refund_Amount = r.fld_Total_Amount * 0.95,
+            p.fld_Cancellation_Fee = r.fld_Total_Amount * 0.05,
+            p.fld_Final_Amount_Paid = r.fld_Total_Amount * 0.05
+        FROM tbl_Payment p
+        JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
+        WHERE p.fk_ReservationID = @ReservationID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -720,12 +726,14 @@ namespace pgso.Billing.Repositories
             }
         }
 
+
         //////
 
         public async Task<bool> UpdateReservationExtension(int reservationID, int otHours)
         {
             try
             {
+
                 // Step 1: Get current total amount and hourly rate in parallel to improve efficiency
                 var hourlyRateTask = GetHourlyRate(reservationID);
                 var currentTotalAmountTask = GetCurrentTotalAmount(reservationID);
@@ -738,17 +746,33 @@ namespace pgso.Billing.Repositories
                 decimal hourlyRate = hourlyRateTask.Result;
                 decimal currentTotalAmount = currentTotalAmountTask.Result;
                 decimal currentOTHours = currentOTHoursTask.Result;  // Existing overtime hours
-                decimal newTotalAmount = currentTotalAmount + (hourlyRate * otHours);
+                decimal newFinalAmountPaid = currentTotalAmount + (hourlyRate * otHours);
                 decimal newOTHours = currentOTHours + otHours;  // Accumulate overtime hours
+                decimal newOvertimeFee = otHours * hourlyRate;
 
                 // Step 3: Update the database with the new overtime hours and total amount
-                var query = "UPDATE tbl_Reservation SET fld_OT_Hours = @newOTHours, fld_Total_Amount = @newTotalAmount WHERE pk_ReservationID = @reservationID";
+                var query = @"
+                    
+                    UPDATE p
+                    SET 
+                        p.fld_Final_Amount_Paid = @newFinalAmountPaid,
+                        p.fld_Overtime_Fee = @newOvertimeFee
+                    FROM tbl_Payment p
+                    JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
+                    WHERE r.pk_ReservationID = @reservationID;
 
+                   
+                    UPDATE r
+                    SET 
+                        r.fld_OT_Hours = @newOTHours
+                    FROM tbl_Reservation r
+                    WHERE r.pk_ReservationID = @reservationID;";
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@newOTHours", newOTHours);  // Updated OT hours
-                    cmd.Parameters.AddWithValue("@newTotalAmount", newTotalAmount);  // Updated total amount
+                    cmd.Parameters.AddWithValue("@newFinalAmountPaid", newFinalAmountPaid);  // Updated Final Amount Paid
+                    cmd.Parameters.AddWithValue("@newOvertimeFee", newOvertimeFee);
                     cmd.Parameters.AddWithValue("@reservationID", reservationID);
 
                     conn.Open();
