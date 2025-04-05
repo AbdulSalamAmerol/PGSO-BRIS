@@ -66,6 +66,12 @@ namespace pgso.Billing.Models
         public string fld_Payment_Status { get; set; }
         public DateTime? fld_Payment_Date { get; set; }
 
+        // NEED TO ADD THESE IN REPORT VIEWER! Dataset and all
+        public decimal fld_Refund_Amount { get; set; }
+        public decimal fld_Cancellation_Fee { get; set; }
+        public decimal fld_Final_Amount_Paid { get; set; }
+        public  decimal fld_Overtime_Fee { get; set; }
+
         // 🔸 Computed Properties
         public double Total_Hours => Math.Max(0, (fld_End_Time - fld_Start_Time).TotalHours);
 

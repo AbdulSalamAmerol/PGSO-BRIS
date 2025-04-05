@@ -125,6 +125,7 @@
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.lbl_OT_Hours = new System.Windows.Forms.TextBox();
             this.pk_ReservationID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Full_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -135,10 +136,9 @@
             this.col_Amount_Due = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Payment_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Approved = new System.Windows.Forms.DataGridViewImageColumn();
-            this.col_Cancel = new System.Windows.Forms.DataGridViewImageColumn();
             this.col_Extend = new System.Windows.Forms.DataGridViewImageColumn();
+            this.col_Cancel = new System.Windows.Forms.DataGridViewImageColumn();
             this.col_Print = new System.Windows.Forms.DataGridViewImageColumn();
-            this.lbl_OT_Hours = new System.Windows.Forms.TextBox();
             this.tlp_Billing_UControls.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -297,8 +297,8 @@
             this.col_Amount_Due,
             this.col_Payment_Status,
             this.col_Approved,
-            this.col_Cancel,
             this.col_Extend,
+            this.col_Cancel,
             this.col_Print});
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
@@ -1472,6 +1472,22 @@
             this.dataGridViewImageColumn4.Name = "dataGridViewImageColumn4";
             this.dataGridViewImageColumn4.ReadOnly = true;
             // 
+            // lbl_OT_Hours
+            // 
+            this.lbl_OT_Hours.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_OT_Hours.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_OT_Hours.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_OT_Hours.Font = new System.Drawing.Font("Arial", 10F);
+            this.lbl_OT_Hours.Location = new System.Drawing.Point(348, 137);
+            this.lbl_OT_Hours.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_OT_Hours.MinimumSize = new System.Drawing.Size(0, 25);
+            this.lbl_OT_Hours.Name = "lbl_OT_Hours";
+            this.lbl_OT_Hours.ReadOnly = true;
+            this.lbl_OT_Hours.Size = new System.Drawing.Size(71, 25);
+            this.lbl_OT_Hours.TabIndex = 59;
+            this.lbl_OT_Hours.Text = "Description";
+            this.lbl_OT_Hours.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // pk_ReservationID
             // 
             this.pk_ReservationID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -1597,6 +1613,15 @@
             this.col_Approved.ReadOnly = true;
             this.col_Approved.Width = 72;
             // 
+            // col_Extend
+            // 
+            this.col_Extend.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.col_Extend.HeaderText = "EXTEND";
+            this.col_Extend.Image = global::pgso.Properties.Resources.Extend_Icon;
+            this.col_Extend.Name = "col_Extend";
+            this.col_Extend.ReadOnly = true;
+            this.col_Extend.Width = 57;
+            // 
             // col_Cancel
             // 
             this.col_Cancel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -1606,15 +1631,6 @@
             this.col_Cancel.Name = "col_Cancel";
             this.col_Cancel.ReadOnly = true;
             this.col_Cancel.Width = 55;
-            // 
-            // col_Extend
-            // 
-            this.col_Extend.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.col_Extend.HeaderText = "EXTEND";
-            this.col_Extend.Image = global::pgso.Properties.Resources.Extend_Icon;
-            this.col_Extend.Name = "col_Extend";
-            this.col_Extend.ReadOnly = true;
-            this.col_Extend.Width = 57;
             // 
             // col_Print
             // 
@@ -1627,22 +1643,6 @@
             this.col_Print.Name = "col_Print";
             this.col_Print.ReadOnly = true;
             this.col_Print.Width = 46;
-            // 
-            // lbl_OT_Hours
-            // 
-            this.lbl_OT_Hours.BackColor = System.Drawing.SystemColors.Control;
-            this.lbl_OT_Hours.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_OT_Hours.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_OT_Hours.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_OT_Hours.Location = new System.Drawing.Point(348, 137);
-            this.lbl_OT_Hours.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_OT_Hours.MinimumSize = new System.Drawing.Size(0, 25);
-            this.lbl_OT_Hours.Name = "lbl_OT_Hours";
-            this.lbl_OT_Hours.ReadOnly = true;
-            this.lbl_OT_Hours.Size = new System.Drawing.Size(71, 25);
-            this.lbl_OT_Hours.TabIndex = 59;
-            this.lbl_OT_Hours.Text = "Description";
-            this.lbl_OT_Hours.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // frm_Billing
             // 
@@ -1761,6 +1761,7 @@
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn3;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn4;
+        private System.Windows.Forms.TextBox lbl_OT_Hours;
         private System.Windows.Forms.DataGridViewTextBoxColumn pk_ReservationID;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Control_Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Full_Name;
@@ -1771,9 +1772,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Amount_Due;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Payment_Status;
         private System.Windows.Forms.DataGridViewImageColumn col_Approved;
-        private System.Windows.Forms.DataGridViewImageColumn col_Cancel;
         private System.Windows.Forms.DataGridViewImageColumn col_Extend;
+        private System.Windows.Forms.DataGridViewImageColumn col_Cancel;
         private System.Windows.Forms.DataGridViewImageColumn col_Print;
-        private System.Windows.Forms.TextBox lbl_OT_Hours;
     }
 }

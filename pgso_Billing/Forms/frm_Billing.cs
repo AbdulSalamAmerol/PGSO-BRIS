@@ -252,13 +252,24 @@ namespace pgso
                 return;
             }
 
+            // 🔍 Get billing record for OT Hours check (synchronously, already implemented in repo)
+            var billingRecords = repo_billing.GetBillingRecordsByReservationId(reservationID);
+            if (billingRecords != null && billingRecords.Count > 0)
+            {
+                var otHours = billingRecords[0].fld_OT_Hours;
+                if (otHours > 0)
+                {
+                    MessageBox.Show("This reservation has overtime hours. Cancellation is not allowed.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
             if (MessageBox.Show("Are you sure you want to cancel this reservation?",
                                 "Confirm Cancellation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 bool success = await UpdateReservationStatusAsync(reservationID, "Cancelled");
                 if (success)
                 {
-                    // Apply 95% deduction logic here
                     bool deductionSuccess = await Task.Run(() => repo_billing.ApplyCancellationDeduction(reservationID));
                     if (deductionSuccess)
                         MessageBox.Show("Reservation cancelled and deduction applied.");
@@ -269,6 +280,7 @@ namespace pgso
                 ShowStatusMessage(success, "cancelled");
             }
         }
+
 
 
 
