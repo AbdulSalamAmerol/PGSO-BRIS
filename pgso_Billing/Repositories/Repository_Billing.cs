@@ -1,6 +1,7 @@
 ﻿using pgso.Billing.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -601,6 +602,52 @@ namespace pgso.Billing.Repositories
 
             return billingDetails;
         }
+
+        public bool UpdateReservationStatus(int reservationID, string newStatus)
+        {
+            // Ensure newStatus is valid as per the constraint
+            if (newStatus != "Cancelled" && newStatus != "Confirmed" && newStatus != "Pending")
+            {
+                MessageBox.Show("Invalid status value. Only 'Cancelled', 'Confirmed', or 'Pending' are allowed.");
+                return false;
+            }
+
+            // SQL query to update reservation status
+            string query = "UPDATE tbl_Reservation SET fld_Reservation_Status = @Status WHERE pk_ReservationID = @ReservationID";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                // Define the parameter types explicitly
+                cmd.Parameters.Add("@Status", SqlDbType.NVarChar, 50).Value = newStatus;
+                cmd.Parameters.Add("@ReservationID", SqlDbType.Int).Value = reservationID;
+
+                // Open connection and execute query
+                conn.Open();
+                return cmd.ExecuteNonQuery() > 0; // Returns true if at least one row is affected
+            }
+        }
+
+        // When status = Cancelled apply deduction of 5% to the total amount
+        public bool ApplyCancellationDeduction(int reservationID)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = @"
+            UPDATE tbl_Reservation
+            SET fld_Total_Amount = fld_Total_Amount * 0.05
+            WHERE pk_ReservationID = @ReservationID";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ReservationID", reservationID);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+
 
     }
 

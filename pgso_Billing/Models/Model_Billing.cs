@@ -79,13 +79,14 @@ namespace pgso.Billing.Models
         public string Formatted_End_Time => DateTime.Today.Add(fld_End_Time).ToString("hh:mm tt");
         public string Formatted_No_Hours => Total_Hours.ToString("0.##") + " hrs";
 
+        /*
         public string Formatted_Payment_Status => fld_Payment_Status switch
         {
             "Confirmed" => "✅ Confirmed",
             "Pending" => "❌ Pending",
             "Cancelled" => "🟡 Cancelled",
             _ => fld_Payment_Status
-        };
+        }; */
 
         public string DisplayReservationName
         {

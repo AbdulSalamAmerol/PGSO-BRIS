@@ -164,6 +164,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BillingDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Extend_Equipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Extend_Equipment.Designer.cs">
+      <DependentUpon>frm_Extend_Equipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Extend_Venue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Extend_Venue.Designer.cs">
+      <DependentUpon>frm_Extend_Venue.cs</DependentUpon>
+    </Compile>
     <Compile Include="pgso_Billing\Forms\frm_Report_Billing_Equipment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -432,6 +444,9 @@
     <EmbeddedResource Include="frm_sportcomplex.resx">
       <DependentUpon>frm_sportcomplex.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Extend_Equipment.resx">
+      <DependentUpon>frm_Extend_Equipment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Report_Billing_Equipment.resx">
       <DependentUpon>frm_Report_Billing_Equipment.cs</DependentUpon>
     </EmbeddedResource>
@@ -523,6 +538,7 @@
     <None Include="pgso_Billing\Image Asset\print.png" />
     <None Include="pgso_Billing\Image Asset\Cancelled_Icon.png" />
     <None Include="pgso_Billing\Image Asset\Approved_Icon.png" />
+    <None Include="pgso_Billing\Image Asset\Extend_Icon.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

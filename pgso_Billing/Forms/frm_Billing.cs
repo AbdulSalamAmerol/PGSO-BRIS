@@ -17,12 +17,8 @@ namespace pgso
         private Dictionary<int, Billing_Model> billingDetailsCache = new Dictionary<int, Billing_Model>(); //for cache
         private List<Billing_Model> groupedBillingData; // Store grouped data globally
         private Repo_Billing repo_billing = new Repo_Billing();
-
-        // Global list to hold all billing records
-        private List<Billing_Model> all_billing_model = new List<Billing_Model>();
-
-        // Binding source for DataGridView
-        private BindingSource dgv_billing_binding_source = new BindingSource();
+        private List<Billing_Model> all_billing_model = new List<Billing_Model>(); // Global list to hold all billing records
+        private BindingSource dgv_billing_binding_source = new BindingSource();// Binding source for DataGridView
 
         public frm_Billing()
         {
@@ -56,67 +52,15 @@ namespace pgso
                     return;
                 }
 
-                // ✅ Group reservations by control number and merge equipment names
-                groupedBillingData = all_billing_model
-                    .GroupBy(item => new
-                    {
-                        item.fld_Control_Number,
-                        item.fld_Reservation_Type,
-                        item.fld_Start_Date,
-                        item.fld_Total_Amount,
-                        item.fld_Payment_Status
-                    })
-                    .Select(group =>
-                    {
-                        var billingRecord = group.First(); // Keep only the first record per control number
+                // Group and format the billing data using the GroupAndFormatBillingData method
+                groupedBillingData = GroupAndFormatBillingData(all_billing_model);
 
-                        // Merge equipment names
-                        billingRecord.EquipmentNames = group
-                            .Select(x => x.fld_Equipment_Name)
-                            .Where(name => !string.IsNullOrEmpty(name))
-                            .Distinct()
-                            .ToList();
-
-                        return billingRecord;
-                    })
-                    .ToList();
-
-                // ✅ Ensure "Reservation Name" column exists
-                if (!dgv_Billing_Records.Columns.Contains("col_Reservation_Name"))
-                {
-                    dgv_Billing_Records.Columns.Add(new DataGridViewTextBoxColumn
-                    {
-                        Name = "col_Reservation_Name",
-                        HeaderText = "Reservation",
-                        DataPropertyName = "DisplayReservationName",
-                        AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader
-                    });
-                }
-
-                // ✅ Ensure the print button column icon is set
-                if (dgv_Billing_Records.Columns["col_Print"] is DataGridViewImageColumn imgCol)
-                {
-                    imgCol.Image = ResizeImage(ByteArrayToImage(Properties.Resources.Printer_Icon), 24, 24);
-                }
-
-                if (dgv_Billing_Records.Columns["col_Cancel"] is DataGridViewImageColumn imgCol_Cancel)
-                {
-                    imgCol_Cancel.Image = ResizeImage(Properties.Resources.Cancelled_Icon, 24, 24);
-                }
-                if (dgv_Billing_Records.Columns["col_Approved"] is DataGridViewImageColumn imgCol_Approved)
-                {
-                    imgCol_Approved.Image = ResizeImage(Properties.Resources.Approved_Icon, 24, 24);
-                }
-
-                // ✅ Disable auto-generation of columns
-                dgv_Billing_Records.AutoGenerateColumns = false;
-
-                // ✅ Bind the corrected data source
+                // Bind the grouped data to the DataGridView
                 dgv_billing_binding_source.DataSource = groupedBillingData;
                 dgv_Billing_Records.DataSource = dgv_billing_binding_source;
-
-                // ✅ Adjust column display order
-                dgv_Billing_Records.Columns["col_Reservation_Name"].DisplayIndex = 2;
+                SetIconColumns(); // Set icons for the columns
+                // Adjust column display order (if needed)
+                
             }
             catch (Exception ex)
             {
@@ -124,7 +68,7 @@ namespace pgso
             }
         }
 
-        // 🔍 Fixed Search Method
+
         private void sb_Billing_Search_Bar_TextChanged(object sender, EventArgs e)
         {
             string searchTerm = sb_Billing_Search_Bar.Text.Trim().ToLower();
@@ -147,9 +91,8 @@ namespace pgso
 
                 dgv_billing_binding_source.DataSource = filteredData;
             }
-        }
+        }// 🔍 Fixed Search Method
 
-        
         private Billing_Model GetBillingDetailsByReservationID(int reservationID)
         {
             if (billingDetailsCache.ContainsKey(reservationID))
@@ -174,15 +117,133 @@ namespace pgso
         {
             if (e.RowIndex < 0) return; // Ignore header clicks
 
+            // Get selected column name
+            string columnName = dgv_Billing_Records.Columns[e.ColumnIndex].Name;
+
+            // Get Reservation ID from selected row
             int reservationID = Convert.ToInt32(dgv_Billing_Records.Rows[e.RowIndex].Cells["pk_ReservationID"].Value);
 
-            if (reservationID > 0)
+            // Get Current Status
+            string currentStatus = dgv_Billing_Records.Rows[e.RowIndex].Cells["col_Payment_Status"].Value.ToString();
+
+            // Validate Reservation ID
+            if (reservationID <= 0)
             {
+                MessageBox.Show("Invalid Reservation ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            await DisplayBillingDetails(reservationID);
+            // ✅ Handle Different Column Clicks
+            switch (columnName)
+            {
+                case "col_Print":
+                    PrintBilling(reservationID);
+                    break;
+
+                case "col_Approved":
+                    await HandleApprovalAsync(reservationID, currentStatus);
+                    break;
+
+                case "col_Cancel":
+                    await HandleCancellationAsync(reservationID, currentStatus);
+                    break;
+                
+              
+            }
+        }
+
+        private void PrintBilling(int reservationID) // Print Collection Slip
+        {
+            frm_Print_Billing printBillingForm = new frm_Print_Billing(reservationID);
+            printBillingForm.ShowDialog();
+        }
+
+        
+        private async Task HandleApprovalAsync(int reservationID, string currentStatus)
+        {
+            if (currentStatus != "Pending")
+            {
+                MessageBox.Show("Only 'Pending' reservations can be approved.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (MessageBox.Show("Are you sure you want to approve this reservation?",
+                                "Confirm Approval", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                bool success = await UpdateReservationStatusAsync(reservationID, "Confirmed");
+                ShowStatusMessage(success, "Confirmed");
+            }
+        }
+
+        private async Task HandleCancellationAsync(int reservationID, string currentStatus)
+        {
+            if (currentStatus != "Pending" && currentStatus != "Confirmed")
+            {
+                MessageBox.Show("Only 'Pending' or 'Confirmed' reservations can be cancelled.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (MessageBox.Show("Are you sure you want to cancel this reservation?",
+                                "Confirm Cancellation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                bool success = await UpdateReservationStatusAsync(reservationID, "Cancelled");
+                if (success)
+                {
+                    // Apply 95% deduction logic here
+                    bool deductionSuccess = await Task.Run(() => repo_billing.ApplyCancellationDeduction(reservationID));
+                    if (deductionSuccess)
+                        MessageBox.Show("Reservation cancelled and deduction applied.");
+                    else
+                        MessageBox.Show("Cancellation applied, but deduction failed.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                ShowStatusMessage(success, "cancelled");
+            }
+        }
+
+
+
+        private async Task<bool> UpdateReservationStatusAsync(int reservationID, string newStatus)
+        {
+            try
+            {
+                return await Task.Run(() => repo_billing.UpdateReservationStatus(reservationID, newStatus));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating reservation: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        private void ShowStatusMessage(bool success, string action)
+        {
+            if (success)
+            {
+                MessageBox.Show($"Reservation successfully {action}.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RefreshBillingRecords(); // Refresh UI after update
+            }
+            else
+            {
+                MessageBox.Show($"Failed to {action} the reservation.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        
+
+
+
+
+        private async Task DisplayBillingDetails(int reservationID)
+        {
+            try
+            {
+                // Fetch billing details asynchronously
                 var billingDetails = await Task.Run(() => repo_billing.GetBillingDetailsByReservationID(reservationID));
 
                 if (billingDetails != null)
                 {
-                    // Update UI on the main thread
+                    // Update the UI on the main thread
                     Invoke(new Action(() => DisplayBillingDetailsInPanel(billingDetails)));
                 }
                 else
@@ -190,16 +251,9 @@ namespace pgso
                     MessageBox.Show("No billing details found for this reservation.");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Invalid Reservation ID.");
-            }
-
-            // Handle other column clicks like Print
-            if (dgv_Billing_Records.Columns[e.ColumnIndex].Name == "col_Print")
-            {
-                frm_Print_Billing printBillingForm = new frm_Print_Billing(reservationID);
-                printBillingForm.ShowDialog();
+                MessageBox.Show($"Error fetching billing details: {ex.Message}");
             }
         }
         //Details Panel
@@ -264,6 +318,120 @@ namespace pgso
             reportBillingForm.ShowDialog(); // Opens the form as a modal dialog
 
         }
+
+        private void RefreshBillingRecords()
+        {
+            try
+            {
+                // Re-fetch all billing records
+                all_billing_model = repo_billing.GetAllBillingRecords() ?? new List<Billing_Model>();
+
+                if (all_billing_model.Count == 0)
+                {
+                    dgv_Billing_Records.DataSource = null;
+                    MessageBox.Show("No billing records found.");
+                    return;
+                }
+
+                // Group and format billing data, with UI updates handled inside GroupAndFormatBillingData
+                groupedBillingData = GroupAndFormatBillingData(all_billing_model);
+
+                // Refresh the DataGridView display
+                dgv_Billing_Records.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to refresh billing records: " + ex.Message);
+            }
+        }
+
+
+        private List<Billing_Model> GroupAndFormatBillingData(List<Billing_Model> billingData)
+        {
+            try
+            {
+                var groupedData = billingData
+                    .GroupBy(item => new
+                    {
+                        item.fld_Control_Number,
+                        item.fld_Reservation_Type,
+                        item.fld_Start_Date,
+                        item.fld_Total_Amount,
+                        item.fld_Payment_Status
+                    })
+                    .Select(group =>
+                    {
+                        var billingRecord = group.First(); // Keep the first record per group
+
+                        // Combine equipment names into a list
+                        billingRecord.EquipmentNames = group
+                            .Select(x => x.fld_Equipment_Name)
+                            .Where(name => !string.IsNullOrEmpty(name))
+                            .Distinct()
+                            .ToList();
+
+                        return billingRecord;
+                    })
+                    .ToList();
+
+                // Disable auto-generated columns
+                dgv_Billing_Records.AutoGenerateColumns = false;
+
+                // Re-assign the data source
+                dgv_billing_binding_source.DataSource = groupedData;
+                dgv_Billing_Records.DataSource = dgv_billing_binding_source;
+
+                // Refresh icon columns if needed
+                SetIconColumns();
+
+                // Adjust column order if needed
+                if (!dgv_Billing_Records.Columns.Contains("col_Reservation_Name"))
+                {
+                    dgv_Billing_Records.Columns.Add(new DataGridViewTextBoxColumn
+                    {
+                        Name = "col_Reservation_Name",
+                        HeaderText = "Reservation",
+                        DataPropertyName = "DisplayReservationName",
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader
+                    });
+                }
+                if (dgv_Billing_Records.Columns.Contains("col_Reservation_Name"))
+                {
+                    dgv_Billing_Records.Columns["col_Reservation_Name"].DisplayIndex = 2;
+                }
+
+                return groupedData;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to group and format billing records: " + ex.Message);
+                return new List<Billing_Model>(); // Return empty list in case of error
+            }
+        }
+
+        private void SetIconColumns()
+        {
+            if (dgv_Billing_Records.Columns["col_Print"] is DataGridViewImageColumn imgCol)
+            {
+                imgCol.Image = ResizeImage(ByteArrayToImage(Properties.Resources.Printer_Icon), 24, 24);
+            }
+
+            if (dgv_Billing_Records.Columns["col_Cancel"] is DataGridViewImageColumn imgCol_Cancel)
+            {
+                imgCol_Cancel.Image = ResizeImage(Properties.Resources.Cancelled_Icon, 24, 24);
+            }
+
+            if (dgv_Billing_Records.Columns["col_Approved"] is DataGridViewImageColumn imgCol_Approved)
+            {
+                imgCol_Approved.Image = ResizeImage(Properties.Resources.Approved_Icon, 24, 24);
+            }
+
+            if (dgv_Billing_Records.Columns["col_Extend"] is DataGridViewImageColumn imgCol_Extend)
+            {
+                imgCol_Extend.Image = ResizeImage(Properties.Resources.Extend_Icon, 24, 24);
+            }
+        }
+
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
