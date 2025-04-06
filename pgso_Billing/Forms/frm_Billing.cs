@@ -375,14 +375,14 @@ namespace pgso
 
 
             // If you are showing equipment details (if available)
-            lbl_Venue_Name_Transact.Text = billingDetails.fld_Equipment_Name;
+            lbl_Venue_Name_Transact.Text = billingDetails.fld_Venue_Name;
             lbl_Venue_Scope_Transact.Text = billingDetails.fld_Venue_Scope_Name;
 
             // Calculated charges based on overtime
             
             lbl_OT_Hours.Text = billingDetails.fld_OT_Hours.ToString();
             lbl_OT_Hourly_Charge.Text = billingDetails.fld_Hourly_Rate.ToString("C");
-            lbl_OT_Hours_Amount.Text = (billingDetails.fld_OT_Hours * billingDetails.fld_Hourly_Rate).ToString("C");
+            lbl_Overtime_Fee.Text = (billingDetails.fld_OT_Hours * billingDetails.fld_Hourly_Rate).ToString("C");
             Console.WriteLine($"OT Hours: {billingDetails.fld_OT_Hours}");
 
             // Cancellation charge (if applicable)
@@ -390,8 +390,16 @@ namespace pgso
 
             // Payment details
             lbl_Paid_Amount.Text = billingDetails.fld_Amount_Paid.ToString("C");
+            lbl_Paid_Amount_2.Text = billingDetails.fld_Amount_Paid.ToString("C");
             lbl_Total_Amount.Text = billingDetails.fld_Total_Amount.ToString("C");
             lbl_Balance.Text = (billingDetails.fld_Total_Amount - billingDetails.fld_Amount_Paid).ToString("C");
+            lbl_Refund_Amount.Text = (billingDetails.fld_Refund_Amount != 0 && billingDetails.fld_Refund_Amount != null)
+                        ? " - " + billingDetails.fld_Refund_Amount.ToString("C")
+                        : billingDetails.fld_Refund_Amount.ToString("C");
+
+            lbl_Final_Amount_Paid.Text = billingDetails.fld_Final_Amount_Paid.ToString("C");
+          
+            lbl_Overtime_Fee.Text = billingDetails.fld_Overtime_Fee.ToString("C");
         }
 
         private void btn_Reports_Click(object sender, EventArgs e)

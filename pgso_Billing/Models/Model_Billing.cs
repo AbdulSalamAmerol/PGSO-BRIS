@@ -6,7 +6,7 @@ namespace pgso.Billing.Models
 {
     public class Billing_Model
     {
-        // 🔸 Computed Full Name (Not in Database)
+        // Full Name 
         public string fld_Full_Name => $"{fld_First_Name} {(string.IsNullOrEmpty(fld_Middle_Name) ? "" : fld_Middle_Name + " ")}{fld_Surname}".Trim();
 
         // Requesting Person Details
@@ -65,7 +65,6 @@ namespace pgso.Billing.Models
         public decimal fld_Amount_Paid { get; set; }
         public string fld_Payment_Status { get; set; }
         public DateTime? fld_Payment_Date { get; set; }
-
         // NEED TO ADD THESE IN REPORT VIEWER! Dataset and all
         public decimal fld_Refund_Amount { get; set; }
         public decimal fld_Cancellation_Fee { get; set; }
@@ -85,16 +84,10 @@ namespace pgso.Billing.Models
         public string Formatted_End_Time => DateTime.Today.Add(fld_End_Time).ToString("hh:mm tt");
         public string Formatted_No_Hours => Total_Hours.ToString("0.##") + " hrs";
 
-        /*
-        public string Formatted_Payment_Status => fld_Payment_Status switch
-        {
-            "Confirmed" => "✅ Confirmed",
-            "Pending" => "❌ Pending",
-            "Cancelled" => "🟡 Cancelled",
-            _ => fld_Payment_Status
-        }; */
+        // Add a new property to store merged equipment names ( show sa datagridview as 1 liner when many eq reservation)
+        public List<string> EquipmentNames { get; set; } = new List<string>();
 
-        public string DisplayReservationName
+        /*public string DisplayReservationName // I might not need this
         {
             get
             {
@@ -103,15 +96,6 @@ namespace pgso.Billing.Models
                     ? fld_Venue_Name
                     : string.Join(", ", EquipmentNames); // Merge equipment names if it's equipment type
             }
-        }
-
-
-        // Add a new property to store merged equipment names
-        public List<string> EquipmentNames { get; set; } = new List<string>();
-
-
-      
-
-
+        }*/
     }
 }

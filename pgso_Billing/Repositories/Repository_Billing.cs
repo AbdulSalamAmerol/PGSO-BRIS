@@ -837,7 +837,7 @@ namespace pgso.Billing.Repositories
                 return result != DBNull.Value ? Convert.ToDecimal(result) : 0m;
             }
         }
-
+  
         private async Task<string> GetReservationStatus(int reservationID)
         {
             var query = "SELECT fld_Reservation_Status FROM tbl_Reservation WHERE pk_ReservationID = @reservationID";
