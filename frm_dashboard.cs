@@ -459,6 +459,7 @@ namespace pgso
 
         }
 
+
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
@@ -466,6 +467,12 @@ namespace pgso
 
         private void viewReservationToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+
+        private void tsmi_Billing_Click(object sender, EventArgs e)
+        {
+            frm_Billing billingForm = new frm_Billing(); // Create an instance of frm_Billing
+            billingForm.Show(); // Show the form
 
         }
 

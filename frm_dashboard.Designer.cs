@@ -29,9 +29,15 @@ namespace pgso
             this.equipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewReservationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.venueToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.approvedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelledToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.equipmentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.manageFacilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel_Display = new System.Windows.Forms.Panel();
+
+            this.tsmi_Billing = new System.Windows.Forms.ToolStripMenuItem();
+
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,7 +49,8 @@ namespace pgso
             this.calendarToolStripMenuItem,
             this.createReservationToolStripMenuItem,
             this.viewReservationToolStripMenuItem,
-            this.manageFacilitiesToolStripMenuItem});
+            this.manageFacilitiesToolStripMenuItem,
+            this.tsmi_Billing});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1280, 41);
@@ -100,6 +107,27 @@ namespace pgso
             this.venueToolStripMenuItem1.Text = "Venues";
             this.venueToolStripMenuItem1.Click += new System.EventHandler(this.venueToolStripMenuItem1_Click);
             // 
+            // approvedToolStripMenuItem
+            // 
+            this.approvedToolStripMenuItem.Name = "approvedToolStripMenuItem";
+            this.approvedToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.approvedToolStripMenuItem.Text = "Approved";
+            this.approvedToolStripMenuItem.Click += new System.EventHandler(this.approvedToolStripMenuItem_Click);
+            // 
+            // pendingToolStripMenuItem
+            // 
+            this.pendingToolStripMenuItem.Name = "pendingToolStripMenuItem";
+            this.pendingToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.pendingToolStripMenuItem.Text = "Pending";
+            this.pendingToolStripMenuItem.Click += new System.EventHandler(this.pendingToolStripMenuItem_Click);
+            // 
+            // cancelledToolStripMenuItem
+            // 
+            this.cancelledToolStripMenuItem.Name = "cancelledToolStripMenuItem";
+            this.cancelledToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.cancelledToolStripMenuItem.Text = "Cancelled";
+            this.cancelledToolStripMenuItem.Click += new System.EventHandler(this.cancelledToolStripMenuItem_Click);
+            // 
             // equipmentToolStripMenuItem1
             // 
             this.equipmentToolStripMenuItem1.Name = "equipmentToolStripMenuItem1";
@@ -122,7 +150,18 @@ namespace pgso
             this.panel_Display.Name = "panel_Display";
             this.panel_Display.Size = new System.Drawing.Size(1280, 679);
             this.panel_Display.TabIndex = 1;
+
             this.panel_Display.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Display_Paint);
+
+            // 
+            // tsmi_Billing
+            // 
+            this.tsmi_Billing.Image = ((System.Drawing.Image)(resources.GetObject("tsmi_Billing.Image")));
+            this.tsmi_Billing.Name = "tsmi_Billing";
+            this.tsmi_Billing.Size = new System.Drawing.Size(68, 37);
+            this.tsmi_Billing.Text = "Billing";
+            this.tsmi_Billing.Click += new System.EventHandler(this.tsmi_Billing_Click);
+
             // 
             // frm_Dashboard
             // 
@@ -157,6 +196,18 @@ namespace pgso
         private ToolStripMenuItem equipmentToolStripMenuItem1;
         private ToolStripMenuItem manageFacilitiesToolStripMenuItem;
         private Panel panel_Display;
+
+        private ToolStripMenuItem approvedReservationToolStripMenuItem;
+        private ToolStripMenuItem pendingReservationToolStripMenuItem;
+        private ToolStripMenuItem cancelledReservationToolStripMenuItem;
+
+
         private ToolStripMenuItem calendarToolStripMenuItem;
+
+        private ToolStripMenuItem approvedToolStripMenuItem;
+        private ToolStripMenuItem pendingToolStripMenuItem;
+        private ToolStripMenuItem cancelledToolStripMenuItem;
+        private ToolStripMenuItem tsmi_Billing;
+
     }
 }
