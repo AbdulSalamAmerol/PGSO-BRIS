@@ -33,9 +33,6 @@ namespace pgso
             this.pendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelledToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.equipmentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.approvedReservationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pendingReservationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cancelledReservationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageFacilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel_Display = new System.Windows.Forms.Panel();
 
@@ -59,6 +56,7 @@ namespace pgso
             this.menuStrip1.Size = new System.Drawing.Size(1280, 41);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // calendarToolStripMenuItem
             // 
@@ -100,6 +98,7 @@ namespace pgso
             this.viewReservationToolStripMenuItem.Name = "viewReservationToolStripMenuItem";
             this.viewReservationToolStripMenuItem.Size = new System.Drawing.Size(142, 37);
             this.viewReservationToolStripMenuItem.Text = "Manage Reservation";
+            this.viewReservationToolStripMenuItem.Click += new System.EventHandler(this.viewReservationToolStripMenuItem_Click);
             // 
             // venueToolStripMenuItem1
             // 
@@ -131,35 +130,10 @@ namespace pgso
             // 
             // equipmentToolStripMenuItem1
             // 
-            this.equipmentToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.approvedReservationToolStripMenuItem,
-            this.pendingReservationToolStripMenuItem,
-            this.cancelledReservationToolStripMenuItem});
             this.equipmentToolStripMenuItem1.Name = "equipmentToolStripMenuItem1";
             this.equipmentToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.equipmentToolStripMenuItem1.Text = "Equipments";
             this.equipmentToolStripMenuItem1.Click += new System.EventHandler(this.equipmentToolStripMenuItem1_Click);
-            // 
-            // approvedReservationToolStripMenuItem
-            // 
-            this.approvedReservationToolStripMenuItem.Name = "approvedReservationToolStripMenuItem";
-            this.approvedReservationToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.approvedReservationToolStripMenuItem.Text = "Approved";
-            this.approvedReservationToolStripMenuItem.Click += new System.EventHandler(this.approvedReservationToolStripMenuItem_Click);
-            // 
-            // pendingReservationToolStripMenuItem
-            // 
-            this.pendingReservationToolStripMenuItem.Name = "pendingReservationToolStripMenuItem";
-            this.pendingReservationToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.pendingReservationToolStripMenuItem.Text = "Pending";
-            this.pendingReservationToolStripMenuItem.Click += new System.EventHandler(this.pendingReservationToolStripMenuItem_Click);
-            // 
-            // cancelledReservationToolStripMenuItem
-            // 
-            this.cancelledReservationToolStripMenuItem.Name = "cancelledReservationToolStripMenuItem";
-            this.cancelledReservationToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.cancelledReservationToolStripMenuItem.Text = "Cancelled";
-            this.cancelledReservationToolStripMenuItem.Click += new System.EventHandler(this.cancelledReservationToolStripMenuItem_Click);
             // 
             // manageFacilitiesToolStripMenuItem
             // 
@@ -222,9 +196,11 @@ namespace pgso
         private ToolStripMenuItem equipmentToolStripMenuItem1;
         private ToolStripMenuItem manageFacilitiesToolStripMenuItem;
         private Panel panel_Display;
+
         private ToolStripMenuItem approvedReservationToolStripMenuItem;
         private ToolStripMenuItem pendingReservationToolStripMenuItem;
         private ToolStripMenuItem cancelledReservationToolStripMenuItem;
+
 
         private ToolStripMenuItem calendarToolStripMenuItem;
 

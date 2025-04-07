@@ -32,8 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dt_all = new System.Windows.Forms.DataGridView();
             this.panel_Information = new System.Windows.Forms.Panel();
-            this.btn_Cancel = new System.Windows.Forms.Button();
-            this.btn_Approve = new System.Windows.Forms.Button();
+            this.txt_Sname = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txt_Total = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -58,13 +57,18 @@
             this.txt_Fname = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_CN = new System.Windows.Forms.TextBox();
+            this.txt_Search = new System.Windows.Forms.TextBox();
             this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Venue_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Reservation_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Total_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txt_Sname = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.combobox_Filter = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txt_Rate_Type = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txt_Requesting_Office = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dt_all)).BeginInit();
             this.panel_Information.SuspendLayout();
             this.SuspendLayout();
@@ -78,7 +82,7 @@
             this.dt_all.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 10F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -92,7 +96,7 @@
             this.fld_Total_Amount});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 10F);
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -102,8 +106,9 @@
             this.dt_all.Location = new System.Drawing.Point(12, 64);
             this.dt_all.Name = "dt_all";
             this.dt_all.ReadOnly = true;
+            this.dt_all.RowHeadersVisible = false;
             this.dt_all.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.dt_all.Size = new System.Drawing.Size(875, 521);
+            this.dt_all.Size = new System.Drawing.Size(875, 562);
             this.dt_all.TabIndex = 6;
             this.dt_all.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_canceled_CellContentClick);
             // 
@@ -112,9 +117,11 @@
             this.panel_Information.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_Information.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel_Information.Controls.Add(this.label15);
+            this.panel_Information.Controls.Add(this.txt_Requesting_Office);
+            this.panel_Information.Controls.Add(this.label12);
+            this.panel_Information.Controls.Add(this.txt_Rate_Type);
             this.panel_Information.Controls.Add(this.txt_Sname);
-            this.panel_Information.Controls.Add(this.btn_Cancel);
-            this.panel_Information.Controls.Add(this.btn_Approve);
             this.panel_Information.Controls.Add(this.label11);
             this.panel_Information.Controls.Add(this.txt_Total);
             this.panel_Information.Controls.Add(this.label10);
@@ -141,36 +148,24 @@
             this.panel_Information.Controls.Add(this.txt_CN);
             this.panel_Information.Location = new System.Drawing.Point(903, 12);
             this.panel_Information.Name = "panel_Information";
-            this.panel_Information.Size = new System.Drawing.Size(332, 573);
+            this.panel_Information.Size = new System.Drawing.Size(332, 637);
             this.panel_Information.TabIndex = 7;
+            this.panel_Information.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Information_Paint);
             // 
-            // btn_Cancel
+            // txt_Sname
             // 
-            this.btn_Cancel.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Cancel.Location = new System.Drawing.Point(136, 509);
-            this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.Size = new System.Drawing.Size(75, 33);
-            this.btn_Cancel.TabIndex = 25;
-            this.btn_Cancel.Text = "Cancel";
-            this.btn_Cancel.UseVisualStyleBackColor = true;
-            this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click_1);
-            // 
-            // btn_Approve
-            // 
-            this.btn_Approve.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Approve.Location = new System.Drawing.Point(228, 509);
-            this.btn_Approve.Name = "btn_Approve";
-            this.btn_Approve.Size = new System.Drawing.Size(75, 33);
-            this.btn_Approve.TabIndex = 24;
-            this.btn_Approve.Text = "Approve";
-            this.btn_Approve.UseVisualStyleBackColor = true;
-            this.btn_Approve.Click += new System.EventHandler(this.btn_Approve_Click);
+            this.txt_Sname.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Sname.Location = new System.Drawing.Point(175, 72);
+            this.txt_Sname.Name = "txt_Sname";
+            this.txt_Sname.ReadOnly = true;
+            this.txt_Sname.Size = new System.Drawing.Size(128, 26);
+            this.txt_Sname.TabIndex = 26;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(16, 457);
+            this.label11.Location = new System.Drawing.Point(16, 561);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(43, 17);
             this.label11.TabIndex = 23;
@@ -179,7 +174,7 @@
             // txt_Total
             // 
             this.txt_Total.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Total.Location = new System.Drawing.Point(19, 477);
+            this.txt_Total.Location = new System.Drawing.Point(19, 581);
             this.txt_Total.Name = "txt_Total";
             this.txt_Total.ReadOnly = true;
             this.txt_Total.Size = new System.Drawing.Size(153, 26);
@@ -189,7 +184,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(16, 408);
+            this.label10.Location = new System.Drawing.Point(16, 512);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(50, 17);
             this.label10.TabIndex = 21;
@@ -198,7 +193,7 @@
             // txt_Status
             // 
             this.txt_Status.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Status.Location = new System.Drawing.Point(19, 428);
+            this.txt_Status.Location = new System.Drawing.Point(19, 532);
             this.txt_Status.Name = "txt_Status";
             this.txt_Status.ReadOnly = true;
             this.txt_Status.Size = new System.Drawing.Size(286, 26);
@@ -208,7 +203,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(15, 359);
+            this.label9.Location = new System.Drawing.Point(15, 463);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(84, 17);
             this.label9.TabIndex = 19;
@@ -217,7 +212,7 @@
             // txt_Num_Participants
             // 
             this.txt_Num_Participants.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Num_Participants.Location = new System.Drawing.Point(19, 379);
+            this.txt_Num_Participants.Location = new System.Drawing.Point(19, 483);
             this.txt_Num_Participants.Name = "txt_Num_Participants";
             this.txt_Num_Participants.ReadOnly = true;
             this.txt_Num_Participants.Size = new System.Drawing.Size(286, 26);
@@ -226,7 +221,7 @@
             // txt_HourEnd
             // 
             this.txt_HourEnd.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_HourEnd.Location = new System.Drawing.Point(189, 274);
+            this.txt_HourEnd.Location = new System.Drawing.Point(189, 378);
             this.txt_HourEnd.Name = "txt_HourEnd";
             this.txt_HourEnd.ReadOnly = true;
             this.txt_HourEnd.Size = new System.Drawing.Size(114, 26);
@@ -235,7 +230,7 @@
             // txt_DateEnd
             // 
             this.txt_DateEnd.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_DateEnd.Location = new System.Drawing.Point(190, 242);
+            this.txt_DateEnd.Location = new System.Drawing.Point(190, 346);
             this.txt_DateEnd.Name = "txt_DateEnd";
             this.txt_DateEnd.ReadOnly = true;
             this.txt_DateEnd.Size = new System.Drawing.Size(114, 26);
@@ -245,7 +240,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(16, 310);
+            this.label8.Location = new System.Drawing.Point(16, 414);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(59, 17);
             this.label8.TabIndex = 15;
@@ -254,7 +249,7 @@
             // txt_Activity_Name
             // 
             this.txt_Activity_Name.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Activity_Name.Location = new System.Drawing.Point(18, 330);
+            this.txt_Activity_Name.Location = new System.Drawing.Point(18, 434);
             this.txt_Activity_Name.Name = "txt_Activity_Name";
             this.txt_Activity_Name.ReadOnly = true;
             this.txt_Activity_Name.Size = new System.Drawing.Size(286, 26);
@@ -264,7 +259,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(12, 281);
+            this.label7.Location = new System.Drawing.Point(12, 385);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(47, 17);
             this.label7.TabIndex = 13;
@@ -273,7 +268,7 @@
             // txt_HourStart
             // 
             this.txt_HourStart.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_HourStart.Location = new System.Drawing.Point(69, 275);
+            this.txt_HourStart.Location = new System.Drawing.Point(69, 379);
             this.txt_HourStart.Name = "txt_HourStart";
             this.txt_HourStart.ReadOnly = true;
             this.txt_HourStart.Size = new System.Drawing.Size(114, 26);
@@ -283,7 +278,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(15, 248);
+            this.label6.Location = new System.Drawing.Point(15, 352);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 17);
             this.label6.TabIndex = 11;
@@ -292,7 +287,7 @@
             // txt_Date_Start
             // 
             this.txt_Date_Start.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Date_Start.Location = new System.Drawing.Point(69, 242);
+            this.txt_Date_Start.Location = new System.Drawing.Point(69, 346);
             this.txt_Date_Start.Name = "txt_Date_Start";
             this.txt_Date_Start.ReadOnly = true;
             this.txt_Date_Start.Size = new System.Drawing.Size(114, 26);
@@ -302,7 +297,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(14, 190);
+            this.label5.Location = new System.Drawing.Point(12, 294);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(97, 17);
             this.label5.TabIndex = 9;
@@ -311,7 +306,7 @@
             // txt_Venue_Scope
             // 
             this.txt_Venue_Scope.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Venue_Scope.Location = new System.Drawing.Point(17, 210);
+            this.txt_Venue_Scope.Location = new System.Drawing.Point(17, 314);
             this.txt_Venue_Scope.Name = "txt_Venue_Scope";
             this.txt_Venue_Scope.ReadOnly = true;
             this.txt_Venue_Scope.Size = new System.Drawing.Size(286, 26);
@@ -321,7 +316,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(14, 144);
+            this.label4.Location = new System.Drawing.Point(14, 196);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 17);
             this.label4.TabIndex = 7;
@@ -330,7 +325,7 @@
             // txt_Venue_Name
             // 
             this.txt_Venue_Name.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Venue_Name.Location = new System.Drawing.Point(17, 164);
+            this.txt_Venue_Name.Location = new System.Drawing.Point(17, 216);
             this.txt_Venue_Name.Name = "txt_Venue_Name";
             this.txt_Venue_Name.ReadOnly = true;
             this.txt_Venue_Name.Size = new System.Drawing.Size(286, 26);
@@ -340,7 +335,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(14, 98);
+            this.label3.Location = new System.Drawing.Point(14, 150);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 17);
             this.label3.TabIndex = 5;
@@ -349,7 +344,7 @@
             // txt_Address
             // 
             this.txt_Address.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Address.Location = new System.Drawing.Point(17, 118);
+            this.txt_Address.Location = new System.Drawing.Point(17, 170);
             this.txt_Address.Name = "txt_Address";
             this.txt_Address.ReadOnly = true;
             this.txt_Address.Size = new System.Drawing.Size(286, 26);
@@ -393,6 +388,15 @@
             this.txt_CN.Size = new System.Drawing.Size(286, 26);
             this.txt_CN.TabIndex = 0;
             // 
+            // txt_Search
+            // 
+            this.txt_Search.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Search.Location = new System.Drawing.Point(70, 18);
+            this.txt_Search.Name = "txt_Search";
+            this.txt_Search.Size = new System.Drawing.Size(185, 26);
+            this.txt_Search.TabIndex = 8;
+            this.txt_Search.TextChanged += new System.EventHandler(this.txt_Search_TextChanged);
+            // 
             // fld_Control_Number
             // 
             this.fld_Control_Number.DataPropertyName = "fld_Control_Number";
@@ -413,6 +417,7 @@
             this.fld_Reservation_Status.HeaderText = "Status";
             this.fld_Reservation_Status.Name = "fld_Reservation_Status";
             this.fld_Reservation_Status.ReadOnly = true;
+            this.fld_Reservation_Status.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // fld_Total_Amount
             // 
@@ -421,41 +426,83 @@
             this.fld_Total_Amount.Name = "fld_Total_Amount";
             this.fld_Total_Amount.ReadOnly = true;
             // 
-            // txt_Sname
+            // combobox_Filter
             // 
-            this.txt_Sname.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Sname.Location = new System.Drawing.Point(175, 72);
-            this.txt_Sname.Name = "txt_Sname";
-            this.txt_Sname.ReadOnly = true;
-            this.txt_Sname.Size = new System.Drawing.Size(128, 26);
-            this.txt_Sname.TabIndex = 26;
+            this.combobox_Filter.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.combobox_Filter.FormattingEnabled = true;
+            this.combobox_Filter.Location = new System.Drawing.Point(335, 19);
+            this.combobox_Filter.Name = "combobox_Filter";
+            this.combobox_Filter.Size = new System.Drawing.Size(121, 25);
+            this.combobox_Filter.TabIndex = 9;
             // 
-            // textBox1
+            // label14
             // 
-            this.textBox1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(13, 18);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(137, 26);
-            this.textBox1.TabIndex = 8;
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(269, 19);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(60, 17);
+            this.label14.TabIndex = 14;
+            this.label14.Text = "Filter by:";
             // 
-            // button1
+            // label13
             // 
-            this.button1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(156, 18);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 31);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = true;
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(9, 18);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(55, 17);
+            this.label13.TabIndex = 13;
+            this.label13.Text = "Search:";
+            // 
+            // txt_Rate_Type
+            // 
+            this.txt_Rate_Type.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Rate_Type.Location = new System.Drawing.Point(15, 265);
+            this.txt_Rate_Type.Name = "txt_Rate_Type";
+            this.txt_Rate_Type.ReadOnly = true;
+            this.txt_Rate_Type.Size = new System.Drawing.Size(286, 26);
+            this.txt_Rate_Type.TabIndex = 27;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(16, 245);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(36, 17);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "Type";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(14, 101);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(121, 17);
+            this.label15.TabIndex = 30;
+            this.label15.Text = "Requesting Office";
+            // 
+            // txt_Requesting_Office
+            // 
+            this.txt_Requesting_Office.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Requesting_Office.Location = new System.Drawing.Point(17, 121);
+            this.txt_Requesting_Office.Name = "txt_Requesting_Office";
+            this.txt_Requesting_Office.ReadOnly = true;
+            this.txt_Requesting_Office.Size = new System.Drawing.Size(286, 26);
+            this.txt_Requesting_Office.TabIndex = 29;
             // 
             // frm_Venues
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(1259, 597);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(1259, 661);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.combobox_Filter);
+            this.Controls.Add(this.txt_Search);
             this.Controls.Add(this.panel_Information);
             this.Controls.Add(this.dt_all);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -493,20 +540,24 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txt_DateEnd;
         private System.Windows.Forms.TextBox txt_HourEnd;
-        private System.Windows.Forms.Button btn_Cancel;
-        private System.Windows.Forms.Button btn_Approve;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txt_Total;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txt_Status;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txt_Num_Participants;
+        private System.Windows.Forms.TextBox txt_Sname;
+        private System.Windows.Forms.TextBox txt_Search;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Control_Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Venue_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Reservation_Status;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Total_Amount;
-        private System.Windows.Forms.TextBox txt_Sname;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox combobox_Filter;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txt_Rate_Type;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txt_Requesting_Office;
     }
 }

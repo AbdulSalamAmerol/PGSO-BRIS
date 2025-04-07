@@ -40,34 +40,34 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel_Info = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.lbl_Date_And_Time2 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.lbl_Activity1 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lbl_Requestor2 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.lbl_Equipment = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl_Date_And_Time = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.lbl_Activity = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_Requestor1 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.lbl_Venue = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.lbl_Activity = new System.Windows.Forms.Label();
-            this.lbl_Venue = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.lbl_Requestor1 = new System.Windows.Forms.Label();
-            this.lbl_Date_And_Time = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.lbl_Date_And_Time2 = new System.Windows.Forms.Label();
-            this.lbl_Requestor2 = new System.Windows.Forms.Label();
             this.panel_Info.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // days_Container
@@ -80,6 +80,7 @@
             this.days_Container.Name = "days_Container";
             this.days_Container.Size = new System.Drawing.Size(986, 545);
             this.days_Container.TabIndex = 0;
+//            this.days_Container.Paint += new System.Windows.Forms.PaintEventHandler(this.days_Container_Paint);
             // 
             // btn_Next
             // 
@@ -185,6 +186,8 @@
             // 
             // panel_Info
             // 
+            this.panel_Info.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_Info.BackColor = System.Drawing.SystemColors.Control;
             this.panel_Info.Controls.Add(this.panel5);
             this.panel_Info.Controls.Add(this.panel4);
@@ -198,6 +201,48 @@
             this.panel_Info.Size = new System.Drawing.Size(362, 593);
             this.panel_Info.TabIndex = 11;
             // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.panel5.Controls.Add(this.lbl_Date_And_Time2);
+            this.panel5.Controls.Add(this.label18);
+            this.panel5.Controls.Add(this.label10);
+            this.panel5.Controls.Add(this.lbl_Activity1);
+            this.panel5.Location = new System.Drawing.Point(182, 333);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(175, 247);
+            this.panel5.TabIndex = 14;
+            // 
+            // lbl_Date_And_Time2
+            // 
+            this.lbl_Date_And_Time2.AutoSize = true;
+            this.lbl_Date_And_Time2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Date_And_Time2.Location = new System.Drawing.Point(10, 125);
+            this.lbl_Date_And_Time2.Name = "lbl_Date_And_Time2";
+            this.lbl_Date_And_Time2.Size = new System.Drawing.Size(103, 17);
+            this.lbl_Date_And_Time2.TabIndex = 12;
+            this.lbl_Date_And_Time2.Text = "Date and Time";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(6, 109);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(101, 16);
+            this.label18.TabIndex = 11;
+            this.label18.Text = "Date and Time";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(2, 4);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(60, 16);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Activity:";
+            // 
             // lbl_Activity1
             // 
             this.lbl_Activity1.AutoSize = true;
@@ -207,6 +252,48 @@
             this.lbl_Activity1.Size = new System.Drawing.Size(82, 17);
             this.lbl_Activity1.TabIndex = 10;
             this.lbl_Activity1.Text = "Equipment:";
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.panel4.Controls.Add(this.lbl_Requestor2);
+            this.panel4.Controls.Add(this.label17);
+            this.panel4.Controls.Add(this.label9);
+            this.panel4.Controls.Add(this.lbl_Equipment);
+            this.panel4.Location = new System.Drawing.Point(4, 333);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(175, 247);
+            this.panel4.TabIndex = 13;
+            // 
+            // lbl_Requestor2
+            // 
+            this.lbl_Requestor2.AutoSize = true;
+            this.lbl_Requestor2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Requestor2.Location = new System.Drawing.Point(8, 125);
+            this.lbl_Requestor2.Name = "lbl_Requestor2";
+            this.lbl_Requestor2.Size = new System.Drawing.Size(103, 17);
+            this.lbl_Requestor2.TabIndex = 13;
+            this.lbl_Requestor2.Text = "Date and Time";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(8, 109);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(75, 16);
+            this.label17.TabIndex = 10;
+            this.label17.Text = "Requestor:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(3, 4);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(80, 16);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "Equipment:";
             // 
             // lbl_Equipment
             // 
@@ -218,6 +305,39 @@
             this.lbl_Equipment.TabIndex = 9;
             this.lbl_Equipment.Text = "Equipment:";
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel2.Controls.Add(this.lbl_Date_And_Time);
+            this.panel2.Controls.Add(this.label16);
+            this.panel2.Controls.Add(this.label14);
+            this.panel2.Controls.Add(this.lbl_Activity);
+            this.panel2.Location = new System.Drawing.Point(182, 65);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(175, 246);
+            this.panel2.TabIndex = 12;
+            // 
+            // lbl_Date_And_Time
+            // 
+            this.lbl_Date_And_Time.AutoSize = true;
+            this.lbl_Date_And_Time.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Date_And_Time.Location = new System.Drawing.Point(7, 130);
+            this.lbl_Date_And_Time.Name = "lbl_Date_And_Time";
+            this.lbl_Date_And_Time.Size = new System.Drawing.Size(103, 17);
+            this.lbl_Date_And_Time.TabIndex = 10;
+            this.lbl_Date_And_Time.Text = "Date and Time";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(3, 114);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(101, 16);
+            this.label16.TabIndex = 9;
+            this.label16.Text = "Date and Time";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -228,7 +348,60 @@
             this.label14.TabIndex = 8;
             this.label14.Text = "Activity:";
             this.label14.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label14.Click += new System.EventHandler(this.label14_Click);
+           // this.label14.Click += new System.EventHandler(this.label14_Click);
+            // 
+            // lbl_Activity
+            // 
+            this.lbl_Activity.AutoSize = true;
+            this.lbl_Activity.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Activity.Location = new System.Drawing.Point(3, 21);
+            this.lbl_Activity.Name = "lbl_Activity";
+            this.lbl_Activity.Size = new System.Drawing.Size(55, 17);
+            this.lbl_Activity.TabIndex = 2;
+            this.lbl_Activity.Text = "Activity";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel1.Controls.Add(this.lbl_Requestor1);
+            this.panel1.Controls.Add(this.label15);
+            this.panel1.Controls.Add(this.lbl_Venue);
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Location = new System.Drawing.Point(4, 65);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(175, 246);
+            this.panel1.TabIndex = 11;
+            // 
+            // lbl_Requestor1
+            // 
+            this.lbl_Requestor1.AutoSize = true;
+            this.lbl_Requestor1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Requestor1.Location = new System.Drawing.Point(8, 130);
+            this.lbl_Requestor1.Name = "lbl_Requestor1";
+            this.lbl_Requestor1.Size = new System.Drawing.Size(72, 17);
+            this.lbl_Requestor1.TabIndex = 9;
+            this.lbl_Requestor1.Text = "Requestor";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(5, 114);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(75, 16);
+            this.label15.TabIndex = 8;
+            this.label15.Text = "Requestor:";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbl_Venue
+            // 
+            this.lbl_Venue.AutoSize = true;
+            this.lbl_Venue.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Venue.Location = new System.Drawing.Point(5, 21);
+            this.lbl_Venue.Name = "lbl_Venue";
+            this.lbl_Venue.Size = new System.Drawing.Size(49, 17);
+            this.lbl_Venue.TabIndex = 1;
+            this.lbl_Venue.Text = "Venue";
             // 
             // label13
             // 
@@ -261,46 +434,6 @@
             this.label11.TabIndex = 5;
             this.label11.Text = "Equipments Reservation";
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(2, 4);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(60, 16);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "Activity:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(3, 4);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(80, 16);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "Equipment:";
-            // 
-            // lbl_Activity
-            // 
-            this.lbl_Activity.AutoSize = true;
-            this.lbl_Activity.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Activity.Location = new System.Drawing.Point(3, 21);
-            this.lbl_Activity.Name = "lbl_Activity";
-            this.lbl_Activity.Size = new System.Drawing.Size(55, 17);
-            this.lbl_Activity.TabIndex = 2;
-            this.lbl_Activity.Text = "Activity";
-            // 
-            // lbl_Venue
-            // 
-            this.lbl_Venue.AutoSize = true;
-            this.lbl_Venue.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Venue.Location = new System.Drawing.Point(5, 21);
-            this.lbl_Venue.Name = "lbl_Venue";
-            this.lbl_Venue.Size = new System.Drawing.Size(49, 17);
-            this.lbl_Venue.TabIndex = 1;
-            this.lbl_Venue.Text = "Venue";
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -310,136 +443,6 @@
             this.label8.Size = new System.Drawing.Size(229, 22);
             this.label8.TabIndex = 0;
             this.label8.Text = "Reservation Information";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel1.Controls.Add(this.lbl_Requestor1);
-            this.panel1.Controls.Add(this.label15);
-            this.panel1.Controls.Add(this.lbl_Venue);
-            this.panel1.Controls.Add(this.label13);
-            this.panel1.Location = new System.Drawing.Point(4, 65);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(175, 246);
-            this.panel1.TabIndex = 11;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel2.Controls.Add(this.lbl_Date_And_Time);
-            this.panel2.Controls.Add(this.label16);
-            this.panel2.Controls.Add(this.label14);
-            this.panel2.Controls.Add(this.lbl_Activity);
-            this.panel2.Location = new System.Drawing.Point(182, 65);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(175, 246);
-            this.panel2.TabIndex = 12;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel4.Controls.Add(this.lbl_Requestor2);
-            this.panel4.Controls.Add(this.label17);
-            this.panel4.Controls.Add(this.label9);
-            this.panel4.Controls.Add(this.lbl_Equipment);
-            this.panel4.Location = new System.Drawing.Point(4, 333);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(175, 247);
-            this.panel4.TabIndex = 13;
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel5.Controls.Add(this.lbl_Date_And_Time2);
-            this.panel5.Controls.Add(this.label18);
-            this.panel5.Controls.Add(this.label10);
-            this.panel5.Controls.Add(this.lbl_Activity1);
-            this.panel5.Location = new System.Drawing.Point(182, 333);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(175, 247);
-            this.panel5.TabIndex = 14;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(5, 114);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(75, 16);
-            this.label15.TabIndex = 8;
-            this.label15.Text = "Requestor:";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(3, 114);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(101, 16);
-            this.label16.TabIndex = 9;
-            this.label16.Text = "Date and Time";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lbl_Requestor1
-            // 
-            this.lbl_Requestor1.AutoSize = true;
-            this.lbl_Requestor1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Requestor1.Location = new System.Drawing.Point(8, 130);
-            this.lbl_Requestor1.Name = "lbl_Requestor1";
-            this.lbl_Requestor1.Size = new System.Drawing.Size(72, 17);
-            this.lbl_Requestor1.TabIndex = 9;
-            this.lbl_Requestor1.Text = "Requestor";
-            // 
-            // lbl_Date_And_Time
-            // 
-            this.lbl_Date_And_Time.AutoSize = true;
-            this.lbl_Date_And_Time.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Date_And_Time.Location = new System.Drawing.Point(7, 130);
-            this.lbl_Date_And_Time.Name = "lbl_Date_And_Time";
-            this.lbl_Date_And_Time.Size = new System.Drawing.Size(103, 17);
-            this.lbl_Date_And_Time.TabIndex = 10;
-            this.lbl_Date_And_Time.Text = "Date and Time";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(8, 109);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(75, 16);
-            this.label17.TabIndex = 10;
-            this.label17.Text = "Requestor:";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(6, 109);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(101, 16);
-            this.label18.TabIndex = 11;
-            this.label18.Text = "Date and Time";
-            // 
-            // lbl_Date_And_Time2
-            // 
-            this.lbl_Date_And_Time2.AutoSize = true;
-            this.lbl_Date_And_Time2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Date_And_Time2.Location = new System.Drawing.Point(10, 125);
-            this.lbl_Date_And_Time2.Name = "lbl_Date_And_Time2";
-            this.lbl_Date_And_Time2.Size = new System.Drawing.Size(103, 17);
-            this.lbl_Date_And_Time2.TabIndex = 12;
-            this.lbl_Date_And_Time2.Text = "Date and Time";
-            // 
-            // lbl_Requestor2
-            // 
-            this.lbl_Requestor2.AutoSize = true;
-            this.lbl_Requestor2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Requestor2.Location = new System.Drawing.Point(8, 125);
-            this.lbl_Requestor2.Name = "lbl_Requestor2";
-            this.lbl_Requestor2.Size = new System.Drawing.Size(103, 17);
-            this.lbl_Requestor2.TabIndex = 13;
-            this.lbl_Requestor2.Text = "Date and Time";
             // 
             // frm_Calendar
             // 
@@ -466,14 +469,14 @@
             this.Load += new System.EventHandler(this.frm_Calendar_Load);
             this.panel_Info.ResumeLayout(false);
             this.panel_Info.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }

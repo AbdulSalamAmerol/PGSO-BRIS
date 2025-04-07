@@ -336,7 +336,7 @@ namespace pgso
 
         private void equipmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frm_Create_Utility_Reservation Utility = new frm_Create_Utility_Reservation();
+            frm_Create_Equipment_Reservation Utility = new frm_Create_Equipment_Reservation();
             Utility.Show();
         }
         //CREATE RESERVATION END
@@ -365,6 +365,13 @@ namespace pgso
         }
         private void equipmentToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            frm_Equipment EqApproved = new frm_Equipment();
+            EqApproved.TopLevel = false;
+            EqApproved.FormBorderStyle = FormBorderStyle.None;
+            EqApproved.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(EqApproved);
+            EqApproved.Show();
         }
 
         //MANAGE RESERVATION END
@@ -416,7 +423,7 @@ namespace pgso
 
         private void approvedReservationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frm_Equipment_Approved EqApproved = new frm_Equipment_Approved();
+            frm_Equipment EqApproved = new frm_Equipment();
             EqApproved.TopLevel = false;
             EqApproved.FormBorderStyle = FormBorderStyle.None;
             EqApproved.Dock = DockStyle.Fill;
@@ -452,10 +459,21 @@ namespace pgso
 
         }
 
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void viewReservationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+
         private void tsmi_Billing_Click(object sender, EventArgs e)
         {
             frm_Billing billingForm = new frm_Billing(); // Create an instance of frm_Billing
             billingForm.Show(); // Show the form
+
         }
 
 

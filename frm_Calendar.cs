@@ -18,25 +18,12 @@ namespace pgso
     {
         int month, year;
         private Connection db = new Connection(); // Use the Connection class
-       // private UserControlDays userControlDays;
 
         public frm_Calendar()
         {
             InitializeComponent();
-         //   userControlDays.DateClicked += UserControlDays_DateClicked;
-            // Set initial visibility to false
-            /*lbl_Venue.Visible = false;
-            lbl_Activity.Visible = false;
-            lbl_Equipment.Visible = false;
-            lbl_Activity1.Visible = false;*/
         }
-        private void UserControlDays_DateClicked(object sender, DateClickedEventArgs e)
-        {
-            lbl_Venue.Visible = true;
-            lbl_Activity.Visible = true;
-            lbl_Equipment.Visible = true;
-            lbl_Activity1.Visible = true;
-        }
+
         private void frm_Calendar_Load(object sender, EventArgs e)
         {
             DateTime now = DateTime.Now;
@@ -94,7 +81,7 @@ namespace pgso
             }
         }
 
-        //Display the Reservation Information in the Panel
+        // Display the Reservation Information in the Panel
         private void Ucday_DateClicked(object sender, DateClickedEventArgs e)
         {
             int day = int.Parse(e.Day);
@@ -104,14 +91,16 @@ namespace pgso
             if (reservations.Rows.Count > 0)
             {
                 panel_Info.Visible = true;
+
                 var venueReservations = reservations.AsEnumerable()
                     .Where(r => r.Field<string>("fld_Reservation_Type") == "Venue")
                     .Select(r => new
                     {
-                        Name = "Venue Reserved",
+                        Name = r.Field<string>("fld_Venue_Name"),
                         RequestingPerson = r.Field<string>("fld_First_Name") + " " + r.Field<string>("fld_Surname"),
                         StartTime = r.Field<TimeSpan>("fld_Start_Time"),
-                        EndTime = r.Field<TimeSpan>("fld_End_Time")
+                        EndTime = r.Field<TimeSpan>("fld_End_Time"),
+                        Activity = r.Field<string>("fld_Activity_Name")
                     })
                     .ToList();
 
@@ -119,42 +108,41 @@ namespace pgso
                     .Where(r => r.Field<string>("fld_Reservation_Type") == "Equipment")
                     .Select(r => new
                     {
-                        Name = "Equipment Reserved",
+                        Name = r.Field<string>("fld_Equipment_Name"),
                         RequestingPerson = r.Field<string>("fld_First_Name") + " " + r.Field<string>("fld_Surname"),
                         StartTime = r.Field<TimeSpan>("fld_Start_Time"),
-                        EndTime = r.Field<TimeSpan>("fld_End_Time")
+                        EndTime = r.Field<TimeSpan>("fld_End_Time"),
+                        Activity = r.Field<string>("fld_Activity_Name")
                     })
                     .ToList();
 
                 if (venueReservations.Any())
                 {
-                    var venue = venueReservations.First();
-                    lbl_Venue.Text = venue.Name;
-                    lbl_Requestor1.Text = $"Requested by: {venue.RequestingPerson}";
-                    lbl_Date_And_Time.Text = $"Time: {venue.StartTime} - {venue.EndTime}";
-                    lbl_Activity.Text = string.Empty;
+                    lbl_Venue.Text = string.Join("\n", venueReservations.Select(v => v.Name));
+                    lbl_Requestor1.Text = string.Join("\n", venueReservations.Select(v => v.RequestingPerson));
+                    lbl_Date_And_Time.Text = string.Join("\n", venueReservations.Select(v => $"{v.StartTime} - {v.EndTime}"));
+                    lbl_Activity.Text = string.Join("\n", venueReservations.Select(v => v.Activity));
                 }
                 else
                 {
                     lbl_Venue.Text = "No Reservation Yet";
-                    lbl_Requestor1.Text = string.Empty;
-                    lbl_Date_And_Time.Text = string.Empty;
+                    lbl_Requestor1.Text = "No Reservation Yet";
+                    lbl_Date_And_Time.Text = "No Reservation Yet";
                     lbl_Activity.Text = "No Reservation Yet";
                 }
 
                 if (equipmentReservations.Any())
                 {
-                    var equipment = equipmentReservations.First();
-                    lbl_Equipment.Text = equipment.Name;
-                    lbl_Requestor2.Text = $"Requested by: {equipment.RequestingPerson}";
-                    lbl_Date_And_Time2.Text = $"Time: {equipment.StartTime} - {equipment.EndTime}";
-                    lbl_Activity1.Text = string.Empty;
+                    lbl_Equipment.Text = string.Join("\n", equipmentReservations.Select(E => E.Name));
+                    lbl_Requestor2.Text = string.Join("\n", equipmentReservations.Select(E => E.RequestingPerson));
+                    lbl_Date_And_Time2.Text = string.Join("\n", equipmentReservations.Select(E => $"{E.StartTime} - {E.EndTime}"));
+                    lbl_Activity1.Text = string.Join("\n", equipmentReservations.Select(E => E.Activity));
                 }
                 else
                 {
                     lbl_Equipment.Text = "No Reservation Yet";
-                    lbl_Requestor2.Text = string.Empty;
-                    lbl_Date_And_Time2.Text = string.Empty;
+                    lbl_Requestor2.Text = "No Reservation Yet";
+                    lbl_Date_And_Time2.Text = "No Reservation Yet";
                     lbl_Activity1.Text = "No Reservation Yet";
                 }
             }
@@ -171,9 +159,6 @@ namespace pgso
                 lbl_Activity1.Text = "No Reservation Yet";
             }
         }
-
-
-
 
         // Decrement month
         private void btn_Previous_Click(object sender, EventArgs e)
@@ -236,13 +221,6 @@ namespace pgso
             return reservations;
         }
 
-
-
-        private void label14_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private DataTable GetReservationsForDay(DateTime date)
         {
             DataTable reservations = new DataTable();
@@ -275,12 +253,5 @@ namespace pgso
             }
             return reservations;
         }
-
-
     }
 }
-
-
-
-
-

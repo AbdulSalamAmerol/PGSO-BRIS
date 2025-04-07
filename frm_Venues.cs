@@ -9,11 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
 using System.Windows.Forms;
-using pgso_connect;//pinalitan ko namespaces. From pgso to pgso_connect
+using pgso_connect; //pinalitan ko namespaces. From pgso to pgso_connect
 
 namespace pgso
 {
-
     //NAKA LOCAL HOST LANG YUNG DATABASE KO. PALITAN LATUR.
     public partial class frm_Venues : Form
     {
@@ -22,13 +21,15 @@ namespace pgso
         private SqlCommand cmd;
         private SqlDataAdapter da;
         private DataTable dt = new DataTable();
+        private BindingSource bindingSource = new BindingSource();
         public event EventHandler DashboardRefreshRequested;
         private bool isProcessingApproval = false; // Flag to prevent re-entry
 
-
         // Method to raise the event
-        
-
+        protected virtual void OnDashboardRefreshRequested()
+        {
+            DashboardRefreshRequested?.Invoke(this, EventArgs.Empty);
+        }
 
         public frm_Venues()
         {
@@ -37,17 +38,34 @@ namespace pgso
             //dt_pendings.CellClick += dt_pendings_CellClick; // Handle button click event properly
             dt_all.CellClick += dt_all_CellClick; // Handle cell click event
 
+            // Populate the ComboBox with filter options
+            combobox_Filter.Items.AddRange(new string[] { "All", "Pending", "Cancelled", "Confirmed" });
+            combobox_Filter.SelectedIndexChanged += combobox_Filter_SelectedIndexChanged;
         }
 
-
-        //methods 
         private void frm_Venues_Load(object sender, EventArgs e)
         {
             RefreshData();
             // Subscribe to the CellFormatting event for each DataGridView
             dt_all.CellFormatting += DataGridView_CellFormatting;
-
         }
+
+        private void combobox_Filter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (sender is ComboBox comboBox)
+            {
+                string selectedStatus = comboBox.SelectedItem.ToString();
+                if (selectedStatus == "All")
+                {
+                    bindingSource.RemoveFilter();
+                }
+                else
+                {
+                    bindingSource.Filter = $"fld_Reservation_Status = '{selectedStatus}'";
+                }
+            }
+        }
+
         private void dt_all_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) // Ensure the row index is valid
@@ -78,16 +96,23 @@ namespace pgso
                 rp.fld_First_Name, 
                 rp.fld_Surname,
                 rp.fld_Requesting_Person_Address,
+                rp.fld_Requesting_Office,
                 r.fld_Start_Date,
                 r.fld_End_Date,
                 r.fld_Start_Time,
                 r.fld_End_Time,
                 r.fld_Activity_Name,
+                vp.fld_Rate_Type,
+                vs.fld_Venue_Scope_Name,
                 r.fld_Number_Of_Participants
             FROM 
                 tbl_Reservation r
             LEFT JOIN 
                 tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+            LEFT JOIN
+                tbl_Venue_Pricing vp ON r.fk_Venue_PricingID = vp.pk_Venue_PricingID
+            LEFT JOIN
+            tbl_Venue_Scope vs ON r.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
             WHERE 
                 r.fld_Control_number = @ControlNumber";
 
@@ -106,6 +131,9 @@ namespace pgso
                             txt_HourStart.Text = TimeSpan.Parse(reader["fld_Start_Time"].ToString()).ToString(@"hh\:mm");
                             txt_HourEnd.Text = TimeSpan.Parse(reader["fld_End_Time"].ToString()).ToString(@"hh\:mm");
                             txt_Activity_Name.Text = reader["fld_Activity_Name"].ToString();
+                            txt_Rate_Type.Text = reader["fld_Rate_Type"].ToString();
+                            txt_Venue_Scope.Text = reader["fld_Venue_Scope_Name"].ToString();
+                            txt_Requesting_Office.Text = reader["fld_Requesting_Office"].ToString();
                             txt_Num_Participants.Text = reader["fld_Number_Of_Participants"].ToString();
                         }
                     }
@@ -121,7 +149,6 @@ namespace pgso
                     db.strCon.Close();
             }
         }
-
 
         private void DataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -144,7 +171,6 @@ namespace pgso
                 }
             }
         }
-
 
         // Helper method to get the column index by name
         private int GetColumnIndexByName(DataGridView dataGridView, string columnName)
@@ -172,16 +198,19 @@ namespace pgso
             r.fld_Control_number, 
             r.fld_Reservation_Status,
             r.fld_Total_Amount,
-            v.fld_Venue_Name
+            v.fld_Venue_Name,
+            rp.fld_First_Name,
+            rp.fld_Surname
         FROM 
             tbl_Reservation r
         LEFT JOIN
-            tbl_Venue v ON r.fk_VenueID = v.pk_VenueID                
+            tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
+        LEFT JOIN
+            tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
         WHERE 
             r.fld_Reservation_Type = 'Venue'";
 
                 // Load data into DataGridViews
-                
                 LoadData(queryAll, dt_all, "Reservations");
 
                 // Check if there are no pending reservations
@@ -221,8 +250,9 @@ namespace pgso
                 // Set AutoGenerateColumns to false
                 dataGridView.AutoGenerateColumns = false;
 
-                // Bind the data
-                dataGridView.DataSource = tempDt;
+                // Bind the data to the BindingSource
+                bindingSource.DataSource = tempDt;
+                dataGridView.DataSource = bindingSource;
 
                 // Display a message if no data is found
                 if (tempDt.Rows.Count == 0)
@@ -236,311 +266,38 @@ namespace pgso
             }
         }
 
-        //methods
+        private void txt_Search_TextChanged(object sender, EventArgs e)
+        {
+            string filterText = txt_Search.Text.Trim();
+            if (string.IsNullOrEmpty(filterText))
+            {
+                bindingSource.RemoveFilter();
+            }
+            else
+            {
+                bindingSource.Filter = $"fld_Control_number LIKE '%{filterText}%' OR fld_Venue_Name LIKE '%{filterText}%' OR fld_First_Name LIKE '%{filterText}%' OR fld_Surname LIKE '%{filterText}%'";
+            }
+        }
 
+        private void panel1_Paint(object sender, PaintEventArgs e) { }
 
-
-     
-
-        
-
-
-
-
-        
-
-
-        private void panel1_Paint(object sender, PaintEventArgs e){}
-        //approval of reservations
- 
-        //method
         private void Btn_Refresh_Click(object sender, EventArgs e)
         {
             RefreshData();
         }
 
+        private void lbl_canceled_Click(object sender, EventArgs e) { }
 
-        //btn reschedule
-        //NOTE!! IDAGDAG ANG VENEu
-        /*
-        private void btn_Reschedule_Click(object sender, EventArgs e)
-        {
-            // Input Control Number
-            string controlNumber = Microsoft.VisualBasic.Interaction.InputBox(
-                "Enter Control Number:", "Search Control Number", "");
+        private void dt_canceled_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
 
-            if (!string.IsNullOrEmpty(controlNumber))
-            {
-                Connection db = new Connection();
-                try
-                {
-                    // Retrieve Data from db
-                    string query = @"
-            SELECT 
-                r.fld_Start_Date,
-                r.fld_End_Date,
-                r.fld_Start_Time,
-                r.fld_End_Time,
-                r.fld_Activity_Name,
-                rp.fld_First_Name,
-                rp.fld_Surname,
-                r.fld_Total_Amount
-            FROM 
-                tbl_Reservation r
-            LEFT JOIN 
-                tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-            WHERE 
-                r.fld_Control_Number = @ControlNumber";
+        private void btn_Approve_Click(object sender, EventArgs e) { }
 
-                    using (SqlCommand cmd = new SqlCommand(query, db.strCon))
-                    {
-                        cmd.Parameters.AddWithValue("@ControlNumber", controlNumber);
-                        db.strCon.Open();
+        private void ApproveReservation(string controlNumber) { }
 
-                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
+        private void CancelReservation(string controlNumber) { }
 
-                        if (dt.Rows.Count > 0)
-                        {
-                            // Create Data Dialog
-                            Form dataDialog = new Form()
-                            {
-                                Text = "Record Details",
-                                Size = new System.Drawing.Size(500, 400),
-                                StartPosition = FormStartPosition.CenterScreen
-                            };
+        private void btn_Cancel_Click_1(object sender, EventArgs e) { }
 
-                            DataGridView dgv = new DataGridView()
-                            {
-                                DataSource = dt,
-                                Dock = DockStyle.Top,
-                                ReadOnly = true,
-                                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                                Height = 150
-                            };
-
-                            // New Date and Time Pickers
-                            DateTimePicker dtpStartDate = new DateTimePicker()
-                            {
-                                Format = DateTimePickerFormat.Short,
-                                Value = (DateTime)dt.Rows[0]["fld_Start_Date"],
-                                Dock = DockStyle.Top
-                            };
-
-                            DateTimePicker dtpEndDate = new DateTimePicker()
-                            {
-                                Format = DateTimePickerFormat.Short,
-                                Value = (DateTime)dt.Rows[0]["fld_End_Date"],
-                                Dock = DockStyle.Top
-                            };
-
-                            DateTimePicker dtpStartTime = new DateTimePicker()
-                            {
-                                Format = DateTimePickerFormat.Time,
-                                ShowUpDown = true,
-                                Value = DateTime.Today.Add((TimeSpan)dt.Rows[0]["fld_Start_Time"]),
-                                Dock = DockStyle.Top
-                            };
-
-                            DateTimePicker dtpEndTime = new DateTimePicker()
-                            {
-                                Format = DateTimePickerFormat.Time,
-                                ShowUpDown = true,
-                                Value = DateTime.Today.Add((TimeSpan)dt.Rows[0]["fld_End_Time"]),
-                                Dock = DockStyle.Top
-                            };
-
-                            Button btnUpdate = new Button()
-                            {
-                                Text = "Update Reservation",
-                                Dock = DockStyle.Bottom
-                            };
-
-                            // Update Button Click Event (Update Dates and Times)
-                            btnUpdate.Click += (s, ev) =>
-                            {
-                                DialogResult result = MessageBox.Show(
-                                    "Are you sure you want to update this reservation?",
-                                    "Confirm Update",
-                                    MessageBoxButtons.YesNo,
-                                    MessageBoxIcon.Warning
-                                );
-
-                                if (result == DialogResult.Yes)
-                                {
-                                    // Update Dates and Times
-                                    string updateQuery = @"
-                            UPDATE tbl_Reservation 
-                            SET fld_Start_Date = @StartDate, fld_End_Date = @EndDate, fld_Start_Time = @StartTime, fld_End_Time = @EndTime 
-                            WHERE fld_Control_Number = @ControlNumber";
-
-                                    using (SqlCommand updateCmd = new SqlCommand(updateQuery, db.strCon))
-                                    {
-                                        updateCmd.Parameters.AddWithValue("@StartDate", dtpStartDate.Value);
-                                        updateCmd.Parameters.AddWithValue("@EndDate", dtpEndDate.Value);
-                                        updateCmd.Parameters.AddWithValue("@StartTime", dtpStartTime.Value.TimeOfDay);
-                                        updateCmd.Parameters.AddWithValue("@EndTime", dtpEndTime.Value.TimeOfDay);
-                                        updateCmd.Parameters.AddWithValue("@ControlNumber", controlNumber);
-                                        updateCmd.ExecuteNonQuery();
-                                    }
-
-                                    MessageBox.Show("Reservation updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    dataDialog.Close(); // Close the dialog after updating
-                                }
-                            };
-
-                            dataDialog.Controls.Add(dtpEndTime);
-                            dataDialog.Controls.Add(dtpStartTime);
-                            dataDialog.Controls.Add(dtpEndDate);
-                            dataDialog.Controls.Add(dtpStartDate);
-                            dataDialog.Controls.Add(dgv);
-                            dataDialog.Controls.Add(btnUpdate);
-                            dataDialog.ShowDialog();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Control number not found!", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    if (db.strCon.State == ConnectionState.Open)
-                    {
-                        db.strCon.Close();
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please enter a control number!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }*/
-
-        
-
-        private void lbl_canceled_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dt_canceled_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void btn_Approve_Click(object sender, EventArgs e)
-        {
-            // Get the control number from the displayed data
-            string controlNumber = txt_CN.Text;
-
-            if (!string.IsNullOrEmpty(controlNumber))
-            {
-                // Show confirmation dialog for approval
-                DialogResult result = MessageBox.Show(
-                    "Are you sure you want to approve this reservation?",
-                    "Confirm Approval",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning
-                );
-
-                if (result == DialogResult.Yes)
-                {
-                    ApproveReservation(controlNumber);
-                }
-            }
-        }
-
-
-        private void ApproveReservation(string controlNumber)
-        {
-            try
-            {
-                if (db.strCon.State == ConnectionState.Closed)
-                    db.strCon.Open();
-
-                string query = @"
-            UPDATE tbl_Reservation
-            SET fld_Reservation_Status = 'Confirmed'
-            WHERE fld_Control_number = @ControlNumber";
-
-                using (SqlCommand cmd = new SqlCommand(query, db.strCon))
-                {
-                    cmd.Parameters.AddWithValue("@ControlNumber", controlNumber);
-                    cmd.ExecuteNonQuery();
-                }
-
-                MessageBox.Show("Reservation approved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                RefreshData(); // Refresh the data to reflect the changes
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error approving reservation: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                if (db.strCon.State == ConnectionState.Open)
-                    db.strCon.Close();
-            }
-        }
-
-        private void CancelReservation(string controlNumber)
-        {
-            try
-            {
-                if (db.strCon.State == ConnectionState.Closed)
-                    db.strCon.Open();
-
-                string query = @"
-            UPDATE tbl_Reservation
-            SET fld_Reservation_Status = 'Cancelled'
-            WHERE fld_Control_number = @ControlNumber";
-
-                using (SqlCommand cmd = new SqlCommand(query, db.strCon))
-                {
-                    cmd.Parameters.AddWithValue("@ControlNumber", controlNumber);
-                    cmd.ExecuteNonQuery();
-                }
-
-                MessageBox.Show("Reservation cancelled successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                RefreshData(); // Refresh the data to reflect the changes
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error cancelling reservation: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                if (db.strCon.State == ConnectionState.Open)
-                    db.strCon.Close();
-            }
-        }
-
-        private void btn_Cancel_Click_1(object sender, EventArgs e)
-        {
-            // Get the control number from the displayed data
-            string controlNumber = txt_CN.Text;
-
-            if (!string.IsNullOrEmpty(controlNumber))
-            {
-                // Show confirmation dialog for cancellation
-                DialogResult result = MessageBox.Show(
-                    "Are you sure you want to cancel this reservation?",
-                    "Confirm Cancellation",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning
-                );
-
-                if (result == DialogResult.Yes)
-                {
-                    CancelReservation(controlNumber);
-                }
-            }
-        }
+        private void panel_Information_Paint(object sender, PaintEventArgs e) { }
     }
 }
