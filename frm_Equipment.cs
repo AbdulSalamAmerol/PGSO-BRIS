@@ -21,6 +21,7 @@ namespace pgso
         private SqlCommand cmd;
         private SqlDataAdapter da;
         private DataTable dt = new DataTable();
+        private BindingSource bindingSource = new BindingSource();
         public event EventHandler DashboardRefreshRequested;
 
         // Method to raise the event
@@ -40,15 +41,123 @@ namespace pgso
         public frm_Equipment()
         {
             InitializeComponent();
-            dt_pendings.CellContentClick += dt_pendings_CellContentClick; // Add event handler
+            dt_equipment.CellClick += dt_equipment_CellClick; // Handle cell click event
+
+            // Populate the ComboBox with filter options
+            combobox_Filter.Items.AddRange(new string[] { "All", "Pending", "Cancelled", "Confirmed" });
+            combobox_Filter.SelectedIndexChanged += combobox_Filter_SelectedIndexChanged; // Add event handler
         }
 
-        //methods 
         private void frm_Equipment_Load(object sender, EventArgs e)
         {
             RefreshData();
             // Subscribe to the CellFormatting event for each DataGridView
             //dt_pendings.CellFormatting += DataGridView_CellFormatting;
+        }
+
+        // ComboBox selection change event handler
+        private void combobox_Filter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (sender is ComboBox comboBox)
+            {
+                string selectedStatus = comboBox.SelectedItem.ToString();
+                if (selectedStatus == "All")
+                {
+                    bindingSource.RemoveFilter();
+                }
+                else
+                {
+                    bindingSource.Filter = $"fld_Reservation_Status = '{selectedStatus}'";
+                }
+            }
+        }
+
+        private void dt_equipment_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0) // Ensure the row index is valid
+            {
+                DataGridViewRow row = dt_equipment.Rows[e.RowIndex];
+
+                // Populate the basic information
+                txt_CN.Text = row.Cells["fld_Control_number"].Value.ToString();
+                txt_Status.Text = row.Cells["fld_Reservation_Status"].Value.ToString();
+                txt_Total.Text = row.Cells["fld_Total_Amount"].Value.ToString();
+                txt_Equipment_Name.Text = row.Cells["fld_Equipment_Name"].Value.ToString();
+
+                // Fetch and display additional information
+                string controlNumber = row.Cells["fld_Control_number"].Value.ToString();
+                FetchAndDisplayAdditionalInfo(controlNumber);
+            }
+        }
+
+        private void FetchAndDisplayAdditionalInfo(string controlNumber)
+        {
+            try
+            {
+                if (db.strCon.State == ConnectionState.Closed)
+                    db.strCon.Open();
+
+                string query = @"
+        SELECT 
+            rp.fld_First_Name, 
+            rp.fld_Surname,
+            rp.fld_Requesting_Office,
+            rp.fld_Requesting_Person_Address,
+            r.fld_Start_Date,
+            r.fld_End_Date,
+            r.fld_Start_Time,
+            r.fld_End_Time,
+            r.fld_Activity_Name,
+            r.fld_Reservation_Type,
+            r.fld_Number_Of_Participants,
+            e.fld_Equipment_Name,
+            rpe.fld_Number_Of_Days,
+            rpe.fld_Quantity
+        FROM 
+            tbl_Reservation r
+        LEFT JOIN 
+            tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+        LEFT JOIN 
+            tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
+        LEFT JOIN
+            tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
+        WHERE 
+            r.fld_Control_number = @ControlNumber";
+
+                using (SqlCommand cmd = new SqlCommand(query, db.strCon))
+                {
+                    cmd.Parameters.AddWithValue("@ControlNumber", controlNumber);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            txt_Fname.Text = reader["fld_First_Name"].ToString();
+                            txt_Sname.Text = reader["fld_Surname"].ToString();
+                            txt_Address.Text = reader["fld_Requesting_Person_Address"].ToString();
+                            txt_Date_Start.Text = Convert.ToDateTime(reader["fld_Start_Date"]).ToString("yyyy-MM-dd");
+                            txt_DateEnd.Text = Convert.ToDateTime(reader["fld_End_Date"]).ToString("yyyy-MM-dd");
+                            txt_HourStart.Text = TimeSpan.Parse(reader["fld_Start_Time"].ToString()).ToString(@"hh\:mm");
+                            txt_HourEnd.Text = TimeSpan.Parse(reader["fld_End_Time"].ToString()).ToString(@"hh\:mm");
+                            txt_Purpose.Text = reader["fld_Activity_Name"].ToString();
+                            txt_Quantity.Text = reader["fld_Number_Of_Participants"].ToString();
+                            txt_Equipment_Name.Text = reader["fld_Equipment_Name"].ToString();
+                            txt_Number_of_Days.Text = reader["fld_Number_Of_Days"].ToString();
+                            txt_Quantity.Text = reader["fld_Quantity"].ToString();
+                            txt_Requesting_Office.Text = reader["fld_Requesting_Office"].ToString();
+                            txt_Reservation_type.Text = reader["fld_Reservation_Type"].ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error fetching additional information: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (db.strCon.State == ConnectionState.Open)
+                    db.strCon.Close();
+            }
         }
 
         private void RefreshData()
@@ -59,95 +168,28 @@ namespace pgso
                     db.strCon.Open(); // Open the database connection if not already open
 
                 // Query for pending reservations
-                string queryPending = @"
-                    SELECT 
-                        r.fld_Control_number, 
-                        r.fld_Start_Date,  
-                        r.fld_Reservation_Status,
-                        r.fld_Total_Amount,
-                        r.fld_Activity_Name,
-                        r.fld_Total_Amount,
-                        r.fld_Reservation_Status,
-                        rp.fld_First_Name,             
-                        rp.fld_Surname,     
-                        rp.fld_Requesting_Person_Address,
-                        rp.fld_Contact_Number,
-                        e.fld_Equipment_Name,
-                        rpe.fld_Number_Of_Days,
-                        rpe.fld_Quantity
-                    FROM 
-                        tbl_Reservation r
-                    LEFT JOIN 
-                        tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-                    LEFT JOIN
-                        tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
-                    LEFT JOIN
-                        tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
-                    WHERE 
-                        r.fld_Reservation_Status = 'Pending' AND
-                        r.fld_Reservation_Type = 'Equipment'";
-
-                //APPROVED ITO!!
                 string queryApproved = @"
                     SELECT 
                         r.fld_Control_number, 
-                        r.fld_Start_Date,  
                         r.fld_Reservation_Status,
                         r.fld_Total_Amount,
-                        r.fld_Activity_Name,
-                        r.fld_Total_Amount,
-                        r.fld_Reservation_Status,
-                        rp.fld_First_Name,             
-                        rp.fld_Surname,     
-                        rp.fld_Requesting_Person_Address,
-                        rp.fld_Contact_Number,
                         e.fld_Equipment_Name,
                         rpe.fld_Number_Of_Days,
-                        rpe.fld_Quantity
+                        rpe.fld_Quantity,
+                        rp.fld_First_Name,
+                        rp.fld_Surname
                     FROM 
                         tbl_Reservation r
-                    LEFT JOIN 
-                        tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
                     LEFT JOIN
                         tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
                     LEFT JOIN
                         tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
-                    WHERE 
-                        r.fld_Reservation_Status = 'Confirmed' AND
-                        r.fld_Reservation_Type = 'Equipment'";
-
-                //SA CANCEL THIS
-                string queryCancelled = @"
-                    SELECT 
-                        r.fld_Control_number, 
-                        r.fld_Start_Date,  
-                        r.fld_Reservation_Status,
-                        r.fld_Total_Amount,
-                        r.fld_Activity_Name,
-                        r.fld_Total_Amount,
-                        r.fld_Reservation_Status,
-                        rp.fld_First_Name,             
-                        rp.fld_Surname,     
-                        rp.fld_Requesting_Person_Address,
-                        rp.fld_Contact_Number,
-                        e.fld_Equipment_Name,
-                        rpe.fld_Number_Of_Days,
-                        rpe.fld_Quantity
-                    FROM 
-                        tbl_Reservation r
-                    LEFT JOIN 
+                    LEFT JOIN
                         tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-                    LEFT JOIN
-                        tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
-                    LEFT JOIN
-                        tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
-                    WHERE 
-                        r.fld_Reservation_Status = 'Cancelled' AND
+                    WHERE  
                         r.fld_Reservation_Type = 'Equipment'";
 
-                LoadData(queryApproved, dt_Approved, "Approved");
-                LoadData(queryPending, dt_pendings, "Pending");
-                LoadData(queryCancelled, dt_Cancelled, "Cancelled");
+                LoadData(queryApproved, dt_equipment, "Approved");
             }
             catch (Exception ex)
             {
@@ -178,8 +220,9 @@ namespace pgso
                 // Set AutoGenerateColumns to false
                 dataGridView.AutoGenerateColumns = false;
 
-                // Bind the data
-                dataGridView.DataSource = tempDt;
+                // Bind the data to the BindingSource
+                bindingSource.DataSource = tempDt;
+                dataGridView.DataSource = bindingSource;
 
                 // Display a message if no data is found
                 if (tempDt.Rows.Count == 0)
@@ -193,569 +236,17 @@ namespace pgso
             }
         }
 
-        private void bt_Create_Reservation_Click(object sender, EventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            frm_Create_Utility_Reservation frmCreateUtilityReservation = new frm_Create_Utility_Reservation();
-            frmCreateUtilityReservation.Show();
-        }
-
-        private void dt_Approved_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        //Approved ito
-        private void btn_ApprovedReservation_Click(object sender, EventArgs e)
-        {
-            if (dt_pendings.SelectedRows.Count > 0)
+            string filterText = textBox1.Text.Trim();
+            if (string.IsNullOrEmpty(filterText))
             {
-                DataGridViewRow row = dt_pendings.SelectedRows[0];
-                string controlNumber = row.Cells["fld_Control_number"].Value.ToString();
-                string startDate = row.Cells["fld_Start_Date"].Value.ToString();
-                string reservationStatus = row.Cells["fld_Reservation_Status"].Value.ToString();
-                string totalAmount = row.Cells["fld_Total_Amount"].Value.ToString();
-                string activityName = row.Cells["fld_Activity_Name"].Value.ToString();
-                string firstName = row.Cells["fld_First_Name"].Value.ToString();
-                string surname = row.Cells["fld_Surname"].Value.ToString();
-                string address = row.Cells["fld_Requesting_Person_Address"].Value.ToString();
-                string contactNumber = row.Cells["fld_Contact_Number"].Value.ToString();
-                string equipmentName = row.Cells["fld_Equipment_Name"].Value.ToString();
-                string numberOfDays = row.Cells["fld_Number_Of_Days"].Value.ToString();
-                string quantity = row.Cells["fld_Quantity"].Value.ToString();
-
-                ShowApprovedForm(controlNumber, startDate, "Confirmed", totalAmount, activityName, firstName, surname, address, contactNumber, equipmentName, numberOfDays, quantity);
-                RefreshData();
+                bindingSource.RemoveFilter();
             }
             else
             {
-                MessageBox.Show("Please select a row to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                bindingSource.Filter = $"fld_Control_number LIKE '%{filterText}%' OR fld_Equipment_Name LIKE '%{filterText}%' OR fld_First_Name LIKE '%{filterText}%' OR fld_Surname LIKE '%{filterText}%'";
             }
         }
-
-        private void dt_pendings_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dt_pendings.Rows[e.RowIndex];
-                string controlNumber = row.Cells["fld_Control_number"].Value.ToString();
-                string startDate = row.Cells["fld_Start_Date"].Value.ToString();
-                string reservationStatus = row.Cells["fld_Reservation_Status"].Value.ToString();
-                string totalAmount = row.Cells["fld_Total_Amount"].Value.ToString();
-                string activityName = row.Cells["fld_Activity_Name"].Value.ToString();
-                string firstName = row.Cells["fld_First_Name"].Value.ToString();
-                string surname = row.Cells["fld_Surname"].Value.ToString();
-                string address = row.Cells["fld_Requesting_Person_Address"].Value.ToString();
-                string contactNumber = row.Cells["fld_Contact_Number"].Value.ToString();
-                string equipmentName = row.Cells["fld_Equipment_Name"].Value.ToString();
-                string numberOfDays = row.Cells["fld_Number_Of_Days"].Value.ToString();
-                string quantity = row.Cells["fld_Quantity"].Value.ToString();
-
-                ShowApprovedForm(controlNumber, startDate, reservationStatus, totalAmount, activityName, firstName, surname, address, contactNumber, equipmentName, numberOfDays, quantity);
-            }
-        }
-
-        private async void ShowApprovedForm(string controlNumber, string startDate, string reservationStatus, string totalAmount, string activityName, string firstName, string surname, string address, string contactNumber, string equipmentName, string numberOfDays, string quantity)
-        {
-            // Create a new form dynamically
-            Form editForm = new Form();
-            editForm.Text = "Edit Reservation";
-            editForm.Size = new Size(600, 600); // Set the size of the form
-
-            // Create and add controls to the form
-            Label lblControlNumber = new Label() { Text = "Control Number", Left = 10, Top = 20 };
-            TextBox txtControlNumber = new TextBox() { Left = 150, Top = 20, Width = 200, Text = controlNumber };
-
-            Label lblStartDate = new Label() { Text = "Start Date", Left = 10, Top = 60 };
-            TextBox txtStartDate = new TextBox() { Left = 150, Top = 60, Width = 200, Text = startDate };
-
-            Label lblReservationStatus = new Label() { Text = "Reservation Status", Left = 10, Top = 100 };
-            TextBox txtReservationStatus = new TextBox() { Left = 150, Top = 100, Width = 200, Text = reservationStatus };
-
-            Label lblTotalAmount = new Label() { Text = "Total Amount", Left = 10, Top = 140 };
-            TextBox txtTotalAmount = new TextBox() { Left = 150, Top = 140, Width = 200, Text = totalAmount };
-
-            Label lblActivityName = new Label() { Text = "Activity Name", Left = 10, Top = 180 };
-            TextBox txtActivityName = new TextBox() { Left = 150, Top = 180, Width = 200, Text = activityName };
-
-            Label lblFirstName = new Label() { Text = "First Name", Left = 10, Top = 220 };
-            TextBox txtFirstName = new TextBox() { Left = 150, Top = 220, Width = 200, Text = firstName };
-
-            Label lblSurname = new Label() { Text = "Surname", Left = 10, Top = 260 };
-            TextBox txtSurname = new TextBox() { Left = 150, Top = 260, Width = 200, Text = surname };
-
-            Label lblAddress = new Label() { Text = "Address", Left = 10, Top = 300 };
-            TextBox txtAddress = new TextBox() { Left = 150, Top = 300, Width = 200, Text = address };
-
-            Label lblContactNumber = new Label() { Text = "Contact Number", Left = 10, Top = 340 };
-            TextBox txtContactNumber = new TextBox() { Left = 150, Top = 340, Width = 200, Text = contactNumber };
-
-            Label lblEquipmentName = new Label() { Text = "Equipment Name", Left = 10, Top = 380 };
-            TextBox txtEquipmentName = new TextBox() { Left = 150, Top = 380, Width = 200, Text = equipmentName };
-
-            Label lblNumberOfDays = new Label() { Text = "Number of Days", Left = 10, Top = 420 };
-            TextBox txtNumberOfDays = new TextBox() { Left = 150, Top = 420, Width = 200, Text = numberOfDays };
-
-            Label lblQuantity = new Label() { Text = "Quantity", Left = 10, Top = 460 };
-            TextBox txtQuantity = new TextBox() { Left = 150, Top = 460, Width = 200, Text = quantity };
-
-            Button btnSave = new Button() { Text = "Approve", Left = 150, Top = 500, Width = 100 };
-            btnSave.Click += async (s, args) =>
-            {
-                try
-                {
-                    if (db.strCon.State == ConnectionState.Closed)
-                        db.strCon.Open();
-
-                    using (SqlTransaction transaction = db.strCon.BeginTransaction())
-                    {
-                        try
-                        {
-                            // Update only the reservation status
-                            string updateQuery = @"
-                                UPDATE tbl_Reservation
-                                SET fld_Reservation_Status = @reservationStatus
-                                WHERE fld_Control_number = @controlNumber";
-
-                            using (SqlCommand cmd = new SqlCommand(updateQuery, db.strCon, transaction))
-                            {
-                                cmd.Parameters.AddWithValue("@reservationStatus", txtReservationStatus.Text);
-                                cmd.Parameters.AddWithValue("@controlNumber", txtControlNumber.Text);
-                                await cmd.ExecuteNonQueryAsync();
-                            }
-
-                            transaction.Commit();
-                            MessageBox.Show("Reservation status updated to Confirmed!");
-                            editForm.Close();
-                            RefreshData();
-                        }
-                        catch (Exception ex)
-                        {
-                            transaction.Rollback();
-                            MessageBox.Show($"Error updating reservation status: {ex.Message}", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Database connection error: {ex.Message}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    if (db.strCon.State == ConnectionState.Open)
-                        db.strCon.Close();
-                }
-            };
-
-            editForm.Controls.Add(lblControlNumber);
-            editForm.Controls.Add(txtControlNumber);
-            editForm.Controls.Add(lblStartDate);
-            editForm.Controls.Add(txtStartDate);
-            editForm.Controls.Add(lblReservationStatus);
-            editForm.Controls.Add(txtReservationStatus);
-            editForm.Controls.Add(lblTotalAmount);
-            editForm.Controls.Add(txtTotalAmount);
-            editForm.Controls.Add(lblActivityName);
-            editForm.Controls.Add(txtActivityName);
-            editForm.Controls.Add(lblFirstName);
-            editForm.Controls.Add(txtFirstName);
-            editForm.Controls.Add(lblSurname);
-            editForm.Controls.Add(txtSurname);
-            editForm.Controls.Add(lblAddress);
-            editForm.Controls.Add(txtAddress);
-            editForm.Controls.Add(lblContactNumber);
-            editForm.Controls.Add(txtContactNumber);
-            editForm.Controls.Add(lblEquipmentName);
-            editForm.Controls.Add(txtEquipmentName);
-            editForm.Controls.Add(lblNumberOfDays);
-            editForm.Controls.Add(txtNumberOfDays);
-            editForm.Controls.Add(lblQuantity);
-            editForm.Controls.Add(txtQuantity);
-            editForm.Controls.Add(btnSave);
-
-            // Show the form immediately
-            editForm.Show();
-
-            // Perform any additional operations asynchronously
-            await Task.Run(() =>
-            {
-                // Simulate a delay for demonstration purposes
-                System.Threading.Thread.Sleep(1000);
-            });
-        }
-
-        //END OF APPROVED
-
-
-        //CANCELLED START
-        private void btn_Cancel_Reservation_Click(object sender, EventArgs e)
-        {
-            if (dt_pendings.SelectedRows.Count > 0)
-            {
-                DataGridViewRow row = dt_pendings.SelectedRows[0];
-                string controlNumber = row.Cells["fld_Control_number"].Value.ToString();
-                string startDate = row.Cells["fld_Start_Date"].Value.ToString();
-                string reservationStatus = row.Cells["fld_Reservation_Status"].Value.ToString();
-                string totalAmount = row.Cells["fld_Total_Amount"].Value.ToString();
-                string activityName = row.Cells["fld_Activity_Name"].Value.ToString();
-                string firstName = row.Cells["fld_First_Name"].Value.ToString();
-                string surname = row.Cells["fld_Surname"].Value.ToString();
-                string address = row.Cells["fld_Requesting_Person_Address"].Value.ToString();
-                string contactNumber = row.Cells["fld_Contact_Number"].Value.ToString();
-                string equipmentName = row.Cells["fld_Equipment_Name"].Value.ToString();
-                string numberOfDays = row.Cells["fld_Number_Of_Days"].Value.ToString();
-                string quantity = row.Cells["fld_Quantity"].Value.ToString();
-
-                ShowCancelForm(controlNumber, startDate, "Cancelled", totalAmount, activityName, firstName, surname, address, contactNumber, equipmentName, numberOfDays, quantity);
-                RefreshData();
-            }
-            else
-            {
-                MessageBox.Show("Please select a row to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-        private async void ShowCancelForm(string controlNumber, string startDate, string reservationStatus, string totalAmount, string activityName, string firstName, string surname, string address, string contactNumber, string equipmentName, string numberOfDays, string quantity)
-        {
-            // Create a new form dynamically
-            Form editForm = new Form();
-            editForm.Text = "Edit Reservation";
-            editForm.Size = new Size(600, 600); // Set the size of the form
-
-            // Create and add controls to the form
-            Label lblControlNumber = new Label() { Text = "Control Number", Left = 10, Top = 20 };
-            TextBox txtControlNumber = new TextBox() { Left = 150, Top = 20, Width = 200, Text = controlNumber };
-
-            Label lblStartDate = new Label() { Text = "Start Date", Left = 10, Top = 60 };
-            TextBox txtStartDate = new TextBox() { Left = 150, Top = 60, Width = 200, Text = startDate };
-
-            Label lblReservationStatus = new Label() { Text = "Reservation Status", Left = 10, Top = 100 };
-            TextBox txtReservationStatus = new TextBox() { Left = 150, Top = 100, Width = 200, Text = reservationStatus };
-
-            Label lblTotalAmount = new Label() { Text = "Total Amount", Left = 10, Top = 140 };
-            TextBox txtTotalAmount = new TextBox() { Left = 150, Top = 140, Width = 200, Text = totalAmount };
-
-            Label lblActivityName = new Label() { Text = "Activity Name", Left = 10, Top = 180 };
-            TextBox txtActivityName = new TextBox() { Left = 150, Top = 180, Width = 200, Text = activityName };
-
-            Label lblFirstName = new Label() { Text = "First Name", Left = 10, Top = 220 };
-            TextBox txtFirstName = new TextBox() { Left = 150, Top = 220, Width = 200, Text = firstName };
-
-            Label lblSurname = new Label() { Text = "Surname", Left = 10, Top = 260 };
-            TextBox txtSurname = new TextBox() { Left = 150, Top = 260, Width = 200, Text = surname };
-
-            Label lblAddress = new Label() { Text = "Address", Left = 10, Top = 300 };
-            TextBox txtAddress = new TextBox() { Left = 150, Top = 300, Width = 200, Text = address };
-
-            Label lblContactNumber = new Label() { Text = "Contact Number", Left = 10, Top = 340 };
-            TextBox txtContactNumber = new TextBox() { Left = 150, Top = 340, Width = 200, Text = contactNumber };
-
-            Label lblEquipmentName = new Label() { Text = "Equipment Name", Left = 10, Top = 380 };
-            TextBox txtEquipmentName = new TextBox() { Left = 150, Top = 380, Width = 200, Text = equipmentName };
-
-            Label lblNumberOfDays = new Label() { Text = "Number of Days", Left = 10, Top = 420 };
-            TextBox txtNumberOfDays = new TextBox() { Left = 150, Top = 420, Width = 200, Text = numberOfDays };
-
-            Label lblQuantity = new Label() { Text = "Quantity", Left = 10, Top = 460 };
-            TextBox txtQuantity = new TextBox() { Left = 150, Top = 460, Width = 200, Text = quantity };
-
-            Button btnCancel = new Button() { Text = "Cancel", Left = 150, Top = 500, Width = 100 };
-            btnCancel.Click += async (s, args) =>
-            {
-                try
-                {
-                    if (db.strCon.State == ConnectionState.Closed)
-                        db.strCon.Open();
-
-                    using (SqlTransaction transaction = db.strCon.BeginTransaction())
-                    {
-                        try
-                        {
-                            // Update only the reservation status
-                            string updateQuery = @"
-                        UPDATE tbl_Reservation
-                        SET fld_Reservation_Status = @reservationStatus
-                        WHERE fld_Control_number = @controlNumber";
-
-                            using (SqlCommand cmd = new SqlCommand(updateQuery, db.strCon, transaction))
-                            {
-                                cmd.Parameters.AddWithValue("@reservationStatus", txtReservationStatus.Text);
-                                cmd.Parameters.AddWithValue("@controlNumber", txtControlNumber.Text);
-                                await cmd.ExecuteNonQueryAsync();
-                            }
-
-                            transaction.Commit();
-                            MessageBox.Show("Reservation status updated to Cancel!");
-                            editForm.Close();
-                            RefreshData();
-                        }
-                        catch (Exception ex)
-                        {
-                            transaction.Rollback();
-                            MessageBox.Show($"Error updating reservation status: {ex.Message}", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Database connection error: {ex.Message}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    if (db.strCon.State == ConnectionState.Open)
-                        db.strCon.Close();
-                }
-            };
-
-            editForm.Controls.Add(lblControlNumber);
-            editForm.Controls.Add(txtControlNumber);
-            editForm.Controls.Add(lblStartDate);
-            editForm.Controls.Add(txtStartDate);
-            editForm.Controls.Add(lblReservationStatus);
-            editForm.Controls.Add(txtReservationStatus);
-            editForm.Controls.Add(lblTotalAmount);
-            editForm.Controls.Add(txtTotalAmount);
-            editForm.Controls.Add(lblActivityName);
-            editForm.Controls.Add(txtActivityName);
-            editForm.Controls.Add(lblFirstName);
-            editForm.Controls.Add(txtFirstName);
-            editForm.Controls.Add(lblSurname);
-            editForm.Controls.Add(txtSurname);
-            editForm.Controls.Add(lblAddress);
-            editForm.Controls.Add(txtAddress);
-            editForm.Controls.Add(lblContactNumber);
-            editForm.Controls.Add(txtContactNumber);
-            editForm.Controls.Add(lblEquipmentName);
-            editForm.Controls.Add(txtEquipmentName);
-            editForm.Controls.Add(lblNumberOfDays);
-            editForm.Controls.Add(txtNumberOfDays);
-            editForm.Controls.Add(lblQuantity);
-            editForm.Controls.Add(txtQuantity);
-            editForm.Controls.Add(btnCancel);
-
-            // Show the form immediately
-            editForm.Show();
-
-            // Perform any additional operations asynchronously
-            await Task.Run(() =>
-            {
-                // Simulate a delay for demonstration purposes
-                System.Threading.Thread.Sleep(1000);
-            });
-        }
-
-
-        //CANCEL END
-
-        //RESCHEDULE ITO
-        //START
-
-        private void btn_Reschedule_Reservation_Click(object sender, EventArgs e)
-        {
-            if (dt_Approved.SelectedRows.Count > 0)
-            {
-                DataGridViewRow row = dt_Approved.SelectedRows[0];
-                string controlNumber = row.Cells["ControlNumber"].Value.ToString();
-                string startDate = row.Cells["StartDate"].Value.ToString();
-                string endDate = row.Cells["EndDate"].Value?.ToString() ?? string.Empty;
-                string equipmentName = row.Cells["EquipmentName"].Value.ToString();
-                string quantity = row.Cells["Quantity"].Value.ToString();
-
-                ShowRescheduleForm(controlNumber, startDate, endDate, equipmentName, quantity);
-                RefreshData();
-            }
-            else
-            {
-                MessageBox.Show("Please select a row to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-        private void ShowRescheduleForm(string controlNumber, string startDate, string endDate, string equipmentName, string quantity)
-        {
-            try
-            {
-                Form editForm = new Form();
-                editForm.Text = "Reschedule Reservation";
-                editForm.Size = new Size(400, 300); // Smaller form since we have fewer fields
-                editForm.StartPosition = FormStartPosition.CenterParent;
-                editForm.FormBorderStyle = FormBorderStyle.FixedDialog;
-                editForm.MaximizeBox = false;
-                editForm.MinimizeBox = false;
-
-                // Create controls
-                Label lblControlNumber = new Label() { Text = "Control Number:", Left = 10, Top = 20 };
-                TextBox txtControlNumber = new TextBox()
-                {
-                    Left = 150,
-                    Top = 20,
-                    Width = 200,
-                    Text = controlNumber,
-                    ReadOnly = true
-                };
-
-                Label lblEquipmentName = new Label() { Text = "Equipment:", Left = 10, Top = 60 };
-                TextBox txtEquipmentName = new TextBox()
-                {
-                    Left = 150,
-                    Top = 60,
-                    Width = 200,
-                    Text = equipmentName,
-                    ReadOnly = true
-                };
-
-                Label lblStartDate = new Label() { Text = "New Start Date:", Left = 10, Top = 100 };
-                DateTimePicker dtpStartDate = new DateTimePicker()
-                {
-                    Left = 150,
-                    Top = 100,
-                    Width = 200
-                };
-
-                Label lblEndDate = new Label() { Text = "New End Date:", Left = 10, Top = 140 };
-                DateTimePicker dtpEndDate = new DateTimePicker()
-                {
-                    Left = 150,
-                    Top = 140,
-                    Width = 200
-                };
-
-                Label lblQuantity = new Label() { Text = "New Quantity:", Left = 10, Top = 180 };
-                TextBox txtQuantity = new TextBox()
-                {
-                    Left = 150,
-                    Top = 180,
-                    Width = 200,
-                    Text = quantity
-                };
-
-                // Parse dates with error handling
-                if (DateTime.TryParse(startDate, out var parsedStartDate))
-                    dtpStartDate.Value = parsedStartDate;
-
-                if (!string.IsNullOrEmpty(endDate) && DateTime.TryParse(endDate, out var parsedEndDate))
-                    dtpEndDate.Value = parsedEndDate;
-                else
-                    dtpEndDate.Value = dtpStartDate.Value; // Default to start date if end date is invalid
-
-                Button btnSave = new Button()
-                {
-                    Text = "Save",
-                    Left = 150,
-                    Top = 220,
-                    Width = 100,
-                    DialogResult = DialogResult.OK
-                };
-
-                Button btnCancel = new Button()
-                {
-                    Text = "Cancel",
-                    Left = 260,
-                    Top = 220,
-                    Width = 100,
-                    DialogResult = DialogResult.Cancel
-                };
-
-                btnSave.Click += (s, args) =>
-                {
-                    if (!int.TryParse(txtQuantity.Text, out int qty) || qty <= 0)
-                    {
-                        MessageBox.Show("Please enter a valid quantity (positive number).", "Invalid Quantity", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-
-                    if (dtpEndDate.Value < dtpStartDate.Value)
-                    {
-                        MessageBox.Show("End date cannot be before start date.", "Invalid Dates", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-
-                    try
-                    {
-                        if (db.strCon.State == ConnectionState.Closed)
-                            db.strCon.Open();
-
-                        using (SqlTransaction transaction = db.strCon.BeginTransaction())
-                        {
-                            try
-                            {
-                                // Update only the dates in reservation table
-                                string updateQuery = @"
-                            UPDATE tbl_Reservation
-                            SET fld_Start_Date = @startDate,
-                                fld_End_Date = @endDate
-                            WHERE fld_Control_number = @controlNumber";
-
-                                using (SqlCommand cmd = new SqlCommand(updateQuery, db.strCon, transaction))
-                                {
-                                    cmd.Parameters.AddWithValue("@startDate", dtpStartDate.Value);
-                                    cmd.Parameters.AddWithValue("@endDate", dtpEndDate.Value);
-                                    cmd.Parameters.AddWithValue("@controlNumber", controlNumber);
-                                    cmd.ExecuteNonQuery();
-                                }
-
-                                // Update only the quantity in equipment table
-                                string updateQuantityQuery = @"
-                            UPDATE tbl_Reservation_Equipment
-                            SET fld_Quantity = @quantity
-                            WHERE fk_ReservationID = 
-                                (SELECT pk_ReservationID FROM tbl_Reservation WHERE fld_Control_number = @controlNumber)";
-
-                                using (SqlCommand cmd = new SqlCommand(updateQuantityQuery, db.strCon, transaction))
-                                {
-                                    cmd.Parameters.AddWithValue("@quantity", qty);
-                                    cmd.Parameters.AddWithValue("@controlNumber", controlNumber);
-                                    cmd.ExecuteNonQuery();
-                                }
-
-                                transaction.Commit();
-                                MessageBox.Show("Reservation rescheduled successfully!");
-                                editForm.DialogResult = DialogResult.OK;
-                                editForm.Close();
-                                RefreshData();
-                            }
-                            catch (Exception ex)
-                            {
-                                transaction.Rollback();
-                                MessageBox.Show($"Error rescheduling reservation: {ex.Message}", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Database connection error: {ex.Message}", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    finally
-                    {
-                        if (db.strCon.State == ConnectionState.Open)
-                            db.strCon.Close();
-                    }
-                };
-
-                btnCancel.Click += (s, args) => editForm.Close();
-
-                // Add all controls to form
-                editForm.Controls.AddRange(new Control[] {
-            lblControlNumber, txtControlNumber,
-            lblEquipmentName, txtEquipmentName,
-            lblStartDate, dtpStartDate,
-            lblEndDate, dtpEndDate,
-            lblQuantity, txtQuantity,
-            btnSave, btnCancel
-        });
-
-                editForm.AcceptButton = btnSave;
-                editForm.CancelButton = btnCancel;
-                editForm.FormClosed += (s, args) => editForm.Dispose();
-
-                if (editForm.ShowDialog() == DialogResult.OK)
-                {
-                    // Data was updated successfully
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error creating form: {ex.Message}", "Form Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        //END
-
     }
 }

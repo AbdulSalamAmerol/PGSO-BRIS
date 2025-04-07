@@ -154,11 +154,11 @@
     <Compile Include="frm_Calendar.Designer.cs">
       <DependentUpon>frm_Calendar.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_Equipment_Approved.cs">
+    <Compile Include="frm_Equipment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_Equipment_Approved.Designer.cs">
-      <DependentUpon>frm_Equipment_Approved.cs</DependentUpon>
+    <Compile Include="frm_Equipment.Designer.cs">
+      <DependentUpon>frm_Equipment.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_Equipment_Cancelled.cs">
       <SubType>Form</SubType>
@@ -178,11 +178,11 @@
     <Compile Include="frm_Venue_Approved.Designer.cs">
       <DependentUpon>frm_Venue_Approved.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_Create_Utility_Reservation.cs">
+    <Compile Include="frm_Create_Equipment_Reservation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_Create_Utility_Reservation.Designer.cs">
-      <DependentUpon>frm_Create_Utility_Reservation.cs</DependentUpon>
+    <Compile Include="frm_Create_Equipment_Reservation.Designer.cs">
+      <DependentUpon>frm_Create_Equipment_Reservation.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_Create_Venuer_Reservation.cs">
       <SubType>Form</SubType>
@@ -195,12 +195,6 @@
     </Compile>
     <Compile Include="frm_convention.Designer.cs">
       <DependentUpon>frm_convention.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_Equipment.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_Equipment.Designer.cs">
-      <DependentUpon>frm_Equipment.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_Login.cs">
       <SubType>Form</SubType>
@@ -285,8 +279,8 @@
     <EmbeddedResource Include="frm_Calendar.resx">
       <DependentUpon>frm_Calendar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_Equipment_Approved.resx">
-      <DependentUpon>frm_Equipment_Approved.cs</DependentUpon>
+    <EmbeddedResource Include="frm_Equipment.resx">
+      <DependentUpon>frm_Equipment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Equipment_Cancelled.resx">
       <DependentUpon>frm_Equipment_Cancelled.cs</DependentUpon>
@@ -297,17 +291,14 @@
     <EmbeddedResource Include="frm_Venue_Approved.resx">
       <DependentUpon>frm_Venue_Approved.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_Create_Utility_Reservation.resx">
-      <DependentUpon>frm_Create_Utility_Reservation.cs</DependentUpon>
+    <EmbeddedResource Include="frm_Create_Equipment_Reservation.resx">
+      <DependentUpon>frm_Create_Equipment_Reservation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Create_Venuer_Reservation.resx">
       <DependentUpon>frm_Create_Venuer_Reservation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_convention.resx">
       <DependentUpon>frm_convention.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_Equipment.resx">
-      <DependentUpon>frm_Equipment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Login.resx">
       <DependentUpon>frm_Login.cs</DependentUpon>

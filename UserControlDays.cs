@@ -59,7 +59,7 @@ namespace pgso
 
             if (equipmentReservations.Any())
             {
-                lblEquipmentReservations.ForeColor = Color.Orange;
+                lblEquipmentReservations.ForeColor = Color.Blue;
             }
             else
             {

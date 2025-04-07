@@ -26,7 +26,7 @@ namespace pgso
             LoadVenues();
             //CalculateNumberOfDays();
             CalculateNumberOfHour();
-           // date_of_use_start.ValueChanged += Date_ValueChanged;
+            // date_of_use_start.ValueChanged += Date_ValueChanged;
             //date_of_use_end.ValueChanged += Date_ValueChanged;
             TimeStart.ValueChanged += Time_ValueChanged;
             TimeEnd.ValueChanged += Time_ValueChanged;
@@ -41,7 +41,7 @@ namespace pgso
         private void frm_createvenuereservation_Load(object sender, EventArgs e)
         {
             LoadVenues();
-          //  date_of_use_start.ValueChanged += date_of_use_start_ValueChanged;
+            //  date_of_use_start.ValueChanged += date_of_use_start_ValueChanged;
             //date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
             TimeStart.ValueChanged += TimeStart_ValueChanged;
             TimeEnd.ValueChanged += TimeEnd_ValueChanged;
@@ -467,7 +467,7 @@ namespace pgso
             txt_firstname.Clear();
             txt_address.Clear();
             txt_contact.Clear();
-           
+
             txt_controlnum.Clear();
             txt_activity.Clear();
             txt_rate.Clear();
@@ -567,13 +567,13 @@ namespace pgso
                 date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
             }
         }
-        private void txt_rate_TextChanged(object sender, EventArgs e){}
-        private void combo_Utility_SelectedIndexChanged_1(object sender, EventArgs e){ }
-        private void panel_Rev_Type_Paint(object sender, PaintEventArgs e){}
-        private void panel_Venue_Paint(object sender, PaintEventArgs e){}
-        private void txt_Reservation_Type_TextChanged(object sender, EventArgs e){}
+        private void txt_rate_TextChanged(object sender, EventArgs e) { }
+        private void combo_Utility_SelectedIndexChanged_1(object sender, EventArgs e) { }
+        private void panel_Rev_Type_Paint(object sender, PaintEventArgs e) { }
+        private void panel_Venue_Paint(object sender, PaintEventArgs e) { }
+        private void txt_Reservation_Type_TextChanged(object sender, EventArgs e) { }
         private void txtx_Num_Hours_TextChanged(object sender, EventArgs e)
-        {}
+        { }
 
         private void combo_Request_SelectedIndexChanged(object sender, EventArgs e)
         {
