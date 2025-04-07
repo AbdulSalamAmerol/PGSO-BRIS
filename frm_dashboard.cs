@@ -467,7 +467,7 @@ namespace pgso
 
         private void viewReservationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+        }
 
         private void tsmi_Billing_Click(object sender, EventArgs e)
         {
