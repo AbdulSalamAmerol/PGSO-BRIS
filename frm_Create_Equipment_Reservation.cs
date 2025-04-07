@@ -248,11 +248,11 @@ namespace pgso
                     int.TryParse(txt_Days_Of_Use.Text, out int numberOfDays) && numberOfDays > 0)
                 {
                     // Calculate the total subsequent cost based on the number of days
-                    decimal subsequentTotal = subsequentRate * numberOfDays;
-                    txt_Price_Subsequent.Text = subsequentTotal.ToString("0.00");
+                   // decimal subsequentTotal = subsequentRate;
+                    //txt_Price_Subsequent.Text = subsequentTotal.ToString("0.00");
 
                     // Calculate the total amount by adding the rate and subsequent total, then multiplying by the quantity
-                    decimal totalAmount = (rate + subsequentTotal) * quantity;
+                    decimal totalAmount = ((rate * quantity) + (subsequentRate * quantity * (numberOfDays - 1)));
                     txt_Total.Text = totalAmount.ToString("0.00");
                 }
                 else
