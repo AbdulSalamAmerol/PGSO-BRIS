@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -248,7 +248,7 @@ namespace pgso
                 if (int.TryParse(txt_Quantity.Text, out int quantity) && quantity > 0 &&
                     int.TryParse(txt_Days_Of_Use.Text, out int numberOfDays) && numberOfDays > 0)
                 {
-                    
+
 
                     // Calculate the total amount by adding the rate and subsequent total, then multiplying by the quantity
                     decimal totalAmount = ((rate * quantity) + (subsequentRate * quantity * (numberOfDays - 1)));
