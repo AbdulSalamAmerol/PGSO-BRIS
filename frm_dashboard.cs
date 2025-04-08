@@ -119,10 +119,9 @@ namespace pgso
         private void Venues_Click(object sender, EventArgs e)
         {
             //uncomment ako later
-            frm_mngreservation frm_venues = new frm_mngreservation();
+
             //frm_venues.DashboardRefreshRequested += Frm_venues_DashboardRefreshRequested;
-            frm_venues.ShowDialog();
-        }
+        } 
 
         private void Frm_venues_DashboardRefreshRequested(object sender, EventArgs e)
         {

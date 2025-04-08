@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label21 = new System.Windows.Forms.Label();
             this.txt_Price_Subsequent = new System.Windows.Forms.TextBox();
@@ -70,10 +72,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txt_First_Name = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EquipmentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Selected_Equipments)).BeginInit();
             this.SuspendLayout();
@@ -172,7 +174,17 @@
             this.dgv_Selected_Equipments.Location = new System.Drawing.Point(128, 506);
             this.dgv_Selected_Equipments.Name = "dgv_Selected_Equipments";
             this.dgv_Selected_Equipments.ReadOnly = true;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Selected_Equipments.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_Selected_Equipments.RowHeadersVisible = false;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            this.dgv_Selected_Equipments.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_Selected_Equipments.Size = new System.Drawing.Size(456, 108);
             this.dgv_Selected_Equipments.TabIndex = 67;
             // 
@@ -545,17 +557,11 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "REQUESTING OFFICE/PERSON:";
             // 
-            // Total
+            // EquipmentName
             // 
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
-            // 
-            // Rate
-            // 
-            this.Rate.HeaderText = "Rate";
-            this.Rate.Name = "Rate";
-            this.Rate.ReadOnly = true;
+            this.EquipmentName.HeaderText = "Equipment";
+            this.EquipmentName.Name = "EquipmentName";
+            this.EquipmentName.ReadOnly = true;
             // 
             // Quantity
             // 
@@ -563,11 +569,17 @@
             this.Quantity.Name = "Quantity";
             this.Quantity.ReadOnly = true;
             // 
-            // EquipmentName
+            // Rate
             // 
-            this.EquipmentName.HeaderText = "Equipment";
-            this.EquipmentName.Name = "EquipmentName";
-            this.EquipmentName.ReadOnly = true;
+            this.Rate.HeaderText = "Days";
+            this.Rate.Name = "Rate";
+            this.Rate.ReadOnly = true;
+            // 
+            // Total
+            // 
+            this.Total.HeaderText = "Total";
+            this.Total.Name = "Total";
+            this.Total.ReadOnly = true;
             // 
             // frm_Create_Equipment_Reservation
             // 

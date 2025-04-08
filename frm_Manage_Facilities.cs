@@ -24,7 +24,9 @@ namespace pgso
             dt_Equipments.CellContentClick += dt_Equipments_CellContentClick;
             dt_Equipments.CellClick += dt_Equipments_CellClick;
             dt_Venues.CellClick += dt_Venues_CellClick;
+
         }
+
 
         private void frm_Manage_Facilities_Load(object sender, EventArgs e)
         {
@@ -696,5 +698,11 @@ namespace pgso
         private void btn_Delete_Equipment_Click(object sender, EventArgs e) { }
         private void dt_Venues_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
         private void panel2_Paint(object sender, PaintEventArgs e) { }
+
+        private void btn_AddScope_Click(object sender, EventArgs e)
+        {
+            frm_Add_Scope frm_Add_Scope = new frm_Add_Scope();
+            frm_Add_Scope.Show();
+        }
     }
 }
