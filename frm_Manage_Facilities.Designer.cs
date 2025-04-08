@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_Manage_Facilities));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.dt_Equipments = new System.Windows.Forms.DataGridView();
             this.fld_Equipment_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,6 +55,7 @@
             this.fld_Additional_Charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EditVenue = new System.Windows.Forms.DataGridViewImageColumn();
             this.DeleteVenue = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btn_AddScope = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dt_Equipments)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -76,14 +77,14 @@
             this.dt_Equipments.AllowUserToAddRows = false;
             this.dt_Equipments.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dt_Equipments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 10F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dt_Equipments.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 10F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dt_Equipments.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dt_Equipments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dt_Equipments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.fld_Equipment_Name,
@@ -91,14 +92,14 @@
             this.fld_Equipment_Price_Subsequent,
             this.Edit,
             this.Delete});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 10F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dt_Equipments.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 10F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dt_Equipments.DefaultCellStyle = dataGridViewCellStyle6;
             this.dt_Equipments.Location = new System.Drawing.Point(7, 70);
             this.dt_Equipments.Name = "dt_Equipments";
             this.dt_Equipments.ReadOnly = true;
@@ -164,7 +165,7 @@
             this.panel1.Controls.Add(this.btn_Add_Equipment);
             this.panel1.Controls.Add(this.dt_Equipments);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(7, 327);
+            this.panel1.Location = new System.Drawing.Point(19, 358);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(711, 335);
             this.panel1.TabIndex = 2;
@@ -184,12 +185,13 @@
             // panel2
             // 
             this.panel2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panel2.Controls.Add(this.btn_AddScope);
             this.panel2.Controls.Add(this.btn_Add_Venue);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.dt_Venues);
-            this.panel2.Location = new System.Drawing.Point(0, 1);
+            this.panel2.Location = new System.Drawing.Point(12, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1135, 329);
+            this.panel2.Size = new System.Drawing.Size(1135, 340);
             this.panel2.TabIndex = 3;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -197,7 +199,7 @@
             // 
             this.btn_Add_Venue.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btn_Add_Venue.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Add_Venue.Location = new System.Drawing.Point(7, 23);
+            this.btn_Add_Venue.Location = new System.Drawing.Point(7, 29);
             this.btn_Add_Venue.Name = "btn_Add_Venue";
             this.btn_Add_Venue.Size = new System.Drawing.Size(109, 23);
             this.btn_Add_Venue.TabIndex = 7;
@@ -209,7 +211,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Location = new System.Drawing.Point(10, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 20);
             this.label2.TabIndex = 6;
@@ -220,14 +222,14 @@
             this.dt_Venues.AllowUserToAddRows = false;
             this.dt_Venues.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dt_Venues.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 10F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dt_Venues.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Century Gothic", 10F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dt_Venues.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dt_Venues.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dt_Venues.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.fld_Venue_Name,
@@ -239,19 +241,19 @@
             this.fld_Additional_Charge,
             this.EditVenue,
             this.DeleteVenue});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 10F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dt_Venues.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dt_Venues.Location = new System.Drawing.Point(7, 52);
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Century Gothic", 10F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dt_Venues.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dt_Venues.Location = new System.Drawing.Point(7, 58);
             this.dt_Venues.Name = "dt_Venues";
             this.dt_Venues.ReadOnly = true;
             this.dt_Venues.RowHeadersVisible = false;
-            this.dt_Venues.Size = new System.Drawing.Size(1103, 258);
+            this.dt_Venues.Size = new System.Drawing.Size(1103, 279);
             this.dt_Venues.TabIndex = 5;
             this.dt_Venues.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_Venues_CellContentClick);
             // 
@@ -332,11 +334,23 @@
             this.DeleteVenue.ReadOnly = true;
             this.DeleteVenue.Width = 60;
             // 
+            // btn_AddScope
+            // 
+            this.btn_AddScope.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btn_AddScope.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_AddScope.Location = new System.Drawing.Point(134, 29);
+            this.btn_AddScope.Name = "btn_AddScope";
+            this.btn_AddScope.Size = new System.Drawing.Size(109, 23);
+            this.btn_AddScope.TabIndex = 8;
+            this.btn_AddScope.Text = "Add Scope";
+            this.btn_AddScope.UseVisualStyleBackColor = true;
+            this.btn_AddScope.Click += new System.EventHandler(this.btn_AddScope_Click);
+            // 
             // frm_Manage_Facilities
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1147, 674);
+            this.ClientSize = new System.Drawing.Size(1296, 710);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "frm_Manage_Facilities";
@@ -378,5 +392,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Equipment_Price_Subsequent;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewImageColumn Delete;
+        private System.Windows.Forms.Button btn_AddScope;
     }
 }

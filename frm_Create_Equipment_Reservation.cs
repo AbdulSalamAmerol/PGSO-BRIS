@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -24,6 +24,7 @@ namespace pgso
             public string EquipmentName { get; set; }
             public int Quantity { get; set; }
             public decimal Rate { get; set; }
+            public decimal NumDays { get; set; }
             public decimal CalculatedTotal { get; set; }
         }
         public frm_Create_Equipment_Reservation()
@@ -134,7 +135,7 @@ namespace pgso
         }
 
         private void LoadUtilities(string type)
-        {
+        {/*
             try
             {
                 DBConnect();
@@ -177,7 +178,7 @@ namespace pgso
             finally
             {
                 DBClose();
-            }
+            }*/
         }
 
         private void LoadUtilityDetails(int utilityId)
@@ -247,9 +248,7 @@ namespace pgso
                 if (int.TryParse(txt_Quantity.Text, out int quantity) && quantity > 0 &&
                     int.TryParse(txt_Days_Of_Use.Text, out int numberOfDays) && numberOfDays > 0)
                 {
-                    // Calculate the total subsequent cost based on the number of days
-                   // decimal subsequentTotal = subsequentRate;
-                    //txt_Price_Subsequent.Text = subsequentTotal.ToString("0.00");
+
 
                     // Calculate the total amount by adding the rate and subsequent total, then multiplying by the quantity
                     decimal totalAmount = ((rate * quantity) + (subsequentRate * quantity * (numberOfDays - 1)));
@@ -282,7 +281,8 @@ namespace pgso
                 dgv_Selected_Equipments.Rows.Add(
                     item.EquipmentName,
                     item.Quantity,
-                    item.Rate.ToString("0.00"),
+                    item.NumDays,
+                   // item.Rate.ToString("0.00"),
                     item.CalculatedTotal.ToString("0.00")
                 );
             }
@@ -393,8 +393,8 @@ namespace pgso
                     // Insert equipment
                     cmd = new SqlCommand(@"
                 INSERT INTO tbl_Reservation_Equipment 
-                (fk_ReservationID, fk_EquipmentID, fk_Equipment_PricingID, fld_Quantity, fld_Number_Of_Days, fld_Rate_Per_Day, fld_Total_Equipment_Cost) 
-                VALUES (@fk_ReservationID, @fk_EquipmentID, @fk_Equipment_PricingID, @fld_Quantity, @fld_Number_Of_Days, @fld_Rate_Per_Day, @fld_Total_Equipment_Cost)",
+                (fk_ReservationID, fk_EquipmentID, fk_Equipment_PricingID, fld_Quantity, fld_Number_Of_Days, fld_Total_Equipment_Cost) 
+                VALUES (@fk_ReservationID, @fk_EquipmentID, @fk_Equipment_PricingID, @fld_Quantity, @fld_Number_Of_Days, @fld_Total_Equipment_Cost)",
                         conn, transaction);
 
                     cmd.Parameters.AddWithValue("@fk_ReservationID", reservationID);
@@ -402,7 +402,7 @@ namespace pgso
                     cmd.Parameters.AddWithValue("@fk_Equipment_PricingID", venuePricingID);
                     cmd.Parameters.AddWithValue("@fld_Quantity", equipment.Quantity);
                     cmd.Parameters.AddWithValue("@fld_Number_Of_Days", txt_Days_Of_Use.Text);
-                    cmd.Parameters.AddWithValue("@fld_Rate_Per_Day", equipment.Rate);
+                  
                     cmd.Parameters.AddWithValue("@fld_Total_Equipment_Cost", equipment.CalculatedTotal); // Include total cost
 
                     cmd.ExecuteNonQuery();
@@ -523,7 +523,8 @@ namespace pgso
                 EquipmentID = equipmentId,
                 EquipmentName = equipmentName,
                 Quantity = quantity,
-                Rate = rate,
+                //Rate = rate,
+                NumDays = decimal.Parse(txt_Days_Of_Use.Text),
                 CalculatedTotal = totalAmount
             });
 

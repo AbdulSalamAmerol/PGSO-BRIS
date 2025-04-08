@@ -80,7 +80,6 @@
             this.days_Container.Name = "days_Container";
             this.days_Container.Size = new System.Drawing.Size(986, 545);
             this.days_Container.TabIndex = 0;
-//            this.days_Container.Paint += new System.Windows.Forms.PaintEventHandler(this.days_Container_Paint);
             // 
             // btn_Next
             // 
@@ -348,7 +347,6 @@
             this.label14.TabIndex = 8;
             this.label14.Text = "Activity:";
             this.label14.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-           // this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
             // lbl_Activity
             // 
@@ -464,6 +462,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
             this.Name = "frm_Calendar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frm_Calendar";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frm_Calendar_Load);

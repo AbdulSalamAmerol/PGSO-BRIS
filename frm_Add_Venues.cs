@@ -220,5 +220,40 @@ namespace pgso
         {
 
         }
+
+        private void txt_Venue_Name_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_Venue_Scope_Name_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_RT1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radio_No1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_First_Four_Hours_Rate_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_Hourly_Rate_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_Additional_Charges_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

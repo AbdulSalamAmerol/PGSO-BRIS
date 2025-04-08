@@ -227,6 +227,12 @@
     <Compile Include="frm_Add_Equipment.Designer.cs">
       <DependentUpon>frm_Add_Equipment.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_Add_Scope.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Add_Scope.Designer.cs">
+      <DependentUpon>frm_Add_Scope.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_Add_Venues.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -299,12 +305,6 @@
     <Compile Include="frm_Manage_Facilities.Designer.cs">
       <DependentUpon>frm_Manage_Facilities.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_mngreservation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_mngreservation.Designer.cs">
-      <DependentUpon>frm_mngreservation.cs</DependentUpon>
-    </Compile>
     <Compile Include="frm_Venue_Pending.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -358,6 +358,10 @@
     <EmbeddedResource Include="frm_Add_Equipment.resx">
       <DependentUpon>frm_Add_Equipment.cs</DependentUpon>
     </EmbeddedResource>
+
+    <EmbeddedResource Include="frm_Add_Scope.resx">
+      <DependentUpon>frm_Add_Scope.cs</DependentUpon>
+
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -379,6 +383,7 @@
     </Compile>
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Billing.resx">
       <DependentUpon>frm_Billing.cs</DependentUpon>
+
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Add_Venues.resx">
       <DependentUpon>frm_Add_Venues.cs</DependentUpon>
@@ -416,9 +421,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Manage_Facilities.resx">
       <DependentUpon>frm_Manage_Facilities.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_mngreservation.resx">
-      <DependentUpon>frm_mngreservation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Venue_Pending.resx">
       <DependentUpon>frm_Venue_Pending.cs</DependentUpon>
