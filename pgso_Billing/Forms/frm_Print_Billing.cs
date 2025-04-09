@@ -10,7 +10,7 @@ namespace pgso.pgso_Billing.Forms
     public partial class frm_Print_Billing : Form
     {
         private int _reservationId;
-        private List<Billing_Model> _billingData;
+        private List<Model_Billing> _billingData;
         private Repo_Billing repo_Billing = new Repo_Billing(); // Repository instance
 
         // Accept only pk_ReservationID when opening the form

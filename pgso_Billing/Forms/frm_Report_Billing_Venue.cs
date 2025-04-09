@@ -15,7 +15,7 @@ namespace pgso.pgso_Billing.Forms
 {
     public partial class frm_Report_Billing_Venue : Form
     {
-        private List<Billing_Model> _revenueData;
+        private List<Model_Billing> _revenueData;
         private Repo_Billing repo_Billing = new Repo_Billing(); // Repository instance
 
         private DateTime _startDate;

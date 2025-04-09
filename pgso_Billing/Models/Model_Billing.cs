@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace pgso.Billing.Models
 {
-    public class Billing_Model
+    public class Model_Billing
     {
         // Full Name 
         public string fld_Full_Name => $"{fld_First_Name} {(string.IsNullOrEmpty(fld_Middle_Name) ? "" : fld_Middle_Name + " ")}{fld_Surname}".Trim();
@@ -32,14 +32,12 @@ namespace pgso.Billing.Models
         public decimal fld_Total_Amount { get; set; }
         public int fld_OT_Hours { get; set; }
 
-
         // Venue Details
         public int? pk_VenueID { get; set; }
         public string fld_Venue_Name { get; set; }
         public int? pk_Venue_ScopeID { get; set; }
         public string fld_Venue_Scope_Name { get; set; }
         
-
         // Venue Pricing
         public int? pk_Venue_PricingID { get; set; }
         public decimal fld_First4Hrs_Rate { get; set; }
@@ -87,7 +85,11 @@ namespace pgso.Billing.Models
         // Add a new property to store merged equipment names ( show sa datagridview as 1 liner when many eq reservation)
         public List<string> EquipmentNames { get; set; } = new List<string>();
 
-        /*public string DisplayReservationName // I might not need this
+        // Datagridview display name for reservation with multiple equipment 
+        // This property will return the name of the venue if fld_Reservation_Type is "Venue"
+        // Otherwise, it will return the names of the equipment in a comma-separated format
+        // (WHAT IF DALAWA VENUE) NEED FIXING!
+        public string DisplayReservationName 
         {
             get
             {
@@ -96,6 +98,6 @@ namespace pgso.Billing.Models
                     ? fld_Venue_Name
                     : string.Join(", ", EquipmentNames); // Merge equipment names if it's equipment type
             }
-        }*/
+        }
     }
 }

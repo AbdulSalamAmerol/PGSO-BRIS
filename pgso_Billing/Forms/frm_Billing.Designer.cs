@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_Billing));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tlp_Billing_UControls = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -142,11 +142,11 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tlp_Billing_UControls.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -243,7 +243,7 @@
             this.textBox2.Size = new System.Drawing.Size(43, 13);
             this.textBox2.TabIndex = 7;
             this.textBox2.Text = "Filter";
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged_1);
             // 
             // textBox1
             // 
@@ -280,18 +280,18 @@
             this.dgv_Billing_Records.AllowUserToOrderColumns = true;
             this.dgv_Billing_Records.AllowUserToResizeColumns = false;
             this.dgv_Billing_Records.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgv_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle49.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgv_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle49;
             this.dgv_Billing_Records.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_Billing_Records.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Billing_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle50.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle50.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle50.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle50.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle50.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle50.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Billing_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle50;
             this.dgv_Billing_Records.ColumnHeadersHeight = 40;
             this.dgv_Billing_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_Billing_Records.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -308,14 +308,14 @@
             this.col_Extend,
             this.col_Cancel,
             this.col_Print});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_Billing_Records.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle60.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle60.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            dataGridViewCellStyle60.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle60.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle60.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle60.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_Billing_Records.DefaultCellStyle = dataGridViewCellStyle60;
             this.dgv_Billing_Records.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_Billing_Records.Location = new System.Drawing.Point(11, 68);
             this.dgv_Billing_Records.Margin = new System.Windows.Forms.Padding(0);
@@ -333,8 +333,8 @@
             // 
             this.pk_ReservationID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.pk_ReservationID.DataPropertyName = "pk_ReservationID";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.pk_ReservationID.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.pk_ReservationID.DefaultCellStyle = dataGridViewCellStyle51;
             this.pk_ReservationID.FillWeight = 5F;
             this.pk_ReservationID.HeaderText = "ID";
             this.pk_ReservationID.MinimumWidth = 10;
@@ -348,8 +348,8 @@
             // 
             this.fld_Control_Number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.fld_Control_Number.DataPropertyName = "fld_Control_Number";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.fld_Control_Number.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.fld_Control_Number.DefaultCellStyle = dataGridViewCellStyle52;
             this.fld_Control_Number.FillWeight = 15F;
             this.fld_Control_Number.HeaderText = "CONTROL NUMBER";
             this.fld_Control_Number.Name = "fld_Control_Number";
@@ -360,8 +360,8 @@
             // 
             this.fld_Full_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.fld_Full_Name.DataPropertyName = "fld_Full_Name";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.fld_Full_Name.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.fld_Full_Name.DefaultCellStyle = dataGridViewCellStyle53;
             this.fld_Full_Name.FillWeight = 15F;
             this.fld_Full_Name.HeaderText = "Requesting Person";
             this.fld_Full_Name.Name = "fld_Full_Name";
@@ -373,8 +373,8 @@
             // 
             this.col_Reservation_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_Reservation_Type.DataPropertyName = "fld_Reservation_Type";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Reservation_Type.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Reservation_Type.DefaultCellStyle = dataGridViewCellStyle54;
             this.col_Reservation_Type.FillWeight = 10F;
             this.col_Reservation_Type.HeaderText = "Reservation Type";
             this.col_Reservation_Type.Name = "col_Reservation_Type";
@@ -386,8 +386,8 @@
             // 
             this.col_Venue_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_Venue_Name.DataPropertyName = "fld_Venue_Name";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Venue_Name.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Venue_Name.DefaultCellStyle = dataGridViewCellStyle55;
             this.col_Venue_Name.FillWeight = 15F;
             this.col_Venue_Name.HeaderText = "Venue Name";
             this.col_Venue_Name.Name = "col_Venue_Name";
@@ -399,8 +399,8 @@
             // 
             this.col_Equipment_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_Equipment_Name.DataPropertyName = "fld_Equipment_Name";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Equipment_Name.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Equipment_Name.DefaultCellStyle = dataGridViewCellStyle56;
             this.col_Equipment_Name.FillWeight = 10F;
             this.col_Equipment_Name.HeaderText = "Equipment Name";
             this.col_Equipment_Name.Name = "col_Equipment_Name";
@@ -412,8 +412,8 @@
             // 
             this.col_Start_Date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_Start_Date.DataPropertyName = "fld_Start_Date";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Start_Date.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Start_Date.DefaultCellStyle = dataGridViewCellStyle57;
             this.col_Start_Date.FillWeight = 10F;
             this.col_Start_Date.HeaderText = "Reservation Date";
             this.col_Start_Date.Name = "col_Start_Date";
@@ -424,8 +424,8 @@
             // 
             this.col_Amount_Due.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_Amount_Due.DataPropertyName = "fld_Total_Amount";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Amount_Due.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Amount_Due.DefaultCellStyle = dataGridViewCellStyle58;
             this.col_Amount_Due.FillWeight = 10F;
             this.col_Amount_Due.HeaderText = "Amount Due";
             this.col_Amount_Due.Name = "col_Amount_Due";
@@ -436,8 +436,8 @@
             // 
             this.col_Payment_Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_Payment_Status.DataPropertyName = "fld_Reservation_Status";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Payment_Status.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Payment_Status.DefaultCellStyle = dataGridViewCellStyle59;
             this.col_Payment_Status.FillWeight = 7F;
             this.col_Payment_Status.HeaderText = "Status";
             this.col_Payment_Status.Name = "col_Payment_Status";
@@ -1349,12 +1349,12 @@
             this.lbl_Venue_Scope.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Venue_Scope.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Venue_Scope.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Venue_Scope.Location = new System.Drawing.Point(547, 248);
+            this.lbl_Venue_Scope.Location = new System.Drawing.Point(547, 262);
             this.lbl_Venue_Scope.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Venue_Scope.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Venue_Scope.Name = "lbl_Venue_Scope";
             this.lbl_Venue_Scope.ReadOnly = true;
-            this.lbl_Venue_Scope.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Venue_Scope.Size = new System.Drawing.Size(249, 25);
             this.lbl_Venue_Scope.TabIndex = 28;
             // 
             // textBox17
@@ -1363,12 +1363,12 @@
             this.textBox17.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox17.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox17.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox17.Location = new System.Drawing.Point(401, 248);
+            this.textBox17.Location = new System.Drawing.Point(401, 262);
             this.textBox17.Margin = new System.Windows.Forms.Padding(0);
             this.textBox17.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox17.Name = "textBox17";
             this.textBox17.ReadOnly = true;
-            this.textBox17.Size = new System.Drawing.Size(132, 16);
+            this.textBox17.Size = new System.Drawing.Size(132, 25);
             this.textBox17.TabIndex = 27;
             this.textBox17.Text = "Area";
             this.textBox17.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1379,12 +1379,12 @@
             this.lbl_Venue_Name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Venue_Name.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Venue_Name.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Venue_Name.Location = new System.Drawing.Point(547, 223);
+            this.lbl_Venue_Name.Location = new System.Drawing.Point(547, 235);
             this.lbl_Venue_Name.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Venue_Name.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Venue_Name.Name = "lbl_Venue_Name";
             this.lbl_Venue_Name.ReadOnly = true;
-            this.lbl_Venue_Name.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Venue_Name.Size = new System.Drawing.Size(249, 25);
             this.lbl_Venue_Name.TabIndex = 26;
             // 
             // textBox14
@@ -1393,12 +1393,12 @@
             this.textBox14.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox14.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox14.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox14.Location = new System.Drawing.Point(401, 223);
+            this.textBox14.Location = new System.Drawing.Point(401, 235);
             this.textBox14.Margin = new System.Windows.Forms.Padding(0);
             this.textBox14.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox14.Name = "textBox14";
             this.textBox14.ReadOnly = true;
-            this.textBox14.Size = new System.Drawing.Size(132, 16);
+            this.textBox14.Size = new System.Drawing.Size(132, 25);
             this.textBox14.TabIndex = 25;
             this.textBox14.Text = "Venue";
             this.textBox14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1439,12 +1439,12 @@
             this.lbl_Reservation_Status.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Reservation_Status.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Reservation_Status.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Reservation_Status.Location = new System.Drawing.Point(547, 198);
+            this.lbl_Reservation_Status.Location = new System.Drawing.Point(547, 208);
             this.lbl_Reservation_Status.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Reservation_Status.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Reservation_Status.Name = "lbl_Reservation_Status";
             this.lbl_Reservation_Status.ReadOnly = true;
-            this.lbl_Reservation_Status.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Reservation_Status.Size = new System.Drawing.Size(249, 25);
             this.lbl_Reservation_Status.TabIndex = 22;
             // 
             // lbl_Number_Of_Participants
@@ -1453,12 +1453,12 @@
             this.lbl_Number_Of_Participants.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Number_Of_Participants.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Number_Of_Participants.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Number_Of_Participants.Location = new System.Drawing.Point(547, 173);
+            this.lbl_Number_Of_Participants.Location = new System.Drawing.Point(547, 181);
             this.lbl_Number_Of_Participants.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Number_Of_Participants.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Number_Of_Participants.Name = "lbl_Number_Of_Participants";
             this.lbl_Number_Of_Participants.ReadOnly = true;
-            this.lbl_Number_Of_Participants.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Number_Of_Participants.Size = new System.Drawing.Size(249, 25);
             this.lbl_Number_Of_Participants.TabIndex = 21;
             // 
             // lbl_Activity_Name
@@ -1467,12 +1467,12 @@
             this.lbl_Activity_Name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Activity_Name.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Activity_Name.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Activity_Name.Location = new System.Drawing.Point(547, 148);
+            this.lbl_Activity_Name.Location = new System.Drawing.Point(547, 154);
             this.lbl_Activity_Name.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Activity_Name.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Activity_Name.Name = "lbl_Activity_Name";
             this.lbl_Activity_Name.ReadOnly = true;
-            this.lbl_Activity_Name.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Activity_Name.Size = new System.Drawing.Size(249, 25);
             this.lbl_Activity_Name.TabIndex = 20;
             // 
             // lbl_Reservation_Time
@@ -1481,12 +1481,12 @@
             this.lbl_Reservation_Time.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Reservation_Time.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Reservation_Time.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Reservation_Time.Location = new System.Drawing.Point(547, 123);
+            this.lbl_Reservation_Time.Location = new System.Drawing.Point(547, 127);
             this.lbl_Reservation_Time.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Reservation_Time.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Reservation_Time.Name = "lbl_Reservation_Time";
             this.lbl_Reservation_Time.ReadOnly = true;
-            this.lbl_Reservation_Time.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Reservation_Time.Size = new System.Drawing.Size(249, 25);
             this.lbl_Reservation_Time.TabIndex = 19;
             // 
             // lbl_Reservation_Dates
@@ -1495,12 +1495,12 @@
             this.lbl_Reservation_Dates.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Reservation_Dates.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Reservation_Dates.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Reservation_Dates.Location = new System.Drawing.Point(547, 98);
+            this.lbl_Reservation_Dates.Location = new System.Drawing.Point(547, 100);
             this.lbl_Reservation_Dates.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Reservation_Dates.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Reservation_Dates.Name = "lbl_Reservation_Dates";
             this.lbl_Reservation_Dates.ReadOnly = true;
-            this.lbl_Reservation_Dates.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Reservation_Dates.Size = new System.Drawing.Size(249, 25);
             this.lbl_Reservation_Dates.TabIndex = 18;
             // 
             // lbl_Address
@@ -1509,12 +1509,12 @@
             this.lbl_Address.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Address.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Address.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Address.Location = new System.Drawing.Point(149, 198);
+            this.lbl_Address.Location = new System.Drawing.Point(149, 208);
             this.lbl_Address.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Address.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Address.Name = "lbl_Address";
             this.lbl_Address.ReadOnly = true;
-            this.lbl_Address.Size = new System.Drawing.Size(250, 23);
+            this.lbl_Address.Size = new System.Drawing.Size(250, 25);
             this.lbl_Address.TabIndex = 17;
             // 
             // lbl_Contact_Number
@@ -1523,12 +1523,12 @@
             this.lbl_Contact_Number.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Contact_Number.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Contact_Number.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Contact_Number.Location = new System.Drawing.Point(149, 173);
+            this.lbl_Contact_Number.Location = new System.Drawing.Point(149, 181);
             this.lbl_Contact_Number.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Contact_Number.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Contact_Number.Name = "lbl_Contact_Number";
             this.lbl_Contact_Number.ReadOnly = true;
-            this.lbl_Contact_Number.Size = new System.Drawing.Size(250, 23);
+            this.lbl_Contact_Number.Size = new System.Drawing.Size(250, 25);
             this.lbl_Contact_Number.TabIndex = 16;
             // 
             // lbl_Origin_Request
@@ -1537,12 +1537,12 @@
             this.lbl_Origin_Request.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Origin_Request.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Origin_Request.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Origin_Request.Location = new System.Drawing.Point(149, 148);
+            this.lbl_Origin_Request.Location = new System.Drawing.Point(149, 154);
             this.lbl_Origin_Request.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Origin_Request.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Origin_Request.Name = "lbl_Origin_Request";
             this.lbl_Origin_Request.ReadOnly = true;
-            this.lbl_Origin_Request.Size = new System.Drawing.Size(250, 23);
+            this.lbl_Origin_Request.Size = new System.Drawing.Size(250, 25);
             this.lbl_Origin_Request.TabIndex = 15;
             // 
             // lbl_Requesting_Office
@@ -1551,12 +1551,12 @@
             this.lbl_Requesting_Office.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Requesting_Office.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Requesting_Office.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Requesting_Office.Location = new System.Drawing.Point(149, 123);
+            this.lbl_Requesting_Office.Location = new System.Drawing.Point(149, 127);
             this.lbl_Requesting_Office.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Requesting_Office.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Requesting_Office.Name = "lbl_Requesting_Office";
             this.lbl_Requesting_Office.ReadOnly = true;
-            this.lbl_Requesting_Office.Size = new System.Drawing.Size(250, 23);
+            this.lbl_Requesting_Office.Size = new System.Drawing.Size(250, 25);
             this.lbl_Requesting_Office.TabIndex = 14;
             // 
             // lbl_Requesting_Person
@@ -1565,12 +1565,12 @@
             this.lbl_Requesting_Person.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Requesting_Person.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Requesting_Person.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Requesting_Person.Location = new System.Drawing.Point(149, 98);
+            this.lbl_Requesting_Person.Location = new System.Drawing.Point(149, 100);
             this.lbl_Requesting_Person.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Requesting_Person.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Requesting_Person.Name = "lbl_Requesting_Person";
             this.lbl_Requesting_Person.ReadOnly = true;
-            this.lbl_Requesting_Person.Size = new System.Drawing.Size(250, 23);
+            this.lbl_Requesting_Person.Size = new System.Drawing.Size(250, 25);
             this.lbl_Requesting_Person.TabIndex = 13;
             // 
             // textBox15
@@ -1594,12 +1594,12 @@
             this.textBox13.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox13.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox13.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox13.Location = new System.Drawing.Point(401, 198);
+            this.textBox13.Location = new System.Drawing.Point(401, 208);
             this.textBox13.Margin = new System.Windows.Forms.Padding(0);
             this.textBox13.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox13.Name = "textBox13";
             this.textBox13.ReadOnly = true;
-            this.textBox13.Size = new System.Drawing.Size(132, 16);
+            this.textBox13.Size = new System.Drawing.Size(132, 25);
             this.textBox13.TabIndex = 10;
             this.textBox13.Text = "Status";
             this.textBox13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1610,12 +1610,12 @@
             this.textBox12.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox12.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox12.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox12.Location = new System.Drawing.Point(401, 173);
+            this.textBox12.Location = new System.Drawing.Point(401, 181);
             this.textBox12.Margin = new System.Windows.Forms.Padding(0);
             this.textBox12.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox12.Name = "textBox12";
             this.textBox12.ReadOnly = true;
-            this.textBox12.Size = new System.Drawing.Size(132, 16);
+            this.textBox12.Size = new System.Drawing.Size(132, 25);
             this.textBox12.TabIndex = 9;
             this.textBox12.Text = "No. of Participants";
             this.textBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1626,12 +1626,12 @@
             this.textBox11.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox11.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox11.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox11.Location = new System.Drawing.Point(401, 148);
+            this.textBox11.Location = new System.Drawing.Point(401, 154);
             this.textBox11.Margin = new System.Windows.Forms.Padding(0);
             this.textBox11.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox11.Name = "textBox11";
             this.textBox11.ReadOnly = true;
-            this.textBox11.Size = new System.Drawing.Size(132, 16);
+            this.textBox11.Size = new System.Drawing.Size(132, 25);
             this.textBox11.TabIndex = 8;
             this.textBox11.Text = "Activity";
             this.textBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1642,12 +1642,12 @@
             this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox10.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox10.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox10.Location = new System.Drawing.Point(401, 123);
+            this.textBox10.Location = new System.Drawing.Point(401, 127);
             this.textBox10.Margin = new System.Windows.Forms.Padding(0);
             this.textBox10.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox10.Name = "textBox10";
             this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(132, 16);
+            this.textBox10.Size = new System.Drawing.Size(132, 25);
             this.textBox10.TabIndex = 7;
             this.textBox10.Text = "Reservation Time";
             this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1658,12 +1658,12 @@
             this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox9.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox9.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox9.Location = new System.Drawing.Point(401, 98);
+            this.textBox9.Location = new System.Drawing.Point(401, 100);
             this.textBox9.Margin = new System.Windows.Forms.Padding(0);
             this.textBox9.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(132, 16);
+            this.textBox9.Size = new System.Drawing.Size(132, 25);
             this.textBox9.TabIndex = 6;
             this.textBox9.Text = "Reservation Dates";
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1674,12 +1674,12 @@
             this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox8.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox8.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox8.Location = new System.Drawing.Point(4, 198);
+            this.textBox8.Location = new System.Drawing.Point(4, 208);
             this.textBox8.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.textBox8.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox8.Name = "textBox8";
             this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(132, 16);
+            this.textBox8.Size = new System.Drawing.Size(132, 25);
             this.textBox8.TabIndex = 5;
             this.textBox8.Text = "Address";
             this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1690,12 +1690,12 @@
             this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox7.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox7.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox7.Location = new System.Drawing.Point(4, 148);
+            this.textBox7.Location = new System.Drawing.Point(4, 154);
             this.textBox7.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.textBox7.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox7.Name = "textBox7";
             this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(132, 16);
+            this.textBox7.Size = new System.Drawing.Size(132, 25);
             this.textBox7.TabIndex = 4;
             this.textBox7.Text = "Origin of Request";
             this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1706,12 +1706,12 @@
             this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox6.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox6.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox6.Location = new System.Drawing.Point(4, 173);
+            this.textBox6.Location = new System.Drawing.Point(4, 181);
             this.textBox6.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.textBox6.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(132, 16);
+            this.textBox6.Size = new System.Drawing.Size(132, 25);
             this.textBox6.TabIndex = 3;
             this.textBox6.Text = "Contact Number";
             this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1722,12 +1722,12 @@
             this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox5.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox5.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox5.Location = new System.Drawing.Point(4, 123);
+            this.textBox5.Location = new System.Drawing.Point(4, 127);
             this.textBox5.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.textBox5.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(132, 16);
+            this.textBox5.Size = new System.Drawing.Size(132, 25);
             this.textBox5.TabIndex = 2;
             this.textBox5.Text = "Requesting Office";
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1738,12 +1738,12 @@
             this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox4.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox4.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox4.Location = new System.Drawing.Point(4, 98);
+            this.textBox4.Location = new System.Drawing.Point(4, 100);
             this.textBox4.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.textBox4.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(132, 16);
+            this.textBox4.Size = new System.Drawing.Size(132, 25);
             this.textBox4.TabIndex = 1;
             this.textBox4.Text = "Requesting Person";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1762,6 +1762,14 @@
             this.textBox3.Size = new System.Drawing.Size(196, 19);
             this.textBox3.TabIndex = 0;
             this.textBox3.Text = "CLIENT INFORMATION";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(750, 695);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(824, 12);
+            this.flowLayoutPanel1.TabIndex = 0;
             // 
             // dataGridViewImageColumn1
             // 
@@ -1805,14 +1813,6 @@
             this.dataGridViewImageColumn4.Name = "dataGridViewImageColumn4";
             this.dataGridViewImageColumn4.ReadOnly = true;
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(750, 695);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(824, 12);
-            this.flowLayoutPanel1.TabIndex = 0;
-            // 
             // frm_Billing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1855,7 +1855,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Panel pnl_Billing_Details;
         private System.Windows.Forms.TextBox textBox3;
@@ -1952,5 +1951,6 @@
         private System.Windows.Forms.TextBox textBox25;
         private System.Windows.Forms.TextBox textBox24;
         private System.Windows.Forms.TextBox textBox38;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }

@@ -13,9 +13,9 @@ namespace pgso.Billing.Repositories
         private string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;Persist Security Info=True;User ID=sa;Password=abz123;Encrypt=False;";
 
 
-        public List<Billing_Model> GetAllBillingRecords()
+        public List<Model_Billing> GetAllBillingRecords()
         {
-            List<Billing_Model> billings = new List<Billing_Model>();
+            List<Model_Billing> billings = new List<Model_Billing>();
 
             try
             {
@@ -103,7 +103,7 @@ namespace pgso.Billing.Repositories
 
                             Console.WriteLine($"📝 Fetched Reservation: {reservationId}, {controlNumber}");
 
-                            Billing_Model billing = new Billing_Model
+                            Model_Billing billing = new Model_Billing
                             {
                                 // Requesting Person Details
                                 pk_Requesting_PersonID = reader.IsDBNull(0) ? 0 : reader.GetInt32(0),
@@ -178,9 +178,9 @@ namespace pgso.Billing.Repositories
         }
 
         // Get Billing Records by Reservation ID (RDLC of frm_Print_Billing)
-        public List<Billing_Model> GetBillingRecordsByReservationId(int reservationId)
+        public List<Model_Billing> GetBillingRecordsByReservationId(int reservationId)
         {
-            List<Billing_Model> billingRecords = new List<Billing_Model>();
+            List<Model_Billing> billingRecords = new List<Model_Billing>();
 
 
             try
@@ -261,7 +261,7 @@ namespace pgso.Billing.Repositories
                         {
                             while (reader.Read())
                             {
-                                Billing_Model billing = new Billing_Model
+                                Model_Billing billing = new Model_Billing
                                 {
 
                                     pk_Requesting_PersonID = reader.IsDBNull(0) ? 0 : reader.GetInt32(0),
@@ -329,9 +329,9 @@ namespace pgso.Billing.Repositories
         }
 
         // Get Revenue Data by Filters (RDLC of frm_Report_Revenue_By_Reservation_Type)
-        public List<Billing_Model> GetRevenueByFilters(DateTime startDate, DateTime endDate, string paymentStatus, string reservationType)
+        public List<Model_Billing> GetRevenueByFilters(DateTime startDate, DateTime endDate, string paymentStatus, string reservationType)
         {
-            List<Billing_Model> revenueData = new List<Billing_Model>();
+            List<Model_Billing> revenueData = new List<Model_Billing>();
 
             try
             {
@@ -427,7 +427,7 @@ namespace pgso.Billing.Repositories
                         {
                             while (reader.Read())
                             {
-                                revenueData.Add(new Billing_Model
+                                revenueData.Add(new Model_Billing
                                 {
                                     pk_Requesting_PersonID = reader.IsDBNull(0) ? 0 : reader.GetInt32(0),
                                     fld_Surname = reader.IsDBNull(1) ? "" : reader.GetString(1),
@@ -500,9 +500,9 @@ namespace pgso.Billing.Repositories
 
 
         // Fetch billing details for a specific reservation
-        public Billing_Model GetBillingDetailsByReservationID(int reservationID)
+        public Model_Billing GetBillingDetailsByReservationID(int reservationID)
         {
-            Billing_Model billingDetails = null;
+            Model_Billing billingDetails = null;
 
             try
             {
@@ -577,7 +577,7 @@ namespace pgso.Billing.Repositories
                         {
                             if (reader.Read())
                             {
-                                billingDetails = new Billing_Model
+                                billingDetails = new Model_Billing
                                 {
                                     pk_Requesting_PersonID = reader.IsDBNull(0) ? 0 : reader.GetInt32(0),
                                     fld_Surname = reader.IsDBNull(1) ? "" : reader.GetString(1),

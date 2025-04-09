@@ -16,7 +16,7 @@ namespace pgso.pgso_Billing.Forms
     {
         public event Action OnExtensionSuccessful;  // Define the event
         private int _reservationID;
-        private List<Billing_Model> _billingData;
+        private List<Model_Billing> _billingData;
         private Repo_Billing repo_Billing = new Repo_Billing(); // Repository instance
 
         public frm_Extend_Venue(int reservationID)

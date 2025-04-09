@@ -11,14 +11,14 @@ using System.IO;
 using System.Threading.Tasks;
 
 // PAGINATION FEATURE 4/6/25 8:20 PM
+// add jaymar contri
 namespace pgso
 {
     public partial class frm_Billing : Form
     {
-        private Dictionary<int, Billing_Model> billingDetailsCache = new Dictionary<int, Billing_Model>(); //for cache
-        private List<Billing_Model> groupedBillingData; // Store grouped data globally
+        private List<Model_Billing> all_billing_model = new List<Model_Billing>(); // Global list to hold all billing records
+        private List<Model_Billing> groupedBillingData; // Store grouped data globally
         private Repo_Billing repo_billing = new Repo_Billing();
-        private List<Billing_Model> all_billing_model = new List<Billing_Model>(); // Global list to hold all billing records
         private BindingSource dgv_billing_binding_source = new BindingSource();// Binding source for DataGridView
 
         public frm_Billing()
@@ -43,9 +43,7 @@ namespace pgso
         {
             try
             {
-
-                // Get all billing records
-                all_billing_model = repo_billing.GetAllBillingRecords() ?? new List<Billing_Model>();
+                all_billing_model = repo_billing.GetAllBillingRecords() ?? new List<Model_Billing>(); // Get all billing records
 
                 if (all_billing_model.Count == 0)
                 {
@@ -95,7 +93,9 @@ namespace pgso
             }
         }// 🔍 Fixed Search Method
 
-        private Billing_Model GetBillingDetailsByReservationID(int reservationID)
+
+        private Dictionary<int, Model_Billing> billingDetailsCache = new Dictionary<int, Model_Billing>(); //for cache
+        private Model_Billing GetBillingDetailsByReservationID(int reservationID)
         {
             if (billingDetailsCache.ContainsKey(reservationID))
             {
@@ -235,7 +235,7 @@ namespace pgso
                     RefreshBillingRecords(reservationID);
 
                     // Optionally, display updated billing details in the panel
-                    Billing_Model updatedDetails = all_billing_model.FirstOrDefault(r => r.pk_ReservationID == reservationID);
+                    Model_Billing updatedDetails = all_billing_model.FirstOrDefault(r => r.pk_ReservationID == reservationID);
                     if (updatedDetails != null)
                     {
                         DisplayBillingDetailsInPanel(updatedDetails);
@@ -339,7 +339,7 @@ namespace pgso
             }
         }
         //Details Panel
-        private void DisplayBillingDetailsInPanel(Billing_Model billingDetails)
+        private void DisplayBillingDetailsInPanel(Model_Billing billingDetails)
         {
             pnl_Billing_Details.Visible = true;
 
@@ -416,7 +416,7 @@ namespace pgso
             {
                 MessageBox.Show("Refreshing billing records...");
 
-                all_billing_model = repo_billing.GetAllBillingRecords() ?? new List<Billing_Model>();
+                all_billing_model = repo_billing.GetAllBillingRecords() ?? new List<Model_Billing>();
 
                 if (all_billing_model.Count == 0)
                 {
@@ -476,14 +476,8 @@ namespace pgso
             }
         }
 
-
-
-
-
-
-
-
-        private List<Billing_Model> GroupAndFormatBillingData(List<Billing_Model> billingData)
+        // DGV Grouping and Formatting
+        private List<Model_Billing> GroupAndFormatBillingData(List<Model_Billing> billingData)
         {
             try
             {
@@ -511,15 +505,13 @@ namespace pgso
                     })
                     .ToList();
 
-                // Disable auto-generated columns
-                dgv_Billing_Records.AutoGenerateColumns = false;
+                dgv_Billing_Records.AutoGenerateColumns = false;// Disable auto-generated columns
 
                 // Re-assign the data source
                 dgv_billing_binding_source.DataSource = groupedData;
                 dgv_Billing_Records.DataSource = dgv_billing_binding_source;
 
-                // Refresh icon columns if needed
-                SetIconColumns();
+                SetIconColumns();// Refresh icon 
 
                 // Adjust column order if needed
                 if (!dgv_Billing_Records.Columns.Contains("col_Reservation_Name"))
@@ -536,16 +528,18 @@ namespace pgso
                 {
                     dgv_Billing_Records.Columns["col_Reservation_Name"].DisplayIndex = 2;
                 }
-
                 return groupedData;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to group and format billing records: " + ex.Message);
-                return new List<Billing_Model>(); // Return empty list in case of error
+                return new List<Model_Billing>(); // Return empty list in case of error
             }
         }
 
+
+
+        // Icons Formatting For DGV (print/cancel/approve/extend)
         private void SetIconColumns()
         {
             if (dgv_Billing_Records.Columns["col_Print"] is DataGridViewImageColumn imgCol)
@@ -570,47 +564,6 @@ namespace pgso
         }
 
 
-        private void OpenExtendVenueForm(int reservationID)
-        {
-            MessageBox.Show("Opening Extend Venue Form...");
-
-            frm_Extend_Venue extendForm = new frm_Extend_Venue(reservationID);
-
-            // Subscribe to the event BEFORE showing the form
-            extendForm.OnExtensionSuccessful += () =>
-            {
-                MessageBox.Show("Event triggered: Reservation extended. Refreshing billing records...");
-
-                // Re-fetch and refresh the data with the row selected
-                RefreshBillingRecords(reservationID); // This will refresh the grid and reselect the row
-
-                // Ensure we get the updated details of the reservation after it is extended
-                Billing_Model updatedDetails = all_billing_model.FirstOrDefault(r => r.pk_ReservationID == reservationID);
-                if (updatedDetails != null)
-                {
-                    MessageBox.Show("Updated billing details found, updating the panel...");
-                    DisplayBillingDetailsInPanel(updatedDetails); // ✅ Update panel with new data
-                }
-                else
-                {
-                    MessageBox.Show("Updated billing details not found for the reservation.");
-                }
-            };
-
-            extendForm.ShowDialog();
-
-            // After the dialog closes, you can refresh the data again in case the event wasn't triggered
-            RefreshBillingRecords(reservationID);
-        }
-
-
-
-
-
-
-
-
-
         private void btn_Extend_Venue_Click(object sender, EventArgs e)
         {
             if (dgv_Billing_Records.CurrentRow != null)
@@ -624,9 +577,36 @@ namespace pgso
                 MessageBox.Show("Please select a reservation first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+        private void OpenExtendVenueForm(int reservationID)
+        {
+            MessageBox.Show("Opening Extend Venue Form...");
+            frm_Extend_Venue extendForm = new frm_Extend_Venue(reservationID);
+            // Subscribe to the event BEFORE showing the form
+            extendForm.OnExtensionSuccessful += () =>
+            {
+                MessageBox.Show("Event triggered: Reservation extended. Refreshing billing records...");
 
+                // Re-fetch and refresh the data with the row selected
+               // RefreshBillingRecords(reservationID); // This will refresh the grid and reselect the row
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+                // Ensure we get the updated details of the reservation after it is extended
+                Model_Billing updatedDetails = all_billing_model.FirstOrDefault(r => r.pk_ReservationID == reservationID);
+                if (updatedDetails != null)
+                {
+                    MessageBox.Show("Updated billing details found, updating the panel...");
+                    DisplayBillingDetailsInPanel(updatedDetails); // ✅ Update panel with new data
+                }
+                else
+                {
+                    MessageBox.Show("Updated billing details not found for the reservation.");
+                }
+            };
+            extendForm.ShowDialog();
+            // After the dialog closes, you can refresh the data again in case the event wasn't triggered
+            RefreshBillingRecords(reservationID);
+        }
+
+        private void textBox2_TextChanged_1(object sender, EventArgs e)
         {
 
         }

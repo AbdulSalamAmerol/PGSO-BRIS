@@ -358,10 +358,9 @@
     <EmbeddedResource Include="frm_Add_Equipment.resx">
       <DependentUpon>frm_Add_Equipment.cs</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="frm_Add_Scope.resx">
       <DependentUpon>frm_Add_Scope.cs</DependentUpon>
-
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -383,7 +382,6 @@
     </Compile>
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Billing.resx">
       <DependentUpon>frm_Billing.cs</DependentUpon>
-
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Add_Venues.resx">
       <DependentUpon>frm_Add_Venues.cs</DependentUpon>
