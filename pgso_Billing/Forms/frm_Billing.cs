@@ -9,13 +9,20 @@ using System.Drawing;
 using pgso.Properties;
 using System.IO;
 using System.Threading.Tasks;
+using pgso.pgso_Billing.User_Control;
+using pgso.pgso_Billing;
 
-// PAGINATION FEATURE 4/6/25 8:20 PM
-// add jaymar contri
+
+
 namespace pgso
 {
     public partial class frm_Billing : Form
     {
+
+        //Controls.Venue_User_Controls venue_User_Controls = new Controls.Venue_User_Controls();
+
+
+
         private List<Model_Billing> all_billing_model = new List<Model_Billing>(); // Global list to hold all billing records
         private List<Model_Billing> groupedBillingData; // Store grouped data globally
         private Repo_Billing repo_billing = new Repo_Billing();
@@ -119,23 +126,58 @@ namespace pgso
         {
             if (e.RowIndex < 0) return; // Ignore header clicks
 
-            // Get selected column name
             string columnName = dgv_Billing_Records.Columns[e.ColumnIndex].Name;
 
-            // Get Reservation ID from selected row
             int reservationID = Convert.ToInt32(dgv_Billing_Records.Rows[e.RowIndex].Cells["pk_ReservationID"].Value);
-
-            // Get Current Status
             string currentStatus = dgv_Billing_Records.Rows[e.RowIndex].Cells["col_Payment_Status"].Value.ToString();
 
-            // Validate Reservation ID
             if (reservationID <= 0)
             {
                 MessageBox.Show("Invalid Reservation ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            await DisplayBillingDetails(reservationID);
-            // ✅ Handle Different Column Clicks
+
+            // 🔄 Load billing details
+            Model_Billing billing = repo_billing.GetBillingDetailsByReservationID(reservationID);
+
+            if (billing == null)
+            {
+                MessageBox.Show("Billing details not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // ✅ Dynamically load correct UserControl
+            pnl_Billing_Details.Controls.Clear(); // your panel to host the control
+            UserControl billingControl = null;
+
+            switch (billing.fld_Reservation_Type)
+            {
+                case "Venue":
+                    var venueControl = new Venue_User_Control(billing);
+                    venueControl.Dock = DockStyle.Fill;
+                    venueControl.LoadBillingDetails(billing);
+                    billingControl = venueControl;
+                    break;
+
+                case "Equipment":
+                    var equipmentControl = new Equipment_User_Control(billing);
+                    equipmentControl.Dock = DockStyle.Fill;
+                    equipmentControl.LoadBillingDetails(billing);
+                    billingControl = equipmentControl;
+                    break;
+
+                default:
+                    MessageBox.Show("Unsupported reservation type.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+            }
+
+            if (billingControl != null)
+            {
+                pnl_Billing_Details.Controls.Add(billingControl);
+                pnl_Billing_Details.Visible = true;
+            }
+
+            // ✅ Handle Specific Column Actions
             switch (columnName)
             {
                 case "col_Print":
@@ -153,9 +195,9 @@ namespace pgso
                 case "col_Extend":
                     HandleExtension(reservationID, e.RowIndex);
                     break;
-
             }
         }
+
 
         private async Task PrintBilling(int reservationID, string currentStatus) // Print Collection Slip
         {
@@ -209,40 +251,64 @@ namespace pgso
 
         private async Task HandleApprovalAsync(int reservationID, string currentStatus)
         {
-            // Check if the reservation status is "Pending"
             if (currentStatus != "Pending")
             {
                 MessageBox.Show("Only 'Pending' reservations can be approved.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Confirm approval
             if (MessageBox.Show("Are you sure you want to approve this reservation?",
                                 "Confirm Approval", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                // Perform the approval operation asynchronously
                 bool success = await UpdateReservationStatusAsync(reservationID, "Confirmed");
-
-                // Show status message for the approval outcome
                 ShowStatusMessage(success, "Confirmed");
 
                 if (success)
                 {
-                    // If successful, refresh the billing records and highlight the approved reservation row
                     MessageBox.Show("Reservation approved successfully. Refreshing billing records...");
 
-                    // Refresh the grid and select the updated row
                     RefreshBillingRecords(reservationID);
 
-                    // Optionally, display updated billing details in the panel
-                    Model_Billing updatedDetails = all_billing_model.FirstOrDefault(r => r.pk_ReservationID == reservationID);
+                    Model_Billing updatedDetails = repo_billing.GetBillingDetailsByReservationID(reservationID);
+
+
                     if (updatedDetails != null)
                     {
-                        DisplayBillingDetailsInPanel(updatedDetails);
+                        // Load correct UserControl dynamically
+                        pnl_Billing_Details.Controls.Clear();
+                        UserControl billingControl = null;
+
+                        switch (updatedDetails.fld_Reservation_Type)
+                        {
+                            case "Venue":
+                                var venueControl = new Venue_User_Control(updatedDetails);
+                                venueControl.Dock = DockStyle.Fill;
+                                venueControl.LoadBillingDetails(updatedDetails);
+                                billingControl = venueControl;
+                                break;
+
+                            case "Equipment":
+                                var equipmentControl = new Equipment_User_Control(updatedDetails);
+                                equipmentControl.Dock = DockStyle.Fill;
+                                equipmentControl.LoadBillingDetails(updatedDetails);
+                                billingControl = equipmentControl;
+                                break;
+
+                            default:
+                                MessageBox.Show("Unsupported reservation type.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return;
+                        }
+
+                        if (billingControl != null)
+                        {
+                            pnl_Billing_Details.Controls.Add(billingControl);
+                            pnl_Billing_Details.Visible = true;
+                        }
                     }
                 }
             }
         }
+
 
 
         private async Task HandleCancellationAsync(int reservationID, string currentStatus)
@@ -311,35 +377,43 @@ namespace pgso
             }
         }
 
-        
 
 
 
 
-        private async Task DisplayBillingDetails(int reservationID)
+
+        private void ShowBillingDetailsInPanel(Model_Billing details)
         {
-            try
-            {
-                // Fetch billing details asynchronously
-                var billingDetails = await Task.Run(() => repo_billing.GetBillingDetailsByReservationID(reservationID));
+            // Clear existing controls from the billing panel
+            pnl_Billing_Details.Controls.Clear();
 
-                if (billingDetails != null)
-                {
-                    // Update the UI on the main thread
-                    Invoke(new Action(() => DisplayBillingDetailsInPanel(billingDetails)));
-                }
-                else
-                {
-                    MessageBox.Show("No billing details found for this reservation.");
-                }
-            }
-            catch (Exception ex)
+            UserControl controlToDisplay;
+
+            if (details.fld_Reservation_Type == "Venue")
             {
-                MessageBox.Show($"Error fetching billing details: {ex.Message}");
+                controlToDisplay = new Venue_User_Control(details);
             }
+            else if (details.fld_Reservation_Type == "Equipment")
+            {
+                controlToDisplay = new Equipment_User_Control(details);
+            }
+            else
+            {
+                MessageBox.Show("Unknown reservation type. Cannot display billing details.");
+                return;
+            }
+
+            // Set docking and add to the panel
+            controlToDisplay.Dock = DockStyle.Fill;
+            pnl_Billing_Details.Controls.Add(controlToDisplay);
+
+            // Show the panel if it was hidden
+            if (!pnl_Billing_Details.Visible)
+                pnl_Billing_Details.Visible = true;
         }
+
         //Details Panel
-        private void DisplayBillingDetailsInPanel(Model_Billing billingDetails)
+        /*private void DisplayBillingDetailsInPanel(Model_Billing billingDetails)
         {
             pnl_Billing_Details.Visible = true;
 
@@ -402,6 +476,7 @@ namespace pgso
           
             lbl_Overtime_Fee.Text = billingDetails.fld_Overtime_Fee.ToString("C");
         }
+        */
 
         private void btn_Reports_Click(object sender, EventArgs e)
         {
@@ -581,30 +656,61 @@ namespace pgso
         {
             MessageBox.Show("Opening Extend Venue Form...");
             frm_Extend_Venue extendForm = new frm_Extend_Venue(reservationID);
+
             // Subscribe to the event BEFORE showing the form
             extendForm.OnExtensionSuccessful += () =>
             {
                 MessageBox.Show("Event triggered: Reservation extended. Refreshing billing records...");
 
                 // Re-fetch and refresh the data with the row selected
-               // RefreshBillingRecords(reservationID); // This will refresh the grid and reselect the row
+                // RefreshBillingRecords(reservationID); // This will refresh the grid and reselect the row
 
                 // Ensure we get the updated details of the reservation after it is extended
                 Model_Billing updatedDetails = all_billing_model.FirstOrDefault(r => r.pk_ReservationID == reservationID);
                 if (updatedDetails != null)
                 {
                     MessageBox.Show("Updated billing details found, updating the panel...");
-                    DisplayBillingDetailsInPanel(updatedDetails); // ✅ Update panel with new data
+
+                    // Dynamically load the correct UserControl based on the reservation type
+                    UserControl billingControl = null;
+                    switch (updatedDetails.fld_Reservation_Type)
+                    {
+                        case "Venue":
+                            var venueControl = new Venue_User_Control(updatedDetails); // Pass updated details to the constructor
+                            venueControl.Dock = DockStyle.Fill;
+                            billingControl = venueControl;
+                            break;
+
+                        case "Equipment":
+                            var equipmentControl = new Equipment_User_Control(updatedDetails); // Pass updated details to the constructor
+                            equipmentControl.Dock = DockStyle.Fill;
+                            billingControl = equipmentControl;
+                            break;
+
+                        default:
+                            MessageBox.Show("Unsupported reservation type.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                    }
+
+                    if (billingControl != null)
+                    {
+                        pnl_Billing_Details.Controls.Clear(); // Clear existing controls
+                        pnl_Billing_Details.Controls.Add(billingControl); // Add the new control
+                        pnl_Billing_Details.Visible = true;
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Updated billing details not found for the reservation.");
                 }
             };
+
             extendForm.ShowDialog();
+
             // After the dialog closes, you can refresh the data again in case the event wasn't triggered
             RefreshBillingRecords(reservationID);
         }
+
 
         private void textBox2_TextChanged_1(object sender, EventArgs e)
         {
