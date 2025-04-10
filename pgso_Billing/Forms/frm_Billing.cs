@@ -86,8 +86,8 @@ namespace pgso
                     (item.fld_Full_Name?.ToLower().Contains(searchTerm) ?? false) ||
                     (item.fld_Venue_Name?.ToLower().Contains(searchTerm) ?? false) ||
                     (item.fld_Reservation_Type?.ToLower().Contains(searchTerm) ?? false) ||
-                    (item.fld_Payment_Status?.ToLower().Contains(searchTerm) ?? false) ||
-                    item.EquipmentNames.Any(equipment => equipment.ToLower().Contains(searchTerm))
+                    (item.fld_Reservation_Status?.ToLower().Contains(searchTerm) ?? false) ||
+                    (item.EquipmentNames.Any(equipment => equipment.ToLower().Contains(searchTerm)))
                 ).ToList();
 
                 dgv_billing_binding_source.DataSource = filteredData;
@@ -122,7 +122,7 @@ namespace pgso
             string columnName = dgv_Billing_Records.Columns[e.ColumnIndex].Name;
 
             int reservationID = Convert.ToInt32(dgv_Billing_Records.Rows[e.RowIndex].Cells["pk_ReservationID"].Value);
-            string currentStatus = dgv_Billing_Records.Rows[e.RowIndex].Cells["col_Payment_Status"].Value.ToString();
+            string currentStatus = dgv_Billing_Records.Rows[e.RowIndex].Cells["col_Reservation_Status"].Value.ToString();
 
             if (reservationID <= 0)
             {
@@ -211,7 +211,7 @@ namespace pgso
         private void HandleExtension(int reservationID, int rowIndex)
         {
             // Get reservation status from the selected row
-            string reservationStatus = dgv_Billing_Records.Rows[rowIndex].Cells["col_Payment_Status"].Value.ToString();
+            string reservationStatus = dgv_Billing_Records.Rows[rowIndex].Cells["col_Reservation_Status"].Value.ToString();
 
             // Check if the reservation status is not "Confirmed"
             if (reservationStatus == "Cancelled" || reservationStatus == "Pending")
@@ -485,7 +485,7 @@ namespace pgso
                         item.fld_Reservation_Type,
                         item.fld_Start_Date,
                         item.fld_Total_Amount,
-                        item.fld_Payment_Status
+                        item.fld_Reservation_Status
                     })
                     .Select(group =>
                     {

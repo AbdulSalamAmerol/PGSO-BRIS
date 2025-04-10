@@ -45,16 +45,19 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.pnl_Billing_Details = new System.Windows.Forms.Panel();
+            this.dgv_Equipment_Billing_Records = new System.Windows.Forms.DataGridView();
             this.textBox38 = new System.Windows.Forms.TextBox();
             this.lbl_Rate_Type = new System.Windows.Forms.TextBox();
             this.textBox35 = new System.Windows.Forms.TextBox();
             this.textBox36 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.dgv_Equipment_Billing_Records = new System.Windows.Forms.DataGridView();
             this._BRIS_EXPERIMENT_3_0DataSet = new pgso._BRIS_EXPERIMENT_3_0DataSet();
             this.tblReservationEquipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbl_Reservation_EquipmentTableAdapter = new pgso._BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_Reservation_EquipmentTableAdapter();
+            this.lbl_Reservation_Status = new System.Windows.Forms.TextBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
             this.col_fk_Reservation_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_OT_Days = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Reservation_EquipmentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_fk_EquipmentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_fk_Equipment_PricingID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,6 +68,10 @@
             this.col_fld_Equipment_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_fld_Equipment_Price_Subsequent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_Add_Equipment_Billing = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lbl_fld_Total_Amount = new System.Windows.Forms.TextBox();
+            this.btn_Delete_Equipment_Billing = new System.Windows.Forms.Button();
             this.pnl_Billing_Details.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Equipment_Billing_Records)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet)).BeginInit();
@@ -299,6 +306,12 @@
             // pnl_Billing_Details
             // 
             this.pnl_Billing_Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Billing_Details.Controls.Add(this.btn_Delete_Equipment_Billing);
+            this.pnl_Billing_Details.Controls.Add(this.lbl_fld_Total_Amount);
+            this.pnl_Billing_Details.Controls.Add(this.textBox1);
+            this.pnl_Billing_Details.Controls.Add(this.btn_Add_Equipment_Billing);
+            this.pnl_Billing_Details.Controls.Add(this.lbl_Reservation_Status);
+            this.pnl_Billing_Details.Controls.Add(this.textBox13);
             this.pnl_Billing_Details.Controls.Add(this.dgv_Equipment_Billing_Records);
             this.pnl_Billing_Details.Controls.Add(this.textBox38);
             this.pnl_Billing_Details.Controls.Add(this.lbl_Rate_Type);
@@ -327,6 +340,31 @@
             this.pnl_Billing_Details.Name = "pnl_Billing_Details";
             this.pnl_Billing_Details.Size = new System.Drawing.Size(810, 846);
             this.pnl_Billing_Details.TabIndex = 8;
+            // 
+            // dgv_Equipment_Billing_Records
+            // 
+            this.dgv_Equipment_Billing_Records.AllowUserToAddRows = false;
+            this.dgv_Equipment_Billing_Records.AllowUserToDeleteRows = false;
+            this.dgv_Equipment_Billing_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Equipment_Billing_Records.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.col_fk_Reservation_ID,
+            this.col_OT_Days,
+            this.col_Reservation_EquipmentID,
+            this.col_fk_EquipmentID,
+            this.col_fk_Equipment_PricingID,
+            this.col_Quantity,
+            this.col_fld_Number_Of_Days,
+            this.col_fld_Total_Equipment_Cost,
+            this.col_fld_Equipment_Name,
+            this.col_fld_Equipment_Price,
+            this.col_fld_Equipment_Price_Subsequent,
+            this.col_Total});
+            this.dgv_Equipment_Billing_Records.Location = new System.Drawing.Point(6, 331);
+            this.dgv_Equipment_Billing_Records.Name = "dgv_Equipment_Billing_Records";
+            this.dgv_Equipment_Billing_Records.ReadOnly = true;
+            this.dgv_Equipment_Billing_Records.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Equipment_Billing_Records.Size = new System.Drawing.Size(790, 510);
+            this.dgv_Equipment_Billing_Records.TabIndex = 46;
             // 
             // textBox38
             // 
@@ -402,29 +440,6 @@
             this.textBox3.TabIndex = 0;
             this.textBox3.Text = "CLIENT INFORMATION";
             // 
-            // dgv_Equipment_Billing_Records
-            // 
-            this.dgv_Equipment_Billing_Records.AllowUserToAddRows = false;
-            this.dgv_Equipment_Billing_Records.AllowUserToDeleteRows = false;
-            this.dgv_Equipment_Billing_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_Equipment_Billing_Records.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.col_fk_Reservation_ID,
-            this.col_Reservation_EquipmentID,
-            this.col_fk_EquipmentID,
-            this.col_fk_Equipment_PricingID,
-            this.col_Quantity,
-            this.col_fld_Number_Of_Days,
-            this.col_fld_Total_Equipment_Cost,
-            this.col_fld_Equipment_Name,
-            this.col_fld_Equipment_Price,
-            this.col_fld_Equipment_Price_Subsequent,
-            this.col_Total});
-            this.dgv_Equipment_Billing_Records.Location = new System.Drawing.Point(6, 331);
-            this.dgv_Equipment_Billing_Records.Name = "dgv_Equipment_Billing_Records";
-            this.dgv_Equipment_Billing_Records.ReadOnly = true;
-            this.dgv_Equipment_Billing_Records.Size = new System.Drawing.Size(790, 221);
-            this.dgv_Equipment_Billing_Records.TabIndex = 46;
-            // 
             // _BRIS_EXPERIMENT_3_0DataSet
             // 
             this._BRIS_EXPERIMENT_3_0DataSet.DataSetName = "_BRIS_EXPERIMENT_3_0DataSet";
@@ -439,12 +454,49 @@
             // 
             this.tbl_Reservation_EquipmentTableAdapter.ClearBeforeFill = true;
             // 
+            // lbl_Reservation_Status
+            // 
+            this.lbl_Reservation_Status.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Reservation_Status.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_Reservation_Status.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Reservation_Status.Font = new System.Drawing.Font("Arial", 10F);
+            this.lbl_Reservation_Status.Location = new System.Drawing.Point(547, 129);
+            this.lbl_Reservation_Status.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Reservation_Status.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Reservation_Status.Name = "lbl_Reservation_Status";
+            this.lbl_Reservation_Status.ReadOnly = true;
+            this.lbl_Reservation_Status.Size = new System.Drawing.Size(249, 25);
+            this.lbl_Reservation_Status.TabIndex = 48;
+            // 
+            // textBox13
+            // 
+            this.textBox13.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox13.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox13.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox13.Font = new System.Drawing.Font("Arial", 10F);
+            this.textBox13.Location = new System.Drawing.Point(401, 129);
+            this.textBox13.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox13.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.ReadOnly = true;
+            this.textBox13.Size = new System.Drawing.Size(132, 25);
+            this.textBox13.TabIndex = 47;
+            this.textBox13.Text = "Status";
+            this.textBox13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // col_fk_Reservation_ID
             // 
             this.col_fk_Reservation_ID.DataPropertyName = "pk_ReservationID";
             this.col_fk_Reservation_ID.HeaderText = "Reservation ID";
             this.col_fk_Reservation_ID.Name = "col_fk_Reservation_ID";
             this.col_fk_Reservation_ID.ReadOnly = true;
+            // 
+            // col_OT_Days
+            // 
+            this.col_OT_Days.DataPropertyName = "fld_OT_Days";
+            this.col_OT_Days.HeaderText = "OT Days";
+            this.col_OT_Days.Name = "col_OT_Days";
+            this.col_OT_Days.ReadOnly = true;
             // 
             // col_Reservation_EquipmentID
             // 
@@ -515,6 +567,40 @@
             this.col_Total.Name = "col_Total";
             this.col_Total.ReadOnly = true;
             // 
+            // btn_Add_Equipment_Billing
+            // 
+            this.btn_Add_Equipment_Billing.Location = new System.Drawing.Point(257, 280);
+            this.btn_Add_Equipment_Billing.Name = "btn_Add_Equipment_Billing";
+            this.btn_Add_Equipment_Billing.Size = new System.Drawing.Size(75, 23);
+            this.btn_Add_Equipment_Billing.TabIndex = 49;
+            this.btn_Add_Equipment_Billing.Text = "ADD";
+            this.btn_Add_Equipment_Billing.UseVisualStyleBackColor = true;
+            this.btn_Add_Equipment_Billing.Click += new System.EventHandler(this.btn_Add_Equipment_Billing_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(257, 254);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 50;
+            this.textBox1.Text = "Overall Total";
+            // 
+            // lbl_fld_Total_Amount
+            // 
+            this.lbl_fld_Total_Amount.Location = new System.Drawing.Point(363, 254);
+            this.lbl_fld_Total_Amount.Name = "lbl_fld_Total_Amount";
+            this.lbl_fld_Total_Amount.Size = new System.Drawing.Size(100, 20);
+            this.lbl_fld_Total_Amount.TabIndex = 51;
+            // 
+            // btn_Delete_Equipment_Billing
+            // 
+            this.btn_Delete_Equipment_Billing.Location = new System.Drawing.Point(338, 280);
+            this.btn_Delete_Equipment_Billing.Name = "btn_Delete_Equipment_Billing";
+            this.btn_Delete_Equipment_Billing.Size = new System.Drawing.Size(75, 23);
+            this.btn_Delete_Equipment_Billing.TabIndex = 52;
+            this.btn_Delete_Equipment_Billing.Text = "DELETE";
+            this.btn_Delete_Equipment_Billing.UseVisualStyleBackColor = true;
+            // 
             // Equipment_User_Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -559,7 +645,10 @@
         private System.Windows.Forms.BindingSource tblReservationEquipmentBindingSource;
         private _BRIS_EXPERIMENT_3_0DataSet _BRIS_EXPERIMENT_3_0DataSet;
         private _BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_Reservation_EquipmentTableAdapter tbl_Reservation_EquipmentTableAdapter;
+        private System.Windows.Forms.TextBox lbl_Reservation_Status;
+        private System.Windows.Forms.TextBox textBox13;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fk_Reservation_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_OT_Days;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Reservation_EquipmentID;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fk_EquipmentID;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fk_Equipment_PricingID;
@@ -570,5 +659,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fld_Equipment_Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fld_Equipment_Price_Subsequent;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Total;
+        private System.Windows.Forms.Button btn_Add_Equipment_Billing;
+        private System.Windows.Forms.TextBox lbl_fld_Total_Amount;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btn_Delete_Equipment_Billing;
     }
 }

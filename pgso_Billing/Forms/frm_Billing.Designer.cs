@@ -66,7 +66,7 @@
             this.col_Equipment_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Start_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Amount_Due = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Payment_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Reservation_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Approved = new System.Windows.Forms.DataGridViewImageColumn();
             this.col_Extend = new System.Windows.Forms.DataGridViewImageColumn();
             this.col_Cancel = new System.Windows.Forms.DataGridViewImageColumn();
@@ -225,7 +225,7 @@
             this.col_Equipment_Name,
             this.col_Start_Date,
             this.col_Amount_Due,
-            this.col_Payment_Status,
+            this.col_Reservation_Status,
             this.col_Approved,
             this.col_Extend,
             this.col_Cancel,
@@ -437,17 +437,17 @@
             this.col_Amount_Due.ReadOnly = true;
             this.col_Amount_Due.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // col_Payment_Status
+            // col_Reservation_Status
             // 
-            this.col_Payment_Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_Payment_Status.DataPropertyName = "fld_Payment_Status";
+            this.col_Reservation_Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Reservation_Status.DataPropertyName = "fld_Reservation_Status";
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Payment_Status.DefaultCellStyle = dataGridViewCellStyle11;
-            this.col_Payment_Status.FillWeight = 7F;
-            this.col_Payment_Status.HeaderText = "Status";
-            this.col_Payment_Status.Name = "col_Payment_Status";
-            this.col_Payment_Status.ReadOnly = true;
-            this.col_Payment_Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.col_Reservation_Status.DefaultCellStyle = dataGridViewCellStyle11;
+            this.col_Reservation_Status.FillWeight = 7F;
+            this.col_Reservation_Status.HeaderText = "Status";
+            this.col_Reservation_Status.Name = "col_Reservation_Status";
+            this.col_Reservation_Status.ReadOnly = true;
+            this.col_Reservation_Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // col_Approved
             // 
@@ -544,7 +544,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Equipment_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Start_Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Amount_Due;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_Payment_Status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Reservation_Status;
         private System.Windows.Forms.DataGridViewImageColumn col_Approved;
         private System.Windows.Forms.DataGridViewImageColumn col_Extend;
         private System.Windows.Forms.DataGridViewImageColumn col_Cancel;

@@ -1,16 +1,21 @@
 ﻿SELECT 
     -- Requesting Person Details
+    r.pk_ReservationID,
+    re.pk_Reservation_EquipmentID,
+        r.fld_Total_Amount,
+        re.fld_Total_Equipment_Cost,
     r.fld_Control_Number,
     r.fld_Reservation_Status,
     p.fld_Payment_Status,
+    r.fld_Reservation_Type,
     rp.pk_Requesting_PersonID,
-    r.fld_OT_Hours,
-    r.fld_Total_Amount,
-    p.fld_Refund_Amount,
-    p.fld_Cancellation_Fee,
+
     p.fld_Amount_Paid,
     p.fld_Final_Amount_Paid,
+    r.fld_OT_Hours,
     p.fld_Overtime_Fee,
+    p.fld_Refund_Amount,
+    p.fld_Cancellation_Fee,
     vp.fld_Hourly_Rate,
     vp.fld_First4Hrs_Rate,
     rp.fld_Surname,
@@ -21,9 +26,9 @@
 
     
     -- Reservation Details
-    r.pk_ReservationID,
 
-    r.fld_Reservation_Type,
+
+
     r.fld_Start_Date,
     r.fld_End_Date,
     r.fld_Start_Time,
@@ -53,7 +58,7 @@
     ep.fld_Equipment_Price_Subsequent,
     re.fld_Quantity,
     re.fld_Number_Of_Days,
-    re.fld_Total_Equipment_Cost,
+
 
     -- Payment Details
     p.pk_PaymentID,

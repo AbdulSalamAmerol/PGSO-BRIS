@@ -164,6 +164,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BillingDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Add_Equipment_Billing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Add_Equipment_Billing.Designer.cs">
+      <DependentUpon>frm_Add_Equipment_Billing.cs</DependentUpon>
+    </Compile>
     <Compile Include="pgso_Billing\Forms\frm_Extend_Equipment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -392,6 +398,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_BRIS_EXPERIMENT_3_0DataSet.xsd</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Add_Equipment_Billing.resx">
+      <DependentUpon>frm_Add_Equipment_Billing.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Billing.resx">
       <DependentUpon>frm_Billing.cs</DependentUpon>
     </EmbeddedResource>

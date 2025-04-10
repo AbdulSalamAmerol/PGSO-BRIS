@@ -16,10 +16,11 @@ namespace pgso.pgso_Billing.User_Control
     public partial class Equipment_User_Control : UserControl
     {
         private Repo_Billing repo_billing = new Repo_Billing();
-
+        private Model_Billing _billingDetails;
         public Equipment_User_Control(Model_Billing billingDetailsList)
         {
             InitializeComponent();
+            _billingDetails = billingDetailsList; // Store the passed-in model
             LoadBillingDetails(billingDetailsList);
         }
 
@@ -30,9 +31,7 @@ namespace pgso.pgso_Billing.User_Control
             try
             {
                 var reservationID = billingDetailsList.pk_ReservationID;
-
                 // Fetch equipment reservation records
-                //var equipmentDetails = repo_billing.GetBillingDetailsByReservationID(reservationID);
                 var equipmentDetails = repo_billing.GetEquipmentBillingDetailsByReservationID(reservationID);
 
                 if (equipmentDetails == null )
@@ -41,9 +40,6 @@ namespace pgso.pgso_Billing.User_Control
                     MessageBox.Show("No equipment reservations found for this billing.");
                     return;
                 }
-
-                // Optional: Group or format if needed
-
 
                 // Bind to DataGridView
                 dgv_Equipment_Billing_Records.AutoGenerateColumns = false; // Disable auto-generation of columns
@@ -57,22 +53,76 @@ namespace pgso.pgso_Billing.User_Control
                 MessageBox.Show("Failed to load equipment billing details: " + ex.Message);
             }
 
-
-        
             lbl_Control_Number.Text = billingDetailsList.fld_Control_Number;
-
             lbl_Requesting_Person.Text = $"{billingDetailsList.fld_First_Name} {billingDetailsList.fld_Middle_Name} {billingDetailsList.fld_Surname}";
             lbl_Requesting_Office.Text = billingDetailsList.fld_Requesting_Person_Address;
             lbl_Origin_Request.Text = billingDetailsList.fld_Request_Origin;
             lbl_Contact_Number.Text = billingDetailsList.fld_Contact_Number;
             lbl_Address.Text = billingDetailsList.fld_Requesting_Person_Address;
-
-      
             lbl_Reservation_Dates.Text = $"{billingDetailsList.fld_Start_Date.ToString("MM/dd/yyyy")} - {billingDetailsList.fld_End_Date.ToString("MM/dd/yyyy")}";
-
-         
             lbl_Rate_Type.Text = billingDetailsList.fld_Rate_Type;
-         
+            lbl_Reservation_Status.Text = billingDetailsList.fld_Reservation_Status;
+            lbl_fld_Total_Amount.Text = billingDetailsList.fld_Total_Amount.ToString("C");  
+
+
         }
+
+        private void btn_Add_Equipment_Billing_Click(object sender, EventArgs e)
+        {
+            int reservationID = _billingDetails.pk_ReservationID;
+
+            using (var form = new pgso.pgso_Billing.Forms.frm_Add_Equipment_Billing(reservationID))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    var updatedEquipment = repo_billing.GetEquipmentBillingDetailsByReservationID(reservationID);
+                    dgv_Equipment_Billing_Records.DataSource = updatedEquipment;
+                }
+            }
+        }
+        private void btn_Delete_Equipment_Billing_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Ensure a row is selected
+                if (dgv_Equipment_Billing_Records.SelectedRows.Count > 0)
+                {
+                    // Retrieve the pk_Reservation_EquipmentID from the selected row
+                    int reservationEquipmentID = Convert.ToInt32(dgv_Equipment_Billing_Records.SelectedRows[0].Cells["pk_Reservation_EquipmentID"].Value);
+
+                    // Ask for confirmation before deleting
+                    var confirmation = MessageBox.Show("Are you sure you want to delete this equipment reservation?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (confirmation == DialogResult.Yes)
+                    {
+                        // Call a method to delete the record from the database
+                        bool success = _repo.DeleteEquipmentReservation(reservationEquipmentID);
+
+                        if (success)
+                        {
+                            MessageBox.Show("✅ Equipment reservation deleted successfully.");
+
+                            // Refresh the DataGridView to reflect the changes
+                            LoadEquipmentBillingData();  // This method should reload data into dgv_Equipment_Billing_Records
+                        }
+                        else
+                        {
+                            MessageBox.Show("⚠️ Failed to delete equipment reservation.");
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("⚠️ Please select a row to delete.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("❌ Error: " + ex.Message);
+            }
+        }
+
+
     }
 }
