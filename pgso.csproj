@@ -335,6 +335,18 @@
     <Compile Include="frm_sportcomplex.Designer.cs">
       <DependentUpon>frm_sportcomplex.cs</DependentUpon>
     </Compile>
+    <Compile Include="pgso_Billing\User Control\Equipment_User_Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\User Control\Equipment_User_Control.Designer.cs">
+      <DependentUpon>Equipment_User_Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pgso_Billing\User Control\Venue_User_Control.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\User Control\Venue_User_Control.Designer.cs">
+      <DependentUpon>Venue_User_Control.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="frm_reservation_forms.cs">
@@ -458,6 +470,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\Forms\Report_Billing_Equipment.rdlc" />
     <EmbeddedResource Include="pgso_Billing\Forms\Report_Billing_Venue.rdlc" />
+    <EmbeddedResource Include="pgso_Billing\User Control\Venue_User_Control.resx">
+      <DependentUpon>Venue_User_Control.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
