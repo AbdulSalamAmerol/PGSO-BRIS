@@ -470,6 +470,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\Forms\Report_Billing_Equipment.rdlc" />
     <EmbeddedResource Include="pgso_Billing\Forms\Report_Billing_Venue.rdlc" />
+    <EmbeddedResource Include="pgso_Billing\User Control\Equipment_User_Control.resx">
+      <DependentUpon>Equipment_User_Control.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\User Control\Venue_User_Control.resx">
       <DependentUpon>Venue_User_Control.cs</DependentUpon>
     </EmbeddedResource>
