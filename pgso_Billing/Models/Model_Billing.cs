@@ -47,6 +47,7 @@ namespace pgso.Billing.Models
         public decimal fld_Additional_Charge { get; set; }
 
         // Reserved Equipment Details
+        public int? pk_Reservation_EquipmentID { get; set; }
         public int? fk_EquipmentID { get; set; }
         public string fld_Equipment_Name { get; set; }
         public int? fk_Equipment_PricingID { get; set; }
@@ -55,6 +56,7 @@ namespace pgso.Billing.Models
         public int fld_Quantity { get; set; }
         public int fld_Number_Of_Days { get; set; }
         public decimal fld_Total_Equipment_Cost { get; set; }
+        public int fld_OT_Days { get; set; }
 
         // Payment Details
         public int? pk_PaymentID { get; set; }
@@ -63,7 +65,7 @@ namespace pgso.Billing.Models
         public decimal fld_Amount_Paid { get; set; }
         public string fld_Payment_Status { get; set; }
         public DateTime? fld_Payment_Date { get; set; }
-        // NEED TO ADD THESE IN REPORT VIEWER! Dataset and all
+      
         public decimal fld_Refund_Amount { get; set; }
         public decimal fld_Cancellation_Fee { get; set; }
         public decimal fld_Final_Amount_Paid { get; set; }

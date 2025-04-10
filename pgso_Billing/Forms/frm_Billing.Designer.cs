@@ -28,26 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_Billing));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tlp_Billing_UControls = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.cmb_Billing_Filter = new System.Windows.Forms.ComboBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.sb_Billing_Search_Bar = new System.Windows.Forms.TextBox();
             this.dgv_Billing_Records = new System.Windows.Forms.DataGridView();
+            this.btn_Reports = new System.Windows.Forms.Button();
+            this.flp_Top = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnl_Billing_Details = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
             this.pk_ReservationID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Full_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,26 +67,16 @@
             this.col_Start_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Amount_Due = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Payment_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_Reports = new System.Windows.Forms.Button();
-            this.flp_Top = new System.Windows.Forms.FlowLayoutPanel();
-            this.pnl_Billing_Details = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.col_Approved = new System.Windows.Forms.DataGridViewImageColumn();
             this.col_Extend = new System.Windows.Forms.DataGridViewImageColumn();
             this.col_Cancel = new System.Windows.Forms.DataGridViewImageColumn();
             this.col_Print = new System.Windows.Forms.DataGridViewImageColumn();
             this.tlp_Billing_UControls.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_Billing_Records)).BeginInit();
-            this.flp_Top.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Billing_Records)).BeginInit();
+            this.flp_Top.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlp_Billing_UControls
@@ -116,6 +116,18 @@
             this.panel1.Size = new System.Drawing.Size(728, 68);
             this.panel1.TabIndex = 6;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(194, 30);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(15, 21);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
+            // 
             // cmb_Billing_Filter
             // 
             this.cmb_Billing_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -127,6 +139,19 @@
             this.cmb_Billing_Filter.Name = "cmb_Billing_Filter";
             this.cmb_Billing_Filter.Size = new System.Drawing.Size(147, 21);
             this.cmb_Billing_Filter.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(194, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(15, 21);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
             // 
             // textBox2
             // 
@@ -177,18 +202,18 @@
             this.dgv_Billing_Records.AllowUserToOrderColumns = true;
             this.dgv_Billing_Records.AllowUserToResizeColumns = false;
             this.dgv_Billing_Records.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgv_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgv_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_Billing_Records.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_Billing_Records.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Billing_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Billing_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_Billing_Records.ColumnHeadersHeight = 40;
             this.dgv_Billing_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_Billing_Records.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -205,14 +230,14 @@
             this.col_Extend,
             this.col_Cancel,
             this.col_Print});
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_Billing_Records.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_Billing_Records.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgv_Billing_Records.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_Billing_Records.Location = new System.Drawing.Point(11, 68);
             this.dgv_Billing_Records.Margin = new System.Windows.Forms.Padding(0);
@@ -225,121 +250,6 @@
             this.dgv_Billing_Records.Size = new System.Drawing.Size(728, 762);
             this.dgv_Billing_Records.TabIndex = 0;
             this.dgv_Billing_Records.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Billing_Records_CellContentClick);
-            // 
-            // pk_ReservationID
-            // 
-            this.pk_ReservationID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.pk_ReservationID.DataPropertyName = "pk_ReservationID";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.pk_ReservationID.DefaultCellStyle = dataGridViewCellStyle15;
-            this.pk_ReservationID.FillWeight = 5F;
-            this.pk_ReservationID.HeaderText = "ID";
-            this.pk_ReservationID.MinimumWidth = 10;
-            this.pk_ReservationID.Name = "pk_ReservationID";
-            this.pk_ReservationID.ReadOnly = true;
-            this.pk_ReservationID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.pk_ReservationID.Visible = false;
-            this.pk_ReservationID.Width = 43;
-            // 
-            // fld_Control_Number
-            // 
-            this.fld_Control_Number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.fld_Control_Number.DataPropertyName = "fld_Control_Number";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.fld_Control_Number.DefaultCellStyle = dataGridViewCellStyle16;
-            this.fld_Control_Number.FillWeight = 15F;
-            this.fld_Control_Number.HeaderText = "CONTROL NUMBER";
-            this.fld_Control_Number.Name = "fld_Control_Number";
-            this.fld_Control_Number.ReadOnly = true;
-            this.fld_Control_Number.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // fld_Full_Name
-            // 
-            this.fld_Full_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.fld_Full_Name.DataPropertyName = "fld_Full_Name";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.fld_Full_Name.DefaultCellStyle = dataGridViewCellStyle17;
-            this.fld_Full_Name.FillWeight = 15F;
-            this.fld_Full_Name.HeaderText = "Requesting Person";
-            this.fld_Full_Name.Name = "fld_Full_Name";
-            this.fld_Full_Name.ReadOnly = true;
-            this.fld_Full_Name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.fld_Full_Name.Visible = false;
-            // 
-            // col_Reservation_Type
-            // 
-            this.col_Reservation_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_Reservation_Type.DataPropertyName = "fld_Reservation_Type";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Reservation_Type.DefaultCellStyle = dataGridViewCellStyle18;
-            this.col_Reservation_Type.FillWeight = 10F;
-            this.col_Reservation_Type.HeaderText = "Reservation Type";
-            this.col_Reservation_Type.Name = "col_Reservation_Type";
-            this.col_Reservation_Type.ReadOnly = true;
-            this.col_Reservation_Type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.col_Reservation_Type.Visible = false;
-            // 
-            // col_Venue_Name
-            // 
-            this.col_Venue_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_Venue_Name.DataPropertyName = "fld_Venue_Name";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Venue_Name.DefaultCellStyle = dataGridViewCellStyle19;
-            this.col_Venue_Name.FillWeight = 15F;
-            this.col_Venue_Name.HeaderText = "Venue Name";
-            this.col_Venue_Name.Name = "col_Venue_Name";
-            this.col_Venue_Name.ReadOnly = true;
-            this.col_Venue_Name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.col_Venue_Name.Visible = false;
-            // 
-            // col_Equipment_Name
-            // 
-            this.col_Equipment_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_Equipment_Name.DataPropertyName = "fld_Equipment_Name";
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Equipment_Name.DefaultCellStyle = dataGridViewCellStyle20;
-            this.col_Equipment_Name.FillWeight = 10F;
-            this.col_Equipment_Name.HeaderText = "Equipment Name";
-            this.col_Equipment_Name.Name = "col_Equipment_Name";
-            this.col_Equipment_Name.ReadOnly = true;
-            this.col_Equipment_Name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.col_Equipment_Name.Visible = false;
-            // 
-            // col_Start_Date
-            // 
-            this.col_Start_Date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_Start_Date.DataPropertyName = "fld_Start_Date";
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Start_Date.DefaultCellStyle = dataGridViewCellStyle21;
-            this.col_Start_Date.FillWeight = 10F;
-            this.col_Start_Date.HeaderText = "Reservation Date";
-            this.col_Start_Date.Name = "col_Start_Date";
-            this.col_Start_Date.ReadOnly = true;
-            this.col_Start_Date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // col_Amount_Due
-            // 
-            this.col_Amount_Due.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_Amount_Due.DataPropertyName = "fld_Total_Amount";
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Amount_Due.DefaultCellStyle = dataGridViewCellStyle22;
-            this.col_Amount_Due.FillWeight = 10F;
-            this.col_Amount_Due.HeaderText = "Amount Due";
-            this.col_Amount_Due.Name = "col_Amount_Due";
-            this.col_Amount_Due.ReadOnly = true;
-            this.col_Amount_Due.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // col_Payment_Status
-            // 
-            this.col_Payment_Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_Payment_Status.DataPropertyName = "fld_Reservation_Status";
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Payment_Status.DefaultCellStyle = dataGridViewCellStyle23;
-            this.col_Payment_Status.FillWeight = 7F;
-            this.col_Payment_Status.HeaderText = "Status";
-            this.col_Payment_Status.Name = "col_Payment_Status";
-            this.col_Payment_Status.ReadOnly = true;
-            this.col_Payment_Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // btn_Reports
             // 
@@ -369,7 +279,7 @@
             this.pnl_Billing_Details.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_Billing_Details.Location = new System.Drawing.Point(750, 34);
             this.pnl_Billing_Details.MaximumSize = new System.Drawing.Size(810, 846);
-            this.pnl_Billing_Details.MinimumSize = new System.Drawing.Size(0, 846);
+            this.pnl_Billing_Details.MinimumSize = new System.Drawing.Size(2, 846);
             this.pnl_Billing_Details.Name = "pnl_Billing_Details";
             this.pnl_Billing_Details.Size = new System.Drawing.Size(810, 846);
             this.pnl_Billing_Details.TabIndex = 6;
@@ -401,7 +311,6 @@
             this.dataGridViewImageColumn2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
             this.dataGridViewImageColumn2.ReadOnly = true;
-            this.dataGridViewImageColumn2.Width = 57;
             // 
             // dataGridViewImageColumn3
             // 
@@ -413,7 +322,6 @@
             this.dataGridViewImageColumn3.MinimumWidth = 20;
             this.dataGridViewImageColumn3.Name = "dataGridViewImageColumn3";
             this.dataGridViewImageColumn3.ReadOnly = true;
-            this.dataGridViewImageColumn3.Width = 55;
             // 
             // dataGridViewImageColumn4
             // 
@@ -425,32 +333,121 @@
             this.dataGridViewImageColumn4.MinimumWidth = 20;
             this.dataGridViewImageColumn4.Name = "dataGridViewImageColumn4";
             this.dataGridViewImageColumn4.ReadOnly = true;
-            this.dataGridViewImageColumn4.Width = 46;
             // 
-            // pictureBox2
+            // pk_ReservationID
             // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(194, 30);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(15, 21);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 6;
-            this.pictureBox2.TabStop = false;
+            this.pk_ReservationID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.pk_ReservationID.DataPropertyName = "pk_ReservationID";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.pk_ReservationID.DefaultCellStyle = dataGridViewCellStyle3;
+            this.pk_ReservationID.FillWeight = 5F;
+            this.pk_ReservationID.HeaderText = "ID";
+            this.pk_ReservationID.MinimumWidth = 10;
+            this.pk_ReservationID.Name = "pk_ReservationID";
+            this.pk_ReservationID.ReadOnly = true;
+            this.pk_ReservationID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.pk_ReservationID.Visible = false;
+            this.pk_ReservationID.Width = 43;
             // 
-            // pictureBox1
+            // fld_Control_Number
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(194, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(15, 21);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
+            this.fld_Control_Number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.fld_Control_Number.DataPropertyName = "fld_Control_Number";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.fld_Control_Number.DefaultCellStyle = dataGridViewCellStyle4;
+            this.fld_Control_Number.FillWeight = 15F;
+            this.fld_Control_Number.HeaderText = "CONTROL NUMBER";
+            this.fld_Control_Number.Name = "fld_Control_Number";
+            this.fld_Control_Number.ReadOnly = true;
+            this.fld_Control_Number.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // fld_Full_Name
+            // 
+            this.fld_Full_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.fld_Full_Name.DataPropertyName = "fld_Full_Name";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.fld_Full_Name.DefaultCellStyle = dataGridViewCellStyle5;
+            this.fld_Full_Name.FillWeight = 15F;
+            this.fld_Full_Name.HeaderText = "Requesting Person";
+            this.fld_Full_Name.Name = "fld_Full_Name";
+            this.fld_Full_Name.ReadOnly = true;
+            this.fld_Full_Name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.fld_Full_Name.Visible = false;
+            // 
+            // col_Reservation_Type
+            // 
+            this.col_Reservation_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Reservation_Type.DataPropertyName = "fld_Reservation_Type";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Reservation_Type.DefaultCellStyle = dataGridViewCellStyle6;
+            this.col_Reservation_Type.FillWeight = 10F;
+            this.col_Reservation_Type.HeaderText = "Reservation Type";
+            this.col_Reservation_Type.Name = "col_Reservation_Type";
+            this.col_Reservation_Type.ReadOnly = true;
+            this.col_Reservation_Type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.col_Reservation_Type.Visible = false;
+            // 
+            // col_Venue_Name
+            // 
+            this.col_Venue_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Venue_Name.DataPropertyName = "fld_Venue_Name";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Venue_Name.DefaultCellStyle = dataGridViewCellStyle7;
+            this.col_Venue_Name.FillWeight = 15F;
+            this.col_Venue_Name.HeaderText = "Venue Name";
+            this.col_Venue_Name.Name = "col_Venue_Name";
+            this.col_Venue_Name.ReadOnly = true;
+            this.col_Venue_Name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.col_Venue_Name.Visible = false;
+            // 
+            // col_Equipment_Name
+            // 
+            this.col_Equipment_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Equipment_Name.DataPropertyName = "fld_Equipment_Name";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Equipment_Name.DefaultCellStyle = dataGridViewCellStyle8;
+            this.col_Equipment_Name.FillWeight = 10F;
+            this.col_Equipment_Name.HeaderText = "Equipment Name";
+            this.col_Equipment_Name.Name = "col_Equipment_Name";
+            this.col_Equipment_Name.ReadOnly = true;
+            this.col_Equipment_Name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.col_Equipment_Name.Visible = false;
+            // 
+            // col_Start_Date
+            // 
+            this.col_Start_Date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Start_Date.DataPropertyName = "fld_Start_Date";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Start_Date.DefaultCellStyle = dataGridViewCellStyle9;
+            this.col_Start_Date.FillWeight = 10F;
+            this.col_Start_Date.HeaderText = "Reservation Date";
+            this.col_Start_Date.Name = "col_Start_Date";
+            this.col_Start_Date.ReadOnly = true;
+            this.col_Start_Date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // col_Amount_Due
+            // 
+            this.col_Amount_Due.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Amount_Due.DataPropertyName = "fld_Total_Amount";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Amount_Due.DefaultCellStyle = dataGridViewCellStyle10;
+            this.col_Amount_Due.FillWeight = 10F;
+            this.col_Amount_Due.HeaderText = "Amount Due";
+            this.col_Amount_Due.Name = "col_Amount_Due";
+            this.col_Amount_Due.ReadOnly = true;
+            this.col_Amount_Due.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // col_Payment_Status
+            // 
+            this.col_Payment_Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Payment_Status.DataPropertyName = "fld_Payment_Status";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Payment_Status.DefaultCellStyle = dataGridViewCellStyle11;
+            this.col_Payment_Status.FillWeight = 7F;
+            this.col_Payment_Status.HeaderText = "Status";
+            this.col_Payment_Status.Name = "col_Payment_Status";
+            this.col_Payment_Status.ReadOnly = true;
+            this.col_Payment_Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // col_Approved
             // 
@@ -513,10 +510,10 @@
             this.tlp_Billing_UControls.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_Billing_Records)).EndInit();
-            this.flp_Top.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Billing_Records)).EndInit();
+            this.flp_Top.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -537,6 +534,8 @@
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn3;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn4;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.DataGridViewTextBoxColumn pk_ReservationID;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Control_Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Full_Name;
@@ -550,7 +549,5 @@
         private System.Windows.Forms.DataGridViewImageColumn col_Extend;
         private System.Windows.Forms.DataGridViewImageColumn col_Cancel;
         private System.Windows.Forms.DataGridViewImageColumn col_Print;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.TextBox textBox2;
     }
 }

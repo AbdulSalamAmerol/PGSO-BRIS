@@ -1,5 +1,8 @@
 ﻿SELECT 
     -- Requesting Person Details
+    r.fld_Control_Number,
+    r.fld_Reservation_Status,
+    p.fld_Payment_Status,
     rp.pk_Requesting_PersonID,
     r.fld_OT_Hours,
     r.fld_Total_Amount,
@@ -19,7 +22,7 @@
     
     -- Reservation Details
     r.pk_ReservationID,
-    r.fld_Control_Number,
+
     r.fld_Reservation_Type,
     r.fld_Start_Date,
     r.fld_End_Date,
@@ -27,7 +30,7 @@
     r.fld_End_Time,
     r.fld_Activity_Name,
     r.fld_Number_Of_Participants,
-    r.fld_Reservation_Status,
+
     
     
     

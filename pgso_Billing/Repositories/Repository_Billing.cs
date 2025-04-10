@@ -8,7 +8,8 @@ using System.Windows.Forms;
 
 namespace pgso.Billing.Repositories
 {
-    internal class Repo_Billing
+    // I CHANGED THIS TO PUBLIC FROM INTERNAL
+    public class Repo_Billing
     {
         private string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;Persist Security Info=True;User ID=sa;Password=abz123;Encrypt=False;";
 
@@ -509,6 +510,7 @@ namespace pgso.Billing.Repositories
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
+
                     string query = @"
                         SELECT 
                             rp.pk_Requesting_PersonID,
@@ -856,6 +858,132 @@ namespace pgso.Billing.Repositories
 
 
         ////
+
+        // Equipment User Control Datagridview
+        public List<Model_Billing> GetEquipmentBillingDetailsByReservationID(int reservationID)
+        {
+            List<Model_Billing> billingDetailsList = new List<Model_Billing>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string query = @"
+        SELECT 
+            rp.pk_Requesting_PersonID,
+            rp.fld_Surname,
+            rp.fld_First_Name,
+            rp.fld_Middle_Name,
+            rp.fld_Requesting_Person_Address,
+            rp.fld_Contact_Number,
+            rp.fld_Request_Origin,
+
+            r.pk_ReservationID,
+            r.fld_Control_Number,
+            r.fld_Reservation_Type,
+            r.fld_Start_Date,
+            r.fld_End_Date,
+            r.fld_Activity_Name,
+            r.fld_Total_Amount,
+
+            re.fk_EquipmentID,
+            e.fld_Equipment_Name,
+            re.fk_Equipment_PricingID,
+            ep.fld_Equipment_Price,
+            ep.fld_Equipment_Price_Subsequent,
+            re.fld_Quantity,
+            re.fld_Number_Of_Days,
+            re.fld_Total_Equipment_Cost,
+            r.fld_OT_Hours,
+
+            p.pk_PaymentID,
+            p.fld_Created_At,
+            p.fld_Amount_Due,
+            p.fld_Amount_Paid,
+            p.fld_Payment_Status,
+            p.fld_Payment_Date,
+            p.fld_Refund_Amount,
+            p.fld_Cancellation_Fee,
+            p.fld_Final_Amount_Paid,
+            p.fld_Overtime_Fee,
+            re.pk_Reservation_EquipmentID
+        FROM dbo.tbl_Reservation r
+        LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+        LEFT JOIN dbo.tbl_Reservation_Equipment re ON r.pk_ReservationID = re.fk_ReservationID
+        LEFT JOIN dbo.tbl_Equipment e ON re.fk_EquipmentID = e.pk_EquipmentID
+        LEFT JOIN dbo.tbl_Equipment_Pricing ep ON re.fk_Equipment_PricingID = ep.pk_Equipment_PricingID
+        LEFT JOIN dbo.tbl_Payment p ON r.pk_ReservationID = p.fk_ReservationID
+        WHERE r.pk_ReservationID = @ReservationID";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ReservationID", reservationID);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var billingDetails = new Model_Billing
+                                {
+                                    // Requesting Person
+                                    pk_Requesting_PersonID = reader.IsDBNull(0) ? 0 : reader.GetInt32(0),
+                                    fld_Surname = reader.IsDBNull(1) ? "" : reader.GetString(1),
+                                    fld_First_Name = reader.IsDBNull(2) ? "" : reader.GetString(2),
+                                    fld_Middle_Name = reader.IsDBNull(3) ? "" : reader.GetString(3),
+                                    fld_Requesting_Person_Address = reader.IsDBNull(4) ? "" : reader.GetString(4),
+                                    fld_Contact_Number = reader.IsDBNull(5) ? "" : reader.GetString(5),
+                                    fld_Request_Origin = reader.IsDBNull(6) ? "" : reader.GetString(6),
+
+                                    // Reservation
+                                    pk_ReservationID = reader.GetInt32(7),
+                                    fld_Control_Number = reader.GetString(8),
+                                    fld_Reservation_Type = reader.GetString(9),
+                                    fld_Start_Date = reader.GetDateTime(10),
+                                    fld_End_Date = reader.GetDateTime(11),
+                                    fld_Activity_Name = reader.IsDBNull(12) ? "" : reader.GetString(12),
+                                    fld_Total_Amount = reader.IsDBNull(13) ? 0 : reader.GetDecimal(13),
+
+                                    // Equipment
+                                    fk_EquipmentID = reader.IsDBNull(14) ? 0 : reader.GetInt32(14),
+                                    fld_Equipment_Name = reader.IsDBNull(15) ? "" : reader.GetString(15),
+                                    fk_Equipment_PricingID = reader.IsDBNull(16) ? 0 : reader.GetInt32(16),
+                                    fld_Equipment_Price = reader.IsDBNull(17) ? 0 : reader.GetDecimal(17),
+                                    fld_Equipment_Price_Subsequent = reader.IsDBNull(18) ? 0 : reader.GetDecimal(18),
+                                    fld_Quantity = reader.IsDBNull(19) ? 0 : reader.GetInt32(19),
+                                    fld_Number_Of_Days = reader.IsDBNull(20) ? 0 : reader.GetInt32(20),
+                                    fld_Total_Equipment_Cost = reader.IsDBNull(21) ? 0 : reader.GetDecimal(21),
+                                    fld_OT_Days = reader.IsDBNull(22) ? 0 : reader.GetInt32(22),
+
+                                    // Payment
+                                    pk_PaymentID = reader.IsDBNull(23) ? 0 : reader.GetInt32(23),
+                                    fld_Created_At = reader.IsDBNull(24) ? DateTime.MinValue : reader.GetDateTime(24),
+                                    fld_Amount_Due = reader.IsDBNull(25) ? 0 : reader.GetDecimal(25),
+                                    fld_Amount_Paid = reader.IsDBNull(26) ? 0 : reader.GetDecimal(26),
+                                    fld_Payment_Status = reader.IsDBNull(27) ? "Unknown" : reader.GetString(27),
+                                    fld_Payment_Date = reader.IsDBNull(28) ? (DateTime?)null : reader.GetDateTime(28),
+                                    fld_Refund_Amount = reader.IsDBNull(29) ? 0 : reader.GetDecimal(29),
+                                    fld_Cancellation_Fee = reader.IsDBNull(30) ? 0 : reader.GetDecimal(30),
+                                    fld_Final_Amount_Paid = reader.IsDBNull(31) ? 0 : reader.GetDecimal(31),
+                                    fld_Overtime_Fee = reader.IsDBNull(32) ? 0 : reader.GetDecimal(32),
+                                    pk_Reservation_EquipmentID = reader.IsDBNull(33) ? 0 : reader.GetInt32(33)
+                                };
+
+                                billingDetailsList.Add(billingDetails);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("❌ Error fetching billing details: " + ex.Message);
+            }
+
+            return billingDetailsList;
+        }
+
 
 
 
