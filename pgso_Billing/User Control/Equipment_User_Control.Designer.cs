@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.textBox26 = new System.Windows.Forms.TextBox();
             this.lbl_Control_Number = new System.Windows.Forms.TextBox();
             this.lbl_Reservation_Dates = new System.Windows.Forms.TextBox();
@@ -44,29 +45,40 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.pnl_Billing_Details = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btn_Delete_Equipment_Billing = new System.Windows.Forms.Button();
+            this.lbl_fld_Total_Amount = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btn_Add_Equipment_Billing = new System.Windows.Forms.Button();
+            this.lbl_Reservation_Status = new System.Windows.Forms.TextBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.dgv_Equipment_Billing_Records = new System.Windows.Forms.DataGridView();
             this.textBox38 = new System.Windows.Forms.TextBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.textBox39 = new System.Windows.Forms.TextBox();
             this.lbl_Rate_Type = new System.Windows.Forms.TextBox();
             this.textBox35 = new System.Windows.Forms.TextBox();
             this.textBox36 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.textBox17 = new System.Windows.Forms.TextBox();
-            this.textBox18 = new System.Windows.Forms.TextBox();
-            this.textBox19 = new System.Windows.Forms.TextBox();
-            this.textBox20 = new System.Windows.Forms.TextBox();
-            this.textBox21 = new System.Windows.Forms.TextBox();
-            this.textBox22 = new System.Windows.Forms.TextBox();
+            this._BRIS_EXPERIMENT_3_0DataSet = new pgso._BRIS_EXPERIMENT_3_0DataSet();
+            this.tblReservationEquipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tbl_Reservation_EquipmentTableAdapter = new pgso._BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_Reservation_EquipmentTableAdapter();
+            this.col_fk_Reservation_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Start_Date_Eq = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_End_Date_Eq = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_OT_Days = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Reservation_EquipmentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_fk_EquipmentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_fk_Equipment_PricingID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_fld_Number_Of_Days = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_fld_Total_Equipment_Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_fld_Equipment_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_fld_Equipment_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_fld_Equipment_Price_Subsequent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnl_Billing_Details.SuspendLayout();
-            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Equipment_Billing_Records)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblReservationEquipmentBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox26
@@ -80,7 +92,7 @@
             this.textBox26.MinimumSize = new System.Drawing.Size(2, 30);
             this.textBox26.Name = "textBox26";
             this.textBox26.ReadOnly = true;
-            this.textBox26.Size = new System.Drawing.Size(253, 30);
+            this.textBox26.Size = new System.Drawing.Size(253, 19);
             this.textBox26.TabIndex = 24;
             this.textBox26.Text = "RESERVATION INFORMATION";
             // 
@@ -110,7 +122,7 @@
             this.lbl_Reservation_Dates.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Reservation_Dates.Name = "lbl_Reservation_Dates";
             this.lbl_Reservation_Dates.ReadOnly = true;
-            this.lbl_Reservation_Dates.Size = new System.Drawing.Size(249, 25);
+            this.lbl_Reservation_Dates.Size = new System.Drawing.Size(249, 23);
             this.lbl_Reservation_Dates.TabIndex = 18;
             // 
             // lbl_Address
@@ -124,7 +136,7 @@
             this.lbl_Address.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Address.Name = "lbl_Address";
             this.lbl_Address.ReadOnly = true;
-            this.lbl_Address.Size = new System.Drawing.Size(250, 25);
+            this.lbl_Address.Size = new System.Drawing.Size(250, 23);
             this.lbl_Address.TabIndex = 17;
             // 
             // lbl_Contact_Number
@@ -138,7 +150,7 @@
             this.lbl_Contact_Number.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Contact_Number.Name = "lbl_Contact_Number";
             this.lbl_Contact_Number.ReadOnly = true;
-            this.lbl_Contact_Number.Size = new System.Drawing.Size(250, 25);
+            this.lbl_Contact_Number.Size = new System.Drawing.Size(250, 23);
             this.lbl_Contact_Number.TabIndex = 16;
             // 
             // lbl_Origin_Request
@@ -152,7 +164,7 @@
             this.lbl_Origin_Request.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Origin_Request.Name = "lbl_Origin_Request";
             this.lbl_Origin_Request.ReadOnly = true;
-            this.lbl_Origin_Request.Size = new System.Drawing.Size(250, 25);
+            this.lbl_Origin_Request.Size = new System.Drawing.Size(250, 23);
             this.lbl_Origin_Request.TabIndex = 15;
             // 
             // lbl_Requesting_Office
@@ -166,7 +178,7 @@
             this.lbl_Requesting_Office.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Requesting_Office.Name = "lbl_Requesting_Office";
             this.lbl_Requesting_Office.ReadOnly = true;
-            this.lbl_Requesting_Office.Size = new System.Drawing.Size(250, 25);
+            this.lbl_Requesting_Office.Size = new System.Drawing.Size(250, 23);
             this.lbl_Requesting_Office.TabIndex = 14;
             // 
             // lbl_Requesting_Person
@@ -180,7 +192,7 @@
             this.lbl_Requesting_Person.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Requesting_Person.Name = "lbl_Requesting_Person";
             this.lbl_Requesting_Person.ReadOnly = true;
-            this.lbl_Requesting_Person.Size = new System.Drawing.Size(250, 25);
+            this.lbl_Requesting_Person.Size = new System.Drawing.Size(250, 23);
             this.lbl_Requesting_Person.TabIndex = 13;
             // 
             // textBox15
@@ -209,7 +221,7 @@
             this.textBox9.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(132, 25);
+            this.textBox9.Size = new System.Drawing.Size(132, 16);
             this.textBox9.TabIndex = 6;
             this.textBox9.Text = "Reservation Dates";
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -225,7 +237,7 @@
             this.textBox8.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox8.Name = "textBox8";
             this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(132, 25);
+            this.textBox8.Size = new System.Drawing.Size(132, 16);
             this.textBox8.TabIndex = 5;
             this.textBox8.Text = "Address";
             this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -241,7 +253,7 @@
             this.textBox7.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox7.Name = "textBox7";
             this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(132, 25);
+            this.textBox7.Size = new System.Drawing.Size(132, 16);
             this.textBox7.TabIndex = 4;
             this.textBox7.Text = "Origin of Request";
             this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -257,7 +269,7 @@
             this.textBox6.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(132, 25);
+            this.textBox6.Size = new System.Drawing.Size(132, 16);
             this.textBox6.TabIndex = 3;
             this.textBox6.Text = "Contact Number";
             this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -273,7 +285,7 @@
             this.textBox5.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(132, 25);
+            this.textBox5.Size = new System.Drawing.Size(132, 16);
             this.textBox5.TabIndex = 2;
             this.textBox5.Text = "Requesting Office";
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -289,7 +301,7 @@
             this.textBox4.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(132, 25);
+            this.textBox4.Size = new System.Drawing.Size(132, 16);
             this.textBox4.TabIndex = 1;
             this.textBox4.Text = "Requesting Person";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -297,8 +309,15 @@
             // pnl_Billing_Details
             // 
             this.pnl_Billing_Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Billing_Details.Controls.Add(this.button1);
+            this.pnl_Billing_Details.Controls.Add(this.btn_Delete_Equipment_Billing);
+            this.pnl_Billing_Details.Controls.Add(this.lbl_fld_Total_Amount);
+            this.pnl_Billing_Details.Controls.Add(this.textBox1);
+            this.pnl_Billing_Details.Controls.Add(this.btn_Add_Equipment_Billing);
+            this.pnl_Billing_Details.Controls.Add(this.lbl_Reservation_Status);
+            this.pnl_Billing_Details.Controls.Add(this.textBox13);
+            this.pnl_Billing_Details.Controls.Add(this.dgv_Equipment_Billing_Records);
             this.pnl_Billing_Details.Controls.Add(this.textBox38);
-            this.pnl_Billing_Details.Controls.Add(this.panel5);
             this.pnl_Billing_Details.Controls.Add(this.lbl_Rate_Type);
             this.pnl_Billing_Details.Controls.Add(this.textBox35);
             this.pnl_Billing_Details.Controls.Add(this.textBox36);
@@ -320,10 +339,112 @@
             this.pnl_Billing_Details.Controls.Add(this.textBox3);
             this.pnl_Billing_Details.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_Billing_Details.Location = new System.Drawing.Point(0, 0);
-            this.pnl_Billing_Details.MaximumSize = new System.Drawing.Size(810, 661);
+            this.pnl_Billing_Details.MaximumSize = new System.Drawing.Size(810, 700);
+            this.pnl_Billing_Details.MinimumSize = new System.Drawing.Size(810, 700);
             this.pnl_Billing_Details.Name = "pnl_Billing_Details";
-            this.pnl_Billing_Details.Size = new System.Drawing.Size(810, 661);
+            this.pnl_Billing_Details.Size = new System.Drawing.Size(810, 700);
             this.pnl_Billing_Details.TabIndex = 8;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(420, 287);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(124, 23);
+            this.button1.TabIndex = 53;
+            this.button1.Text = "next feature extend";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btn_Delete_Equipment_Billing
+            // 
+            this.btn_Delete_Equipment_Billing.Location = new System.Drawing.Point(338, 287);
+            this.btn_Delete_Equipment_Billing.Name = "btn_Delete_Equipment_Billing";
+            this.btn_Delete_Equipment_Billing.Size = new System.Drawing.Size(75, 23);
+            this.btn_Delete_Equipment_Billing.TabIndex = 52;
+            this.btn_Delete_Equipment_Billing.Text = "DELETE";
+            this.btn_Delete_Equipment_Billing.UseVisualStyleBackColor = true;
+            this.btn_Delete_Equipment_Billing.Click += new System.EventHandler(this.btn_Delete_Equipment_Billing_Click);
+            // 
+            // lbl_fld_Total_Amount
+            // 
+            this.lbl_fld_Total_Amount.Location = new System.Drawing.Point(363, 261);
+            this.lbl_fld_Total_Amount.Name = "lbl_fld_Total_Amount";
+            this.lbl_fld_Total_Amount.Size = new System.Drawing.Size(100, 20);
+            this.lbl_fld_Total_Amount.TabIndex = 51;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(257, 261);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 50;
+            this.textBox1.Text = "Overall Total";
+            // 
+            // btn_Add_Equipment_Billing
+            // 
+            this.btn_Add_Equipment_Billing.Location = new System.Drawing.Point(257, 287);
+            this.btn_Add_Equipment_Billing.Name = "btn_Add_Equipment_Billing";
+            this.btn_Add_Equipment_Billing.Size = new System.Drawing.Size(75, 23);
+            this.btn_Add_Equipment_Billing.TabIndex = 49;
+            this.btn_Add_Equipment_Billing.Text = "ADD";
+            this.btn_Add_Equipment_Billing.UseVisualStyleBackColor = true;
+            this.btn_Add_Equipment_Billing.Click += new System.EventHandler(this.btn_Add_Equipment_Billing_Click);
+            // 
+            // lbl_Reservation_Status
+            // 
+            this.lbl_Reservation_Status.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Reservation_Status.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_Reservation_Status.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Reservation_Status.Font = new System.Drawing.Font("Arial", 10F);
+            this.lbl_Reservation_Status.Location = new System.Drawing.Point(547, 129);
+            this.lbl_Reservation_Status.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Reservation_Status.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Reservation_Status.Name = "lbl_Reservation_Status";
+            this.lbl_Reservation_Status.ReadOnly = true;
+            this.lbl_Reservation_Status.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Reservation_Status.TabIndex = 48;
+            // 
+            // textBox13
+            // 
+            this.textBox13.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox13.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox13.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox13.Font = new System.Drawing.Font("Arial", 10F);
+            this.textBox13.Location = new System.Drawing.Point(401, 129);
+            this.textBox13.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox13.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.ReadOnly = true;
+            this.textBox13.Size = new System.Drawing.Size(132, 16);
+            this.textBox13.TabIndex = 47;
+            this.textBox13.Text = "Status";
+            this.textBox13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // dgv_Equipment_Billing_Records
+            // 
+            this.dgv_Equipment_Billing_Records.AllowUserToAddRows = false;
+            this.dgv_Equipment_Billing_Records.AllowUserToDeleteRows = false;
+            this.dgv_Equipment_Billing_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Equipment_Billing_Records.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.col_fk_Reservation_ID,
+            this.col_Start_Date_Eq,
+            this.col_End_Date_Eq,
+            this.col_OT_Days,
+            this.col_Reservation_EquipmentID,
+            this.col_fk_EquipmentID,
+            this.col_fk_Equipment_PricingID,
+            this.col_Quantity,
+            this.col_fld_Number_Of_Days,
+            this.col_fld_Total_Equipment_Cost,
+            this.col_fld_Equipment_Name,
+            this.col_fld_Equipment_Price,
+            this.col_fld_Equipment_Price_Subsequent,
+            this.col_Total});
+            this.dgv_Equipment_Billing_Records.Location = new System.Drawing.Point(6, 331);
+            this.dgv_Equipment_Billing_Records.Name = "dgv_Equipment_Billing_Records";
+            this.dgv_Equipment_Billing_Records.ReadOnly = true;
+            this.dgv_Equipment_Billing_Records.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Equipment_Billing_Records.Size = new System.Drawing.Size(790, 352);
+            this.dgv_Equipment_Billing_Records.TabIndex = 46;
             // 
             // textBox38
             // 
@@ -339,46 +460,6 @@
             this.textBox38.Size = new System.Drawing.Size(792, 23);
             this.textBox38.TabIndex = 45;
             // 
-            // panel5
-            // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.textBox21);
-            this.panel5.Controls.Add(this.textBox22);
-            this.panel5.Controls.Add(this.textBox14);
-            this.panel5.Controls.Add(this.textBox16);
-            this.panel5.Controls.Add(this.textBox17);
-            this.panel5.Controls.Add(this.textBox18);
-            this.panel5.Controls.Add(this.textBox19);
-            this.panel5.Controls.Add(this.textBox20);
-            this.panel5.Controls.Add(this.textBox11);
-            this.panel5.Controls.Add(this.textBox12);
-            this.panel5.Controls.Add(this.textBox13);
-            this.panel5.Controls.Add(this.textBox10);
-            this.panel5.Controls.Add(this.textBox2);
-            this.panel5.Controls.Add(this.textBox1);
-            this.panel5.Controls.Add(this.textBox39);
-            this.panel5.Location = new System.Drawing.Point(6, 310);
-            this.panel5.MaximumSize = new System.Drawing.Size(790, 353);
-            this.panel5.MinimumSize = new System.Drawing.Size(790, 353);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(790, 353);
-            this.panel5.TabIndex = 44;
-            // 
-            // textBox39
-            // 
-            this.textBox39.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox39.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox39.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox39.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox39.Location = new System.Drawing.Point(410, -22);
-            this.textBox39.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox39.MinimumSize = new System.Drawing.Size(0, 25);
-            this.textBox39.Name = "textBox39";
-            this.textBox39.ReadOnly = true;
-            this.textBox39.Size = new System.Drawing.Size(102, 25);
-            this.textBox39.TabIndex = 46;
-            this.textBox39.Text = "Amount";
-            // 
             // lbl_Rate_Type
             // 
             this.lbl_Rate_Type.BackColor = System.Drawing.SystemColors.Control;
@@ -390,7 +471,7 @@
             this.lbl_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
             this.lbl_Rate_Type.Name = "lbl_Rate_Type";
             this.lbl_Rate_Type.ReadOnly = true;
-            this.lbl_Rate_Type.Size = new System.Drawing.Size(87, 25);
+            this.lbl_Rate_Type.Size = new System.Drawing.Size(87, 20);
             this.lbl_Rate_Type.TabIndex = 35;
             this.lbl_Rate_Type.Text = "Description";
             // 
@@ -405,7 +486,7 @@
             this.textBox35.MinimumSize = new System.Drawing.Size(0, 25);
             this.textBox35.Name = "textBox35";
             this.textBox35.ReadOnly = true;
-            this.textBox35.Size = new System.Drawing.Size(103, 25);
+            this.textBox35.Size = new System.Drawing.Size(103, 20);
             this.textBox35.TabIndex = 30;
             this.textBox35.Text = "Rate Type";
             // 
@@ -420,7 +501,7 @@
             this.textBox36.MinimumSize = new System.Drawing.Size(0, 30);
             this.textBox36.Name = "textBox36";
             this.textBox36.ReadOnly = true;
-            this.textBox36.Size = new System.Drawing.Size(243, 30);
+            this.textBox36.Size = new System.Drawing.Size(243, 19);
             this.textBox36.TabIndex = 29;
             this.textBox36.Text = "TRANSACTION DETAILS";
             // 
@@ -435,233 +516,135 @@
             this.textBox3.MinimumSize = new System.Drawing.Size(2, 30);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(196, 30);
+            this.textBox3.Size = new System.Drawing.Size(196, 19);
             this.textBox3.TabIndex = 0;
             this.textBox3.Text = "CLIENT INFORMATION";
             // 
-            // textBox1
+            // _BRIS_EXPERIMENT_3_0DataSet
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox1.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox1.Location = new System.Drawing.Point(9, 9);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox1.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(132, 25);
-            this.textBox1.TabIndex = 46;
-            this.textBox1.Text = "Equipment";
+            this._BRIS_EXPERIMENT_3_0DataSet.DataSetName = "_BRIS_EXPERIMENT_3_0DataSet";
+            this._BRIS_EXPERIMENT_3_0DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // textBox2
+            // tblReservationEquipmentBindingSource
             // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox2.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox2.Location = new System.Drawing.Point(9, 34);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox2.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(132, 25);
-            this.textBox2.TabIndex = 47;
-            this.textBox2.Text = "Collapsible Tent 1";
+            this.tblReservationEquipmentBindingSource.DataMember = "tbl_Reservation_Equipment";
+            this.tblReservationEquipmentBindingSource.DataSource = this._BRIS_EXPERIMENT_3_0DataSet;
             // 
-            // textBox10
+            // tbl_Reservation_EquipmentTableAdapter
             // 
-            this.textBox10.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox10.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox10.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox10.Location = new System.Drawing.Point(9, 59);
-            this.textBox10.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox10.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(132, 25);
-            this.textBox10.TabIndex = 48;
-            this.textBox10.Text = "Collapsible Tent 2";
+            this.tbl_Reservation_EquipmentTableAdapter.ClearBeforeFill = true;
             // 
-            // textBox11
+            // col_fk_Reservation_ID
             // 
-            this.textBox11.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox11.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox11.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox11.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox11.Location = new System.Drawing.Point(9, 134);
-            this.textBox11.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox11.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.ReadOnly = true;
-            this.textBox11.Size = new System.Drawing.Size(132, 25);
-            this.textBox11.TabIndex = 51;
-            this.textBox11.Text = "Long Table";
+            this.col_fk_Reservation_ID.DataPropertyName = "pk_ReservationID";
+            this.col_fk_Reservation_ID.HeaderText = "Reservation ID";
+            this.col_fk_Reservation_ID.Name = "col_fk_Reservation_ID";
+            this.col_fk_Reservation_ID.ReadOnly = true;
             // 
-            // textBox12
+            // col_Start_Date_Eq
             // 
-            this.textBox12.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox12.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox12.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox12.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox12.Location = new System.Drawing.Point(9, 109);
-            this.textBox12.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox12.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.ReadOnly = true;
-            this.textBox12.Size = new System.Drawing.Size(132, 25);
-            this.textBox12.TabIndex = 50;
-            this.textBox12.Text = "Seat Cover";
+            this.col_Start_Date_Eq.DataPropertyName = "fld_Start_Date_Eq";
+            this.col_Start_Date_Eq.HeaderText = "Start Date";
+            this.col_Start_Date_Eq.Name = "col_Start_Date_Eq";
+            this.col_Start_Date_Eq.ReadOnly = true;
             // 
-            // textBox13
+            // col_End_Date_Eq
             // 
-            this.textBox13.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox13.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox13.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox13.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox13.Location = new System.Drawing.Point(9, 84);
-            this.textBox13.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox13.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.ReadOnly = true;
-            this.textBox13.Size = new System.Drawing.Size(132, 25);
-            this.textBox13.TabIndex = 49;
-            this.textBox13.Text = "Chair";
+            this.col_End_Date_Eq.DataPropertyName = "fld_End_Date_Eq";
+            this.col_End_Date_Eq.HeaderText = "End Date";
+            this.col_End_Date_Eq.Name = "col_End_Date_Eq";
+            this.col_End_Date_Eq.ReadOnly = true;
             // 
-            // textBox14
+            // col_OT_Days
             // 
-            this.textBox14.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox14.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox14.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox14.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox14.Location = new System.Drawing.Point(9, 284);
-            this.textBox14.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox14.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.ReadOnly = true;
-            this.textBox14.Size = new System.Drawing.Size(132, 25);
-            this.textBox14.TabIndex = 57;
-            this.textBox14.Text = "Sound System";
+            this.col_OT_Days.DataPropertyName = "fld_OT_Days";
+            this.col_OT_Days.HeaderText = "OT Days";
+            this.col_OT_Days.Name = "col_OT_Days";
+            this.col_OT_Days.ReadOnly = true;
             // 
-            // textBox16
+            // col_Reservation_EquipmentID
             // 
-            this.textBox16.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox16.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox16.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox16.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox16.Location = new System.Drawing.Point(9, 259);
-            this.textBox16.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox16.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.ReadOnly = true;
-            this.textBox16.Size = new System.Drawing.Size(132, 25);
-            this.textBox16.TabIndex = 56;
-            this.textBox16.Text = "Industrial Fan";
+            this.col_Reservation_EquipmentID.DataPropertyName = "pk_Reservation_EquipmentID";
+            this.col_Reservation_EquipmentID.HeaderText = "Reservation Equipment ID";
+            this.col_Reservation_EquipmentID.Name = "col_Reservation_EquipmentID";
+            this.col_Reservation_EquipmentID.ReadOnly = true;
             // 
-            // textBox17
+            // col_fk_EquipmentID
             // 
-            this.textBox17.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox17.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox17.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox17.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox17.Location = new System.Drawing.Point(9, 234);
-            this.textBox17.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox17.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.ReadOnly = true;
-            this.textBox17.Size = new System.Drawing.Size(132, 25);
-            this.textBox17.TabIndex = 55;
-            this.textBox17.Text = "Parachute";
+            this.col_fk_EquipmentID.DataPropertyName = "fk_EquipmentID";
+            this.col_fk_EquipmentID.HeaderText = "Equipment ID";
+            this.col_fk_EquipmentID.Name = "col_fk_EquipmentID";
+            this.col_fk_EquipmentID.ReadOnly = true;
             // 
-            // textBox18
+            // col_fk_Equipment_PricingID
             // 
-            this.textBox18.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox18.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox18.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox18.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox18.Location = new System.Drawing.Point(9, 209);
-            this.textBox18.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox18.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.ReadOnly = true;
-            this.textBox18.Size = new System.Drawing.Size(132, 25);
-            this.textBox18.TabIndex = 54;
-            this.textBox18.Text = "Tablecloth";
+            this.col_fk_Equipment_PricingID.DataPropertyName = "fk_Equipment_PricingID";
+            this.col_fk_Equipment_PricingID.HeaderText = "Equipment Pricing ID";
+            this.col_fk_Equipment_PricingID.Name = "col_fk_Equipment_PricingID";
+            this.col_fk_Equipment_PricingID.ReadOnly = true;
             // 
-            // textBox19
+            // col_Quantity
             // 
-            this.textBox19.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox19.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox19.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox19.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox19.Location = new System.Drawing.Point(9, 184);
-            this.textBox19.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox19.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox19.Name = "textBox19";
-            this.textBox19.ReadOnly = true;
-            this.textBox19.Size = new System.Drawing.Size(132, 25);
-            this.textBox19.TabIndex = 53;
-            this.textBox19.Text = "Square Table";
+            this.col_Quantity.DataPropertyName = "fld_Quantity";
+            this.col_Quantity.HeaderText = "Quantity";
+            this.col_Quantity.Name = "col_Quantity";
+            this.col_Quantity.ReadOnly = true;
             // 
-            // textBox20
+            // col_fld_Number_Of_Days
             // 
-            this.textBox20.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox20.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox20.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox20.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox20.Location = new System.Drawing.Point(9, 159);
-            this.textBox20.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox20.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox20.Name = "textBox20";
-            this.textBox20.ReadOnly = true;
-            this.textBox20.Size = new System.Drawing.Size(132, 25);
-            this.textBox20.TabIndex = 52;
-            this.textBox20.Text = "Round Table";
+            this.col_fld_Number_Of_Days.DataPropertyName = "fld_Number_Of_Days";
+            this.col_fld_Number_Of_Days.HeaderText = "Days";
+            this.col_fld_Number_Of_Days.Name = "col_fld_Number_Of_Days";
+            this.col_fld_Number_Of_Days.ReadOnly = true;
             // 
-            // textBox21
+            // col_fld_Total_Equipment_Cost
             // 
-            this.textBox21.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox21.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox21.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox21.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox21.Location = new System.Drawing.Point(9, 334);
-            this.textBox21.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox21.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.ReadOnly = true;
-            this.textBox21.Size = new System.Drawing.Size(132, 25);
-            this.textBox21.TabIndex = 59;
-            this.textBox21.Text = "Sound System";
+            this.col_fld_Total_Equipment_Cost.DataPropertyName = "fld_Total_Equipment_Cost";
+            this.col_fld_Total_Equipment_Cost.HeaderText = "Total Equipment Cost";
+            this.col_fld_Total_Equipment_Cost.Name = "col_fld_Total_Equipment_Cost";
+            this.col_fld_Total_Equipment_Cost.ReadOnly = true;
             // 
-            // textBox22
+            // col_fld_Equipment_Name
             // 
-            this.textBox22.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox22.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox22.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox22.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox22.Location = new System.Drawing.Point(9, 309);
-            this.textBox22.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox22.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox22.Name = "textBox22";
-            this.textBox22.ReadOnly = true;
-            this.textBox22.Size = new System.Drawing.Size(132, 25);
-            this.textBox22.TabIndex = 58;
-            this.textBox22.Text = "Industrial Fan";
+            this.col_fld_Equipment_Name.DataPropertyName = "fld_Equipment_Name";
+            this.col_fld_Equipment_Name.HeaderText = "Equipment Name";
+            this.col_fld_Equipment_Name.Name = "col_fld_Equipment_Name";
+            this.col_fld_Equipment_Name.ReadOnly = true;
+            // 
+            // col_fld_Equipment_Price
+            // 
+            this.col_fld_Equipment_Price.DataPropertyName = "fld_Equipment_Price";
+            this.col_fld_Equipment_Price.HeaderText = "Base Price";
+            this.col_fld_Equipment_Price.Name = "col_fld_Equipment_Price";
+            this.col_fld_Equipment_Price.ReadOnly = true;
+            // 
+            // col_fld_Equipment_Price_Subsequent
+            // 
+            this.col_fld_Equipment_Price_Subsequent.DataPropertyName = "fld_Equipment_Price_Subsequent";
+            this.col_fld_Equipment_Price_Subsequent.HeaderText = "Sub Price";
+            this.col_fld_Equipment_Price_Subsequent.Name = "col_fld_Equipment_Price_Subsequent";
+            this.col_fld_Equipment_Price_Subsequent.ReadOnly = true;
+            // 
+            // col_Total
+            // 
+            this.col_Total.HeaderText = "Total";
+            this.col_Total.Name = "col_Total";
+            this.col_Total.ReadOnly = true;
             // 
             // Equipment_User_Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnl_Billing_Details);
-            this.MaximumSize = new System.Drawing.Size(810, 661);
-            this.MinimumSize = new System.Drawing.Size(810, 661);
+            this.MaximumSize = new System.Drawing.Size(810, 700);
+            this.MinimumSize = new System.Drawing.Size(810, 700);
             this.Name = "Equipment_User_Control";
-            this.Size = new System.Drawing.Size(810, 661);
+            this.Size = new System.Drawing.Size(810, 700);
             this.pnl_Billing_Details.ResumeLayout(false);
             this.pnl_Billing_Details.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Equipment_Billing_Records)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblReservationEquipmentBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -684,25 +667,34 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Panel pnl_Billing_Details;
         private System.Windows.Forms.TextBox textBox38;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.TextBox textBox39;
         private System.Windows.Forms.TextBox lbl_Rate_Type;
         private System.Windows.Forms.TextBox textBox35;
         private System.Windows.Forms.TextBox textBox36;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.DataGridView dgv_Equipment_Billing_Records;
+        private System.Windows.Forms.BindingSource tblReservationEquipmentBindingSource;
+        private _BRIS_EXPERIMENT_3_0DataSet _BRIS_EXPERIMENT_3_0DataSet;
+        private _BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_Reservation_EquipmentTableAdapter tbl_Reservation_EquipmentTableAdapter;
+        private System.Windows.Forms.TextBox lbl_Reservation_Status;
         private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button btn_Add_Equipment_Billing;
+        private System.Windows.Forms.TextBox lbl_fld_Total_Amount;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.TextBox textBox16;
-        private System.Windows.Forms.TextBox textBox17;
-        private System.Windows.Forms.TextBox textBox18;
-        private System.Windows.Forms.TextBox textBox19;
-        private System.Windows.Forms.TextBox textBox20;
-        private System.Windows.Forms.TextBox textBox21;
-        private System.Windows.Forms.TextBox textBox22;
+        private System.Windows.Forms.Button btn_Delete_Equipment_Billing;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_fk_Reservation_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Start_Date_Eq;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_End_Date_Eq;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_OT_Days;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Reservation_EquipmentID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_fk_EquipmentID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_fk_Equipment_PricingID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_fld_Number_Of_Days;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_fld_Total_Equipment_Cost;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_fld_Equipment_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_fld_Equipment_Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_fld_Equipment_Price_Subsequent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Total;
     }
 }

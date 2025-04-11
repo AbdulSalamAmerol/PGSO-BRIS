@@ -382,19 +382,37 @@ namespace pgso
                 {
                     // Get pricing ID
                     cmd = new SqlCommand(@"
-                SELECT pk_Equipment_PricingID 
-                FROM tbl_Equipment_Pricing 
-                WHERE fk_EquipmentID = @FacilityID",
+SELECT pk_Equipment_PricingID 
+FROM tbl_Equipment_Pricing 
+WHERE fk_EquipmentID = @FacilityID",
                         conn, transaction);
 
                     cmd.Parameters.AddWithValue("@FacilityID", equipment.EquipmentID);
                     int venuePricingID = (int)cmd.ExecuteScalar();
-
-                    // Insert equipment
+                    // ABZ - AKO NAG ADD NITO TO 
+                    // Check remaining stock
                     cmd = new SqlCommand(@"
-                INSERT INTO tbl_Reservation_Equipment 
-                (fk_ReservationID, fk_EquipmentID, fk_Equipment_PricingID, fld_Quantity, fld_Number_Of_Days, fld_Total_Equipment_Cost) 
-                VALUES (@fk_ReservationID, @fk_EquipmentID, @fk_Equipment_PricingID, @fld_Quantity, @fld_Number_Of_Days, @fld_Total_Equipment_Cost)",
+                    SELECT fld_Remaining_Stock 
+                    FROM tbl_Equipment 
+                    WHERE pk_EquipmentID = @EquipmentID", conn, transaction);
+
+                    cmd.Parameters.AddWithValue("@EquipmentID", equipment.EquipmentID);
+                    int remainingStock = (int)cmd.ExecuteScalar();
+
+                    if (equipment.Quantity > remainingStock)
+                    {
+                        // Handle the case when not enough stock is available
+                        throw new InvalidOperationException($"? Not enough stock for equipment ID {equipment.EquipmentID}. Requested: {equipment.Quantity}, Available: {remainingStock}");
+                        // OR: Show MessageBox / log and continue
+                        // MessageBox.Show($"Not enough stock for equipment {equipment.EquipmentID}.");
+                        // continue;
+                    }
+
+                    // Insert equipment reservation
+                    cmd = new SqlCommand(@"
+                    INSERT INTO tbl_Reservation_Equipment 
+                    (fk_ReservationID, fk_EquipmentID, fk_Equipment_PricingID, fld_Quantity, fld_Number_Of_Days, fld_Total_Equipment_Cost) 
+                    VALUES (@fk_ReservationID, @fk_EquipmentID, @fk_Equipment_PricingID, @fld_Quantity, @fld_Number_Of_Days, @fld_Total_Equipment_Cost)",
                         conn, transaction);
 
                     cmd.Parameters.AddWithValue("@fk_ReservationID", reservationID);
@@ -402,11 +420,22 @@ namespace pgso
                     cmd.Parameters.AddWithValue("@fk_Equipment_PricingID", venuePricingID);
                     cmd.Parameters.AddWithValue("@fld_Quantity", equipment.Quantity);
                     cmd.Parameters.AddWithValue("@fld_Number_Of_Days", txt_Days_Of_Use.Text);
-                  
-                    cmd.Parameters.AddWithValue("@fld_Total_Equipment_Cost", equipment.CalculatedTotal); // Include total cost
+                    cmd.Parameters.AddWithValue("@fld_Total_Equipment_Cost", equipment.CalculatedTotal);
+
+                    cmd.ExecuteNonQuery();
+
+                    // Deduct stock
+                    cmd = new SqlCommand(@"
+UPDATE tbl_Equipment
+SET fld_Remaining_Stock = fld_Remaining_Stock - @ReservedQuantity
+WHERE pk_EquipmentID = @EquipmentID", conn, transaction);
+
+                    cmd.Parameters.AddWithValue("@ReservedQuantity", equipment.Quantity);
+                    cmd.Parameters.AddWithValue("@EquipmentID", equipment.EquipmentID);
 
                     cmd.ExecuteNonQuery();
                 }
+
 
                 transaction.Commit();
                 MessageBox.Show("Reservation submitted successfully!");
