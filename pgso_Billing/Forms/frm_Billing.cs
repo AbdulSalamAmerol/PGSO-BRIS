@@ -43,6 +43,7 @@ namespace pgso
 
         private void frm_Billing_Load(object sender, EventArgs e)
         {
+
             try
             {
                 all_billing_model = repo_billing.GetAllBillingRecords() ?? new List<Model_Billing>(); // Get all billing records
@@ -156,6 +157,14 @@ namespace pgso
                     var equipmentControl = new Equipment_User_Control(billing);
                     equipmentControl.Dock = DockStyle.Fill;
                     equipmentControl.LoadBillingDetails(billing);
+                    // ✅ Subscribe to the event when the Equipment User Control is loaded
+                    equipmentControl.EquipmentBillingUpdated += (s, e) =>
+                    {
+                        // When the equipment billing is updated, refresh the billing records
+                        RefreshBillingRecords(highlightReservationID: reservationID);
+                    };
+
+
                     billingControl = equipmentControl;
                     break;
 

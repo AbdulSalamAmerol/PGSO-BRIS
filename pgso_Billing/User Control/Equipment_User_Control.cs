@@ -15,6 +15,12 @@ namespace pgso.pgso_Billing.User_Control
 {
     public partial class Equipment_User_Control : UserControl
     {
+        public event EventHandler EquipmentBillingUpdated;
+        protected virtual void OnEquipmentBillingUpdated()
+        {
+            EquipmentBillingUpdated?.Invoke(this, EventArgs.Empty);
+        }
+
         private Repo_Billing repo_billing = new Repo_Billing();
         private Model_Billing _billingDetails;
         public Equipment_User_Control(Model_Billing billingDetailsList)
@@ -75,9 +81,12 @@ namespace pgso.pgso_Billing.User_Control
                     var updatedEquipment = repo_billing.GetEquipmentBillingDetailsByReservationID(reservationID);
                     dgv_Equipment_Billing_Records.DataSource = updatedEquipment;
 
-                    // Refresh billing details
+                    // Refresh billing details in the user control
                     _billingDetails = repo_billing.GetBillingDetailsByReservationID(reservationID);
                     LoadBillingDetails(_billingDetails);
+
+                    // 🔥 Notify parent form
+                    EquipmentBillingUpdated?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -138,6 +147,7 @@ namespace pgso.pgso_Billing.User_Control
             {
                 MessageBox.Show("❌ Error: " + ex.Message);
             }
+            OnEquipmentBillingUpdated();
         }
     }
 }
