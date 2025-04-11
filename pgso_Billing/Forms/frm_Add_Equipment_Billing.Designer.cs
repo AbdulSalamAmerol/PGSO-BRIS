@@ -31,9 +31,7 @@
             this.cmb_Equipment = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.num_Quantity = new System.Windows.Forms.NumericUpDown();
-            this.num_Days = new System.Windows.Forms.NumericUpDown();
             this.btn_Save = new System.Windows.Forms.Button();
             this.lbl_Standard_Price = new System.Windows.Forms.TextBox();
             this.lbl_Subsequent_Price = new System.Windows.Forms.TextBox();
@@ -42,7 +40,6 @@
             this.dtp_Start_Date_Eq = new System.Windows.Forms.DateTimePicker();
             this.dtp_End_Date_Eq = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.num_Quantity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Days)).BeginInit();
             this.SuspendLayout();
             // 
             // cmb_Equipment
@@ -70,14 +67,6 @@
             this.textBox3.TabIndex = 3;
             this.textBox3.Text = "num_Quantity";
             // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(12, 153);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 4;
-            this.textBox4.Text = "num_Days";
-            // 
             // num_Quantity
             // 
             this.num_Quantity.Location = new System.Drawing.Point(128, 127);
@@ -85,16 +74,9 @@
             this.num_Quantity.Size = new System.Drawing.Size(199, 20);
             this.num_Quantity.TabIndex = 8;
             // 
-            // num_Days
-            // 
-            this.num_Days.Location = new System.Drawing.Point(127, 153);
-            this.num_Days.Name = "num_Days";
-            this.num_Days.Size = new System.Drawing.Size(200, 20);
-            this.num_Days.TabIndex = 9;
-            // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(173, 179);
+            this.btn_Save.Location = new System.Drawing.Point(252, 153);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(75, 23);
             this.btn_Save.TabIndex = 10;
@@ -150,7 +132,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(376, 228);
+            this.ClientSize = new System.Drawing.Size(355, 214);
             this.Controls.Add(this.dtp_End_Date_Eq);
             this.Controls.Add(this.dtp_Start_Date_Eq);
             this.Controls.Add(this.textBox5);
@@ -158,16 +140,13 @@
             this.Controls.Add(this.lbl_Subsequent_Price);
             this.Controls.Add(this.lbl_Standard_Price);
             this.Controls.Add(this.btn_Save);
-            this.Controls.Add(this.num_Days);
             this.Controls.Add(this.num_Quantity);
-            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.cmb_Equipment);
             this.Name = "frm_Add_Equipment_Billing";
             this.Text = "frm_Add_Equipment_Billing";
             ((System.ComponentModel.ISupportInitialize)(this.num_Quantity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Days)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,9 +157,7 @@
         private System.Windows.Forms.ComboBox cmb_Equipment;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.NumericUpDown num_Quantity;
-        private System.Windows.Forms.NumericUpDown num_Days;
         private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.TextBox lbl_Standard_Price;
         private System.Windows.Forms.TextBox lbl_Subsequent_Price;

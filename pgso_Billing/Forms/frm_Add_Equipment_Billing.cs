@@ -69,10 +69,11 @@ namespace pgso.pgso_Billing.Forms
             {
                 int equipmentID = Convert.ToInt32(cmb_Equipment.SelectedValue);
                 int quantity = (int)num_Quantity.Value;
-                int days = (int)num_Days.Value;
-
-                DateTime Start_Date_Eq = dtp_Start_Date_Eq.Value.Date; 
+                DateTime Start_Date_Eq = dtp_Start_Date_Eq.Value.Date;
                 DateTime End_Date_Eq = dtp_End_Date_Eq.Value.Date;
+                int days = (End_Date_Eq - Start_Date_Eq).Days + 1; // +1 to include both start and end date
+
+            
                 // Ensure start date is not after end date
                 if (Start_Date_Eq > End_Date_Eq)
                 {
