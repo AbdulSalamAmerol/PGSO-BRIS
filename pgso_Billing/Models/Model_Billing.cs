@@ -58,6 +58,8 @@ namespace pgso.Billing.Models
         public decimal fld_Total_Equipment_Cost { get; set; }
         public int fld_OT_Days { get; set; }
         public int pk_Equipment_PricingID { get; set; }
+        public DateTime fld_Start_Date_Eq { get; set; }
+        public DateTime fld_End_Date_Eq { get; set; }
 
         // Payment Details
         public int? pk_PaymentID { get; set; }

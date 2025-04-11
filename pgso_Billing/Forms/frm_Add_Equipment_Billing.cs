@@ -71,6 +71,15 @@ namespace pgso.pgso_Billing.Forms
                 int quantity = (int)num_Quantity.Value;
                 int days = (int)num_Days.Value;
 
+                DateTime Start_Date_Eq = dtp_Start_Date_Eq.Value.Date; 
+                DateTime End_Date_Eq = dtp_End_Date_Eq.Value.Date;
+                // Ensure start date is not after end date
+                if (Start_Date_Eq > End_Date_Eq)
+                {
+                    MessageBox.Show("Start Date cannot be after End Date.", "Invalid Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // Fetch pricing for the selected equipment using the new method
                 var pricing = _repo.GetEquipmentPricingByEquipmentID(equipmentID);
                 decimal totalCost = 0;
@@ -83,7 +92,7 @@ namespace pgso.pgso_Billing.Forms
                 }
 
                 // Add the equipment reservation
-                bool success = _repo.AddEquipmentReservation(_reservationID, equipmentID, pricing.pk_Equipment_PricingID, quantity, days, totalCost);
+                bool success = _repo.AddEquipmentReservation(_reservationID, equipmentID, pricing.pk_Equipment_PricingID, quantity, days, totalCost, Start_Date_Eq, End_Date_Eq);
 
                 if (success)
                 {

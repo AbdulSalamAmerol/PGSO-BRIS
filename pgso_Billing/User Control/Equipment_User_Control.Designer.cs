@@ -52,7 +52,17 @@
             this.lbl_Reservation_Status = new System.Windows.Forms.TextBox();
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.dgv_Equipment_Billing_Records = new System.Windows.Forms.DataGridView();
+            this.textBox38 = new System.Windows.Forms.TextBox();
+            this.lbl_Rate_Type = new System.Windows.Forms.TextBox();
+            this.textBox35 = new System.Windows.Forms.TextBox();
+            this.textBox36 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this._BRIS_EXPERIMENT_3_0DataSet = new pgso._BRIS_EXPERIMENT_3_0DataSet();
+            this.tblReservationEquipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tbl_Reservation_EquipmentTableAdapter = new pgso._BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_Reservation_EquipmentTableAdapter();
             this.col_fk_Reservation_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Start_Date_Eq = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_End_Date_Eq = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_OT_Days = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Reservation_EquipmentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_fk_EquipmentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,14 +74,6 @@
             this.col_fld_Equipment_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_fld_Equipment_Price_Subsequent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBox38 = new System.Windows.Forms.TextBox();
-            this.lbl_Rate_Type = new System.Windows.Forms.TextBox();
-            this.textBox35 = new System.Windows.Forms.TextBox();
-            this.textBox36 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this._BRIS_EXPERIMENT_3_0DataSet = new pgso._BRIS_EXPERIMENT_3_0DataSet();
-            this.tblReservationEquipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tbl_Reservation_EquipmentTableAdapter = new pgso._BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_Reservation_EquipmentTableAdapter();
             this.pnl_Billing_Details.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Equipment_Billing_Records)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet)).BeginInit();
@@ -413,6 +415,8 @@
             this.dgv_Equipment_Billing_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Equipment_Billing_Records.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_fk_Reservation_ID,
+            this.col_Start_Date_Eq,
+            this.col_End_Date_Eq,
             this.col_OT_Days,
             this.col_Reservation_EquipmentID,
             this.col_fk_EquipmentID,
@@ -430,89 +434,6 @@
             this.dgv_Equipment_Billing_Records.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Equipment_Billing_Records.Size = new System.Drawing.Size(790, 352);
             this.dgv_Equipment_Billing_Records.TabIndex = 46;
-            // 
-            // col_fk_Reservation_ID
-            // 
-            this.col_fk_Reservation_ID.DataPropertyName = "pk_ReservationID";
-            this.col_fk_Reservation_ID.HeaderText = "Reservation ID";
-            this.col_fk_Reservation_ID.Name = "col_fk_Reservation_ID";
-            this.col_fk_Reservation_ID.ReadOnly = true;
-            // 
-            // col_OT_Days
-            // 
-            this.col_OT_Days.DataPropertyName = "fld_OT_Days";
-            this.col_OT_Days.HeaderText = "OT Days";
-            this.col_OT_Days.Name = "col_OT_Days";
-            this.col_OT_Days.ReadOnly = true;
-            // 
-            // col_Reservation_EquipmentID
-            // 
-            this.col_Reservation_EquipmentID.DataPropertyName = "pk_Reservation_EquipmentID";
-            this.col_Reservation_EquipmentID.HeaderText = "Reservation Equipment ID";
-            this.col_Reservation_EquipmentID.Name = "col_Reservation_EquipmentID";
-            this.col_Reservation_EquipmentID.ReadOnly = true;
-            // 
-            // col_fk_EquipmentID
-            // 
-            this.col_fk_EquipmentID.DataPropertyName = "fk_EquipmentID";
-            this.col_fk_EquipmentID.HeaderText = "Equipment ID";
-            this.col_fk_EquipmentID.Name = "col_fk_EquipmentID";
-            this.col_fk_EquipmentID.ReadOnly = true;
-            // 
-            // col_fk_Equipment_PricingID
-            // 
-            this.col_fk_Equipment_PricingID.DataPropertyName = "fk_Equipment_PricingID";
-            this.col_fk_Equipment_PricingID.HeaderText = "Equipment Pricing ID";
-            this.col_fk_Equipment_PricingID.Name = "col_fk_Equipment_PricingID";
-            this.col_fk_Equipment_PricingID.ReadOnly = true;
-            // 
-            // col_Quantity
-            // 
-            this.col_Quantity.DataPropertyName = "fld_Quantity";
-            this.col_Quantity.HeaderText = "Quantity";
-            this.col_Quantity.Name = "col_Quantity";
-            this.col_Quantity.ReadOnly = true;
-            // 
-            // col_fld_Number_Of_Days
-            // 
-            this.col_fld_Number_Of_Days.DataPropertyName = "fld_Number_Of_Days";
-            this.col_fld_Number_Of_Days.HeaderText = "Days";
-            this.col_fld_Number_Of_Days.Name = "col_fld_Number_Of_Days";
-            this.col_fld_Number_Of_Days.ReadOnly = true;
-            // 
-            // col_fld_Total_Equipment_Cost
-            // 
-            this.col_fld_Total_Equipment_Cost.DataPropertyName = "fld_Total_Equipment_Cost";
-            this.col_fld_Total_Equipment_Cost.HeaderText = "Total Equipment Cost";
-            this.col_fld_Total_Equipment_Cost.Name = "col_fld_Total_Equipment_Cost";
-            this.col_fld_Total_Equipment_Cost.ReadOnly = true;
-            // 
-            // col_fld_Equipment_Name
-            // 
-            this.col_fld_Equipment_Name.DataPropertyName = "fld_Equipment_Name";
-            this.col_fld_Equipment_Name.HeaderText = "Equipment Name";
-            this.col_fld_Equipment_Name.Name = "col_fld_Equipment_Name";
-            this.col_fld_Equipment_Name.ReadOnly = true;
-            // 
-            // col_fld_Equipment_Price
-            // 
-            this.col_fld_Equipment_Price.DataPropertyName = "fld_Equipment_Price";
-            this.col_fld_Equipment_Price.HeaderText = "Base Price";
-            this.col_fld_Equipment_Price.Name = "col_fld_Equipment_Price";
-            this.col_fld_Equipment_Price.ReadOnly = true;
-            // 
-            // col_fld_Equipment_Price_Subsequent
-            // 
-            this.col_fld_Equipment_Price_Subsequent.DataPropertyName = "fld_Equipment_Price_Subsequent";
-            this.col_fld_Equipment_Price_Subsequent.HeaderText = "Sub Price";
-            this.col_fld_Equipment_Price_Subsequent.Name = "col_fld_Equipment_Price_Subsequent";
-            this.col_fld_Equipment_Price_Subsequent.ReadOnly = true;
-            // 
-            // col_Total
-            // 
-            this.col_Total.HeaderText = "Total";
-            this.col_Total.Name = "col_Total";
-            this.col_Total.ReadOnly = true;
             // 
             // textBox38
             // 
@@ -602,6 +523,103 @@
             // 
             this.tbl_Reservation_EquipmentTableAdapter.ClearBeforeFill = true;
             // 
+            // col_fk_Reservation_ID
+            // 
+            this.col_fk_Reservation_ID.DataPropertyName = "pk_ReservationID";
+            this.col_fk_Reservation_ID.HeaderText = "Reservation ID";
+            this.col_fk_Reservation_ID.Name = "col_fk_Reservation_ID";
+            this.col_fk_Reservation_ID.ReadOnly = true;
+            // 
+            // col_Start_Date_Eq
+            // 
+            this.col_Start_Date_Eq.DataPropertyName = "fld_Start_Date_Eq";
+            this.col_Start_Date_Eq.HeaderText = "Start Date";
+            this.col_Start_Date_Eq.Name = "col_Start_Date_Eq";
+            this.col_Start_Date_Eq.ReadOnly = true;
+            // 
+            // col_End_Date_Eq
+            // 
+            this.col_End_Date_Eq.DataPropertyName = "fld_End_Date_Eq";
+            this.col_End_Date_Eq.HeaderText = "End Date";
+            this.col_End_Date_Eq.Name = "col_End_Date_Eq";
+            this.col_End_Date_Eq.ReadOnly = true;
+            // 
+            // col_OT_Days
+            // 
+            this.col_OT_Days.DataPropertyName = "fld_OT_Days";
+            this.col_OT_Days.HeaderText = "OT Days";
+            this.col_OT_Days.Name = "col_OT_Days";
+            this.col_OT_Days.ReadOnly = true;
+            // 
+            // col_Reservation_EquipmentID
+            // 
+            this.col_Reservation_EquipmentID.DataPropertyName = "pk_Reservation_EquipmentID";
+            this.col_Reservation_EquipmentID.HeaderText = "Reservation Equipment ID";
+            this.col_Reservation_EquipmentID.Name = "col_Reservation_EquipmentID";
+            this.col_Reservation_EquipmentID.ReadOnly = true;
+            // 
+            // col_fk_EquipmentID
+            // 
+            this.col_fk_EquipmentID.DataPropertyName = "fk_EquipmentID";
+            this.col_fk_EquipmentID.HeaderText = "Equipment ID";
+            this.col_fk_EquipmentID.Name = "col_fk_EquipmentID";
+            this.col_fk_EquipmentID.ReadOnly = true;
+            // 
+            // col_fk_Equipment_PricingID
+            // 
+            this.col_fk_Equipment_PricingID.DataPropertyName = "fk_Equipment_PricingID";
+            this.col_fk_Equipment_PricingID.HeaderText = "Equipment Pricing ID";
+            this.col_fk_Equipment_PricingID.Name = "col_fk_Equipment_PricingID";
+            this.col_fk_Equipment_PricingID.ReadOnly = true;
+            // 
+            // col_Quantity
+            // 
+            this.col_Quantity.DataPropertyName = "fld_Quantity";
+            this.col_Quantity.HeaderText = "Quantity";
+            this.col_Quantity.Name = "col_Quantity";
+            this.col_Quantity.ReadOnly = true;
+            // 
+            // col_fld_Number_Of_Days
+            // 
+            this.col_fld_Number_Of_Days.DataPropertyName = "fld_Number_Of_Days";
+            this.col_fld_Number_Of_Days.HeaderText = "Days";
+            this.col_fld_Number_Of_Days.Name = "col_fld_Number_Of_Days";
+            this.col_fld_Number_Of_Days.ReadOnly = true;
+            // 
+            // col_fld_Total_Equipment_Cost
+            // 
+            this.col_fld_Total_Equipment_Cost.DataPropertyName = "fld_Total_Equipment_Cost";
+            this.col_fld_Total_Equipment_Cost.HeaderText = "Total Equipment Cost";
+            this.col_fld_Total_Equipment_Cost.Name = "col_fld_Total_Equipment_Cost";
+            this.col_fld_Total_Equipment_Cost.ReadOnly = true;
+            // 
+            // col_fld_Equipment_Name
+            // 
+            this.col_fld_Equipment_Name.DataPropertyName = "fld_Equipment_Name";
+            this.col_fld_Equipment_Name.HeaderText = "Equipment Name";
+            this.col_fld_Equipment_Name.Name = "col_fld_Equipment_Name";
+            this.col_fld_Equipment_Name.ReadOnly = true;
+            // 
+            // col_fld_Equipment_Price
+            // 
+            this.col_fld_Equipment_Price.DataPropertyName = "fld_Equipment_Price";
+            this.col_fld_Equipment_Price.HeaderText = "Base Price";
+            this.col_fld_Equipment_Price.Name = "col_fld_Equipment_Price";
+            this.col_fld_Equipment_Price.ReadOnly = true;
+            // 
+            // col_fld_Equipment_Price_Subsequent
+            // 
+            this.col_fld_Equipment_Price_Subsequent.DataPropertyName = "fld_Equipment_Price_Subsequent";
+            this.col_fld_Equipment_Price_Subsequent.HeaderText = "Sub Price";
+            this.col_fld_Equipment_Price_Subsequent.Name = "col_fld_Equipment_Price_Subsequent";
+            this.col_fld_Equipment_Price_Subsequent.ReadOnly = true;
+            // 
+            // col_Total
+            // 
+            this.col_Total.HeaderText = "Total";
+            this.col_Total.Name = "col_Total";
+            this.col_Total.ReadOnly = true;
+            // 
             // Equipment_User_Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -648,7 +666,13 @@
         private _BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_Reservation_EquipmentTableAdapter tbl_Reservation_EquipmentTableAdapter;
         private System.Windows.Forms.TextBox lbl_Reservation_Status;
         private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.Button btn_Add_Equipment_Billing;
+        private System.Windows.Forms.TextBox lbl_fld_Total_Amount;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btn_Delete_Equipment_Billing;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fk_Reservation_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Start_Date_Eq;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_End_Date_Eq;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_OT_Days;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Reservation_EquipmentID;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fk_EquipmentID;
@@ -660,9 +684,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fld_Equipment_Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fld_Equipment_Price_Subsequent;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Total;
-        private System.Windows.Forms.Button btn_Add_Equipment_Billing;
-        private System.Windows.Forms.TextBox lbl_fld_Total_Amount;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button btn_Delete_Equipment_Billing;
     }
 }

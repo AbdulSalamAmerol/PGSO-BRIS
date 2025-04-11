@@ -911,7 +911,9 @@ namespace pgso.Billing.Repositories
             p.fld_Final_Amount_Paid,
             p.fld_Overtime_Fee,
             re.pk_Reservation_EquipmentID,
-            r.fld_Reservation_Status
+            r.fld_Reservation_Status,
+            re.fld_Start_Date_Eq,
+            re.fld_End_Date_Eq
 
         FROM dbo.tbl_Reservation r
         LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
@@ -973,8 +975,9 @@ namespace pgso.Billing.Repositories
                                     fld_Final_Amount_Paid = reader.IsDBNull(31) ? 0 : reader.GetDecimal(31),
                                     fld_Overtime_Fee = reader.IsDBNull(32) ? 0 : reader.GetDecimal(32),
                                     pk_Reservation_EquipmentID = reader.IsDBNull(33) ? 0 : reader.GetInt32(33),
-                                    fld_Reservation_Status = reader.IsDBNull(34) ? "" : reader.GetString(34)
-                           
+                                    fld_Reservation_Status = reader.IsDBNull(34) ? "" : reader.GetString(34),
+                                    fld_Start_Date_Eq = reader.IsDBNull(35) ? DateTime.MinValue : reader.GetDateTime(35),
+                                    fld_End_Date_Eq = reader.IsDBNull(36) ? DateTime.MinValue : reader.GetDateTime(36)
                                 };
 
                                 billingDetailsList.Add(billingDetails);
@@ -1200,15 +1203,15 @@ namespace pgso.Billing.Repositories
         }
 
         // Method to add equipment reservation
-        public bool AddEquipmentReservation(int reservationID, int equipmentID, int pricingID, int quantity, int numberOfDays, decimal totalCost)
+        public bool AddEquipmentReservation(int reservationID, int equipmentID, int pricingID, int quantity, int numberOfDays, decimal totalCost, DateTime Start_Date_Eq, DateTime End_Date_Eq)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = @"
             INSERT INTO tbl_Reservation_Equipment
-                (fk_ReservationID, fk_EquipmentID, fk_Equipment_PricingID, fld_Quantity, fld_Number_Of_Days, fld_Total_Equipment_Cost)
+                (fk_ReservationID, fk_EquipmentID, fk_Equipment_PricingID, fld_Quantity, fld_Number_Of_Days, fld_Total_Equipment_Cost, fld_Start_Date_Eq, fld_End_Date_Eq)
             VALUES
-                (@ReservationID, @EquipmentID, @PricingID, @Quantity, @Days, @TotalCost)";
+                (@ReservationID, @EquipmentID, @PricingID, @Quantity, @Days, @TotalCost, @StartDateEq, @EndDateEq)";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@ReservationID", reservationID);
@@ -1217,6 +1220,8 @@ namespace pgso.Billing.Repositories
                 cmd.Parameters.AddWithValue("@Quantity", quantity);
                 cmd.Parameters.AddWithValue("@Days", numberOfDays);
                 cmd.Parameters.AddWithValue("@TotalCost", totalCost);
+                cmd.Parameters.AddWithValue("@StartDateEq", Start_Date_Eq);
+                cmd.Parameters.AddWithValue("@EndDateEq", End_Date_Eq);
 
                 conn.Open();
                 return cmd.ExecuteNonQuery() > 0;

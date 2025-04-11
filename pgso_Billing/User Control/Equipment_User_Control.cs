@@ -41,19 +41,16 @@ namespace pgso.pgso_Billing.User_Control
                     MessageBox.Show("No equipment reservations found for this billing.");
                     return;
                 }
-
                 // Bind to DataGridView
                 dgv_Equipment_Billing_Records.AutoGenerateColumns = false; // Disable auto-generation of columns
                 BindingSource equipmentBindingSource = new BindingSource();
                 equipmentBindingSource.DataSource = equipmentDetails;
                 dgv_Equipment_Billing_Records.DataSource = equipmentBindingSource;
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to load equipment billing details: " + ex.Message);
             }
-
             lbl_Control_Number.Text = billingDetailsList.fld_Control_Number;
             lbl_Requesting_Person.Text = $"{billingDetailsList.fld_First_Name} {billingDetailsList.fld_Middle_Name} {billingDetailsList.fld_Surname}";
             lbl_Requesting_Office.Text = billingDetailsList.fld_Requesting_Person_Address;
@@ -64,10 +61,7 @@ namespace pgso.pgso_Billing.User_Control
             lbl_Rate_Type.Text = billingDetailsList.fld_Rate_Type;
             lbl_Reservation_Status.Text = billingDetailsList.fld_Reservation_Status;
             lbl_fld_Total_Amount.Text = billingDetailsList.fld_Total_Amount.ToString("C");  
-
-
         }
-
         private void btn_Add_Equipment_Billing_Click(object sender, EventArgs e)
         {
             int reservationID = _billingDetails.pk_ReservationID;
@@ -77,11 +71,17 @@ namespace pgso.pgso_Billing.User_Control
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
                 {
+                    // Refresh equipment list
                     var updatedEquipment = repo_billing.GetEquipmentBillingDetailsByReservationID(reservationID);
                     dgv_Equipment_Billing_Records.DataSource = updatedEquipment;
+
+                    // ✅ Refresh billing details including total amount
+                    _billingDetails = repo_billing.GetBillingDetailsByReservationID(reservationID);
+                    LoadBillingDetails(_billingDetails);
                 }
             }
         }
+
         private void btn_Delete_Equipment_Billing_Click(object sender, EventArgs e)
         {
             try
@@ -137,6 +137,7 @@ namespace pgso.pgso_Billing.User_Control
                 MessageBox.Show("❌ Error: " + ex.Message);
             }
         }
+
 
 
 

@@ -37,6 +37,10 @@
             this.btn_Save = new System.Windows.Forms.Button();
             this.lbl_Standard_Price = new System.Windows.Forms.TextBox();
             this.lbl_Subsequent_Price = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.dtp_Start_Date_Eq = new System.Windows.Forms.DateTimePicker();
+            this.dtp_End_Date_Eq = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.num_Quantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_Days)).BeginInit();
             this.SuspendLayout();
@@ -44,15 +48,15 @@
             // cmb_Equipment
             // 
             this.cmb_Equipment.FormattingEnabled = true;
-            this.cmb_Equipment.Location = new System.Drawing.Point(128, 12);
+            this.cmb_Equipment.Location = new System.Drawing.Point(128, 75);
             this.cmb_Equipment.Name = "cmb_Equipment";
-            this.cmb_Equipment.Size = new System.Drawing.Size(120, 21);
+            this.cmb_Equipment.Size = new System.Drawing.Size(199, 21);
             this.cmb_Equipment.TabIndex = 0;
             this.cmb_Equipment.SelectedIndexChanged += new System.EventHandler(this.cmb_Equipment_SelectedIndexChanged);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 12);
+            this.textBox1.Location = new System.Drawing.Point(12, 75);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 1;
@@ -60,7 +64,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(12, 64);
+            this.textBox3.Location = new System.Drawing.Point(12, 127);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 20);
             this.textBox3.TabIndex = 3;
@@ -68,7 +72,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(12, 90);
+            this.textBox4.Location = new System.Drawing.Point(12, 153);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(100, 20);
             this.textBox4.TabIndex = 4;
@@ -76,21 +80,21 @@
             // 
             // num_Quantity
             // 
-            this.num_Quantity.Location = new System.Drawing.Point(128, 64);
+            this.num_Quantity.Location = new System.Drawing.Point(128, 127);
             this.num_Quantity.Name = "num_Quantity";
-            this.num_Quantity.Size = new System.Drawing.Size(120, 20);
+            this.num_Quantity.Size = new System.Drawing.Size(199, 20);
             this.num_Quantity.TabIndex = 8;
             // 
             // num_Days
             // 
-            this.num_Days.Location = new System.Drawing.Point(127, 90);
+            this.num_Days.Location = new System.Drawing.Point(127, 153);
             this.num_Days.Name = "num_Days";
-            this.num_Days.Size = new System.Drawing.Size(121, 20);
+            this.num_Days.Size = new System.Drawing.Size(200, 20);
             this.num_Days.TabIndex = 9;
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(173, 116);
+            this.btn_Save.Location = new System.Drawing.Point(173, 179);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(75, 23);
             this.btn_Save.TabIndex = 10;
@@ -100,23 +104,57 @@
             // 
             // lbl_Standard_Price
             // 
-            this.lbl_Standard_Price.Location = new System.Drawing.Point(12, 38);
+            this.lbl_Standard_Price.Location = new System.Drawing.Point(12, 101);
             this.lbl_Standard_Price.Name = "lbl_Standard_Price";
             this.lbl_Standard_Price.Size = new System.Drawing.Size(100, 20);
             this.lbl_Standard_Price.TabIndex = 11;
             // 
             // lbl_Subsequent_Price
             // 
-            this.lbl_Subsequent_Price.Location = new System.Drawing.Point(128, 39);
+            this.lbl_Subsequent_Price.Location = new System.Drawing.Point(128, 102);
             this.lbl_Subsequent_Price.Name = "lbl_Subsequent_Price";
-            this.lbl_Subsequent_Price.Size = new System.Drawing.Size(121, 20);
+            this.lbl_Subsequent_Price.Size = new System.Drawing.Size(200, 20);
             this.lbl_Subsequent_Price.TabIndex = 12;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(12, 49);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 13;
+            this.textBox2.Text = "End Date";
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(12, 23);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 20);
+            this.textBox5.TabIndex = 14;
+            this.textBox5.Text = "Start Date";
+            // 
+            // dtp_Start_Date_Eq
+            // 
+            this.dtp_Start_Date_Eq.Location = new System.Drawing.Point(128, 23);
+            this.dtp_Start_Date_Eq.Name = "dtp_Start_Date_Eq";
+            this.dtp_Start_Date_Eq.Size = new System.Drawing.Size(200, 20);
+            this.dtp_Start_Date_Eq.TabIndex = 15;
+            // 
+            // dtp_End_Date_Eq
+            // 
+            this.dtp_End_Date_Eq.Location = new System.Drawing.Point(128, 49);
+            this.dtp_End_Date_Eq.Name = "dtp_End_Date_Eq";
+            this.dtp_End_Date_Eq.Size = new System.Drawing.Size(200, 20);
+            this.dtp_End_Date_Eq.TabIndex = 16;
             // 
             // frm_Add_Equipment_Billing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(259, 142);
+            this.ClientSize = new System.Drawing.Size(376, 228);
+            this.Controls.Add(this.dtp_End_Date_Eq);
+            this.Controls.Add(this.dtp_Start_Date_Eq);
+            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.lbl_Subsequent_Price);
             this.Controls.Add(this.lbl_Standard_Price);
             this.Controls.Add(this.btn_Save);
@@ -146,5 +184,9 @@
         private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.TextBox lbl_Standard_Price;
         private System.Windows.Forms.TextBox lbl_Subsequent_Price;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.DateTimePicker dtp_Start_Date_Eq;
+        private System.Windows.Forms.DateTimePicker dtp_End_Date_Eq;
     }
 }
