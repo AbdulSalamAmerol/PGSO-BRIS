@@ -44,15 +44,15 @@
             // cmb_Equipment
             // 
             this.cmb_Equipment.FormattingEnabled = true;
-            this.cmb_Equipment.Location = new System.Drawing.Point(139, 43);
+            this.cmb_Equipment.Location = new System.Drawing.Point(128, 12);
             this.cmb_Equipment.Name = "cmb_Equipment";
-            this.cmb_Equipment.Size = new System.Drawing.Size(121, 21);
+            this.cmb_Equipment.Size = new System.Drawing.Size(120, 21);
             this.cmb_Equipment.TabIndex = 0;
             this.cmb_Equipment.SelectedIndexChanged += new System.EventHandler(this.cmb_Equipment_SelectedIndexChanged);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(22, 43);
+            this.textBox1.Location = new System.Drawing.Point(12, 12);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 1;
@@ -60,7 +60,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(22, 126);
+            this.textBox3.Location = new System.Drawing.Point(12, 64);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 20);
             this.textBox3.TabIndex = 3;
@@ -68,7 +68,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(22, 184);
+            this.textBox4.Location = new System.Drawing.Point(12, 90);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(100, 20);
             this.textBox4.TabIndex = 4;
@@ -76,21 +76,21 @@
             // 
             // num_Quantity
             // 
-            this.num_Quantity.Location = new System.Drawing.Point(140, 126);
+            this.num_Quantity.Location = new System.Drawing.Point(128, 64);
             this.num_Quantity.Name = "num_Quantity";
             this.num_Quantity.Size = new System.Drawing.Size(120, 20);
             this.num_Quantity.TabIndex = 8;
             // 
             // num_Days
             // 
-            this.num_Days.Location = new System.Drawing.Point(140, 185);
+            this.num_Days.Location = new System.Drawing.Point(127, 90);
             this.num_Days.Name = "num_Days";
-            this.num_Days.Size = new System.Drawing.Size(120, 20);
+            this.num_Days.Size = new System.Drawing.Size(121, 20);
             this.num_Days.TabIndex = 9;
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(87, 241);
+            this.btn_Save.Location = new System.Drawing.Point(173, 116);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(75, 23);
             this.btn_Save.TabIndex = 10;
@@ -100,23 +100,23 @@
             // 
             // lbl_Standard_Price
             // 
-            this.lbl_Standard_Price.Location = new System.Drawing.Point(12, 84);
+            this.lbl_Standard_Price.Location = new System.Drawing.Point(12, 38);
             this.lbl_Standard_Price.Name = "lbl_Standard_Price";
             this.lbl_Standard_Price.Size = new System.Drawing.Size(100, 20);
             this.lbl_Standard_Price.TabIndex = 11;
             // 
             // lbl_Subsequent_Price
             // 
-            this.lbl_Subsequent_Price.Location = new System.Drawing.Point(140, 84);
+            this.lbl_Subsequent_Price.Location = new System.Drawing.Point(128, 39);
             this.lbl_Subsequent_Price.Name = "lbl_Subsequent_Price";
-            this.lbl_Subsequent_Price.Size = new System.Drawing.Size(100, 20);
+            this.lbl_Subsequent_Price.Size = new System.Drawing.Size(121, 20);
             this.lbl_Subsequent_Price.TabIndex = 12;
             // 
             // frm_Add_Equipment_Billing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(259, 142);
             this.Controls.Add(this.lbl_Subsequent_Price);
             this.Controls.Add(this.lbl_Standard_Price);
             this.Controls.Add(this.btn_Save);

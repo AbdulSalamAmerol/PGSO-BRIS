@@ -147,9 +147,10 @@
             this.pnl_Billing_Details.Controls.Add(this.textBox3);
             this.pnl_Billing_Details.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_Billing_Details.Location = new System.Drawing.Point(0, 0);
-            this.pnl_Billing_Details.MaximumSize = new System.Drawing.Size(810, 661);
+            this.pnl_Billing_Details.MaximumSize = new System.Drawing.Size(810, 700);
+            this.pnl_Billing_Details.MinimumSize = new System.Drawing.Size(810, 700);
             this.pnl_Billing_Details.Name = "pnl_Billing_Details";
-            this.pnl_Billing_Details.Size = new System.Drawing.Size(810, 661);
+            this.pnl_Billing_Details.Size = new System.Drawing.Size(810, 700);
             this.pnl_Billing_Details.TabIndex = 7;
             // 
             // textBox38
@@ -212,7 +213,7 @@
             this.panel5.Controls.Add(this.lbl_Additional_Hourly_Charge);
             this.panel5.Controls.Add(this.textBox44);
             this.panel5.Controls.Add(this.lbl_Venue_Scope_Transact);
-            this.panel5.Location = new System.Drawing.Point(6, 310);
+            this.panel5.Location = new System.Drawing.Point(9, 310);
             this.panel5.MaximumSize = new System.Drawing.Size(790, 353);
             this.panel5.MinimumSize = new System.Drawing.Size(790, 353);
             this.panel5.Name = "panel5";
@@ -361,7 +362,7 @@
             this.lbl_Paid_Amount_2.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Paid_Amount_2.Name = "lbl_Paid_Amount_2";
             this.lbl_Paid_Amount_2.ReadOnly = true;
-            this.lbl_Paid_Amount_2.Size = new System.Drawing.Size(107, 25);
+            this.lbl_Paid_Amount_2.Size = new System.Drawing.Size(107, 16);
             this.lbl_Paid_Amount_2.TabIndex = 69;
             this.lbl_Paid_Amount_2.Text = "Amount";
             this.lbl_Paid_Amount_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -377,7 +378,7 @@
             this.textBox20.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox20.Name = "textBox20";
             this.textBox20.ReadOnly = true;
-            this.textBox20.Size = new System.Drawing.Size(113, 25);
+            this.textBox20.Size = new System.Drawing.Size(113, 16);
             this.textBox20.TabIndex = 68;
             this.textBox20.Text = "Paid Amount";
             this.textBox20.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -393,7 +394,7 @@
             this.lbl_Final_Amount_Paid.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Final_Amount_Paid.Name = "lbl_Final_Amount_Paid";
             this.lbl_Final_Amount_Paid.ReadOnly = true;
-            this.lbl_Final_Amount_Paid.Size = new System.Drawing.Size(107, 25);
+            this.lbl_Final_Amount_Paid.Size = new System.Drawing.Size(107, 16);
             this.lbl_Final_Amount_Paid.TabIndex = 67;
             this.lbl_Final_Amount_Paid.Text = "Amount";
             this.lbl_Final_Amount_Paid.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -409,7 +410,7 @@
             this.lbl_OT_Hours.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_OT_Hours.Name = "lbl_OT_Hours";
             this.lbl_OT_Hours.ReadOnly = true;
-            this.lbl_OT_Hours.Size = new System.Drawing.Size(97, 25);
+            this.lbl_OT_Hours.Size = new System.Drawing.Size(97, 16);
             this.lbl_OT_Hours.TabIndex = 59;
             this.lbl_OT_Hours.Text = "Description";
             this.lbl_OT_Hours.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -425,7 +426,7 @@
             this.textBox19.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox19.Name = "textBox19";
             this.textBox19.ReadOnly = true;
-            this.textBox19.Size = new System.Drawing.Size(113, 25);
+            this.textBox19.Size = new System.Drawing.Size(113, 16);
             this.textBox19.TabIndex = 66;
             this.textBox19.Text = "Overall Total";
             this.textBox19.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -441,7 +442,7 @@
             this.lbl_Overtime_Fee.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Overtime_Fee.Name = "lbl_Overtime_Fee";
             this.lbl_Overtime_Fee.ReadOnly = true;
-            this.lbl_Overtime_Fee.Size = new System.Drawing.Size(107, 25);
+            this.lbl_Overtime_Fee.Size = new System.Drawing.Size(107, 15);
             this.lbl_Overtime_Fee.TabIndex = 55;
             this.lbl_Overtime_Fee.Text = "Amount";
             this.lbl_Overtime_Fee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -457,7 +458,7 @@
             this.lbl_Base_Charge_Amount.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Base_Charge_Amount.Name = "lbl_Base_Charge_Amount";
             this.lbl_Base_Charge_Amount.ReadOnly = true;
-            this.lbl_Base_Charge_Amount.Size = new System.Drawing.Size(107, 25);
+            this.lbl_Base_Charge_Amount.Size = new System.Drawing.Size(107, 16);
             this.lbl_Base_Charge_Amount.TabIndex = 58;
             this.lbl_Base_Charge_Amount.Text = "Description";
             this.lbl_Base_Charge_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -473,7 +474,7 @@
             this.lbl_Refund_Amount.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Refund_Amount.Name = "lbl_Refund_Amount";
             this.lbl_Refund_Amount.ReadOnly = true;
-            this.lbl_Refund_Amount.Size = new System.Drawing.Size(107, 25);
+            this.lbl_Refund_Amount.Size = new System.Drawing.Size(107, 16);
             this.lbl_Refund_Amount.TabIndex = 64;
             this.lbl_Refund_Amount.Text = "Amount";
             this.lbl_Refund_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -489,7 +490,7 @@
             this.textBox32.MinimumSize = new System.Drawing.Size(0, 25);
             this.textBox32.Name = "textBox32";
             this.textBox32.ReadOnly = true;
-            this.textBox32.Size = new System.Drawing.Size(102, 25);
+            this.textBox32.Size = new System.Drawing.Size(102, 16);
             this.textBox32.TabIndex = 43;
             this.textBox32.Text = "Description";
             // 
@@ -504,7 +505,7 @@
             this.textBox16.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox16.Name = "textBox16";
             this.textBox16.ReadOnly = true;
-            this.textBox16.Size = new System.Drawing.Size(113, 25);
+            this.textBox16.Size = new System.Drawing.Size(113, 16);
             this.textBox16.TabIndex = 59;
             this.textBox16.Text = "Refund Amount";
             this.textBox16.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -520,7 +521,7 @@
             this.lbl_OT_Hourly_Charge.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_OT_Hourly_Charge.Name = "lbl_OT_Hourly_Charge";
             this.lbl_OT_Hourly_Charge.ReadOnly = true;
-            this.lbl_OT_Hourly_Charge.Size = new System.Drawing.Size(113, 25);
+            this.lbl_OT_Hourly_Charge.Size = new System.Drawing.Size(113, 15);
             this.lbl_OT_Hourly_Charge.TabIndex = 49;
             this.lbl_OT_Hourly_Charge.Text = "Description";
             this.lbl_OT_Hourly_Charge.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -536,7 +537,7 @@
             this.lbl_Balance.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Balance.Name = "lbl_Balance";
             this.lbl_Balance.ReadOnly = true;
-            this.lbl_Balance.Size = new System.Drawing.Size(107, 25);
+            this.lbl_Balance.Size = new System.Drawing.Size(107, 16);
             this.lbl_Balance.TabIndex = 62;
             this.lbl_Balance.Text = "Amount";
             this.lbl_Balance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -552,7 +553,7 @@
             this.textBox29.MinimumSize = new System.Drawing.Size(0, 25);
             this.textBox29.Name = "textBox29";
             this.textBox29.ReadOnly = true;
-            this.textBox29.Size = new System.Drawing.Size(113, 25);
+            this.textBox29.Size = new System.Drawing.Size(113, 16);
             this.textBox29.TabIndex = 38;
             this.textBox29.Text = "Hourly Charge";
             this.textBox29.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -568,7 +569,7 @@
             this.textBox58.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox58.Name = "textBox58";
             this.textBox58.ReadOnly = true;
-            this.textBox58.Size = new System.Drawing.Size(113, 25);
+            this.textBox58.Size = new System.Drawing.Size(113, 16);
             this.textBox58.TabIndex = 61;
             this.textBox58.Text = "Balance";
             this.textBox58.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -584,7 +585,7 @@
             this.textBox33.MinimumSize = new System.Drawing.Size(0, 25);
             this.textBox33.Name = "textBox33";
             this.textBox33.ReadOnly = true;
-            this.textBox33.Size = new System.Drawing.Size(62, 25);
+            this.textBox33.Size = new System.Drawing.Size(62, 16);
             this.textBox33.TabIndex = 45;
             this.textBox33.Text = "No. Hrs";
             // 
@@ -599,7 +600,7 @@
             this.lbl_Paid_Amount.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Paid_Amount.Name = "lbl_Paid_Amount";
             this.lbl_Paid_Amount.ReadOnly = true;
-            this.lbl_Paid_Amount.Size = new System.Drawing.Size(107, 25);
+            this.lbl_Paid_Amount.Size = new System.Drawing.Size(107, 16);
             this.lbl_Paid_Amount.TabIndex = 60;
             this.lbl_Paid_Amount.Text = "Amount";
             this.lbl_Paid_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -615,7 +616,7 @@
             this.textBox63.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox63.Name = "textBox63";
             this.textBox63.ReadOnly = true;
-            this.textBox63.Size = new System.Drawing.Size(119, 25);
+            this.textBox63.Size = new System.Drawing.Size(119, 15);
             this.textBox63.TabIndex = 36;
             this.textBox63.Text = "Overtime Charge";
             // 
@@ -630,7 +631,7 @@
             this.lbl_Additional_Charge.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Additional_Charge.Name = "lbl_Additional_Charge";
             this.lbl_Additional_Charge.ReadOnly = true;
-            this.lbl_Additional_Charge.Size = new System.Drawing.Size(107, 25);
+            this.lbl_Additional_Charge.Size = new System.Drawing.Size(107, 16);
             this.lbl_Additional_Charge.TabIndex = 56;
             this.lbl_Additional_Charge.Text = "Amount";
             this.lbl_Additional_Charge.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -646,7 +647,7 @@
             this.textBox55.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox55.Name = "textBox55";
             this.textBox55.ReadOnly = true;
-            this.textBox55.Size = new System.Drawing.Size(113, 25);
+            this.textBox55.Size = new System.Drawing.Size(113, 16);
             this.textBox55.TabIndex = 59;
             this.textBox55.Text = "Paid Amount";
             this.textBox55.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -662,7 +663,7 @@
             this.lbl_Total_Amount.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Total_Amount.Name = "lbl_Total_Amount";
             this.lbl_Total_Amount.ReadOnly = true;
-            this.lbl_Total_Amount.Size = new System.Drawing.Size(107, 25);
+            this.lbl_Total_Amount.Size = new System.Drawing.Size(107, 16);
             this.lbl_Total_Amount.TabIndex = 55;
             this.lbl_Total_Amount.Text = "Amount";
             this.lbl_Total_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -678,7 +679,7 @@
             this.textBox46.MinimumSize = new System.Drawing.Size(0, 25);
             this.textBox46.Name = "textBox46";
             this.textBox46.ReadOnly = true;
-            this.textBox46.Size = new System.Drawing.Size(107, 25);
+            this.textBox46.Size = new System.Drawing.Size(107, 16);
             this.textBox46.TabIndex = 47;
             this.textBox46.Text = "Amount";
             this.textBox46.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -694,7 +695,7 @@
             this.textBox51.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox51.Name = "textBox51";
             this.textBox51.ReadOnly = true;
-            this.textBox51.Size = new System.Drawing.Size(113, 25);
+            this.textBox51.Size = new System.Drawing.Size(113, 16);
             this.textBox51.TabIndex = 58;
             this.textBox51.Text = "Total Amount";
             this.textBox51.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -710,7 +711,7 @@
             this.textBox28.MinimumSize = new System.Drawing.Size(0, 19);
             this.textBox28.Name = "textBox28";
             this.textBox28.ReadOnly = true;
-            this.textBox28.Size = new System.Drawing.Size(102, 19);
+            this.textBox28.Size = new System.Drawing.Size(102, 16);
             this.textBox28.TabIndex = 46;
             this.textBox28.Text = "Description";
             // 
@@ -725,7 +726,7 @@
             this.lbl_Additional_Hours_Amount.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Additional_Hours_Amount.Name = "lbl_Additional_Hours_Amount";
             this.lbl_Additional_Hours_Amount.ReadOnly = true;
-            this.lbl_Additional_Hours_Amount.Size = new System.Drawing.Size(107, 25);
+            this.lbl_Additional_Hours_Amount.Size = new System.Drawing.Size(107, 16);
             this.lbl_Additional_Hours_Amount.TabIndex = 48;
             this.lbl_Additional_Hours_Amount.Text = "Amount";
             this.lbl_Additional_Hours_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -741,7 +742,7 @@
             this.lbl_Venue_Name_Transact.MinimumSize = new System.Drawing.Size(2, 15);
             this.lbl_Venue_Name_Transact.Name = "lbl_Venue_Name_Transact";
             this.lbl_Venue_Name_Transact.ReadOnly = true;
-            this.lbl_Venue_Name_Transact.Size = new System.Drawing.Size(122, 15);
+            this.lbl_Venue_Name_Transact.Size = new System.Drawing.Size(122, 13);
             this.lbl_Venue_Name_Transact.TabIndex = 52;
             this.lbl_Venue_Name_Transact.Text = "Description";
             // 
@@ -756,7 +757,7 @@
             this.textBox34.MinimumSize = new System.Drawing.Size(0, 25);
             this.textBox34.Name = "textBox34";
             this.textBox34.ReadOnly = true;
-            this.textBox34.Size = new System.Drawing.Size(53, 25);
+            this.textBox34.Size = new System.Drawing.Size(53, 16);
             this.textBox34.TabIndex = 46;
             this.textBox34.Text = "4";
             this.textBox34.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -788,7 +789,7 @@
             this.textBox27.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox27.Name = "textBox27";
             this.textBox27.ReadOnly = true;
-            this.textBox27.Size = new System.Drawing.Size(119, 25);
+            this.textBox27.Size = new System.Drawing.Size(119, 16);
             this.textBox27.TabIndex = 36;
             this.textBox27.Text = "Base Charge";
             // 
@@ -803,7 +804,7 @@
             this.textBox39.MinimumSize = new System.Drawing.Size(0, 25);
             this.textBox39.Name = "textBox39";
             this.textBox39.ReadOnly = true;
-            this.textBox39.Size = new System.Drawing.Size(102, 25);
+            this.textBox39.Size = new System.Drawing.Size(102, 20);
             this.textBox39.TabIndex = 46;
             this.textBox39.Text = "Amount";
             // 
@@ -834,7 +835,7 @@
             this.textBox31.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox31.Name = "textBox31";
             this.textBox31.ReadOnly = true;
-            this.textBox31.Size = new System.Drawing.Size(119, 25);
+            this.textBox31.Size = new System.Drawing.Size(119, 16);
             this.textBox31.TabIndex = 41;
             this.textBox31.Text = "Additional Hours";
             // 
@@ -849,7 +850,7 @@
             this.lbl_Total_Hour.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Total_Hour.Name = "lbl_Total_Hour";
             this.lbl_Total_Hour.ReadOnly = true;
-            this.lbl_Total_Hour.Size = new System.Drawing.Size(97, 25);
+            this.lbl_Total_Hour.Size = new System.Drawing.Size(97, 16);
             this.lbl_Total_Hour.TabIndex = 47;
             this.lbl_Total_Hour.Text = "Description";
             this.lbl_Total_Hour.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -865,7 +866,7 @@
             this.lbl_Additional_Hourly_Charge.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Additional_Hourly_Charge.Name = "lbl_Additional_Hourly_Charge";
             this.lbl_Additional_Hourly_Charge.ReadOnly = true;
-            this.lbl_Additional_Hourly_Charge.Size = new System.Drawing.Size(113, 25);
+            this.lbl_Additional_Hourly_Charge.Size = new System.Drawing.Size(113, 16);
             this.lbl_Additional_Hourly_Charge.TabIndex = 49;
             this.lbl_Additional_Hourly_Charge.Text = "Description";
             this.lbl_Additional_Hourly_Charge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -881,7 +882,7 @@
             this.textBox44.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox44.Name = "textBox44";
             this.textBox44.ReadOnly = true;
-            this.textBox44.Size = new System.Drawing.Size(119, 25);
+            this.textBox44.Size = new System.Drawing.Size(119, 16);
             this.textBox44.TabIndex = 51;
             this.textBox44.Text = "Additional Charges";
             // 
@@ -896,7 +897,7 @@
             this.lbl_Venue_Scope_Transact.MinimumSize = new System.Drawing.Size(2, 15);
             this.lbl_Venue_Scope_Transact.Name = "lbl_Venue_Scope_Transact";
             this.lbl_Venue_Scope_Transact.ReadOnly = true;
-            this.lbl_Venue_Scope_Transact.Size = new System.Drawing.Size(123, 15);
+            this.lbl_Venue_Scope_Transact.Size = new System.Drawing.Size(123, 13);
             this.lbl_Venue_Scope_Transact.TabIndex = 53;
             this.lbl_Venue_Scope_Transact.Text = "Main Hall";
             // 
@@ -956,7 +957,7 @@
             this.lbl_Venue_Scope.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Venue_Scope.Name = "lbl_Venue_Scope";
             this.lbl_Venue_Scope.ReadOnly = true;
-            this.lbl_Venue_Scope.Size = new System.Drawing.Size(249, 25);
+            this.lbl_Venue_Scope.Size = new System.Drawing.Size(249, 23);
             this.lbl_Venue_Scope.TabIndex = 28;
             // 
             // textBox17
@@ -970,7 +971,7 @@
             this.textBox17.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox17.Name = "textBox17";
             this.textBox17.ReadOnly = true;
-            this.textBox17.Size = new System.Drawing.Size(132, 25);
+            this.textBox17.Size = new System.Drawing.Size(132, 16);
             this.textBox17.TabIndex = 27;
             this.textBox17.Text = "Area";
             this.textBox17.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -986,7 +987,7 @@
             this.lbl_Venue_Name.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Venue_Name.Name = "lbl_Venue_Name";
             this.lbl_Venue_Name.ReadOnly = true;
-            this.lbl_Venue_Name.Size = new System.Drawing.Size(249, 25);
+            this.lbl_Venue_Name.Size = new System.Drawing.Size(249, 23);
             this.lbl_Venue_Name.TabIndex = 26;
             // 
             // textBox14
@@ -1000,7 +1001,7 @@
             this.textBox14.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox14.Name = "textBox14";
             this.textBox14.ReadOnly = true;
-            this.textBox14.Size = new System.Drawing.Size(132, 25);
+            this.textBox14.Size = new System.Drawing.Size(132, 16);
             this.textBox14.TabIndex = 25;
             this.textBox14.Text = "Venue";
             this.textBox14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1016,7 +1017,7 @@
             this.textBox26.MinimumSize = new System.Drawing.Size(2, 30);
             this.textBox26.Name = "textBox26";
             this.textBox26.ReadOnly = true;
-            this.textBox26.Size = new System.Drawing.Size(253, 30);
+            this.textBox26.Size = new System.Drawing.Size(253, 19);
             this.textBox26.TabIndex = 24;
             this.textBox26.Text = "RESERVATION INFORMATION";
             // 
@@ -1046,7 +1047,7 @@
             this.lbl_Reservation_Status.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Reservation_Status.Name = "lbl_Reservation_Status";
             this.lbl_Reservation_Status.ReadOnly = true;
-            this.lbl_Reservation_Status.Size = new System.Drawing.Size(249, 25);
+            this.lbl_Reservation_Status.Size = new System.Drawing.Size(249, 23);
             this.lbl_Reservation_Status.TabIndex = 22;
             // 
             // lbl_Number_Of_Participants
@@ -1060,7 +1061,7 @@
             this.lbl_Number_Of_Participants.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Number_Of_Participants.Name = "lbl_Number_Of_Participants";
             this.lbl_Number_Of_Participants.ReadOnly = true;
-            this.lbl_Number_Of_Participants.Size = new System.Drawing.Size(249, 25);
+            this.lbl_Number_Of_Participants.Size = new System.Drawing.Size(249, 23);
             this.lbl_Number_Of_Participants.TabIndex = 21;
             // 
             // lbl_Activity_Name
@@ -1074,7 +1075,7 @@
             this.lbl_Activity_Name.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Activity_Name.Name = "lbl_Activity_Name";
             this.lbl_Activity_Name.ReadOnly = true;
-            this.lbl_Activity_Name.Size = new System.Drawing.Size(249, 25);
+            this.lbl_Activity_Name.Size = new System.Drawing.Size(249, 23);
             this.lbl_Activity_Name.TabIndex = 20;
             // 
             // lbl_Reservation_Time
@@ -1088,7 +1089,7 @@
             this.lbl_Reservation_Time.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Reservation_Time.Name = "lbl_Reservation_Time";
             this.lbl_Reservation_Time.ReadOnly = true;
-            this.lbl_Reservation_Time.Size = new System.Drawing.Size(249, 25);
+            this.lbl_Reservation_Time.Size = new System.Drawing.Size(249, 23);
             this.lbl_Reservation_Time.TabIndex = 19;
             // 
             // lbl_Reservation_Dates
@@ -1102,7 +1103,7 @@
             this.lbl_Reservation_Dates.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Reservation_Dates.Name = "lbl_Reservation_Dates";
             this.lbl_Reservation_Dates.ReadOnly = true;
-            this.lbl_Reservation_Dates.Size = new System.Drawing.Size(249, 25);
+            this.lbl_Reservation_Dates.Size = new System.Drawing.Size(249, 23);
             this.lbl_Reservation_Dates.TabIndex = 18;
             // 
             // lbl_Address
@@ -1116,7 +1117,7 @@
             this.lbl_Address.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Address.Name = "lbl_Address";
             this.lbl_Address.ReadOnly = true;
-            this.lbl_Address.Size = new System.Drawing.Size(250, 25);
+            this.lbl_Address.Size = new System.Drawing.Size(250, 23);
             this.lbl_Address.TabIndex = 17;
             // 
             // lbl_Contact_Number
@@ -1130,7 +1131,7 @@
             this.lbl_Contact_Number.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Contact_Number.Name = "lbl_Contact_Number";
             this.lbl_Contact_Number.ReadOnly = true;
-            this.lbl_Contact_Number.Size = new System.Drawing.Size(250, 25);
+            this.lbl_Contact_Number.Size = new System.Drawing.Size(250, 23);
             this.lbl_Contact_Number.TabIndex = 16;
             // 
             // lbl_Origin_Request
@@ -1144,7 +1145,7 @@
             this.lbl_Origin_Request.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Origin_Request.Name = "lbl_Origin_Request";
             this.lbl_Origin_Request.ReadOnly = true;
-            this.lbl_Origin_Request.Size = new System.Drawing.Size(250, 25);
+            this.lbl_Origin_Request.Size = new System.Drawing.Size(250, 23);
             this.lbl_Origin_Request.TabIndex = 15;
             // 
             // lbl_Requesting_Office
@@ -1158,7 +1159,7 @@
             this.lbl_Requesting_Office.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Requesting_Office.Name = "lbl_Requesting_Office";
             this.lbl_Requesting_Office.ReadOnly = true;
-            this.lbl_Requesting_Office.Size = new System.Drawing.Size(250, 25);
+            this.lbl_Requesting_Office.Size = new System.Drawing.Size(250, 23);
             this.lbl_Requesting_Office.TabIndex = 14;
             // 
             // lbl_Requesting_Person
@@ -1172,7 +1173,7 @@
             this.lbl_Requesting_Person.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Requesting_Person.Name = "lbl_Requesting_Person";
             this.lbl_Requesting_Person.ReadOnly = true;
-            this.lbl_Requesting_Person.Size = new System.Drawing.Size(250, 25);
+            this.lbl_Requesting_Person.Size = new System.Drawing.Size(250, 23);
             this.lbl_Requesting_Person.TabIndex = 13;
             // 
             // textBox15
@@ -1201,7 +1202,7 @@
             this.textBox13.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox13.Name = "textBox13";
             this.textBox13.ReadOnly = true;
-            this.textBox13.Size = new System.Drawing.Size(132, 25);
+            this.textBox13.Size = new System.Drawing.Size(132, 16);
             this.textBox13.TabIndex = 10;
             this.textBox13.Text = "Status";
             this.textBox13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1217,7 +1218,7 @@
             this.textBox12.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox12.Name = "textBox12";
             this.textBox12.ReadOnly = true;
-            this.textBox12.Size = new System.Drawing.Size(132, 25);
+            this.textBox12.Size = new System.Drawing.Size(132, 16);
             this.textBox12.TabIndex = 9;
             this.textBox12.Text = "No. of Participants";
             this.textBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1233,7 +1234,7 @@
             this.textBox11.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox11.Name = "textBox11";
             this.textBox11.ReadOnly = true;
-            this.textBox11.Size = new System.Drawing.Size(132, 25);
+            this.textBox11.Size = new System.Drawing.Size(132, 16);
             this.textBox11.TabIndex = 8;
             this.textBox11.Text = "Activity";
             this.textBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1249,7 +1250,7 @@
             this.textBox10.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox10.Name = "textBox10";
             this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(132, 25);
+            this.textBox10.Size = new System.Drawing.Size(132, 16);
             this.textBox10.TabIndex = 7;
             this.textBox10.Text = "Reservation Time";
             this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1265,7 +1266,7 @@
             this.textBox9.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(132, 25);
+            this.textBox9.Size = new System.Drawing.Size(132, 16);
             this.textBox9.TabIndex = 6;
             this.textBox9.Text = "Reservation Dates";
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1281,7 +1282,7 @@
             this.textBox8.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox8.Name = "textBox8";
             this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(132, 25);
+            this.textBox8.Size = new System.Drawing.Size(132, 16);
             this.textBox8.TabIndex = 5;
             this.textBox8.Text = "Address";
             this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1297,7 +1298,7 @@
             this.textBox7.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox7.Name = "textBox7";
             this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(132, 25);
+            this.textBox7.Size = new System.Drawing.Size(132, 16);
             this.textBox7.TabIndex = 4;
             this.textBox7.Text = "Origin of Request";
             this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1313,7 +1314,7 @@
             this.textBox6.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(132, 25);
+            this.textBox6.Size = new System.Drawing.Size(132, 16);
             this.textBox6.TabIndex = 3;
             this.textBox6.Text = "Contact Number";
             this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1329,7 +1330,7 @@
             this.textBox5.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(132, 25);
+            this.textBox5.Size = new System.Drawing.Size(132, 16);
             this.textBox5.TabIndex = 2;
             this.textBox5.Text = "Requesting Office";
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1345,7 +1346,7 @@
             this.textBox4.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(132, 25);
+            this.textBox4.Size = new System.Drawing.Size(132, 16);
             this.textBox4.TabIndex = 1;
             this.textBox4.Text = "Requesting Person";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1361,7 +1362,7 @@
             this.textBox3.MinimumSize = new System.Drawing.Size(2, 30);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(196, 30);
+            this.textBox3.Size = new System.Drawing.Size(196, 19);
             this.textBox3.TabIndex = 0;
             this.textBox3.Text = "CLIENT INFORMATION";
             // 
@@ -1370,10 +1371,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnl_Billing_Details);
-            this.MaximumSize = new System.Drawing.Size(810, 661);
-            this.MinimumSize = new System.Drawing.Size(810, 661);
+            this.MaximumSize = new System.Drawing.Size(810, 700);
+            this.MinimumSize = new System.Drawing.Size(810, 700);
             this.Name = "Venue_User_Control";
-            this.Size = new System.Drawing.Size(810, 661);
+            this.Size = new System.Drawing.Size(810, 700);
             this.pnl_Billing_Details.ResumeLayout(false);
             this.pnl_Billing_Details.PerformLayout();
             this.panel5.ResumeLayout(false);

@@ -22,6 +22,7 @@ namespace pgso.pgso_Billing.User_Control
             InitializeComponent();
             _billingDetails = billingDetailsList; // Store the passed-in model
             LoadBillingDetails(billingDetailsList);
+            LoadBillingDetails(_billingDetails);  // Reload the data after deletion
         }
 
         public void LoadBillingDetails(Model_Billing billingDetailsList)
@@ -89,7 +90,8 @@ namespace pgso.pgso_Billing.User_Control
                 if (dgv_Equipment_Billing_Records.SelectedRows.Count > 0)
                 {
                     // Retrieve the pk_Reservation_EquipmentID from the selected row
-                    int reservationEquipmentID = Convert.ToInt32(dgv_Equipment_Billing_Records.SelectedRows[0].Cells["pk_Reservation_EquipmentID"].Value);
+                    int reservationEquipmentID = Convert.ToInt32(dgv_Equipment_Billing_Records.SelectedRows[0].Cells["col_Reservation_EquipmentID"].Value);
+                    int reservationID = _billingDetails.pk_ReservationID;  // Retrieve the ReservationID for total amount update
 
                     // Ask for confirmation before deleting
                     var confirmation = MessageBox.Show("Are you sure you want to delete this equipment reservation?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -97,14 +99,27 @@ namespace pgso.pgso_Billing.User_Control
                     if (confirmation == DialogResult.Yes)
                     {
                         // Call a method to delete the record from the database
-                        bool success = _repo.DeleteEquipmentReservation(reservationEquipmentID);
+                        bool success = repo_billing.DeleteEquipmentReservation(reservationEquipmentID);
 
                         if (success)
                         {
                             MessageBox.Show("✅ Equipment reservation deleted successfully.");
 
-                            // Refresh the DataGridView to reflect the changes
-                            LoadEquipmentBillingData();  // This method should reload data into dgv_Equipment_Billing_Records
+                            // Update the total amount for the reservation
+                            bool updateSuccess = repo_billing.UpdateReservationTotalAmount(reservationID);
+
+                            if (updateSuccess)
+                            {
+                                MessageBox.Show("✅ Reservation total amount updated successfully.");
+                            }
+                            else
+                            {
+                                MessageBox.Show("⚠️ Failed to update reservation total amount.");
+                            }
+
+                            // Re-fetch the updated billing details to refresh the label
+                            _billingDetails = repo_billing.GetBillingDetailsByReservationID(reservationID);  // You need a method to fetch the updated billing details
+                            LoadBillingDetails(_billingDetails);  // Refresh everything, including the total amount label
                         }
                         else
                         {
@@ -122,6 +137,11 @@ namespace pgso.pgso_Billing.User_Control
                 MessageBox.Show("❌ Error: " + ex.Message);
             }
         }
+
+
+
+
+
 
 
     }

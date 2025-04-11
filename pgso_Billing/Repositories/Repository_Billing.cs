@@ -1436,6 +1436,50 @@ namespace pgso.Billing.Repositories
             }
         }
 
+        public bool DeleteEquipmentReservation(int reservationEquipmentID)
+        {
+            try
+            {
+                // First, check if the record exists
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string checkQuery = "SELECT COUNT(*) FROM tbl_Reservation_Equipment WHERE pk_Reservation_EquipmentID = @ReservationEquipmentID";
+                    SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
+                    checkCmd.Parameters.Add("@ReservationEquipmentID", SqlDbType.Int).Value = reservationEquipmentID;
+
+                    conn.Open();
+                    int count = (int)checkCmd.ExecuteScalar();
+                    if (count == 0)
+                    {
+                        // If no records found, return false immediately
+                        Console.WriteLine("❌ No record found to delete.");
+                        return false;
+                    }
+                }
+
+                // Proceed with deletion if the record exists
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = "DELETE FROM tbl_Reservation_Equipment WHERE pk_Reservation_EquipmentID = @ReservationEquipmentID";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.Add("@ReservationEquipmentID", SqlDbType.Int).Value = reservationEquipmentID;
+
+                    conn.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the error or handle it accordingly
+                Console.WriteLine($"Error in DeleteEquipmentReservation: {ex.Message}");
+                return false;
+            }
+        }
+
+
 
 
 
