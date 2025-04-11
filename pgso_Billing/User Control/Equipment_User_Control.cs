@@ -75,12 +75,14 @@ namespace pgso.pgso_Billing.User_Control
                     var updatedEquipment = repo_billing.GetEquipmentBillingDetailsByReservationID(reservationID);
                     dgv_Equipment_Billing_Records.DataSource = updatedEquipment;
 
-                    // ✅ Refresh billing details including total amount
+                    // Refresh billing details
                     _billingDetails = repo_billing.GetBillingDetailsByReservationID(reservationID);
                     LoadBillingDetails(_billingDetails);
                 }
             }
         }
+
+
 
         private void btn_Delete_Equipment_Billing_Click(object sender, EventArgs e)
         {
@@ -123,7 +125,7 @@ namespace pgso.pgso_Billing.User_Control
                         }
                         else
                         {
-                            MessageBox.Show("⚠️ Failed to delete equipment reservation.");
+                            MessageBox.Show("⚠️ Failed to delete equipment reservation. No More Equipment Reservation to Delete. ");
                         }
                     }
                 }
@@ -137,13 +139,5 @@ namespace pgso.pgso_Billing.User_Control
                 MessageBox.Show("❌ Error: " + ex.Message);
             }
         }
-
-
-
-
-
-
-
-
     }
 }

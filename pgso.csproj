@@ -373,6 +373,11 @@
     <Compile Include="UserControlDays.Designer.cs">
       <DependentUpon>UserControlDays.cs</DependentUpon>
     </Compile>
+    <Compile Include="_BRIS_EXPERIMENT_3_0DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_BRIS_EXPERIMENT_3_0DataSet1.xsd</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frm_Add_Equipment.resx">
       <DependentUpon>frm_Add_Equipment.cs</DependentUpon>
     </EmbeddedResource>
@@ -549,6 +554,17 @@
     </None>
     <None Include="_BRIS_EXPERIMENT_3_0DataSet.xss">
       <DependentUpon>_BRIS_EXPERIMENT_3_0DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="_BRIS_EXPERIMENT_3_0DataSet1.xsc">
+      <DependentUpon>_BRIS_EXPERIMENT_3_0DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="_BRIS_EXPERIMENT_3_0DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_BRIS_EXPERIMENT_3_0DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_BRIS_EXPERIMENT_3_0DataSet1.xss">
+      <DependentUpon>_BRIS_EXPERIMENT_3_0DataSet1.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

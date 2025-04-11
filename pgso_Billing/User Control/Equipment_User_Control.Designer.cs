@@ -45,6 +45,7 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.pnl_Billing_Details = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.btn_Delete_Equipment_Billing = new System.Windows.Forms.Button();
             this.lbl_fld_Total_Amount = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -308,6 +309,7 @@
             // pnl_Billing_Details
             // 
             this.pnl_Billing_Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Billing_Details.Controls.Add(this.button1);
             this.pnl_Billing_Details.Controls.Add(this.btn_Delete_Equipment_Billing);
             this.pnl_Billing_Details.Controls.Add(this.lbl_fld_Total_Amount);
             this.pnl_Billing_Details.Controls.Add(this.textBox1);
@@ -343,9 +345,18 @@
             this.pnl_Billing_Details.Size = new System.Drawing.Size(810, 700);
             this.pnl_Billing_Details.TabIndex = 8;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(420, 287);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(124, 23);
+            this.button1.TabIndex = 53;
+            this.button1.Text = "next feature extend";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // btn_Delete_Equipment_Billing
             // 
-            this.btn_Delete_Equipment_Billing.Location = new System.Drawing.Point(338, 280);
+            this.btn_Delete_Equipment_Billing.Location = new System.Drawing.Point(338, 287);
             this.btn_Delete_Equipment_Billing.Name = "btn_Delete_Equipment_Billing";
             this.btn_Delete_Equipment_Billing.Size = new System.Drawing.Size(75, 23);
             this.btn_Delete_Equipment_Billing.TabIndex = 52;
@@ -355,14 +366,14 @@
             // 
             // lbl_fld_Total_Amount
             // 
-            this.lbl_fld_Total_Amount.Location = new System.Drawing.Point(363, 254);
+            this.lbl_fld_Total_Amount.Location = new System.Drawing.Point(363, 261);
             this.lbl_fld_Total_Amount.Name = "lbl_fld_Total_Amount";
             this.lbl_fld_Total_Amount.Size = new System.Drawing.Size(100, 20);
             this.lbl_fld_Total_Amount.TabIndex = 51;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(257, 254);
+            this.textBox1.Location = new System.Drawing.Point(257, 261);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 50;
@@ -370,7 +381,7 @@
             // 
             // btn_Add_Equipment_Billing
             // 
-            this.btn_Add_Equipment_Billing.Location = new System.Drawing.Point(257, 280);
+            this.btn_Add_Equipment_Billing.Location = new System.Drawing.Point(257, 287);
             this.btn_Add_Equipment_Billing.Name = "btn_Add_Equipment_Billing";
             this.btn_Add_Equipment_Billing.Size = new System.Drawing.Size(75, 23);
             this.btn_Add_Equipment_Billing.TabIndex = 49;
@@ -670,6 +681,7 @@
         private System.Windows.Forms.TextBox lbl_fld_Total_Amount;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btn_Delete_Equipment_Billing;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fk_Reservation_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Start_Date_Eq;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_End_Date_Eq;

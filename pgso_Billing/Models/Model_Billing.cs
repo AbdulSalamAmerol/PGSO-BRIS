@@ -60,6 +60,11 @@ namespace pgso.Billing.Models
         public int pk_Equipment_PricingID { get; set; }
         public DateTime fld_Start_Date_Eq { get; set; }
         public DateTime fld_End_Date_Eq { get; set; }
+        public int fld_Total_Stock { get; set; }
+        public int fld_Remaining_Stock { get; set; }
+        public string fld_Equipment_Status { get; set; }
+        public DateTime fld_Date_Returned { get; set; }
+        public int fld_Quantity_Returned { get; set; }
 
         // Payment Details
         public int? pk_PaymentID { get; set; }

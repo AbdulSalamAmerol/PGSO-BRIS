@@ -71,43 +71,40 @@ namespace pgso.pgso_Billing.Forms
                 int quantity = (int)num_Quantity.Value;
                 DateTime Start_Date_Eq = dtp_Start_Date_Eq.Value.Date;
                 DateTime End_Date_Eq = dtp_End_Date_Eq.Value.Date;
-                int days = (End_Date_Eq - Start_Date_Eq).Days + 1; // +1 to include both start and end date
+                int days = (End_Date_Eq - Start_Date_Eq).Days + 1;
 
-            
-                // Ensure start date is not after end date
                 if (Start_Date_Eq > End_Date_Eq)
                 {
                     MessageBox.Show("Start Date cannot be after End Date.", "Invalid Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Fetch pricing for the selected equipment using the new method
                 var pricing = _repo.GetEquipmentPricingByEquipmentID(equipmentID);
                 decimal totalCost = 0;
 
                 if (pricing != null)
                 {
-                    // Calculate total cost using the formula
                     totalCost = (pricing.fld_Equipment_Price * quantity) +
                                 (pricing.fld_Equipment_Price_Subsequent * (days - 1) * quantity);
                 }
 
-                // Add the equipment reservation
+                // Check stock BEFORE adding
+                if (!_repo.DeductStockAfterReservation(equipmentID, quantity))
+                {
+                    MessageBox.Show("❌ Not enough remaining stock to fulfill this reservation.", "Stock Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 bool success = _repo.AddEquipmentReservation(_reservationID, equipmentID, pricing.pk_Equipment_PricingID, quantity, days, totalCost, Start_Date_Eq, End_Date_Eq);
 
                 if (success)
                 {
-                    // Update the total amount in tbl_Reservation for the current reservation
                     bool updateSuccess = _repo.UpdateReservationTotalAmount(_reservationID);
 
                     if (updateSuccess)
-                    {
                         MessageBox.Show("✅ Equipment reservation added successfully, and total amount updated.");
-                    }
                     else
-                    {
                         MessageBox.Show("⚠️ Equipment reservation added, but failed to update total amount.");
-                    }
 
                     this.DialogResult = DialogResult.OK;
                     this.Close();
@@ -123,8 +120,13 @@ namespace pgso.pgso_Billing.Forms
             }
         }
 
+        private void frm_Add_Equipment_Billing_Load_1(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the '_BRIS_EXPERIMENT_3_0DataSet1.tbl_Equipment' table. You can move, or remove it, as needed.
+            this.tbl_EquipmentTableAdapter1.Fill(this._BRIS_EXPERIMENT_3_0DataSet1.tbl_Equipment);
+            // TODO: This line of code loads data into the '_BRIS_EXPERIMENT_3_0DataSet.tbl_Equipment' table. You can move, or remove it, as needed.
+            this.tbl_EquipmentTableAdapter.Fill(this._BRIS_EXPERIMENT_3_0DataSet.tbl_Equipment);
 
-
-
+        }
     }
 }

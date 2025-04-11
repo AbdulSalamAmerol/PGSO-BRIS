@@ -913,7 +913,12 @@ namespace pgso.Billing.Repositories
             re.pk_Reservation_EquipmentID,
             r.fld_Reservation_Status,
             re.fld_Start_Date_Eq,
-            re.fld_End_Date_Eq
+            re.fld_End_Date_Eq,
+            e.fld_Total_Stock,
+            e.fld_Remaining_Stock,
+            re.fld_Equipment_Status,
+            re.fld_Date_Returned,
+            re.fld_Quantity_Returned
 
         FROM dbo.tbl_Reservation r
         LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
@@ -977,7 +982,12 @@ namespace pgso.Billing.Repositories
                                     pk_Reservation_EquipmentID = reader.IsDBNull(33) ? 0 : reader.GetInt32(33),
                                     fld_Reservation_Status = reader.IsDBNull(34) ? "" : reader.GetString(34),
                                     fld_Start_Date_Eq = reader.IsDBNull(35) ? DateTime.MinValue : reader.GetDateTime(35),
-                                    fld_End_Date_Eq = reader.IsDBNull(36) ? DateTime.MinValue : reader.GetDateTime(36)
+                                    fld_End_Date_Eq = reader.IsDBNull(36) ? DateTime.MinValue : reader.GetDateTime(36),
+                                    fld_Total_Stock = reader.IsDBNull(37) ? 0 : reader.GetInt32(37),
+                                    fld_Remaining_Stock = reader.IsDBNull(38) ? 0 : reader.GetInt32(38),
+                                    fld_Equipment_Status = reader.IsDBNull(39) ? "" : reader.GetString(39),
+                                    fld_Date_Returned = reader.IsDBNull(40) ? DateTime.MinValue : reader.GetDateTime(40),
+                                    fld_Quantity_Returned = reader.IsDBNull(41) ? 0 : reader.GetInt32(41)
                                 };
 
                                 billingDetailsList.Add(billingDetails);
@@ -1133,7 +1143,7 @@ namespace pgso.Billing.Repositories
         }
         */
 
-       
+
 
 
         /// END
@@ -1143,33 +1153,37 @@ namespace pgso.Billing.Repositories
 
         // Repository_Billing.cs
 
-      
 
-            // Method to fetch all equipment
-            public List<dynamic> GetAllEquipments()
+
+        // Method to fetch all equipment
+        public List<dynamic> GetAllEquipments()
+        {
+            List<dynamic> equipmentList = new List<dynamic>();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                List<dynamic> equipmentList = new List<dynamic>();
+                string query = "SELECT pk_EquipmentID, fld_Equipment_Name FROM tbl_Equipment ORDER BY fld_Equipment_Name";
 
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    string query = "SELECT pk_EquipmentID, fld_Equipment_Name FROM tbl_Equipment ORDER BY fld_Equipment_Name";
-
-                    SqlCommand cmd = new SqlCommand(query, conn);
                     conn.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        equipmentList.Add(new
+                        while (reader.Read())
                         {
-                            pk_EquipmentID = reader.GetInt32(0),
-                            fld_Equipment_Name = reader.GetString(1)
-                        });
-                    }
+                            equipmentList.Add(new
+                            {
+                                pk_EquipmentID = reader.GetInt32(0),
+                                fld_Equipment_Name = reader.GetString(1)
+                            });
+                        }
+                    } // ✅ reader is closed here
                 }
-
-                return equipmentList;
             }
+
+            return equipmentList;
+        }
+
 
         // Method to fetch equipment pricing by equipment ID
         public dynamic GetEquipmentPricingByEquipmentID(int equipmentID)
@@ -1179,28 +1193,33 @@ namespace pgso.Billing.Repositories
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = @"
-            SELECT pk_Equipment_PricingID, fld_Equipment_Price, fld_Equipment_Price_Subsequent
-            FROM tbl_Equipment_Pricing
-            WHERE fk_EquipmentID = @EquipmentID";  // Assuming fk_EquipmentID is the foreign key to tbl_Equipment
+        SELECT pk_Equipment_PricingID, fld_Equipment_Price, fld_Equipment_Price_Subsequent
+        FROM tbl_Equipment_Pricing
+        WHERE fk_EquipmentID = @EquipmentID";
 
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@EquipmentID", equipmentID);
-                conn.Open();
-
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    pricing = new
+                    cmd.Parameters.AddWithValue("@EquipmentID", equipmentID);
+                    conn.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        pk_Equipment_PricingID = reader.GetInt32(0),
-                        fld_Equipment_Price = reader.GetDecimal(1),
-                        fld_Equipment_Price_Subsequent = reader.GetDecimal(2)
-                    };
+                        if (reader.Read())
+                        {
+                            pricing = new
+                            {
+                                pk_Equipment_PricingID = reader.GetInt32(0),
+                                fld_Equipment_Price = reader.GetDecimal(1),
+                                fld_Equipment_Price_Subsequent = reader.GetDecimal(2)
+                            };
+                        }
+                    } // ✅ reader is closed here
                 }
             }
 
             return pricing;
         }
+
 
         // Method to add equipment reservation
         public bool AddEquipmentReservation(int reservationID, int equipmentID, int pricingID, int quantity, int numberOfDays, decimal totalCost, DateTime Start_Date_Eq, DateTime End_Date_Eq)
@@ -1405,70 +1424,29 @@ namespace pgso.Billing.Repositories
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     string query = @"
-                SELECT SUM(fld_Total_Equipment_Cost) 
-                FROM tbl_Reservation_Equipment 
-                WHERE fk_ReservationID = @ReservationID";
+            SELECT SUM(fld_Total_Equipment_Cost) 
+            FROM tbl_Reservation_Equipment 
+            WHERE fk_ReservationID = @ReservationID";
 
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@ReservationID", reservationID);
 
                     conn.Open();
-                    totalEquipmentCost = (decimal)cmd.ExecuteScalar();
+                    object result = cmd.ExecuteScalar();
+                    totalEquipmentCost = (result != DBNull.Value) ? Convert.ToDecimal(result) : 0;
                 }
 
                 // Update the fld_Total_Amount in tbl_Reservation
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     string updateQuery = @"
-                UPDATE tbl_Reservation
-                SET fld_Total_Amount = @TotalAmount
-                WHERE pk_ReservationID = @ReservationID";
+            UPDATE tbl_Reservation
+            SET fld_Total_Amount = @TotalAmount
+            WHERE pk_ReservationID = @ReservationID";
 
                     SqlCommand cmd = new SqlCommand(updateQuery, conn);
                     cmd.Parameters.AddWithValue("@TotalAmount", totalEquipmentCost);
                     cmd.Parameters.AddWithValue("@ReservationID", reservationID);
-
-                    conn.Open();
-                    int rowsAffected = cmd.ExecuteNonQuery();
-
-                    return rowsAffected > 0; // Returns true if the update was successful
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("❌ Error: " + ex.Message);
-                return false;
-            }
-        }
-
-        public bool DeleteEquipmentReservation(int reservationEquipmentID)
-        {
-            try
-            {
-                // First, check if the record exists
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    string checkQuery = "SELECT COUNT(*) FROM tbl_Reservation_Equipment WHERE pk_Reservation_EquipmentID = @ReservationEquipmentID";
-                    SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
-                    checkCmd.Parameters.Add("@ReservationEquipmentID", SqlDbType.Int).Value = reservationEquipmentID;
-
-                    conn.Open();
-                    int count = (int)checkCmd.ExecuteScalar();
-                    if (count == 0)
-                    {
-                        // If no records found, return false immediately
-                        Console.WriteLine("❌ No record found to delete.");
-                        return false;
-                    }
-                }
-
-                // Proceed with deletion if the record exists
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    string query = "DELETE FROM tbl_Reservation_Equipment WHERE pk_Reservation_EquipmentID = @ReservationEquipmentID";
-
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.Add("@ReservationEquipmentID", SqlDbType.Int).Value = reservationEquipmentID;
 
                     conn.Open();
                     int rowsAffected = cmd.ExecuteNonQuery();
@@ -1478,11 +1456,136 @@ namespace pgso.Billing.Repositories
             }
             catch (Exception ex)
             {
-                // Log the error or handle it accordingly
-                Console.WriteLine($"Error in DeleteEquipmentReservation: {ex.Message}");
+                MessageBox.Show("❌ Error: " + ex.Message);
                 return false;
             }
         }
+
+
+        public bool DeleteEquipmentReservation(int reservationEquipmentID)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlTransaction transaction = conn.BeginTransaction();
+
+                try
+                {
+                    // Step 1: Get EquipmentID and Quantity
+                    SqlCommand cmd = new SqlCommand(@"
+                SELECT fk_EquipmentID, fld_Quantity 
+                FROM tbl_Reservation_Equipment 
+                WHERE pk_Reservation_EquipmentID = @ReservationEquipmentID", conn, transaction);
+
+                    cmd.Parameters.AddWithValue("@ReservationEquipmentID", reservationEquipmentID);
+
+                    int equipmentID = 0;
+                    int quantityToReturn = 0;
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        equipmentID = reader.GetInt32(0);
+                        quantityToReturn = reader.GetInt32(1);
+                    }
+                    else
+                    {
+                        reader.Close();
+                        transaction.Rollback();
+                        return false;
+                    }
+                    reader.Close(); // ✅ close it before next command
+
+                    // Step 2: Check current remaining and total stock
+                    cmd = new SqlCommand(@"
+                SELECT fld_Remaining_Stock, fld_Total_Stock 
+                FROM tbl_Equipment 
+                WHERE pk_EquipmentID = @EquipmentID", conn, transaction);
+
+                    cmd.Parameters.AddWithValue("@EquipmentID", equipmentID);
+
+                    int remainingStock = 0;
+                    int totalStock = 0;
+
+                    SqlDataReader reader2 = cmd.ExecuteReader();  // ⚠️ different name
+                    if (reader2.Read())
+                    {
+                        remainingStock = reader2.IsDBNull(0) ? 0 : reader2.GetInt32(0);
+                        totalStock = reader2.IsDBNull(1) ? 0 : reader2.GetInt32(1);
+                    }
+                    else
+                    {
+                        reader2.Close();
+                        transaction.Rollback();
+                        return false;
+                    }
+                    reader2.Close(); // ✅
+
+                    // Step 3: Check if adding back the quantity would exceed total stock
+                    if (remainingStock + quantityToReturn > totalStock)
+                    {
+                        transaction.Rollback();
+                        throw new InvalidOperationException("❌ Adding back the equipment would exceed total stock. Check for stock consistency.");
+                    }
+
+                    // Step 4: Add back quantity to Remaining Stock
+                    cmd = new SqlCommand(@"
+                UPDATE tbl_Equipment 
+                SET fld_Remaining_Stock = fld_Remaining_Stock + @Quantity 
+                WHERE pk_EquipmentID = @EquipmentID", conn, transaction);
+
+                    cmd.Parameters.AddWithValue("@Quantity", quantityToReturn);
+                    cmd.Parameters.AddWithValue("@EquipmentID", equipmentID);
+                    cmd.ExecuteNonQuery();
+
+                    // Step 5: Delete the reservation
+                    cmd = new SqlCommand(@"
+                DELETE FROM tbl_Reservation_Equipment 
+                WHERE pk_Reservation_EquipmentID = @ReservationEquipmentID", conn, transaction);
+
+                    cmd.Parameters.AddWithValue("@ReservationEquipmentID", reservationEquipmentID);
+                    cmd.ExecuteNonQuery();
+
+                    transaction.Commit();
+                    return true;
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+        }
+
+
+
+        public bool DeductStockAfterReservation(int equipmentID, int quantityToDeduct)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                // Check current stock
+                string checkQuery = "SELECT fld_Remaining_Stock FROM tbl_Equipment WHERE pk_EquipmentID = @id";
+                SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
+                checkCmd.Parameters.AddWithValue("@id", equipmentID);
+                int remainingStock = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                if (remainingStock < quantityToDeduct)
+                    return false;
+
+                // Deduct stock
+                string updateQuery = "UPDATE tbl_Equipment SET fld_Remaining_Stock = fld_Remaining_Stock - @qty WHERE pk_EquipmentID = @id";
+                SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
+                updateCmd.Parameters.AddWithValue("@qty", quantityToDeduct);
+                updateCmd.Parameters.AddWithValue("@id", equipmentID);
+
+                int rows = updateCmd.ExecuteNonQuery();
+                return rows > 0;
+            }
+        }
+
+
 
 
 
