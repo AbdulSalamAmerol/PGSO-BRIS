@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static iText.Kernel.Pdf.Colorspace.PdfPattern;
 
+// WHAT TO ADD NEXT
+
 namespace pgso.pgso_Billing.User_Control
 {
     public partial class Equipment_User_Control : UserControl
