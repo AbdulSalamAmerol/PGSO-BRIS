@@ -249,6 +249,8 @@ namespace pgso
             }
         }
 
+        // Inside the class where HandleApprovalAsync is defined
+
         private async Task HandleApprovalAsync(int reservationID, string currentStatus)
         {
             if (currentStatus != "Pending")
@@ -257,57 +259,103 @@ namespace pgso
                 return;
             }
 
-            if (MessageBox.Show("Are you sure you want to approve this reservation?",
-                                "Confirm Approval", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            // --- Step 1: Create an instance of your OR form ---
+            // Use 'using' to ensure the form is disposed of properly
+            using (frm_OR orForm = new frm_OR())
             {
-                bool success = await UpdateReservationStatusAsync(reservationID, "Confirmed");
-                ShowStatusMessage(success, "Confirmed");
+                // --- Step 2: Show the form modally and wait for the user ---
+                // ShowDialog() pauses execution here until frm_OR is closed
+                // It returns the DialogResult that was set in frm_OR (e.g., OK or Cancel)
+                DialogResult result = orForm.ShowDialog(this); // 'this' sets the owner window
 
-                if (success)
+                // --- Step 3: Check if the user confirmed in frm_OR ---
+                if (result == DialogResult.OK)
                 {
-                    MessageBox.Show("Reservation approved successfully. Refreshing billing records...");
+                    // --- User clicked btn_OR_Confirm in frm_OR ---
 
-                    RefreshBillingRecords(reservationID);
+                    // Optional: You can now access data from the form if you added properties
+                    // string officialReceiptNumber = orForm.EnteredORNumber;
+                    // You might want to save this officialReceiptNumber somewhere along with the billing record.
 
-                    Model_Billing updatedDetails = repo_billing.GetBillingDetailsByReservationID(reservationID);
+                    // --- Step 4: Proceed with the original approval logic ---
+                    bool success = await UpdateReservationStatusAsync(reservationID, "Confirmed");
+                    ShowStatusMessage(success, "Confirmed");
 
-
-                    if (updatedDetails != null)
+                    if (success)
                     {
-                        // Load correct UserControl dynamically
-                        pnl_Billing_Details.Controls.Clear();
-                        UserControl billingControl = null;
+                        // Optional: Include the OR number in the success message if desired
+                        // MessageBox.Show($"Reservation approved successfully with OR# {officialReceiptNumber}. Refreshing billing records...");
+                        MessageBox.Show("Reservation approved successfully. Refreshing billing records...");
 
-                        switch (updatedDetails.fld_Reservation_Type)
+                        RefreshBillingRecords(reservationID);
+
+                        Model_Billing updatedDetails = repo_billing.GetBillingDetailsByReservationID(reservationID);
+
+                        if (updatedDetails != null)
                         {
-                            case "Venue":
-                                var venueControl = new Venue_User_Control(updatedDetails);
-                                venueControl.Dock = DockStyle.Fill;
-                                venueControl.LoadBillingDetails(updatedDetails);
-                                billingControl = venueControl;
-                                break;
+                            // Load correct UserControl dynamically
+                            pnl_Billing_Details.Controls.Clear();
+                            UserControl billingControl = null;
 
-                            case "Equipment":
-                                var equipmentControl = new Equipment_User_Control(updatedDetails);
-                                equipmentControl.Dock = DockStyle.Fill;
-                                equipmentControl.LoadBillingDetails(updatedDetails);
-                                billingControl = equipmentControl;
-                                break;
+                            switch (updatedDetails.fld_Reservation_Type)
+                            {
+                                case "Venue":
+                                    var venueControl = new Venue_User_Control(updatedDetails);
+                                    venueControl.Dock = DockStyle.Fill;
+                                    venueControl.LoadBillingDetails(updatedDetails);
+                                    billingControl = venueControl;
+                                    break;
 
-                            default:
-                                MessageBox.Show("Unsupported reservation type.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                return;
+                                case "Equipment":
+                                    var equipmentControl = new Equipment_User_Control(updatedDetails);
+                                    equipmentControl.Dock = DockStyle.Fill;
+                                    equipmentControl.LoadBillingDetails(updatedDetails);
+                                    billingControl = equipmentControl;
+                                    break;
+
+                                default:
+                                    MessageBox.Show("Unsupported reservation type.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    // Consider if you should still clear the panel or return earlier
+                                    // return; // Maybe return here if the type is unsupported?
+                                    break; // Added break statement for completeness
+                            }
+
+                            if (billingControl != null)
+                            {
+                                pnl_Billing_Details.Controls.Add(billingControl);
+                                pnl_Billing_Details.Visible = true;
+                            }
+                            // Removed the potentially redundant else block if default handles the message
+                            // else
+                            // {
+                            //      pnl_Billing_Details.Visible = false; // Hide panel if no control loaded
+                            // }
                         }
-
-                        if (billingControl != null)
+                        else
                         {
-                            pnl_Billing_Details.Controls.Add(billingControl);
-                            pnl_Billing_Details.Visible = true;
+                            pnl_Billing_Details.Visible = false; // Hide panel if details are null after refresh
+                            MessageBox.Show("Could not retrieve updated billing details after approval.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
+                    // No 'else' needed here for the 'if (success)' because ShowStatusMessage already handles the failure message.
                 }
-            }
+                else
+                {
+                    // --- User closed frm_OR without confirming (e.g., clicked Cancel or the 'X' button) ---
+                    // You might want to log this or show a message, or just do nothing.
+                    // Example:
+                    // MessageBox.Show("Approval cancelled.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            } // The 'using' statement ensures orForm.Dispose() is called here
         }
+
+        // Make sure you have these methods defined elsewhere in your class:
+        // private async Task<bool> UpdateReservationStatusAsync(int reservationID, string status) { ... }
+        // private void ShowStatusMessage(bool success, string action) { ... }
+        // private void RefreshBillingRecords(int reservationID) { ... }
+        // Assuming repo_billing is an instance variable or accessible.
+        // Assuming pnl_Billing_Details is the name of your Panel control.
+        // Assuming Model_Billing, Venue_User_Control, Equipment_User_Control exist.
 
 
 
