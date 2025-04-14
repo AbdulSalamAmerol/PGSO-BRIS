@@ -21,6 +21,7 @@ namespace pgso.pgso_Billing
             LoadBillingDetails(billingDetails); // Populate the fields on creation
         }
 
+
         // Method to load billing details into the controls
         public void LoadBillingDetails(Model_Billing billingDetails)
         {
@@ -48,6 +49,7 @@ namespace pgso.pgso_Billing
             lbl_Venue_Name.Text = billingDetails.fld_Venue_Name;
             lbl_Venue_Scope.Text = billingDetails.fld_Venue_Scope_Name;
             lbl_Rate_Type.Text = billingDetails.fld_Rate_Type;
+            lbl_Is_Aircon.Text = billingDetails.fld_Aircon ? "Yes" : "No";
 
             // Venue pricing details (based on hourly charges, etc.)
             lbl_Base_Charge_Amount.Text = billingDetails.fld_First4Hrs_Rate.ToString("C");
@@ -77,7 +79,11 @@ namespace pgso.pgso_Billing
             lbl_Final_Amount_Paid.Text = billingDetails.fld_Final_Amount_Paid.ToString("C");
 
             lbl_Overtime_Fee.Text = billingDetails.fld_Overtime_Fee.ToString("C");
+
+            
         }
+
+       
     }
 
 }

@@ -1585,10 +1585,109 @@ namespace pgso.Billing.Repositories
             }
         }
 
+        public bool UpdateReservationORNumber(int reservationID, string orNumber)
+        {
+            // Basic validation for the input OR number (optional but recommended)
+            if (string.IsNullOrWhiteSpace(orNumber))
+            {
+                // Decide how to handle invalid input - maybe return false or throw exception
+                return false; // Can't update with an empty OR number
+            }
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = @"
+                    UPDATE tbl_Reservation
+                    SET fld_OR = @ORNumber
+                    WHERE pk_ReservationID = @ReservationID";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        // Use parameters to prevent SQL injection
+                        cmd.Parameters.AddWithValue("@ORNumber", orNumber);
+                        cmd.Parameters.AddWithValue("@ReservationID", reservationID);
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        // Return true if one row was updated, false otherwise
+                        return rowsAffected == 1;
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    // Log the exception (using your preferred logging mechanism)
+                    Console.WriteLine("SQL Error updating OR Number: " + ex.Message);
+                    // Consider more specific error handling or logging here
+                    return false; // Indicate failure
+                }
+                catch (Exception ex)
+                {
+                    // Log unexpected errors
+                    Console.WriteLine("General Error updating OR Number: " + ex.Message);
+                    return false; // Indicate failure
+                }
+            }
+        }
 
 
+        public bool CheckORExists(string orNumber)
+        {
+            // Trim the input OR number to avoid issues with leading/trailing spaces
+            string trimmedOrNumber = orNumber?.Trim() ?? string.Empty;
 
+            if (string.IsNullOrEmpty(trimmedOrNumber))
+            {
+                return false; // Or throw an exception, as an empty OR shouldn't be checked? Depends on requirements.
+            }
 
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    // Query to count how many times this OR number appears.
+                    // Replace [YourCorrectORColumnName] with the actual column name.
+                    // Consider using UPPER() for case-insensitive comparison if needed:
+                    // WHERE UPPER([YourCorrectORColumnName]) = UPPER(@ORNumber)
+                    string query = $@"
+                    SELECT COUNT(*)
+                    FROM tbl_Reservation
+                    WHERE fld_OR = @ORNumber";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        // Use parameter to prevent SQL injection
+                        cmd.Parameters.AddWithValue("@ORNumber", trimmedOrNumber);
+
+                        // ExecuteScalar returns the first column of the first row (our count)
+                        object result = cmd.ExecuteScalar();
+
+                        // Convert the result to an integer
+                        int count = Convert.ToInt32(result);
+
+                        // If count > 0, the OR number already exists
+                        return count > 0;
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    // Log the error
+                    Console.WriteLine("SQL Error checking OR Number existence: " + ex.Message);
+                    // Decide how to handle DB errors during check. Returning false might be misleading.
+                    // Throwing an exception might be better, or returning a nullable bool (true, false, null for error).
+                    // For now, we'll return false to avoid blocking unnecessarily, but log the error.
+                    return false; // Indicate check failed or doesn't exist (ambiguous on error)
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("General Error checking OR Number existence: " + ex.Message);
+                    return false;
+                }
+            }
+        }
 
 
         /// END OF CHAT GPT CRUD

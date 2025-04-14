@@ -53,14 +53,6 @@
             this.lbl_Reservation_Status = new System.Windows.Forms.TextBox();
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.dgv_Equipment_Billing_Records = new System.Windows.Forms.DataGridView();
-            this.textBox38 = new System.Windows.Forms.TextBox();
-            this.lbl_Rate_Type = new System.Windows.Forms.TextBox();
-            this.textBox35 = new System.Windows.Forms.TextBox();
-            this.textBox36 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this._BRIS_EXPERIMENT_3_0DataSet = new pgso._BRIS_EXPERIMENT_3_0DataSet();
-            this.tblReservationEquipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tbl_Reservation_EquipmentTableAdapter = new pgso._BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_Reservation_EquipmentTableAdapter();
             this.col_fk_Reservation_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Start_Date_Eq = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_End_Date_Eq = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,6 +67,14 @@
             this.col_fld_Equipment_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_fld_Equipment_Price_Subsequent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBox38 = new System.Windows.Forms.TextBox();
+            this.lbl_Rate_Type = new System.Windows.Forms.TextBox();
+            this.textBox35 = new System.Windows.Forms.TextBox();
+            this.textBox36 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this._BRIS_EXPERIMENT_3_0DataSet = new pgso._BRIS_EXPERIMENT_3_0DataSet();
+            this.tblReservationEquipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tbl_Reservation_EquipmentTableAdapter = new pgso._BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_Reservation_EquipmentTableAdapter();
             this.pnl_Billing_Details.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Equipment_Billing_Records)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet)).BeginInit();
@@ -446,94 +446,6 @@
             this.dgv_Equipment_Billing_Records.Size = new System.Drawing.Size(790, 352);
             this.dgv_Equipment_Billing_Records.TabIndex = 46;
             // 
-            // textBox38
-            // 
-            this.textBox38.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox38.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox38.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox38.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox38.Location = new System.Drawing.Point(4, 75);
-            this.textBox38.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox38.MinimumSize = new System.Drawing.Size(2, 21);
-            this.textBox38.Name = "textBox38";
-            this.textBox38.ReadOnly = true;
-            this.textBox38.Size = new System.Drawing.Size(792, 23);
-            this.textBox38.TabIndex = 45;
-            // 
-            // lbl_Rate_Type
-            // 
-            this.lbl_Rate_Type.BackColor = System.Drawing.SystemColors.Control;
-            this.lbl_Rate_Type.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Rate_Type.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Rate_Type.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Rate_Type.Location = new System.Drawing.Point(136, 280);
-            this.lbl_Rate_Type.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
-            this.lbl_Rate_Type.Name = "lbl_Rate_Type";
-            this.lbl_Rate_Type.ReadOnly = true;
-            this.lbl_Rate_Type.Size = new System.Drawing.Size(87, 20);
-            this.lbl_Rate_Type.TabIndex = 35;
-            this.lbl_Rate_Type.Text = "Description";
-            // 
-            // textBox35
-            // 
-            this.textBox35.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox35.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox35.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox35.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox35.Location = new System.Drawing.Point(6, 280);
-            this.textBox35.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox35.MinimumSize = new System.Drawing.Size(0, 25);
-            this.textBox35.Name = "textBox35";
-            this.textBox35.ReadOnly = true;
-            this.textBox35.Size = new System.Drawing.Size(103, 20);
-            this.textBox35.TabIndex = 30;
-            this.textBox35.Text = "Rate Type";
-            // 
-            // textBox36
-            // 
-            this.textBox36.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox36.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox36.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox36.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox36.Location = new System.Drawing.Point(4, 248);
-            this.textBox36.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox36.MinimumSize = new System.Drawing.Size(0, 30);
-            this.textBox36.Name = "textBox36";
-            this.textBox36.ReadOnly = true;
-            this.textBox36.Size = new System.Drawing.Size(243, 19);
-            this.textBox36.TabIndex = 29;
-            this.textBox36.Text = "TRANSACTION DETAILS";
-            // 
-            // textBox3
-            // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(6, 57);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox3.MinimumSize = new System.Drawing.Size(2, 30);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(196, 19);
-            this.textBox3.TabIndex = 0;
-            this.textBox3.Text = "CLIENT INFORMATION";
-            // 
-            // _BRIS_EXPERIMENT_3_0DataSet
-            // 
-            this._BRIS_EXPERIMENT_3_0DataSet.DataSetName = "_BRIS_EXPERIMENT_3_0DataSet";
-            this._BRIS_EXPERIMENT_3_0DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // tblReservationEquipmentBindingSource
-            // 
-            this.tblReservationEquipmentBindingSource.DataMember = "tbl_Reservation_Equipment";
-            this.tblReservationEquipmentBindingSource.DataSource = this._BRIS_EXPERIMENT_3_0DataSet;
-            // 
-            // tbl_Reservation_EquipmentTableAdapter
-            // 
-            this.tbl_Reservation_EquipmentTableAdapter.ClearBeforeFill = true;
-            // 
             // col_fk_Reservation_ID
             // 
             this.col_fk_Reservation_ID.DataPropertyName = "pk_ReservationID";
@@ -630,6 +542,94 @@
             this.col_Total.HeaderText = "Total";
             this.col_Total.Name = "col_Total";
             this.col_Total.ReadOnly = true;
+            // 
+            // textBox38
+            // 
+            this.textBox38.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox38.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox38.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox38.Font = new System.Drawing.Font("Arial", 10F);
+            this.textBox38.Location = new System.Drawing.Point(4, 75);
+            this.textBox38.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox38.MinimumSize = new System.Drawing.Size(2, 21);
+            this.textBox38.Name = "textBox38";
+            this.textBox38.ReadOnly = true;
+            this.textBox38.Size = new System.Drawing.Size(792, 23);
+            this.textBox38.TabIndex = 45;
+            // 
+            // lbl_Rate_Type
+            // 
+            this.lbl_Rate_Type.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Rate_Type.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Rate_Type.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Rate_Type.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Rate_Type.Location = new System.Drawing.Point(136, 280);
+            this.lbl_Rate_Type.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
+            this.lbl_Rate_Type.Name = "lbl_Rate_Type";
+            this.lbl_Rate_Type.ReadOnly = true;
+            this.lbl_Rate_Type.Size = new System.Drawing.Size(87, 20);
+            this.lbl_Rate_Type.TabIndex = 35;
+            this.lbl_Rate_Type.Text = "Description";
+            // 
+            // textBox35
+            // 
+            this.textBox35.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox35.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox35.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox35.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox35.Location = new System.Drawing.Point(6, 280);
+            this.textBox35.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox35.MinimumSize = new System.Drawing.Size(0, 25);
+            this.textBox35.Name = "textBox35";
+            this.textBox35.ReadOnly = true;
+            this.textBox35.Size = new System.Drawing.Size(103, 20);
+            this.textBox35.TabIndex = 30;
+            this.textBox35.Text = "Rate Type";
+            // 
+            // textBox36
+            // 
+            this.textBox36.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox36.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox36.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox36.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox36.Location = new System.Drawing.Point(4, 248);
+            this.textBox36.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox36.MinimumSize = new System.Drawing.Size(0, 30);
+            this.textBox36.Name = "textBox36";
+            this.textBox36.ReadOnly = true;
+            this.textBox36.Size = new System.Drawing.Size(243, 19);
+            this.textBox36.TabIndex = 29;
+            this.textBox36.Text = "TRANSACTION DETAILS";
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox3.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Location = new System.Drawing.Point(6, 57);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox3.MinimumSize = new System.Drawing.Size(2, 30);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(196, 19);
+            this.textBox3.TabIndex = 0;
+            this.textBox3.Text = "CLIENT INFORMATION";
+            // 
+            // _BRIS_EXPERIMENT_3_0DataSet
+            // 
+            this._BRIS_EXPERIMENT_3_0DataSet.DataSetName = "_BRIS_EXPERIMENT_3_0DataSet";
+            this._BRIS_EXPERIMENT_3_0DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // tblReservationEquipmentBindingSource
+            // 
+            this.tblReservationEquipmentBindingSource.DataMember = "tbl_Reservation_Equipment";
+            this.tblReservationEquipmentBindingSource.DataSource = this._BRIS_EXPERIMENT_3_0DataSet;
+            // 
+            // tbl_Reservation_EquipmentTableAdapter
+            // 
+            this.tbl_Reservation_EquipmentTableAdapter.ClearBeforeFill = true;
             // 
             // Equipment_User_Control
             // 
