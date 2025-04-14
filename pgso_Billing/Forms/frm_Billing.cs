@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using pgso.pgso_Billing.User_Control;
 using pgso.pgso_Billing;
 
-// DO SOMETHING
+
 
 namespace pgso
 {
@@ -542,7 +542,6 @@ namespace pgso
                 return new List<Model_Billing>(); // Return empty list in case of error
             }
         }
-
 
 
         // Icons Formatting For DGV (print/cancel/approve/extend)

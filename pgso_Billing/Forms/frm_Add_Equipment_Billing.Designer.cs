@@ -41,22 +41,24 @@
             this.dtp_Start_Date_Eq = new System.Windows.Forms.DateTimePicker();
             this.dtp_End_Date_Eq = new System.Windows.Forms.DateTimePicker();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this._BRIS_EXPERIMENT_3_0DataSet = new pgso._BRIS_EXPERIMENT_3_0DataSet();
-            this.tblEquipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tbl_EquipmentTableAdapter = new pgso._BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_EquipmentTableAdapter();
-            this._BRIS_EXPERIMENT_3_0DataSet1 = new pgso._BRIS_EXPERIMENT_3_0DataSet1();
-            this.tblEquipmentBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.tbl_EquipmentTableAdapter1 = new pgso._BRIS_EXPERIMENT_3_0DataSet1TableAdapters.tbl_EquipmentTableAdapter();
             this.pkEquipmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fldEquipmentNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fldTotalStockDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fldRemainingStockDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tblEquipmentBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this._BRIS_EXPERIMENT_3_0DataSet1 = new pgso._BRIS_EXPERIMENT_3_0DataSet1();
+            this._BRIS_EXPERIMENT_3_0DataSet = new pgso._BRIS_EXPERIMENT_3_0DataSet();
+            this.tblEquipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tbl_EquipmentTableAdapter = new pgso._BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_EquipmentTableAdapter();
+            this.tbl_EquipmentTableAdapter1 = new pgso._BRIS_EXPERIMENT_3_0DataSet1TableAdapters.tbl_EquipmentTableAdapter();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.num_Quantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblEquipmentBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblEquipmentBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tblEquipmentBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // cmb_Equipment
@@ -74,28 +76,28 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "cmb_Equipment";
+            this.textBox1.Text = "Equipment";
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(12, 116);
+            this.textBox3.Location = new System.Drawing.Point(13, 145);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 20);
             this.textBox3.TabIndex = 3;
-            this.textBox3.Text = "num_Quantity";
+            this.textBox3.Text = "Quantity";
             // 
             // num_Quantity
             // 
-            this.num_Quantity.Location = new System.Drawing.Point(128, 116);
+            this.num_Quantity.Location = new System.Drawing.Point(129, 145);
             this.num_Quantity.Name = "num_Quantity";
             this.num_Quantity.Size = new System.Drawing.Size(199, 20);
             this.num_Quantity.TabIndex = 8;
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(252, 142);
+            this.btn_Save.Location = new System.Drawing.Point(348, 12);
             this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(75, 23);
+            this.btn_Save.Size = new System.Drawing.Size(190, 153);
             this.btn_Save.TabIndex = 10;
             this.btn_Save.Text = "Save";
             this.btn_Save.UseVisualStyleBackColor = true;
@@ -103,14 +105,14 @@
             // 
             // lbl_Standard_Price
             // 
-            this.lbl_Standard_Price.Location = new System.Drawing.Point(12, 90);
+            this.lbl_Standard_Price.Location = new System.Drawing.Point(129, 93);
             this.lbl_Standard_Price.Name = "lbl_Standard_Price";
-            this.lbl_Standard_Price.Size = new System.Drawing.Size(100, 20);
+            this.lbl_Standard_Price.Size = new System.Drawing.Size(198, 20);
             this.lbl_Standard_Price.TabIndex = 11;
             // 
             // lbl_Subsequent_Price
             // 
-            this.lbl_Subsequent_Price.Location = new System.Drawing.Point(128, 91);
+            this.lbl_Subsequent_Price.Location = new System.Drawing.Point(129, 120);
             this.lbl_Subsequent_Price.Name = "lbl_Subsequent_Price";
             this.lbl_Subsequent_Price.Size = new System.Drawing.Size(200, 20);
             this.lbl_Subsequent_Price.TabIndex = 12;
@@ -166,34 +168,6 @@
             this.dataGridView1.StandardTab = true;
             this.dataGridView1.TabIndex = 17;
             // 
-            // _BRIS_EXPERIMENT_3_0DataSet
-            // 
-            this._BRIS_EXPERIMENT_3_0DataSet.DataSetName = "_BRIS_EXPERIMENT_3_0DataSet";
-            this._BRIS_EXPERIMENT_3_0DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // tblEquipmentBindingSource
-            // 
-            this.tblEquipmentBindingSource.DataMember = "tbl_Equipment";
-            this.tblEquipmentBindingSource.DataSource = this._BRIS_EXPERIMENT_3_0DataSet;
-            // 
-            // tbl_EquipmentTableAdapter
-            // 
-            this.tbl_EquipmentTableAdapter.ClearBeforeFill = true;
-            // 
-            // _BRIS_EXPERIMENT_3_0DataSet1
-            // 
-            this._BRIS_EXPERIMENT_3_0DataSet1.DataSetName = "_BRIS_EXPERIMENT_3_0DataSet1";
-            this._BRIS_EXPERIMENT_3_0DataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // tblEquipmentBindingSource1
-            // 
-            this.tblEquipmentBindingSource1.DataMember = "tbl_Equipment";
-            this.tblEquipmentBindingSource1.DataSource = this._BRIS_EXPERIMENT_3_0DataSet1;
-            // 
-            // tbl_EquipmentTableAdapter1
-            // 
-            this.tbl_EquipmentTableAdapter1.ClearBeforeFill = true;
-            // 
             // pkEquipmentIDDataGridViewTextBoxColumn
             // 
             this.pkEquipmentIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -230,11 +204,57 @@
             this.fldRemainingStockDataGridViewTextBoxColumn.ReadOnly = true;
             this.fldRemainingStockDataGridViewTextBoxColumn.Width = 133;
             // 
+            // tblEquipmentBindingSource1
+            // 
+            this.tblEquipmentBindingSource1.DataMember = "tbl_Equipment";
+            this.tblEquipmentBindingSource1.DataSource = this._BRIS_EXPERIMENT_3_0DataSet1;
+            // 
+            // _BRIS_EXPERIMENT_3_0DataSet1
+            // 
+            this._BRIS_EXPERIMENT_3_0DataSet1.DataSetName = "_BRIS_EXPERIMENT_3_0DataSet1";
+            this._BRIS_EXPERIMENT_3_0DataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // _BRIS_EXPERIMENT_3_0DataSet
+            // 
+            this._BRIS_EXPERIMENT_3_0DataSet.DataSetName = "_BRIS_EXPERIMENT_3_0DataSet";
+            this._BRIS_EXPERIMENT_3_0DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // tblEquipmentBindingSource
+            // 
+            this.tblEquipmentBindingSource.DataMember = "tbl_Equipment";
+            this.tblEquipmentBindingSource.DataSource = this._BRIS_EXPERIMENT_3_0DataSet;
+            // 
+            // tbl_EquipmentTableAdapter
+            // 
+            this.tbl_EquipmentTableAdapter.ClearBeforeFill = true;
+            // 
+            // tbl_EquipmentTableAdapter1
+            // 
+            this.tbl_EquipmentTableAdapter1.ClearBeforeFill = true;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(13, 93);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 18;
+            this.textBox4.Text = "Price";
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(12, 120);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(100, 20);
+            this.textBox6.TabIndex = 19;
+            this.textBox6.Text = "Subsequent Price ";
+            // 
             // frm_Add_Equipment_Billing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(550, 501);
+            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.dtp_End_Date_Eq);
             this.Controls.Add(this.dtp_Start_Date_Eq);
@@ -252,10 +272,10 @@
             this.Load += new System.EventHandler(this.frm_Add_Equipment_Billing_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.num_Quantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblEquipmentBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblEquipmentBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tblEquipmentBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,5 +305,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fldEquipmentNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fldTotalStockDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fldRemainingStockDataGridViewTextBoxColumn;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox6;
     }
 }
