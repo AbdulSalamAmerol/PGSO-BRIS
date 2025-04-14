@@ -1,6 +1,7 @@
 ﻿SELECT 
     -- Requesting Person Details
     r.pk_ReservationID,
+    r.fld_OR,
     re.pk_Reservation_EquipmentID,
         r.fld_Total_Amount,
         re.fld_Total_Equipment_Cost,

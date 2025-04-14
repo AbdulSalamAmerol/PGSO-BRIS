@@ -66,11 +66,11 @@
             this.btn_Reports = new System.Windows.Forms.Button();
             this.flp_Top = new System.Windows.Forms.FlowLayoutPanel();
             this.pnl_Billing_Details = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tlp_Billing_UControls.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -369,31 +369,31 @@
             // col_Approved
             // 
             this.col_Approved.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.col_Approved.HeaderText = "APPROVED";
+            this.col_Approved.HeaderText = "APRVD";
             this.col_Approved.Image = global::pgso.Properties.Resources.Approved_Icon;
             this.col_Approved.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.col_Approved.Name = "col_Approved";
             this.col_Approved.ReadOnly = true;
-            this.col_Approved.Width = 72;
+            this.col_Approved.Width = 50;
             // 
             // col_Extend
             // 
             this.col_Extend.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.col_Extend.HeaderText = "EXTEND";
+            this.col_Extend.HeaderText = "EXTND";
             this.col_Extend.Image = global::pgso.Properties.Resources.Extend_Icon;
             this.col_Extend.Name = "col_Extend";
             this.col_Extend.ReadOnly = true;
-            this.col_Extend.Width = 57;
+            this.col_Extend.Width = 50;
             // 
             // col_Cancel
             // 
             this.col_Cancel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.col_Cancel.HeaderText = "CANCEL";
+            this.col_Cancel.HeaderText = "CANCL";
             this.col_Cancel.Image = global::pgso.Properties.Resources.Cancelled_Icon;
             this.col_Cancel.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.col_Cancel.Name = "col_Cancel";
             this.col_Cancel.ReadOnly = true;
-            this.col_Cancel.Width = 55;
+            this.col_Cancel.Width = 48;
             // 
             // col_Print
             // 
@@ -442,6 +442,14 @@
             this.pnl_Billing_Details.Size = new System.Drawing.Size(810, 688);
             this.pnl_Billing_Details.TabIndex = 6;
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(750, 749);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(819, 12);
+            this.flowLayoutPanel1.TabIndex = 0;
+            // 
             // dataGridViewImageColumn1
             // 
             this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -483,14 +491,6 @@
             this.dataGridViewImageColumn4.MinimumWidth = 20;
             this.dataGridViewImageColumn4.Name = "dataGridViewImageColumn4";
             this.dataGridViewImageColumn4.ReadOnly = true;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(750, 749);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(819, 12);
-            this.flowLayoutPanel1.TabIndex = 0;
             // 
             // frm_Billing
             // 
@@ -538,6 +538,7 @@
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn3;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn4;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn pk_ReservationID;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Control_Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Full_Name;
@@ -551,6 +552,5 @@
         private System.Windows.Forms.DataGridViewImageColumn col_Extend;
         private System.Windows.Forms.DataGridViewImageColumn col_Cancel;
         private System.Windows.Forms.DataGridViewImageColumn col_Print;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

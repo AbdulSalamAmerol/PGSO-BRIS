@@ -105,6 +105,8 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lbl_Is_Aircon = new System.Windows.Forms.TextBox();
             this.pnl_Billing_Details.SuspendLayout();
             this.panel5.SuspendLayout();
             this.SuspendLayout();
@@ -112,6 +114,8 @@
             // pnl_Billing_Details
             // 
             this.pnl_Billing_Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Billing_Details.Controls.Add(this.lbl_Is_Aircon);
+            this.pnl_Billing_Details.Controls.Add(this.textBox1);
             this.pnl_Billing_Details.Controls.Add(this.textBox38);
             this.pnl_Billing_Details.Controls.Add(this.panel5);
             this.pnl_Billing_Details.Controls.Add(this.lbl_Rate_Type);
@@ -213,7 +217,7 @@
             this.panel5.Controls.Add(this.lbl_Additional_Hourly_Charge);
             this.panel5.Controls.Add(this.textBox44);
             this.panel5.Controls.Add(this.lbl_Venue_Scope_Transact);
-            this.panel5.Location = new System.Drawing.Point(9, 310);
+            this.panel5.Location = new System.Drawing.Point(9, 318);
             this.panel5.MaximumSize = new System.Drawing.Size(790, 353);
             this.panel5.MinimumSize = new System.Drawing.Size(790, 353);
             this.panel5.Name = "panel5";
@@ -912,7 +916,7 @@
             this.lbl_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
             this.lbl_Rate_Type.Name = "lbl_Rate_Type";
             this.lbl_Rate_Type.ReadOnly = true;
-            this.lbl_Rate_Type.Size = new System.Drawing.Size(87, 25);
+            this.lbl_Rate_Type.Size = new System.Drawing.Size(87, 20);
             this.lbl_Rate_Type.TabIndex = 35;
             this.lbl_Rate_Type.Text = "Description";
             // 
@@ -927,7 +931,7 @@
             this.textBox35.MinimumSize = new System.Drawing.Size(0, 25);
             this.textBox35.Name = "textBox35";
             this.textBox35.ReadOnly = true;
-            this.textBox35.Size = new System.Drawing.Size(103, 25);
+            this.textBox35.Size = new System.Drawing.Size(103, 20);
             this.textBox35.TabIndex = 30;
             this.textBox35.Text = "Rate Type";
             // 
@@ -942,7 +946,7 @@
             this.textBox36.MinimumSize = new System.Drawing.Size(0, 30);
             this.textBox36.Name = "textBox36";
             this.textBox36.ReadOnly = true;
-            this.textBox36.Size = new System.Drawing.Size(243, 30);
+            this.textBox36.Size = new System.Drawing.Size(243, 19);
             this.textBox36.TabIndex = 29;
             this.textBox36.Text = "TRANSACTION DETAILS";
             // 
@@ -1366,6 +1370,36 @@
             this.textBox3.TabIndex = 0;
             this.textBox3.Text = "CLIENT INFORMATION";
             // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox1.Font = new System.Drawing.Font("Arial", 10F);
+            this.textBox1.Location = new System.Drawing.Point(401, 287);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox1.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(132, 25);
+            this.textBox1.TabIndex = 46;
+            this.textBox1.Text = "Aircon";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbl_Is_Aircon
+            // 
+            this.lbl_Is_Aircon.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Is_Aircon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_Is_Aircon.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Is_Aircon.Font = new System.Drawing.Font("Arial", 10F);
+            this.lbl_Is_Aircon.Location = new System.Drawing.Point(547, 288);
+            this.lbl_Is_Aircon.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Is_Aircon.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Is_Aircon.Name = "lbl_Is_Aircon";
+            this.lbl_Is_Aircon.ReadOnly = true;
+            this.lbl_Is_Aircon.Size = new System.Drawing.Size(249, 25);
+            this.lbl_Is_Aircon.TabIndex = 47;
+            // 
             // Venue_User_Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1462,5 +1496,7 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox lbl_Is_Aircon;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
