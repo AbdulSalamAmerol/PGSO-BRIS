@@ -21,6 +21,12 @@ namespace pgso.pgso_Billing
             LoadBillingDetails(billingDetails); // Populate the fields on creation
         }
 
+        private void btn_Change_Reservation_info_Click(object sender, EventArgs e)
+        {
+            frm_Edit_Reservation_Info editForm = new frm_Edit_Reservation_Info();
+            editForm.ShowDialog();
+        }
+
 
         // Method to load billing details into the controls
         public void LoadBillingDetails(Model_Billing billingDetails)
