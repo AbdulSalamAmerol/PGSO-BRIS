@@ -1184,6 +1184,31 @@ namespace pgso.Billing.Repositories
             return equipmentList;
         }
 
+        // Method to fetch Venue equipment
+        public List<dynamic> GetAllVenue()
+        {
+            List<dynamic> venueList = new List<dynamic>();
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT pk_VenueID, fld_Venue_Name FROM tbl_Venue ORDER BY fld_Venue_Name";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            venueList.Add(new
+                            {
+                                pk_VenueID = reader.GetInt32(0),
+                                fld_Venue_Name = reader.GetString(1)
+                            });
+                        }
+                    } // ✅ reader is closed here
+                }
+            }
+        }
+
 
         // Method to fetch equipment pricing by equipment ID
         public dynamic GetEquipmentPricingByEquipmentID(int equipmentID)

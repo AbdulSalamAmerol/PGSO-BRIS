@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.pnl_Billing_Details = new System.Windows.Forms.Panel();
+            this.btn_Change_Reservation_info = new System.Windows.Forms.Button();
+            this.lbl_Is_Aircon = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox38 = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.textBox37 = new System.Windows.Forms.TextBox();
@@ -105,8 +108,6 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.lbl_Is_Aircon = new System.Windows.Forms.TextBox();
             this.pnl_Billing_Details.SuspendLayout();
             this.panel5.SuspendLayout();
             this.SuspendLayout();
@@ -114,6 +115,7 @@
             // pnl_Billing_Details
             // 
             this.pnl_Billing_Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Billing_Details.Controls.Add(this.btn_Change_Reservation_info);
             this.pnl_Billing_Details.Controls.Add(this.lbl_Is_Aircon);
             this.pnl_Billing_Details.Controls.Add(this.textBox1);
             this.pnl_Billing_Details.Controls.Add(this.textBox38);
@@ -156,6 +158,46 @@
             this.pnl_Billing_Details.Name = "pnl_Billing_Details";
             this.pnl_Billing_Details.Size = new System.Drawing.Size(810, 700);
             this.pnl_Billing_Details.TabIndex = 7;
+            // 
+            // btn_Change_Reservation_info
+            // 
+            this.btn_Change_Reservation_info.Location = new System.Drawing.Point(657, 48);
+            this.btn_Change_Reservation_info.Name = "btn_Change_Reservation_info";
+            this.btn_Change_Reservation_info.Size = new System.Drawing.Size(61, 24);
+            this.btn_Change_Reservation_info.TabIndex = 48;
+            this.btn_Change_Reservation_info.Text = "Edit";
+            this.btn_Change_Reservation_info.UseVisualStyleBackColor = true;
+            this.btn_Change_Reservation_info.Click += new System.EventHandler(this.btn_Change_Reservation_info_Click);
+            // 
+            // lbl_Is_Aircon
+            // 
+            this.lbl_Is_Aircon.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Is_Aircon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_Is_Aircon.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Is_Aircon.Font = new System.Drawing.Font("Arial", 10F);
+            this.lbl_Is_Aircon.Location = new System.Drawing.Point(547, 288);
+            this.lbl_Is_Aircon.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Is_Aircon.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Is_Aircon.Name = "lbl_Is_Aircon";
+            this.lbl_Is_Aircon.ReadOnly = true;
+            this.lbl_Is_Aircon.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Is_Aircon.TabIndex = 47;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox1.Font = new System.Drawing.Font("Arial", 10F);
+            this.textBox1.Location = new System.Drawing.Point(401, 287);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox1.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(132, 16);
+            this.textBox1.TabIndex = 46;
+            this.textBox1.Text = "Aircon";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox38
             // 
@@ -1370,36 +1412,6 @@
             this.textBox3.TabIndex = 0;
             this.textBox3.Text = "CLIENT INFORMATION";
             // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox1.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox1.Location = new System.Drawing.Point(401, 287);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox1.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(132, 25);
-            this.textBox1.TabIndex = 46;
-            this.textBox1.Text = "Aircon";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_Is_Aircon
-            // 
-            this.lbl_Is_Aircon.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lbl_Is_Aircon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbl_Is_Aircon.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Is_Aircon.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Is_Aircon.Location = new System.Drawing.Point(547, 288);
-            this.lbl_Is_Aircon.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Is_Aircon.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Is_Aircon.Name = "lbl_Is_Aircon";
-            this.lbl_Is_Aircon.ReadOnly = true;
-            this.lbl_Is_Aircon.Size = new System.Drawing.Size(249, 25);
-            this.lbl_Is_Aircon.TabIndex = 47;
-            // 
             // Venue_User_Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1498,5 +1510,6 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox lbl_Is_Aircon;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btn_Change_Reservation_info;
     }
 }
