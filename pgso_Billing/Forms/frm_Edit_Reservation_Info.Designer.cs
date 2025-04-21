@@ -59,7 +59,7 @@
             this.textBox1.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(86, 25);
+            this.textBox1.Size = new System.Drawing.Size(86, 16);
             this.textBox1.TabIndex = 62;
             this.textBox1.Text = "Aircon";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -75,7 +75,7 @@
             this.textBox17.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox17.Name = "textBox17";
             this.textBox17.ReadOnly = true;
-            this.textBox17.Size = new System.Drawing.Size(86, 25);
+            this.textBox17.Size = new System.Drawing.Size(86, 16);
             this.textBox17.TabIndex = 60;
             this.textBox17.Text = "Area";
             this.textBox17.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -91,7 +91,7 @@
             this.textBox14.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox14.Name = "textBox14";
             this.textBox14.ReadOnly = true;
-            this.textBox14.Size = new System.Drawing.Size(86, 25);
+            this.textBox14.Size = new System.Drawing.Size(86, 16);
             this.textBox14.TabIndex = 58;
             this.textBox14.Text = "Venue";
             this.textBox14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -107,7 +107,7 @@
             this.textBox10.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox10.Name = "textBox10";
             this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(86, 25);
+            this.textBox10.Size = new System.Drawing.Size(86, 16);
             this.textBox10.TabIndex = 49;
             this.textBox10.Text = "Start Time";
             this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -123,7 +123,7 @@
             this.textBox9.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(86, 25);
+            this.textBox9.Size = new System.Drawing.Size(86, 16);
             this.textBox9.TabIndex = 48;
             this.textBox9.Text = "Start Date";
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -139,7 +139,7 @@
             this.textBox2.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(86, 25);
+            this.textBox2.Size = new System.Drawing.Size(86, 16);
             this.textBox2.TabIndex = 65;
             this.textBox2.Text = "End Date";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -179,7 +179,7 @@
             this.textBox3.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(86, 25);
+            this.textBox3.Size = new System.Drawing.Size(86, 16);
             this.textBox3.TabIndex = 68;
             this.textBox3.Text = "End Time";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -234,6 +234,7 @@
             this.btn_Save.TabIndex = 74;
             this.btn_Save.Text = "Save";
             this.btn_Save.UseVisualStyleBackColor = true;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
             // btn_Cancel
             // 
@@ -244,7 +245,7 @@
             this.btn_Cancel.Text = "Cancel";
             this.btn_Cancel.UseVisualStyleBackColor = true;
             // 
-            // frm_Edit_Reservation_Info
+            // frm_Edit_Venue_Reservation_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -266,7 +267,7 @@
             this.Controls.Add(this.textBox14);
             this.Controls.Add(this.textBox10);
             this.Controls.Add(this.textBox9);
-            this.Name = "frm_Edit_Reservation_Info";
+            this.Name = "frm_Edit_Venue_Reservation_Info";
             this.Text = "frm_Edit_Reservation_Info";
             this.ResumeLayout(false);
             this.PerformLayout();
