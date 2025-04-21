@@ -14,19 +14,23 @@ namespace pgso.pgso_Billing
 {
     public partial class Venue_User_Control : UserControl
     {
+
+        private Model_Billing _billingDetails;
         // Constructor that accepts Model_Billing
         public Venue_User_Control(Model_Billing billingDetails)
         {
             InitializeComponent();
+            _billingDetails = billingDetails; // ✅ Store for later use
             LoadBillingDetails(billingDetails); // Populate the fields on creation
         }
 
+   
         private void btn_Change_Reservation_info_Click(object sender, EventArgs e)
         {
-            frm_Edit_Reservation_Info editForm = new frm_Edit_Reservation_Info();
+            frm_Edit_Venue_Reservation_Info editForm = new frm_Edit_Venue_Reservation_Info(_billingDetails);
             editForm.ShowDialog();
         }
-
+   
 
         // Method to load billing details into the controls
         public void LoadBillingDetails(Model_Billing billingDetails)

@@ -49,17 +49,17 @@ namespace pgso.pgso_Billing.Forms
                     }
                     else
                     {
-                        MessageBox.Show("⚠️ No pricing found for the selected equipment.");
+                        MessageBox.Show(" No pricing found for the selected equipment.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("⚠️ Please select a valid equipment item.");
+                    MessageBox.Show(" Please select a valid equipment item.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("❌ Error: " + ex.Message);
+                MessageBox.Show(" Error: " + ex.Message);
             }
         }
 
@@ -91,7 +91,7 @@ namespace pgso.pgso_Billing.Forms
                 // Check stock BEFORE adding
                 if (!_repo.DeductStockAfterReservation(equipmentID, quantity))
                 {
-                    MessageBox.Show("❌ Not enough remaining stock to fulfill this reservation.", "Stock Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(" Not enough remaining stock to fulfill this reservation.", "Stock Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -102,21 +102,21 @@ namespace pgso.pgso_Billing.Forms
                     bool updateSuccess = _repo.UpdateReservationTotalAmount(_reservationID);
 
                     if (updateSuccess)
-                        MessageBox.Show("✅ Equipment reservation added successfully, and total amount updated.");
+                        MessageBox.Show(" Equipment reservation added successfully, and total amount updated.");
                     else
-                        MessageBox.Show("⚠️ Equipment reservation added, but failed to update total amount.");
+                        MessageBox.Show("⚠ Equipment reservation added, but failed to update total amount.");
 
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("⚠️ Failed to add equipment reservation.");
+                    MessageBox.Show(" Failed to add equipment reservation.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("❌ Error: " + ex.Message);
+                MessageBox.Show(" Error: " + ex.Message);
             }
         }
 

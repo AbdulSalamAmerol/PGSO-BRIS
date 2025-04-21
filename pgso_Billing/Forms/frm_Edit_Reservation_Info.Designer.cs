@@ -1,6 +1,6 @@
 ﻿namespace pgso.pgso_Billing.Forms
 {
-    partial class frm_Edit_Reservation_Info
+    partial class frm_Edit_Venue_Reservation_Info
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_Edit_Reservation_Info));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_Edit_Venue_Reservation_Info));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox17 = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();

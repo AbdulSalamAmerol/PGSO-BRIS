@@ -71,14 +71,12 @@
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.tlp_Billing_UControls.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Billing_Records)).BeginInit();
             this.flp_Top.SuspendLayout();
-            this.pnl_Billing_Details.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlp_Billing_UControls
@@ -436,7 +434,6 @@
             // pnl_Billing_Details
             // 
             this.pnl_Billing_Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnl_Billing_Details.Controls.Add(this.monthCalendar1);
             this.pnl_Billing_Details.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_Billing_Details.Location = new System.Drawing.Point(750, 50);
             this.pnl_Billing_Details.MaximumSize = new System.Drawing.Size(810, 688);
@@ -495,12 +492,6 @@
             this.dataGridViewImageColumn4.Name = "dataGridViewImageColumn4";
             this.dataGridViewImageColumn4.ReadOnly = true;
             // 
-            // monthCalendar1
-            // 
-            this.monthCalendar1.Location = new System.Drawing.Point(151, 158);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 0;
-            // 
             // frm_Billing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -526,7 +517,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Billing_Records)).EndInit();
             this.flp_Top.ResumeLayout(false);
-            this.pnl_Billing_Details.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -562,6 +552,5 @@
         private System.Windows.Forms.DataGridViewImageColumn col_Extend;
         private System.Windows.Forms.DataGridViewImageColumn col_Cancel;
         private System.Windows.Forms.DataGridViewImageColumn col_Print;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
     }
 }
