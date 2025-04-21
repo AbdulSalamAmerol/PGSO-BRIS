@@ -33,6 +33,8 @@ namespace pgso
             InitializeFormComponents();
             InitializeDataGridView();
             LoadUtilities();
+            txt_Control_Num.Text = GenerateControlNumber();
+
         }
 
         private void InitializeFormComponents()
@@ -93,6 +95,52 @@ namespace pgso
                 conn.Dispose();
             }
         }
+        private string GenerateControlNumber()
+        {
+            try
+            {
+                DBConnect();
+
+                int currentYear = DateTime.Now.Year;
+
+                // Query to get the MAX control number for current year
+                cmd = new SqlCommand(
+                    "SELECT MAX(fld_Control_Number) FROM tbl_Reservation " +
+                    "WHERE fld_Control_Number LIKE 'CN-___-" + currentYear + "'", conn);
+
+                string lastControlNumber = (string)cmd.ExecuteScalar();
+
+                int nextNumber = 1; // Default if no records exist
+
+                if (!string.IsNullOrEmpty(lastControlNumber))
+                {
+                    // Extract the numeric part (positions 3-5: CN-001-2025 → 001)
+                    string numberPart = lastControlNumber.Substring(3, 3);
+                    if (int.TryParse(numberPart, out int lastNumber))
+                    {
+                        nextNumber = lastNumber + 1;
+
+                        // Reset to 1 if we exceed 999
+                        if (nextNumber > 999)
+                        {
+                            nextNumber = 1;
+                        }
+                    }
+                }
+
+                return $"CN-{nextNumber:D3}-{currentYear}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error generating control number: " + ex.Message);
+                return $"CN-001-{DateTime.Now.Year}"; // Fallback
+            }
+            finally
+            {
+                DBClose();
+            }
+        }
+
 
         private void Date_ValueChanged(object sender, EventArgs e)
         {
@@ -340,10 +388,10 @@ namespace pgso
 
                 // Insert Requesting Person
                 cmd = new SqlCommand(@"
-            INSERT INTO tbl_Requesting_Person 
-            (fld_Surname, fld_First_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office) 
-            OUTPUT INSERTED.pk_Requesting_PersonID 
-            VALUES (@Surname, @FirstName, @Address, @ContactNumber, @RequestOrigin, @RequestingOffice)",
+        INSERT INTO tbl_Requesting_Person 
+        (fld_Surname, fld_First_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office) 
+        OUTPUT INSERTED.pk_Requesting_PersonID 
+        VALUES (@Surname, @FirstName, @Address, @ContactNumber, @RequestOrigin, @RequestingOffice)",
                     conn, transaction);
 
                 cmd.Parameters.AddWithValue("@Surname", txt_Surname.Text);
@@ -357,10 +405,10 @@ namespace pgso
 
                 // Insert Reservation with the total amount from the DataGridView
                 cmd = new SqlCommand(@"
-            INSERT INTO tbl_Reservation 
-            (fld_Control_Number, fld_Reservation_Type, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_time, fld_Activity_Name, fld_Number_Of_Participants, fld_Reservation_Status, fld_Total_Amount, fk_Requesting_PersonID) 
-            OUTPUT INSERTED.pk_ReservationID 
-            VALUES (@fld_Control_Number, @fld_Reservation_Type, @fld_Start_Date, @fld_End_Date, @fld_Start_Time, @fld_End_time, @fld_Activity_Name, @fld_Number_Of_Participants, @fld_Reservation_Status, @fld_Total_Amount, @Requesting_PersonID)",
+        INSERT INTO tbl_Reservation 
+        (fld_Control_Number, fld_Reservation_Type, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_time, fld_Activity_Name, fld_Number_Of_Participants, fld_Reservation_Status, fld_Total_Amount, fk_Requesting_PersonID) 
+        OUTPUT INSERTED.pk_ReservationID 
+        VALUES (@fld_Control_Number, @fld_Reservation_Type, @fld_Start_Date, @fld_End_Date, @fld_Start_Time, @fld_End_time, @fld_Activity_Name, @fld_Number_Of_Participants, @fld_Reservation_Status, @fld_Total_Amount, @Requesting_PersonID)",
                     conn, transaction);
 
                 cmd.Parameters.AddWithValue("@fld_Control_Number", txt_Control_Num.Text);
@@ -377,14 +425,14 @@ namespace pgso
 
                 int reservationID = (int)cmd.ExecuteScalar();
 
-                // Insert each equipment reservation
+                // Insert each equipment reservation and update available quantity
                 foreach (var equipment in selectedEquipmentList)
                 {
                     // Get pricing ID
                     cmd = new SqlCommand(@"
-                SELECT pk_Equipment_PricingID 
-                FROM tbl_Equipment_Pricing 
-                WHERE fk_EquipmentID = @FacilityID",
+            SELECT pk_Equipment_PricingID 
+            FROM tbl_Equipment_Pricing 
+            WHERE fk_EquipmentID = @FacilityID",
                         conn, transaction);
 
                     cmd.Parameters.AddWithValue("@FacilityID", equipment.EquipmentID);
@@ -392,9 +440,9 @@ namespace pgso
 
                     // Insert equipment
                     cmd = new SqlCommand(@"
-                INSERT INTO tbl_Reservation_Equipment 
-                (fk_ReservationID, fk_EquipmentID, fk_Equipment_PricingID, fld_Quantity, fld_Number_Of_Days, fld_Total_Equipment_Cost) 
-                VALUES (@fk_ReservationID, @fk_EquipmentID, @fk_Equipment_PricingID, @fld_Quantity, @fld_Number_Of_Days, @fld_Total_Equipment_Cost)",
+            INSERT INTO tbl_Reservation_Equipment 
+            (fk_ReservationID, fk_EquipmentID, fk_Equipment_PricingID, fld_Quantity, fld_Number_Of_Days, fld_Total_Equipment_Cost) 
+            VALUES (@fk_ReservationID, @fk_EquipmentID, @fk_Equipment_PricingID, @fld_Quantity, @fld_Number_Of_Days, @fld_Total_Equipment_Cost)",
                         conn, transaction);
 
                     cmd.Parameters.AddWithValue("@fk_ReservationID", reservationID);
@@ -402,8 +450,19 @@ namespace pgso
                     cmd.Parameters.AddWithValue("@fk_Equipment_PricingID", venuePricingID);
                     cmd.Parameters.AddWithValue("@fld_Quantity", equipment.Quantity);
                     cmd.Parameters.AddWithValue("@fld_Number_Of_Days", txt_Days_Of_Use.Text);
-                  
                     cmd.Parameters.AddWithValue("@fld_Total_Equipment_Cost", equipment.CalculatedTotal); // Include total cost
+
+                    cmd.ExecuteNonQuery();
+
+                    // Update available quantity in tbl_Equipment
+                    cmd = new SqlCommand(@"
+            UPDATE tbl_Equipment 
+            SET fld_Available_Quantity = fld_Available_Quantity - @Quantity 
+            WHERE pk_EquipmentID = @EquipmentID",
+                        conn, transaction);
+
+                    cmd.Parameters.AddWithValue("@Quantity", equipment.Quantity);
+                    cmd.Parameters.AddWithValue("@EquipmentID", equipment.EquipmentID);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -438,6 +497,7 @@ namespace pgso
                 DBClose();
             }
         }
+
 
 
 

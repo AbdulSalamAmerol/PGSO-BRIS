@@ -14,12 +14,12 @@ using pgso_connect;
 
 namespace pgso
 {
-    public partial class frm_Calendar : Form
+    public partial class frm_Calendar_Venue : Form
     {
         int month, year;
         private Connection db = new Connection(); // Use the Connection class
 
-        public frm_Calendar()
+        public frm_Calendar_Venue()
         {
             InitializeComponent();
         }
@@ -48,13 +48,13 @@ namespace pgso
             DataTable reservations = GetReservationsForMonth(year, month);
 
             // Clear previous controls
-            days_Container.Controls.Clear();
+            tbale_Calendars.Controls.Clear();
 
             // Create blank user controls for days before the start of the month
             for (int i = 1; i < dayoftheweek; i++)
             {
-                UserControlBlank ucblank = new UserControlBlank();
-                days_Container.Controls.Add(ucblank);
+                UserControlDaysEquipment ucblank = new UserControlDaysEquipment();
+                tbale_Calendars.Controls.Add(ucblank);
             }
 
             // Create user controls for each day of the month
@@ -62,104 +62,30 @@ namespace pgso
             {
                 UserControlDays ucday = new UserControlDays();
                 ucday.days(i);
-                ucday.DateClicked += Ucday_DateClicked;
 
                 // Find reservations for the current day
                 DateTime currentDate = new DateTime(year, month, i);
                 var venueReservations = reservations.AsEnumerable()
                     .Where(r => currentDate >= r.Field<DateTime>("fld_Start_Date") && currentDate <= r.Field<DateTime>("fld_End_Date") && r.Field<string>("fld_Reservation_Type") == "Venue")
-                    .Select(r => r.Field<string>("fld_Venue_Name"))
+                    .Select(r => (DisplayName: r.Field<string>("fld_Venue_Name"), ControlNumber: r.Field<string>("fld_Control_Number")))
                     .ToList();
 
                 var equipmentReservations = reservations.AsEnumerable()
                     .Where(r => currentDate >= r.Field<DateTime>("fld_Start_Date") && currentDate <= r.Field<DateTime>("fld_End_Date") && r.Field<string>("fld_Reservation_Type") == "Equipment")
-                    .Select(r => r.Field<string>("fld_Equipment_Name"))
+                    .Select(r => (DisplayName: r.Field<string>("fld_Equipment_Name"), ControlNumber: r.Field<string>("fld_Control_Number")))
                     .ToList();
 
                 ucday.SetReservations(venueReservations, equipmentReservations);
-                days_Container.Controls.Add(ucday);
+                tbale_Calendars.Controls.Add(ucday);
             }
         }
 
+
+
+        /*
         // Display the Reservation Information in the Panel
-        private void Ucday_DateClicked(object sender, DateClickedEventArgs e)
-        {
-            int day = int.Parse(e.Day);
-            DateTime selectedDate = new DateTime(year, month, day);
-            DataTable reservations = GetReservationsForDay(selectedDate);
-
-            if (reservations.Rows.Count > 0)
-            {
-                panel_Info.Visible = true;
-
-                var venueReservations = reservations.AsEnumerable()
-                    .Where(r => r.Field<string>("fld_Reservation_Type") == "Venue")
-                    .Select(r => new
-                    {
-                        Name = r.Field<string>("fld_Venue_Name"),
-                        RequestingPerson = r.Field<string>("fld_First_Name") + " " + r.Field<string>("fld_Surname"),
-                        StartTime = r.Field<TimeSpan>("fld_Start_Time"),
-                        EndTime = r.Field<TimeSpan>("fld_End_Time"),
-                        Activity = r.Field<string>("fld_Activity_Name")
-                    })
-                    .ToList();
-
-                var equipmentReservations = reservations.AsEnumerable()
-                    .Where(r => r.Field<string>("fld_Reservation_Type") == "Equipment")
-                    .Select(r => new
-                    {
-                        Name = r.Field<string>("fld_Equipment_Name"),
-                        RequestingPerson = r.Field<string>("fld_First_Name") + " " + r.Field<string>("fld_Surname"),
-                        StartTime = r.Field<TimeSpan>("fld_Start_Time"),
-                        EndTime = r.Field<TimeSpan>("fld_End_Time"),
-                        Activity = r.Field<string>("fld_Activity_Name")
-                    })
-                    .ToList();
-
-                if (venueReservations.Any())
-                {
-                    lbl_Venue.Text = string.Join("\n", venueReservations.Select(v => v.Name));
-                    lbl_Requestor1.Text = string.Join("\n", venueReservations.Select(v => v.RequestingPerson));
-                    lbl_Date_And_Time.Text = string.Join("\n", venueReservations.Select(v => $"{v.StartTime} - {v.EndTime}"));
-                    lbl_Activity.Text = string.Join("\n", venueReservations.Select(v => v.Activity));
-                }
-                else
-                {
-                    lbl_Venue.Text = "No Reservation Yet";
-                    lbl_Requestor1.Text = "No Reservation Yet";
-                    lbl_Date_And_Time.Text = "No Reservation Yet";
-                    lbl_Activity.Text = "No Reservation Yet";
-                }
-
-                if (equipmentReservations.Any())
-                {
-                    lbl_Equipment.Text = string.Join("\n", equipmentReservations.Select(E => E.Name));
-                    lbl_Requestor2.Text = string.Join("\n", equipmentReservations.Select(E => E.RequestingPerson));
-                    lbl_Date_And_Time2.Text = string.Join("\n", equipmentReservations.Select(E => $"{E.StartTime} - {E.EndTime}"));
-                    lbl_Activity1.Text = string.Join("\n", equipmentReservations.Select(E => E.Activity));
-                }
-                else
-                {
-                    lbl_Equipment.Text = "No Reservation Yet";
-                    lbl_Requestor2.Text = "No Reservation Yet";
-                    lbl_Date_And_Time2.Text = "No Reservation Yet";
-                    lbl_Activity1.Text = "No Reservation Yet";
-                }
-            }
-            else
-            {
-                panel_Info.Visible = true;
-                lbl_Venue.Text = "No Reservation Yet";
-                lbl_Requestor1.Text = "No Reservation Yet";
-                lbl_Date_And_Time.Text = "No Reservation Yet";
-                lbl_Activity.Text = "No Reservation Yet";
-                lbl_Equipment.Text = "No Reservation Yet";
-                lbl_Requestor2.Text = "No Reservation Yet";
-                lbl_Date_And_Time2.Text = "No Reservation Yet";
-                lbl_Activity1.Text = "No Reservation Yet";
-            }
-        }
-
+        
+        */
         // Decrement month
         private void btn_Previous_Click(object sender, EventArgs e)
         {
@@ -219,6 +145,22 @@ namespace pgso
                                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return reservations;
+        }
+
+        private void days_Container_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btn_Equipments_Click(object sender, EventArgs e)
+        {
+            frm_Calendar_Equipments frm_Calendar_Equipments = new frm_Calendar_Equipments();
+            frm_Calendar_Equipments.Show();
+        }
+
+        private void panel_Info_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private DataTable GetReservationsForDay(DateTime date)

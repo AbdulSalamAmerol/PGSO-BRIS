@@ -33,6 +33,7 @@ namespace pgso
             RefreshData();
         }
 
+        //displays the data in the datagridview
         private void RefreshData()
         {
             try
@@ -58,9 +59,10 @@ namespace pgso
 
                 string queryEquipment = @"
                      SELECT 
-                         e.fld_Equipment_Name, 
-                         ep.fld_Equipment_Price,
-                         ep.fld_Equipment_Price_Subsequent
+                        e.fld_Equipment_Name, 
+                        ep.fld_Equipment_Price,
+                        ep.fld_Equipment_Price_Subsequent,
+                        e.fld_Available_Quantity
                      FROM 
                          tbl_Equipment e
                      JOIN 
@@ -119,7 +121,7 @@ namespace pgso
             frm_Add_Venues frm_Add_Venues = new frm_Add_Venues();
             frm_Add_Venues.Show();
         }
-
+        //sa datagridview click for venues
         private void dt_Venues_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -197,6 +199,8 @@ namespace pgso
             }
         }
 
+
+        //Click the data grid view for Equipments para ma-edit or delete
         private void dt_Equipments_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -209,7 +213,9 @@ namespace pgso
                     string equipmentPrice = row.Cells["fld_Equipment_Price"].Value.ToString();
                     string equipmentPriceSubsequent = row.Cells["fld_Equipment_Price_Subsequent"].Value.ToString();
 
-                    ShowEditForm(equipmentName, equipmentPrice, equipmentPriceSubsequent);
+                   
+                    ShowEditForm(equipmentName, equipmentPrice, equipmentPriceSubsequent, row.Cells["fld_Available_Quantity"].Value.ToString());
+
                 }
                 else if (e.ColumnIndex == dt_Equipments.Columns["Delete"].Index)
                 {
@@ -370,13 +376,12 @@ namespace pgso
             }
         }
 
-        // Edit forms (remain unchanged from previous version)
-        // Edit forms
-        private void ShowEditForm(string equipmentName, string equipmentPrice, string equipmentPriceSubsequent)
+        //Edit form for EQUIPMENTS
+        private void ShowEditForm(string equipmentName, string equipmentPrice, string equipmentPriceSubsequent, string equipmentQuantity)
         {
             Form editForm = new Form();
             editForm.Text = "Edit Equipment";
-            editForm.Size = new Size(400, 250);
+            editForm.Size = new Size(400, 300);
 
             // Create and add controls
             Label lblName = new Label() { Text = "Equipment Name", Left = 10, Top = 20 };
@@ -388,7 +393,10 @@ namespace pgso
             Label lblPriceSubsequent = new Label() { Text = "Subsequent Price", Left = 10, Top = 100 };
             TextBox txtPriceSubsequent = new TextBox() { Left = 150, Top = 100, Width = 200, Text = equipmentPriceSubsequent };
 
-            Button btnSave = new Button() { Text = "Save", Left = 150, Top = 140, Width = 100 };
+            Label lblQuantity = new Label() { Text = "Quantity", Left = 10, Top = 140 };
+            TextBox txtQuantity = new TextBox() { Left = 150, Top = 140, Width = 200, Text = equipmentQuantity };
+
+            Button btnSave = new Button() { Text = "Save", Left = 150, Top = 180, Width = 100 };
             btnSave.Click += (s, args) =>
             {
                 try
@@ -430,19 +438,20 @@ namespace pgso
                                 return;
                             }
 
-                            // Update equipment name if changed
-                            if (txtName.Text != equipmentName)
+                            // Update equipment name and quantity if changed
+                            if (txtName.Text != equipmentName || txtQuantity.Text != equipmentQuantity)
                             {
-                                string updateNameQuery = @"
-                            UPDATE tbl_Equipment
-                            SET fld_Equipment_Name = @newName
-                            WHERE pk_EquipmentID = @equipmentId";
+                                string updateEquipmentQuery = @"
+                        UPDATE tbl_Equipment
+                        SET fld_Equipment_Name = @newName, fld_Available_Quantity = @newQuantity
+                        WHERE pk_EquipmentID = @equipmentId";
 
-                                using (SqlCommand cmdName = new SqlCommand(updateNameQuery, db.strCon, transaction))
+                                using (SqlCommand cmdUpdate = new SqlCommand(updateEquipmentQuery, db.strCon, transaction))
                                 {
-                                    cmdName.Parameters.AddWithValue("@newName", txtName.Text);
-                                    cmdName.Parameters.AddWithValue("@equipmentId", equipmentId);
-                                    cmdName.ExecuteNonQuery();
+                                    cmdUpdate.Parameters.AddWithValue("@newName", txtName.Text);
+                                    cmdUpdate.Parameters.AddWithValue("@newQuantity", txtQuantity.Text);
+                                    cmdUpdate.Parameters.AddWithValue("@equipmentId", equipmentId);
+                                    cmdUpdate.ExecuteNonQuery();
                                 }
                             }
 
@@ -453,8 +462,8 @@ namespace pgso
                             if (priceChanged || subsequentPriceChanged)
                             {
                                 string updatePriceQuery = @"
-                            UPDATE tbl_Equipment_Pricing
-                            SET " +
+                        UPDATE tbl_Equipment_Pricing
+                        SET " +
                                     (priceChanged ? "fld_Equipment_Price = @price" : "") +
                                     (priceChanged && subsequentPriceChanged ? ", " : "") +
                                     (subsequentPriceChanged ? "fld_Equipment_Price_Subsequent = @priceSubsequent" : "") +
@@ -502,11 +511,14 @@ namespace pgso
             editForm.Controls.Add(txtPrice);
             editForm.Controls.Add(lblPriceSubsequent);
             editForm.Controls.Add(txtPriceSubsequent);
+            editForm.Controls.Add(lblQuantity);
+            editForm.Controls.Add(txtQuantity);
             editForm.Controls.Add(btnSave);
 
             editForm.Show();
         }
 
+        //Edit form for Venues
         private void ShowEditForm(string venueName, string venueScopeName, bool aircon, string rateType,
     decimal first4HrsRate, decimal hourlyRate, decimal additionalCharge)
         {
@@ -703,6 +715,11 @@ namespace pgso
         {
             frm_Add_Scope frm_Add_Scope = new frm_Add_Scope();
             frm_Add_Scope.Show();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
