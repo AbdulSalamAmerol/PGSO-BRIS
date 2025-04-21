@@ -45,7 +45,7 @@ namespace pgso
         }
         private void DisplayCalendar()
         {
-            frm_Calendar calendar = new frm_Calendar();
+            frm_Calendar_Venue calendar = new frm_Calendar_Venue();
             calendar.TopLevel = false;
             calendar.FormBorderStyle = FormBorderStyle.None;
             calendar.Dock = DockStyle.Fill;
@@ -55,64 +55,7 @@ namespace pgso
         }
 
         private void CreateSideMenu()
-        {
-            /*sideMenu = new Panel
-            {
-                Size = new Size(200, this.ClientSize.Height),
-                Dock = DockStyle.Left,
-                BackColor = Color.DarkSlateGray,
-                Padding = new Padding(10)
-            };*/
-/*
-            Label menuLabel = new Label
-            {
-                Text = "Select Month & Year",
-                ForeColor = Color.White,
-                Font = new Font("Arial", 12, FontStyle.Bold),
-                AutoSize = true,
-                Location = new Point(20, 20)
-            };
-            sideMenu.Controls.Add(menuLabel);
-
-            cmbMonth = new ComboBox
-            {
-                Size = new Size(180, 30),
-                Location = new Point(10, 50),
-                DropDownStyle = ComboBoxStyle.DropDownList
-            };
-            cmbMonth.Items.AddRange(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames.Take(12).ToArray());
-            cmbMonth.SelectedIndex = currentMonth - 1;
-            cmbMonth.SelectedIndexChanged += CmbMonth_SelectedIndexChanged;
-            sideMenu.Controls.Add(cmbMonth);
-
-            numYear = new NumericUpDown
-            {
-                Size = new Size(180, 30),
-                Location = new Point(10, 90),
-                Minimum = DateTime.Now.Year, // Restrict past years
-                Maximum = 2100,
-                Value = currentYear
-            };
-            numYear.ValueChanged += NumYear_ValueChanged;
-            sideMenu.Controls.Add(numYear);
-*/
-            // Button Venue
-            /*
-            Button Venues = new Button
-            {
-                Text = "Manage Reservations",
-                Size = new Size(180, 30),
-                Location = new Point(10, 130),
-                BackColor = Color.LightGray,
-                ForeColor = Color.Black,
-                Font = new Font("Century Gothic", 10, FontStyle.Regular)
-            };
-            Venues.Click += Venues_Click;
-            sideMenu.Controls.Add(Venues);
-            */
-           
-
-            
+        {  
         }
 
         // Event handler for button venues click
@@ -352,16 +295,7 @@ namespace pgso
             Venues.Show();
         }
 
-        private void approvedToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frm_Venue_Approved AprVenue = new frm_Venue_Approved();
-            AprVenue.TopLevel = false;
-            AprVenue.FormBorderStyle = FormBorderStyle.None;
-            AprVenue.Dock = DockStyle.Fill;
-            this.panel_Display.Controls.Clear();
-            this.panel_Display.Controls.Add(AprVenue);
-            AprVenue.Show();
-        }
+
         private void equipmentToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             frm_Equipment EqApproved = new frm_Equipment();
@@ -387,16 +321,7 @@ namespace pgso
             Facilities.Show();
         }
 
-        private void pendingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frm_Venue_Pending PenVenues = new frm_Venue_Pending();
-            PenVenues.TopLevel = false;
-            PenVenues.FormBorderStyle = FormBorderStyle.None;
-            PenVenues.Dock = DockStyle.Fill;
-            this.panel_Display.Controls.Clear();
-            this.panel_Display.Controls.Add(PenVenues);
-            PenVenues.Show();
-        }
+
 
         private void cancelledToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -409,16 +334,7 @@ namespace pgso
             VenCancelled.Show();
         }
 
-        private void pendingReservationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frm_Equipment_Pending EqPending = new frm_Equipment_Pending();
-            EqPending.TopLevel = false;
-            EqPending.FormBorderStyle = FormBorderStyle.None;
-            EqPending.Dock = DockStyle.Fill;
-            this.panel_Display.Controls.Clear();
-            this.panel_Display.Controls.Add(EqPending);
-            EqPending.Show();
-        }
+
 
         private void approvedReservationToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -431,20 +347,11 @@ namespace pgso
             EqApproved.Show();
         }
 
-        private void cancelledReservationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frm_Equipment_Cancelled EqCancelled = new frm_Equipment_Cancelled();
-            EqCancelled.TopLevel = false;
-            EqCancelled.FormBorderStyle = FormBorderStyle.None;
-            EqCancelled.Dock = DockStyle.Fill;
-            this.panel_Display.Controls.Clear();
-            this.panel_Display.Controls.Add(EqCancelled);
-            EqCancelled.Show();
-        }
+
 
         private void calendarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frm_Calendar Calendar = new frm_Calendar();
+            frm_Calendar_Venue Calendar = new frm_Calendar_Venue();
             Calendar.TopLevel = false;
             Calendar.FormBorderStyle = FormBorderStyle.None;
             Calendar.Dock = DockStyle.Fill;
@@ -473,6 +380,15 @@ namespace pgso
             frm_Billing billingForm = new frm_Billing(); // Create an instance of frm_Billing
             billingForm.Show(); // Show the form
 
+        }
+
+        private void panel_Calendar_Paint(object sender, PaintEventArgs e)
+        {
+            // Example: Fix the size and position of the panel_Display
+            //panel_Display.Dock = DockStyle.None; // Remove dynamic docking
+            //panel_Display.Anchor = AnchorStyles.Top | AnchorStyles.Left; // Fix to top-left corner
+  //          panel_Display.Size = new Size(2000, 800); // Set a fixed size (width: 800px, height: 600px)
+    //        panel_Display.Location = new Point(20, 50); // Set a fixed position (50px from top-left corner)
         }
 
 

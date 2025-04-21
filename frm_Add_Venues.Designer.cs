@@ -152,7 +152,6 @@
             this.txt_Additional_Charges.Name = "txt_Additional_Charges";
             this.txt_Additional_Charges.Size = new System.Drawing.Size(206, 26);
             this.txt_Additional_Charges.TabIndex = 11;
-            this.txt_Additional_Charges.TextChanged += new System.EventHandler(this.txt_Additional_Charges_TextChanged);
             // 
             // txt_Hourly_Rate
             // 

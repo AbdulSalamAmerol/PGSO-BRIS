@@ -35,8 +35,9 @@ namespace pgso
             txt_Hourly_Rate.TextChanged += (sender, e) => CalculateTotalAmount();
             combo_Request.Items.Add("Call");
             combo_Request.Items.Add("Letter");
-            combo_Request.Items.Add("Walk-In");
+            combo_Request.Items.Add("Walk In");
             CalculateTotalAmount();
+            txt_controlnum.Text = GenerateControlNumber();
         }
         private void frm_createvenuereservation_Load(object sender, EventArgs e)
         {
@@ -45,6 +46,7 @@ namespace pgso
             //date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
             TimeStart.ValueChanged += TimeStart_ValueChanged;
             TimeEnd.ValueChanged += TimeEnd_ValueChanged;
+            txt_controlnum.Text = GenerateControlNumber();
         }
         // Open database connection
         private void DBConnect()
@@ -174,6 +176,53 @@ namespace pgso
             catch (Exception ex)
             {
                 MessageBox.Show("Error loading reservation types: " + ex.Message);
+            }
+            finally
+            {
+                DBClose();
+            }
+        }
+
+
+        private string GenerateControlNumber()
+        {
+            try
+            {
+                DBConnect();
+
+                int currentYear = DateTime.Now.Year;
+
+                // Query to get the MAX control number for current year
+                cmd = new SqlCommand(
+                    "SELECT MAX(fld_Control_Number) FROM tbl_Reservation " +
+                    "WHERE fld_Control_Number LIKE 'CN-___-" + currentYear + "'", conn);
+
+                string lastControlNumber = (string)cmd.ExecuteScalar();
+
+                int nextNumber = 1; // Default if no records exist
+
+                if (!string.IsNullOrEmpty(lastControlNumber))
+                {
+                    // Extract the numeric part (positions 3-5: CN-001-2025 → 001)
+                    string numberPart = lastControlNumber.Substring(3, 3);
+                    if (int.TryParse(numberPart, out int lastNumber))
+                    {
+                        nextNumber = lastNumber + 1;
+
+                        // Reset to 1 if we exceed 999
+                        if (nextNumber > 999)
+                        {
+                            nextNumber = 1;
+                        }
+                    }
+                }
+
+                return $"CN-{nextNumber:D3}-{currentYear}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error generating control number: " + ex.Message);
+                return $"CN-001-{DateTime.Now.Year}"; // Fallback
             }
             finally
             {
@@ -364,14 +413,24 @@ namespace pgso
                     return;
                 }
 
-                // Step 1: Insert into RequestingPerson
-                cmd = new SqlCommand("INSERT INTO tbl_Requesting_Person (fld_Surname, fld_First_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin) OUTPUT INSERTED.pk_Requesting_PersonID VALUES (@Surname, @FirstName, @Address, @ContactNumber, @RequestOrigin)", conn, transaction);
+                // Step 1: Validate the input
+                if (string.IsNullOrWhiteSpace(txt_controlnum.Text))
+                {
+                    MessageBox.Show("Control number is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                cmd.Parameters.AddWithValue("@Surname", txt_surname.Text);
-                cmd.Parameters.AddWithValue("@FirstName", txt_firstname.Text);
-                cmd.Parameters.AddWithValue("@Address", txt_address.Text);
+                if (string.IsNullOrWhiteSpace(txt_activity.Text))
+                {
+                    MessageBox.Show("Activity name is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                //insert to equipment
+                if (combo_venues.SelectedValue == null || combo_scope.SelectedValue == null || combo_ReservationType.SelectedValue == null)
+                {
+                    MessageBox.Show("Please select a venue, scope, and reservation type.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 // Validate the contact number
                 string contactNumber = txt_contact.Text;
@@ -381,12 +440,23 @@ namespace pgso
                     return;
                 }
 
+                // Step 2: Insert into tbl_Requesting_Person
+                cmd = new SqlCommand(@"
+        INSERT INTO tbl_Requesting_Person 
+        (fld_Surname, fld_First_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office) 
+        OUTPUT INSERTED.pk_Requesting_PersonID 
+        VALUES (@Surname, @FirstName, @Address, @ContactNumber, @RequestOrigin, @Requesting_Office)", conn, transaction);
+
+                cmd.Parameters.AddWithValue("@Surname", txt_surname.Text);
+                cmd.Parameters.AddWithValue("@FirstName", txt_firstname.Text);
+                cmd.Parameters.AddWithValue("@Address", txt_address.Text);
                 cmd.Parameters.AddWithValue("@ContactNumber", contactNumber);
                 cmd.Parameters.AddWithValue("@RequestOrigin", combo_Request.Text);
+                cmd.Parameters.AddWithValue("@Requesting_Office", txt_Requesting_Office.Text);
 
                 int personID = (int)cmd.ExecuteScalar();
 
-                // Step 2: Retrieve fk_VenueID, fk_Venue_PricingID, fk_Venue_ScopeID
+                // Step 3: Retrieve fk_VenueID, fk_Venue_PricingID, fk_Venue_ScopeID
                 int venueID = selectedVenueID;
                 int venueScopeID = (int)combo_scope.SelectedValue;
                 string reservationType = combo_ReservationType.SelectedValue.ToString();
@@ -407,42 +477,62 @@ namespace pgso
 
                 int venuePricingID = (int)cmd.ExecuteScalar();
 
-                // Step 3: Insert into Reservations
+                // Step 4: Insert into tbl_Reservation
                 cmd = new SqlCommand(@"
                 INSERT INTO tbl_Reservation 
-                (fld_Control_Number, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time, fld_Activity_Name, fld_Number_Of_Participants, fld_Reservation_Status, fld_Reservation_Type, fld_Total_Amount, fk_Requesting_PersonID, fk_VenueID, fk_Venue_PricingID, fk_Venue_ScopeID) 
+                (fld_Control_Number, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time, fld_Activity_Name, 
+                fld_Number_Of_Participants, fld_Reservation_Status, fld_Reservation_Type, fld_Total_Amount, 
+                fk_Requesting_PersonID, fk_VenueID, fk_Venue_PricingID, fk_Venue_ScopeID) 
                 OUTPUT INSERTED.pk_ReservationID 
-                VALUES (@fld_Control_Number, @fld_Start_Date, @fld_End_Date, @fld_Start_Time, @fld_End_Time, @fld_Activity_Name, @fld_Number_Of_Participants, @fld_Reservation_Status, @fld_Reservation_Type, @Total_Amount, @Requesting_PersonID, @VenueID, @VenuePricingID, @VenueScopeID)", conn, transaction);
+                VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityName, 
+                @NumberOfParticipants, @ReservationStatus, @ReservationType, @TotalAmount, 
+                @RequestingPersonID, @VenueID, @VenuePricingID, @VenueScopeID)", conn, transaction);
 
-                cmd.Parameters.AddWithValue("@fld_Control_Number", txt_controlnum.Text);
-                cmd.Parameters.AddWithValue("@fld_Start_Date", date_of_use_start.Value);
-                cmd.Parameters.AddWithValue("@fld_End_Date", date_of_use_end.Value);
-                cmd.Parameters.AddWithValue("@fld_Start_Time", TimeStart.Value.TimeOfDay);
-                cmd.Parameters.AddWithValue("@fld_End_Time", TimeEnd.Value.TimeOfDay);
-                cmd.Parameters.AddWithValue("@fld_Activity_Name", txt_activity.Text);
-                cmd.Parameters.AddWithValue("@fld_Reservation_Type", "Venue");
-                cmd.Parameters.AddWithValue("@fld_Number_Of_Participants", num_participants.Value);
-                cmd.Parameters.AddWithValue("@Total_Amount", txt_Total.Text);
-                cmd.Parameters.AddWithValue("@fld_Reservation_Status", "Pending");
-                cmd.Parameters.AddWithValue("@Requesting_PersonID", personID);
+                cmd.Parameters.AddWithValue("@ControlNumber", txt_controlnum.Text);
+                cmd.Parameters.AddWithValue("@StartDate", date_of_use_start.Value);
+                cmd.Parameters.AddWithValue("@EndDate", date_of_use_end.Value);
+                cmd.Parameters.AddWithValue("@StartTime", TimeStart.Value.TimeOfDay);
+                cmd.Parameters.AddWithValue("@EndTime", TimeEnd.Value.TimeOfDay);
+                cmd.Parameters.AddWithValue("@ActivityName", txt_activity.Text);
+                cmd.Parameters.AddWithValue("@NumberOfParticipants", num_participants.Value);
+                cmd.Parameters.AddWithValue("@ReservationStatus", "Pending");
+                cmd.Parameters.AddWithValue("@ReservationType", "Venue");
+                cmd.Parameters.AddWithValue("@TotalAmount", decimal.Parse(txt_Total.Text));
+                cmd.Parameters.AddWithValue("@RequestingPersonID", personID);
                 cmd.Parameters.AddWithValue("@VenueID", venueID);
                 cmd.Parameters.AddWithValue("@VenuePricingID", venuePricingID);
                 cmd.Parameters.AddWithValue("@VenueScopeID", venueScopeID);
 
                 int reservationID = (int)cmd.ExecuteScalar();
 
+                // Step 5: Insert into tbl_Reservation_Venues
+                cmd = new SqlCommand(@"
+                INSERT INTO tbl_Reservation_Venues 
+                (fk_ReservationID, fk_VenueID, fk_Venue_ScopeID, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time, fld_Total_Amount, fld_Participants) 
+                VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate, @StartTime, @EndTime, @TotalAmount, @Participants)", conn, transaction);
+
+                cmd.Parameters.AddWithValue("@ReservationID", reservationID);
+                cmd.Parameters.AddWithValue("@VenueID", venueID);
+                cmd.Parameters.AddWithValue("@ScopeID", venueScopeID);
+                cmd.Parameters.AddWithValue("@StartDate", date_of_use_start.Value);
+                cmd.Parameters.AddWithValue("@EndDate", date_of_use_end.Value);
+                cmd.Parameters.AddWithValue("@StartTime", TimeStart.Value.TimeOfDay);
+                cmd.Parameters.AddWithValue("@EndTime", TimeEnd.Value.TimeOfDay);
+                cmd.Parameters.AddWithValue("@TotalAmount", decimal.Parse(txt_Total.Text));
+                cmd.Parameters.AddWithValue("@Participants", num_participants.Value);
+
+                cmd.ExecuteNonQuery();
+
                 // Commit the transaction
                 transaction.Commit();
 
                 MessageBox.Show("Reservation submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btn_clearform_Click(sender, e);
             }
             catch (SqlException ex)
             {
                 // Rollback the transaction if any error occurs
-                if (transaction != null)
-                {
-                    transaction.Rollback();
-                }
+                transaction?.Rollback();
                 if (ex.Number == 547) // Check constraint violation
                 {
                     MessageBox.Show("Error: " + ex.Message + " Please ensure all data meets the required constraints.", "Constraint Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -455,10 +545,7 @@ namespace pgso
             catch (Exception ex)
             {
                 // Rollback the transaction if any error occurs
-                if (transaction != null)
-                {
-                    transaction.Rollback();
-                }
+                transaction?.Rollback();
                 MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
@@ -466,6 +553,8 @@ namespace pgso
                 DBClose(); // Close Connection
             }
         }
+
+
         private void combo_ReservationType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (IsReservationTypeAndScopeSelected())
@@ -523,7 +612,8 @@ namespace pgso
             txt_firstname.Clear();
             txt_address.Clear();
             txt_contact.Clear();
-
+            // Generate new control number
+            txt_controlnum.Text = GenerateControlNumber();
             txt_controlnum.Clear();
             txt_activity.Clear();
             txt_rate.Clear();
@@ -644,11 +734,17 @@ namespace pgso
                     break;
                 case "Letter":
                     break;
-                case "Walk-In":
+                case "Walk In":
                     break;
                 default:
                     break;
             }
+        }
+
+        private void num_participants_ValueChanged(object sender, EventArgs e)
+        {
+            this.num_participants.Maximum = 50000; // Set to 50,000 or any desired value
+
         }
     }
 }

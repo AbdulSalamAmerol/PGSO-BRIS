@@ -250,10 +250,5 @@ namespace pgso
         {
 
         }
-
-        private void txt_Additional_Charges_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
