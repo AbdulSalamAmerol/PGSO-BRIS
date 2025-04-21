@@ -1184,7 +1184,10 @@ namespace pgso.Billing.Repositories
             return equipmentList;
         }
 
+        // Duplicate so i commented it out
+
         // Method to fetch Venue equipment
+        /*
         public List<dynamic> GetAllVenue()
         {
             List<dynamic> venueList = new List<dynamic>();
@@ -1207,8 +1210,9 @@ namespace pgso.Billing.Repositories
                     } // ✅ reader is closed here
                 }
             }
+            return venueList;
         }
-
+        */
 
         // Method to fetch equipment pricing by equipment ID
         public dynamic GetEquipmentPricingByEquipmentID(int equipmentID)
@@ -1716,6 +1720,261 @@ namespace pgso.Billing.Repositories
 
 
         /// END OF CHAT GPT CRUD
+        /// 
+
+        /// START OF GEMINI EDIT RESERVATION INFO
+
+        // Method to get full details for one reservation
+        public Model_Billing GetReservationDetails(int reservationID)
+        {
+            Model_Billing details = null;
+            // SQL to select all necessary fields from tbl_Reservation JOINED with others if needed
+            string sql = @"SELECT
+                           pk_ReservationID, fk_VenueID, fk_Venue_ScopeID,
+                           fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time,
+                           fk_Venue_PricingID, fld_Reservation_Type -- Add other fields as needed
+                       FROM tbl_Reservation
+                       WHERE pk_ReservationID = @ReservationID";
+
+            using (SqlConnection conn = new SqlConnection(connectionString)) 
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@ReservationID", reservationID);
+                try
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            details = new Model_Billing
+                            {
+                                pk_ReservationID = reader.GetInt32(reader.GetOrdinal("pk_ReservationID")),
+                                fk_VenueID = reader.IsDBNull(reader.GetOrdinal("fk_VenueID")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("fk_VenueID")),
+                                fk_Venue_ScopeID = reader.IsDBNull(reader.GetOrdinal("fk_Venue_ScopeID")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("fk_Venue_ScopeID")),
+                                fld_Start_Date = reader.GetDateTime(reader.GetOrdinal("fld_Start_Date")),
+                                fld_End_Date = reader.GetDateTime(reader.GetOrdinal("fld_End_Date")),
+                                fld_Start_Time = reader.GetTimeSpan(reader.GetOrdinal("fld_Start_Time")),
+                                fld_End_Time = reader.GetTimeSpan(reader.GetOrdinal("fld_End_Time")),
+                                fk_Venue_PricingID = reader.IsDBNull(reader.GetOrdinal("fk_Venue_PricingID")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("fk_Venue_PricingID")),
+                                fld_Reservation_Type = reader.GetString(reader.GetOrdinal("fld_Reservation_Type"))
+                                // Map other properties from Model_Billing if needed
+                            };
+
+                            // We need to infer Aircon status from fk_Venue_PricingID if not stored directly
+                            // This requires another lookup or JOIN in the initial query
+                            // For simplicity, let's assume we determine it later or add it to Model_Billing
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log error
+                    Console.WriteLine("Error fetching reservation details: " + ex.Message);
+                    throw; // Re-throw or handle as appropriate
+                }
+            }
+            return details;
+        }
+
+
+        // Method to get Venue List (assuming it returns ID and Name)
+        public List<KeyValuePair<int, string>> GetAllVenue()
+        {
+            var list = new List<KeyValuePair<int, string>>();
+            string sql = "SELECT pk_VenueID, fld_Venue_Name FROM tbl_Venue ORDER BY fld_Venue_Name";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                try
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(new KeyValuePair<int, string>(reader.GetInt32(0), reader.GetString(1)));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log error
+                    Console.WriteLine("Error fetching venues: " + ex.Message);
+                }
+            }
+            return list;
+        }
+
+
+       
+        // Method to get Venue Scope List
+        public List<KeyValuePair<int, string>> GetAllVenueScopes() // Add filtering by VenueID if needed
+        {
+            var list = new List<KeyValuePair<int, string>>();
+            // Consider filtering by VenueID if scopes are venue-specific
+            string sql = "SELECT pk_Venue_ScopeID, fld_Venue_Scope_Name FROM tbl_Venue_Scope ORDER BY fld_Venue_Scope_Name";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                // If filtering: cmd.Parameters.AddWithValue("@VenueID", venueId);
+                try
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(new KeyValuePair<int, string>(reader.GetInt32(0), reader.GetString(1)));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log error
+                    Console.WriteLine("Error fetching venue scopes: " + ex.Message);
+                }
+            }
+            return list;
+        }
+       
+
+        // Method to get Pricing Details
+        // Returning a simple class or tuple might be cleaner than object[]
+        public class VenuePricingResult
+        {
+            public int PricingID { get; set; }
+            public decimal First4HrsRate { get; set; }
+            public decimal HourlyRate { get; set; }
+            public bool Found { get; set; } = false; // Flag to indicate if found
+        }
+
+        public VenuePricingResult GetVenuePricingDetails(int venueId, int scopeId, bool aircon, string rateType)
+        {
+            VenuePricingResult result = new VenuePricingResult();
+            string sql = @"
+            SELECT pk_Venue_PricingID, fld_First4Hrs_Rate, fld_Hourly_Rate
+            FROM tbl_Venue_Pricing
+            WHERE fk_VenueID = @VenueID
+              AND fk_Venue_ScopeID = @ScopeID
+              AND fld_Aircon = @Aircon
+              AND fld_Rate_Type = @RateType";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@VenueID", venueId);
+                cmd.Parameters.AddWithValue("@ScopeID", scopeId);
+                cmd.Parameters.AddWithValue("@Aircon", aircon);
+                cmd.Parameters.AddWithValue("@RateType", rateType ?? (object)DBNull.Value); // Handle null rateType
+
+                try
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            result.PricingID = reader.GetInt32(reader.GetOrdinal("pk_Venue_PricingID"));
+                            result.First4HrsRate = reader.GetDecimal(reader.GetOrdinal("fld_First4Hrs_Rate"));
+                            result.HourlyRate = reader.GetDecimal(reader.GetOrdinal("fld_Hourly_Rate"));
+                            result.Found = true;
+                        }
+                        // No else needed, Found defaults to false
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log error
+                    Console.WriteLine("Error fetching pricing details: " + ex.Message);
+                    throw; // Re-throw or handle
+                }
+            }
+            return result;
+        }
+
+        // Method to get Aircon status based on PricingID (if needed)
+        public bool? GetAirconStatusFromPricing(int? pricingId)
+        {
+            if (!pricingId.HasValue) return null;
+
+            bool? airconStatus = null;
+            string sql = "SELECT fld_Aircon FROM tbl_Venue_Pricing WHERE pk_Venue_PricingID = @PricingID";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@PricingID", pricingId.Value);
+                try
+                {
+                    conn.Open();
+                    object result = cmd.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        airconStatus = Convert.ToBoolean(result);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error fetching aircon status: " + ex.Message);
+                    // Handle error appropriately
+                }
+            }
+            return airconStatus;
+        }
+
+        // Method to update the reservation
+        public bool UpdateVenueReservation(int reservationID, DateTime startDate, DateTime endDate, TimeSpan startTime, TimeSpan endTime, int venueId, int scopeId, int venuePricingId, decimal first4HrsRate, decimal hourlyRate)
+        {
+            string sql = @"
+            UPDATE tbl_Reservation SET
+                fld_Start_Date = @StartDate,
+                fld_End_Date = @EndDate,
+                fld_Start_Time = @StartTime,
+                fld_End_Time = @EndTime,
+                fk_VenueID = @VenueID,
+                fk_Venue_ScopeID = @ScopeID,
+                fk_Venue_PricingID = @VenuePricingID,
+                fld_First4Hrs_Rate = @First4HrsRate,
+                fld_Hourly_Rate = @HourlyRate
+                -- Add fld_Total_Amount, fld_OT_Hours updates here if calculated
+            WHERE pk_ReservationID = @ReservationID";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.Add("@StartDate", SqlDbType.Date).Value = startDate;
+                cmd.Parameters.Add("@EndDate", SqlDbType.Date).Value = endDate;
+                cmd.Parameters.Add("@StartTime", SqlDbType.Time).Value = startTime;
+                cmd.Parameters.Add("@EndTime", SqlDbType.Time).Value = endTime;
+                cmd.Parameters.Add("@VenueID", SqlDbType.Int).Value = venueId;
+                cmd.Parameters.Add("@ScopeID", SqlDbType.Int).Value = scopeId;
+                cmd.Parameters.Add("@VenuePricingID", SqlDbType.Int).Value = venuePricingId;
+                cmd.Parameters.Add("@First4HrsRate", SqlDbType.Decimal).Value = first4HrsRate;
+                cmd.Parameters.Add("@HourlyRate", SqlDbType.Decimal).Value = hourlyRate;
+                cmd.Parameters.Add("@ReservationID", SqlDbType.Int).Value = reservationID;
+
+                // Add parameters for TotalAmount, OTHours if needed
+
+                try
+                {
+                    conn.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0; // Return true if update was successful
+                }
+                catch (Exception ex)
+                {
+                    // Log error
+                    Console.WriteLine("Error updating reservation: " + ex.Message);
+                    return false; // Indicate failure
+                }
+            }
+        }
+
+
+        /// END OF GEMINI EDIT RESERVATION INFO
+
+
     }
 }
 

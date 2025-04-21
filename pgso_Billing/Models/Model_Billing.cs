@@ -37,7 +37,10 @@ namespace pgso.Billing.Models
         public string fld_Venue_Name { get; set; }
         public int? pk_Venue_ScopeID { get; set; }
         public string fld_Venue_Scope_Name { get; set; }
-        
+        public int? fk_VenueID { get; set; } // Foreign key for VenueID in the Venue Pricing table
+        public int? fk_Venue_ScopeID { get; set; } // Foreign key for Venue Scope ID in the Venue Pricing table
+        public int? fk_Venue_PricingID { get; set; } // Foreign key for Venue Pricing ID in the Venue Pricing table
+
         // Venue Pricing
         public int? pk_Venue_PricingID { get; set; }
         public decimal fld_First4Hrs_Rate { get; set; }

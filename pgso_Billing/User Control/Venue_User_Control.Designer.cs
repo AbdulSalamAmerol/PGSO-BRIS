@@ -161,7 +161,7 @@
             // 
             // btn_Change_Reservation_info
             // 
-            this.btn_Change_Reservation_info.Location = new System.Drawing.Point(657, 48);
+            this.btn_Change_Reservation_info.Location = new System.Drawing.Point(666, 48);
             this.btn_Change_Reservation_info.Name = "btn_Change_Reservation_info";
             this.btn_Change_Reservation_info.Size = new System.Drawing.Size(61, 24);
             this.btn_Change_Reservation_info.TabIndex = 48;
