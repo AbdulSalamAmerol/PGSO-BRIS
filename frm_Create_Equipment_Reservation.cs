@@ -481,7 +481,7 @@ namespace pgso
                     // Update available quantity in tbl_Equipment
                     cmd = new SqlCommand(@"
             UPDATE tbl_Equipment 
-            SET fld_Available_Quantity = fld_Available_Quantity - @Quantity 
+            SET fld_Remaining_Stock = fld_Remaining_Stock - @Quantity 
             WHERE pk_EquipmentID = @EquipmentID",
                         conn, transaction);
 

@@ -109,6 +109,7 @@ namespace pgso
             // 
             // approvedToolStripMenuItem
             // 
+            /*
             this.approvedToolStripMenuItem.Name = "approvedToolStripMenuItem";
             this.approvedToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.approvedToolStripMenuItem.Text = "Approved";
@@ -121,6 +122,7 @@ namespace pgso
             this.pendingToolStripMenuItem.Text = "Pending";
             this.pendingToolStripMenuItem.Click += new System.EventHandler(this.pendingToolStripMenuItem_Click);
             // 
+            */
             // cancelledToolStripMenuItem
             // 
             this.cancelledToolStripMenuItem.Name = "cancelledToolStripMenuItem";

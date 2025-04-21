@@ -62,7 +62,7 @@ namespace pgso
                         e.fld_Equipment_Name, 
                         ep.fld_Equipment_Price,
                         ep.fld_Equipment_Price_Subsequent,
-                        e.fld_Available_Quantity
+                        e.fld_Remaining_Stock
                      FROM 
                          tbl_Equipment e
                      JOIN 
@@ -214,7 +214,7 @@ namespace pgso
                     string equipmentPriceSubsequent = row.Cells["fld_Equipment_Price_Subsequent"].Value.ToString();
 
                    
-                    ShowEditForm(equipmentName, equipmentPrice, equipmentPriceSubsequent, row.Cells["fld_Available_Quantity"].Value.ToString());
+                    ShowEditForm(equipmentName, equipmentPrice, equipmentPriceSubsequent, row.Cells["fld_Remaining_Stock"].Value.ToString());
 
                 }
                 else if (e.ColumnIndex == dt_Equipments.Columns["Delete"].Index)
@@ -443,7 +443,7 @@ namespace pgso
                             {
                                 string updateEquipmentQuery = @"
                         UPDATE tbl_Equipment
-                        SET fld_Equipment_Name = @newName, fld_Available_Quantity = @newQuantity
+                        SET fld_Equipment_Name = @newName, fld_Remaining_Stock = @newQuantity
                         WHERE pk_EquipmentID = @equipmentId";
 
                                 using (SqlCommand cmdUpdate = new SqlCommand(updateEquipmentQuery, db.strCon, transaction))

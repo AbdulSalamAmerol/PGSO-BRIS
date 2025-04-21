@@ -54,7 +54,7 @@
             this.fld_Equipment_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Equipment_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Equipment_Price_Subsequent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Available_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Remaining_Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dt_Equipments)).BeginInit();
@@ -91,7 +91,7 @@
             this.fld_Equipment_Name,
             this.fld_Equipment_Price,
             this.fld_Equipment_Price_Subsequent,
-            this.fld_Available_Quantity,
+            this.fld_Remaining_Stock,
             this.Edit,
             this.Delete});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -322,12 +322,12 @@
             this.fld_Equipment_Price_Subsequent.Name = "fld_Equipment_Price_Subsequent";
             this.fld_Equipment_Price_Subsequent.ReadOnly = true;
             // 
-            // fld_Available_Quantity
+            // fld_Remaining_Stock
             // 
-            this.fld_Available_Quantity.DataPropertyName = "fld_Available_Quantity";
-            this.fld_Available_Quantity.HeaderText = "Servisable";
-            this.fld_Available_Quantity.Name = "fld_Available_Quantity";
-            this.fld_Available_Quantity.ReadOnly = true;
+            this.fld_Remaining_Stock.DataPropertyName = "fld_Remaining_Stock";
+            this.fld_Remaining_Stock.HeaderText = "Servisable";
+            this.fld_Remaining_Stock.Name = "fld_Remaining_Stock";
+            this.fld_Remaining_Stock.ReadOnly = true;
             // 
             // Edit
             // 
@@ -402,7 +402,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Equipment_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Equipment_Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Equipment_Price_Subsequent;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Available_Quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Remaining_Stock;
         private System.Windows.Forms.DataGridViewImageColumn Edit;
         private System.Windows.Forms.DataGridViewImageColumn Delete;
     }

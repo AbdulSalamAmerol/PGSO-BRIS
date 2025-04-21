@@ -1491,6 +1491,8 @@ namespace pgso.Billing.Repositories
         }
 
 
+        // Does not Delete from tbl_Reservation ( Only in tbl_Reservation_Equipment )
+        // Error : When deleting all data from tbl_Reservation_Equipment, the dashboard gives an error:
         public bool DeleteEquipmentReservation(int reservationEquipmentID)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
