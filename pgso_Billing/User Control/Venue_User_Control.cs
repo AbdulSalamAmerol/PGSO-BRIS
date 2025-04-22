@@ -14,7 +14,8 @@ namespace pgso.pgso_Billing
 {
     public partial class Venue_User_Control : UserControl
     {
-
+       
+        public event Action<int?> RequestBillingRefresh;
         private Model_Billing _billingDetails;
         // Constructor that accepts Model_Billing
         public Venue_User_Control(Model_Billing billingDetails)
@@ -24,13 +25,31 @@ namespace pgso.pgso_Billing
             LoadBillingDetails(billingDetails); // Populate the fields on creation
         }
 
-   
+
         private void btn_Change_Reservation_info_Click(object sender, EventArgs e)
         {
             frm_Edit_Venue_Reservation_Info editForm = new frm_Edit_Venue_Reservation_Info(_billingDetails);
-            editForm.ShowDialog();
+
+            var result = editForm.ShowDialog();
+
+            // 👇 Refresh only if dialog result is OK (successful save)
+            if (result == DialogResult.OK)
+            {
+                // Reload the billing details in this control
+                var updatedDetails = new Repo_Billing().GetBillingDetailsByReservationID(_billingDetails.pk_ReservationID);
+                if (updatedDetails != null)
+                {
+                    _billingDetails = updatedDetails;
+                    LoadBillingDetails(_billingDetails);
+                }
+
+                // 🔔 Trigger refresh event to inform frm_Billing
+                RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID);
+            }
         }
-   
+
+
+
 
         // Method to load billing details into the controls
         public void LoadBillingDetails(Model_Billing billingDetails)
@@ -41,7 +60,7 @@ namespace pgso.pgso_Billing
             lbl_Control_Number.Text = billingDetails.fld_Control_Number;
             lbl_Activity_Name.Text = billingDetails.fld_Activity_Name;
             lbl_Requesting_Person.Text = $"{billingDetails.fld_First_Name} {billingDetails.fld_Middle_Name} {billingDetails.fld_Surname}";
-            lbl_Requesting_Office.Text = billingDetails.fld_Requesting_Person_Address;
+            lbl_Requesting_Office.Text = billingDetails.fld_Requesting_Office;
             lbl_Origin_Request.Text = billingDetails.fld_Request_Origin;
             lbl_Contact_Number.Text = billingDetails.fld_Contact_Number;
             lbl_Address.Text = billingDetails.fld_Requesting_Person_Address;

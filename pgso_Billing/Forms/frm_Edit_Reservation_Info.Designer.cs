@@ -34,9 +34,7 @@
             this.textBox14 = new System.Windows.Forms.TextBox();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.dtp_Start_Date = new System.Windows.Forms.DateTimePicker();
-            this.dtp_End_Date = new System.Windows.Forms.DateTimePicker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.dtp_Start_Time = new System.Windows.Forms.DateTimePicker();
@@ -46,6 +44,8 @@
             this.cb_Aircon = new System.Windows.Forms.CheckBox();
             this.btn_Save = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
+            this.dtp_End_Date = new System.Windows.Forms.DateTimePicker();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBox1
@@ -123,26 +123,10 @@
             this.textBox9.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(86, 25);
+            this.textBox9.Size = new System.Drawing.Size(86, 16);
             this.textBox9.TabIndex = 48;
             this.textBox9.Text = "Start Date";
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox2.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox2.Location = new System.Drawing.Point(46, 109);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox2.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(86, 25);
-            this.textBox2.TabIndex = 65;
-            this.textBox2.Text = "End Date";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // dtp_Start_Date
             // 
@@ -150,13 +134,6 @@
             this.dtp_Start_Date.Name = "dtp_Start_Date";
             this.dtp_Start_Date.Size = new System.Drawing.Size(175, 20);
             this.dtp_Start_Date.TabIndex = 66;
-            // 
-            // dtp_End_Date
-            // 
-            this.dtp_End_Date.Location = new System.Drawing.Point(149, 109);
-            this.dtp_End_Date.Name = "dtp_End_Date";
-            this.dtp_End_Date.Size = new System.Drawing.Size(175, 20);
-            this.dtp_End_Date.TabIndex = 67;
             // 
             // panel1
             // 
@@ -207,6 +184,7 @@
             this.cmb_Venue.Name = "cmb_Venue";
             this.cmb_Venue.Size = new System.Drawing.Size(175, 21);
             this.cmb_Venue.TabIndex = 71;
+            this.cmb_Venue.SelectedIndexChanged += new System.EventHandler(this.cmb_Venue_SelectedIndexChanged);
             // 
             // cmb_Venue_Scope
             // 
@@ -215,6 +193,7 @@
             this.cmb_Venue_Scope.Name = "cmb_Venue_Scope";
             this.cmb_Venue_Scope.Size = new System.Drawing.Size(175, 21);
             this.cmb_Venue_Scope.TabIndex = 72;
+            this.cmb_Venue_Scope.SelectedIndexChanged += new System.EventHandler(this.cmb_Venue_Scope_SelectedIndexChanged);
             // 
             // cb_Aircon
             // 
@@ -234,6 +213,7 @@
             this.btn_Save.TabIndex = 74;
             this.btn_Save.Text = "Save";
             this.btn_Save.UseVisualStyleBackColor = true;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
             // btn_Cancel
             // 
@@ -243,8 +223,32 @@
             this.btn_Cancel.TabIndex = 75;
             this.btn_Cancel.Text = "Cancel";
             this.btn_Cancel.UseVisualStyleBackColor = true;
+            this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
             // 
-            // frm_Edit_Reservation_Info
+            // dtp_End_Date
+            // 
+            this.dtp_End_Date.Location = new System.Drawing.Point(149, 109);
+            this.dtp_End_Date.Name = "dtp_End_Date";
+            this.dtp_End_Date.Size = new System.Drawing.Size(175, 20);
+            this.dtp_End_Date.TabIndex = 67;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox2.Font = new System.Drawing.Font("Arial", 10F);
+            this.textBox2.Location = new System.Drawing.Point(46, 109);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox2.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(86, 25);
+            this.textBox2.TabIndex = 65;
+            this.textBox2.Text = "End Date";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // frm_Edit_Venue_Reservation_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -266,7 +270,7 @@
             this.Controls.Add(this.textBox14);
             this.Controls.Add(this.textBox10);
             this.Controls.Add(this.textBox9);
-            this.Name = "frm_Edit_Reservation_Info";
+            this.Name = "frm_Edit_Venue_Reservation_Info";
             this.Text = "frm_Edit_Reservation_Info";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -280,9 +284,7 @@
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.DateTimePicker dtp_Start_Date;
-        private System.Windows.Forms.DateTimePicker dtp_End_Date;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.DateTimePicker dtp_Start_Time;
         private System.Windows.Forms.DateTimePicker dtp_End_Time;
@@ -291,5 +293,7 @@
         private System.Windows.Forms.CheckBox cb_Aircon;
         private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.Button btn_Cancel;
+        private System.Windows.Forms.DateTimePicker dtp_End_Date;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }

@@ -368,44 +368,47 @@
             // 
             // col_Approved
             // 
-            this.col_Approved.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.col_Approved.HeaderText = "APRVD";
+            this.col_Approved.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.col_Approved.HeaderText = "APV";
             this.col_Approved.Image = global::pgso.Properties.Resources.Approved_Icon;
             this.col_Approved.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.col_Approved.MinimumWidth = 60;
             this.col_Approved.Name = "col_Approved";
             this.col_Approved.ReadOnly = true;
-            this.col_Approved.Width = 50;
+            this.col_Approved.Width = 60;
             // 
             // col_Extend
             // 
-            this.col_Extend.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.col_Extend.HeaderText = "EXTND";
+            this.col_Extend.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.col_Extend.HeaderText = "OT";
             this.col_Extend.Image = global::pgso.Properties.Resources.Extend_Icon;
+            this.col_Extend.MinimumWidth = 60;
             this.col_Extend.Name = "col_Extend";
             this.col_Extend.ReadOnly = true;
-            this.col_Extend.Width = 50;
+            this.col_Extend.Width = 60;
             // 
             // col_Cancel
             // 
-            this.col_Cancel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.col_Cancel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.col_Cancel.HeaderText = "CANCL";
             this.col_Cancel.Image = global::pgso.Properties.Resources.Cancelled_Icon;
             this.col_Cancel.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.col_Cancel.MinimumWidth = 60;
             this.col_Cancel.Name = "col_Cancel";
             this.col_Cancel.ReadOnly = true;
-            this.col_Cancel.Width = 48;
+            this.col_Cancel.Width = 60;
             // 
             // col_Print
             // 
-            this.col_Print.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.col_Print.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.col_Print.FillWeight = 3F;
             this.col_Print.HeaderText = "PRINT";
             this.col_Print.Image = global::pgso.Properties.Resources.print;
             this.col_Print.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.col_Print.MinimumWidth = 20;
+            this.col_Print.MinimumWidth = 60;
             this.col_Print.Name = "col_Print";
             this.col_Print.ReadOnly = true;
-            this.col_Print.Width = 46;
+            this.col_Print.Width = 60;
             // 
             // btn_Reports
             // 

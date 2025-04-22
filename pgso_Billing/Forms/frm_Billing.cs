@@ -115,6 +115,21 @@ namespace pgso
             return billingDetails;
         }
 
+        private void LoadVenueBillingControl(Model_Billing billingDetails)
+        {
+            pnl_Billing_Details.Controls.Clear(); // Or wherever you load the control
+
+            Venue_User_Control venueControl = new Venue_User_Control(billingDetails);
+
+            // ⛓️ Subscribe to refresh event
+            venueControl.RequestBillingRefresh += (updatedReservationID) =>
+            {
+                RefreshBillingRecords(updatedReservationID);
+            };
+
+            pnl_Billing_Details.Controls.Add(venueControl); // Add it to your container
+        }
+
         // Datagrid Cell Content Click
         private async void dgv_Billing_Records_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -148,9 +163,13 @@ namespace pgso
             {
                 case "Venue":
                     var venueControl = new Venue_User_Control(billing);
+                 
                     venueControl.Dock = DockStyle.Fill;
                     venueControl.LoadBillingDetails(billing);
                     billingControl = venueControl;
+                    venueControl.RequestBillingRefresh += RefreshBillingRecords;
+                    pnl_Billing_Details.Controls.Clear();
+                    pnl_Billing_Details.Controls.Add(venueControl);
                     break;
 
                 case "Equipment":

@@ -11,7 +11,7 @@ namespace pgso.Billing.Repositories
     // I CHANGED THIS TO PUBLIC FROM INTERNAL
     public class Repo_Billing
     {
-     
+
         private string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;Persist Security Info=True;User ID=sa;Password=abz123;Encrypt=False;";
 
 
@@ -560,7 +560,8 @@ namespace pgso.Billing.Repositories
                             p.fld_Refund_Amount,
                             p.fld_Cancellation_Fee,
                             p.fld_Final_Amount_Paid,
-                            p.fld_Overtime_Fee
+                            p.fld_Overtime_Fee,
+                            rp.fld_Requesting_Office
                         FROM dbo.tbl_Reservation r
                         LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
                         LEFT JOIN dbo.tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
@@ -628,7 +629,8 @@ namespace pgso.Billing.Repositories
                                     fld_Refund_Amount = reader.IsDBNull(43) ? 0 : reader.GetDecimal(43),
                                     fld_Cancellation_Fee = reader.IsDBNull(44) ? 0 : reader.GetDecimal(44),
                                     fld_Final_Amount_Paid = reader.IsDBNull(45) ? 0 : reader.GetDecimal(45),
-                                    fld_Overtime_Fee = reader.IsDBNull(46) ? 0 : reader.GetDecimal(46)
+                                    fld_Overtime_Fee = reader.IsDBNull(46) ? 0 : reader.GetDecimal(46),
+                                    fld_Requesting_Office = reader.IsDBNull(47) ? "" : reader.GetString(47)
                                 };
                             }
                         }
@@ -840,7 +842,7 @@ namespace pgso.Billing.Repositories
                 return result != DBNull.Value ? Convert.ToDecimal(result) : 0m;
             }
         }
-  
+
         // Currently Not in Use
         private async Task<string> GetReservationStatus(int reservationID)
         {
@@ -1727,6 +1729,7 @@ namespace pgso.Billing.Repositories
         /// START OF GEMINI EDIT RESERVATION INFO
 
         // Method to get full details for one reservation
+        /*
         public Model_Billing GetReservationDetails(int reservationID)
         {
             Model_Billing details = null;
@@ -1738,7 +1741,7 @@ namespace pgso.Billing.Repositories
                        FROM tbl_Reservation
                        WHERE pk_ReservationID = @ReservationID";
 
-            using (SqlConnection conn = new SqlConnection(connectionString)) 
+            using (SqlConnection conn = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
                 cmd.Parameters.AddWithValue("@ReservationID", reservationID);
@@ -1778,7 +1781,7 @@ namespace pgso.Billing.Repositories
             }
             return details;
         }
-
+        */
 
         // Method to get Venue List (assuming it returns ID and Name)
         public List<KeyValuePair<int, string>> GetAllVenue()
@@ -1809,7 +1812,7 @@ namespace pgso.Billing.Repositories
         }
 
 
-       
+
         // Method to get Venue Scope List
         public List<KeyValuePair<int, string>> GetAllVenueScopes() // Add filtering by VenueID if needed
         {
@@ -1839,7 +1842,7 @@ namespace pgso.Billing.Repositories
             }
             return list;
         }
-       
+
 
         // Method to get Pricing Details
         // Returning a simple class or tuple might be cleaner than object[]
@@ -1977,6 +1980,264 @@ namespace pgso.Billing.Repositories
         /// END OF GEMINI EDIT RESERVATION INFO
 
 
-    }
+        // START GEMINI 2.5
+
+        // --- Inside Repo_Billing.cs ---
+
+        // Modify to accept optional venueId
+        public List<KeyValuePair<int, string>> GetAllVenueScopes(int? venueId = null)
+        {
+            var list = new List<KeyValuePair<int, string>>();
+            // Base SQL query - select scopes linked to venue pricing entries
+            // DISTINCT ensures we only get each scope once per venue
+            string sql = @"SELECT DISTINCT vs.pk_Venue_ScopeID, vs.fld_Venue_Scope_Name
+                   FROM tbl_Venue_Scope vs
+                   INNER JOIN tbl_Venue_Pricing vp ON vs.pk_Venue_ScopeID = vp.fk_Venue_ScopeID";
+
+            // Add WHERE clause if venueId is provided
+            if (venueId.HasValue)
+            {
+                sql += " WHERE vp.fk_VenueID = @VenueID";
+            }
+            sql += " ORDER BY vs.fld_Venue_Scope_Name";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                if (venueId.HasValue)
+                {
+                    cmd.Parameters.AddWithValue("@VenueID", venueId.Value);
+                }
+                try
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(new KeyValuePair<int, string>(reader.GetInt32(0), reader.GetString(1)));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error fetching venue scopes: " + ex.Message); // Log error
+                }
+            }
+            return list;
+        }
+
+        // Helper method for clarity
+        public List<KeyValuePair<int, string>> GetScopesForVenue(int venueId)
+        {
+            return GetAllVenueScopes(venueId);
+        }
+
+
+        // Method to check if Aircon option exists for a Venue/Scope
+        public bool CheckAirconAvailability(int venueId, int? scopeId)
+        {
+            // Only check if scopeId is provided, otherwise, it's too broad
+            if (!scopeId.HasValue)
+            {
+                return false; // Or query if *any* scope for the venue has AC? Let's require scope.
+            }
+
+            bool hasAirconOption = false;
+            // Check if any pricing entry exists with Aircon=1 for this venue/scope
+            string sql = @"SELECT TOP 1 1
+                   FROM tbl_Venue_Pricing
+                   WHERE fk_VenueID = @VenueID
+                     AND fk_Venue_ScopeID = @ScopeID
+                     AND fld_Aircon = 1"; // Check for entries where Aircon is explicitly TRUE
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@VenueID", venueId);
+                cmd.Parameters.AddWithValue("@ScopeID", scopeId.Value); // Scope must have value here
+
+                try
+                {
+                    conn.Open();
+                    object result = cmd.ExecuteScalar();
+                    // If ExecuteScalar returns anything (even 1), it means a record was found
+                    if (result != null && result != DBNull.Value)
+                    {
+                        hasAirconOption = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error checking aircon availability: " + ex.Message); // Log error
+                }
+            }
+            return hasAirconOption;
+        }
+
+        // *** IMPORTANT ***
+        // Method to determine the ACTUAL Rate Type ('Regular', 'Special', 'PGNV')
+        // This logic depends HEAVILY on your business rules.
+        // Does it come from the Requesting Person type? Original booking flags?
+        // This is a placeholder - IMPLEMENT YOUR ACTUAL LOGIC HERE.
+        public string GetIntendedRateTypeForReservation(int reservationId)
+        {
+            // --- Placeholder Logic ---
+            // Example: Fetch Requesting Person details linked to reservation, check their type
+            // Example: Check a flag on the original reservation record
+            // For now, just returning the stored one from original load for consistency
+            // BUT THIS MIGHT NOT BE CORRECT IF RATE TYPE CAN CHANGE OR IS CONTEXTUAL
+            Model_Billing details = GetReservationDetails(reservationId); // Reuse existing method
+            if (details != null && !string.IsNullOrEmpty(details.fld_Rate_Type)) // Assuming you add this property
+            {
+                return details.fld_Rate_Type;
+            }
+
+            // Fallback - THIS IS LIKELY WRONG, fix the logic above
+            return "Regular";
+            // --- End Placeholder ---
+        }
+
+
+        // Modify UpdateVenueReservation to accept totalAmount and update the field
+        public bool UpdateVenueReservation(int reservationID, DateTime startDate, DateTime endDate, TimeSpan startTime, TimeSpan endTime, int venueId, int scopeId, int venuePricingId, decimal first4HrsRate, decimal hourlyRate, decimal totalAmount) // Added totalAmount
+        {
+            string sql = @"
+        UPDATE tbl_Reservation SET
+            fld_Start_Date = @StartDate,
+            fld_End_Date = @EndDate,
+            fld_Start_Time = @StartTime,
+            fld_End_Time = @EndTime,
+            fk_VenueID = @VenueID,
+            fk_Venue_ScopeID = @ScopeID,
+            fk_Venue_PricingID = @VenuePricingID,
+            fld_First4Hrs_Rate = @First4HrsRate,
+            fld_Hourly_Rate = @HourlyRate,
+            fld_Total_Amount = @TotalAmount  -- Update Total Amount
+            -- Removed OT Hours
+        WHERE pk_ReservationID = @ReservationID";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                // ... (Add parameters for all fields as before) ...
+                cmd.Parameters.Add("@StartDate", SqlDbType.Date).Value = startDate;
+                cmd.Parameters.Add("@EndDate", SqlDbType.Date).Value = endDate;
+                cmd.Parameters.Add("@StartTime", SqlDbType.Time).Value = startTime;
+                cmd.Parameters.Add("@EndTime", SqlDbType.Time).Value = endTime;
+                cmd.Parameters.Add("@VenueID", SqlDbType.Int).Value = venueId;
+                cmd.Parameters.Add("@ScopeID", SqlDbType.Int).Value = scopeId;
+                cmd.Parameters.Add("@VenuePricingID", SqlDbType.Int).Value = venuePricingId;
+                cmd.Parameters.Add("@First4HrsRate", SqlDbType.Decimal).Value = first4HrsRate;
+                cmd.Parameters.Add("@HourlyRate", SqlDbType.Decimal).Value = hourlyRate;
+                cmd.Parameters.Add("@ReservationID", SqlDbType.Int).Value = reservationID;
+                cmd.Parameters.Add("@TotalAmount", SqlDbType.Decimal).Value = totalAmount; // Add TotalAmount parameter
+
+                try
+                {
+                    conn.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error updating reservation: " + ex.Message); // Log error
+                    return false;
+                }
+            }
+        }
+
+        // Make sure your GetReservationDetails fetches the fld_Rate_Type from tbl_Venue_Pricing
+        // You might need to JOIN tbl_Venue_Pricing in GetReservationDetails
+        public Model_Billing GetReservationDetails(int reservationID)
+        {
+            Model_Billing details = null;
+            // JOIN with tbl_Venue_Pricing to get the RateType
+            string sql = @"SELECT
+                       r.pk_ReservationID, r.fk_VenueID, r.fk_Venue_ScopeID,
+                       r.fld_Start_Date, r.fld_End_Date, r.fld_Start_Time, r.fld_End_Time,
+                       r.fk_Venue_PricingID, r.fld_Reservation_Type,
+                       vp.fld_Rate_Type -- Fetch Rate Type from Pricing Table
+                   FROM tbl_Reservation r
+                   LEFT JOIN tbl_Venue_Pricing vp ON r.fk_Venue_PricingID = vp.pk_Venue_PricingID -- Use LEFT JOIN in case pricing ID is null
+                   WHERE r.pk_ReservationID = @ReservationID";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@ReservationID", reservationID);
+                try
+                {
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            details = new Model_Billing
+                            {
+                                pk_ReservationID = reader.GetInt32(reader.GetOrdinal("pk_ReservationID")),
+                                fk_VenueID = reader.IsDBNull(reader.GetOrdinal("fk_VenueID")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("fk_VenueID")),
+                                fk_Venue_ScopeID = reader.IsDBNull(reader.GetOrdinal("fk_Venue_ScopeID")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("fk_Venue_ScopeID")),
+                                fld_Start_Date = reader.GetDateTime(reader.GetOrdinal("fld_Start_Date")),
+                                fld_End_Date = reader.GetDateTime(reader.GetOrdinal("fld_End_Date")),
+                                fld_Start_Time = reader.GetTimeSpan(reader.GetOrdinal("fld_Start_Time")),
+                                fld_End_Time = reader.GetTimeSpan(reader.GetOrdinal("fld_End_Time")),
+                                fk_Venue_PricingID = reader.IsDBNull(reader.GetOrdinal("fk_Venue_PricingID")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("fk_Venue_PricingID")),
+                                fld_Reservation_Type = reader.GetString(reader.GetOrdinal("fld_Reservation_Type")),
+                                // Add a property in Model_Billing for this:
+                                fld_Rate_Type = reader.IsDBNull(reader.GetOrdinal("fld_Rate_Type")) ? null : reader.GetString(reader.GetOrdinal("fld_Rate_Type"))
+                            };
+                        }
+                    }
+                }
+                catch (Exception ex) { /* ... handle error ... */ }
+            }
+            return details;
+        }
+
+        public bool IsVenueReservedOnDate(int venueId, DateTime date, int? excludeReservationId = null)
+        {
+            string sql = @"
+        SELECT COUNT(*)
+        FROM tbl_Reservation
+        WHERE fk_VenueID = @VenueId
+          AND CAST(fld_Start_Date AS DATE) = @DateOnly
+          " + (excludeReservationId.HasValue ? "AND pk_ReservationID != @ReservationId" : "") + ";";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@VenueId", venueId);
+                cmd.Parameters.AddWithValue("@DateOnly", date.Date); // Strip time component
+
+                if (excludeReservationId.HasValue)
+                    cmd.Parameters.AddWithValue("@ReservationId", excludeReservationId.Value);
+
+                try
+                {
+                    conn.Open();
+                    int count = (int)cmd.ExecuteScalar();
+                    return count > 0; // true = conflict
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error checking reservation conflict: {ex.Message}");
+                    throw new Exception("Database error during venue conflict check.", ex);
+                }
+            }
+        }
+
+
+        
+
+    } // End Class Repo_Billing
+
+    // Add to Model_Billing.cs:
+    // public string fld_Rate_Type_From_Pricing { get; set; }
+
+
+    // END GEMINI 2.5
+
 }
+
 
