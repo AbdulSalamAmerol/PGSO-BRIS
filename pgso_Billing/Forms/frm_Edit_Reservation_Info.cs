@@ -235,15 +235,13 @@ namespace pgso.pgso_Billing.Forms
         // --- SAVE BUTTON CLICK HANDLER ---
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            // --- 1. Input Validation --- (Keep existing validation)
-            // ... (validation checks as before) ...
+            
             if (cmb_Venue.SelectedValue == null || cmb_Venue_Scope.SelectedValue == null)
             {
                 MessageBox.Show("Please select a venue and scope.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Check if scope is valid for the selected venue (important if loaded dynamically)
             if (cmb_Venue_Scope.Items.Count == 0 && cmb_Venue.SelectedValue != null)
             {
                 MessageBox.Show("Please select a valid scope for the chosen venue.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -251,7 +249,6 @@ namespace pgso.pgso_Billing.Forms
                 return;
             }
 
-            // Check if the start date is valid and not in the past
             if (dtp_Start_Date.Value.Date < DateTime.Now.Date)
             {
                 MessageBox.Show("Start date cannot be in the past.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -259,7 +256,6 @@ namespace pgso.pgso_Billing.Forms
                 return;
             }
 
-         
             // --- 2. Get Values from Controls ---
             DateTime startDate = dtp_Start_Date.Value.Date;
             DateTime endDate = dtp_End_Date.Value.Date;
@@ -270,7 +266,6 @@ namespace pgso.pgso_Billing.Forms
             // Aircon status depends on checkbox visibility and state
             bool aircon = cb_Aircon.Visible && cb_Aircon.Checked;
 
-            // --- Reservation Conflict Check ---
             DateTime selectedDate = dtp_Start_Date.Value.Date;
             int selectedVenueId = (int)cmb_Venue.SelectedValue;
 
@@ -293,17 +288,10 @@ namespace pgso.pgso_Billing.Forms
                 return;
             }
 
-            // --- End Reservation Conflict Check ---
-
-
-
             try
             {
-                // --- 3. Determine ACTUAL Intended Rate Type ---
-                // This is crucial. Fetch the rate type that *should* apply to this reservation.
-                // Replace placeholder with real logic (e.g., check requesting person type)
+                // Fetch the rate type that *should* apply to this reservation.
                 string rateType = _repo.GetIntendedRateTypeForReservation(_reservationID); // Use repo method
-
                 if (string.IsNullOrEmpty(rateType))
                 {
                     MessageBox.Show("Could not determine the applicable rate type for this reservation. Update cancelled.", "Rate Type Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -319,21 +307,10 @@ namespace pgso.pgso_Billing.Forms
                 if (rateType == RATE_TYPE_PGNV)
                 {
                     totalAmount = 0m;
-                    // PGNV might still need a pricing record (e.g., for tracking/reporting)
-                    // Or it might mean fk_Venue_PricingID should be NULL. Clarify this rule.
-                    // Let's assume we try to find *a* pricing record, maybe one marked PGNV or a default.
-                    // For simplicity now, we might skip pricing lookup or handle differently.
-                    // Let's try finding a generic non-AC price ID for association? This is risky.
-                    // Safest might be to set PricingID to a known default or handle null fk_Venue_PricingID.
-                    // Let's find the NON-AC pricing for the selected venue/scope/rateType(PGNV) if it exists.
                     pricing = _repo.GetVenuePricingDetails(venueId, venueScopeId, false, rateType); // Look for PGNV non-AC record
                     if (!pricing.Found)
                     {
-                        // If no specific PGNV record, what happens? Maybe set FK to NULL?
-                        // Let's allow saving without a specific pricing ID if PGNV, needs DB schema allowance (NULL FK)
-                        // For now, proceed but maybe log a warning or use a default ID if required not null.
-                        finalPricingId = -1; // Or some default/placeholder ID
-                                             // Set rates to 0 since total is 0
+                        finalPricingId = -1;                   
                         pricing = new Repo_Billing.VenuePricingResult { Found = true, First4HrsRate = 0, HourlyRate = 0, PricingID = -1 }; // Mock pricing result
                     }
                     else

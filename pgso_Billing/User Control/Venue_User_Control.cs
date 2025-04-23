@@ -28,6 +28,14 @@ namespace pgso.pgso_Billing
 
         private void btn_Change_Reservation_info_Click(object sender, EventArgs e)
         {
+            // ✅ Only allow if status is Confirmed or Pending
+            if (_billingDetails.fld_Reservation_Status != "Confirmed" && _billingDetails.fld_Reservation_Status != "Pending")
+            {
+                MessageBox.Show("Reservation Information Adjustment Error. ",
+                                "Edit Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             frm_Edit_Venue_Reservation_Info editForm = new frm_Edit_Venue_Reservation_Info(_billingDetails);
 
             var result = editForm.ShowDialog();
@@ -47,6 +55,7 @@ namespace pgso.pgso_Billing
                 RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID);
             }
         }
+
 
 
 

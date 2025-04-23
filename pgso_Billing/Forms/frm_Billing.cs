@@ -609,7 +609,7 @@ namespace pgso
                         Name = "col_Reservation_Name",
                         HeaderText = "Reservation",
                         DataPropertyName = "DisplayReservationName",
-                        AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
                     });
                 }
                 if (dgv_Billing_Records.Columns.Contains("col_Reservation_Name"))
