@@ -29,25 +29,36 @@ namespace pgso.pgso_Billing.Forms
         {
             try
             {
-                // Step 1: Validate user input
+                // Validate OR Extension
+                string orExtension = lbl_OR_Extension.Text.Trim();
+                if (string.IsNullOrEmpty(orExtension))
+                {
+                    MessageBox.Show("Please enter a valid OR number for the extension.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Check if extension already exists
+                bool alreadyExtended = await repo_Billing.CheckIfAlreadyExtended(_reservationID);
+                if (alreadyExtended)
+                {
+                    MessageBox.Show("This reservation has already been extended and has an OR number.", "Extension Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Validate Hours
                 if (string.IsNullOrEmpty(lbl_Extend_Venue.Text) || !decimal.TryParse(lbl_Extend_Venue.Text, out decimal inputHours))
                 {
                     MessageBox.Show("Please enter a valid number for extended hours.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // Step 2: Round the number
-                int roundedHours = (int)Math.Ceiling(inputHours); // Rounds up any decimal value (e.g., 3.1 to 4)
+                int roundedHours = (int)Math.Ceiling(inputHours);
 
-                // Step 3: Update the database via the repository
-                var result = await repo_Billing.UpdateReservationExtension(_reservationID, roundedHours);
-
+                // Update
+                var result = await repo_Billing.UpdateReservationExtension(_reservationID, roundedHours, orExtension); // include OR
                 if (result)
                 {
                     MessageBox.Show("Reservation extended successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Trigger the event after successful extension
-                    MessageBox.Show("Inside frm_Extend_Venue: Extension succeeded. Triggering event...");
                     OnExtensionSuccessful?.Invoke();
                     this.Close();
                 }
@@ -61,6 +72,7 @@ namespace pgso.pgso_Billing.Forms
                 MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
     }
 }

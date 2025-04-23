@@ -34,24 +34,28 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.lbl_OR_Extension = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lbl_OR_Extension);
+            this.panel2.Controls.Add(this.textBox2);
             this.panel2.Controls.Add(this.btn_Extend_Venue);
             this.panel2.Controls.Add(this.lbl_Extend_Venue);
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 45);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(369, 103);
+            this.panel2.Size = new System.Drawing.Size(369, 243);
             this.panel2.TabIndex = 3;
             // 
             // btn_Extend_Venue
             // 
-            this.btn_Extend_Venue.Location = new System.Drawing.Point(274, 56);
+            this.btn_Extend_Venue.Location = new System.Drawing.Point(274, 114);
             this.btn_Extend_Venue.Name = "btn_Extend_Venue";
             this.btn_Extend_Venue.Size = new System.Drawing.Size(70, 35);
             this.btn_Extend_Venue.TabIndex = 6;
@@ -110,11 +114,38 @@
             this.textBox3.TabIndex = 2;
             this.textBox3.Text = "EXTEND VENUE USAGE";
             // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(9, 59);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox2.MinimumSize = new System.Drawing.Size(0, 30);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(146, 30);
+            this.textBox2.TabIndex = 7;
+            this.textBox2.Text = "OR";
+            // 
+            // lbl_OR_Extension
+            // 
+            this.lbl_OR_Extension.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_OR_Extension.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_OR_Extension.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_OR_Extension.Location = new System.Drawing.Point(164, 59);
+            this.lbl_OR_Extension.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_OR_Extension.MinimumSize = new System.Drawing.Size(4, 30);
+            this.lbl_OR_Extension.Name = "lbl_OR_Extension";
+            this.lbl_OR_Extension.Size = new System.Drawing.Size(180, 30);
+            this.lbl_OR_Extension.TabIndex = 8;
+            // 
             // frm_Extend_Venue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 148);
+            this.ClientSize = new System.Drawing.Size(369, 288);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "frm_Extend_Venue";
@@ -135,5 +166,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button btn_Extend_Venue;
+        private System.Windows.Forms.TextBox lbl_OR_Extension;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }

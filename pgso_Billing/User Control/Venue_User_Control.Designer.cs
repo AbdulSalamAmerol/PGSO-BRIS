@@ -108,6 +108,7 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.newbtn_Extend_Venue = new System.Windows.Forms.Button();
             this.pnl_Billing_Details.SuspendLayout();
             this.panel5.SuspendLayout();
             this.SuspendLayout();
@@ -115,6 +116,7 @@
             // pnl_Billing_Details
             // 
             this.pnl_Billing_Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Billing_Details.Controls.Add(this.newbtn_Extend_Venue);
             this.pnl_Billing_Details.Controls.Add(this.btn_Change_Reservation_info);
             this.pnl_Billing_Details.Controls.Add(this.lbl_Is_Aircon);
             this.pnl_Billing_Details.Controls.Add(this.textBox1);
@@ -1412,6 +1414,16 @@
             this.textBox3.TabIndex = 0;
             this.textBox3.Text = "CLIENT INFORMATION";
             // 
+            // newbtn_Extend_Venue
+            // 
+            this.newbtn_Extend_Venue.Location = new System.Drawing.Point(666, 19);
+            this.newbtn_Extend_Venue.Name = "newbtn_Extend_Venue";
+            this.newbtn_Extend_Venue.Size = new System.Drawing.Size(75, 23);
+            this.newbtn_Extend_Venue.TabIndex = 49;
+            this.newbtn_Extend_Venue.Text = "button1";
+            this.newbtn_Extend_Venue.UseVisualStyleBackColor = true;
+            this.newbtn_Extend_Venue.Click += new System.EventHandler(this.newbtn_Extend_Venue_Click);
+            // 
             // Venue_User_Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1511,5 +1523,6 @@
         private System.Windows.Forms.TextBox lbl_Is_Aircon;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btn_Change_Reservation_info;
+        private System.Windows.Forms.Button newbtn_Extend_Venue;
     }
 }

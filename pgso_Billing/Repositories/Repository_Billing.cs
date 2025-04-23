@@ -734,7 +734,8 @@ namespace pgso.Billing.Repositories
 
         //////
 
-        public async Task<bool> UpdateReservationExtension(int reservationID, int otHours)
+        public async Task<bool> UpdateReservationExtension(int reservationID, int otHours, string orExtension)
+
         {
             try
             {
@@ -769,9 +770,11 @@ namespace pgso.Billing.Repositories
                    
                     UPDATE r
                     SET 
-                        r.fld_OT_Hours = @newOTHours
+                        r.fld_OT_Hours = @newOTHours,
+                        r.fld_OR_Extension = @orExtension
                     FROM tbl_Reservation r
                     WHERE r.pk_ReservationID = @reservationID;";
+
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -779,6 +782,7 @@ namespace pgso.Billing.Repositories
                     cmd.Parameters.AddWithValue("@newFinalAmountPaid", newFinalAmountPaid);  // Updated Final Amount Paid
                     cmd.Parameters.AddWithValue("@newOvertimeFee", newOvertimeFee);
                     cmd.Parameters.AddWithValue("@reservationID", reservationID);
+                    cmd.Parameters.AddWithValue("@orExtension", orExtension);
 
                     conn.Open();
                     return await cmd.ExecuteNonQueryAsync() > 0;
@@ -791,6 +795,32 @@ namespace pgso.Billing.Repositories
                 return false;
             }
         }
+
+        public async Task<bool> CheckIfAlreadyExtended(int reservationID)
+        {
+            string query = @"SELECT fld_OT_Hours, fld_OR_Extension 
+                     FROM tbl_Reservation 
+                     WHERE pk_ReservationID = @reservationID";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@reservationID", reservationID);
+                await conn.OpenAsync();
+
+                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    if (reader.Read())
+                    {
+                        decimal otHours = reader["fld_OT_Hours"] != DBNull.Value ? Convert.ToDecimal(reader["fld_OT_Hours"]) : 0;
+                        string orExtension = reader["fld_OR_Extension"] != DBNull.Value ? reader["fld_OR_Extension"].ToString() : null;
+                        return otHours > 0 || !string.IsNullOrEmpty(orExtension);
+                    }
+                }
+            }
+            return false;
+        }
+
 
 
         private async Task<decimal> GetHourlyRate(int reservationID)
@@ -2157,7 +2187,8 @@ namespace pgso.Billing.Repositories
                        r.pk_ReservationID, r.fk_VenueID, r.fk_Venue_ScopeID,
                        r.fld_Start_Date, r.fld_End_Date, r.fld_Start_Time, r.fld_End_Time,
                        r.fk_Venue_PricingID, r.fld_Reservation_Type,
-                       vp.fld_Rate_Type -- Fetch Rate Type from Pricing Table
+                       vp.fld_Rate_Type, -- Fetch Rate Type from Pricing Table
+                       r.fld_Reservation_Status
                    FROM tbl_Reservation r
                    LEFT JOIN tbl_Venue_Pricing vp ON r.fk_Venue_PricingID = vp.pk_Venue_PricingID -- Use LEFT JOIN in case pricing ID is null
                    WHERE r.pk_ReservationID = @ReservationID";
@@ -2185,7 +2216,8 @@ namespace pgso.Billing.Repositories
                                 fk_Venue_PricingID = reader.IsDBNull(reader.GetOrdinal("fk_Venue_PricingID")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("fk_Venue_PricingID")),
                                 fld_Reservation_Type = reader.GetString(reader.GetOrdinal("fld_Reservation_Type")),
                                 // Add a property in Model_Billing for this:
-                                fld_Rate_Type = reader.IsDBNull(reader.GetOrdinal("fld_Rate_Type")) ? null : reader.GetString(reader.GetOrdinal("fld_Rate_Type"))
+                                fld_Rate_Type = reader.IsDBNull(reader.GetOrdinal("fld_Rate_Type")) ? null : reader.GetString(reader.GetOrdinal("fld_Rate_Type")),
+                                fld_Reservation_Status = reader.IsDBNull(reader.GetOrdinal("fld_Reservation_Status")) ? null : reader.GetString(reader.GetOrdinal("fld_Reservation_Status"))
                             };
                         }
                     }

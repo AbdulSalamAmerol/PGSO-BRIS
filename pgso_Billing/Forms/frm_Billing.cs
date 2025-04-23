@@ -166,6 +166,10 @@ namespace pgso
                  
                     venueControl.Dock = DockStyle.Fill;
                     venueControl.LoadBillingDetails(billing);
+                    venueControl.OnRequestVenueExtension += (reservationID, status) =>
+                    {
+                        OpenExtendVenueForm(reservationID); // Your existing logic
+                    };
                     billingControl = venueControl;
                     venueControl.RequestBillingRefresh += RefreshBillingRecords;
                     pnl_Billing_Details.Controls.Clear();
@@ -664,7 +668,8 @@ namespace pgso
                 MessageBox.Show("Please select a reservation first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        private void OpenExtendVenueForm(int reservationID)
+
+        public void OpenExtendVenueForm(int reservationID)
         {
             MessageBox.Show("Opening Extend Venue Form...");
             frm_Extend_Venue extendForm = new frm_Extend_Venue(reservationID);

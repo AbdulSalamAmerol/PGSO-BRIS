@@ -16,6 +16,8 @@ namespace pgso.pgso_Billing
     {
        
         public event Action<int?> RequestBillingRefresh;
+        public event Action<int>? OnVenueExtended;
+        public event Action<int, string> OnRequestVenueExtension;// Check if extension is applicable
         private Model_Billing _billingDetails;
         // Constructor that accepts Model_Billing
         public Venue_User_Control(Model_Billing billingDetails)
@@ -24,6 +26,27 @@ namespace pgso.pgso_Billing
             _billingDetails = billingDetails; // ✅ Store for later use
             LoadBillingDetails(billingDetails); // Populate the fields on creation
         }
+        private void newbtn_Extend_Venue_Click(object sender, EventArgs e)
+        {
+            if (_billingDetails != null)
+            {
+                string reservationStatus = _billingDetails.fld_Reservation_Status;
+
+                // Check if the reservation is not "Confirmed"
+                if (reservationStatus == "Cancelled" || reservationStatus == "Pending")
+                {
+                    MessageBox.Show("Only Confirmed reservations can be extended.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                OnRequestVenueExtension?.Invoke(_billingDetails.pk_ReservationID, reservationStatus); // Optionally pass status
+            }
+            else
+            {
+                MessageBox.Show("Reservation details are missing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
 
         private void btn_Change_Reservation_info_Click(object sender, EventArgs e)

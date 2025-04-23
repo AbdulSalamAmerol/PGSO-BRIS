@@ -14,6 +14,9 @@ namespace pgso.pgso_Billing.Forms
 {
     public partial class frm_Edit_Venue_Reservation_Info : Form
     {
+        private TimeSpan _initialStartTime;
+        private TimeSpan _initialEndTime;
+        private TimeSpan _initialDuration;
         // Use the specific reservation ID passed in
         private int _reservationID;
         private Model_Billing _originalBillingInfo; // Store original details
@@ -104,6 +107,13 @@ namespace pgso.pgso_Billing.Forms
             {
                 Model_Billing details = _repo.GetReservationDetails(_reservationID);
 
+                 if (details.fld_Reservation_Status == "Confirmed")
+            {
+                cmb_Venue.Enabled = false;
+                cmb_Venue_Scope.Enabled = false;
+                cb_Aircon.Enabled = false;
+            }
+
                 if (details != null)
                 {
                     _originalBillingInfo = details; // Store the fetched details
@@ -114,6 +124,10 @@ namespace pgso.pgso_Billing.Forms
                     DateTime baseDate = DateTime.Today; // Use a fixed date for time part
                     dtp_Start_Time.Value = baseDate.Date + details.fld_Start_Time;
                     dtp_End_Time.Value = baseDate.Date + details.fld_End_Time;
+                    // Get the time parts - confirmed reservation check
+                    _initialStartTime = dtp_Start_Time.Value.TimeOfDay;
+                    _initialEndTime = dtp_End_Time.Value.TimeOfDay;
+                    _initialDuration = _initialEndTime - _initialStartTime;
 
                     // Set Venue
                     if (cmb_Venue.DataSource != null && details.fk_VenueID.HasValue)
@@ -160,14 +174,15 @@ namespace pgso.pgso_Billing.Forms
         // --- EVENT HANDLER for Venue Change ---
         private void cmb_Venue_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             int? selectedVenueId = null;
             if (cmb_Venue.SelectedValue is int venueId) // Safer check
             {
                 selectedVenueId = venueId;
             }
-
-            // Reload scopes based on the selected venue
-            LoadVenueScopeDropdown(selectedVenueId);
+           
+                // Reload scopes based on the selected venue
+                LoadVenueScopeDropdown(selectedVenueId);
 
             // Update Aircon visibility (might hide if no scopes or no AC options)
             UpdateAirconCheckboxVisibility();
@@ -261,6 +276,7 @@ namespace pgso.pgso_Billing.Forms
             DateTime endDate = dtp_End_Date.Value.Date;
             TimeSpan startTime = dtp_Start_Time.Value.TimeOfDay;
             TimeSpan endTime = dtp_End_Time.Value.TimeOfDay;
+            TimeSpan newDuration = endTime - startTime;
             int venueId = (int)cmb_Venue.SelectedValue;
             int venueScopeId = (int)cmb_Venue_Scope.SelectedValue;
             // Aircon status depends on checkbox visibility and state
@@ -269,7 +285,17 @@ namespace pgso.pgso_Billing.Forms
             DateTime selectedDate = dtp_Start_Date.Value.Date;
             int selectedVenueId = (int)cmb_Venue.SelectedValue;
 
-            try
+            if (_originalBillingInfo.fld_Reservation_Status == "Confirmed")
+            {
+                if (newDuration != _initialDuration)
+                {
+                    MessageBox.Show("Cannot change the total number of hours.",
+                                    "Time Change Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    dtp_Start_Date.Focus();
+                    return;
+                }
+            }
+                try
             {
                 bool isVenueReserved = _repo.IsVenueReservedOnDate(selectedVenueId, selectedDate, _reservationID); // Pass current ID to exclude it
 
@@ -310,7 +336,8 @@ namespace pgso.pgso_Billing.Forms
                     pricing = _repo.GetVenuePricingDetails(venueId, venueScopeId, false, rateType); // Look for PGNV non-AC record
                     if (!pricing.Found)
                     {
-                        finalPricingId = -1;                   
+                        finalPricingId = -1; 
+                                            
                         pricing = new Repo_Billing.VenuePricingResult { Found = true, First4HrsRate = 0, HourlyRate = 0, PricingID = -1 }; // Mock pricing result
                     }
                     else
