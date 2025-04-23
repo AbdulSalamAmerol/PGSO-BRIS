@@ -50,7 +50,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox1.Font = new System.Drawing.Font("Arial", 10F);
@@ -59,14 +59,14 @@
             this.textBox1.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(86, 25);
+            this.textBox1.Size = new System.Drawing.Size(86, 16);
             this.textBox1.TabIndex = 62;
-            this.textBox1.Text = "Aircon";
+            this.textBox1.Text = "AIRCON";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox17
             // 
-            this.textBox17.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox17.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox17.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox17.Font = new System.Drawing.Font("Arial", 10F);
@@ -75,14 +75,14 @@
             this.textBox17.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox17.Name = "textBox17";
             this.textBox17.ReadOnly = true;
-            this.textBox17.Size = new System.Drawing.Size(86, 25);
+            this.textBox17.Size = new System.Drawing.Size(86, 16);
             this.textBox17.TabIndex = 60;
-            this.textBox17.Text = "Area";
+            this.textBox17.Text = "AREA";
             this.textBox17.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox14
             // 
-            this.textBox14.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox14.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox14.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox14.Font = new System.Drawing.Font("Arial", 10F);
@@ -91,14 +91,14 @@
             this.textBox14.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox14.Name = "textBox14";
             this.textBox14.ReadOnly = true;
-            this.textBox14.Size = new System.Drawing.Size(86, 25);
+            this.textBox14.Size = new System.Drawing.Size(86, 16);
             this.textBox14.TabIndex = 58;
-            this.textBox14.Text = "Venue";
+            this.textBox14.Text = "VENUE";
             this.textBox14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox10
             // 
-            this.textBox10.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox10.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox10.Font = new System.Drawing.Font("Arial", 10F);
@@ -107,14 +107,14 @@
             this.textBox10.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox10.Name = "textBox10";
             this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(86, 25);
+            this.textBox10.Size = new System.Drawing.Size(86, 16);
             this.textBox10.TabIndex = 49;
-            this.textBox10.Text = "Start Time";
+            this.textBox10.Text = "START TIME";
             this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox9
             // 
-            this.textBox9.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox9.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox9.Font = new System.Drawing.Font("Arial", 10F);
@@ -125,7 +125,7 @@
             this.textBox9.ReadOnly = true;
             this.textBox9.Size = new System.Drawing.Size(86, 16);
             this.textBox9.TabIndex = 48;
-            this.textBox9.Text = "Start Date";
+            this.textBox9.Text = "START DATE";
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // dtp_Start_Date
@@ -139,6 +139,7 @@
             // 
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -147,7 +148,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox3.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox3.Font = new System.Drawing.Font("Arial", 10F);
@@ -156,9 +157,9 @@
             this.textBox3.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(86, 25);
+            this.textBox3.Size = new System.Drawing.Size(86, 16);
             this.textBox3.TabIndex = 68;
-            this.textBox3.Text = "End Time";
+            this.textBox3.Text = "END TIME";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // dtp_Start_Time
@@ -179,6 +180,7 @@
             // 
             // cmb_Venue
             // 
+            this.cmb_Venue.BackColor = System.Drawing.SystemColors.Window;
             this.cmb_Venue.FormattingEnabled = true;
             this.cmb_Venue.Location = new System.Drawing.Point(149, 187);
             this.cmb_Venue.Name = "cmb_Venue";
@@ -188,6 +190,7 @@
             // 
             // cmb_Venue_Scope
             // 
+            this.cmb_Venue_Scope.BackColor = System.Drawing.SystemColors.Window;
             this.cmb_Venue_Scope.FormattingEnabled = true;
             this.cmb_Venue_Scope.Location = new System.Drawing.Point(149, 215);
             this.cmb_Venue_Scope.Name = "cmb_Venue_Scope";
@@ -207,22 +210,26 @@
             // 
             // btn_Save
             // 
+            this.btn_Save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Save.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Save.Location = new System.Drawing.Point(205, 260);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(78, 37);
             this.btn_Save.TabIndex = 74;
-            this.btn_Save.Text = "Save";
-            this.btn_Save.UseVisualStyleBackColor = true;
+            this.btn_Save.Text = "SAVE";
+            this.btn_Save.UseVisualStyleBackColor = false;
             this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
             // btn_Cancel
             // 
+            this.btn_Cancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Cancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Cancel.Location = new System.Drawing.Point(300, 260);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(78, 37);
             this.btn_Cancel.TabIndex = 75;
-            this.btn_Cancel.Text = "Cancel";
-            this.btn_Cancel.UseVisualStyleBackColor = true;
+            this.btn_Cancel.Text = "CANCEL";
+            this.btn_Cancel.UseVisualStyleBackColor = false;
             this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
             // 
             // dtp_End_Date
@@ -234,7 +241,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox2.Font = new System.Drawing.Font("Arial", 10F);
@@ -243,15 +250,16 @@
             this.textBox2.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(86, 25);
+            this.textBox2.Size = new System.Drawing.Size(86, 16);
             this.textBox2.TabIndex = 65;
-            this.textBox2.Text = "End Date";
+            this.textBox2.Text = "END DATE";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // frm_Edit_Venue_Reservation_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.ClientSize = new System.Drawing.Size(392, 309);
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_Save);

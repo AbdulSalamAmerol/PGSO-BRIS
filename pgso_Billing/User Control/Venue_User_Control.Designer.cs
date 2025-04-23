@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnl_Billing_Details = new System.Windows.Forms.Panel();
+            this.newbtn_Extend_Venue = new System.Windows.Forms.Button();
             this.btn_Change_Reservation_info = new System.Windows.Forms.Button();
             this.lbl_Is_Aircon = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -37,7 +38,6 @@
             this.textBox37 = new System.Windows.Forms.TextBox();
             this.textBox30 = new System.Windows.Forms.TextBox();
             this.textBox25 = new System.Windows.Forms.TextBox();
-            this.textBox24 = new System.Windows.Forms.TextBox();
             this.textBox23 = new System.Windows.Forms.TextBox();
             this.textBox22 = new System.Windows.Forms.TextBox();
             this.textBox21 = new System.Windows.Forms.TextBox();
@@ -108,7 +108,6 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.newbtn_Extend_Venue = new System.Windows.Forms.Button();
             this.pnl_Billing_Details.SuspendLayout();
             this.panel5.SuspendLayout();
             this.SuspendLayout();
@@ -155,43 +154,59 @@
             this.pnl_Billing_Details.Controls.Add(this.textBox3);
             this.pnl_Billing_Details.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_Billing_Details.Location = new System.Drawing.Point(0, 0);
-            this.pnl_Billing_Details.MaximumSize = new System.Drawing.Size(810, 700);
-            this.pnl_Billing_Details.MinimumSize = new System.Drawing.Size(810, 700);
             this.pnl_Billing_Details.Name = "pnl_Billing_Details";
-            this.pnl_Billing_Details.Size = new System.Drawing.Size(810, 700);
+            this.pnl_Billing_Details.Size = new System.Drawing.Size(700, 700);
             this.pnl_Billing_Details.TabIndex = 7;
+            // 
+            // newbtn_Extend_Venue
+            // 
+            this.newbtn_Extend_Venue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.newbtn_Extend_Venue.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.newbtn_Extend_Venue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newbtn_Extend_Venue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.newbtn_Extend_Venue.Location = new System.Drawing.Point(616, 46);
+            this.newbtn_Extend_Venue.Name = "newbtn_Extend_Venue";
+            this.newbtn_Extend_Venue.Size = new System.Drawing.Size(80, 29);
+            this.newbtn_Extend_Venue.TabIndex = 49;
+            this.newbtn_Extend_Venue.Text = "OVERTIME";
+            this.newbtn_Extend_Venue.UseVisualStyleBackColor = false;
+            this.newbtn_Extend_Venue.Click += new System.EventHandler(this.newbtn_Extend_Venue_Click);
             // 
             // btn_Change_Reservation_info
             // 
-            this.btn_Change_Reservation_info.Location = new System.Drawing.Point(666, 48);
+            this.btn_Change_Reservation_info.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Change_Reservation_info.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Change_Reservation_info.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Change_Reservation_info.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.btn_Change_Reservation_info.Location = new System.Drawing.Point(549, 46);
             this.btn_Change_Reservation_info.Name = "btn_Change_Reservation_info";
-            this.btn_Change_Reservation_info.Size = new System.Drawing.Size(61, 24);
+            this.btn_Change_Reservation_info.Size = new System.Drawing.Size(61, 29);
             this.btn_Change_Reservation_info.TabIndex = 48;
-            this.btn_Change_Reservation_info.Text = "Edit";
-            this.btn_Change_Reservation_info.UseVisualStyleBackColor = true;
+            this.btn_Change_Reservation_info.Text = "EDIT";
+            this.btn_Change_Reservation_info.UseVisualStyleBackColor = false;
             this.btn_Change_Reservation_info.Click += new System.EventHandler(this.btn_Change_Reservation_info_Click);
             // 
             // lbl_Is_Aircon
             // 
-            this.lbl_Is_Aircon.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Is_Aircon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Is_Aircon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Is_Aircon.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Is_Aircon.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Is_Aircon.Location = new System.Drawing.Point(547, 288);
+            this.lbl_Is_Aircon.Location = new System.Drawing.Point(491, 284);
             this.lbl_Is_Aircon.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Is_Aircon.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Is_Aircon.Name = "lbl_Is_Aircon";
             this.lbl_Is_Aircon.ReadOnly = true;
-            this.lbl_Is_Aircon.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Is_Aircon.Size = new System.Drawing.Size(200, 23);
             this.lbl_Is_Aircon.TabIndex = 47;
             // 
             // textBox1
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox1.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox1.Location = new System.Drawing.Point(401, 287);
+            this.textBox1.Location = new System.Drawing.Point(345, 283);
             this.textBox1.Margin = new System.Windows.Forms.Padding(0);
             this.textBox1.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox1.Name = "textBox1";
@@ -203,25 +218,24 @@
             // 
             // textBox38
             // 
-            this.textBox38.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox38.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox38.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox38.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox38.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox38.Location = new System.Drawing.Point(4, 75);
+            this.textBox38.Font = new System.Drawing.Font("Arial", 5F);
+            this.textBox38.Location = new System.Drawing.Point(-14, 78);
             this.textBox38.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox38.MinimumSize = new System.Drawing.Size(2, 21);
             this.textBox38.Name = "textBox38";
             this.textBox38.ReadOnly = true;
-            this.textBox38.Size = new System.Drawing.Size(792, 23);
+            this.textBox38.Size = new System.Drawing.Size(725, 15);
             this.textBox38.TabIndex = 45;
             // 
             // panel5
             // 
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.textBox37);
             this.panel5.Controls.Add(this.textBox30);
             this.panel5.Controls.Add(this.textBox25);
-            this.panel5.Controls.Add(this.textBox24);
             this.panel5.Controls.Add(this.textBox23);
             this.panel5.Controls.Add(this.textBox22);
             this.panel5.Controls.Add(this.textBox21);
@@ -261,20 +275,18 @@
             this.panel5.Controls.Add(this.lbl_Additional_Hourly_Charge);
             this.panel5.Controls.Add(this.textBox44);
             this.panel5.Controls.Add(this.lbl_Venue_Scope_Transact);
-            this.panel5.Location = new System.Drawing.Point(9, 318);
-            this.panel5.MaximumSize = new System.Drawing.Size(790, 353);
-            this.panel5.MinimumSize = new System.Drawing.Size(790, 353);
+            this.panel5.Location = new System.Drawing.Point(5, 317);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(790, 353);
+            this.panel5.Size = new System.Drawing.Size(687, 367);
             this.panel5.TabIndex = 44;
             // 
             // textBox37
             // 
-            this.textBox37.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox37.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox37.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox37.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox37.Location = new System.Drawing.Point(9, 215);
+            this.textBox37.Location = new System.Drawing.Point(9, 227);
             this.textBox37.Margin = new System.Windows.Forms.Padding(0);
             this.textBox37.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox37.Multiline = true;
@@ -286,11 +298,11 @@
             // 
             // textBox30
             // 
-            this.textBox30.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox30.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox30.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox30.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox30.Location = new System.Drawing.Point(9, 190);
+            this.textBox30.Location = new System.Drawing.Point(9, 202);
             this.textBox30.Margin = new System.Windows.Forms.Padding(0);
             this.textBox30.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox30.Multiline = true;
@@ -302,11 +314,11 @@
             // 
             // textBox25
             // 
-            this.textBox25.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox25.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox25.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox25.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox25.Location = new System.Drawing.Point(9, 165);
+            this.textBox25.Location = new System.Drawing.Point(9, 177);
             this.textBox25.Margin = new System.Windows.Forms.Padding(0);
             this.textBox25.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox25.Multiline = true;
@@ -316,30 +328,13 @@
             this.textBox25.TabIndex = 75;
             this.textBox25.Text = ".";
             // 
-            // textBox24
-            // 
-            this.textBox24.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox24.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox24.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox24.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox24.Location = new System.Drawing.Point(125, 240);
-            this.textBox24.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox24.MinimumSize = new System.Drawing.Size(20, 25);
-            this.textBox24.Multiline = true;
-            this.textBox24.Name = "textBox24";
-            this.textBox24.ReadOnly = true;
-            this.textBox24.Size = new System.Drawing.Size(126, 25);
-            this.textBox24.TabIndex = 74;
-            this.textBox24.Text = ".";
-            this.textBox24.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // textBox23
             // 
-            this.textBox23.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox23.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox23.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox23.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox23.Location = new System.Drawing.Point(540, 117);
+            this.textBox23.Location = new System.Drawing.Point(570, 129);
             this.textBox23.Margin = new System.Windows.Forms.Padding(0);
             this.textBox23.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox23.Multiline = true;
@@ -352,11 +347,11 @@
             // 
             // textBox22
             // 
-            this.textBox22.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox22.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox22.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox22.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox22.Location = new System.Drawing.Point(540, 65);
+            this.textBox22.Location = new System.Drawing.Point(570, 77);
             this.textBox22.Margin = new System.Windows.Forms.Padding(0);
             this.textBox22.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox22.Multiline = true;
@@ -369,11 +364,11 @@
             // 
             // textBox21
             // 
-            this.textBox21.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox21.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox21.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox21.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox21.Location = new System.Drawing.Point(9, 115);
+            this.textBox21.Location = new System.Drawing.Point(9, 127);
             this.textBox21.Margin = new System.Windows.Forms.Padding(0);
             this.textBox21.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox21.Multiline = true;
@@ -385,11 +380,11 @@
             // 
             // textBox18
             // 
-            this.textBox18.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox18.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox18.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox18.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox18.Location = new System.Drawing.Point(9, 65);
+            this.textBox18.Location = new System.Drawing.Point(9, 77);
             this.textBox18.Margin = new System.Windows.Forms.Padding(0);
             this.textBox18.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox18.Multiline = true;
@@ -401,11 +396,11 @@
             // 
             // lbl_Paid_Amount_2
             // 
-            this.lbl_Paid_Amount_2.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Paid_Amount_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Paid_Amount_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Paid_Amount_2.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Paid_Amount_2.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Paid_Amount_2.Location = new System.Drawing.Point(540, 263);
+            this.lbl_Paid_Amount_2.Location = new System.Drawing.Point(570, 275);
             this.lbl_Paid_Amount_2.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Paid_Amount_2.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Paid_Amount_2.Name = "lbl_Paid_Amount_2";
@@ -417,11 +412,11 @@
             // 
             // textBox20
             // 
-            this.textBox20.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox20.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox20.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox20.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox20.Location = new System.Drawing.Point(427, 263);
+            this.textBox20.Location = new System.Drawing.Point(449, 275);
             this.textBox20.Margin = new System.Windows.Forms.Padding(0);
             this.textBox20.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox20.Name = "textBox20";
@@ -433,11 +428,11 @@
             // 
             // lbl_Final_Amount_Paid
             // 
-            this.lbl_Final_Amount_Paid.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Final_Amount_Paid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Final_Amount_Paid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Final_Amount_Paid.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Final_Amount_Paid.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Final_Amount_Paid.Location = new System.Drawing.Point(540, 313);
+            this.lbl_Final_Amount_Paid.Location = new System.Drawing.Point(570, 325);
             this.lbl_Final_Amount_Paid.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Final_Amount_Paid.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Final_Amount_Paid.Name = "lbl_Final_Amount_Paid";
@@ -449,27 +444,27 @@
             // 
             // lbl_OT_Hours
             // 
-            this.lbl_OT_Hours.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_OT_Hours.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_OT_Hours.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_OT_Hours.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_OT_Hours.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_OT_Hours.Location = new System.Drawing.Point(330, 240);
+            this.lbl_OT_Hours.Location = new System.Drawing.Point(347, 252);
             this.lbl_OT_Hours.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_OT_Hours.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_OT_Hours.Name = "lbl_OT_Hours";
             this.lbl_OT_Hours.ReadOnly = true;
-            this.lbl_OT_Hours.Size = new System.Drawing.Size(97, 16);
+            this.lbl_OT_Hours.Size = new System.Drawing.Size(60, 16);
             this.lbl_OT_Hours.TabIndex = 59;
-            this.lbl_OT_Hours.Text = "Description";
+            this.lbl_OT_Hours.Text = "0";
             this.lbl_OT_Hours.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox19
             // 
-            this.textBox19.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox19.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox19.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox19.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox19.Location = new System.Drawing.Point(427, 313);
+            this.textBox19.Location = new System.Drawing.Point(449, 325);
             this.textBox19.Margin = new System.Windows.Forms.Padding(0);
             this.textBox19.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox19.Name = "textBox19";
@@ -481,11 +476,11 @@
             // 
             // lbl_Overtime_Fee
             // 
-            this.lbl_Overtime_Fee.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Overtime_Fee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Overtime_Fee.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Overtime_Fee.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Overtime_Fee.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Overtime_Fee.Location = new System.Drawing.Point(540, 240);
+            this.lbl_Overtime_Fee.Location = new System.Drawing.Point(570, 252);
             this.lbl_Overtime_Fee.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Overtime_Fee.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Overtime_Fee.Name = "lbl_Overtime_Fee";
@@ -497,11 +492,11 @@
             // 
             // lbl_Base_Charge_Amount
             // 
-            this.lbl_Base_Charge_Amount.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Base_Charge_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Base_Charge_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Base_Charge_Amount.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Base_Charge_Amount.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Base_Charge_Amount.Location = new System.Drawing.Point(540, 42);
+            this.lbl_Base_Charge_Amount.Location = new System.Drawing.Point(570, 54);
             this.lbl_Base_Charge_Amount.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Base_Charge_Amount.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Base_Charge_Amount.Name = "lbl_Base_Charge_Amount";
@@ -513,11 +508,11 @@
             // 
             // lbl_Refund_Amount
             // 
-            this.lbl_Refund_Amount.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Refund_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Refund_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Refund_Amount.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Refund_Amount.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Refund_Amount.Location = new System.Drawing.Point(540, 288);
+            this.lbl_Refund_Amount.Location = new System.Drawing.Point(570, 300);
             this.lbl_Refund_Amount.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Refund_Amount.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Refund_Amount.Name = "lbl_Refund_Amount";
@@ -529,11 +524,11 @@
             // 
             // textBox32
             // 
-            this.textBox32.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox32.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox32.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox32.Font = new System.Drawing.Font("Arial", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox32.Location = new System.Drawing.Point(9, 9);
+            this.textBox32.Location = new System.Drawing.Point(9, 21);
             this.textBox32.Margin = new System.Windows.Forms.Padding(0);
             this.textBox32.MinimumSize = new System.Drawing.Size(0, 25);
             this.textBox32.Name = "textBox32";
@@ -544,11 +539,11 @@
             // 
             // textBox16
             // 
-            this.textBox16.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox16.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox16.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox16.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox16.Location = new System.Drawing.Point(427, 288);
+            this.textBox16.Location = new System.Drawing.Point(449, 300);
             this.textBox16.Margin = new System.Windows.Forms.Padding(0);
             this.textBox16.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox16.Name = "textBox16";
@@ -560,11 +555,11 @@
             // 
             // lbl_OT_Hourly_Charge
             // 
-            this.lbl_OT_Hourly_Charge.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_OT_Hourly_Charge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_OT_Hourly_Charge.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_OT_Hourly_Charge.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_OT_Hourly_Charge.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_OT_Hourly_Charge.Location = new System.Drawing.Point(427, 240);
+            this.lbl_OT_Hourly_Charge.Location = new System.Drawing.Point(449, 252);
             this.lbl_OT_Hourly_Charge.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_OT_Hourly_Charge.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_OT_Hourly_Charge.Name = "lbl_OT_Hourly_Charge";
@@ -576,11 +571,11 @@
             // 
             // lbl_Balance
             // 
-            this.lbl_Balance.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Balance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Balance.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Balance.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Balance.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Balance.Location = new System.Drawing.Point(540, 215);
+            this.lbl_Balance.Location = new System.Drawing.Point(570, 227);
             this.lbl_Balance.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Balance.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Balance.Name = "lbl_Balance";
@@ -592,11 +587,11 @@
             // 
             // textBox29
             // 
-            this.textBox29.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox29.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox29.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox29.Font = new System.Drawing.Font("Arial", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox29.Location = new System.Drawing.Point(427, 9);
+            this.textBox29.Location = new System.Drawing.Point(449, 21);
             this.textBox29.Margin = new System.Windows.Forms.Padding(0);
             this.textBox29.MinimumSize = new System.Drawing.Size(0, 25);
             this.textBox29.Name = "textBox29";
@@ -604,15 +599,15 @@
             this.textBox29.Size = new System.Drawing.Size(113, 16);
             this.textBox29.TabIndex = 38;
             this.textBox29.Text = "Hourly Charge";
-            this.textBox29.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox29.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox58
             // 
-            this.textBox58.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox58.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox58.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox58.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox58.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox58.Location = new System.Drawing.Point(427, 215);
+            this.textBox58.Location = new System.Drawing.Point(449, 227);
             this.textBox58.Margin = new System.Windows.Forms.Padding(0);
             this.textBox58.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox58.Name = "textBox58";
@@ -624,26 +619,27 @@
             // 
             // textBox33
             // 
-            this.textBox33.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox33.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox33.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox33.Font = new System.Drawing.Font("Arial", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox33.Location = new System.Drawing.Point(347, 9);
+            this.textBox33.Location = new System.Drawing.Point(347, 21);
             this.textBox33.Margin = new System.Windows.Forms.Padding(0);
             this.textBox33.MinimumSize = new System.Drawing.Size(0, 25);
             this.textBox33.Name = "textBox33";
             this.textBox33.ReadOnly = true;
-            this.textBox33.Size = new System.Drawing.Size(62, 16);
+            this.textBox33.Size = new System.Drawing.Size(60, 16);
             this.textBox33.TabIndex = 45;
             this.textBox33.Text = "No. Hrs";
+            this.textBox33.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_Paid_Amount
             // 
-            this.lbl_Paid_Amount.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Paid_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Paid_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Paid_Amount.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Paid_Amount.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Paid_Amount.Location = new System.Drawing.Point(540, 190);
+            this.lbl_Paid_Amount.Location = new System.Drawing.Point(570, 202);
             this.lbl_Paid_Amount.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Paid_Amount.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Paid_Amount.Name = "lbl_Paid_Amount";
@@ -655,26 +651,25 @@
             // 
             // textBox63
             // 
-            this.textBox63.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox63.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox63.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox63.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox63.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox63.Location = new System.Drawing.Point(9, 240);
+            this.textBox63.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox63.Location = new System.Drawing.Point(9, 252);
             this.textBox63.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox63.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox63.Name = "textBox63";
             this.textBox63.ReadOnly = true;
-            this.textBox63.Size = new System.Drawing.Size(119, 15);
+            this.textBox63.Size = new System.Drawing.Size(119, 16);
             this.textBox63.TabIndex = 36;
             this.textBox63.Text = "Overtime Charge";
             // 
             // lbl_Additional_Charge
             // 
-            this.lbl_Additional_Charge.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Additional_Charge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Additional_Charge.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Additional_Charge.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Additional_Charge.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Additional_Charge.Location = new System.Drawing.Point(540, 142);
+            this.lbl_Additional_Charge.Location = new System.Drawing.Point(570, 154);
             this.lbl_Additional_Charge.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Additional_Charge.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Additional_Charge.Name = "lbl_Additional_Charge";
@@ -686,11 +681,11 @@
             // 
             // textBox55
             // 
-            this.textBox55.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox55.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox55.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox55.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox55.Location = new System.Drawing.Point(427, 190);
+            this.textBox55.Location = new System.Drawing.Point(449, 202);
             this.textBox55.Margin = new System.Windows.Forms.Padding(0);
             this.textBox55.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox55.Name = "textBox55";
@@ -702,11 +697,11 @@
             // 
             // lbl_Total_Amount
             // 
-            this.lbl_Total_Amount.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Total_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Total_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Total_Amount.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Total_Amount.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Total_Amount.Location = new System.Drawing.Point(540, 165);
+            this.lbl_Total_Amount.Location = new System.Drawing.Point(570, 177);
             this.lbl_Total_Amount.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Total_Amount.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Total_Amount.Name = "lbl_Total_Amount";
@@ -718,11 +713,11 @@
             // 
             // textBox46
             // 
-            this.textBox46.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox46.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox46.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox46.Font = new System.Drawing.Font("Arial", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox46.Location = new System.Drawing.Point(540, 9);
+            this.textBox46.Location = new System.Drawing.Point(570, 21);
             this.textBox46.Margin = new System.Windows.Forms.Padding(0);
             this.textBox46.MinimumSize = new System.Drawing.Size(0, 25);
             this.textBox46.Name = "textBox46";
@@ -734,11 +729,11 @@
             // 
             // textBox51
             // 
-            this.textBox51.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox51.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox51.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox51.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox51.Location = new System.Drawing.Point(427, 165);
+            this.textBox51.Location = new System.Drawing.Point(449, 177);
             this.textBox51.Margin = new System.Windows.Forms.Padding(0);
             this.textBox51.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox51.Name = "textBox51";
@@ -750,11 +745,11 @@
             // 
             // textBox28
             // 
-            this.textBox28.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox28.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox28.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox28.Font = new System.Drawing.Font("Arial", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox28.Location = new System.Drawing.Point(148, 9);
+            this.textBox28.Location = new System.Drawing.Point(175, 21);
             this.textBox28.Margin = new System.Windows.Forms.Padding(0);
             this.textBox28.MinimumSize = new System.Drawing.Size(0, 19);
             this.textBox28.Name = "textBox28";
@@ -765,11 +760,11 @@
             // 
             // lbl_Additional_Hours_Amount
             // 
-            this.lbl_Additional_Hours_Amount.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Additional_Hours_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Additional_Hours_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Additional_Hours_Amount.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Additional_Hours_Amount.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Additional_Hours_Amount.Location = new System.Drawing.Point(540, 90);
+            this.lbl_Additional_Hours_Amount.Location = new System.Drawing.Point(570, 102);
             this.lbl_Additional_Hours_Amount.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Additional_Hours_Amount.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Additional_Hours_Amount.Name = "lbl_Additional_Hours_Amount";
@@ -781,42 +776,42 @@
             // 
             // lbl_Venue_Name_Transact
             // 
-            this.lbl_Venue_Name_Transact.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Venue_Name_Transact.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Venue_Name_Transact.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Venue_Name_Transact.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Venue_Name_Transact.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Venue_Name_Transact.Location = new System.Drawing.Point(129, 44);
+            this.lbl_Venue_Name_Transact.Location = new System.Drawing.Point(175, 56);
             this.lbl_Venue_Name_Transact.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Venue_Name_Transact.MinimumSize = new System.Drawing.Size(2, 15);
             this.lbl_Venue_Name_Transact.Name = "lbl_Venue_Name_Transact";
             this.lbl_Venue_Name_Transact.ReadOnly = true;
             this.lbl_Venue_Name_Transact.Size = new System.Drawing.Size(122, 13);
             this.lbl_Venue_Name_Transact.TabIndex = 52;
-            this.lbl_Venue_Name_Transact.Text = "Description";
+            this.lbl_Venue_Name_Transact.Text = "....";
             // 
             // textBox34
             // 
-            this.textBox34.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox34.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox34.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox34.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox34.Location = new System.Drawing.Point(347, 42);
+            this.textBox34.Location = new System.Drawing.Point(347, 54);
             this.textBox34.Margin = new System.Windows.Forms.Padding(0);
             this.textBox34.MinimumSize = new System.Drawing.Size(0, 25);
             this.textBox34.Name = "textBox34";
             this.textBox34.ReadOnly = true;
-            this.textBox34.Size = new System.Drawing.Size(53, 16);
+            this.textBox34.Size = new System.Drawing.Size(60, 16);
             this.textBox34.TabIndex = 46;
             this.textBox34.Text = "4";
             this.textBox34.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox45
             // 
-            this.textBox45.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox45.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox45.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox45.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox45.Location = new System.Drawing.Point(128, 142);
+            this.textBox45.Location = new System.Drawing.Point(175, 154);
             this.textBox45.Margin = new System.Windows.Forms.Padding(0);
             this.textBox45.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox45.Multiline = true;
@@ -828,11 +823,11 @@
             // 
             // textBox27
             // 
-            this.textBox27.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox27.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox27.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox27.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox27.Location = new System.Drawing.Point(9, 42);
+            this.textBox27.Location = new System.Drawing.Point(9, 54);
             this.textBox27.Margin = new System.Windows.Forms.Padding(0);
             this.textBox27.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox27.Name = "textBox27";
@@ -858,27 +853,27 @@
             // 
             // textBox43
             // 
-            this.textBox43.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox43.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox43.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox43.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox43.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox43.Location = new System.Drawing.Point(127, 92);
+            this.textBox43.Location = new System.Drawing.Point(173, 102);
             this.textBox43.Margin = new System.Windows.Forms.Padding(0);
             this.textBox43.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox43.Multiline = true;
             this.textBox43.Name = "textBox43";
             this.textBox43.ReadOnly = true;
-            this.textBox43.Size = new System.Drawing.Size(124, 50);
+            this.textBox43.Size = new System.Drawing.Size(124, 43);
             this.textBox43.TabIndex = 54;
             this.textBox43.Text = "Each Succeeding Hour After 4 hours";
             // 
             // textBox31
             // 
-            this.textBox31.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox31.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox31.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox31.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox31.Location = new System.Drawing.Point(9, 90);
+            this.textBox31.Location = new System.Drawing.Point(9, 102);
             this.textBox31.Margin = new System.Windows.Forms.Padding(0);
             this.textBox31.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox31.Name = "textBox31";
@@ -889,27 +884,27 @@
             // 
             // lbl_Total_Hour
             // 
-            this.lbl_Total_Hour.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Total_Hour.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Total_Hour.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Total_Hour.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Total_Hour.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Total_Hour.Location = new System.Drawing.Point(330, 92);
+            this.lbl_Total_Hour.Location = new System.Drawing.Point(347, 102);
             this.lbl_Total_Hour.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Total_Hour.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Total_Hour.Name = "lbl_Total_Hour";
             this.lbl_Total_Hour.ReadOnly = true;
-            this.lbl_Total_Hour.Size = new System.Drawing.Size(97, 16);
+            this.lbl_Total_Hour.Size = new System.Drawing.Size(60, 16);
             this.lbl_Total_Hour.TabIndex = 47;
-            this.lbl_Total_Hour.Text = "Description";
+            this.lbl_Total_Hour.Text = "0";
             this.lbl_Total_Hour.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_Additional_Hourly_Charge
             // 
-            this.lbl_Additional_Hourly_Charge.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Additional_Hourly_Charge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Additional_Hourly_Charge.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Additional_Hourly_Charge.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Additional_Hourly_Charge.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Additional_Hourly_Charge.Location = new System.Drawing.Point(427, 92);
+            this.lbl_Additional_Hourly_Charge.Location = new System.Drawing.Point(449, 102);
             this.lbl_Additional_Hourly_Charge.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Additional_Hourly_Charge.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Additional_Hourly_Charge.Name = "lbl_Additional_Hourly_Charge";
@@ -917,15 +912,15 @@
             this.lbl_Additional_Hourly_Charge.Size = new System.Drawing.Size(113, 16);
             this.lbl_Additional_Hourly_Charge.TabIndex = 49;
             this.lbl_Additional_Hourly_Charge.Text = "Description";
-            this.lbl_Additional_Hourly_Charge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lbl_Additional_Hourly_Charge.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox44
             // 
-            this.textBox44.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox44.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox44.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox44.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox44.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox44.Location = new System.Drawing.Point(9, 140);
+            this.textBox44.Location = new System.Drawing.Point(9, 152);
             this.textBox44.Margin = new System.Windows.Forms.Padding(0);
             this.textBox44.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox44.Name = "textBox44";
@@ -936,41 +931,41 @@
             // 
             // lbl_Venue_Scope_Transact
             // 
-            this.lbl_Venue_Scope_Transact.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Venue_Scope_Transact.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Venue_Scope_Transact.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Venue_Scope_Transact.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Venue_Scope_Transact.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Venue_Scope_Transact.Location = new System.Drawing.Point(127, 64);
+            this.lbl_Venue_Scope_Transact.Location = new System.Drawing.Point(175, 77);
             this.lbl_Venue_Scope_Transact.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Venue_Scope_Transact.MinimumSize = new System.Drawing.Size(2, 15);
             this.lbl_Venue_Scope_Transact.Name = "lbl_Venue_Scope_Transact";
             this.lbl_Venue_Scope_Transact.ReadOnly = true;
             this.lbl_Venue_Scope_Transact.Size = new System.Drawing.Size(123, 13);
             this.lbl_Venue_Scope_Transact.TabIndex = 53;
-            this.lbl_Venue_Scope_Transact.Text = "Main Hall";
+            this.lbl_Venue_Scope_Transact.Text = "....";
             // 
             // lbl_Rate_Type
             // 
-            this.lbl_Rate_Type.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Rate_Type.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.lbl_Rate_Type.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Rate_Type.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Rate_Type.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Rate_Type.Location = new System.Drawing.Point(136, 280);
+            this.lbl_Rate_Type.Location = new System.Drawing.Point(136, 287);
             this.lbl_Rate_Type.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
             this.lbl_Rate_Type.Name = "lbl_Rate_Type";
             this.lbl_Rate_Type.ReadOnly = true;
             this.lbl_Rate_Type.Size = new System.Drawing.Size(87, 20);
             this.lbl_Rate_Type.TabIndex = 35;
-            this.lbl_Rate_Type.Text = "Description";
+            this.lbl_Rate_Type.Text = "...";
             // 
             // textBox35
             // 
-            this.textBox35.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox35.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox35.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox35.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox35.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox35.Location = new System.Drawing.Point(6, 280);
+            this.textBox35.Location = new System.Drawing.Point(6, 287);
             this.textBox35.Margin = new System.Windows.Forms.Padding(0);
             this.textBox35.MinimumSize = new System.Drawing.Size(0, 25);
             this.textBox35.Name = "textBox35";
@@ -981,11 +976,11 @@
             // 
             // textBox36
             // 
-            this.textBox36.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox36.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox36.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox36.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox36.Location = new System.Drawing.Point(4, 248);
+            this.textBox36.Location = new System.Drawing.Point(4, 255);
             this.textBox36.Margin = new System.Windows.Forms.Padding(0);
             this.textBox36.MinimumSize = new System.Drawing.Size(0, 30);
             this.textBox36.Name = "textBox36";
@@ -996,25 +991,25 @@
             // 
             // lbl_Venue_Scope
             // 
-            this.lbl_Venue_Scope.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Venue_Scope.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Venue_Scope.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Venue_Scope.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Venue_Scope.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Venue_Scope.Location = new System.Drawing.Point(547, 262);
+            this.lbl_Venue_Scope.Location = new System.Drawing.Point(491, 258);
             this.lbl_Venue_Scope.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Venue_Scope.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Venue_Scope.Name = "lbl_Venue_Scope";
             this.lbl_Venue_Scope.ReadOnly = true;
-            this.lbl_Venue_Scope.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Venue_Scope.Size = new System.Drawing.Size(200, 23);
             this.lbl_Venue_Scope.TabIndex = 28;
             // 
             // textBox17
             // 
-            this.textBox17.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox17.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox17.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox17.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox17.Location = new System.Drawing.Point(401, 262);
+            this.textBox17.Location = new System.Drawing.Point(345, 258);
             this.textBox17.Margin = new System.Windows.Forms.Padding(0);
             this.textBox17.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox17.Name = "textBox17";
@@ -1026,25 +1021,25 @@
             // 
             // lbl_Venue_Name
             // 
-            this.lbl_Venue_Name.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Venue_Name.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Venue_Name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Venue_Name.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Venue_Name.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Venue_Name.Location = new System.Drawing.Point(547, 235);
+            this.lbl_Venue_Name.Location = new System.Drawing.Point(491, 231);
             this.lbl_Venue_Name.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Venue_Name.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Venue_Name.Name = "lbl_Venue_Name";
             this.lbl_Venue_Name.ReadOnly = true;
-            this.lbl_Venue_Name.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Venue_Name.Size = new System.Drawing.Size(200, 23);
             this.lbl_Venue_Name.TabIndex = 26;
             // 
             // textBox14
             // 
-            this.textBox14.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox14.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox14.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox14.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox14.Location = new System.Drawing.Point(401, 235);
+            this.textBox14.Location = new System.Drawing.Point(345, 231);
             this.textBox14.Margin = new System.Windows.Forms.Padding(0);
             this.textBox14.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox14.Name = "textBox14";
@@ -1056,196 +1051,199 @@
             // 
             // textBox26
             // 
-            this.textBox26.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox26.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox26.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox26.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox26.Location = new System.Drawing.Point(401, 57);
+            this.textBox26.Location = new System.Drawing.Point(353, 57);
             this.textBox26.Margin = new System.Windows.Forms.Padding(0);
             this.textBox26.MinimumSize = new System.Drawing.Size(2, 30);
             this.textBox26.Name = "textBox26";
             this.textBox26.ReadOnly = true;
-            this.textBox26.Size = new System.Drawing.Size(253, 19);
+            this.textBox26.Size = new System.Drawing.Size(180, 19);
             this.textBox26.TabIndex = 24;
-            this.textBox26.Text = "RESERVATION INFORMATION";
+            this.textBox26.Text = "RESERVATION INFO";
             // 
             // lbl_Control_Number
             // 
-            this.lbl_Control_Number.BackColor = System.Drawing.SystemColors.Control;
+            this.lbl_Control_Number.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            this.lbl_Control_Number.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Control_Number.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Control_Number.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Control_Number.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Control_Number.ForeColor = System.Drawing.Color.Red;
-            this.lbl_Control_Number.Location = new System.Drawing.Point(132, 3);
+            this.lbl_Control_Number.Location = new System.Drawing.Point(281, 8);
             this.lbl_Control_Number.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Control_Number.MinimumSize = new System.Drawing.Size(4, 25);
             this.lbl_Control_Number.Name = "lbl_Control_Number";
             this.lbl_Control_Number.ReadOnly = true;
-            this.lbl_Control_Number.Size = new System.Drawing.Size(267, 27);
+            this.lbl_Control_Number.Size = new System.Drawing.Size(196, 31);
             this.lbl_Control_Number.TabIndex = 23;
-            this.lbl_Control_Number.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_Reservation_Status
             // 
-            this.lbl_Reservation_Status.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Reservation_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Reservation_Status.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Reservation_Status.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Reservation_Status.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Reservation_Status.Location = new System.Drawing.Point(547, 208);
+            this.lbl_Reservation_Status.Location = new System.Drawing.Point(491, 204);
             this.lbl_Reservation_Status.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Reservation_Status.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Reservation_Status.Name = "lbl_Reservation_Status";
             this.lbl_Reservation_Status.ReadOnly = true;
-            this.lbl_Reservation_Status.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Reservation_Status.Size = new System.Drawing.Size(200, 23);
             this.lbl_Reservation_Status.TabIndex = 22;
             // 
             // lbl_Number_Of_Participants
             // 
-            this.lbl_Number_Of_Participants.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Number_Of_Participants.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Number_Of_Participants.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Number_Of_Participants.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Number_Of_Participants.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Number_Of_Participants.Location = new System.Drawing.Point(547, 181);
+            this.lbl_Number_Of_Participants.Location = new System.Drawing.Point(491, 177);
             this.lbl_Number_Of_Participants.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Number_Of_Participants.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Number_Of_Participants.Name = "lbl_Number_Of_Participants";
             this.lbl_Number_Of_Participants.ReadOnly = true;
-            this.lbl_Number_Of_Participants.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Number_Of_Participants.Size = new System.Drawing.Size(200, 23);
             this.lbl_Number_Of_Participants.TabIndex = 21;
             // 
             // lbl_Activity_Name
             // 
-            this.lbl_Activity_Name.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Activity_Name.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Activity_Name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Activity_Name.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Activity_Name.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Activity_Name.Location = new System.Drawing.Point(547, 154);
+            this.lbl_Activity_Name.Location = new System.Drawing.Point(491, 150);
             this.lbl_Activity_Name.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Activity_Name.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Activity_Name.Name = "lbl_Activity_Name";
             this.lbl_Activity_Name.ReadOnly = true;
-            this.lbl_Activity_Name.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Activity_Name.Size = new System.Drawing.Size(200, 23);
             this.lbl_Activity_Name.TabIndex = 20;
             // 
             // lbl_Reservation_Time
             // 
-            this.lbl_Reservation_Time.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Reservation_Time.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Reservation_Time.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Reservation_Time.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Reservation_Time.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Reservation_Time.Location = new System.Drawing.Point(547, 127);
+            this.lbl_Reservation_Time.Location = new System.Drawing.Point(491, 123);
             this.lbl_Reservation_Time.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Reservation_Time.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Reservation_Time.Name = "lbl_Reservation_Time";
             this.lbl_Reservation_Time.ReadOnly = true;
-            this.lbl_Reservation_Time.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Reservation_Time.Size = new System.Drawing.Size(200, 23);
             this.lbl_Reservation_Time.TabIndex = 19;
             // 
             // lbl_Reservation_Dates
             // 
-            this.lbl_Reservation_Dates.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Reservation_Dates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Reservation_Dates.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Reservation_Dates.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Reservation_Dates.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Reservation_Dates.Location = new System.Drawing.Point(547, 100);
+            this.lbl_Reservation_Dates.Location = new System.Drawing.Point(491, 96);
             this.lbl_Reservation_Dates.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Reservation_Dates.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Reservation_Dates.Name = "lbl_Reservation_Dates";
             this.lbl_Reservation_Dates.ReadOnly = true;
-            this.lbl_Reservation_Dates.Size = new System.Drawing.Size(249, 23);
+            this.lbl_Reservation_Dates.Size = new System.Drawing.Size(200, 23);
             this.lbl_Reservation_Dates.TabIndex = 18;
             // 
             // lbl_Address
             // 
-            this.lbl_Address.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Address.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Address.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Address.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Address.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Address.Location = new System.Drawing.Point(149, 208);
+            this.lbl_Address.Location = new System.Drawing.Point(132, 204);
             this.lbl_Address.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Address.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Address.Multiline = true;
             this.lbl_Address.Name = "lbl_Address";
             this.lbl_Address.ReadOnly = true;
-            this.lbl_Address.Size = new System.Drawing.Size(250, 23);
+            this.lbl_Address.Size = new System.Drawing.Size(200, 25);
             this.lbl_Address.TabIndex = 17;
             // 
             // lbl_Contact_Number
             // 
-            this.lbl_Contact_Number.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Contact_Number.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Contact_Number.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Contact_Number.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Contact_Number.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Contact_Number.Location = new System.Drawing.Point(149, 181);
+            this.lbl_Contact_Number.Location = new System.Drawing.Point(132, 177);
             this.lbl_Contact_Number.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Contact_Number.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Contact_Number.Name = "lbl_Contact_Number";
             this.lbl_Contact_Number.ReadOnly = true;
-            this.lbl_Contact_Number.Size = new System.Drawing.Size(250, 23);
+            this.lbl_Contact_Number.Size = new System.Drawing.Size(200, 23);
             this.lbl_Contact_Number.TabIndex = 16;
             // 
             // lbl_Origin_Request
             // 
-            this.lbl_Origin_Request.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Origin_Request.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Origin_Request.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Origin_Request.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Origin_Request.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Origin_Request.Location = new System.Drawing.Point(149, 154);
+            this.lbl_Origin_Request.Location = new System.Drawing.Point(132, 150);
             this.lbl_Origin_Request.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Origin_Request.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Origin_Request.Name = "lbl_Origin_Request";
             this.lbl_Origin_Request.ReadOnly = true;
-            this.lbl_Origin_Request.Size = new System.Drawing.Size(250, 23);
+            this.lbl_Origin_Request.Size = new System.Drawing.Size(200, 23);
             this.lbl_Origin_Request.TabIndex = 15;
             // 
             // lbl_Requesting_Office
             // 
-            this.lbl_Requesting_Office.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Requesting_Office.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Requesting_Office.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Requesting_Office.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Requesting_Office.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Requesting_Office.Location = new System.Drawing.Point(149, 127);
+            this.lbl_Requesting_Office.Location = new System.Drawing.Point(132, 123);
             this.lbl_Requesting_Office.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Requesting_Office.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Requesting_Office.Name = "lbl_Requesting_Office";
             this.lbl_Requesting_Office.ReadOnly = true;
-            this.lbl_Requesting_Office.Size = new System.Drawing.Size(250, 23);
+            this.lbl_Requesting_Office.Size = new System.Drawing.Size(200, 23);
             this.lbl_Requesting_Office.TabIndex = 14;
             // 
             // lbl_Requesting_Person
             // 
-            this.lbl_Requesting_Person.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lbl_Requesting_Person.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Requesting_Person.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_Requesting_Person.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Requesting_Person.Font = new System.Drawing.Font("Arial", 10F);
-            this.lbl_Requesting_Person.Location = new System.Drawing.Point(149, 100);
+            this.lbl_Requesting_Person.Location = new System.Drawing.Point(132, 96);
             this.lbl_Requesting_Person.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Requesting_Person.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Requesting_Person.Name = "lbl_Requesting_Person";
             this.lbl_Requesting_Person.ReadOnly = true;
-            this.lbl_Requesting_Person.Size = new System.Drawing.Size(250, 23);
+            this.lbl_Requesting_Person.Size = new System.Drawing.Size(200, 23);
             this.lbl_Requesting_Person.TabIndex = 13;
             // 
             // textBox15
             // 
-            this.textBox15.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            this.textBox15.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox15.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox15.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox15.ForeColor = System.Drawing.Color.Red;
-            this.textBox15.Location = new System.Drawing.Point(2, 3);
+            this.textBox15.Font = new System.Drawing.Font("Arial", 20F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.textBox15.Location = new System.Drawing.Point(4, 8);
             this.textBox15.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox15.MinimumSize = new System.Drawing.Size(4, 25);
+            this.textBox15.MaximumSize = new System.Drawing.Size(200, 27);
+            this.textBox15.MinimumSize = new System.Drawing.Size(270, 27);
             this.textBox15.Name = "textBox15";
             this.textBox15.ReadOnly = true;
-            this.textBox15.Size = new System.Drawing.Size(130, 27);
+            this.textBox15.Size = new System.Drawing.Size(270, 27);
             this.textBox15.TabIndex = 12;
-            this.textBox15.Text = "Control Number";
+            this.textBox15.Text = "CONTROL NUMBER";
             // 
             // textBox13
             // 
-            this.textBox13.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox13.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox13.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox13.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox13.Location = new System.Drawing.Point(401, 208);
+            this.textBox13.Location = new System.Drawing.Point(345, 204);
             this.textBox13.Margin = new System.Windows.Forms.Padding(0);
             this.textBox13.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox13.Name = "textBox13";
@@ -1257,11 +1255,11 @@
             // 
             // textBox12
             // 
-            this.textBox12.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox12.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox12.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox12.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox12.Location = new System.Drawing.Point(401, 181);
+            this.textBox12.Location = new System.Drawing.Point(345, 177);
             this.textBox12.Margin = new System.Windows.Forms.Padding(0);
             this.textBox12.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox12.Name = "textBox12";
@@ -1273,11 +1271,11 @@
             // 
             // textBox11
             // 
-            this.textBox11.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox11.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox11.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox11.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox11.Location = new System.Drawing.Point(401, 154);
+            this.textBox11.Location = new System.Drawing.Point(345, 150);
             this.textBox11.Margin = new System.Windows.Forms.Padding(0);
             this.textBox11.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox11.Name = "textBox11";
@@ -1289,11 +1287,11 @@
             // 
             // textBox10
             // 
-            this.textBox10.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox10.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox10.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox10.Location = new System.Drawing.Point(401, 127);
+            this.textBox10.Location = new System.Drawing.Point(345, 123);
             this.textBox10.Margin = new System.Windows.Forms.Padding(0);
             this.textBox10.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox10.Name = "textBox10";
@@ -1305,11 +1303,11 @@
             // 
             // textBox9
             // 
-            this.textBox9.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox9.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox9.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox9.Location = new System.Drawing.Point(401, 100);
+            this.textBox9.Location = new System.Drawing.Point(345, 96);
             this.textBox9.Margin = new System.Windows.Forms.Padding(0);
             this.textBox9.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox9.Name = "textBox9";
@@ -1321,87 +1319,87 @@
             // 
             // textBox8
             // 
-            this.textBox8.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox8.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox8.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox8.Location = new System.Drawing.Point(4, 208);
+            this.textBox8.Location = new System.Drawing.Point(11, 204);
             this.textBox8.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox8.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox8.MinimumSize = new System.Drawing.Size(110, 16);
             this.textBox8.Name = "textBox8";
             this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(132, 16);
+            this.textBox8.Size = new System.Drawing.Size(110, 16);
             this.textBox8.TabIndex = 5;
             this.textBox8.Text = "Address";
             this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox7
             // 
-            this.textBox7.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox7.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox7.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox7.Location = new System.Drawing.Point(4, 154);
+            this.textBox7.Location = new System.Drawing.Point(11, 150);
             this.textBox7.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox7.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox7.MinimumSize = new System.Drawing.Size(110, 16);
             this.textBox7.Name = "textBox7";
             this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(132, 16);
+            this.textBox7.Size = new System.Drawing.Size(110, 16);
             this.textBox7.TabIndex = 4;
             this.textBox7.Text = "Origin of Request";
             this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox6
             // 
-            this.textBox6.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox6.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox6.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox6.Location = new System.Drawing.Point(4, 181);
+            this.textBox6.Location = new System.Drawing.Point(11, 177);
             this.textBox6.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox6.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox6.MinimumSize = new System.Drawing.Size(110, 16);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(132, 16);
+            this.textBox6.Size = new System.Drawing.Size(110, 16);
             this.textBox6.TabIndex = 3;
             this.textBox6.Text = "Contact Number";
             this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox5
             // 
-            this.textBox5.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox5.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox5.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox5.Location = new System.Drawing.Point(4, 127);
+            this.textBox5.Location = new System.Drawing.Point(11, 123);
             this.textBox5.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox5.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox5.MinimumSize = new System.Drawing.Size(110, 16);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(132, 16);
+            this.textBox5.Size = new System.Drawing.Size(110, 16);
             this.textBox5.TabIndex = 2;
             this.textBox5.Text = "Requesting Office";
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox4
             // 
-            this.textBox4.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox4.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox4.Font = new System.Drawing.Font("Arial", 10F);
-            this.textBox4.Location = new System.Drawing.Point(4, 100);
+            this.textBox4.Location = new System.Drawing.Point(11, 96);
             this.textBox4.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.textBox4.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(132, 16);
+            this.textBox4.Size = new System.Drawing.Size(110, 16);
             this.textBox4.TabIndex = 1;
             this.textBox4.Text = "Requesting Person";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox3
             // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox3.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1414,25 +1412,14 @@
             this.textBox3.TabIndex = 0;
             this.textBox3.Text = "CLIENT INFORMATION";
             // 
-            // newbtn_Extend_Venue
-            // 
-            this.newbtn_Extend_Venue.Location = new System.Drawing.Point(666, 19);
-            this.newbtn_Extend_Venue.Name = "newbtn_Extend_Venue";
-            this.newbtn_Extend_Venue.Size = new System.Drawing.Size(75, 23);
-            this.newbtn_Extend_Venue.TabIndex = 49;
-            this.newbtn_Extend_Venue.Text = "button1";
-            this.newbtn_Extend_Venue.UseVisualStyleBackColor = true;
-            this.newbtn_Extend_Venue.Click += new System.EventHandler(this.newbtn_Extend_Venue_Click);
-            // 
             // Venue_User_Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.Controls.Add(this.pnl_Billing_Details);
-            this.MaximumSize = new System.Drawing.Size(810, 700);
-            this.MinimumSize = new System.Drawing.Size(810, 700);
             this.Name = "Venue_User_Control";
-            this.Size = new System.Drawing.Size(810, 700);
+            this.Size = new System.Drawing.Size(700, 700);
             this.pnl_Billing_Details.ResumeLayout(false);
             this.pnl_Billing_Details.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -1449,7 +1436,6 @@
         private System.Windows.Forms.TextBox textBox37;
         private System.Windows.Forms.TextBox textBox30;
         private System.Windows.Forms.TextBox textBox25;
-        private System.Windows.Forms.TextBox textBox24;
         private System.Windows.Forms.TextBox textBox23;
         private System.Windows.Forms.TextBox textBox22;
         private System.Windows.Forms.TextBox textBox21;

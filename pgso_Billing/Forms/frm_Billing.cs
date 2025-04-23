@@ -26,6 +26,7 @@ namespace pgso
         public frm_Billing()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private Image ResizeImage(Image img, int width, int height)
@@ -611,7 +612,7 @@ namespace pgso
                     dgv_Billing_Records.Columns.Add(new DataGridViewTextBoxColumn
                     {
                         Name = "col_Reservation_Name",
-                        HeaderText = "Reservation",
+                        HeaderText = "RESERVATION",
                         DataPropertyName = "DisplayReservationName",
                         AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
                     });

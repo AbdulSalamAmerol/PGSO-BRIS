@@ -14,6 +14,7 @@ namespace pgso.pgso_Billing.Forms
 {
     public partial class frm_Edit_Venue_Reservation_Info : Form
     {
+        
         private TimeSpan _initialStartTime;
         private TimeSpan _initialEndTime;
         private TimeSpan _initialDuration;
@@ -33,6 +34,7 @@ namespace pgso.pgso_Billing.Forms
         public frm_Edit_Venue_Reservation_Info(Model_Billing billing)
         {
             InitializeComponent();
+            
 
             if (billing == null || billing.pk_ReservationID <= 0)
             {
@@ -270,7 +272,7 @@ namespace pgso.pgso_Billing.Forms
                 dtp_Start_Date.Focus();
                 return;
             }
-
+            
             // --- 2. Get Values from Controls ---
             DateTime startDate = dtp_Start_Date.Value.Date;
             DateTime endDate = dtp_End_Date.Value.Date;

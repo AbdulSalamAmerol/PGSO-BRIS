@@ -38,7 +38,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(12, 99);
@@ -61,6 +61,7 @@
             // 
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -69,28 +70,31 @@
             // 
             // btn_OR_Confirm
             // 
-            this.btn_OR_Confirm.Location = new System.Drawing.Point(154, 130);
+            this.btn_OR_Confirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_OR_Confirm.Location = new System.Drawing.Point(234, 130);
             this.btn_OR_Confirm.Name = "btn_OR_Confirm";
-            this.btn_OR_Confirm.Size = new System.Drawing.Size(155, 23);
+            this.btn_OR_Confirm.Size = new System.Drawing.Size(75, 32);
             this.btn_OR_Confirm.TabIndex = 3;
-            this.btn_OR_Confirm.Text = "btn_OR_Confirm";
-            this.btn_OR_Confirm.UseVisualStyleBackColor = true;
+            this.btn_OR_Confirm.Text = "ENTER";
+            this.btn_OR_Confirm.UseVisualStyleBackColor = false;
             this.btn_OR_Confirm.Click += new System.EventHandler(this.btn_OR_Confirm_Click);
             // 
             // btn_Cancel
             // 
+            this.btn_Cancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
             this.btn_Cancel.Location = new System.Drawing.Point(315, 130);
             this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
+            this.btn_Cancel.Size = new System.Drawing.Size(75, 32);
             this.btn_Cancel.TabIndex = 4;
             this.btn_Cancel.Text = "Cancel";
-            this.btn_Cancel.UseVisualStyleBackColor = true;
+            this.btn_Cancel.UseVisualStyleBackColor = false;
             this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
             // 
             // frm_OR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.ClientSize = new System.Drawing.Size(402, 165);
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_OR_Confirm);

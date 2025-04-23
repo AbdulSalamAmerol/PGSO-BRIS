@@ -11,6 +11,7 @@ namespace pgso.pgso_Billing.Forms
         private int _reservationID;
         private Repo_Billing _repo = new Repo_Billing();
 
+       
         public frm_Add_Equipment_Billing(int reservationID)
         {
             InitializeComponent();
