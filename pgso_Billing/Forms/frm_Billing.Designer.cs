@@ -43,6 +43,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tlp_Billing_UControls = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.btn_Reports = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.cmb_Billing_Filter = new System.Windows.Forms.ComboBox();
@@ -51,17 +56,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.sb_Billing_Search_Bar = new System.Windows.Forms.TextBox();
             this.dgv_Billing_Records = new System.Windows.Forms.DataGridView();
-            this.flp_Top = new System.Windows.Forms.FlowLayoutPanel();
-            this.pnl_Billing_Details = new System.Windows.Forms.Panel();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.pk_ReservationID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Full_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,6 +69,12 @@
             this.col_Extend = new System.Windows.Forms.DataGridViewImageColumn();
             this.col_Cancel = new System.Windows.Forms.DataGridViewImageColumn();
             this.col_Print = new System.Windows.Forms.DataGridViewImageColumn();
+            this.flp_Top = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnl_Billing_Details = new System.Windows.Forms.Panel();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
             this.tlp_Billing_UControls.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -123,6 +123,73 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(728, 68);
             this.panel1.TabIndex = 6;
+            // 
+            // button3
+            // 
+            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.button3.Location = new System.Drawing.Point(3, 30);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(147, 33);
+            this.button3.TabIndex = 12;
+            this.button3.Text = "CONFIRMATION SLIP";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.button2.Location = new System.Drawing.Point(188, 30);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(147, 33);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "EXTENSION SLIP";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.button1.Location = new System.Drawing.Point(375, 30);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(147, 33);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "CANCELLATION SLIP";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(568, 6);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(147, 21);
+            this.comboBox1.TabIndex = 9;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Location = new System.Drawing.Point(522, 10);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(43, 13);
+            this.textBox3.TabIndex = 8;
+            this.textBox3.Text = "SORT";
             // 
             // btn_Reports
             // 
@@ -281,137 +348,6 @@
             this.dgv_Billing_Records.TabIndex = 0;
             this.dgv_Billing_Records.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Billing_Records_CellContentClick);
             // 
-            // flp_Top
-            // 
-            this.flp_Top.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flp_Top.Location = new System.Drawing.Point(0, 0);
-            this.flp_Top.MaximumSize = new System.Drawing.Size(0, 10);
-            this.flp_Top.MinimumSize = new System.Drawing.Size(0, 10);
-            this.flp_Top.Name = "flp_Top";
-            this.flp_Top.Size = new System.Drawing.Size(1459, 10);
-            this.flp_Top.TabIndex = 5;
-            // 
-            // pnl_Billing_Details
-            // 
-            this.pnl_Billing_Details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            this.pnl_Billing_Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnl_Billing_Details.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnl_Billing_Details.Location = new System.Drawing.Point(750, 10);
-            this.pnl_Billing_Details.MaximumSize = new System.Drawing.Size(700, 688);
-            this.pnl_Billing_Details.MinimumSize = new System.Drawing.Size(700, 700);
-            this.pnl_Billing_Details.Name = "pnl_Billing_Details";
-            this.pnl_Billing_Details.Size = new System.Drawing.Size(700, 700);
-            this.pnl_Billing_Details.TabIndex = 6;
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewImageColumn1.FillWeight = 3F;
-            this.dataGridViewImageColumn1.HeaderText = "PRINT";
-            this.dataGridViewImageColumn1.Image = global::pgso.Properties.Resources.print;
-            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn1.MinimumWidth = 20;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            // 
-            // dataGridViewImageColumn2
-            // 
-            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewImageColumn2.HeaderText = "CANCEL";
-            this.dataGridViewImageColumn2.Image = global::pgso.Properties.Resources.Cancelled_Icon;
-            this.dataGridViewImageColumn2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
-            this.dataGridViewImageColumn2.ReadOnly = true;
-            // 
-            // dataGridViewImageColumn3
-            // 
-            this.dataGridViewImageColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewImageColumn3.FillWeight = 3F;
-            this.dataGridViewImageColumn3.HeaderText = "PRINT";
-            this.dataGridViewImageColumn3.Image = global::pgso.Properties.Resources.print;
-            this.dataGridViewImageColumn3.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn3.MinimumWidth = 20;
-            this.dataGridViewImageColumn3.Name = "dataGridViewImageColumn3";
-            this.dataGridViewImageColumn3.ReadOnly = true;
-            // 
-            // dataGridViewImageColumn4
-            // 
-            this.dataGridViewImageColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewImageColumn4.FillWeight = 3F;
-            this.dataGridViewImageColumn4.HeaderText = "PRINT";
-            this.dataGridViewImageColumn4.Image = global::pgso.Properties.Resources.print;
-            this.dataGridViewImageColumn4.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn4.MinimumWidth = 20;
-            this.dataGridViewImageColumn4.Name = "dataGridViewImageColumn4";
-            this.dataGridViewImageColumn4.ReadOnly = true;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(522, 10);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(43, 13);
-            this.textBox3.TabIndex = 8;
-            this.textBox3.Text = "SORT";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(568, 6);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(147, 21);
-            this.comboBox1.TabIndex = 9;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.button1.Location = new System.Drawing.Point(375, 30);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 33);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "CANCELLATION SLIP";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.button2.Location = new System.Drawing.Point(188, 30);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(147, 33);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "EXTENSION SLIP";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.button3.Location = new System.Drawing.Point(3, 30);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(147, 33);
-            this.button3.TabIndex = 12;
-            this.button3.Text = "CONFIRMATION SLIP";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
             // pk_ReservationID
             // 
             this.pk_ReservationID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -425,7 +361,7 @@
             this.pk_ReservationID.ReadOnly = true;
             this.pk_ReservationID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.pk_ReservationID.Visible = false;
-            this.pk_ReservationID.Width = 43;
+            this.pk_ReservationID.Width = 46;
             // 
             // fld_Control_Number
             // 
@@ -574,6 +510,70 @@
             this.col_Print.Name = "col_Print";
             this.col_Print.ReadOnly = true;
             this.col_Print.Width = 60;
+            // 
+            // flp_Top
+            // 
+            this.flp_Top.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flp_Top.Location = new System.Drawing.Point(0, 0);
+            this.flp_Top.MaximumSize = new System.Drawing.Size(0, 10);
+            this.flp_Top.MinimumSize = new System.Drawing.Size(0, 10);
+            this.flp_Top.Name = "flp_Top";
+            this.flp_Top.Size = new System.Drawing.Size(1459, 10);
+            this.flp_Top.TabIndex = 5;
+            // 
+            // pnl_Billing_Details
+            // 
+            this.pnl_Billing_Details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            this.pnl_Billing_Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Billing_Details.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnl_Billing_Details.Location = new System.Drawing.Point(750, 10);
+            this.pnl_Billing_Details.MaximumSize = new System.Drawing.Size(700, 688);
+            this.pnl_Billing_Details.MinimumSize = new System.Drawing.Size(700, 700);
+            this.pnl_Billing_Details.Name = "pnl_Billing_Details";
+            this.pnl_Billing_Details.Size = new System.Drawing.Size(700, 700);
+            this.pnl_Billing_Details.TabIndex = 6;
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewImageColumn1.FillWeight = 3F;
+            this.dataGridViewImageColumn1.HeaderText = "PRINT";
+            this.dataGridViewImageColumn1.Image = global::pgso.Properties.Resources.print;
+            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn1.MinimumWidth = 20;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn2
+            // 
+            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewImageColumn2.HeaderText = "CANCEL";
+            this.dataGridViewImageColumn2.Image = global::pgso.Properties.Resources.Cancelled_Icon;
+            this.dataGridViewImageColumn2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            this.dataGridViewImageColumn2.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn3
+            // 
+            this.dataGridViewImageColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewImageColumn3.FillWeight = 3F;
+            this.dataGridViewImageColumn3.HeaderText = "PRINT";
+            this.dataGridViewImageColumn3.Image = global::pgso.Properties.Resources.print;
+            this.dataGridViewImageColumn3.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn3.MinimumWidth = 20;
+            this.dataGridViewImageColumn3.Name = "dataGridViewImageColumn3";
+            this.dataGridViewImageColumn3.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn4
+            // 
+            this.dataGridViewImageColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewImageColumn4.FillWeight = 3F;
+            this.dataGridViewImageColumn4.HeaderText = "PRINT";
+            this.dataGridViewImageColumn4.Image = global::pgso.Properties.Resources.print;
+            this.dataGridViewImageColumn4.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn4.MinimumWidth = 20;
+            this.dataGridViewImageColumn4.Name = "dataGridViewImageColumn4";
+            this.dataGridViewImageColumn4.ReadOnly = true;
             // 
             // frm_Billing
             // 
