@@ -18,7 +18,7 @@ namespace pgso.pgso_Billing.Forms
         private int _reservationID;
         private List<Model_Billing> _billingData;
         private Repo_Billing repo_Billing = new Repo_Billing(); // Repository instance
-
+        public event Action<int?> RequestBillingRefresh;
         public frm_Extend_Venue(int reservationID)
         {
             InitializeComponent();
@@ -59,7 +59,7 @@ namespace pgso.pgso_Billing.Forms
                 if (result)
                 {
                     MessageBox.Show("Reservation extended successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    OnExtensionSuccessful?.Invoke();
+                    RequestBillingRefresh?.Invoke(_reservationID);
                     this.Close();
                 }
                 else
@@ -73,6 +73,15 @@ namespace pgso.pgso_Billing.Forms
             }
         }
 
+        private void btn_Cancel_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to cancel and close this form?", "Confirm Cancel", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
 
+       
     }
 }

@@ -804,6 +804,7 @@
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
+                                <Format>0;0-</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -819,6 +820,7 @@
                         </Border>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>

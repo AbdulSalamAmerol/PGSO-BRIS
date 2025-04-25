@@ -116,21 +116,52 @@ namespace pgso.pgso_Billing
             lbl_Base_Charge_Amount.Text = billingDetails.fld_First4Hrs_Rate.ToString("C");
             lbl_Additional_Hourly_Charge.Text = billingDetails.fld_Hourly_Rate.ToString("C");
             lbl_Additional_Charge.Text = billingDetails.fld_Additional_Charge.ToString("C");
-            lbl_Total_Hour.Text = (billingDetails.Total_Hours - 4).ToString("F0");
+            lbl_Total_Hour.Text = (billingDetails.Total_Hours - 4).ToString("F0") + " HRS";
             lbl_Additional_Hours_Amount.Text = (billingDetails.fld_Hourly_Rate * (decimal)(billingDetails.Total_Hours - 4)).ToString("C");
 
             // If you are showing equipment details (if available)
             lbl_Venue_Name_Transact.Text = billingDetails.fld_Venue_Name;
-            lbl_Venue_Scope_Transact.Text = billingDetails.fld_Venue_Scope_Name;
+            string scopeName = billingDetails.fld_Venue_Scope_Name;
+
+            switch (scopeName)
+            {
+                case "AH_Whole_Building":
+                case "CS_Whole_Building":
+                    lbl_Venue_Scope_Transact.Text = "Entire Venue";
+                    break;
+                case "CS_Lobby":
+                    lbl_Venue_Scope_Transact.Text = "Lobby Only";
+                    break;
+                case "CS_Main_Hall":
+                    lbl_Venue_Scope_Transact.Text = "Main Hall Only";
+                    break;
+                case "CS_Main_Hall_And_Mezzanine":
+                    lbl_Venue_Scope_Transact.Text = "Main Hall and Mezzanine";
+                    break;
+                case "PS_Room_A":
+                    lbl_Venue_Scope_Transact.Text = "Room A Only";
+                    break;
+                case "PS_Room_ABC":
+                    lbl_Venue_Scope_Transact.Text = "Room A, B and C";
+                    break;
+                case "PS_Room_BC":
+                    lbl_Venue_Scope_Transact.Text = "Room B and C";
+                    break;
+                default:
+                    lbl_Venue_Scope_Transact.Text = scopeName; // fallback if not matched
+                    break;
+            }
+
 
             // Calculated charges based on overtime
-            lbl_OT_Hours.Text = billingDetails.fld_OT_Hours.ToString();
+            lbl_OT_Hours.Text = billingDetails.fld_OT_Hours.ToString() + " HRS";
             lbl_OT_Hourly_Charge.Text = billingDetails.fld_Hourly_Rate.ToString("C");
             lbl_Overtime_Fee.Text = (billingDetails.fld_OT_Hours * billingDetails.fld_Hourly_Rate).ToString("C");
 
             // Payment details
             lbl_Paid_Amount.Text = billingDetails.fld_Amount_Paid.ToString("C");
-            lbl_Paid_Amount_2.Text = billingDetails.fld_Amount_Paid.ToString("C");
+            decimal otCharge = billingDetails.fld_OT_Hours * billingDetails.fld_Hourly_Rate;
+            lbl_Paid_Amount_2.Text = (otCharge > 0 ? "-" : "") + otCharge.ToString("C");
             lbl_Total_Amount.Text = billingDetails.fld_Total_Amount.ToString("C");
             lbl_Balance.Text = (billingDetails.fld_Total_Amount - billingDetails.fld_Amount_Paid).ToString("C");
             lbl_Refund_Amount.Text = (billingDetails.fld_Refund_Amount != 0 && billingDetails.fld_Refund_Amount != null)
@@ -140,8 +171,10 @@ namespace pgso.pgso_Billing
             lbl_Final_Amount_Paid.Text = billingDetails.fld_Final_Amount_Paid.ToString("C");
 
             lbl_Overtime_Fee.Text = billingDetails.fld_Overtime_Fee.ToString("C");
+            textBox24.Text = (billingDetails.fld_First4Hrs_Rate / 4).ToString("C");
 
-            
+
+
         }
 
        

@@ -27,7 +27,23 @@ namespace pgso
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+            // Adjust as needed, this gives ~99px margin around
+            pb_Logo.Size = new Size(500, 500);
+            pb_Logo.SizeMode = PictureBoxSizeMode.Zoom;
+            pb_Logo.BackColor = Color.Transparent;
+
+            // Center it inside the 698x698 panel
+            pb_Logo.Location = new Point(
+                (pnl_Billing_Details.Width - pb_Logo.Width) / 2,
+                (pnl_Billing_Details.Height - pb_Logo.Height) / 2
+            );
+
+            // Optional: Make sure it's the top-most control in the panel
+            pb_Logo.BringToFront();
+
+
         }
+
 
         private Image ResizeImage(Image img, int width, int height)
         {
@@ -221,6 +237,50 @@ namespace pgso
                 case "col_Extend":
                     HandleExtension(reservationID, e.RowIndex);
                     break;
+            }
+        }
+
+        // Palitan Ito, mag red lang yung mga equipment na hindi naibalik lahat
+        private void dgv_Billing_Records_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Check if it's a data row (ignore header and new row placeholder)
+            if (e.RowIndex >= 0 && e.RowIndex < this.dgv_Billing_Records.Rows.Count && !this.dgv_Billing_Records.Rows[e.RowIndex].IsNewRow)
+            {
+                // Get the current row being formatted
+                DataGridViewRow row = this.dgv_Billing_Records.Rows[e.RowIndex];
+
+                // Define the name of the column to check
+                string statusColumnName = "col_Reservation_Status"; // Your column name
+
+                try
+                {
+                    // Get the value from the specified status column for the current row
+                    object cellValue = row.Cells[statusColumnName].Value;
+
+                    // Check if the value is not null and equals "Pending" (case-sensitive)
+                    if (cellValue != null && cellValue != DBNull.Value && cellValue.ToString() == "Cancelled")
+                    {
+                        // Set the background color for the entire row to LightCoral (a shade of red)
+                        row.DefaultCellStyle.BackColor = Color.LightCoral;
+                        // Optional: Change text color for better contrast if needed
+                        // row.DefaultCellStyle.ForeColor = Color.White;
+                    }
+                    else
+                    {
+                        // --- IMPORTANT: Reset the background color for all other rows ---
+                        // Use White, or the DataGridView's default style, or Color.Empty
+                        row.DefaultCellStyle.BackColor = Color.White;
+                        // Reset text color if you changed it above
+                        // row.DefaultCellStyle.ForeColor = this.dgv_Billing_Records.DefaultCellStyle.ForeColor;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Optional: Log error if the column name is wrong or other issues occur
+                    Console.WriteLine($"Error during cell formatting: {ex.Message}");
+                    // Ensure a default color even if an error occurs
+                    row.DefaultCellStyle.BackColor = Color.White;
+                }
             }
         }
 

@@ -929,7 +929,6 @@
                             <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>

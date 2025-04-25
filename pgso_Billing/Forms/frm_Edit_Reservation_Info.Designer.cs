@@ -279,6 +279,7 @@
             this.Controls.Add(this.textBox10);
             this.Controls.Add(this.textBox9);
             this.Name = "frm_Edit_Venue_Reservation_Info";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frm_Edit_Reservation_Info";
             this.ResumeLayout(false);
             this.PerformLayout();

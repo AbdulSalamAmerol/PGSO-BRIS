@@ -33,6 +33,7 @@
             // 
             // Report_Viewer_Equipment_Revenue
             // 
+            this.Report_Viewer_Equipment_Revenue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.Report_Viewer_Equipment_Revenue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Report_Viewer_Equipment_Revenue.Location = new System.Drawing.Point(0, 0);
             this.Report_Viewer_Equipment_Revenue.Name = "Report_Viewer_Equipment_Revenue";
@@ -47,6 +48,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.Report_Viewer_Equipment_Revenue);
             this.Name = "frm_Report_Billing_Equipment";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frm_Report_Billing_Equipment";
             this.Load += new System.EventHandler(this.frm_Report_Billing_Equipment_Load);
             this.ResumeLayout(false);

@@ -1,5 +1,6 @@
 ﻿using pgso.Billing.Models;
 using pgso.Billing.Repositories;
+using pgso.pgso_Billing.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,6 +37,9 @@ namespace pgso.pgso_Billing.User_Control
         public void LoadBillingDetails(Model_Billing billingDetailsList)
         {
             pnl_Billing_Details.Visible = true;
+            lbl_Reservation_Status.Text = billingDetailsList.fld_Reservation_Status;
+            btn_Delete_Equipment_Billing.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
+            btn_Add_Equipment_Billing.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
 
             try
             {
@@ -151,5 +155,31 @@ namespace pgso.pgso_Billing.User_Control
             }
             OnEquipmentBillingUpdated();
         }
+
+        private void btn_Return_Click(object sender, EventArgs e)
+        {
+            if (dgv_Equipment_Billing_Records.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a row first.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Get the selected equipment reservation
+            var selectedBilling = dgv_Equipment_Billing_Records.CurrentRow.DataBoundItem as Model_Billing;
+
+            if (selectedBilling == null)
+            {
+                MessageBox.Show("Unable to retrieve equipment details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            frm_Equipment_Returns returnForm = new frm_Equipment_Returns(selectedBilling);
+            returnForm.OnEquipmentReturned += () =>
+            {
+                LoadBillingDetails(_billingDetails); // refresh display
+            };
+            returnForm.ShowDialog();
+        }
+
     }
 }

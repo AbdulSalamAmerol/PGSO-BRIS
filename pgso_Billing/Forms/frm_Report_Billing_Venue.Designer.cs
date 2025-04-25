@@ -33,6 +33,7 @@
             // 
             // Report_Viewer_Venue_Revenue
             // 
+            this.Report_Viewer_Venue_Revenue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.Report_Viewer_Venue_Revenue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Report_Viewer_Venue_Revenue.Location = new System.Drawing.Point(0, 0);
             this.Report_Viewer_Venue_Revenue.Name = "Report_Viewer_Venue_Revenue";

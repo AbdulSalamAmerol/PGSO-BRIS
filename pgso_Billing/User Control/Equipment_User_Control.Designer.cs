@@ -46,7 +46,8 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.pnl_Billing_Details = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.textBox38 = new System.Windows.Forms.TextBox();
+            this.btn_Return = new System.Windows.Forms.Button();
             this.btn_Delete_Equipment_Billing = new System.Windows.Forms.Button();
             this.lbl_fld_Total_Amount = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -61,12 +62,14 @@
             this._BRIS_EXPERIMENT_3_0DataSet = new pgso._BRIS_EXPERIMENT_3_0DataSet();
             this.tblReservationEquipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbl_Reservation_EquipmentTableAdapter = new pgso._BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_Reservation_EquipmentTableAdapter();
-            this.textBox38 = new System.Windows.Forms.TextBox();
             this.col_fld_Equipment_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Quantity_Returned = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Quantity_Damaged = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Unreturned = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_fld_Equipment_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_fld_Equipment_Price_Subsequent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_fk_Reservation_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_fld_Total_Equipment_Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_fld_Number_Of_Days = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Start_Date_Eq = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_End_Date_Eq = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,8 +77,8 @@
             this.col_Reservation_EquipmentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_fk_EquipmentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_fk_Equipment_PricingID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_fld_Total_Equipment_Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_fk_Reservation_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnl_Billing_Details.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Equipment_Billing_Records)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet)).BeginInit();
@@ -93,7 +96,7 @@
             this.textBox26.MinimumSize = new System.Drawing.Size(2, 30);
             this.textBox26.Name = "textBox26";
             this.textBox26.ReadOnly = true;
-            this.textBox26.Size = new System.Drawing.Size(182, 30);
+            this.textBox26.Size = new System.Drawing.Size(182, 19);
             this.textBox26.TabIndex = 24;
             this.textBox26.Text = "RESERVATION INFO";
             // 
@@ -109,7 +112,7 @@
             this.lbl_Control_Number.MinimumSize = new System.Drawing.Size(4, 25);
             this.lbl_Control_Number.Name = "lbl_Control_Number";
             this.lbl_Control_Number.ReadOnly = true;
-            this.lbl_Control_Number.Size = new System.Drawing.Size(267, 25);
+            this.lbl_Control_Number.Size = new System.Drawing.Size(267, 20);
             this.lbl_Control_Number.TabIndex = 23;
             this.lbl_Control_Number.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -124,7 +127,7 @@
             this.lbl_Reservation_Dates.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Reservation_Dates.Name = "lbl_Reservation_Dates";
             this.lbl_Reservation_Dates.ReadOnly = true;
-            this.lbl_Reservation_Dates.Size = new System.Drawing.Size(200, 25);
+            this.lbl_Reservation_Dates.Size = new System.Drawing.Size(200, 23);
             this.lbl_Reservation_Dates.TabIndex = 18;
             // 
             // lbl_Address
@@ -138,7 +141,7 @@
             this.lbl_Address.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Address.Name = "lbl_Address";
             this.lbl_Address.ReadOnly = true;
-            this.lbl_Address.Size = new System.Drawing.Size(200, 25);
+            this.lbl_Address.Size = new System.Drawing.Size(200, 23);
             this.lbl_Address.TabIndex = 17;
             // 
             // lbl_Contact_Number
@@ -152,7 +155,7 @@
             this.lbl_Contact_Number.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Contact_Number.Name = "lbl_Contact_Number";
             this.lbl_Contact_Number.ReadOnly = true;
-            this.lbl_Contact_Number.Size = new System.Drawing.Size(200, 25);
+            this.lbl_Contact_Number.Size = new System.Drawing.Size(200, 23);
             this.lbl_Contact_Number.TabIndex = 16;
             // 
             // lbl_Origin_Request
@@ -166,7 +169,7 @@
             this.lbl_Origin_Request.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Origin_Request.Name = "lbl_Origin_Request";
             this.lbl_Origin_Request.ReadOnly = true;
-            this.lbl_Origin_Request.Size = new System.Drawing.Size(200, 25);
+            this.lbl_Origin_Request.Size = new System.Drawing.Size(200, 23);
             this.lbl_Origin_Request.TabIndex = 15;
             // 
             // lbl_Requesting_Office
@@ -180,7 +183,7 @@
             this.lbl_Requesting_Office.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Requesting_Office.Name = "lbl_Requesting_Office";
             this.lbl_Requesting_Office.ReadOnly = true;
-            this.lbl_Requesting_Office.Size = new System.Drawing.Size(200, 25);
+            this.lbl_Requesting_Office.Size = new System.Drawing.Size(200, 23);
             this.lbl_Requesting_Office.TabIndex = 14;
             // 
             // lbl_Requesting_Person
@@ -208,7 +211,7 @@
             this.textBox15.MinimumSize = new System.Drawing.Size(4, 25);
             this.textBox15.Name = "textBox15";
             this.textBox15.ReadOnly = true;
-            this.textBox15.Size = new System.Drawing.Size(130, 25);
+            this.textBox15.Size = new System.Drawing.Size(130, 20);
             this.textBox15.TabIndex = 12;
             this.textBox15.Text = "Control Number";
             // 
@@ -238,7 +241,7 @@
             this.textBox8.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox8.Name = "textBox8";
             this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(115, 25);
+            this.textBox8.Size = new System.Drawing.Size(115, 16);
             this.textBox8.TabIndex = 5;
             this.textBox8.Text = "Address";
             this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -254,7 +257,7 @@
             this.textBox7.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox7.Name = "textBox7";
             this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(115, 25);
+            this.textBox7.Size = new System.Drawing.Size(115, 16);
             this.textBox7.TabIndex = 4;
             this.textBox7.Text = "Origin of Request";
             this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -270,7 +273,7 @@
             this.textBox6.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(115, 25);
+            this.textBox6.Size = new System.Drawing.Size(115, 16);
             this.textBox6.TabIndex = 3;
             this.textBox6.Text = "Contact Number";
             this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -286,7 +289,7 @@
             this.textBox5.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(115, 25);
+            this.textBox5.Size = new System.Drawing.Size(115, 16);
             this.textBox5.TabIndex = 2;
             this.textBox5.Text = "Requesting Office";
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -302,7 +305,7 @@
             this.textBox4.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(115, 25);
+            this.textBox4.Size = new System.Drawing.Size(115, 16);
             this.textBox4.TabIndex = 1;
             this.textBox4.Text = "Requesting Person";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -312,7 +315,7 @@
             this.pnl_Billing_Details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.pnl_Billing_Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_Billing_Details.Controls.Add(this.textBox38);
-            this.pnl_Billing_Details.Controls.Add(this.button1);
+            this.pnl_Billing_Details.Controls.Add(this.btn_Return);
             this.pnl_Billing_Details.Controls.Add(this.btn_Delete_Equipment_Billing);
             this.pnl_Billing_Details.Controls.Add(this.lbl_fld_Total_Amount);
             this.pnl_Billing_Details.Controls.Add(this.textBox1);
@@ -347,15 +350,29 @@
             this.pnl_Billing_Details.Size = new System.Drawing.Size(700, 700);
             this.pnl_Billing_Details.TabIndex = 8;
             // 
-            // button1
+            // textBox38
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.button1.Location = new System.Drawing.Point(420, 287);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 23);
-            this.button1.TabIndex = 53;
-            this.button1.Text = "next feature extend";
-            this.button1.UseVisualStyleBackColor = false;
+            this.textBox38.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            this.textBox38.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox38.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox38.Font = new System.Drawing.Font("Arial", 5F);
+            this.textBox38.Location = new System.Drawing.Point(-27, 76);
+            this.textBox38.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox38.Name = "textBox38";
+            this.textBox38.ReadOnly = true;
+            this.textBox38.Size = new System.Drawing.Size(725, 15);
+            this.textBox38.TabIndex = 54;
+            // 
+            // btn_Return
+            // 
+            this.btn_Return.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Return.Location = new System.Drawing.Point(420, 287);
+            this.btn_Return.Name = "btn_Return";
+            this.btn_Return.Size = new System.Drawing.Size(79, 23);
+            this.btn_Return.TabIndex = 53;
+            this.btn_Return.Text = "RETURN";
+            this.btn_Return.UseVisualStyleBackColor = false;
+            this.btn_Return.Click += new System.EventHandler(this.btn_Return_Click);
             // 
             // btn_Delete_Equipment_Billing
             // 
@@ -409,7 +426,7 @@
             this.lbl_Reservation_Status.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Reservation_Status.Name = "lbl_Reservation_Status";
             this.lbl_Reservation_Status.ReadOnly = true;
-            this.lbl_Reservation_Status.Size = new System.Drawing.Size(200, 25);
+            this.lbl_Reservation_Status.Size = new System.Drawing.Size(200, 23);
             this.lbl_Reservation_Status.TabIndex = 48;
             // 
             // textBox13
@@ -423,7 +440,7 @@
             this.textBox13.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox13.Name = "textBox13";
             this.textBox13.ReadOnly = true;
-            this.textBox13.Size = new System.Drawing.Size(109, 25);
+            this.textBox13.Size = new System.Drawing.Size(109, 16);
             this.textBox13.TabIndex = 47;
             this.textBox13.Text = "Status";
             this.textBox13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -435,10 +452,13 @@
             this.dgv_Equipment_Billing_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Equipment_Billing_Records.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_fld_Equipment_Name,
+            this.col_Quantity_Returned,
+            this.col_Quantity_Damaged,
+            this.col_Unreturned,
             this.col_fld_Equipment_Price,
             this.col_fld_Equipment_Price_Subsequent,
-            this.col_fk_Reservation_ID,
             this.col_Quantity,
+            this.col_fld_Total_Equipment_Cost,
             this.col_fld_Number_Of_Days,
             this.col_Start_Date_Eq,
             this.col_End_Date_Eq,
@@ -446,8 +466,8 @@
             this.col_Reservation_EquipmentID,
             this.col_fk_EquipmentID,
             this.col_fk_Equipment_PricingID,
-            this.col_fld_Total_Equipment_Cost,
-            this.col_Total});
+            this.col_Total,
+            this.col_fk_Reservation_ID});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
@@ -459,6 +479,7 @@
             this.dgv_Equipment_Billing_Records.Location = new System.Drawing.Point(6, 331);
             this.dgv_Equipment_Billing_Records.Name = "dgv_Equipment_Billing_Records";
             this.dgv_Equipment_Billing_Records.ReadOnly = true;
+            this.dgv_Equipment_Billing_Records.RowHeadersVisible = false;
             this.dgv_Equipment_Billing_Records.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Equipment_Billing_Records.Size = new System.Drawing.Size(684, 352);
             this.dgv_Equipment_Billing_Records.TabIndex = 46;
@@ -504,7 +525,7 @@
             this.textBox36.MinimumSize = new System.Drawing.Size(0, 30);
             this.textBox36.Name = "textBox36";
             this.textBox36.ReadOnly = true;
-            this.textBox36.Size = new System.Drawing.Size(243, 30);
+            this.textBox36.Size = new System.Drawing.Size(243, 19);
             this.textBox36.TabIndex = 29;
             this.textBox36.Text = "TRANSACTION DETAILS";
             // 
@@ -537,60 +558,88 @@
             // 
             this.tbl_Reservation_EquipmentTableAdapter.ClearBeforeFill = true;
             // 
-            // textBox38
-            // 
-            this.textBox38.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            this.textBox38.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox38.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox38.Font = new System.Drawing.Font("Arial", 5F);
-            this.textBox38.Location = new System.Drawing.Point(-27, 76);
-            this.textBox38.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox38.Name = "textBox38";
-            this.textBox38.ReadOnly = true;
-            this.textBox38.Size = new System.Drawing.Size(725, 15);
-            this.textBox38.TabIndex = 54;
-            // 
             // col_fld_Equipment_Name
             // 
+            this.col_fld_Equipment_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.col_fld_Equipment_Name.DataPropertyName = "fld_Equipment_Name";
-            this.col_fld_Equipment_Name.HeaderText = "Equipment Name";
+            this.col_fld_Equipment_Name.HeaderText = "EQUIPMENT";
             this.col_fld_Equipment_Name.Name = "col_fld_Equipment_Name";
             this.col_fld_Equipment_Name.ReadOnly = true;
+            this.col_fld_Equipment_Name.Width = 96;
+            // 
+            // col_Quantity_Returned
+            // 
+            this.col_Quantity_Returned.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.col_Quantity_Returned.DataPropertyName = "fld_Quantity_Returned";
+            this.col_Quantity_Returned.HeaderText = "Returned";
+            this.col_Quantity_Returned.Name = "col_Quantity_Returned";
+            this.col_Quantity_Returned.ReadOnly = true;
+            this.col_Quantity_Returned.Width = 76;
+            // 
+            // col_Quantity_Damaged
+            // 
+            this.col_Quantity_Damaged.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.col_Quantity_Damaged.DataPropertyName = "fld_Quantity_Damaged";
+            this.col_Quantity_Damaged.HeaderText = "Damaged";
+            this.col_Quantity_Damaged.Name = "col_Quantity_Damaged";
+            this.col_Quantity_Damaged.ReadOnly = true;
+            this.col_Quantity_Damaged.Width = 78;
+            // 
+            // col_Unreturned
+            // 
+            this.col_Unreturned.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.col_Unreturned.HeaderText = "Unreturned";
+            this.col_Unreturned.Name = "col_Unreturned";
+            this.col_Unreturned.ReadOnly = true;
+            this.col_Unreturned.Width = 85;
             // 
             // col_fld_Equipment_Price
             // 
+            this.col_fld_Equipment_Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.col_fld_Equipment_Price.DataPropertyName = "fld_Equipment_Price";
-            this.col_fld_Equipment_Price.HeaderText = "Base Price";
+            this.col_fld_Equipment_Price.HeaderText = "BASE RATE";
             this.col_fld_Equipment_Price.Name = "col_fld_Equipment_Price";
             this.col_fld_Equipment_Price.ReadOnly = true;
+            this.col_fld_Equipment_Price.Visible = false;
+            this.col_fld_Equipment_Price.Width = 92;
             // 
             // col_fld_Equipment_Price_Subsequent
             // 
+            this.col_fld_Equipment_Price_Subsequent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.col_fld_Equipment_Price_Subsequent.DataPropertyName = "fld_Equipment_Price_Subsequent";
-            this.col_fld_Equipment_Price_Subsequent.HeaderText = "Sub Price";
+            this.col_fld_Equipment_Price_Subsequent.HeaderText = "SUB RATE";
             this.col_fld_Equipment_Price_Subsequent.Name = "col_fld_Equipment_Price_Subsequent";
             this.col_fld_Equipment_Price_Subsequent.ReadOnly = true;
-            // 
-            // col_fk_Reservation_ID
-            // 
-            this.col_fk_Reservation_ID.DataPropertyName = "pk_ReservationID";
-            this.col_fk_Reservation_ID.HeaderText = "Reservation ID";
-            this.col_fk_Reservation_ID.Name = "col_fk_Reservation_ID";
-            this.col_fk_Reservation_ID.ReadOnly = true;
+            this.col_fld_Equipment_Price_Subsequent.Visible = false;
+            this.col_fld_Equipment_Price_Subsequent.Width = 86;
             // 
             // col_Quantity
             // 
+            this.col_Quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.col_Quantity.DataPropertyName = "fld_Quantity";
-            this.col_Quantity.HeaderText = "Quantity";
+            this.col_Quantity.HeaderText = "QTY";
             this.col_Quantity.Name = "col_Quantity";
             this.col_Quantity.ReadOnly = true;
+            this.col_Quantity.Width = 54;
+            // 
+            // col_fld_Total_Equipment_Cost
+            // 
+            this.col_fld_Total_Equipment_Cost.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.col_fld_Total_Equipment_Cost.DataPropertyName = "fld_Total_Equipment_Cost";
+            this.col_fld_Total_Equipment_Cost.HeaderText = "TOTAL";
+            this.col_fld_Total_Equipment_Cost.Name = "col_fld_Total_Equipment_Cost";
+            this.col_fld_Total_Equipment_Cost.ReadOnly = true;
+            this.col_fld_Total_Equipment_Cost.Width = 67;
             // 
             // col_fld_Number_Of_Days
             // 
+            this.col_fld_Number_Of_Days.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.col_fld_Number_Of_Days.DataPropertyName = "fld_Number_Of_Days";
-            this.col_fld_Number_Of_Days.HeaderText = "Days";
+            this.col_fld_Number_Of_Days.HeaderText = "DAYS";
             this.col_fld_Number_Of_Days.Name = "col_fld_Number_Of_Days";
             this.col_fld_Number_Of_Days.ReadOnly = true;
+            this.col_fld_Number_Of_Days.Visible = false;
+            this.col_fld_Number_Of_Days.Width = 61;
             // 
             // col_Start_Date_Eq
             // 
@@ -619,6 +668,7 @@
             this.col_Reservation_EquipmentID.HeaderText = "Reservation Equipment ID";
             this.col_Reservation_EquipmentID.Name = "col_Reservation_EquipmentID";
             this.col_Reservation_EquipmentID.ReadOnly = true;
+            this.col_Reservation_EquipmentID.Visible = false;
             // 
             // col_fk_EquipmentID
             // 
@@ -626,6 +676,7 @@
             this.col_fk_EquipmentID.HeaderText = "Equipment ID";
             this.col_fk_EquipmentID.Name = "col_fk_EquipmentID";
             this.col_fk_EquipmentID.ReadOnly = true;
+            this.col_fk_EquipmentID.Visible = false;
             // 
             // col_fk_Equipment_PricingID
             // 
@@ -633,19 +684,22 @@
             this.col_fk_Equipment_PricingID.HeaderText = "Equipment Pricing ID";
             this.col_fk_Equipment_PricingID.Name = "col_fk_Equipment_PricingID";
             this.col_fk_Equipment_PricingID.ReadOnly = true;
-            // 
-            // col_fld_Total_Equipment_Cost
-            // 
-            this.col_fld_Total_Equipment_Cost.DataPropertyName = "fld_Total_Equipment_Cost";
-            this.col_fld_Total_Equipment_Cost.HeaderText = "Total Equipment Cost";
-            this.col_fld_Total_Equipment_Cost.Name = "col_fld_Total_Equipment_Cost";
-            this.col_fld_Total_Equipment_Cost.ReadOnly = true;
+            this.col_fk_Equipment_PricingID.Visible = false;
             // 
             // col_Total
             // 
             this.col_Total.HeaderText = "Total";
             this.col_Total.Name = "col_Total";
             this.col_Total.ReadOnly = true;
+            this.col_Total.Visible = false;
+            // 
+            // col_fk_Reservation_ID
+            // 
+            this.col_fk_Reservation_ID.DataPropertyName = "pk_ReservationID";
+            this.col_fk_Reservation_ID.HeaderText = "Reservation ID";
+            this.col_fk_Reservation_ID.Name = "col_fk_Reservation_ID";
+            this.col_fk_Reservation_ID.ReadOnly = true;
+            this.col_fk_Reservation_ID.Visible = false;
             // 
             // Equipment_User_Control
             // 
@@ -696,13 +750,16 @@
         private System.Windows.Forms.TextBox lbl_fld_Total_Amount;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btn_Delete_Equipment_Billing;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Return;
         private System.Windows.Forms.TextBox textBox38;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fld_Equipment_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Quantity_Returned;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Quantity_Damaged;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Unreturned;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fld_Equipment_Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fld_Equipment_Price_Subsequent;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_fk_Reservation_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_fld_Total_Equipment_Cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fld_Number_Of_Days;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Start_Date_Eq;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_End_Date_Eq;
@@ -710,7 +767,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Reservation_EquipmentID;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fk_EquipmentID;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fk_Equipment_PricingID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_fld_Total_Equipment_Cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_fk_Reservation_ID;
     }
 }

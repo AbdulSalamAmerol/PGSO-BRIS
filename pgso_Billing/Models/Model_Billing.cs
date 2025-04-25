@@ -69,6 +69,8 @@ namespace pgso.Billing.Models
         public string fld_Equipment_Status { get; set; }
         public DateTime fld_Date_Returned { get; set; }
         public int fld_Quantity_Returned { get; set; }
+        public int fld_Quantity_Damaged { get; set; }
+
 
         // Payment Details
         public int? pk_PaymentID { get; set; }
@@ -82,6 +84,7 @@ namespace pgso.Billing.Models
         public decimal fld_Cancellation_Fee { get; set; }
         public decimal fld_Final_Amount_Paid { get; set; }
         public  decimal fld_Overtime_Fee { get; set; }
+        public decimal fld_Amount_Paid_OT { get; set; }
 
         // 🔸 Computed Properties
         public double Total_Hours => Math.Max(0, (fld_End_Time - fld_Start_Time).TotalHours);

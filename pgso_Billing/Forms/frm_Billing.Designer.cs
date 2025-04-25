@@ -58,6 +58,7 @@
             this.dgv_Billing_Records = new System.Windows.Forms.DataGridView();
             this.pk_ReservationID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Reservation_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Full_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Reservation_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Venue_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,6 +72,7 @@
             this.col_Print = new System.Windows.Forms.DataGridViewImageColumn();
             this.flp_Top = new System.Windows.Forms.FlowLayoutPanel();
             this.pnl_Billing_Details = new System.Windows.Forms.Panel();
+            this.pb_Logo = new System.Windows.Forms.PictureBox();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
@@ -80,6 +82,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Billing_Records)).BeginInit();
+            this.pnl_Billing_Details.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Logo)).BeginInit();
             this.SuspendLayout();
             // 
             // tlp_Billing_UControls
@@ -314,6 +318,7 @@
             this.dgv_Billing_Records.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.pk_ReservationID,
             this.fld_Control_Number,
+            this.col_Reservation_Name,
             this.fld_Full_Name,
             this.col_Reservation_Type,
             this.col_Venue_Name,
@@ -347,6 +352,7 @@
             this.dgv_Billing_Records.Size = new System.Drawing.Size(728, 632);
             this.dgv_Billing_Records.TabIndex = 0;
             this.dgv_Billing_Records.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Billing_Records_CellContentClick);
+            this.dgv_Billing_Records.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgv_Billing_Records_CellFormatting);
             // 
             // pk_ReservationID
             // 
@@ -375,6 +381,14 @@
             this.fld_Control_Number.ReadOnly = true;
             this.fld_Control_Number.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.fld_Control_Number.Width = 150;
+            // 
+            // col_Reservation_Name
+            // 
+            this.col_Reservation_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Reservation_Name.DataPropertyName = "DisplayReservationName";
+            this.col_Reservation_Name.HeaderText = "RESERVATION";
+            this.col_Reservation_Name.Name = "col_Reservation_Name";
+            this.col_Reservation_Name.ReadOnly = true;
             // 
             // fld_Full_Name
             // 
@@ -524,7 +538,9 @@
             // pnl_Billing_Details
             // 
             this.pnl_Billing_Details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            this.pnl_Billing_Details.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pnl_Billing_Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Billing_Details.Controls.Add(this.pb_Logo);
             this.pnl_Billing_Details.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_Billing_Details.Location = new System.Drawing.Point(750, 10);
             this.pnl_Billing_Details.MaximumSize = new System.Drawing.Size(700, 688);
@@ -532,6 +548,17 @@
             this.pnl_Billing_Details.Name = "pnl_Billing_Details";
             this.pnl_Billing_Details.Size = new System.Drawing.Size(700, 700);
             this.pnl_Billing_Details.TabIndex = 6;
+            // 
+            // pb_Logo
+            // 
+            this.pb_Logo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pb_Logo.BackgroundImage")));
+            this.pb_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pb_Logo.Location = new System.Drawing.Point(-1, -1);
+            this.pb_Logo.Margin = new System.Windows.Forms.Padding(30);
+            this.pb_Logo.Name = "pb_Logo";
+            this.pb_Logo.Size = new System.Drawing.Size(700, 700);
+            this.pb_Logo.TabIndex = 0;
+            this.pb_Logo.TabStop = false;
             // 
             // dataGridViewImageColumn1
             // 
@@ -598,6 +625,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Billing_Records)).EndInit();
+            this.pnl_Billing_Details.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Logo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -624,8 +653,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.PictureBox pb_Logo;
         private System.Windows.Forms.DataGridViewTextBoxColumn pk_ReservationID;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Control_Number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Reservation_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Full_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Reservation_Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Venue_Name;

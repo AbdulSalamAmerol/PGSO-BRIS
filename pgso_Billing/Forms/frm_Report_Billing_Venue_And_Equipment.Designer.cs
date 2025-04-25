@@ -33,6 +33,7 @@
             // 
             // Report_Viewer_Venue_And_Equipment_Revenue
             // 
+            this.Report_Viewer_Venue_And_Equipment_Revenue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.Report_Viewer_Venue_And_Equipment_Revenue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Report_Viewer_Venue_And_Equipment_Revenue.LocalReport.ReportEmbeddedResource = "pgso.Report_Revenue_By_Reservation_Type.rdlc";
             this.Report_Viewer_Venue_And_Equipment_Revenue.Location = new System.Drawing.Point(0, 0);

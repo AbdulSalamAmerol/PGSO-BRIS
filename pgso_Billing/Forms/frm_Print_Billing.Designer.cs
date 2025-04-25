@@ -51,6 +51,7 @@
             this.ClientSize = new System.Drawing.Size(984, 961);
             this.Controls.Add(this.Print_Billing_Report_Viewer);
             this.Name = "frm_Print_Billing";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frm_Print_Billing";
             this.ResumeLayout(false);
 
