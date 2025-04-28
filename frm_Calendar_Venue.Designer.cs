@@ -148,7 +148,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 206F));
             this.tableLayoutPanel1.Controls.Add(this.label6, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.label5, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.label7, 6, 0);
@@ -159,7 +159,7 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 40);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1346, 20);
             this.tableLayoutPanel1.TabIndex = 23;
             // 
@@ -193,19 +193,20 @@
             this.label9.Text = "Tuesday";
             this.label9.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // frm_Calendar_Vanue
+            // frm_Calendar_Venue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(1370, 723);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.btn_Previous);
             this.Controls.Add(this.btn_Next);
             this.Controls.Add(this.tbale_Calendars);
             this.Controls.Add(this.lbl_Date);
-            this.Name = "frm_Calendar_Vanue";
+            this.Name = "frm_Calendar_Venue";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frm_Calendar";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

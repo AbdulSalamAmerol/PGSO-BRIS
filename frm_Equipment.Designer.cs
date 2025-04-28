@@ -28,15 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dt_equipment = new System.Windows.Forms.DataGridView();
-            this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Equipment_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Reservation_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Total_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_Information = new System.Windows.Forms.Panel();
+            this.btn_Update = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.txt_Requesting_Office = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -71,6 +67,11 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Equipment_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Reservation_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Total_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dt_equipment)).BeginInit();
             this.panel_Information.SuspendLayout();
             this.SuspendLayout();
@@ -78,14 +79,14 @@
             // dt_equipment
             // 
             this.dt_equipment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 10F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dt_equipment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 10F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dt_equipment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dt_equipment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dt_equipment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.fld_Control_Number,
@@ -93,14 +94,14 @@
             this.fld_Equipment_Name,
             this.fld_Reservation_Status,
             this.fld_Total_Amount});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 10F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dt_equipment.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 10F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dt_equipment.DefaultCellStyle = dataGridViewCellStyle6;
             this.dt_equipment.Location = new System.Drawing.Point(15, 64);
             this.dt_equipment.Name = "dt_equipment";
             this.dt_equipment.ReadOnly = true;
@@ -108,46 +109,12 @@
             this.dt_equipment.Size = new System.Drawing.Size(957, 582);
             this.dt_equipment.TabIndex = 1;
             // 
-            // fld_Control_Number
-            // 
-            this.fld_Control_Number.DataPropertyName = "fld_Control_Number";
-            this.fld_Control_Number.HeaderText = "Control Number";
-            this.fld_Control_Number.Name = "fld_Control_Number";
-            this.fld_Control_Number.ReadOnly = true;
-            // 
-            // fld_Quantity
-            // 
-            this.fld_Quantity.DataPropertyName = "fld_Quantity";
-            this.fld_Quantity.HeaderText = "Quantity";
-            this.fld_Quantity.Name = "fld_Quantity";
-            this.fld_Quantity.ReadOnly = true;
-            // 
-            // fld_Equipment_Name
-            // 
-            this.fld_Equipment_Name.DataPropertyName = "fld_Equipment_Name";
-            this.fld_Equipment_Name.HeaderText = "Equipment";
-            this.fld_Equipment_Name.Name = "fld_Equipment_Name";
-            this.fld_Equipment_Name.ReadOnly = true;
-            // 
-            // fld_Reservation_Status
-            // 
-            this.fld_Reservation_Status.DataPropertyName = "fld_Reservation_Status";
-            this.fld_Reservation_Status.HeaderText = "Status";
-            this.fld_Reservation_Status.Name = "fld_Reservation_Status";
-            this.fld_Reservation_Status.ReadOnly = true;
-            // 
-            // fld_Total_Amount
-            // 
-            this.fld_Total_Amount.DataPropertyName = "fld_Total_Amount";
-            this.fld_Total_Amount.HeaderText = "Total";
-            this.fld_Total_Amount.Name = "fld_Total_Amount";
-            this.fld_Total_Amount.ReadOnly = true;
-            // 
             // panel_Information
             // 
             this.panel_Information.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_Information.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel_Information.Controls.Add(this.btn_Update);
             this.panel_Information.Controls.Add(this.label15);
             this.panel_Information.Controls.Add(this.txt_Requesting_Office);
             this.panel_Information.Controls.Add(this.label12);
@@ -179,8 +146,19 @@
             this.panel_Information.Controls.Add(this.txt_CN);
             this.panel_Information.Location = new System.Drawing.Point(994, 12);
             this.panel_Information.Name = "panel_Information";
-            this.panel_Information.Size = new System.Drawing.Size(364, 452);
+            this.panel_Information.Size = new System.Drawing.Size(364, 504);
             this.panel_Information.TabIndex = 8;
+            // 
+            // btn_Update
+            // 
+            this.btn_Update.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Update.Location = new System.Drawing.Point(272, 437);
+            this.btn_Update.Name = "btn_Update";
+            this.btn_Update.Size = new System.Drawing.Size(75, 35);
+            this.btn_Update.TabIndex = 33;
+            this.btn_Update.Text = "Update";
+            this.btn_Update.UseVisualStyleBackColor = true;
+            this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
             // 
             // label15
             // 
@@ -215,6 +193,7 @@
             this.txt_Reservation_type.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Reservation_type.Location = new System.Drawing.Point(159, 148);
             this.txt_Reservation_type.Name = "txt_Reservation_type";
+            this.txt_Reservation_type.ReadOnly = true;
             this.txt_Reservation_type.Size = new System.Drawing.Size(190, 26);
             this.txt_Reservation_type.TabIndex = 29;
             // 
@@ -233,6 +212,7 @@
             this.txt_Number_of_Days.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Number_of_Days.Location = new System.Drawing.Point(159, 308);
             this.txt_Number_of_Days.Name = "txt_Number_of_Days";
+            this.txt_Number_of_Days.ReadOnly = true;
             this.txt_Number_of_Days.Size = new System.Drawing.Size(190, 26);
             this.txt_Number_of_Days.TabIndex = 27;
             // 
@@ -248,19 +228,21 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(96, 413);
+            this.label11.Location = new System.Drawing.Point(3, 414);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(42, 16);
+            this.label11.Size = new System.Drawing.Size(151, 16);
             this.label11.TabIndex = 23;
-            this.label11.Text = "Total:";
+            this.label11.Text = "Total Each Equipment:";
             // 
             // txt_Total
             // 
             this.txt_Total.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Total.Location = new System.Drawing.Point(159, 404);
+            this.txt_Total.Location = new System.Drawing.Point(184, 404);
             this.txt_Total.Name = "txt_Total";
-            this.txt_Total.Size = new System.Drawing.Size(190, 26);
+            this.txt_Total.ReadOnly = true;
+            this.txt_Total.Size = new System.Drawing.Size(165, 26);
             this.txt_Total.TabIndex = 22;
+            this.txt_Total.TextChanged += new System.EventHandler(this.txt_Total_TextChanged);
             // 
             // label10
             // 
@@ -285,6 +267,7 @@
             this.txt_HourEnd.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_HourEnd.Location = new System.Drawing.Point(253, 276);
             this.txt_HourEnd.Name = "txt_HourEnd";
+            this.txt_HourEnd.ReadOnly = true;
             this.txt_HourEnd.Size = new System.Drawing.Size(96, 26);
             this.txt_HourEnd.TabIndex = 17;
             // 
@@ -293,6 +276,7 @@
             this.txt_DateEnd.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_DateEnd.Location = new System.Drawing.Point(272, 244);
             this.txt_DateEnd.Name = "txt_DateEnd";
+            this.txt_DateEnd.ReadOnly = true;
             this.txt_DateEnd.Size = new System.Drawing.Size(77, 26);
             this.txt_DateEnd.TabIndex = 16;
             // 
@@ -311,6 +295,7 @@
             this.txt_Purpose.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Purpose.Location = new System.Drawing.Point(159, 340);
             this.txt_Purpose.Name = "txt_Purpose";
+            this.txt_Purpose.ReadOnly = true;
             this.txt_Purpose.Size = new System.Drawing.Size(190, 26);
             this.txt_Purpose.TabIndex = 14;
             // 
@@ -329,6 +314,7 @@
             this.txt_HourStart.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_HourStart.Location = new System.Drawing.Point(159, 276);
             this.txt_HourStart.Name = "txt_HourStart";
+            this.txt_HourStart.ReadOnly = true;
             this.txt_HourStart.Size = new System.Drawing.Size(88, 26);
             this.txt_HourStart.TabIndex = 12;
             // 
@@ -347,6 +333,7 @@
             this.txt_Date_Start.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Date_Start.Location = new System.Drawing.Point(159, 244);
             this.txt_Date_Start.Name = "txt_Date_Start";
+            this.txt_Date_Start.ReadOnly = true;
             this.txt_Date_Start.Size = new System.Drawing.Size(107, 26);
             this.txt_Date_Start.TabIndex = 10;
             // 
@@ -365,6 +352,7 @@
             this.txt_Quantity.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Quantity.Location = new System.Drawing.Point(159, 212);
             this.txt_Quantity.Name = "txt_Quantity";
+            this.txt_Quantity.ReadOnly = true;
             this.txt_Quantity.Size = new System.Drawing.Size(190, 26);
             this.txt_Quantity.TabIndex = 8;
             // 
@@ -383,6 +371,7 @@
             this.txt_Equipment_Name.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Equipment_Name.Location = new System.Drawing.Point(159, 180);
             this.txt_Equipment_Name.Name = "txt_Equipment_Name";
+            this.txt_Equipment_Name.ReadOnly = true;
             this.txt_Equipment_Name.Size = new System.Drawing.Size(190, 26);
             this.txt_Equipment_Name.TabIndex = 6;
             // 
@@ -437,6 +426,7 @@
             this.txt_CN.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_CN.Location = new System.Drawing.Point(159, 20);
             this.txt_CN.Name = "txt_CN";
+            this.txt_CN.ReadOnly = true;
             this.txt_CN.Size = new System.Drawing.Size(190, 26);
             this.txt_CN.TabIndex = 0;
             // 
@@ -487,6 +477,41 @@
             this.label16.Size = new System.Drawing.Size(79, 16);
             this.label16.TabIndex = 13;
             this.label16.Text = "EQUIPMENT";
+            // 
+            // fld_Control_Number
+            // 
+            this.fld_Control_Number.DataPropertyName = "fld_Control_Number";
+            this.fld_Control_Number.HeaderText = "Control Number";
+            this.fld_Control_Number.Name = "fld_Control_Number";
+            this.fld_Control_Number.ReadOnly = true;
+            // 
+            // fld_Quantity
+            // 
+            this.fld_Quantity.DataPropertyName = "fld_Quantity";
+            this.fld_Quantity.HeaderText = "Quantity";
+            this.fld_Quantity.Name = "fld_Quantity";
+            this.fld_Quantity.ReadOnly = true;
+            // 
+            // fld_Equipment_Name
+            // 
+            this.fld_Equipment_Name.DataPropertyName = "fld_Equipment_Name";
+            this.fld_Equipment_Name.HeaderText = "Equipment";
+            this.fld_Equipment_Name.Name = "fld_Equipment_Name";
+            this.fld_Equipment_Name.ReadOnly = true;
+            // 
+            // fld_Reservation_Status
+            // 
+            this.fld_Reservation_Status.DataPropertyName = "fld_Reservation_Status";
+            this.fld_Reservation_Status.HeaderText = "Status";
+            this.fld_Reservation_Status.Name = "fld_Reservation_Status";
+            this.fld_Reservation_Status.ReadOnly = true;
+            // 
+            // fld_Total_Amount
+            // 
+            this.fld_Total_Amount.DataPropertyName = "fld_Total_Amount";
+            this.fld_Total_Amount.HeaderText = "Total";
+            this.fld_Total_Amount.Name = "fld_Total_Amount";
+            this.fld_Total_Amount.ReadOnly = true;
             // 
             // frm_Equipment
             // 
@@ -539,11 +564,6 @@
         private System.Windows.Forms.TextBox txt_CN;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txt_Number_of_Days;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Control_Number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Quantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Equipment_Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Reservation_Status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Total_Amount;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txt_Reservation_type;
@@ -553,5 +573,11 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txt_Requesting_Office;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button btn_Update;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Control_Number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Equipment_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Reservation_Status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Total_Amount;
     }
 }

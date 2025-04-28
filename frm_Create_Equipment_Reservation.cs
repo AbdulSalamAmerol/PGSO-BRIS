@@ -44,11 +44,16 @@ namespace pgso
             Time_End.Format = DateTimePickerFormat.Custom;
             Time_End.CustomFormat = "hh:mm tt";
 
-           
+            // Set the minimum date to the current date for both Date_Start and Date_End
+            Date_Start.MinDate = DateTime.Now.Date;
+            Date_End.MinDate = DateTime.Now.Date;
+
+         
+
 
             combo_Origin.Items.Add("Call");
             combo_Origin.Items.Add("Letter");
-            combo_Origin.Items.Add("Walk-In");
+            combo_Origin.Items.Add("Walk In");
             combo_Origin.SelectedIndexChanged += combo_Origin_SelectedIndexChanged;
 
             combo_Utility.SelectedIndexChanged += Combo_Utility_SelectedIndexChanged;
@@ -144,8 +149,13 @@ namespace pgso
 
         private void Date_ValueChanged(object sender, EventArgs e)
         {
+           
+
+            // Recalculate the number of days
             CalculateNumberOfDays();
         }
+
+
 
         private void CalculateNumberOfDays()
         {
@@ -499,6 +509,9 @@ namespace pgso
                 selectedEquipmentList.Clear();
                 UpdateSelectedEquipmentDisplay();
                 ClearForm();
+                RefreshCalendarView();
+                // Refresh the control number
+                txt_Control_Num.Text = GenerateControlNumber();
             }
             catch (SqlException ex)
             {
@@ -524,7 +537,29 @@ namespace pgso
         }
 
 
-
+        private void RefreshCalendarView()
+        {
+            // Find all open calendar forms and refresh them
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is frm_Calendar_Venue calendarForm)
+                {
+                    if (calendarForm.InvokeRequired)
+                    {
+                        calendarForm.Invoke(new Action(() =>
+                        {
+                            calendarForm.RefreshCalendar();
+                            calendarForm.BringToFront();
+                        }));
+                    }
+                    else
+                    {
+                        calendarForm.RefreshCalendar();
+                        calendarForm.BringToFront();
+                    }
+                }
+            }
+        }
 
         private void ClearForm()
         {
@@ -629,6 +664,40 @@ namespace pgso
         private void txt_Price_Subsequent_TextChanged(object sender, EventArgs e)
         {
             CalculateTotalAmount();
+        }
+
+        private void Date_Start_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_clearform_Click(object sender, EventArgs e)
+        {
+
+            // Clear textboxes
+            txt_Surname.Clear();
+            txt_First_Name.Clear();
+            txt_Address.Clear();
+            txt_Contact.Clear();
+            txt_Requesting_Office.Clear();
+            txt_Activity.Clear();
+            txt_Quantity.Text = "1";
+            txt_Total.Text = "0.00";
+
+            // Reset ComboBoxes to default selection
+            combo_Origin.SelectedIndex = -1;
+            combo_Utility.SelectedIndex = -1;
+
+            // Reset DateTimePickers to current date and time
+            Date_Start.Value = DateTime.Now;
+            Date_End.Value = DateTime.Now;
+            Time_Start.Value = DateTime.Now;
+            Time_End.Value = DateTime.Now;
+
+            // Refresh the control number
+            txt_Control_Num.Text = GenerateControlNumber();
+
+            // Optionally, reset any other controls as needed
         }
     }
 }

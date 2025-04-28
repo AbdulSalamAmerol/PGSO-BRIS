@@ -341,18 +341,7 @@
     <Compile Include="frm_Venues.Designer.cs">
       <DependentUpon>frm_Venues.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_register.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_register.Designer.cs">
-      <DependentUpon>frm_register.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_sportcomplex.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_sportcomplex.Designer.cs">
-      <DependentUpon>frm_sportcomplex.cs</DependentUpon>
-    </Compile>
+
     <Compile Include="pgso_Billing\User Control\Equipment_User_Control.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -367,12 +356,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="frm_reservation_forms.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_reservation_forms.Designer.cs">
-      <DependentUpon>frm_reservation_forms.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControlDaysEquipment.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -461,12 +444,8 @@
     <EmbeddedResource Include="frm_Venues.resx">
       <DependentUpon>frm_Venues.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_register.resx">
-      <DependentUpon>frm_register.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_sportcomplex.resx">
-      <DependentUpon>frm_sportcomplex.cs</DependentUpon>
-    </EmbeddedResource>
+
+
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Edit_Reservation_Info.resx">
       <DependentUpon>frm_Edit_Reservation_Info.cs</DependentUpon>
     </EmbeddedResource>
@@ -505,14 +484,18 @@
     <EmbeddedResource Include="pgso_Billing\User Control\Venue_User_Control.resx">
       <DependentUpon>Venue_User_Control.cs</DependentUpon>
     </EmbeddedResource>
+
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_reservation_forms.resx">
-      <DependentUpon>frm_reservation_forms.cs</DependentUpon>
-    </EmbeddedResource>
+
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+
     <EmbeddedResource Include="UserControlDaysEquipment.resx">
       <DependentUpon>UserControlDaysEquipment.cs</DependentUpon>
     </EmbeddedResource>

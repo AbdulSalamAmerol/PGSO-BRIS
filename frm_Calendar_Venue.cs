@@ -118,31 +118,51 @@ namespace pgso
             try
             {
                 string query = @"
-        SELECT r.fld_Control_Number, v.fld_Venue_Name, r.fld_Start_Date, r.fld_End_Date, 
-               r.fld_Reservation_Type, r.fld_Activity_Name, e.fld_Equipment_Name, 
-               rp.fld_First_Name, rp.fld_Surname, r.fld_Start_Time, r.fld_End_Time
+        SELECT r.fld_Control_Number,
+               v.fld_Venue_Name,
+               r.fld_Start_Date,
+               r.fld_End_Date, 
+               r.fld_Reservation_Type,
+               r.fld_Activity_Name,
+               e.fld_Equipment_Name, 
+               rp.fld_First_Name,
+               rp.fld_Surname,
+               r.fld_Start_Time,
+               r.fld_End_Time,
+               r.fld_Reservation_Status
         FROM tbl_Reservation r
         LEFT JOIN tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
         LEFT JOIN tbl_Reservation_Equipment re ON r.pk_ReservationID = re.fk_ReservationID
         LEFT JOIN tbl_Equipment e ON re.fk_EquipmentID = e.pk_EquipmentID
         LEFT JOIN tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-        WHERE (YEAR(r.fld_Start_Date) = @Year AND MONTH(r.fld_Start_Date) = @Month)
-           OR (YEAR(r.fld_End_Date) = @Year AND MONTH(r.fld_End_Date) = @Month)";
+        WHERE 
+            (YEAR(r.fld_Start_Date) = @Year AND MONTH(r.fld_Start_Date) = @Month
+            OR YEAR(r.fld_End_Date) = @Year AND MONTH(r.fld_End_Date) = @Month)
+            AND r.fld_Reservation_Status IN ('Confirmed', 'Pending')
+        ORDER BY r.fld_Start_Date, r.fld_Start_Time"; // Add ordering
 
                 using (SqlCommand cmd = new SqlCommand(query, db.strCon))
                 {
                     cmd.Parameters.AddWithValue("@Year", year);
                     cmd.Parameters.AddWithValue("@Month", month);
+
+                    db.strCon.Open();
                     using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
                         da.Fill(reservations);
                     }
+                    db.strCon.Close();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error fetching reservations: " + ex.Message, "Database Error",
                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (db.strCon.State == ConnectionState.Open)
+                    db.strCon.Close();
             }
             return reservations;
         }
@@ -194,6 +214,19 @@ namespace pgso
                                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return reservations;
+        }
+
+        public void RefreshCalendar()
+        {
+            // Clear existing controls
+            tbale_Calendars.Controls.Clear();
+
+            // Force a fresh data load
+            displayDays();
+
+            // Ensure the layout updates
+            tbale_Calendars.PerformLayout();
+            this.Refresh();
         }
     }
 }

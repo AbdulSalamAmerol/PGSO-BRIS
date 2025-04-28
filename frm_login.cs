@@ -82,8 +82,8 @@ namespace pgso
 
         private void lbl_register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            frm_register frm = new frm_register();
-            frm.ShowDialog();
+           // frm_register frm = new frm_register();
+           // frm.ShowDialog();
         }
 
         private void label5_Click(object sender, EventArgs e)

@@ -38,16 +38,25 @@ namespace pgso
             combobox_Filter.SelectedIndexChanged += Combobox_Filter_SelectedIndexChanged;
             txt_Search.TextChanged += Txt_Search_TextChanged;
 
+            txt_FName.TextChanged += Control_ValueChanged;
+            txt_LName.TextChanged += Control_ValueChanged;
+            txt_Address.TextChanged += Control_ValueChanged;
             txt_Status.TextChanged += Control_ValueChanged;
             txt_Activity.TextChanged += Control_ValueChanged;
             txt_Participants.TextChanged += Control_ValueChanged;
-            Date_Start.ValueChanged += Control_ValueChanged;
-            Date_End.ValueChanged += Control_ValueChanged;
-            Time_Start.ValueChanged += Control_ValueChanged;
-            Time_End.ValueChanged += Control_ValueChanged;
+            //Date_Start.ValueChanged += Control_ValueChanged;
+            //Date_End.ValueChanged += Control_ValueChanged;
+            //Time_Start.ValueChanged += Control_ValueChanged;
+            // Time_End.ValueChanged += Control_ValueChanged;
 
-            btn_Update.Click += btn_Update_Click;
+            // btn_Update.Click += btn_Update_Click;
             //btn_Refresh.Click += Btn_Refresh_Click;
+            dt_all.CellFormatting += dt_all_CellFormatting;
+            //datagridview column header bg color
+            dt_all.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.LightBlue;
+            dt_all.EnableHeadersVisualStyles = false;
+            dt_all.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 10, System.Drawing.FontStyle.Bold);
+
         }
 
         private void frm_Venues_Load(object sender, EventArgs e)
@@ -55,8 +64,21 @@ namespace pgso
             LoadReservationData();
         }
 
+        private void dt_all_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Check if the column is one of the numeric columns
+            if (dt_all.Columns[e.ColumnIndex].Name == "fld_Total")
+            {
+                if (e.Value != null && decimal.TryParse(e.Value.ToString(), out decimal value))
+                {
+                    e.Value = value.ToString("N0"); // Format as comma-separated with no decimal places
+                    e.FormattingApplied = true;
+                }
 
+            }
+        }
         //Fetches dat from database and binds it to the binding source
+        //datagridvuew
         private void LoadReservationData()
         {
             try
@@ -96,6 +118,7 @@ namespace pgso
             }
         }
 
+        //pag napindot, magpapkita muna tong mga to bago si LoadReservationDetails
         private void Dt_all_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -104,7 +127,16 @@ namespace pgso
                 currentControlNumber = row.Cells["fld_Control_number"].Value?.ToString() ?? "";
                 txt_CN.Text = currentControlNumber;
                 txt_Status.Text = row.Cells["fld_Reservation_Status"].Value?.ToString() ?? "";
-                txt_Total.Text = row.Cells["fld_Total_Amount"].Value?.ToString() ?? "0.00";
+
+                // Format the Total Amount with commas
+                if (decimal.TryParse(row.Cells["fld_Total_Amount"].Value?.ToString(), out decimal totalAmount))
+                {
+                    txt_Total.Text = totalAmount.ToString("N0"); // Format as comma-separated with no decimal places
+                }
+                else
+                {
+                    txt_Total.Text = "0"; // Default value if parsing fails
+                }
 
                 if (!string.IsNullOrEmpty(currentControlNumber))
                 {
@@ -116,6 +148,9 @@ namespace pgso
             }
         }
 
+
+
+        //display niya ito sa mga text boxes
         private void LoadReservationDetails(string controlNumber)
         {
             try
@@ -124,33 +159,33 @@ namespace pgso
                 {
                     connection.Open();
                     string query = @"
-                    SELECT TOP 1
-                        r.fld_Reservation_Status AS Status,
-                        rp.fld_First_Name AS FirstName, 
-                        rp.fld_Surname AS LastName,
-                        rp.fld_Requesting_Person_Address AS Address,
-                        rp.fld_Requesting_Office AS Office,
-                        r.fld_Activity_Name AS ActivityName,
-                        rv.fld_Participants AS Participants,
-                        v.fld_Venue_Name AS VenueName,
-                        rv.fld_Start_Date AS StartDate,
-                        rv.fld_End_Date AS EndDate,
-                        rv.fld_Start_Time AS StartTime,
-                        rv.fld_End_Time AS EndTime,
-                        vs.fld_Venue_Scope_Name AS Scope,
-                        vp.fld_Rate_Type AS RateType
-                    FROM tbl_Reservation r
-                    LEFT JOIN tbl_Requesting_Person rp 
-                        ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-                    LEFT JOIN tbl_Reservation_Venues rv 
-                        ON r.pk_ReservationID = rv.fk_ReservationID
-                    LEFT JOIN tbl_Venue v 
-                        ON rv.fk_VenueID = v.pk_VenueID
-                    LEFT JOIN tbl_Venue_Scope vs 
-                        ON rv.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
-                    LEFT JOIN tbl_Venue_Pricing vp 
-                        ON (rv.fk_VenueID = vp.fk_VenueID AND rv.fk_Venue_ScopeID = vp.fk_Venue_ScopeID)
-                    WHERE r.fld_Control_number = @ControlNumber";
+                SELECT TOP 1
+                    r.fld_Reservation_Status AS Status,
+                    rp.fld_First_Name AS FirstName, 
+                    rp.fld_Surname AS LastName,
+                    rp.fld_Requesting_Person_Address AS Address,
+                    rp.fld_Requesting_Office AS Office,
+                    r.fld_Activity_Name AS ActivityName,
+                    rv.fld_Participants AS Participants,
+                    v.fld_Venue_Name AS VenueName,
+                    rv.fld_Start_Date AS StartDate,
+                    rv.fld_End_Date AS EndDate,
+                    rv.fld_Start_Time AS StartTime,
+                    rv.fld_End_Time AS EndTime,
+                    vs.fld_Venue_Scope_Name AS Scope,
+                    vp.fld_Rate_Type AS RateType
+                FROM tbl_Reservation r
+                LEFT JOIN tbl_Requesting_Person rp 
+                    ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                LEFT JOIN tbl_Reservation_Venues rv 
+                    ON r.pk_ReservationID = rv.fk_ReservationID
+                LEFT JOIN tbl_Venue v 
+                    ON rv.fk_VenueID = v.pk_VenueID
+                LEFT JOIN tbl_Venue_Scope vs 
+                    ON rv.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
+                LEFT JOIN tbl_Venue_Pricing vp 
+                    ON (rv.fk_VenueID = vp.fk_VenueID AND rv.fk_Venue_ScopeID = vp.fk_Venue_ScopeID)
+                WHERE r.fld_Control_number = @ControlNumber";
 
                     using (var command = new SqlCommand(query, connection))
                     {
@@ -166,21 +201,25 @@ namespace pgso
                                 txt_Office.Text = reader["Office"]?.ToString() ?? "N/A";
                                 txt_Activity.Text = reader["ActivityName"]?.ToString() ?? "N/A";
                                 txt_Participants.Text = reader["Participants"]?.ToString() ?? "0";
-                               // txt_Venue.Text = reader["VenueName"]?.ToString() ?? "N/A";
-                                //txt_Scope.Text = reader["Scope"]?.ToString() ?? "N/A";
+                                txt_Venue.Text = reader["VenueName"]?.ToString() ?? "N/A";
+                                txt_Scope.Text = reader["Scope"]?.ToString() ?? "N/A";
                                 txt_Type.Text = reader["RateType"]?.ToString() ?? "N/A";
 
-                                Date_Start.Value = reader["StartDate"] != DBNull.Value ?
-                                    Convert.ToDateTime(reader["StartDate"]) : DateTime.Now;
-                                Date_End.Value = reader["EndDate"] != DBNull.Value ?
-                                    Convert.ToDateTime(reader["EndDate"]) : DateTime.Now;
-                                Time_Start.Value = reader["StartTime"] != DBNull.Value ?
-                                    DateTime.Today.Add(TimeSpan.Parse(reader["StartTime"].ToString())) : DateTime.Now;
-                                Time_End.Value = reader["EndTime"] != DBNull.Value ?
-                                    DateTime.Today.Add(TimeSpan.Parse(reader["EndTime"].ToString())) : DateTime.Now;
+                                // Display date in MM/dd/yyyy format
+                                txt_Date_Start.Text = reader["StartDate"] != DBNull.Value
+                                    ? Convert.ToDateTime(reader["StartDate"]).ToString("MM/dd/yyyy")
+                                    : "N/A";
+                                txt_Date_End.Text = reader["EndDate"] != DBNull.Value
+                                    ? Convert.ToDateTime(reader["EndDate"]).ToString("MM/dd/yyyy")
+                                    : "N/A";
 
-                                // Populate combo_Venue and combo_Scope
-                                PopulateVenueAndScope(reader["VenueName"]?.ToString(), reader["Scope"]?.ToString());
+                                // Display time in 12-hour format with AM/PM
+                                txt_Hour_Start.Text = reader["StartTime"] != DBNull.Value
+                                    ? DateTime.Today.Add(TimeSpan.Parse(reader["StartTime"].ToString())).ToString("hh:mm tt")
+                                    : "N/A";
+                                txt_Hour_End.Text = reader["EndTime"] != DBNull.Value
+                                    ? DateTime.Today.Add(TimeSpan.Parse(reader["EndTime"].ToString())).ToString("hh:mm tt")
+                                    : "N/A";
                             }
                         }
                     }
@@ -189,65 +228,6 @@ namespace pgso
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading reservation details: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        //populate the venue scope:
-        private void PopulateVenueAndScope(string reservedVenue, string reservedScope)
-        {
-            try
-            {
-                using (var connection = new SqlConnection(db.strCon.ConnectionString))
-                {
-                    connection.Open();
-
-                    // Load all venues
-                    string venueQuery = "SELECT fld_Venue_Name FROM tbl_Venue ORDER BY fld_Venue_Name";
-                    var venueList = new List<string>();
-                    using (var command = new SqlCommand(venueQuery, connection))
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            venueList.Add(reader["fld_Venue_Name"].ToString());
-                        }
-                    }
-
-                    // Load all scopes
-                    string scopeQuery = "SELECT fld_Venue_Scope_Name FROM tbl_Venue_Scope ORDER BY fld_Venue_Scope_Name";
-                    var scopeList = new List<string>();
-                    using (var command = new SqlCommand(scopeQuery, connection))
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            scopeList.Add(reader["fld_Venue_Scope_Name"].ToString());
-                        }
-                    }
-
-                    // Add reserved venue and scope to the top of the lists
-                    if (!string.IsNullOrEmpty(reservedVenue) && !venueList.Contains(reservedVenue))
-                    {
-                        venueList.Insert(0, reservedVenue);
-                    }
-                    if (!string.IsNullOrEmpty(reservedScope) && !scopeList.Contains(reservedScope))
-                    {
-                        scopeList.Insert(0, reservedScope);
-                    }
-
-                    // Bind to combo boxes
-                    combo_Venue.DataSource = venueList;
-                    combo_Scope.DataSource = scopeList;
-
-                    // Set selected items
-                    combo_Venue.SelectedItem = reservedVenue;
-                    combo_Scope.SelectedItem = reservedScope;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading venues and scopes: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -277,63 +257,45 @@ namespace pgso
                 {
                     connection.Open();
 
-                    // First update tbl_Reservation
+                    // Update tbl_Reservation for the status
                     string reservationQuery = @"
-                    UPDATE tbl_Reservation 
-                    SET fld_Reservation_Status = @Status,
-                        fld_Activity_Name = @ActivityName
-                    WHERE fld_Control_number = @ControlNumber";
+                UPDATE tbl_Reservation 
+                SET fld_Reservation_Status = @Status
+                WHERE fld_Control_number = @ControlNumber";
 
                     using (var command = new SqlCommand(reservationQuery, connection))
                     {
                         command.Parameters.AddWithValue("@Status", txt_Status.Text.Trim());
-                        command.Parameters.AddWithValue("@ActivityName", txt_Activity.Text.Trim());
                         command.Parameters.AddWithValue("@ControlNumber", currentControlNumber);
                         command.ExecuteNonQuery();
                     }
 
-                    // Then update tbl_Reservation_Venues
-                    string venueQuery = @"
-                    UPDATE tbl_Reservation_Venues
-                    SET fld_Start_Date = @StartDate,
-                        fld_End_Date = @EndDate,
-                        fld_Start_Time = @StartTime,
-                        fld_End_Time = @EndTime,
-                        fld_Participants = @Participants,
-                        fk_VenueID = (SELECT pk_VenueID FROM tbl_Venue WHERE fld_Venue_Name = @VenueName),
-                        fk_Venue_ScopeID = (SELECT pk_Venue_ScopeID FROM tbl_Venue_Scope WHERE fld_Venue_Scope_Name = @ScopeName)
-                    WHERE fk_ReservationID = 
-                        (SELECT pk_ReservationID FROM tbl_Reservation 
-                         WHERE fld_Control_number = @ControlNumber)";
+                    // Update tbl_Requesting_Person for the first name, last name, and address
+                    string personQuery = @"
+                        UPDATE tbl_Requesting_Person
+                        SET fld_First_Name = @FirstName,
+                            fld_Surname = @LastName,
+                            fld_Requesting_Person_Address = @Address
+                        WHERE pk_Requesting_PersonID = 
+                            (SELECT fk_Requesting_PersonID 
+                             FROM tbl_Reservation 
+                             WHERE fld_Control_number = @ControlNumber)";
 
-                    using (var command = new SqlCommand(venueQuery, connection))
+                    using (var command = new SqlCommand(personQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@StartDate", Date_Start.Value.Date);
-                        command.Parameters.AddWithValue("@EndDate", Date_End.Value.Date);
-                        command.Parameters.AddWithValue("@StartTime", Time_Start.Value.TimeOfDay);
-                        command.Parameters.AddWithValue("@EndTime", Time_End.Value.TimeOfDay);
-                        command.Parameters.AddWithValue("@Participants",
-                            int.TryParse(txt_Participants.Text, out int p) ? p : 0);
-                      //  command.Parameters.AddWithValue("@VenueName", txt_Venue.Text.Trim());
-                        //command.Parameters.AddWithValue("@ScopeName", txt_Scope.Text.Trim());
+                        command.Parameters.AddWithValue("@FirstName", txt_FName.Text.Trim());
+                        command.Parameters.AddWithValue("@LastName", txt_LName.Text.Trim());
+                        command.Parameters.AddWithValue("@Address", txt_Address.Text.Trim());
                         command.Parameters.AddWithValue("@ControlNumber", currentControlNumber);
-
-                        int rowsAffected = command.ExecuteNonQuery();
-
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Reservation updated successfully!", "Success",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            LoadReservationData();
-                            btn_Update.Enabled = false;
-                            hasChanges = false;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Venue details were not updated.", "Warning",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
+                        command.ExecuteNonQuery();
                     }
+
+                    // Display success message only once after both updates
+                    MessageBox.Show("Reservation updated successfully!", "Success",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadReservationData();
+                    btn_Update.Enabled = false;
+                    hasChanges = false;
                 }
             }
             catch (Exception ex)
@@ -342,6 +304,8 @@ namespace pgso
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
 
         private void Btn_Refresh_Click(object sender, EventArgs e)
@@ -385,6 +349,26 @@ namespace pgso
         private void txt_Update_TextChanged(object sender, EventArgs e) { }
 
         private void dt_all_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void txt_Scope_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_Venue_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void combo_Venue_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel_Information_Paint(object sender, PaintEventArgs e)
         {
 
         }

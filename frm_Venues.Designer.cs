@@ -36,11 +36,13 @@
             this.fld_Reservation_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Total_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_Information = new System.Windows.Forms.Panel();
+            this.txt_Hour_End = new System.Windows.Forms.TextBox();
+            this.txt_Scope = new System.Windows.Forms.TextBox();
+            this.txt_Hour_Start = new System.Windows.Forms.TextBox();
             this.btn_Update = new System.Windows.Forms.Button();
-            this.Time_End = new System.Windows.Forms.DateTimePicker();
-            this.Time_Start = new System.Windows.Forms.DateTimePicker();
-            this.Date_End = new System.Windows.Forms.DateTimePicker();
-            this.Date_Start = new System.Windows.Forms.DateTimePicker();
+            this.txt_Date_End = new System.Windows.Forms.TextBox();
+            this.txt_Venue = new System.Windows.Forms.TextBox();
+            this.txt_Date_Start = new System.Windows.Forms.TextBox();
             this.txt_LName = new System.Windows.Forms.TextBox();
             this.txt_Total = new System.Windows.Forms.TextBox();
             this.txt_Status = new System.Windows.Forms.TextBox();
@@ -70,8 +72,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.combo_Venue = new System.Windows.Forms.ComboBox();
-            this.combo_Scope = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dt_all)).BeginInit();
             this.panel_Information.SuspendLayout();
             this.SuspendLayout();
@@ -149,13 +149,13 @@
             this.panel_Information.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_Information.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel_Information.Controls.Add(this.combo_Scope);
-            this.panel_Information.Controls.Add(this.combo_Venue);
+            this.panel_Information.Controls.Add(this.txt_Hour_End);
+            this.panel_Information.Controls.Add(this.txt_Scope);
+            this.panel_Information.Controls.Add(this.txt_Hour_Start);
             this.panel_Information.Controls.Add(this.btn_Update);
-            this.panel_Information.Controls.Add(this.Time_End);
-            this.panel_Information.Controls.Add(this.Time_Start);
-            this.panel_Information.Controls.Add(this.Date_End);
-            this.panel_Information.Controls.Add(this.Date_Start);
+            this.panel_Information.Controls.Add(this.txt_Date_End);
+            this.panel_Information.Controls.Add(this.txt_Venue);
+            this.panel_Information.Controls.Add(this.txt_Date_Start);
             this.panel_Information.Controls.Add(this.txt_LName);
             this.panel_Information.Controls.Add(this.txt_Total);
             this.panel_Information.Controls.Add(this.txt_Status);
@@ -184,6 +184,35 @@
             this.panel_Information.Name = "panel_Information";
             this.panel_Information.Size = new System.Drawing.Size(375, 468);
             this.panel_Information.TabIndex = 7;
+            this.panel_Information.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Information_Paint);
+            // 
+            // txt_Hour_End
+            // 
+            this.txt_Hour_End.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Hour_End.Location = new System.Drawing.Point(259, 249);
+            this.txt_Hour_End.Name = "txt_Hour_End";
+            this.txt_Hour_End.ReadOnly = true;
+            this.txt_Hour_End.Size = new System.Drawing.Size(100, 23);
+            this.txt_Hour_End.TabIndex = 70;
+            // 
+            // txt_Scope
+            // 
+            this.txt_Scope.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Scope.Location = new System.Drawing.Point(153, 172);
+            this.txt_Scope.Name = "txt_Scope";
+            this.txt_Scope.ReadOnly = true;
+            this.txt_Scope.Size = new System.Drawing.Size(205, 22);
+            this.txt_Scope.TabIndex = 17;
+            this.txt_Scope.TextChanged += new System.EventHandler(this.txt_Scope_TextChanged);
+            // 
+            // txt_Hour_Start
+            // 
+            this.txt_Hour_Start.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Hour_Start.Location = new System.Drawing.Point(153, 249);
+            this.txt_Hour_Start.Name = "txt_Hour_Start";
+            this.txt_Hour_Start.ReadOnly = true;
+            this.txt_Hour_Start.Size = new System.Drawing.Size(100, 23);
+            this.txt_Hour_Start.TabIndex = 69;
             // 
             // btn_Update
             // 
@@ -196,35 +225,33 @@
             this.btn_Update.UseVisualStyleBackColor = true;
             this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
             // 
-            // Time_End
+            // txt_Date_End
             // 
-            this.Time_End.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.Time_End.Location = new System.Drawing.Point(263, 256);
-            this.Time_End.Name = "Time_End";
-            this.Time_End.Size = new System.Drawing.Size(103, 20);
-            this.Time_End.TabIndex = 65;
+            this.txt_Date_End.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Date_End.Location = new System.Drawing.Point(153, 301);
+            this.txt_Date_End.Name = "txt_Date_End";
+            this.txt_Date_End.ReadOnly = true;
+            this.txt_Date_End.Size = new System.Drawing.Size(204, 23);
+            this.txt_Date_End.TabIndex = 68;
             // 
-            // Time_Start
+            // txt_Venue
             // 
-            this.Time_Start.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.Time_Start.Location = new System.Drawing.Point(154, 256);
-            this.Time_Start.Name = "Time_Start";
-            this.Time_Start.Size = new System.Drawing.Size(103, 20);
-            this.Time_Start.TabIndex = 64;
+            this.txt_Venue.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Venue.Location = new System.Drawing.Point(154, 146);
+            this.txt_Venue.Name = "txt_Venue";
+            this.txt_Venue.ReadOnly = true;
+            this.txt_Venue.Size = new System.Drawing.Size(205, 22);
+            this.txt_Venue.TabIndex = 16;
+            this.txt_Venue.TextChanged += new System.EventHandler(this.txt_Venue_TextChanged);
             // 
-            // Date_End
+            // txt_Date_Start
             // 
-            this.Date_End.Location = new System.Drawing.Point(153, 305);
-            this.Date_End.Name = "Date_End";
-            this.Date_End.Size = new System.Drawing.Size(200, 20);
-            this.Date_End.TabIndex = 63;
-            // 
-            // Date_Start
-            // 
-            this.Date_Start.Location = new System.Drawing.Point(153, 282);
-            this.Date_Start.Name = "Date_Start";
-            this.Date_Start.Size = new System.Drawing.Size(200, 20);
-            this.Date_Start.TabIndex = 62;
+            this.txt_Date_Start.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Date_Start.Location = new System.Drawing.Point(154, 275);
+            this.txt_Date_Start.Name = "txt_Date_Start";
+            this.txt_Date_Start.ReadOnly = true;
+            this.txt_Date_Start.Size = new System.Drawing.Size(204, 23);
+            this.txt_Date_Start.TabIndex = 67;
             // 
             // txt_LName
             // 
@@ -235,7 +262,7 @@
             // 
             // txt_Total
             // 
-            this.txt_Total.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Total.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Total.Location = new System.Drawing.Point(154, 380);
             this.txt_Total.Name = "txt_Total";
             this.txt_Total.ReadOnly = true;
@@ -282,7 +309,6 @@
             this.txt_Address.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Address.Location = new System.Drawing.Point(154, 120);
             this.txt_Address.Name = "txt_Address";
-            this.txt_Address.ReadOnly = true;
             this.txt_Address.Size = new System.Drawing.Size(204, 23);
             this.txt_Address.TabIndex = 51;
             // 
@@ -497,22 +523,6 @@
             this.label17.TabIndex = 15;
             this.label17.Text = "VENUES";
             // 
-            // combo_Venue
-            // 
-            this.combo_Venue.FormattingEnabled = true;
-            this.combo_Venue.Location = new System.Drawing.Point(154, 148);
-            this.combo_Venue.Name = "combo_Venue";
-            this.combo_Venue.Size = new System.Drawing.Size(204, 21);
-            this.combo_Venue.TabIndex = 16;
-            // 
-            // combo_Scope
-            // 
-            this.combo_Scope.FormattingEnabled = true;
-            this.combo_Scope.Location = new System.Drawing.Point(154, 173);
-            this.combo_Scope.Name = "combo_Scope";
-            this.combo_Scope.Size = new System.Drawing.Size(204, 21);
-            this.combo_Scope.TabIndex = 17;
-            // 
             // frm_Venues
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -576,12 +586,12 @@
         private System.Windows.Forms.TextBox txt_Office;
         private System.Windows.Forms.TextBox txt_LName;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.DateTimePicker Date_End;
-        private System.Windows.Forms.DateTimePicker Date_Start;
-        private System.Windows.Forms.DateTimePicker Time_End;
-        private System.Windows.Forms.DateTimePicker Time_Start;
         private System.Windows.Forms.Button btn_Update;
-        private System.Windows.Forms.ComboBox combo_Venue;
-        private System.Windows.Forms.ComboBox combo_Scope;
+        private System.Windows.Forms.TextBox txt_Venue;
+        private System.Windows.Forms.TextBox txt_Scope;
+        private System.Windows.Forms.TextBox txt_Date_Start;
+        private System.Windows.Forms.TextBox txt_Date_End;
+        private System.Windows.Forms.TextBox txt_Hour_Start;
+        private System.Windows.Forms.TextBox txt_Hour_End;
     }
 }
