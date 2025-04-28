@@ -37,19 +37,47 @@ namespace pgso
         {
             lblDays.Text = numday.ToString();
         }
-
+        public void ClearReservations()
+        {
+            combo_Venues.DataSource = null;
+            combo_Equipments.DataSource = null;
+            combo_Venues.Items.Clear();
+            combo_Equipments.Items.Clear();
+            this.BackColor = SystemColors.ControlDark;
+        }
         public void SetReservations(List<(string DisplayName, string ControlNumber)> venueReservations,
                              List<(string DisplayName, string ControlNumber)> equipmentReservations)
         {
             venueReservations = venueReservations ?? new List<(string, string)>();
             equipmentReservations = equipmentReservations ?? new List<(string, string)>();
 
+            // Filter out null or empty DisplayName values
+            venueReservations = venueReservations.Where(v => !string.IsNullOrEmpty(v.DisplayName)).ToList();
+            equipmentReservations = equipmentReservations.Where(e => !string.IsNullOrEmpty(e.DisplayName)).ToList();
+
+            // Debugging: Log invalid entries
+            var invalidVenueReservations = venueReservations.Where(v => string.IsNullOrEmpty(v.DisplayName)).ToList();
+            var invalidEquipmentReservations = equipmentReservations.Where(e => string.IsNullOrEmpty(e.DisplayName)).ToList();
+
+            if (invalidVenueReservations.Any())
+            {
+                MessageBox.Show($"Invalid venue reservations: {string.Join(", ", invalidVenueReservations.Select(v => v.ControlNumber))}", "Debug");
+            }
+
+            if (invalidEquipmentReservations.Any())
+            {
+                MessageBox.Show($"Invalid equipment reservations: {string.Join(", ", invalidEquipmentReservations.Select(e => e.ControlNumber))}", "Debug");
+            }
+
             // Set combo box data sources
             combo_Venues.DataSource = venueReservations.Select(v => v.DisplayName).ToList();
             combo_Equipments.DataSource = equipmentReservations.Select(e => e.DisplayName).ToList();
 
-            // Handle duplicates in equipmentReservations
-            combo_Venues.Tag = venueReservations.ToDictionary(v => v.DisplayName, v => v.ControlNumber);
+            // Handle duplicates in reservations
+            combo_Venues.Tag = venueReservations
+                .GroupBy(v => v.DisplayName)
+                .ToDictionary(g => g.Key, g => g.First().ControlNumber);
+
             combo_Equipments.Tag = equipmentReservations
                 .GroupBy(e => e.DisplayName)
                 .ToDictionary(g => g.Key, g => g.First().ControlNumber);
@@ -66,6 +94,7 @@ namespace pgso
             combo_Venues.ForeColor = hasVenueReservations ? Color.Green : Color.Black;
             combo_Equipments.ForeColor = hasEquipmentReservations ? Color.Blue : Color.Black;
         }
+
 
         private void Combo_Venues_SelectedIndexChanged(object sender, EventArgs e)
         {

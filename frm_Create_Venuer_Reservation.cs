@@ -24,10 +24,9 @@ namespace pgso
             TimeEnd.Format = DateTimePickerFormat.Custom;
             TimeEnd.CustomFormat = "hh:mm tt";
             LoadVenues();
-            //CalculateNumberOfDays();
+
             CalculateNumberOfHour();
-            // date_of_use_start.ValueChanged += Date_ValueChanged;
-            //date_of_use_end.ValueChanged += Date_ValueChanged;
+
             TimeStart.ValueChanged += Time_ValueChanged;
             TimeEnd.ValueChanged += Time_ValueChanged;
             txt_rate.TextChanged += (sender, e) => CalculateTotalAmount();
@@ -38,6 +37,11 @@ namespace pgso
             combo_Request.Items.Add("Walk In");
             CalculateTotalAmount();
             txt_controlnum.Text = GenerateControlNumber();
+
+            // Set MinDate to prevent selecting past dates
+            date_of_use_start.MinDate = DateTime.Now.Date;
+            date_of_use_end.MinDate = DateTime.Now.Date;
+
         }
         private void frm_createvenuereservation_Load(object sender, EventArgs e)
         {
@@ -79,6 +83,8 @@ namespace pgso
             CalculateNumberOfHour();
         }
 
+        
+
         private void CalculateNumberOfHour()
         {
             DateTime startDateTime = date_of_use_start.Value.Date + TimeStart.Value.TimeOfDay;
@@ -87,11 +93,23 @@ namespace pgso
             TimeSpan difference = endDateTime - startDateTime;
             double numberOfHours = difference.TotalHours;
 
+            // Check if the number of hours is negative
+            if (numberOfHours < 0)
+            {
+                MessageBox.Show("The number of hours must not be negative. Please adjust the start and end times.",
+                                "Invalid Number of Hours", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Reset the number of hours to 0
+                txtx_Num_Hours.Text = "0.00";
+                return; // Exit the method
+            }
+
             txtx_Num_Hours.Text = numberOfHours.ToString("0.00");
 
             // Force calculation after updating hours
             CalculateTotalAmount();
         }
+
         // Load venues and populate combo_venues
         private void LoadVenues()
         {
@@ -183,7 +201,7 @@ namespace pgso
             }
         }
 
-
+        //Auto generate control number
         private string GenerateControlNumber()
         {
             try
@@ -287,7 +305,7 @@ namespace pgso
             }
         }
 
-        // Load rate based on selected venue, venue scope, reservation type, and aircon selection
+        // Load rate(from db) based on selected venue, venue scope, reservation type, and aircon selection
         private void LoadRate()
         {
             try
@@ -298,12 +316,12 @@ namespace pgso
 
                 DBConnect();
                 string rateQuery = @"
-            SELECT fld_First4Hrs_Rate, fld_Hourly_Rate 
-            FROM tbl_Venue_Pricing 
-            WHERE fld_Rate_Type = @RateType 
-            AND fk_VenueID = @VenueID 
-            AND fk_Venue_ScopeID = @VenueScopeID 
-            AND fld_Aircon = @UsesAircon";
+                    SELECT fld_First4Hrs_Rate, fld_Hourly_Rate 
+                    FROM tbl_Venue_Pricing 
+                    WHERE fld_Rate_Type = @RateType 
+                    AND fk_VenueID = @VenueID 
+                    AND fk_Venue_ScopeID = @VenueScopeID 
+                    AND fld_Aircon = @UsesAircon";
 
                 using (SqlCommand rateCmd = new SqlCommand(rateQuery, conn))
                 {
@@ -340,7 +358,7 @@ namespace pgso
             }
         }
 
-        // Submit data to tbl_Reservation
+        // Submit data to tbl_Reservation/tbl_Reservation_Venue/tbl_Requesting_Person
         private void btn_submit_Click(object sender, EventArgs e)
         {
             SqlTransaction transaction = null;
@@ -386,10 +404,10 @@ namespace pgso
 
                 // Step 2: Insert into tbl_Requesting_Person
                 cmd = new SqlCommand(@"
-        INSERT INTO tbl_Requesting_Person 
-        (fld_Surname, fld_First_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office) 
-        OUTPUT INSERTED.pk_Requesting_PersonID 
-        VALUES (@Surname, @FirstName, @Address, @ContactNumber, @RequestOrigin, @Requesting_Office)", conn, transaction);
+                    INSERT INTO tbl_Requesting_Person 
+                    (fld_Surname, fld_First_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office) 
+                    OUTPUT INSERTED.pk_Requesting_PersonID 
+                    VALUES (@Surname, @FirstName, @Address, @ContactNumber, @RequestOrigin, @Requesting_Office)", conn, transaction);
 
                 cmd.Parameters.AddWithValue("@Surname", txt_surname.Text);
                 cmd.Parameters.AddWithValue("@FirstName", txt_firstname.Text);
@@ -423,14 +441,14 @@ namespace pgso
 
                 // Step 4: Insert into tbl_Reservation
                 cmd = new SqlCommand(@"
-                INSERT INTO tbl_Reservation 
-                (fld_Control_Number, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time, fld_Activity_Name, 
-                fld_Number_Of_Participants, fld_Reservation_Status, fld_Reservation_Type, fld_Total_Amount, 
-                fk_Requesting_PersonID, fk_VenueID, fk_Venue_PricingID, fk_Venue_ScopeID) 
-                OUTPUT INSERTED.pk_ReservationID 
-                VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityName, 
-                @NumberOfParticipants, @ReservationStatus, @ReservationType, @TotalAmount, 
-                @RequestingPersonID, @VenueID, @VenuePricingID, @VenueScopeID)", conn, transaction);
+                    INSERT INTO tbl_Reservation 
+                    (fld_Control_Number, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time, fld_Activity_Name, 
+                    fld_Number_Of_Participants, fld_Reservation_Status, fld_Reservation_Type, fld_Total_Amount, 
+                    fk_Requesting_PersonID, fk_VenueID, fk_Venue_PricingID, fk_Venue_ScopeID) 
+                    OUTPUT INSERTED.pk_ReservationID 
+                    VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityName, 
+                    @NumberOfParticipants, @ReservationStatus, @ReservationType, @TotalAmount, 
+                    @RequestingPersonID, @VenueID, @VenuePricingID, @VenueScopeID)", conn, transaction);
 
                 cmd.Parameters.AddWithValue("@ControlNumber", txt_controlnum.Text);
                 cmd.Parameters.AddWithValue("@StartDate", date_of_use_start.Value);
@@ -470,27 +488,32 @@ namespace pgso
                 // Commit the transaction
                 transaction.Commit();
 
-                MessageBox.Show("Reservation submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Venue Reservation submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Refresh the control number
+                txt_controlnum.Text = GenerateControlNumber();
+                RefreshCalendarView();
                 btn_clearform_Click(sender, e);
             }
             catch (SqlException ex)
             {
                 // Rollback the transaction if any error occurs
                 transaction?.Rollback();
-                if (ex.Number == 547) // Check constraint violation
+
+                // Check for specific SQL error numbers or messages
+                if (ex.Message.Contains("CK_ValidDate")) // Example: Check constraint for valid dates
                 {
-                    MessageBox.Show("Error: " + ex.Message + " Please ensure all data meets the required constraints.", "Constraint Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("The selected date must be from the current date to future dates.", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Error: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
                 // Rollback the transaction if any error occurs
                 transaction?.Rollback();
-                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -498,6 +521,29 @@ namespace pgso
             }
         }
 
+        private void RefreshCalendarView()
+        {
+            // Find all open calendar forms and refresh them
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is frm_Calendar_Venue calendarForm)
+                {
+                    if (calendarForm.InvokeRequired)
+                    {
+                        calendarForm.Invoke(new Action(() =>
+                        {
+                            calendarForm.RefreshCalendar();
+                            calendarForm.BringToFront();
+                        }));
+                    }
+                    else
+                    {
+                        calendarForm.RefreshCalendar();
+                        calendarForm.BringToFront();
+                    }
+                }
+            }
+        }
 
         private void combo_ReservationType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -538,7 +584,7 @@ namespace pgso
         // Helper method to validate the contact number
         private bool IsValidContactNumber(string contactNumber)
         {
-            // validation
+      
             // Ensure the contact number is 10-15 digits long and may contain spaces, dashes, and parentheses
             string cleanedContactNumber = new string(contactNumber.Where(char.IsDigit).ToArray());
             return cleanedContactNumber.Length >= 10 && cleanedContactNumber.Length <= 15;
@@ -551,37 +597,56 @@ namespace pgso
 
         private void btn_clearform_Click(object sender, EventArgs e)
         {
-            // Clear textboxes
-            txt_surname.Clear();
-            txt_firstname.Clear();
-            txt_address.Clear();
-            txt_contact.Clear();
-            // Generate new control number
-            txt_controlnum.Text = GenerateControlNumber();
-            txt_controlnum.Clear();
-            txt_activity.Clear();
-            txt_rate.Clear();
+            // Temporarily unsubscribe from ValueChanged events
+            date_of_use_start.ValueChanged -= date_of_use_start_ValueChanged;
+            date_of_use_end.ValueChanged -= date_of_use_end_ValueChanged;
+            TimeStart.ValueChanged -= Time_ValueChanged;
+            TimeEnd.ValueChanged -= Time_ValueChanged;
 
-            // Reset DateTimePickers to current date and time
-            date_of_use_start.Value = DateTime.Now;
-            date_of_use_end.Value = DateTime.Now;
-            TimeStart.Value = DateTime.Now;
-            TimeEnd.Value = DateTime.Now;
+            try
+            {
+                // Clear textboxes
+                txt_surname.Clear();
+                txt_firstname.Clear();
+                txt_address.Clear();
+                txt_contact.Clear();
+                txt_activity.Clear();
+                txt_rate.Clear();
 
-            // Reset ComboBoxes to default selection
-            if (combo_venues.Items.Count > 0)
-                combo_venues.SelectedIndex = 0;
-            if (combo_scope.Items.Count > 0)
-                combo_scope.SelectedIndex = 0;
-            if (combo_ReservationType.Items.Count > 0)
-                combo_ReservationType.SelectedIndex = 0;
+                // Refresh the control number
+                txt_controlnum.Text = GenerateControlNumber();
 
-            // Reset RadioButtons
-            radio_Yes.Checked = false;
-            radio_No.Checked = false;
+                // Reset DateTimePickers to current date and time
+                date_of_use_start.Value = DateTime.Now;
+                date_of_use_end.Value = DateTime.Now;
+                TimeStart.Value = DateTime.Now;
+                TimeEnd.Value = DateTime.Now;
 
-            // Optionally, reset any other controls as needed
+                // Reset ComboBoxes to default selection
+                if (combo_venues.Items.Count > 0)
+                    combo_venues.SelectedIndex = 0;
+                if (combo_scope.Items.Count > 0)
+                    combo_scope.SelectedIndex = 0;
+                if (combo_ReservationType.Items.Count > 0)
+                    combo_ReservationType.SelectedIndex = 0;
+
+                // Reset RadioButtons
+                radio_Yes.Checked = false;
+                radio_No.Checked = false;
+
+                // Optionally, reset any other controls as needed
+            }
+            finally
+            {
+                // Re-subscribe to ValueChanged events
+                date_of_use_start.ValueChanged += date_of_use_start_ValueChanged;
+                date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
+                TimeStart.ValueChanged += Time_ValueChanged;
+                TimeEnd.ValueChanged += Time_ValueChanged;
+            }
         }
+
+
 
         // Load reserved dates from the database
         private void LoadReservedDates(int venueID)
@@ -590,21 +655,35 @@ namespace pgso
             try
             {
                 DBConnect();
-                cmd = new SqlCommand("SELECT fld_Start_Date, fld_End_Date FROM tbl_Reservation WHERE fk_VenueID = @VenueID", conn);
+                cmd = new SqlCommand(@"
+            SELECT fld_Start_Date, fld_End_Date 
+            FROM tbl_Reservation 
+            WHERE fk_VenueID = @VenueID 
+              AND fld_Reservation_Status IN ('Confirmed', 'Pending')", conn);
                 cmd.Parameters.AddWithValue("@VenueID", venueID);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    DateTime startDate = reader.GetDateTime(0);
-                    DateTime endDate = reader.GetDateTime(1);
-                    for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+                    if (!reader.IsDBNull(0) && !reader.IsDBNull(1)) // Ensure dates are not null
                     {
-                        reservedDates.Add(date);
+                        DateTime startDate = reader.GetDateTime(0);
+                        DateTime endDate = reader.GetDateTime(1);
+                        for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+                        {
+                            reservedDates.Add(date);
+                        }
                     }
                 }
 
                 reader.Close();
+
+                // Debugging: Log reserved dates
+                Console.WriteLine("Reserved Dates:");
+                foreach (var date in reservedDates)
+                {
+                    Console.WriteLine(date.ToShortDateString());
+                }
             }
             catch (Exception ex)
             {
@@ -615,6 +694,8 @@ namespace pgso
                 DBClose();
             }
         }
+
+
 
         private void date_of_use_start_ValueChanged(object sender, EventArgs e)
         {
@@ -627,36 +708,21 @@ namespace pgso
             // Check if the selected date is reserved
             if (reservedDates.Contains(date_of_use_start.Value.Date))
             {
-                MessageBox.Show("The selected start date is already reserved for this venue. Please choose another date.", "Date Reserved", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("The selected start date is already reserved for this venue. Please choose another date.",
+                                "Date Reserved", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 // Temporarily unsubscribe from the event
                 date_of_use_start.ValueChanged -= date_of_use_start_ValueChanged;
-                date_of_use_start.Value = DateTime.Now; // Reset to current date
-                                                        // Re-subscribe to the event
+                date_of_use_start.Value = DateTime.Now.Date; // Reset to the current date
+                                                             // Re-subscribe to the event
                 date_of_use_start.ValueChanged += date_of_use_start_ValueChanged;
             }
         }
 
-        private void date_of_use_end_ValueChanged(object sender, EventArgs e)
-        {
-            // Ensure reservedDates is initialized
-            if (reservedDates == null)
-            {
-                reservedDates = new List<DateTime>();
-            }
 
-            // Check if the selected date is reserved
-            if (reservedDates.Contains(date_of_use_end.Value.Date))
-            {
-                MessageBox.Show("The selected end date is already reserved for this venue. Please choose another date.", "Date Reserved", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                // Temporarily unsubscribe from the event
-                date_of_use_end.ValueChanged -= date_of_use_end_ValueChanged;
-                date_of_use_end.Value = DateTime.Now; // Reset to current date
-                                                      // Re-subscribe to the event
-                date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
-            }
-        }
+
+
         private void txt_rate_TextChanged(object sender, EventArgs e) { }
         private void combo_Utility_SelectedIndexChanged_1(object sender, EventArgs e) { }
         private void panel_Rev_Type_Paint(object sender, PaintEventArgs e) { }
@@ -688,6 +754,65 @@ namespace pgso
         private void num_participants_ValueChanged(object sender, EventArgs e)
         {
             this.num_participants.Maximum = 50000; // Set to 50,000 or any desired value
+
+        }
+
+        private void date_of_use_end_ValueChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine($"date_of_use_end_ValueChanged triggered. Selected Date: {date_of_use_end.Value.Date}");
+
+            // Ensure reservedDates is initialized
+            if (reservedDates == null)
+            {
+                reservedDates = new List<DateTime>();
+            }
+
+            // Check if the selected date is the current date
+            if (date_of_use_end.Value.Date == DateTime.Now.Date)
+            {
+                MessageBox.Show("The selected end date cannot be the current date. Please choose another date.",
+                                "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Temporarily unsubscribe from the event
+                date_of_use_end.ValueChanged -= date_of_use_end_ValueChanged;
+                date_of_use_end.Value = DateTime.Now.AddDays(1); // Reset to the next day
+                                                                 // Re-subscribe to the event
+                date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
+
+                return; // Exit the method
+            }
+
+            // Check if the selected date is in the past
+            if (date_of_use_end.Value.Date < DateTime.Now.Date)
+            {
+                MessageBox.Show("The selected end date cannot be in the past. Please choose a valid date.",
+                                "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Temporarily unsubscribe from the event
+                date_of_use_end.ValueChanged -= date_of_use_end_ValueChanged;
+                date_of_use_end.Value = DateTime.Now.AddDays(1); // Reset to the next day
+                                                                 // Re-subscribe to the event
+                date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
+
+                return; // Exit the method
+            }
+
+            // Check if the selected date is reserved
+            if (reservedDates.Contains(date_of_use_end.Value.Date))
+            {
+                MessageBox.Show("The selected end date is already reserved for this venue. Please choose another date.",
+                                "Date Reserved", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Temporarily unsubscribe from the event
+                date_of_use_end.ValueChanged -= date_of_use_end_ValueChanged;
+                date_of_use_end.Value = DateTime.Now.AddDays(1); // Reset to the next day
+                                                                 // Re-subscribe to the event
+                date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
+            }
+        }
+
+        private void TimeEnd_ValueChanged_1(object sender, EventArgs e)
+        {
 
         }
     }

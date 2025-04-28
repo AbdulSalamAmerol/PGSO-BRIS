@@ -25,6 +25,18 @@ namespace pgso
             dt_Equipments.CellClick += dt_Equipments_CellClick;
             dt_Venues.CellClick += dt_Venues_CellClick;
 
+            // Attach CellFormatting event
+            dt_Venues.CellFormatting += dt_Venues_CellFormatting;
+            dt_Equipments.CellFormatting += dt_Equipments_CellFormatting;
+
+            //datagridview column header bg color
+            dt_Equipments.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.LightBlue;
+            dt_Equipments.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 10, System.Drawing.FontStyle.Bold); 
+            dt_Equipments.EnableHeadersVisualStyles = false;
+
+            dt_Venues.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.LightBlue;
+            dt_Venues.EnableHeadersVisualStyles = false;
+            dt_Venues.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 10, System.Drawing.FontStyle.Bold);
         }
 
 
@@ -41,6 +53,7 @@ namespace pgso
                 if (db.strCon.State == ConnectionState.Closed)
                     db.strCon.Open();
 
+                //VENUES
                 string queryVenues = @"
                 SELECT 
                     v.fld_Venue_Name, 
@@ -57,16 +70,19 @@ namespace pgso
                  JOIN 
                     tbl_Venue_Scope vs ON vs.pk_Venue_ScopeID = vp.fk_Venue_ScopeID";
 
+                //EQUIPMENT
                 string queryEquipment = @"
-                     SELECT 
-                        e.fld_Equipment_Name, 
-                        ep.fld_Equipment_Price,
-                        ep.fld_Equipment_Price_Subsequent,
-                        e.fld_Available_Quantity
-                     FROM 
-                         tbl_Equipment e
-                     JOIN 
-                        tbl_Equipment_Pricing ep ON e.pk_EquipmentID = ep.fk_EquipmentID";
+                SELECT 
+                    e.fld_Equipment_Name, 
+                    ep.fld_Equipment_Price,
+                    ep.fld_Equipment_Price_Subsequent,
+                    e.fld_Remaining_Stock,
+                    e.fld_Total_Stock
+                FROM 
+                    tbl_Equipment e
+                JOIN 
+                    tbl_Equipment_Pricing ep ON e.pk_EquipmentID = ep.fk_EquipmentID";
+
 
                 LoadData(queryEquipment, dt_Equipments, "equipment");
                 LoadData(queryVenues, dt_Venues, "venues");
@@ -81,6 +97,38 @@ namespace pgso
                     db.strCon.Close();
             }
         }
+        private void dt_Venues_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Check if the column is one of the numeric columns
+            if (dt_Venues.Columns[e.ColumnIndex].Name == "fld_First4Hrs_Rate" ||
+                dt_Venues.Columns[e.ColumnIndex].Name == "fld_Hourly_Rate" ||
+                dt_Venues.Columns[e.ColumnIndex].Name == "fld_Additional_Charge")
+            {
+                if (e.Value != null && decimal.TryParse(e.Value.ToString(), out decimal value))
+                {
+                    e.Value = value.ToString("N2"); // Format as comma-separated with 2 decimal places
+                    e.FormattingApplied = true;
+                }
+            }
+        }
+
+        private void dt_Equipments_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Check if the column is one of the numeric columns
+            if (dt_Equipments.Columns[e.ColumnIndex].Name == "fld_Equipment_Price" ||
+                dt_Equipments.Columns[e.ColumnIndex].Name == "fld_Equipment_Price_Subsequent" ||
+                dt_Equipments.Columns[e.ColumnIndex].Name == "fld_Total_Stock" ||
+                dt_Equipments.Columns[e.ColumnIndex].Name == "fld_Remaining_Stock")
+            {
+                if (e.Value != null && decimal.TryParse(e.Value.ToString(), out decimal value))
+                {
+                    e.Value = value.ToString("N0"); // Format as comma-separated with no decimal places
+                    e.FormattingApplied = true;
+                }
+            }
+        }
+
+
 
         private void LoadData(string query, DataGridView dataGridView, string status)
         {
@@ -214,7 +262,7 @@ namespace pgso
                     string equipmentPriceSubsequent = row.Cells["fld_Equipment_Price_Subsequent"].Value.ToString();
 
                    
-                    ShowEditForm(equipmentName, equipmentPrice, equipmentPriceSubsequent, row.Cells["fld_Available_Quantity"].Value.ToString());
+                    ShowEditForm(equipmentName, equipmentPrice, equipmentPriceSubsequent, row.Cells["fld_Total_Stock"].Value.ToString());
 
                 }
                 else if (e.ColumnIndex == dt_Equipments.Columns["Delete"].Index)
@@ -443,7 +491,7 @@ namespace pgso
                             {
                                 string updateEquipmentQuery = @"
                         UPDATE tbl_Equipment
-                        SET fld_Equipment_Name = @newName, fld_Available_Quantity = @newQuantity
+                        SET fld_Equipment_Name = @newName, fld_Remaining_Stock = @newQuantity
                         WHERE pk_EquipmentID = @equipmentId";
 
                                 using (SqlCommand cmdUpdate = new SqlCommand(updateEquipmentQuery, db.strCon, transaction))

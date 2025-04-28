@@ -259,9 +259,9 @@ namespace pgso
 
         private void OpenChooseVenuesForm(int day)
         {
-            frm_reservation_forms frm = new frm_reservation_forms();
-            frm.Text = $"Choose Venue - {currentMonth}/{day}/{currentYear}";
-            frm.ShowDialog();
+          //  frm_reservation_forms frm = new frm_reservation_forms();
+           // frm.Text = $"Choose Venue - {currentMonth}/{day}/{currentYear}";
+            //frm.ShowDialog();
         }
 
         private void frm_dashboard_Load(object sender, EventArgs e)

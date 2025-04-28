@@ -68,17 +68,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.GhostWhite;
-            this.ClientSize = new System.Drawing.Size(355, 246);
+            this.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.ClientSize = new System.Drawing.Size(354, 244);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblReservationDetails);
             this.Controls.Add(this.lblReservationType);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MinimizeBox = false;
             this.Name = "frm_ReservationDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reservation Details";
-            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Load += new System.EventHandler(this.frm_ReservationDetails_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
