@@ -168,7 +168,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.50542cm</Width>
+              <Width>4.22662cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -188,6 +188,7 @@
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
+                                <Format>MMM d, yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -229,7 +230,7 @@
         <Top>4.12433cm</Top>
         <Left>3.33467cm</Left>
         <Height>0.6cm</Height>
-        <Width>3.50542cm</Width>
+        <Width>4.22662cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -256,7 +257,7 @@
           </Paragraph>
         </Paragraphs>
         <Top>4.12433cm</Top>
-        <Left>12.55161cm</Left>
+        <Left>13.10686cm</Left>
         <Height>0.6cm</Height>
         <Width>1.70625cm</Width>
         <ZIndex>5</ZIndex>
@@ -270,7 +271,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.99174cm</Width>
+              <Width>2.47177cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -329,9 +330,9 @@
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
         <Top>4.12433cm</Top>
-        <Left>14.29314cm</Left>
+        <Left>14.81311cm</Left>
         <Height>0.6cm</Height>
-        <Width>2.99174cm</Width>
+        <Width>2.47177cm</Width>
         <ZIndex>6</ZIndex>
         <Style>
           <Border>
@@ -544,6 +545,7 @@
                         </Border>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -609,7 +611,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.15605cm</Width>
+              <Width>1.82563cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -670,7 +672,7 @@
         <Top>8.90835cm</Top>
         <Left>4.13724cm</Left>
         <Height>0.6cm</Height>
-        <Width>2.15605cm</Width>
+        <Width>1.82563cm</Width>
         <ZIndex>13</ZIndex>
         <Style>
           <Border>
@@ -697,7 +699,7 @@
           </Paragraph>
         </Paragraphs>
         <Top>8.90835cm</Top>
-        <Left>6.29329cm</Left>
+        <Left>6.03343cm</Left>
         <Height>0.6cm</Height>
         <Width>0.2cm</Width>
         <ZIndex>14</ZIndex>
@@ -770,7 +772,7 @@
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
         <Top>8.90835cm</Top>
-        <Left>6.49329cm</Left>
+        <Left>6.30398cm</Left>
         <Height>0.6cm</Height>
         <Width>2.89688cm</Width>
         <ZIndex>15</ZIndex>
@@ -820,7 +822,6 @@
                         </Border>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>

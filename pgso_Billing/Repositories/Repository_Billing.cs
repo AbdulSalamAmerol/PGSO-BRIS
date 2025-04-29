@@ -179,6 +179,8 @@ namespace pgso.Billing.Repositories
             return billings;
         }
 
+        
+
         // Get Billing Records by Reservation ID (RDLC of frm_Print_Billing)
         public List<Model_Billing> GetBillingRecordsByReservationId(int reservationId)
         {
@@ -561,7 +563,8 @@ namespace pgso.Billing.Repositories
                             p.fld_Cancellation_Fee,
                             p.fld_Final_Amount_Paid,
                             p.fld_Overtime_Fee,
-                            rp.fld_Requesting_Office
+                            rp.fld_Requesting_Office,
+                            r.fld_OR
                         FROM dbo.tbl_Reservation r
                         LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
                         LEFT JOIN dbo.tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
@@ -630,7 +633,8 @@ namespace pgso.Billing.Repositories
                                     fld_Cancellation_Fee = reader.IsDBNull(44) ? 0 : reader.GetDecimal(44),
                                     fld_Final_Amount_Paid = reader.IsDBNull(45) ? 0 : reader.GetDecimal(45),
                                     fld_Overtime_Fee = reader.IsDBNull(46) ? 0 : reader.GetDecimal(46),
-                                    fld_Requesting_Office = reader.IsDBNull(47) ? "" : reader.GetString(47)
+                                    fld_Requesting_Office = reader.IsDBNull(47) ? "" : reader.GetString(47),
+                                    fld_OR = reader.IsDBNull(48) ? 0 : reader.GetInt32(48)
                                 };
                             }
                         }
@@ -951,7 +955,8 @@ namespace pgso.Billing.Repositories
             re.fld_Equipment_Status,
             re.fld_Date_Returned,
             re.fld_Quantity_Returned,
-            re.fld_Quantity_Damaged
+            re.fld_Quantity_Damaged,
+            r.fld_OR
 
         FROM dbo.tbl_Reservation r
         LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
@@ -1021,7 +1026,8 @@ namespace pgso.Billing.Repositories
                                     fld_Equipment_Status = reader.IsDBNull(39) ? "" : reader.GetString(39),
                                     fld_Date_Returned = reader.IsDBNull(40) ? DateTime.MinValue : reader.GetDateTime(40),
                                     fld_Quantity_Returned = reader.IsDBNull(41) ? 0 : reader.GetInt32(41),
-                                    fld_Quantity_Damaged = reader.IsDBNull(42) ? 0 : reader.GetInt32(42)
+                                    fld_Quantity_Damaged = reader.IsDBNull(42) ? 0 : reader.GetInt32(42),
+                                    fld_OR = reader.IsDBNull(43) ? 0 : reader.GetInt32(43)
                                 };
 
                                 billingDetailsList.Add(billingDetails);

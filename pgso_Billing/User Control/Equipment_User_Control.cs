@@ -29,6 +29,7 @@ namespace pgso.pgso_Billing.User_Control
         public Equipment_User_Control(Model_Billing billingDetailsList)
         {
             InitializeComponent();
+            btn_Add_Equipment_Billing.ForeColor = Color.FromArgb(242, 239, 231);
             _billingDetails = billingDetailsList; // Store the passed-in model
             LoadBillingDetails(billingDetailsList);
             LoadBillingDetails(_billingDetails);  // Reload the data after deletion
@@ -40,7 +41,7 @@ namespace pgso.pgso_Billing.User_Control
             lbl_Reservation_Status.Text = billingDetailsList.fld_Reservation_Status;
             btn_Delete_Equipment_Billing.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
             btn_Add_Equipment_Billing.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
-
+            
             try
             {
                 var reservationID = billingDetailsList.pk_ReservationID;
@@ -72,7 +73,24 @@ namespace pgso.pgso_Billing.User_Control
             lbl_Reservation_Dates.Text = $"{billingDetailsList.fld_Start_Date.ToString("MM/dd/yyyy")} - {billingDetailsList.fld_End_Date.ToString("MM/dd/yyyy")}";
             lbl_Rate_Type.Text = billingDetailsList.fld_Rate_Type;
             lbl_Reservation_Status.Text = billingDetailsList.fld_Reservation_Status;
-            lbl_fld_Total_Amount.Text = billingDetailsList.fld_Total_Amount.ToString("C");  
+            lbl_fld_Total_Amount.Text = billingDetailsList.fld_Total_Amount.ToString("C");
+
+            bool showOR = billingDetailsList.fld_OR != null && billingDetailsList.fld_OR != 0;
+            lbl_OR.Visible = tb_OR.Visible = showOR;
+
+            if (showOR)
+            {
+                lbl_OR.Text = billingDetailsList.fld_OR.ToString();
+            }
+            // First, center align *everything* by default
+            dgv_Equipment_Billing_Records.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv_Equipment_Billing_Records.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Then, set only the first column (index 0) to be left-aligned
+            if (dgv_Equipment_Billing_Records.Columns.Count > 0)
+            {
+                dgv_Equipment_Billing_Records.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            }
         }
         private void btn_Add_Equipment_Billing_Click(object sender, EventArgs e)
         {

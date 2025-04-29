@@ -41,7 +41,6 @@ namespace pgso
             // Optional: Make sure it's the top-most control in the panel
             pb_Logo.BringToFront();
 
-
         }
 
 
@@ -61,6 +60,16 @@ namespace pgso
         private void frm_Billing_Load(object sender, EventArgs e)
         {
 
+            dgv_Billing_Records.CellClick += dgv_Billing_Records_CellContentClick;
+            sb_Billing_Search_Bar.AutoSize = false;
+            this.MinimumSize = new Size(1920, 1200);
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.StartPosition = FormStartPosition.Manual;
+            
+
+
+            dgv_Billing_Records.Columns["col_Amount_Due"].DefaultCellStyle.Format = "C2";
+            dgv_Billing_Records.Columns["col_Amount_Due"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-PH");
             try
             {
                 all_billing_model = repo_billing.GetAllBillingRecords() ?? new List<Model_Billing>(); // Get all billing records
@@ -88,6 +97,17 @@ namespace pgso
             }
         }
 
+        protected override void WndProc(ref Message m)
+        {
+            const int WM_NCLBUTTONDOWN = 0xA1;
+            const int WM_NCLBUTTONDBLCLK = 0xA3; // <- THIS blocks double-click resize
+            const int HTCAPTION = 0x2;
+
+            if ((m.Msg == WM_NCLBUTTONDOWN || m.Msg == WM_NCLBUTTONDBLCLK) && m.WParam.ToInt32() == HTCAPTION)
+                return; // ignore both drag and double-click maximize
+
+            base.WndProc(ref m);
+        }
         private void sb_Billing_Search_Bar_TextChanged(object sender, EventArgs e)
         {
             string searchTerm = sb_Billing_Search_Bar.Text.Trim().ToLower();
@@ -150,7 +170,16 @@ namespace pgso
         // Datagrid Cell Content Click
         private async void dgv_Billing_Records_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return; // Ignore header clicks
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
+            // Check if the clicked cell is not a header row
+            if (e.RowIndex >= 0)
+            {
+                // You can use e.RowIndex and e.ColumnIndex to get the clicked cell's data
+                var clickedCellValue = dgv_Billing_Records[e.ColumnIndex, e.RowIndex].Value;
+
+               
+            }
 
             string columnName = dgv_Billing_Records.Columns[e.ColumnIndex].Name;
 
@@ -248,16 +277,14 @@ namespace pgso
             {
                 // Get the current row being formatted
                 DataGridViewRow row = this.dgv_Billing_Records.Rows[e.RowIndex];
-
-                // Define the name of the column to check
-                string statusColumnName = "col_Reservation_Status"; // Your column name
+                string statusColumnName = "col_Reservation_Status";
 
                 try
                 {
                     // Get the value from the specified status column for the current row
                     object cellValue = row.Cells[statusColumnName].Value;
 
-                    // Check if the value is not null and equals "Pending" (case-sensitive)
+                    // Check if the value is not null and equals "Cancelled" (case-sensitive)
                     if (cellValue != null && cellValue != DBNull.Value && cellValue.ToString() == "Cancelled")
                     {
                         // Set the background color for the entire row to LightCoral (a shade of red)
@@ -267,11 +294,8 @@ namespace pgso
                     }
                     else
                     {
-                        // --- IMPORTANT: Reset the background color for all other rows ---
-                        // Use White, or the DataGridView's default style, or Color.Empty
-                        row.DefaultCellStyle.BackColor = Color.White;
-                        // Reset text color if you changed it above
-                        // row.DefaultCellStyle.ForeColor = this.dgv_Billing_Records.DefaultCellStyle.ForeColor;
+                        // Set the default background color for all other rows to light gray
+                        row.DefaultCellStyle.BackColor = Color.FromArgb(242, 239, 231); // Light grayish color
                     }
                 }
                 catch (Exception ex)
@@ -281,8 +305,26 @@ namespace pgso
                     // Ensure a default color even if an error occurs
                     row.DefaultCellStyle.BackColor = Color.White;
                 }
+
+                // Apply alignment for specific columns
+                if (
+                    e.ColumnIndex == dgv_Billing_Records.Columns["col_Approved"].Index ||
+                    e.ColumnIndex == dgv_Billing_Records.Columns["col_Extend"].Index ||
+                    e.ColumnIndex == dgv_Billing_Records.Columns["col_Cancel"].Index ||
+                    e.ColumnIndex == dgv_Billing_Records.Columns["col_Print"].Index ||
+                    e.ColumnIndex == dgv_Billing_Records.Columns["fld_Control_Number"].Index) // Add col_Control_Number here
+                {
+                    // Align these columns' contents in the middle
+                    e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                }
+                else
+                {
+                    // Left align for other columns
+                    e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                }
             }
         }
+
 
 
         private async Task PrintBilling(int reservationID, string currentStatus) // Print Collection Slip

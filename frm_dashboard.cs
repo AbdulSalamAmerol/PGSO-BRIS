@@ -378,7 +378,7 @@ namespace pgso
         private void tsmi_Billing_Click(object sender, EventArgs e)
         {
             frm_Billing billingForm = new frm_Billing(); // Create an instance of frm_Billing
-            billingForm.Show(); // Show the form
+            billingForm.ShowDialog(); // Show the form
 
         }
 

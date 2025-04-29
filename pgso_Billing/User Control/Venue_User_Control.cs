@@ -9,6 +9,7 @@ using System.Drawing;
 using pgso.Properties;
 using System.IO;
 using System.Threading.Tasks;
+using System.Reflection.Emit;
 
 namespace pgso.pgso_Billing
 {
@@ -86,6 +87,7 @@ namespace pgso.pgso_Billing
         // Method to load billing details into the controls
         public void LoadBillingDetails(Model_Billing billingDetails)
         {
+            HideOvertimeAndRefundDetails(_billingDetails);
             pnl_Billing_Details.Visible = true;
 
             // Populate the labels with values from the billingDetails model
@@ -96,6 +98,14 @@ namespace pgso.pgso_Billing
             lbl_Origin_Request.Text = billingDetails.fld_Request_Origin;
             lbl_Contact_Number.Text = billingDetails.fld_Contact_Number;
             lbl_Address.Text = billingDetails.fld_Requesting_Person_Address;
+            bool showOR = billingDetails.fld_OR != null && billingDetails.fld_OR != 0;
+            lbl_OR.Visible = tb_OR.Visible = showOR;
+
+            if (showOR)
+            {
+                lbl_OR.Text = billingDetails.fld_OR.ToString();
+            }
+
 
             // Format reservation dates (start and end)
             lbl_Reservation_Dates.Text = $"{billingDetails.fld_Start_Date.ToString("MM/dd/yyyy")} - {billingDetails.fld_End_Date.ToString("MM/dd/yyyy")}";
@@ -164,20 +174,109 @@ namespace pgso.pgso_Billing
             lbl_Paid_Amount_2.Text = (otCharge > 0 ? "-" : "") + otCharge.ToString("C");
             lbl_Total_Amount.Text = billingDetails.fld_Total_Amount.ToString("C");
             lbl_Balance.Text = (billingDetails.fld_Total_Amount - billingDetails.fld_Amount_Paid).ToString("C");
-            lbl_Refund_Amount.Text = (billingDetails.fld_Refund_Amount != 0 && billingDetails.fld_Refund_Amount != null)
-                        ? " - " + billingDetails.fld_Refund_Amount.ToString("C")
-                        : billingDetails.fld_Refund_Amount.ToString("C");
+            lbl_Refund_Amount.Text = (billingDetails.fld_Cancellation_Fee).ToString("C");  
 
-            lbl_Final_Amount_Paid.Text = billingDetails.fld_Final_Amount_Paid.ToString("C");
+            lbl_Final_Amount_Paid.Text = (billingDetails.fld_Final_Amount_Paid).ToString("C");
 
             lbl_Overtime_Fee.Text = billingDetails.fld_Overtime_Fee.ToString("C");
             textBox24.Text = (billingDetails.fld_First4Hrs_Rate / 4).ToString("C");
-
-
-
+            lbl_Total_Amount_2.Text = (billingDetails.fld_Overtime_Fee+billingDetails.fld_Cancellation_Fee).ToString("C");
+            lbl_Paid_Amount_2.Text = (billingDetails.fld_Overtime_Fee + billingDetails.fld_Cancellation_Fee).ToString("C");
+            lbl_Balance_2.Text = (billingDetails.fld_Cancellation_Fee - billingDetails.fld_Cancellation_Fee).ToString("C");
+            lbl_Balance_3.Text = (billingDetails.fld_Cancellation_Fee - billingDetails.fld_Cancellation_Fee).ToString("C");
         }
 
-       
+        private void HideOvertimeAndRefundDetails(Model_Billing billingDetails)
+        {
+
+            decimal Refund_Charge = billingDetails.fld_Amount_Paid * 0.05m;
+
+
+            if (billingDetails.fld_Overtime_Fee > 0)
+            {
+                tb9.Visible = false;
+                lbl_Refund_Amount.Visible = false;
+            }
+
+            if (billingDetails.fld_Cancellation_Fee > 0)
+            {
+                tb7.Visible = false;
+                tb8.Visible = false;
+                lbl_OT_Hours.Visible = false;
+               
+                lbl_OT_Hourly_Charge.Visible = false;
+                lbl_Overtime_Fee.Visible = false;
+            }
+
+
+            if (billingDetails.fld_Overtime_Fee == 0 && billingDetails.fld_Cancellation_Fee == 0)
+            {
+               
+                // Hide all specified controls
+                tb1.Visible = false;
+                tb2.Visible = false;
+                tb3.Visible = false;
+                tb4.Visible = false;
+                tb5.Visible = false;
+                tb6.Visible = false;
+                tb7.Visible = false;
+                tb8.Visible = false;
+                tb9.Visible = false;
+                tb10.Visible = false;
+                tb11.Visible = false;
+                tb12.Visible = false;
+                tb13.Visible = false;
+                tb14.Visible = false;
+                lbl_h1.Visible = false;
+                lbl_h2.Visible = false;
+                lbl_h3.Visible = false;
+                label34.Visible = false;
+                label35.Visible = false;
+                label38.Visible = false;
+                label39.Visible = false;
+                label40.Visible = false;
+                label41.Visible = false;
+                label42.Visible = false;
+                label45.Visible = false;
+                label46.Visible = false;
+                label48.Visible = false;
+
+
+
+        
+                label11.Visible = false;
+                label10.Visible = false;
+                label12.Visible = false;
+                label13.Visible = false;
+                label14.Visible = false;
+                label15.Visible = false;
+                label16.Visible = false;
+                label17.Visible = false;
+                label18.Visible = false;
+                label19.Visible = false;
+                label20.Visible = false;
+                label26.Visible = false;
+                label27.Visible = false;
+                label29.Visible = false;
+                label30.Visible = false;
+                label32.Visible = false;
+                label33.Visible = false;
+                lbl_Balance_3.Visible = false;
+                lbl_Final_Amount_Paid.Visible = false;
+                lbl_OT_Hours.Visible = false;
+                lbl_OT_Hourly_Charge.Visible = false;
+                lbl_Overtime_Fee.Visible = false;
+                lbl_Refund_Amount.Visible = false;
+                lbl_Total_Amount_2.Visible = false;
+                lbl_Paid_Amount_2.Visible = false;
+                lbl_Balance_2.Visible = false;
+            }
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 
 }

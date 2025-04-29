@@ -32,6 +32,7 @@ namespace pgso.Billing.Models
         public string fld_Reservation_Status { get; set; }
         public decimal fld_Total_Amount { get; set; }
         public int fld_OT_Hours { get; set; }
+        public int fld_OR { get; set; }
 
         // Venue Details
         public int? pk_VenueID { get; set; }
