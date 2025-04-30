@@ -373,7 +373,11 @@ namespace pgso {
             
             private global::System.Data.DataColumn columnfld_Additional_Charge;
             
+            private global::System.Data.DataColumn columnfld_Start_Date_Eq;
+            
             private global::System.Data.DataColumn columnfld_OT_Hours;
+            
+            private global::System.Data.DataColumn columnfld_End_Date_Eq;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -786,9 +790,25 @@ namespace pgso {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn fld_Start_Date_EqColumn {
+                get {
+                    return this.columnfld_Start_Date_Eq;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public global::System.Data.DataColumn fld_OT_HoursColumn {
                 get {
                     return this.columnfld_OT_Hours;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn fld_End_Date_EqColumn {
+                get {
+                    return this.columnfld_End_Date_Eq;
                 }
             }
             
@@ -877,7 +897,9 @@ namespace pgso {
                         bool fld_Aircon, 
                         string fld_Rate_Type, 
                         string fld_Additional_Charge, 
-                        string fld_OT_Hours) {
+                        System.DateTime fld_Start_Date_Eq, 
+                        string fld_OT_Hours, 
+                        System.DateTime fld_End_Date_Eq) {
                 BillingDataTableRow rowBillingDataTableRow = ((BillingDataTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         pk_ReservationID,
@@ -927,7 +949,9 @@ namespace pgso {
                         fld_Aircon,
                         fld_Rate_Type,
                         fld_Additional_Charge,
-                        fld_OT_Hours};
+                        fld_Start_Date_Eq,
+                        fld_OT_Hours,
+                        fld_End_Date_Eq};
                 rowBillingDataTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBillingDataTableRow);
                 return rowBillingDataTableRow;
@@ -997,7 +1021,9 @@ namespace pgso {
                 this.columnfld_Aircon = base.Columns["fld_Aircon"];
                 this.columnfld_Rate_Type = base.Columns["fld_Rate_Type"];
                 this.columnfld_Additional_Charge = base.Columns["fld_Additional_Charge"];
+                this.columnfld_Start_Date_Eq = base.Columns["fld_Start_Date_Eq"];
                 this.columnfld_OT_Hours = base.Columns["fld_OT_Hours"];
+                this.columnfld_End_Date_Eq = base.Columns["fld_End_Date_Eq"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1097,8 +1123,12 @@ namespace pgso {
                 base.Columns.Add(this.columnfld_Rate_Type);
                 this.columnfld_Additional_Charge = new global::System.Data.DataColumn("fld_Additional_Charge", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfld_Additional_Charge);
+                this.columnfld_Start_Date_Eq = new global::System.Data.DataColumn("fld_Start_Date_Eq", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfld_Start_Date_Eq);
                 this.columnfld_OT_Hours = new global::System.Data.DataColumn("fld_OT_Hours", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfld_OT_Hours);
+                this.columnfld_End_Date_Eq = new global::System.Data.DataColumn("fld_End_Date_Eq", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfld_End_Date_Eq);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2006,6 +2036,22 @@ namespace pgso {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public System.DateTime fld_Start_Date_Eq {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableBillingDataTable.fld_Start_Date_EqColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'fld_Start_Date_Eq\' in table \'BillingDataTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBillingDataTable.fld_Start_Date_EqColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string fld_OT_Hours {
                 get {
                     try {
@@ -2017,6 +2063,22 @@ namespace pgso {
                 }
                 set {
                     this[this.tableBillingDataTable.fld_OT_HoursColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public System.DateTime fld_End_Date_Eq {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableBillingDataTable.fld_End_Date_EqColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'fld_End_Date_Eq\' in table \'BillingDataTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBillingDataTable.fld_End_Date_EqColumn] = value;
                 }
             }
             
@@ -2586,6 +2648,18 @@ namespace pgso {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isfld_Start_Date_EqNull() {
+                return this.IsNull(this.tableBillingDataTable.fld_Start_Date_EqColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setfld_Start_Date_EqNull() {
+                this[this.tableBillingDataTable.fld_Start_Date_EqColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isfld_OT_HoursNull() {
                 return this.IsNull(this.tableBillingDataTable.fld_OT_HoursColumn);
             }
@@ -2594,6 +2668,18 @@ namespace pgso {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setfld_OT_HoursNull() {
                 this[this.tableBillingDataTable.fld_OT_HoursColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isfld_End_Date_EqNull() {
+                return this.IsNull(this.tableBillingDataTable.fld_End_Date_EqColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setfld_End_Date_EqNull() {
+                this[this.tableBillingDataTable.fld_End_Date_EqColumn] = global::System.Convert.DBNull;
             }
         }
         

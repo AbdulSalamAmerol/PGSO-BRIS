@@ -99,6 +99,8 @@ namespace pgso.Billing.Models
         public string Formatted_Start_Time => DateTime.Today.Add(fld_Start_Time).ToString("hh:mm tt");
         public string Formatted_End_Time => DateTime.Today.Add(fld_End_Time).ToString("hh:mm tt");
         public string Formatted_No_Hours => Total_Hours.ToString("0.##") + " hrs";
+        public string Formatted_Start_Date_Eq => fld_Start_Date_Eq.ToString("MMMM dd, yyyy");
+        public string Formatted_End_Date_Eq => fld_End_Date_Eq.ToString("MMMM dd, yyyy");
 
         // Add a new property to store merged equipment names ( show sa datagridview as 1 liner when many eq reservation)
         public List<string> EquipmentNames { get; set; } = new List<string>();

@@ -81,7 +81,16 @@ namespace pgso.Billing.Repositories
                                     p.fld_Refund_Amount,
                                     p.fld_Cancellation_Fee,
                                     p.fld_Final_Amount_Paid, 
-                                    p.fld_Overtime_Fee     
+                                    p.fld_Overtime_Fee,
+                                    
+                                    re.fld_OT_Days,
+                                    re.fld_Start_Date_Eq,                      
+                                    re.fld_End_Date_Eq,
+                                    re.fld_Equipment_Status,
+                                    re.fld_Date_Returned,
+                                    re.fld_Quantity_Returned,
+                                    re.fld_Quantity_Damaged
+
 
                                 FROM dbo.tbl_Reservation r
                                 LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
@@ -160,7 +169,14 @@ namespace pgso.Billing.Repositories
                                 fld_Refund_Amount = reader.IsDBNull(39) ? 0 : reader.GetDecimal(39),
                                 fld_Cancellation_Fee = reader.IsDBNull(40) ? 0 : reader.GetDecimal(40),
                                 fld_Final_Amount_Paid = reader.IsDBNull(41) ? 0 : reader.GetDecimal(41),
-                                fld_Overtime_Fee = reader.IsDBNull(42) ? 0 : reader.GetDecimal(42)
+                                fld_Overtime_Fee = reader.IsDBNull(42) ? 0 : reader.GetDecimal(42),
+                                fld_OT_Days = reader.IsDBNull(43) ? 0 : reader.GetInt32(43),
+                                fld_Start_Date_Eq = reader.IsDBNull(44) ? DateTime.MinValue : reader.GetDateTime(44),
+                                fld_End_Date_Eq = reader.IsDBNull(45) ? DateTime.MinValue : reader.GetDateTime(45),
+                                fld_Equipment_Status = reader.IsDBNull(46) ? "" : reader.GetString(46),
+                                fld_Date_Returned = reader.IsDBNull(47) ? DateTime.MinValue : reader.GetDateTime(47),
+                                fld_Quantity_Returned = reader.IsDBNull(48) ? 0 : reader.GetInt32(48),
+                                fld_Quantity_Damaged = reader.IsDBNull(49) ? 0 : reader.GetInt32(49)
                             };
 
 
@@ -243,7 +259,9 @@ namespace pgso.Billing.Repositories
                         p.fld_Refund_Amount,        
                         p.fld_Cancellation_Fee,
                         p.fld_Final_Amount_Paid,
-                        p.fld_Overtime_Fee
+                        p.fld_Overtime_Fee,
+                        re.fld_Start_Date_Eq,
+                        re.fld_End_Date_Eq
                         
 
                     FROM dbo.tbl_Reservation r
@@ -315,7 +333,9 @@ namespace pgso.Billing.Repositories
                                     fld_Refund_Amount = reader.IsDBNull(39) ? 0 : reader.GetDecimal(39),
                                     fld_Cancellation_Fee = reader.IsDBNull(40) ? 0 : reader.GetDecimal(40),
                                     fld_Final_Amount_Paid = reader.IsDBNull(41) ? 0 : reader.GetDecimal(41),
-                                    fld_Overtime_Fee = reader.IsDBNull(42) ? 0 : reader.GetDecimal(42)
+                                    fld_Overtime_Fee = reader.IsDBNull(42) ? 0 : reader.GetDecimal(42),
+                                    fld_Start_Date_Eq = reader.IsDBNull(43) ? DateTime.MinValue : reader.GetDateTime(43),
+                                    fld_End_Date_Eq = reader.IsDBNull(44) ? DateTime.MinValue : reader.GetDateTime(44)
                                 };
 
                                 billingRecords.Add(billing);

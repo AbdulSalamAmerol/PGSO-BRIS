@@ -111,7 +111,7 @@ namespace pgso.pgso_Billing
             lbl_Reservation_Dates.Text = $"{billingDetails.fld_Start_Date.ToString("MM/dd/yyyy")} - {billingDetails.fld_End_Date.ToString("MM/dd/yyyy")}";
 
             // Format reservation times (start and end)
-            lbl_Reservation_Time.Text = $"{billingDetails.fld_Start_Time.ToString(@"hh\:mm")} - {billingDetails.fld_End_Time.ToString(@"hh\:mm")}";
+            lbl_Reservation_Time.Text = $"{billingDetails.Formatted_Start_Time.ToString()} - {billingDetails.Formatted_End_Time.ToString()}";
 
             lbl_Number_Of_Participants.Text = billingDetails.fld_Number_Of_Participants.ToString();
             lbl_Reservation_Status.Text = billingDetails.fld_Reservation_Status;
@@ -119,6 +119,40 @@ namespace pgso.pgso_Billing
             // Venue details
             lbl_Venue_Name.Text = billingDetails.fld_Venue_Name;
             lbl_Venue_Scope.Text = billingDetails.fld_Venue_Scope_Name;
+
+            string scopeName_Detail = billingDetails.fld_Venue_Scope_Name;
+
+            switch (scopeName_Detail)
+            {
+                case "AH_Whole_Building":
+                case "CS_Whole_Building":
+                    lbl_Venue_Scope.Text = "Entire Venue";
+                    break;
+                case "CS_Lobby":
+                    lbl_Venue_Scope.Text = "Lobby Only";
+                    break;
+                case "CS_Main_Hall":
+                    lbl_Venue_Scope.Text = "Main Hall Only";
+                    break;
+                case "CS_Main_Hall_And_Mezzanine":
+                    lbl_Venue_Scope.Text = "Main Hall and Mezzanine";
+                    break;
+                case "PS_Room_A":
+                    lbl_Venue_Scope.Text = "Room A Only";
+                    break;
+                case "PS_Room_ABC":
+                    lbl_Venue_Scope.Text = "Room A, B and C";
+                    break;
+                case "PS_Room_BC":
+                    lbl_Venue_Scope.Text = "Room B and C";
+                    break;
+                default:
+                    lbl_Venue_Scope.Text = scopeName_Detail; // fallback if not matched
+                    break;
+            }
+
+
+
             lbl_Rate_Type.Text = billingDetails.fld_Rate_Type;
             lbl_Is_Aircon.Text = billingDetails.fld_Aircon ? "Yes" : "No";
 
@@ -174,10 +208,11 @@ namespace pgso.pgso_Billing
             lbl_Paid_Amount_2.Text = (otCharge > 0 ? "-" : "") + otCharge.ToString("C");
             lbl_Total_Amount.Text = billingDetails.fld_Total_Amount.ToString("C");
             lbl_Balance.Text = (billingDetails.fld_Total_Amount - billingDetails.fld_Amount_Paid).ToString("C");
-            lbl_Refund_Amount.Text = (billingDetails.fld_Cancellation_Fee).ToString("C");  
+            lbl_Refund_Amount.Text = (billingDetails.fld_Cancellation_Fee).ToString("C");
 
-            lbl_Final_Amount_Paid.Text = (billingDetails.fld_Final_Amount_Paid).ToString("C");
-
+            //lbl_Final_Amount_Paid.Text = (billingDetails.fld_Final_Amount_Paid).ToString("C");
+            tb13.Visible = false;
+            lbl_Final_Amount_Paid.Visible = false;
             lbl_Overtime_Fee.Text = billingDetails.fld_Overtime_Fee.ToString("C");
             textBox24.Text = (billingDetails.fld_First4Hrs_Rate / 4).ToString("C");
             lbl_Total_Amount_2.Text = (billingDetails.fld_Overtime_Fee+billingDetails.fld_Cancellation_Fee).ToString("C");
@@ -233,10 +268,7 @@ namespace pgso.pgso_Billing
                 label34.Visible = false;
                 label35.Visible = false;
                 label38.Visible = false;
-                label39.Visible = false;
-                label40.Visible = false;
-                label41.Visible = false;
-                label42.Visible = false;
+        
                 label45.Visible = false;
                 label46.Visible = false;
                 label48.Visible = false;
@@ -248,19 +280,21 @@ namespace pgso.pgso_Billing
                 label10.Visible = false;
                 label12.Visible = false;
                 label13.Visible = false;
-                label14.Visible = false;
-                label15.Visible = false;
-                label16.Visible = false;
-                label17.Visible = false;
-                label18.Visible = false;
+     
+             
+          
                 label19.Visible = false;
                 label20.Visible = false;
                 label26.Visible = false;
                 label27.Visible = false;
+                label28.Visible = false;
                 label29.Visible = false;
                 label30.Visible = false;
+                label31.Visible = false;
                 label32.Visible = false;
                 label33.Visible = false;
+                label34.Visible = false;
+              
                 lbl_Balance_3.Visible = false;
                 lbl_Final_Amount_Paid.Visible = false;
                 lbl_OT_Hours.Visible = false;
