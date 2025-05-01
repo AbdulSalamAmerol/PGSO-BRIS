@@ -164,6 +164,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BillingDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="pgso_Billing\Forms\delete this.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\delete this.Designer.cs">
+      <DependentUpon>delete this.cs</DependentUpon>
+    </Compile>
     <Compile Include="pgso_Billing\Forms\frm_Add_Equipment_Billing.cs">
       <SubType>Form</SubType>
     </Compile>
