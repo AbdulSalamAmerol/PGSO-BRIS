@@ -17,15 +17,19 @@ namespace pgso.pgso_Billing
     {
        
         public event Action<int?> RequestBillingRefresh;
-        public event Action<int>? OnVenueExtended;
+        private Repo_Billing _repoBilling; // ✅ Add this field
         public event Action<int, string> OnRequestVenueExtension;// Check if extension is applicable
         private Model_Billing _billingDetails;
         // Constructor that accepts Model_Billing
-        public Venue_User_Control(Model_Billing billingDetails)
+        public Venue_User_Control(Model_Billing billingDetails, Repo_Billing repoBilling)
         {
             InitializeComponent();
+
             _billingDetails = billingDetails; // ✅ Store for later use
+            _repoBilling = repoBilling; // ✅ Store the repository
             LoadBillingDetails(billingDetails); // Populate the fields on creation
+            int reservationID = billingDetails.pk_ReservationID;
+            Console.WriteLine("CHECK billingDetails.fld_Reservation_Status" + billingDetails.fld_Reservation_Status);
         }
         private void newbtn_Extend_Venue_Click(object sender, EventArgs e)
         {
@@ -205,7 +209,7 @@ namespace pgso.pgso_Billing
             // Payment details
             lbl_Paid_Amount.Text = billingDetails.fld_Amount_Paid.ToString("C");
             decimal otCharge = billingDetails.fld_OT_Hours * billingDetails.fld_Hourly_Rate;
-            lbl_Paid_Amount_2.Text = (otCharge > 0 ? "-" : "") + otCharge.ToString("C");
+      
             lbl_Total_Amount.Text = billingDetails.fld_Total_Amount.ToString("C");
             lbl_Balance.Text = (billingDetails.fld_Total_Amount - billingDetails.fld_Amount_Paid).ToString("C");
             lbl_Refund_Amount.Text = (billingDetails.fld_Cancellation_Fee).ToString("C");
@@ -216,32 +220,24 @@ namespace pgso.pgso_Billing
             lbl_Overtime_Fee.Text = billingDetails.fld_Overtime_Fee.ToString("C");
             textBox24.Text = (billingDetails.fld_First4Hrs_Rate / 4).ToString("C");
             lbl_Total_Amount_2.Text = (billingDetails.fld_Overtime_Fee+billingDetails.fld_Cancellation_Fee).ToString("C");
-            lbl_Paid_Amount_2.Text = (billingDetails.fld_Overtime_Fee + billingDetails.fld_Cancellation_Fee).ToString("C");
-            lbl_Balance_2.Text = (billingDetails.fld_Cancellation_Fee - billingDetails.fld_Cancellation_Fee).ToString("C");
+
+
+
+
+            lbl_Paid_Amount_2.Text = billingDetails.fld_Amount_Paid_Overtime.ToString("C");
+
+            lbl_Balance_2.Text = (billingDetails.fld_Overtime_Fee - billingDetails.fld_Amount_Paid_Overtime).ToString("C");
             lbl_Balance_3.Text = (billingDetails.fld_Cancellation_Fee - billingDetails.fld_Cancellation_Fee).ToString("C");
+            Console.WriteLine("WHATAFAKER  "+billingDetails.fld_Amount_Paid_Overtime);
         }
 
         private void HideOvertimeAndRefundDetails(Model_Billing billingDetails)
         {
 
-            decimal Refund_Charge = billingDetails.fld_Amount_Paid * 0.05m;
+            decimal Refund_Charge = billingDetails.fld_Amount_Paid;
 
 
-            if (billingDetails.fld_Overtime_Fee > 0)
-            {
-                tb9.Visible = false;
-                lbl_Refund_Amount.Visible = false;
-            }
-
-            if (billingDetails.fld_Cancellation_Fee > 0)
-            {
-                tb7.Visible = false;
-                tb8.Visible = false;
-                lbl_OT_Hours.Visible = false;
-               
-                lbl_OT_Hourly_Charge.Visible = false;
-                lbl_Overtime_Fee.Visible = false;
-            }
+           
 
 
             if (billingDetails.fld_Overtime_Fee == 0 && billingDetails.fld_Cancellation_Fee == 0)
@@ -305,12 +301,214 @@ namespace pgso.pgso_Billing
                 lbl_Paid_Amount_2.Visible = false;
                 lbl_Balance_2.Visible = false;
             }
+            if (billingDetails.fld_Overtime_Fee > 0)
+            {
+               
+                
+                tb1.Visible = true;
+                tb2.Visible = true;
+                tb3.Visible = true;
+                tb4.Visible = true;
+                tb5.Visible = true;
+                tb6.Visible = true;
+                tb7.Visible = true;
+                tb8.Visible = true;
+                tb9.Visible = false;
+                tb10.Visible = true;
+                tb11.Visible = true;
+                tb12.Visible = true;
+                tb13.Visible = true;
+                tb14.Visible = true;
+
+                lbl_h1.Visible = true;
+                lbl_h2.Visible = true;
+                lbl_h3.Visible = true;
+
+                label34.Visible = true;
+                label35.Visible = true;
+                label38.Visible = true;
+
+                label45.Visible = true;
+                label46.Visible = true;
+                label48.Visible = true;
+
+                label11.Visible = true;
+                label10.Visible = true;
+                label12.Visible = true;
+                label13.Visible = true;
+
+                label19.Visible = true;
+                label20.Visible = true;
+                label26.Visible = true;
+                label27.Visible = true;
+                label28.Visible = true;
+                label29.Visible = true;
+                label30.Visible = true;
+                label31.Visible = true;
+                label32.Visible = true;
+                label33.Visible = true;
+                
+                lbl_Balance_3.Visible = true;
+                lbl_Final_Amount_Paid.Visible = true;
+                lbl_OT_Hours.Visible = true;
+                lbl_OT_Hourly_Charge.Visible = true;
+                lbl_Overtime_Fee.Visible = true;
+                lbl_Refund_Amount.Visible = false;
+                lbl_Total_Amount_2.Visible = true;
+                lbl_Paid_Amount_2.Visible = true;
+                lbl_Balance_2.Visible = true;
+
+
+
+            }
+
+            if (billingDetails.fld_Reservation_Status == "Cancelled")
+            {
+                
+                tb1.Visible = true;
+                tb2.Visible = true;
+                tb3.Visible = true;
+                tb4.Visible = true;
+                tb5.Visible = true;
+                tb6.Visible = true;
+                tb7.Visible = false;
+                tb8.Visible = false;
+                tb9.Visible = true;
+                tb10.Visible = true;
+                tb11.Visible = true;
+                tb12.Visible = true;
+                tb13.Visible = true;
+                tb14.Visible = true;
+
+                lbl_h1.Visible = true;
+                lbl_h2.Visible = true;
+                lbl_h3.Visible = true;
+
+                label34.Visible = true;
+                label35.Visible = true;
+                label38.Visible = true;
+
+                label45.Visible = true;
+                label46.Visible = true;
+                label48.Visible = true;
+
+                label11.Visible = true;
+                label10.Visible = true;
+                label12.Visible = true;
+                label13.Visible = true;
+
+                label19.Visible = true;
+                label20.Visible = true;
+                label26.Visible = true;
+                label27.Visible = true;
+                label28.Visible = true;
+                label29.Visible = true;
+                label30.Visible = true;
+                label31.Visible = true;
+                label32.Visible = true;
+                label33.Visible = true;
+
+                lbl_Balance_3.Visible = true;
+                lbl_Final_Amount_Paid.Visible = true;
+                lbl_OT_Hours.Visible = false;
+                lbl_OT_Hourly_Charge.Visible = false;
+                lbl_Overtime_Fee.Visible = false;
+                lbl_Refund_Amount.Visible = true;
+                lbl_Total_Amount_2.Visible = true;
+                lbl_Paid_Amount_2.Visible = true;
+                lbl_Balance_2.Visible = true;
+            }
         }
 
         private void panel5_Paint(object sender, PaintEventArgs e)
         {
 
         }
+
+
+
+       
+
+        private void btn_Extension_Slip_Click(object sender, EventArgs e)
+        {
+            using (var extension = new frm_Extension_Slip(_billingDetails.pk_ReservationID))
+            {
+                extension.ShowDialog();
+            }
+        }
+
+        private void btn_Cancellation_Slip_Click(object sender, EventArgs e)
+        {
+            using (var cancellation = new frm_Cancellation_Slip(_billingDetails.pk_ReservationID))
+            {
+                cancellation.ShowDialog();
+            }
+        }
+
+        private void btn_Cancel_Reservation_Click(object sender, EventArgs e)
+        {
+            using (var cancelForm = new frm_Cancellation_Reason(_billingDetails.pk_ReservationID))
+            {
+                var result = cancelForm.ShowDialog();
+                // If the cancellation was successful, refresh the billing details
+                if (result == DialogResult.OK)
+                {
+                    // Reload the billing details in this control
+                    var updatedDetails = new Repo_Billing().GetBillingDetailsByReservationID(_billingDetails.pk_ReservationID);
+                    if (updatedDetails != null)
+                    {
+                        _billingDetails = updatedDetails;
+                        LoadBillingDetails(_billingDetails);
+                    }
+                    // 🔔 Trigger refresh event to inform frm_Billing
+                    RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID);
+                }
+            }
+        }
+
+     
+        private async void btn_Confirm_Reservation_Click(object sender, EventArgs e)
+        {
+            if (_billingDetails.fld_Reservation_Status != "Pending")
+            {
+                MessageBox.Show("Only 'Pending' reservations can be approved.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (frm_OR orForm = new frm_OR(_billingDetails.pk_ReservationID, _repoBilling))
+            {
+                DialogResult result = orForm.ShowDialog(this);
+
+                if (result == DialogResult.OK)
+                {
+                    string officialReceiptNumber = orForm.EnteredORNumber;
+
+                    bool statusUpdateSuccess = await Task.Run(() =>
+                        _repoBilling.UpdateReservationStatusAsync(_billingDetails.pk_ReservationID, "Confirmed"));
+
+                    if (statusUpdateSuccess)
+                    {
+                        MessageBox.Show($"Reservation approved successfully with OR# {officialReceiptNumber}.",
+                                        "Approved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        _billingDetails = _repoBilling.GetBillingDetailsByReservationID(_billingDetails.pk_ReservationID);
+                        LoadBillingDetails(_billingDetails);
+
+                        RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); // 🔁 Notify parent to refresh billing
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to update reservation status to 'Confirmed'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Approval process cancelled or OR Number entry failed.",
+                                    "Approval Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
     }
 
 }

@@ -19,18 +19,24 @@ namespace pgso.pgso_Billing.User_Control
     public partial class Equipment_User_Control : UserControl
     {
         public event EventHandler EquipmentBillingUpdated;
+        private Repo_Billing _repoBilling; // ✅ Add this field
+        public event Action<int?> RequestBillingRefresh;
+
+
         protected virtual void OnEquipmentBillingUpdated()
+
         {
             EquipmentBillingUpdated?.Invoke(this, EventArgs.Empty);
         }
 
         private Repo_Billing repo_billing = new Repo_Billing();
         private Model_Billing _billingDetails;
-        public Equipment_User_Control(Model_Billing billingDetailsList)
+        public Equipment_User_Control(Model_Billing billingDetailsList, Repo_Billing repoBilling)
         {
             InitializeComponent();
             btn_Add_Equipment_Billing.ForeColor = Color.FromArgb(242, 239, 231);
             _billingDetails = billingDetailsList; // Store the passed-in model
+            _repoBilling = repoBilling; // ✅ Store the repository
             LoadBillingDetails(billingDetailsList);
             LoadBillingDetails(_billingDetails);  // Reload the data after deletion
         }
@@ -199,5 +205,67 @@ namespace pgso.pgso_Billing.User_Control
             returnForm.ShowDialog();
         }
 
+        private async void btn_Confirm_Reservation_Click(object sender, EventArgs e)
+        {
+            if (_billingDetails.fld_Reservation_Status != "Pending")
+            {
+                MessageBox.Show("Only 'Pending' reservations can be approved.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (frm_OR orForm = new frm_OR(_billingDetails.pk_ReservationID, _repoBilling))
+            {
+                DialogResult result = orForm.ShowDialog(this);
+
+                if (result == DialogResult.OK)
+                {
+                    string officialReceiptNumber = orForm.EnteredORNumber;
+
+                    bool statusUpdateSuccess = await Task.Run(() =>
+                        _repoBilling.UpdateReservationStatusAsync(_billingDetails.pk_ReservationID, "Confirmed"));
+
+                    if (statusUpdateSuccess)
+                    {
+                        MessageBox.Show($"Reservation approved successfully with OR# {officialReceiptNumber}.",
+                                        "Approved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        _billingDetails = _repoBilling.GetBillingDetailsByReservationID(_billingDetails.pk_ReservationID);
+                        LoadBillingDetails(_billingDetails);
+
+                        RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); // 🔁 Notify parent to refresh billing
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to update reservation status to 'Confirmed'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Approval process cancelled or OR Number entry failed.",
+                                    "Approval Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        private void btn_Cancel_Reservation_Click(object sender, EventArgs e)
+        {
+            using (var cancelForm = new frm_Cancellation_Reason(_billingDetails.pk_ReservationID))
+            {
+                var result = cancelForm.ShowDialog();
+                // If the cancellation was successful, refresh the billing details
+                if (result == DialogResult.OK)
+                {
+                    // Reload the billing details in this control
+                    var updatedDetails = new Repo_Billing().GetBillingDetailsByReservationID(_billingDetails.pk_ReservationID);
+                    if (updatedDetails != null)
+                    {
+                        _billingDetails = updatedDetails;
+                        LoadBillingDetails(_billingDetails);
+                    }
+                    // 🔔 Trigger refresh event to inform frm_Billing
+                    RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID);
+                }
+            }
+        }
     }
 }

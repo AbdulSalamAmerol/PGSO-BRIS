@@ -89,7 +89,9 @@ namespace pgso.Billing.Repositories
                                     re.fld_Equipment_Status,
                                     re.fld_Date_Returned,
                                     re.fld_Quantity_Returned,
-                                    re.fld_Quantity_Damaged
+                                    re.fld_Quantity_Damaged,
+                                    p. fld_Amount_Paid_Overtime,
+                                    r. fld_OT_Payment_Status
 
 
                                 FROM dbo.tbl_Reservation r
@@ -176,7 +178,9 @@ namespace pgso.Billing.Repositories
                                 fld_Equipment_Status = reader.IsDBNull(46) ? "" : reader.GetString(46),
                                 fld_Date_Returned = reader.IsDBNull(47) ? DateTime.MinValue : reader.GetDateTime(47),
                                 fld_Quantity_Returned = reader.IsDBNull(48) ? 0 : reader.GetInt32(48),
-                                fld_Quantity_Damaged = reader.IsDBNull(49) ? 0 : reader.GetInt32(49)
+                                fld_Quantity_Damaged = reader.IsDBNull(49) ? 0 : reader.GetInt32(49),
+                                fld_Amount_Paid_Overtime = reader.IsDBNull(50) ? 0 : reader.GetDecimal(50),
+                                fld_OT_Payment_Status = reader.IsDBNull(51) ? "" : reader.GetString(51)
                             };
 
 
@@ -261,7 +265,10 @@ namespace pgso.Billing.Repositories
                         p.fld_Final_Amount_Paid,
                         p.fld_Overtime_Fee,
                         re.fld_Start_Date_Eq,
-                        re.fld_End_Date_Eq
+                        re.fld_End_Date_Eq,
+                        p.fld_Amount_Paid_Overtime,
+                        r.fld_OT_Payment_Status,
+                        fld_Cancellation_Reason 
                         
 
                     FROM dbo.tbl_Reservation r
@@ -335,7 +342,10 @@ namespace pgso.Billing.Repositories
                                     fld_Final_Amount_Paid = reader.IsDBNull(41) ? 0 : reader.GetDecimal(41),
                                     fld_Overtime_Fee = reader.IsDBNull(42) ? 0 : reader.GetDecimal(42),
                                     fld_Start_Date_Eq = reader.IsDBNull(43) ? DateTime.MinValue : reader.GetDateTime(43),
-                                    fld_End_Date_Eq = reader.IsDBNull(44) ? DateTime.MinValue : reader.GetDateTime(44)
+                                    fld_End_Date_Eq = reader.IsDBNull(44) ? DateTime.MinValue : reader.GetDateTime(44),
+                                    fld_Amount_Paid_Overtime = reader.IsDBNull(45) ? 0 : reader.GetDecimal(45),
+                                    fld_OT_Payment_Status = reader.IsDBNull(46) ? "" : reader.GetString(46),
+                                    fld_Cancellation_Reason = reader.IsDBNull(47) ? "" : reader.GetString(47)
                                 };
 
                                 billingRecords.Add(billing);
@@ -584,7 +594,9 @@ namespace pgso.Billing.Repositories
                             p.fld_Final_Amount_Paid,
                             p.fld_Overtime_Fee,
                             rp.fld_Requesting_Office,
-                            r.fld_OR
+                            r.fld_OR,
+                            p.fld_Amount_Paid_Overtime,
+                            r.fld_OT_Payment_Status
                         FROM dbo.tbl_Reservation r
                         LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
                         LEFT JOIN dbo.tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
@@ -654,7 +666,9 @@ namespace pgso.Billing.Repositories
                                     fld_Final_Amount_Paid = reader.IsDBNull(45) ? 0 : reader.GetDecimal(45),
                                     fld_Overtime_Fee = reader.IsDBNull(46) ? 0 : reader.GetDecimal(46),
                                     fld_Requesting_Office = reader.IsDBNull(47) ? "" : reader.GetString(47),
-                                    fld_OR = reader.IsDBNull(48) ? 0 : reader.GetInt32(48)
+                                    fld_OR = reader.IsDBNull(48) ? 0 : reader.GetInt32(48),
+                                    fld_Amount_Paid_Overtime = reader.IsDBNull(49) ? 0 : reader.GetDecimal(49),
+                                    fld_OT_Payment_Status = reader.IsDBNull(50) ? "" : reader.GetString(50)
                                 };
                             }
                         }
@@ -669,63 +683,73 @@ namespace pgso.Billing.Repositories
             return billingDetails;
         }
 
-        public bool UpdateReservationStatus(int reservationID, string newStatus)
+        public async Task<bool> UpdateReservationStatusAsync(int reservationID, string newStatus)
         {
-            // Ensure newStatus is valid as per the constraint
             if (newStatus != "Cancelled" && newStatus != "Confirmed" && newStatus != "Pending")
             {
                 MessageBox.Show("Invalid status value. Only 'Cancelled', 'Confirmed', or 'Pending' are allowed.");
                 return false;
             }
 
-            // SQL query to update reservation status
             string query = "UPDATE tbl_Reservation SET fld_Reservation_Status = @Status WHERE pk_ReservationID = @ReservationID";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                // Define the parameter types explicitly
                 cmd.Parameters.Add("@Status", SqlDbType.NVarChar, 50).Value = newStatus;
                 cmd.Parameters.Add("@ReservationID", SqlDbType.Int).Value = reservationID;
 
-                // Open connection and execute query
-                conn.Open();
-                int rowsAffected = cmd.ExecuteNonQuery();
+                await conn.OpenAsync();
+                int rowsAffected = await cmd.ExecuteNonQueryAsync();
 
-                // If the reservation status update was successful and the status is "Confirmed"
                 if (rowsAffected > 0 && newStatus == "Confirmed")
                 {
-                    // Fetch the total amount from tbl_Reservation
+                    // Fetch the total amount
                     string amountQuery = "SELECT fld_Total_Amount FROM tbl_Reservation WHERE pk_ReservationID = @ReservationID";
-
                     using (SqlCommand amountCmd = new SqlCommand(amountQuery, conn))
                     {
                         amountCmd.Parameters.Add("@ReservationID", SqlDbType.Int).Value = reservationID;
+                        object result = await amountCmd.ExecuteScalarAsync();
 
-                        decimal totalAmount = (decimal)amountCmd.ExecuteScalar();
-
-                        // Update the payment details in tbl_Payment
-                        if (totalAmount > 0)
+                        if (result != null && decimal.TryParse(result.ToString(), out decimal totalAmount) && totalAmount > 0)
                         {
                             string paymentQuery = @"
-                        INSERT INTO tbl_Payment (fk_ReservationID, fld_Payment_Status, fld_Amount_Due, fld_Amount_Paid, fld_Payment_Date, fld_Created_At, fld_Final_Amount_Paid)
-                        VALUES (@ReservationID, 'Confirmed', @AmountDue, @AmountPaid, @PaymentDate, @CreatedAt, @FinalAmountPaid)";
+                    INSERT INTO tbl_Payment (fk_ReservationID, fld_Payment_Status, fld_Amount_Due, fld_Amount_Paid, fld_Payment_Date, fld_Created_At, fld_Final_Amount_Paid)
+                    VALUES (@ReservationID, 'Confirmed', @AmountDue, @AmountPaid, @PaymentDate, @CreatedAt, @FinalAmountPaid)";
 
                             using (SqlCommand paymentCmd = new SqlCommand(paymentQuery, conn))
                             {
                                 paymentCmd.Parameters.Add("@ReservationID", SqlDbType.Int).Value = reservationID;
                                 paymentCmd.Parameters.Add("@AmountDue", SqlDbType.Decimal).Value = totalAmount;
-                                paymentCmd.Parameters.Add("@AmountPaid", SqlDbType.Decimal).Value = totalAmount; // Paid amount is the same as the total amount
-                                paymentCmd.Parameters.Add("@PaymentDate", SqlDbType.Date).Value = DateTime.Today; // Payment Date is today's date
-                                paymentCmd.Parameters.Add("@CreatedAt", SqlDbType.DateTime).Value = DateTime.Now; // Created At is the current date and time
-                                paymentCmd.Parameters.Add("@FinalAmountPaid", SqlDbType.Decimal).Value = totalAmount; // Final Amount Paid is the same as the total amount  
-                                paymentCmd.ExecuteNonQuery();
+                                paymentCmd.Parameters.Add("@AmountPaid", SqlDbType.Decimal).Value = totalAmount;
+                                paymentCmd.Parameters.Add("@PaymentDate", SqlDbType.Date).Value = DateTime.Today;
+                                paymentCmd.Parameters.Add("@CreatedAt", SqlDbType.DateTime).Value = DateTime.Now;
+                                paymentCmd.Parameters.Add("@FinalAmountPaid", SqlDbType.Decimal).Value = totalAmount;
+
+                                await paymentCmd.ExecuteNonQueryAsync();
                             }
                         }
                     }
                 }
 
-                return rowsAffected > 0; // Returns true if at least one row is affected
+                return rowsAffected > 0;
+            }
+        }
+
+
+        public bool SaveCancellationReason(int reservationID, string reason)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "UPDATE tbl_Reservation SET fld_Cancellation_Reason = @reason WHERE pk_ReservationID = @reservationID";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@reason", reason);
+                    cmd.Parameters.AddWithValue("@reservationID", reservationID);
+                    conn.Open();
+                    return cmd.ExecuteNonQuery() > 0;
+                }
             }
         }
 
@@ -740,9 +764,9 @@ namespace pgso.Billing.Repositories
                 string query = @"
         UPDATE p
         SET 
-            p.fld_Refund_Amount = r.fld_Total_Amount * 0.95,
-            p.fld_Cancellation_Fee = r.fld_Total_Amount * 0.05,
-            p.fld_Final_Amount_Paid = r.fld_Total_Amount * 0.05
+            p.fld_Refund_Amount = r.fld_Total_Amount ,
+            p.fld_Cancellation_Fee = r.fld_Total_Amount * 0,
+            p.fld_Final_Amount_Paid = r.fld_Total_Amount * 0
         FROM tbl_Payment p
         JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
         WHERE p.fk_ReservationID = @ReservationID";
@@ -758,67 +782,130 @@ namespace pgso.Billing.Repositories
 
         //////
 
-        public async Task<bool> UpdateReservationExtension(int reservationID, int otHours, string orExtension)
-
+        public async Task<bool> UpdateReservationExtension(int reservationID, int otHours, int orExtension)
         {
             try
             {
-
-                // Step 1: Get current total amount and hourly rate in parallel to improve efficiency
+                // Step 1: Get hourly rate and base amount (not total with previous OT hours)
                 var hourlyRateTask = GetHourlyRate(reservationID);
-                var currentTotalAmountTask = GetCurrentTotalAmount(reservationID);
-                var currentOTHoursTask = GetCurrentOvertimeHours(reservationID);  // Get current OT hours
+                var baseAmountTask = GetBaseAmount(reservationID); // This should get the original charge without OT
 
-                // Wait for all tasks to complete
-                await Task.WhenAll(hourlyRateTask, currentTotalAmountTask, currentOTHoursTask);
+                await Task.WhenAll(hourlyRateTask, baseAmountTask);
 
-                // Step 2: Calculate new total amount and accumulate overtime hours
                 decimal hourlyRate = hourlyRateTask.Result;
-                decimal currentTotalAmount = currentTotalAmountTask.Result;
-                decimal currentOTHours = currentOTHoursTask.Result;  // Existing overtime hours
-                decimal newFinalAmountPaid = currentTotalAmount + (hourlyRate * otHours);
-                decimal newOTHours = currentOTHours + otHours;  // Accumulate overtime hours
-                decimal newOvertimeFee = otHours * hourlyRate;
+                decimal baseAmount = baseAmountTask.Result;
 
-                // Step 3: Update the database with the new overtime hours and total amount
-                var query = @"
-                    
+                // Step 2: Recalculate total based on new OT hours (as user input)
+                decimal newOvertimeFee = otHours * hourlyRate;
+                decimal newFinalAmountPaid = baseAmount + newOvertimeFee;
+
+                // Step 3: Update SQL logic with conditional logic for fld_Amount_Paid_Overtime
+                string query = @"
+                -- Update Payment table (Final and OT fee always)
+                UPDATE p
+                SET
+                    p.fld_Final_Amount_Paid = @newFinalAmountPaid,
+                    p.fld_Overtime_Fee = @newOvertimeFee
+                FROM tbl_Payment p
+                JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
+                WHERE r.pk_ReservationID = @reservationID;
+
+                -- Update fld_Amount_Paid_Overtime only if OR Extension is provided (non-zero)
+                IF @orExtension > 0
+                BEGIN
                     UPDATE p
-                    SET 
-                        p.fld_Final_Amount_Paid = @newFinalAmountPaid,
-                        p.fld_Overtime_Fee = @newOvertimeFee
+                    SET p.fld_Amount_Paid_Overtime = @newOvertimeFee
                     FROM tbl_Payment p
                     JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
                     WHERE r.pk_ReservationID = @reservationID;
+                END
 
-                   
-                    UPDATE r
-                    SET 
-                        r.fld_OT_Hours = @newOTHours,
-                        r.fld_OR_Extension = @orExtension
-                    FROM tbl_Reservation r
-                    WHERE r.pk_ReservationID = @reservationID;";
+                -- Update Reservation table with new OT hours and OR Extension
+                UPDATE tbl_Reservation
+                SET
+                    fld_OT_Hours = @otHours,
+                    fld_OR_Extension = @orExtension
+                WHERE pk_ReservationID = @reservationID;";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@newOTHours", newOTHours);  // Updated OT hours
-                    cmd.Parameters.AddWithValue("@newFinalAmountPaid", newFinalAmountPaid);  // Updated Final Amount Paid
+                    cmd.Parameters.AddWithValue("@otHours", otHours);
+                    cmd.Parameters.AddWithValue("@newFinalAmountPaid", newFinalAmountPaid);
                     cmd.Parameters.AddWithValue("@newOvertimeFee", newOvertimeFee);
                     cmd.Parameters.AddWithValue("@reservationID", reservationID);
                     cmd.Parameters.AddWithValue("@orExtension", orExtension);
 
-                    conn.Open();
-                    return await cmd.ExecuteNonQueryAsync() > 0;
+                    await conn.OpenAsync();
+                    int rowsAffected = await cmd.ExecuteNonQueryAsync();
+                    Console.WriteLine($"Rows affected: {rowsAffected}");
+                    return rowsAffected > 0;
                 }
+            }
+            catch (SqlException sqlEx)
+            {
+                Console.WriteLine($"SQL Error updating reservation {reservationID}: {sqlEx.Message}");
+                return false;
             }
             catch (Exception ex)
             {
-                // Log or handle the error appropriately
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"General Error updating reservation {reservationID}: {ex.Message}");
                 return false;
             }
         }
+
+
+
+        public async Task<decimal> GetBaseAmount(int reservationID)
+        {
+            var query = @"
+        SELECT fld_Total_Amount
+        FROM tbl_Reservation
+        WHERE pk_ReservationID = @reservationID;";
+
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@reservationID", reservationID);
+                await conn.OpenAsync();
+
+                var result = await cmd.ExecuteScalarAsync();
+                return result != null && decimal.TryParse(result.ToString(), out decimal amount) ? amount : 0;
+            }
+        }
+
+        public async Task<Model_Billing> GetCurrentExtensionDetails(int reservationID)
+        {
+            var query = @"
+        SELECT fld_OR_Extension, fld_OT_Hours
+        FROM tbl_Reservation
+        WHERE pk_ReservationID = @reservationID";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@reservationID", reservationID);
+                await conn.OpenAsync();
+
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        return new Model_Billing
+                        {
+                            fld_OR_Extension = reader["fld_OR_Extension"] != DBNull.Value ? Convert.ToInt32(reader["fld_OR_Extension"]) : 0,
+                            fld_OT_Hours = reader["fld_OT_Hours"] != DBNull.Value ? Convert.ToInt32(reader["fld_OT_Hours"]) : 0
+                        };
+                    }
+                }
+            }
+
+            return null;
+        }
+
+
+
 
         public async Task<bool> CheckIfAlreadyExtended(int reservationID)
         {
@@ -861,6 +948,8 @@ namespace pgso.Billing.Repositories
 
                 var result = await cmd.ExecuteScalarAsync();
                 // Ensure DBNull is handled
+                //Delete this after testing
+                Console.WriteLine("GetHourlyRate: " + result);
                 return result != DBNull.Value ? Convert.ToDecimal(result) : 0m;
             }
         }

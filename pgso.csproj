@@ -164,17 +164,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BillingDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="pgso_Billing\Forms\delete this.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="pgso_Billing\Forms\delete this.Designer.cs">
-      <DependentUpon>delete this.cs</DependentUpon>
-    </Compile>
     <Compile Include="pgso_Billing\Forms\frm_Add_Equipment_Billing.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="pgso_Billing\Forms\frm_Add_Equipment_Billing.Designer.cs">
       <DependentUpon>frm_Add_Equipment_Billing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Cancellation_Reason.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Cancellation_Reason.Designer.cs">
+      <DependentUpon>frm_Cancellation_Reason.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Cancellation_Slip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Cancellation_Slip.Designer.cs">
+      <DependentUpon>frm_Cancellation_Slip.cs</DependentUpon>
     </Compile>
     <Compile Include="pgso_Billing\Forms\frm_Edit_Reservation_Info.cs">
       <SubType>Form</SubType>
@@ -199,6 +205,12 @@
     </Compile>
     <Compile Include="pgso_Billing\Forms\frm_Extend_Venue.Designer.cs">
       <DependentUpon>frm_Extend_Venue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Extension_Slip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Extension_Slip.Designer.cs">
+      <DependentUpon>frm_Extension_Slip.cs</DependentUpon>
     </Compile>
     <Compile Include="pgso_Billing\Forms\frm_OR.cs">
       <SubType>Form</SubType>
@@ -443,6 +455,12 @@
     <EmbeddedResource Include="frm_Venues.resx">
       <DependentUpon>frm_Venues.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Cancellation_Reason.resx">
+      <DependentUpon>frm_Cancellation_Reason.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Cancellation_Slip.resx">
+      <DependentUpon>frm_Cancellation_Slip.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Edit_Reservation_Info.resx">
       <DependentUpon>frm_Edit_Reservation_Info.cs</DependentUpon>
     </EmbeddedResource>
@@ -454,6 +472,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Extend_Venue.resx">
       <DependentUpon>frm_Extend_Venue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Extension_Slip.resx">
+      <DependentUpon>frm_Extension_Slip.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\Forms\frm_OR.resx">
       <DependentUpon>frm_OR.cs</DependentUpon>
@@ -475,7 +496,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\Forms\Report_Billing_Equipment.rdlc" />
     <EmbeddedResource Include="pgso_Billing\Forms\Report_Billing_Venue.rdlc" />
-    <EmbeddedResource Include="pgso_Billing\Forms\FEATURE Report - Copy.rdlc">
+    <EmbeddedResource Include="pgso_Billing\Forms\Report_Extension_Slip.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\Report_Cancellation_Slip.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\User Control\Equipment_User_Control.resx">

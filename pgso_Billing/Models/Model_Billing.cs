@@ -33,6 +33,8 @@ namespace pgso.Billing.Models
         public decimal fld_Total_Amount { get; set; }
         public int fld_OT_Hours { get; set; }
         public int fld_OR { get; set; }
+        public string fld_OT_Payment_Status { get;set; }
+        public string fld_Cancellation_Reason { get; set; }
 
         // Venue Details
         public int? pk_VenueID { get; set; }
@@ -50,6 +52,7 @@ namespace pgso.Billing.Models
         public bool fld_Aircon { get; set; }
         public string fld_Rate_Type { get; set; }
         public decimal fld_Additional_Charge { get; set; }
+        public int fld_OR_Extension { get; set; }
 
         // Reserved Equipment Details
         public int? pk_Reservation_EquipmentID { get; set; }
@@ -86,6 +89,7 @@ namespace pgso.Billing.Models
         public decimal fld_Final_Amount_Paid { get; set; }
         public  decimal fld_Overtime_Fee { get; set; }
         public decimal fld_Amount_Paid_OT { get; set; }
+        public decimal fld_Amount_Paid_Overtime { get; set; }
 
         // 🔸 Computed Properties
         public double Total_Hours => Math.Max(0, (fld_End_Time - fld_Start_Time).TotalHours);

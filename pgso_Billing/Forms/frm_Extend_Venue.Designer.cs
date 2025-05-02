@@ -29,27 +29,27 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_Extend_Venue));
-            this.lbl_OR_Extension = new System.Windows.Forms.TextBox();
+            this.tb_OR_Extension = new System.Windows.Forms.TextBox();
             this.btn_Extend_Venue = new System.Windows.Forms.Button();
-            this.lbl_Extend_Venue = new System.Windows.Forms.TextBox();
+            this.tb_Extend_Venue = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // lbl_OR_Extension
+            // tb_OR_Extension
             // 
-            this.lbl_OR_Extension.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lbl_OR_Extension.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_OR_Extension.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_OR_Extension.Location = new System.Drawing.Point(45, 180);
-            this.lbl_OR_Extension.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_OR_Extension.MinimumSize = new System.Drawing.Size(4, 30);
-            this.lbl_OR_Extension.Name = "lbl_OR_Extension";
-            this.lbl_OR_Extension.Size = new System.Drawing.Size(192, 30);
-            this.lbl_OR_Extension.TabIndex = 8;
-            this.lbl_OR_Extension.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tb_OR_Extension.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tb_OR_Extension.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb_OR_Extension.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_OR_Extension.Location = new System.Drawing.Point(45, 180);
+            this.tb_OR_Extension.Margin = new System.Windows.Forms.Padding(0);
+            this.tb_OR_Extension.MinimumSize = new System.Drawing.Size(4, 30);
+            this.tb_OR_Extension.Name = "tb_OR_Extension";
+            this.tb_OR_Extension.Size = new System.Drawing.Size(192, 26);
+            this.tb_OR_Extension.TabIndex = 8;
+            this.tb_OR_Extension.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btn_Extend_Venue
             // 
@@ -65,18 +65,18 @@
             this.btn_Extend_Venue.UseVisualStyleBackColor = false;
             this.btn_Extend_Venue.Click += new System.EventHandler(this.btn_Extend_Venue_Click);
             // 
-            // lbl_Extend_Venue
+            // tb_Extend_Venue
             // 
-            this.lbl_Extend_Venue.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lbl_Extend_Venue.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Extend_Venue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Extend_Venue.Location = new System.Drawing.Point(45, 114);
-            this.lbl_Extend_Venue.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Extend_Venue.MinimumSize = new System.Drawing.Size(4, 30);
-            this.lbl_Extend_Venue.Name = "lbl_Extend_Venue";
-            this.lbl_Extend_Venue.Size = new System.Drawing.Size(192, 30);
-            this.lbl_Extend_Venue.TabIndex = 4;
-            this.lbl_Extend_Venue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tb_Extend_Venue.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tb_Extend_Venue.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb_Extend_Venue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_Extend_Venue.Location = new System.Drawing.Point(45, 114);
+            this.tb_Extend_Venue.Margin = new System.Windows.Forms.Padding(0);
+            this.tb_Extend_Venue.MinimumSize = new System.Drawing.Size(4, 30);
+            this.tb_Extend_Venue.Name = "tb_Extend_Venue";
+            this.tb_Extend_Venue.Size = new System.Drawing.Size(192, 26);
+            this.tb_Extend_Venue.TabIndex = 4;
+            this.tb_Extend_Venue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // panel1
             // 
@@ -114,7 +114,7 @@
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(192, 23);
             this.textBox2.TabIndex = 11;
-            this.textBox2.Text = "OFFICIAL RECEIPT NUMBER ";
+            this.textBox2.Text = "EXTENDED HOURS";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox3
@@ -128,7 +128,7 @@
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(192, 23);
             this.textBox3.TabIndex = 12;
-            this.textBox3.Text = "EXTENDED HOURS";
+            this.textBox3.Text = "OFFICIAL RECEIPT NUMBER";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // frm_Extend_Venue
@@ -140,9 +140,9 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.btn_Cancel);
-            this.Controls.Add(this.lbl_OR_Extension);
+            this.Controls.Add(this.tb_OR_Extension);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.lbl_Extend_Venue);
+            this.Controls.Add(this.tb_Extend_Venue);
             this.Controls.Add(this.btn_Extend_Venue);
             this.Name = "frm_Extend_Venue";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -153,10 +153,10 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox lbl_Extend_Venue;
+        private System.Windows.Forms.TextBox tb_Extend_Venue;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btn_Extend_Venue;
-        private System.Windows.Forms.TextBox lbl_OR_Extension;
+        private System.Windows.Forms.TextBox tb_OR_Extension;
         private System.Windows.Forms.Button btn_Cancel;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;

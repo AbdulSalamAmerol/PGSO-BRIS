@@ -45,10 +45,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnl_Billing_Details = new System.Windows.Forms.Panel();
             this.pb_Logo = new System.Windows.Forms.PictureBox();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dgv_Billing_Records = new System.Windows.Forms.DataGridView();
             this.pk_ReservationID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,10 +55,10 @@
             this.col_Equipment_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Start_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Amount_Due = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Reservation_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Print = new System.Windows.Forms.DataGridViewImageColumn();
             this.col_Approved = new System.Windows.Forms.DataGridViewImageColumn();
             this.col_Cancel = new System.Windows.Forms.DataGridViewImageColumn();
-            this.col_Reservation_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Extend = new System.Windows.Forms.DataGridViewImageColumn();
             this.tlp_Billing_UControls = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -70,14 +66,17 @@
             this.btn_Reports = new System.Windows.Forms.Button();
             this.sb_Billing_Search_Bar = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_Create_Venue_Reservation = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.flp_Top = new System.Windows.Forms.FlowLayoutPanel();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
             this.pnl_Billing_Details.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Billing_Records)).BeginInit();
@@ -109,48 +108,6 @@
             this.pb_Logo.Size = new System.Drawing.Size(912, 1150);
             this.pb_Logo.TabIndex = 0;
             this.pb_Logo.TabStop = false;
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewImageColumn1.FillWeight = 3F;
-            this.dataGridViewImageColumn1.HeaderText = "PRINT";
-            this.dataGridViewImageColumn1.Image = global::pgso.Properties.Resources.print;
-            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn1.MinimumWidth = 20;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            // 
-            // dataGridViewImageColumn2
-            // 
-            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewImageColumn2.HeaderText = "CANCEL";
-            this.dataGridViewImageColumn2.Image = global::pgso.Properties.Resources.Cancelled_Icon;
-            this.dataGridViewImageColumn2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
-            this.dataGridViewImageColumn2.ReadOnly = true;
-            // 
-            // dataGridViewImageColumn3
-            // 
-            this.dataGridViewImageColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewImageColumn3.FillWeight = 3F;
-            this.dataGridViewImageColumn3.HeaderText = "PRINT";
-            this.dataGridViewImageColumn3.Image = global::pgso.Properties.Resources.print;
-            this.dataGridViewImageColumn3.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn3.MinimumWidth = 20;
-            this.dataGridViewImageColumn3.Name = "dataGridViewImageColumn3";
-            this.dataGridViewImageColumn3.ReadOnly = true;
-            // 
-            // dataGridViewImageColumn4
-            // 
-            this.dataGridViewImageColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewImageColumn4.FillWeight = 3F;
-            this.dataGridViewImageColumn4.HeaderText = "PRINT";
-            this.dataGridViewImageColumn4.Image = global::pgso.Properties.Resources.print;
-            this.dataGridViewImageColumn4.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn4.MinimumWidth = 20;
-            this.dataGridViewImageColumn4.Name = "dataGridViewImageColumn4";
-            this.dataGridViewImageColumn4.ReadOnly = true;
             // 
             // dgv_Billing_Records
             // 
@@ -188,10 +145,10 @@
             this.col_Equipment_Name,
             this.col_Start_Date,
             this.col_Amount_Due,
+            this.col_Reservation_Status,
             this.col_Print,
             this.col_Approved,
             this.col_Cancel,
-            this.col_Reservation_Status,
             this.col_Extend});
             this.dgv_Billing_Records.Cursor = System.Windows.Forms.Cursors.Hand;
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -339,6 +296,19 @@
             this.col_Amount_Due.ReadOnly = true;
             this.col_Amount_Due.Width = 79;
             // 
+            // col_Reservation_Status
+            // 
+            this.col_Reservation_Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.col_Reservation_Status.DataPropertyName = "fld_Reservation_Status";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Reservation_Status.DefaultCellStyle = dataGridViewCellStyle11;
+            this.col_Reservation_Status.FillWeight = 7F;
+            this.col_Reservation_Status.HeaderText = "STATUS";
+            this.col_Reservation_Status.Name = "col_Reservation_Status";
+            this.col_Reservation_Status.ReadOnly = true;
+            this.col_Reservation_Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.col_Reservation_Status.Width = 88;
+            // 
             // col_Print
             // 
             this.col_Print.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -360,6 +330,7 @@
             this.col_Approved.MinimumWidth = 60;
             this.col_Approved.Name = "col_Approved";
             this.col_Approved.ReadOnly = true;
+            this.col_Approved.Visible = false;
             this.col_Approved.Width = 60;
             // 
             // col_Cancel
@@ -371,20 +342,8 @@
             this.col_Cancel.MinimumWidth = 60;
             this.col_Cancel.Name = "col_Cancel";
             this.col_Cancel.ReadOnly = true;
+            this.col_Cancel.Visible = false;
             this.col_Cancel.Width = 60;
-            // 
-            // col_Reservation_Status
-            // 
-            this.col_Reservation_Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.col_Reservation_Status.DataPropertyName = "fld_Reservation_Status";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Reservation_Status.DefaultCellStyle = dataGridViewCellStyle11;
-            this.col_Reservation_Status.FillWeight = 7F;
-            this.col_Reservation_Status.HeaderText = "STATUS";
-            this.col_Reservation_Status.Name = "col_Reservation_Status";
-            this.col_Reservation_Status.ReadOnly = true;
-            this.col_Reservation_Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.col_Reservation_Status.Width = 88;
             // 
             // col_Extend
             // 
@@ -424,9 +383,8 @@
             this.panel1.Controls.Add(this.btn_Reports);
             this.panel1.Controls.Add(this.sb_Billing_Search_Bar);
             this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.btn_Create_Venue_Reservation);
             this.panel1.Controls.Add(this.textBox3);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.comboBox1);
@@ -497,20 +455,6 @@
             this.button4.Text = "DAMAGE SLIP";
             this.button4.UseVisualStyleBackColor = false;
             // 
-            // button3
-            // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.button3.Location = new System.Drawing.Point(214, 5);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(155, 54);
-            this.button3.TabIndex = 12;
-            this.button3.Text = "CONFIRMATION SLIP";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
             // textBox1
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -524,19 +468,20 @@
             this.textBox1.TabIndex = 6;
             this.textBox1.Text = "SEARCH";
             // 
-            // button2
+            // btn_Create_Venue_Reservation
             // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.button2.Location = new System.Drawing.Point(8, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(155, 54);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "EXTENSION SLIP";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btn_Create_Venue_Reservation.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_Create_Venue_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Create_Venue_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Create_Venue_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Create_Venue_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.btn_Create_Venue_Reservation.Location = new System.Drawing.Point(8, 5);
+            this.btn_Create_Venue_Reservation.Name = "btn_Create_Venue_Reservation";
+            this.btn_Create_Venue_Reservation.Size = new System.Drawing.Size(155, 54);
+            this.btn_Create_Venue_Reservation.TabIndex = 11;
+            this.btn_Create_Venue_Reservation.Text = "Create Venue Reservation";
+            this.btn_Create_Venue_Reservation.UseVisualStyleBackColor = false;
+            this.btn_Create_Venue_Reservation.Click += new System.EventHandler(this.btn_Create_Venue_Reservation_Click);
             // 
             // textBox3
             // 
@@ -602,6 +547,50 @@
             this.flp_Top.Size = new System.Drawing.Size(1902, 11);
             this.flp_Top.TabIndex = 5;
             // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewImageColumn1.FillWeight = 3F;
+            this.dataGridViewImageColumn1.HeaderText = "PRINT";
+            this.dataGridViewImageColumn1.Image = global::pgso.Properties.Resources.print;
+            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn1.MinimumWidth = 20;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn2
+            // 
+            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewImageColumn2.HeaderText = "CANCEL";
+            this.dataGridViewImageColumn2.Image = global::pgso.Properties.Resources.Cancelled_Icon;
+            this.dataGridViewImageColumn2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn2.MinimumWidth = 60;
+            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            this.dataGridViewImageColumn2.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn3
+            // 
+            this.dataGridViewImageColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewImageColumn3.FillWeight = 3F;
+            this.dataGridViewImageColumn3.HeaderText = "PRINT";
+            this.dataGridViewImageColumn3.Image = global::pgso.Properties.Resources.print;
+            this.dataGridViewImageColumn3.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn3.MinimumWidth = 20;
+            this.dataGridViewImageColumn3.Name = "dataGridViewImageColumn3";
+            this.dataGridViewImageColumn3.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn4
+            // 
+            this.dataGridViewImageColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewImageColumn4.FillWeight = 3F;
+            this.dataGridViewImageColumn4.HeaderText = "PRINT";
+            this.dataGridViewImageColumn4.Image = global::pgso.Properties.Resources.print;
+            this.dataGridViewImageColumn4.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn4.MinimumWidth = 20;
+            this.dataGridViewImageColumn4.Name = "dataGridViewImageColumn4";
+            this.dataGridViewImageColumn4.ReadOnly = true;
+            this.dataGridViewImageColumn4.Visible = false;
+            // 
             // frm_Billing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -638,6 +627,18 @@
         private System.Windows.Forms.PictureBox pb_Logo;
         private System.Windows.Forms.TableLayoutPanel tlp_Billing_UControls;
         public System.Windows.Forms.DataGridView dgv_Billing_Records;
+        private System.Windows.Forms.FlowLayoutPanel flp_Top;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btn_Reports;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox cmb_Billing_Filter;
+        private System.Windows.Forms.Button btn_Create_Venue_Reservation;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox sb_Billing_Search_Bar;
         private System.Windows.Forms.DataGridViewTextBoxColumn pk_ReservationID;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Control_Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Reservation_Name;
@@ -647,23 +648,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Equipment_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Start_Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Amount_Due;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Reservation_Status;
         private System.Windows.Forms.DataGridViewImageColumn col_Print;
         private System.Windows.Forms.DataGridViewImageColumn col_Approved;
         private System.Windows.Forms.DataGridViewImageColumn col_Cancel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_Reservation_Status;
         private System.Windows.Forms.DataGridViewImageColumn col_Extend;
-        private System.Windows.Forms.FlowLayoutPanel flp_Top;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button btn_Reports;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox cmb_Billing_Filter;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox sb_Billing_Search_Bar;
     }
 }

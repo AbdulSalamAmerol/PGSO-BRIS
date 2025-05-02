@@ -156,7 +156,7 @@ namespace pgso
         {
             pnl_Billing_Details.Controls.Clear(); // Or wherever you load the control
 
-            Venue_User_Control venueControl = new Venue_User_Control(billingDetails);
+            Venue_User_Control venueControl = new Venue_User_Control(billingDetails, repo_billing);
 
             // ⛓️ Subscribe to refresh event
             venueControl.RequestBillingRefresh += (updatedReservationID) =>
@@ -208,7 +208,7 @@ namespace pgso
             switch (billing.fld_Reservation_Type)
             {
                 case "Venue":
-                    var venueControl = new Venue_User_Control(billing);
+                    var venueControl = new Venue_User_Control(billing, repo_billing);
                  
                     venueControl.Dock = DockStyle.Fill;
                     venueControl.LoadBillingDetails(billing);
@@ -223,7 +223,7 @@ namespace pgso
                     break;
 
                 case "Equipment":
-                    var equipmentControl = new Equipment_User_Control(billing);
+                    var equipmentControl = new Equipment_User_Control(billing, repo_billing);
                     equipmentControl.Dock = DockStyle.Fill;
                     equipmentControl.LoadBillingDetails(billing);
                     // ✅ Subscribe to the event when the Equipment User Control is loaded
@@ -437,14 +437,14 @@ namespace pgso
                             switch (updatedDetails.fld_Reservation_Type)
                             {
                                 case "Venue":
-                                    var venueControl = new Venue_User_Control(updatedDetails);
+                                    var venueControl = new Venue_User_Control(updatedDetails, repo_billing);
                                     venueControl.Dock = DockStyle.Fill;
                                     venueControl.LoadBillingDetails(updatedDetails);
                                     billingControl = venueControl;
                                     break;
 
                                 case "Equipment":
-                                    var equipmentControl = new Equipment_User_Control(updatedDetails);
+                                    var equipmentControl = new Equipment_User_Control(updatedDetails, repo_billing);
                                     equipmentControl.Dock = DockStyle.Fill;
                                     equipmentControl.LoadBillingDetails(updatedDetails);
                                     billingControl = equipmentControl;
@@ -544,7 +544,7 @@ namespace pgso
         {
             try
             {
-                return await Task.Run(() => repo_billing.UpdateReservationStatus(reservationID, newStatus));
+                return await Task.Run(() => repo_billing.UpdateReservationStatusAsync(reservationID, newStatus));
             }
             catch (Exception ex)
             {
@@ -576,11 +576,11 @@ namespace pgso
 
             if (details.fld_Reservation_Type == "Venue")
             {
-                controlToDisplay = new Venue_User_Control(details);
+                controlToDisplay = new Venue_User_Control(details, repo_billing);
             }
             else if (details.fld_Reservation_Type == "Equipment")
             {
-                controlToDisplay = new Equipment_User_Control(details);
+                controlToDisplay = new Equipment_User_Control(details, repo_billing);
             }
             else
             {
@@ -796,13 +796,13 @@ namespace pgso
                     switch (updatedDetails.fld_Reservation_Type)
                     {
                         case "Venue":
-                            var venueControl = new Venue_User_Control(updatedDetails); // Pass updated details to the constructor
+                            var venueControl = new Venue_User_Control(updatedDetails, repo_billing); // Pass updated details to the constructor
                             venueControl.Dock = DockStyle.Fill;
                             billingControl = venueControl;
                             break;
 
                         case "Equipment":
-                            var equipmentControl = new Equipment_User_Control(updatedDetails); // Pass updated details to the constructor
+                            var equipmentControl = new Equipment_User_Control(updatedDetails, repo_billing); // Pass updated details to the constructor
                             equipmentControl.Dock = DockStyle.Fill;
                             billingControl = equipmentControl;
                             break;
@@ -835,6 +835,12 @@ namespace pgso
         private void textBox2_TextChanged_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_Create_Venue_Reservation_Click(object sender, EventArgs e)
+        {
+            frm_Create_Venuer_Reservation Venue = new frm_Create_Venuer_Reservation();
+            Venue.ShowDialog();
         }
     }
 }
