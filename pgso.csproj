@@ -164,6 +164,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BillingDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="pgso_Billing\Forms\frm_Add_Equipment_Billing.cs">
       <SubType>Form</SubType>
     </Compile>
