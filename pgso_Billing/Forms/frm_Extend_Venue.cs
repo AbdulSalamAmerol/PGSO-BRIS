@@ -39,15 +39,32 @@ namespace pgso.pgso_Billing.Forms
                 var billingData = await repo_Billing.GetCurrentExtensionDetails(_reservationID);
                 if (billingData != null)
                 {
-                    tb_OR_Extension.Text = billingData.fld_OR_Extension.ToString();
+                    // Check if OR extension is 0 or less
+                    if (billingData.fld_OR_Extension <= 0)
+                        tb_OR_Extension.Text = "Enter Official Receipt";
+                    else
+                        tb_OR_Extension.Text = billingData.fld_OR_Extension.ToString();
+
                     tb_Extend_Venue.Text = billingData.fld_OT_Hours.ToString();
+
+                    // Disable the textbox if no OT hours exist
+                    if (billingData.fld_OT_Hours <= 0)
+                    {
+                        tb_Extend_Venue.ReadOnly = true;
+                        tb_Extend_Venue.TabStop = false;
+                    }
+                  
+
                 }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error loading data: " + ex.Message);
             }
         }
+
+
 
 
 
@@ -59,11 +76,12 @@ namespace pgso.pgso_Billing.Forms
                 string orExtensionText = tb_OR_Extension.Text.Trim();
                 string extendHoursText = tb_Extend_Venue.Text.Trim();
 
-                // Validate OR Extension
-                if (!int.TryParse(orExtensionText, out int orExtensionInt))
+                int orExtensionInt = 0; // Default value
+
+                // Try parsing the input, but don't show an error message if it fails
+                if (!int.TryParse(orExtensionText, out orExtensionInt))
                 {
-                    MessageBox.Show("Please enter a valid numeric OR number for the extension.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    // If parsing fails, the value will remain 0 (default behavior)
                 }
 
                 // Validate Hours

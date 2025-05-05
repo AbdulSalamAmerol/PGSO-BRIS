@@ -66,5 +66,14 @@ namespace pgso.pgso_Billing.Forms
                 MessageBox.Show("Please select a valid report.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void btn_Cancel_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to cancel and close this form?", "Confirm Cancel", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
     }
 }

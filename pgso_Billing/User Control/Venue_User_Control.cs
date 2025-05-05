@@ -209,9 +209,9 @@ namespace pgso.pgso_Billing
             // Payment details
             lbl_Paid_Amount.Text = billingDetails.fld_Amount_Paid.ToString("C");
             decimal otCharge = billingDetails.fld_OT_Hours * billingDetails.fld_Hourly_Rate;
-      
-            lbl_Total_Amount.Text = billingDetails.fld_Total_Amount.ToString("C");
-            lbl_Balance.Text = (billingDetails.fld_Total_Amount - billingDetails.fld_Amount_Paid).ToString("C");
+
+            lbl_Total_Amount.Text = (billingDetails.fld_Additional_Charge+billingDetails.fld_First4Hrs_Rate + ((decimal)(billingDetails.Total_Hours - 4) * billingDetails.fld_Hourly_Rate)).ToString("C");
+            lbl_Balance.Text = ((billingDetails.fld_Additional_Charge + billingDetails.fld_First4Hrs_Rate + ((decimal)(billingDetails.Total_Hours - 4) * billingDetails.fld_Hourly_Rate)) - billingDetails.fld_Amount_Paid).ToString("C");
             lbl_Refund_Amount.Text = (billingDetails.fld_Cancellation_Fee).ToString("C");
 
             //lbl_Final_Amount_Paid.Text = (billingDetails.fld_Final_Amount_Paid).ToString("C");
@@ -260,35 +260,27 @@ namespace pgso.pgso_Billing
                 tb14.Visible = false;
                 lbl_h1.Visible = false;
                 lbl_h2.Visible = false;
-                lbl_h3.Visible = false;
+         
                 label34.Visible = false;
-                label35.Visible = false;
+           
                 label38.Visible = false;
         
                 label45.Visible = false;
                 label46.Visible = false;
-                label48.Visible = false;
+             
 
 
 
         
-                label11.Visible = false;
-                label10.Visible = false;
-                label12.Visible = false;
-                label13.Visible = false;
+  
      
              
           
                 label19.Visible = false;
                 label20.Visible = false;
-                label26.Visible = false;
+            
                 label27.Visible = false;
-                label28.Visible = false;
-                label29.Visible = false;
-                label30.Visible = false;
-                label31.Visible = false;
-                label32.Visible = false;
-                label33.Visible = false;
+           
                 label34.Visible = false;
               
                 lbl_Balance_3.Visible = false;
@@ -322,31 +314,22 @@ namespace pgso.pgso_Billing
 
                 lbl_h1.Visible = true;
                 lbl_h2.Visible = true;
-                lbl_h3.Visible = true;
+ 
 
                 label34.Visible = true;
-                label35.Visible = true;
+        
                 label38.Visible = true;
 
                 label45.Visible = true;
                 label46.Visible = true;
-                label48.Visible = true;
+               
 
-                label11.Visible = true;
-                label10.Visible = true;
-                label12.Visible = true;
-                label13.Visible = true;
 
                 label19.Visible = true;
                 label20.Visible = true;
-                label26.Visible = true;
+  
                 label27.Visible = true;
-                label28.Visible = true;
-                label29.Visible = true;
-                label30.Visible = true;
-                label31.Visible = true;
-                label32.Visible = true;
-                label33.Visible = true;
+      
                 
                 lbl_Balance_3.Visible = true;
                 lbl_Final_Amount_Paid.Visible = true;
@@ -382,31 +365,22 @@ namespace pgso.pgso_Billing
 
                 lbl_h1.Visible = true;
                 lbl_h2.Visible = true;
-                lbl_h3.Visible = true;
+
 
                 label34.Visible = true;
-                label35.Visible = true;
+     
                 label38.Visible = true;
 
                 label45.Visible = true;
                 label46.Visible = true;
-                label48.Visible = true;
+     
 
-                label11.Visible = true;
-                label10.Visible = true;
-                label12.Visible = true;
-                label13.Visible = true;
 
                 label19.Visible = true;
                 label20.Visible = true;
-                label26.Visible = true;
+   
                 label27.Visible = true;
-                label28.Visible = true;
-                label29.Visible = true;
-                label30.Visible = true;
-                label31.Visible = true;
-                label32.Visible = true;
-                label33.Visible = true;
+          
 
                 lbl_Balance_3.Visible = true;
                 lbl_Final_Amount_Paid.Visible = true;

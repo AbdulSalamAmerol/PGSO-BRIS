@@ -786,46 +786,66 @@ namespace pgso.Billing.Repositories
         {
             try
             {
-                // Step 1: Get hourly rate and base amount (not total with previous OT hours)
-                var hourlyRateTask = GetHourlyRate(reservationID);
-                var baseAmountTask = GetBaseAmount(reservationID); // This should get the original charge without OT
+                // Step 0: Check existing OT hours
+                string checkQuery = "SELECT fld_OT_Hours FROM tbl_Reservation WHERE pk_ReservationID = @reservationID";
+                int existingOT = 0;
 
+                using (SqlConnection checkConn = new SqlConnection(connectionString))
+                using (SqlCommand checkCmd = new SqlCommand(checkQuery, checkConn))
+                {
+                    checkCmd.Parameters.AddWithValue("@reservationID", reservationID);
+                    await checkConn.OpenAsync();
+                    object result = await checkCmd.ExecuteScalarAsync();
+                    existingOT = result != DBNull.Value ? Convert.ToInt32(result) : 0;
+                }
+
+                // Block update only if trying to change an already existing otHours
+                if (existingOT > 0 && otHours != existingOT)
+                {
+                    MessageBox.Show("Overtime Hours Already Exist in the Database", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+
+
+                // Step 1: Get hourly rate and base amount
+                var hourlyRateTask = GetHourlyRate(reservationID);
+                var baseAmountTask = GetBaseAmount(reservationID);
                 await Task.WhenAll(hourlyRateTask, baseAmountTask);
 
                 decimal hourlyRate = hourlyRateTask.Result;
                 decimal baseAmount = baseAmountTask.Result;
 
-                // Step 2: Recalculate total based on new OT hours (as user input)
+                // Step 2: Recalculate total amounts
                 decimal newOvertimeFee = otHours * hourlyRate;
                 decimal newFinalAmountPaid = baseAmount + newOvertimeFee;
+                decimal newTotalAmount = baseAmount + newOvertimeFee;
 
-                // Step 3: Update SQL logic with conditional logic for fld_Amount_Paid_Overtime
+                // Step 3: Update records
                 string query = @"
-                -- Update Payment table (Final and OT fee always)
-                UPDATE p
-                SET
-                    p.fld_Final_Amount_Paid = @newFinalAmountPaid,
-                    p.fld_Overtime_Fee = @newOvertimeFee
-                FROM tbl_Payment p
-                JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
-                WHERE r.pk_ReservationID = @reservationID;
+        UPDATE p
+        SET
+            p.fld_Final_Amount_Paid = @newFinalAmountPaid,
+            p.fld_Overtime_Fee = @newOvertimeFee
+        FROM tbl_Payment p
+        JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
+        WHERE r.pk_ReservationID = @reservationID;
 
-                -- Update fld_Amount_Paid_Overtime only if OR Extension is provided (non-zero)
-                IF @orExtension > 0
-                BEGIN
-                    UPDATE p
-                    SET p.fld_Amount_Paid_Overtime = @newOvertimeFee
-                    FROM tbl_Payment p
-                    JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
-                    WHERE r.pk_ReservationID = @reservationID;
-                END
-
-                -- Update Reservation table with new OT hours and OR Extension
-                UPDATE tbl_Reservation
-                SET
-                    fld_OT_Hours = @otHours,
-                    fld_OR_Extension = @orExtension
-                WHERE pk_ReservationID = @reservationID;";
+        IF @orExtension > 0
+        BEGIN
+            UPDATE p
+            SET p.fld_Amount_Paid_Overtime = @newOvertimeFee
+            FROM tbl_Payment p
+            JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
+            WHERE r.pk_ReservationID = @reservationID;
+        END
+        IF @orExtension != 
+        BEGIN
+            UPDATE tbl_Reservation
+            SET
+                fld_Total_Amount = @totalAmount,
+                fld_OT_Hours = @otHours,
+                fld_OR_Extension = @orExtension
+            WHERE pk_ReservationID = @reservationID;";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -835,10 +855,10 @@ namespace pgso.Billing.Repositories
                     cmd.Parameters.AddWithValue("@newOvertimeFee", newOvertimeFee);
                     cmd.Parameters.AddWithValue("@reservationID", reservationID);
                     cmd.Parameters.AddWithValue("@orExtension", orExtension);
+                    cmd.Parameters.AddWithValue("@totalAmount", newTotalAmount);
 
                     await conn.OpenAsync();
                     int rowsAffected = await cmd.ExecuteNonQueryAsync();
-                    Console.WriteLine($"Rows affected: {rowsAffected}");
                     return rowsAffected > 0;
                 }
             }
@@ -853,6 +873,8 @@ namespace pgso.Billing.Repositories
                 return false;
             }
         }
+
+
 
 
 

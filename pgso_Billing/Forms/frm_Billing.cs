@@ -152,6 +152,9 @@ namespace pgso
             return billingDetails;
         }
 
+        //Close form when going to dashbaord
+      
+
         private void LoadVenueBillingControl(Model_Billing billingDetails)
         {
             pnl_Billing_Details.Controls.Clear(); // Or wherever you load the control
@@ -842,5 +845,17 @@ namespace pgso
             frm_Create_Venuer_Reservation Venue = new frm_Create_Venuer_Reservation();
             Venue.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frm_Create_Equipment_Reservation Equipment = new frm_Create_Equipment_Reservation();
+            Equipment.ShowDialog();
+        }
+
+      
+
+
+
     }
+
 }

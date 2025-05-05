@@ -94,6 +94,7 @@ namespace pgso.Billing.Models
         // 🔸 Computed Properties
         public double Total_Hours => Math.Max(0, (fld_End_Time - fld_Start_Time).TotalHours);
 
+
         // 🔸 Formatting Properties
         public string Formatted_Amount_Due => fld_Amount_Due.ToString("C", new CultureInfo("en-PH"));
         public string Formatted_Amount_Paid => fld_Amount_Paid.ToString("C", new CultureInfo("en-PH"));

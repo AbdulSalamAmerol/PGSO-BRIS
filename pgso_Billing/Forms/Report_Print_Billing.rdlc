@@ -225,7 +225,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Control No.</Value>
+                <Value>Control Number :</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>9pt</FontSize>
@@ -238,9 +238,9 @@
           </Paragraph>
         </Paragraphs>
         <Top>4.44183cm</Top>
-        <Left>13.159cm</Left>
+        <Left>11.24927cm</Left>
         <Height>0.4cm</Height>
-        <Width>1.70625cm</Width>
+        <Width>3.61598cm</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -349,7 +349,7 @@
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>5.2375cm</Top>
+        <Top>5.555cm</Top>
         <Left>2.32437cm</Left>
         <Height>0.81167cm</Height>
         <Width>3.58465cm</Width>
@@ -377,7 +377,7 @@
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>8.46139cm</Top>
+        <Top>9.09639cm</Top>
         <Left>2.29792cm</Left>
         <Height>0.4cm</Height>
         <Width>2.1825cm</Width>
@@ -393,19 +393,19 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.67238cm</Width>
+              <Width>3.44346cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.59304cm</Width>
+              <Width>2.92804cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.64006cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.51186cm</Width>
+              <Width>2.92574cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.82391cm</Width>
+              <Width>3.30395cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -661,9 +661,11 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=IIf(IsNothing(Fields!fld_Start_Date_Eq.Value), "N/A", Format(Fields!fld_Start_Date_Eq.Value, "MM/dd/yyyy")) 
- &amp; " - " &amp; 
-IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_Eq.Value, "MM/dd/yyyy"))</Value>
+                              <Value>=IIf(
+ DateDiff("d", Fields!fld_Start_Date_Eq.Value, Fields!fld_End_Date_Eq.Value) = 0,
+ Format(Fields!fld_Start_Date_Eq.Value, "MMMM d, yyyy"),
+ Format(Fields!fld_Start_Date_Eq.Value, "MMMM d") &amp; " - " &amp; Format(Fields!fld_End_Date_Eq.Value, "d, yyyy")
+)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontFamily>Calibri</FontFamily>
@@ -675,7 +677,9 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>fld_Start_Date_Eq</rd:DefaultName>
@@ -684,6 +688,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -701,7 +706,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fld_Quantity.Value</Value>
+                              <Value>=Fields!fld_Quantity.Value &amp; IIF(Fields!fld_Quantity.Value = 1, " pc", " pcs")</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontFamily>Calibri</FontFamily>
@@ -839,7 +844,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>8.91132cm</Top>
+        <Top>9.54632cm</Top>
         <Left>3.09576cm</Left>
         <Height>1cm</Height>
         <Width>14.24125cm</Width>
@@ -861,10 +866,10 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.51185cm</Width>
+              <Width>2.92574cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.82392cm</Width>
+              <Width>3.30395cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -961,10 +966,10 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>10.91132cm</Top>
-        <Left>12.00124cm</Left>
+        <Top>11.54632cm</Top>
+        <Left>11.10732cm</Left>
         <Height>0.5cm</Height>
-        <Width>5.33577cm</Width>
+        <Width>6.22969cm</Width>
         <ZIndex>10</ZIndex>
         <Style>
           <Border>
@@ -977,10 +982,13 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>9.19652cm</Width>
+              <Width>8.01156cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.04473cm</Width>
+              <Width>2.92574cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>3.30395cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1009,6 +1017,41 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox50</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox5">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Number of Hours</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>9pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox5</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1097,6 +1140,42 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox6">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Total_Hours.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>9pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox6</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox53">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -1113,7 +1192,9 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox53</rd:DefaultName>
@@ -1122,6 +1203,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>5pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1138,6 +1220,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
           <TablixMembers>
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -1151,7 +1234,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>9.91132cm</Top>
+        <Top>10.54632cm</Top>
         <Left>3.09576cm</Left>
         <Height>1cm</Height>
         <Width>14.24125cm</Width>
@@ -1184,7 +1267,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>11.57933cm</Top>
+        <Top>14.11933cm</Top>
         <Left>2.32437cm</Left>
         <Height>0.635cm</Height>
         <Width>3.92875cm</Width>
@@ -1230,7 +1313,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>13.01125cm</Top>
+        <Top>15.55125cm</Top>
         <Left>3.97756cm</Left>
         <Height>0.89958cm</Height>
         <Width>4.7625cm</Width>
@@ -1264,7 +1347,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>11.57933cm</Top>
+        <Top>14.11933cm</Top>
         <Left>11.75392cm</Left>
         <Height>0.635cm</Height>
         <Width>1.75917cm</Width>
@@ -1316,7 +1399,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>13.01125cm</Top>
+        <Top>15.55125cm</Top>
         <Left>13.66873cm</Left>
         <Height>0.89958cm</Height>
         <Width>3.66828cm</Width>
@@ -1352,7 +1435,18 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>STATEMENT OF ACCOUNT</Value>
+                <Value>SATATEMENT OF ACCOUNT</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -1365,7 +1459,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
         <Top>1.39446in</Top>
         <Left>2.93422in</Left>
         <Height>0.25in</Height>
-        <Width>2.3859in</Width>
+        <Width>2.38589in</Width>
         <ZIndex>17</ZIndex>
         <Style>
           <Border>
@@ -1395,7 +1489,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>6.52014cm</Top>
+        <Top>7.15514cm</Top>
         <Left>2.32437cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
@@ -1427,7 +1521,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fld_Full_Name.Value</Value>
+                              <Value>=UCase(Fields!fld_Full_Name.Value)</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
@@ -1470,7 +1564,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>6.52014cm</Top>
+        <Top>7.15514cm</Top>
         <Left>6.35895cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
@@ -1500,7 +1594,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>6.92014cm</Top>
+        <Top>7.55514cm</Top>
         <Left>2.32437cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
@@ -1575,7 +1669,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>6.92014cm</Top>
+        <Top>7.55514cm</Top>
         <Left>6.35895cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
@@ -1605,7 +1699,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>7.68486cm</Top>
+        <Top>8.31986cm</Top>
         <Left>2.32437cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
@@ -1624,7 +1718,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>6.48896cm</Width>
+              <Width>11.00452cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1686,10 +1780,10 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>7.68486cm</Top>
+        <Top>8.31986cm</Top>
         <Left>6.35895cm</Left>
         <Height>0.4cm</Height>
-        <Width>6.48896cm</Width>
+        <Width>11.00452cm</Width>
         <ZIndex>23</ZIndex>
         <Style>
           <Border>
@@ -1716,7 +1810,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>7.32014cm</Top>
+        <Top>7.95514cm</Top>
         <Left>2.32437cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
@@ -1791,7 +1885,7 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>7.32014cm</Top>
+        <Top>7.95514cm</Top>
         <Left>6.35895cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
@@ -1803,170 +1897,65 @@ IIf(IsNothing(Fields!fld_End_Date_Eq.Value), "N/A", Format(Fields!fld_End_Date_E
           </Border>
         </Style>
       </Tablix>
-      <Tablix Name="Tablix14">
-        <TablixBody>
-          <TablixColumns>
-            <TablixColumn>
-              <Width>2.73813cm</Width>
-            </TablixColumn>
-          </TablixColumns>
-          <TablixRows>
-            <TablixRow>
-              <Height>0.4cm</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="fld_Requesting_Person_Address9">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=IIf(Fields!fld_Reservation_Type.Value = "Equipment", "Number of Days: ", "Number of Hours: ")</Value>
-                              <Style>
-                                <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Visibility>
-                        <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) OR Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
-                      </Visibility>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>None</Style>
-                        </Border>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-          </TablixRows>
-        </TablixBody>
-        <TablixColumnHierarchy>
-          <TablixMembers>
-            <TablixMember />
-          </TablixMembers>
-        </TablixColumnHierarchy>
-        <TablixRowHierarchy>
-          <TablixMembers>
-            <TablixMember>
-              <Group Name="Group_Number_Hours_Or_Days">
-                <GroupExpressions>
-                  <GroupExpression>=Fields!fld_Number_Of_Days.Value</GroupExpression>
-                </GroupExpressions>
-              </Group>
-            </TablixMember>
-          </TablixMembers>
-        </TablixRowHierarchy>
-        <DataSetName>BillingDataset</DataSetName>
-        <Top>7.68486cm</Top>
-        <Left>14.28138cm</Left>
-        <Height>0.4cm</Height>
-        <Width>2.73813cm</Width>
+      <Textbox Name="Textbox64">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>RESERVATION POLICY</Value>
+                <Style>
+                  <FontFamily>calibri</FontFamily>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value xml:space="preserve">
+ </Value>
+                <Style>
+                  <FontFamily>calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value> - Reservations must be made at least three (3) days before the scheduled activity to avoid overlapping schedules.
+  -  A strictly “No Pay, No Use”.
+</Value>
+                <Style>
+                  <FontFamily>calibri</FontFamily>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox60</rd:DefaultName>
+        <Top>12.19417cm</Top>
+        <Left>2.32437cm</Left>
+        <Height>1.74878cm</Height>
+        <Width>15.0391cm</Width>
         <ZIndex>26</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
             <Width>0.25pt</Width>
           </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
         </Style>
-      </Tablix>
-      <Tablix Name="Tablix10">
-        <TablixBody>
-          <TablixColumns>
-            <TablixColumn>
-              <Width>0.32645cm</Width>
-            </TablixColumn>
-          </TablixColumns>
-          <TablixRows>
-            <TablixRow>
-              <Height>0.4cm</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="fld_Requesting_Person_Address4">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=IIf(Fields!fld_Reservation_Type.Value = "Venue", Fields!Total_Hours.Value, Fields!fld_Number_Of_Days.Value)</Value>
-                              <Style>
-                                <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
-                                <Format>0;0-</Format>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Visibility>
-                        <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) OR Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
-                      </Visibility>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>None</Style>
-                        </Border>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-          </TablixRows>
-        </TablixBody>
-        <TablixColumnHierarchy>
-          <TablixMembers>
-            <TablixMember />
-          </TablixMembers>
-        </TablixColumnHierarchy>
-        <TablixRowHierarchy>
-          <TablixMembers>
-            <TablixMember>
-              <Group Name="Group_Hours_Or_Days">
-                <GroupExpressions>
-                  <GroupExpression>=Fields!fld_Number_Of_Days.Value</GroupExpression>
-                </GroupExpressions>
-              </Group>
-            </TablixMember>
-          </TablixMembers>
-        </TablixRowHierarchy>
-        <DataSetName>BillingDataset</DataSetName>
-        <Top>7.68486cm</Top>
-        <Left>17.03702cm</Left>
-        <Height>0.4cm</Height>
-        <Width>0.32645cm</Width>
-        <ZIndex>27</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-            <Width>0.25pt</Width>
-          </Border>
-        </Style>
-      </Tablix>
+      </Textbox>
     </ReportItems>
-    <Height>6in</Height>
+    <Height>6.4767in</Height>
     <Style>
       <Border>
         <Style>None</Style>
       </Border>
     </Style>
   </Body>
-  <Width>7.6in</Width>
+  <Width>7.1in</Width>
   <Page>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>

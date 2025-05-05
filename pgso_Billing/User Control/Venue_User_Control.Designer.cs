@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.pnl_Billing_Details = new System.Windows.Forms.Panel();
+            this.btn_Confirm_Reservation = new System.Windows.Forms.Button();
+            this.btn_Cancel_Reservation = new System.Windows.Forms.Button();
+            this.btn_Cancellation_Slip = new System.Windows.Forms.Button();
+            this.btn_Extension_Slip = new System.Windows.Forms.Button();
             this.textBox16 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
@@ -42,7 +46,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.label25 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.label48 = new System.Windows.Forms.Label();
             this.textBox44 = new System.Windows.Forms.TextBox();
             this.textBox47 = new System.Windows.Forms.TextBox();
             this.tb7 = new System.Windows.Forms.TextBox();
@@ -51,6 +54,7 @@
             this.label45 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
             this.lbl_Final_Amount_Paid = new System.Windows.Forms.TextBox();
             this.tb13 = new System.Windows.Forms.TextBox();
             this.lbl_Balance_3 = new System.Windows.Forms.TextBox();
@@ -58,6 +62,7 @@
             this.lbl_Balance_2 = new System.Windows.Forms.TextBox();
             this.lbl_Total_Amount_2 = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
+            this.lbl_h2 = new System.Windows.Forms.Label();
             this.tb12 = new System.Windows.Forms.TextBox();
             this.tb11 = new System.Windows.Forms.TextBox();
             this.tb10 = new System.Windows.Forms.TextBox();
@@ -69,6 +74,7 @@
             this.tb3 = new System.Windows.Forms.TextBox();
             this.tb1 = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.lbl_h1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -135,13 +141,6 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.btn_Extension_Slip = new System.Windows.Forms.Button();
-            this.btn_Cancellation_Slip = new System.Windows.Forms.Button();
-            this.btn_Cancel_Reservation = new System.Windows.Forms.Button();
-            this.btn_Confirm_Reservation = new System.Windows.Forms.Button();
-            this.label16 = new System.Windows.Forms.Label();
-            this.lbl_h2 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
             this.pnl_Billing_Details.SuspendLayout();
             this.panel5.SuspendLayout();
             this.SuspendLayout();
@@ -200,6 +199,62 @@
             this.pnl_Billing_Details.Name = "pnl_Billing_Details";
             this.pnl_Billing_Details.Size = new System.Drawing.Size(912, 1150);
             this.pnl_Billing_Details.TabIndex = 7;
+            // 
+            // btn_Confirm_Reservation
+            // 
+            this.btn_Confirm_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Confirm_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Confirm_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
+            this.btn_Confirm_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.btn_Confirm_Reservation.Location = new System.Drawing.Point(662, 43);
+            this.btn_Confirm_Reservation.Name = "btn_Confirm_Reservation";
+            this.btn_Confirm_Reservation.Size = new System.Drawing.Size(230, 34);
+            this.btn_Confirm_Reservation.TabIndex = 60;
+            this.btn_Confirm_Reservation.Text = "Confirm Reservation";
+            this.btn_Confirm_Reservation.UseVisualStyleBackColor = false;
+            this.btn_Confirm_Reservation.Click += new System.EventHandler(this.btn_Confirm_Reservation_Click);
+            // 
+            // btn_Cancel_Reservation
+            // 
+            this.btn_Cancel_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Cancel_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Cancel_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
+            this.btn_Cancel_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.btn_Cancel_Reservation.Location = new System.Drawing.Point(662, 79);
+            this.btn_Cancel_Reservation.Name = "btn_Cancel_Reservation";
+            this.btn_Cancel_Reservation.Size = new System.Drawing.Size(230, 34);
+            this.btn_Cancel_Reservation.TabIndex = 59;
+            this.btn_Cancel_Reservation.Text = "Cancel Reservation";
+            this.btn_Cancel_Reservation.UseVisualStyleBackColor = false;
+            this.btn_Cancel_Reservation.Click += new System.EventHandler(this.btn_Cancel_Reservation_Click);
+            // 
+            // btn_Cancellation_Slip
+            // 
+            this.btn_Cancellation_Slip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Cancellation_Slip.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Cancellation_Slip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            this.btn_Cancellation_Slip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.btn_Cancellation_Slip.Location = new System.Drawing.Point(310, 461);
+            this.btn_Cancellation_Slip.Name = "btn_Cancellation_Slip";
+            this.btn_Cancellation_Slip.Size = new System.Drawing.Size(106, 47);
+            this.btn_Cancellation_Slip.TabIndex = 58;
+            this.btn_Cancellation_Slip.Text = "CANCELLATION SLIP";
+            this.btn_Cancellation_Slip.UseVisualStyleBackColor = false;
+            this.btn_Cancellation_Slip.Click += new System.EventHandler(this.btn_Cancellation_Slip_Click);
+            // 
+            // btn_Extension_Slip
+            // 
+            this.btn_Extension_Slip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Extension_Slip.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Extension_Slip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            this.btn_Extension_Slip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.btn_Extension_Slip.Location = new System.Drawing.Point(430, 461);
+            this.btn_Extension_Slip.Name = "btn_Extension_Slip";
+            this.btn_Extension_Slip.Size = new System.Drawing.Size(106, 47);
+            this.btn_Extension_Slip.TabIndex = 57;
+            this.btn_Extension_Slip.Text = "EXTENSION SLIP";
+            this.btn_Extension_Slip.UseVisualStyleBackColor = false;
+            this.btn_Extension_Slip.Click += new System.EventHandler(this.btn_Extension_Slip_Click);
             // 
             // textBox16
             // 
@@ -345,7 +400,6 @@
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.panel5.Controls.Add(this.label25);
             this.panel5.Controls.Add(this.label20);
-            this.panel5.Controls.Add(this.label48);
             this.panel5.Controls.Add(this.textBox44);
             this.panel5.Controls.Add(this.textBox47);
             this.panel5.Controls.Add(this.tb7);
@@ -442,17 +496,6 @@
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(912, 4);
             this.label20.TabIndex = 158;
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label48.Location = new System.Drawing.Point(717, 297);
-            this.label48.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label48.MinimumSize = new System.Drawing.Size(2, 45);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(2, 45);
-            this.label48.TabIndex = 156;
             // 
             // textBox44
             // 
@@ -556,6 +599,18 @@
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(2, 145);
             this.label43.TabIndex = 144;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.BackColor = System.Drawing.Color.Gray;
+            this.label38.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label38.Location = new System.Drawing.Point(-1, 594);
+            this.label38.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label38.MinimumSize = new System.Drawing.Size(912, 4);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(912, 4);
+            this.label38.TabIndex = 136;
             // 
             // lbl_Final_Amount_Paid
             // 
@@ -663,6 +718,18 @@
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(912, 4);
             this.label34.TabIndex = 124;
+            // 
+            // lbl_h2
+            // 
+            this.lbl_h2.AutoSize = true;
+            this.lbl_h2.BackColor = System.Drawing.Color.Gray;
+            this.lbl_h2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_h2.Location = new System.Drawing.Point(-1, 463);
+            this.lbl_h2.MaximumSize = new System.Drawing.Size(912, 4);
+            this.lbl_h2.MinimumSize = new System.Drawing.Size(912, 2);
+            this.lbl_h2.Name = "lbl_h2";
+            this.lbl_h2.Size = new System.Drawing.Size(912, 4);
+            this.lbl_h2.TabIndex = 121;
             // 
             // tb12
             // 
@@ -826,6 +893,18 @@
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(912, 4);
             this.label19.TabIndex = 100;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.Gray;
+            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label16.Location = new System.Drawing.Point(0, 0);
+            this.label16.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label16.MinimumSize = new System.Drawing.Size(912, 4);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(912, 4);
+            this.label16.TabIndex = 95;
             // 
             // lbl_h1
             // 
@@ -1807,98 +1886,6 @@
             this.textBox3.TabIndex = 0;
             this.textBox3.Text = "CLIENT INFORMATION";
             // 
-            // btn_Extension_Slip
-            // 
-            this.btn_Extension_Slip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.btn_Extension_Slip.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Extension_Slip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            this.btn_Extension_Slip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Extension_Slip.Location = new System.Drawing.Point(430, 461);
-            this.btn_Extension_Slip.Name = "btn_Extension_Slip";
-            this.btn_Extension_Slip.Size = new System.Drawing.Size(106, 47);
-            this.btn_Extension_Slip.TabIndex = 57;
-            this.btn_Extension_Slip.Text = "EXTENSION SLIP";
-            this.btn_Extension_Slip.UseVisualStyleBackColor = false;
-            this.btn_Extension_Slip.Click += new System.EventHandler(this.btn_Extension_Slip_Click);
-            // 
-            // btn_Cancellation_Slip
-            // 
-            this.btn_Cancellation_Slip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.btn_Cancellation_Slip.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Cancellation_Slip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            this.btn_Cancellation_Slip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Cancellation_Slip.Location = new System.Drawing.Point(310, 461);
-            this.btn_Cancellation_Slip.Name = "btn_Cancellation_Slip";
-            this.btn_Cancellation_Slip.Size = new System.Drawing.Size(106, 47);
-            this.btn_Cancellation_Slip.TabIndex = 58;
-            this.btn_Cancellation_Slip.Text = "CANCELLATION SLIP";
-            this.btn_Cancellation_Slip.UseVisualStyleBackColor = false;
-            this.btn_Cancellation_Slip.Click += new System.EventHandler(this.btn_Cancellation_Slip_Click);
-            // 
-            // btn_Cancel_Reservation
-            // 
-            this.btn_Cancel_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.btn_Cancel_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Cancel_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
-            this.btn_Cancel_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Cancel_Reservation.Location = new System.Drawing.Point(662, 79);
-            this.btn_Cancel_Reservation.Name = "btn_Cancel_Reservation";
-            this.btn_Cancel_Reservation.Size = new System.Drawing.Size(230, 34);
-            this.btn_Cancel_Reservation.TabIndex = 59;
-            this.btn_Cancel_Reservation.Text = "Cancel Reservation";
-            this.btn_Cancel_Reservation.UseVisualStyleBackColor = false;
-            this.btn_Cancel_Reservation.Click += new System.EventHandler(this.btn_Cancel_Reservation_Click);
-            // 
-            // btn_Confirm_Reservation
-            // 
-            this.btn_Confirm_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.btn_Confirm_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Confirm_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
-            this.btn_Confirm_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Confirm_Reservation.Location = new System.Drawing.Point(662, 43);
-            this.btn_Confirm_Reservation.Name = "btn_Confirm_Reservation";
-            this.btn_Confirm_Reservation.Size = new System.Drawing.Size(230, 34);
-            this.btn_Confirm_Reservation.TabIndex = 60;
-            this.btn_Confirm_Reservation.Text = "Confirm Reservation";
-            this.btn_Confirm_Reservation.UseVisualStyleBackColor = false;
-            this.btn_Confirm_Reservation.Click += new System.EventHandler(this.btn_Confirm_Reservation_Click);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.BackColor = System.Drawing.Color.Gray;
-            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label16.Location = new System.Drawing.Point(0, 0);
-            this.label16.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label16.MinimumSize = new System.Drawing.Size(912, 4);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(912, 4);
-            this.label16.TabIndex = 95;
-            // 
-            // lbl_h2
-            // 
-            this.lbl_h2.AutoSize = true;
-            this.lbl_h2.BackColor = System.Drawing.Color.Gray;
-            this.lbl_h2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbl_h2.Location = new System.Drawing.Point(-1, 463);
-            this.lbl_h2.MaximumSize = new System.Drawing.Size(912, 4);
-            this.lbl_h2.MinimumSize = new System.Drawing.Size(912, 2);
-            this.lbl_h2.Name = "lbl_h2";
-            this.lbl_h2.Size = new System.Drawing.Size(912, 4);
-            this.lbl_h2.TabIndex = 121;
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.BackColor = System.Drawing.Color.Gray;
-            this.label38.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label38.Location = new System.Drawing.Point(-1, 594);
-            this.label38.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label38.MinimumSize = new System.Drawing.Size(912, 4);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(912, 4);
-            this.label38.TabIndex = 136;
-            // 
             // Venue_User_Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2019,7 +2006,6 @@
         private System.Windows.Forms.TextBox textBox44;
         private System.Windows.Forms.TextBox textBox47;
         private System.Windows.Forms.TextBox tb7;
-        private System.Windows.Forms.Label label48;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.TextBox textBox16;

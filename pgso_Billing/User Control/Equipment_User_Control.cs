@@ -48,6 +48,7 @@ namespace pgso.pgso_Billing.User_Control
             btn_Delete_Equipment_Billing.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
             btn_Add_Equipment_Billing.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
             
+
             try
             {
                 var reservationID = billingDetailsList.pk_ReservationID;

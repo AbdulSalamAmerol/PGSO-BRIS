@@ -78,29 +78,60 @@ namespace pgso.pgso_Billing.Forms
             try
             {
                 List<KeyValuePair<int, string>> scopeList;
+
                 if (venueId.HasValue)
                 {
-                    scopeList = _repo.GetScopesForVenue(venueId.Value);
+                    var rawList = _repo.GetScopesForVenue(venueId.Value);
+
+                    // Map internal scope names to friendly names
+                    scopeList = rawList.Select(kvp => new KeyValuePair<int, string>(
+                        kvp.Key,
+                        GetFriendlyScopeName(kvp.Value)
+                    )).ToList();
                 }
                 else
                 {
-                    // Load all or empty initially? Let's load empty.
                     scopeList = new List<KeyValuePair<int, string>>();
-                    // Or: scopeList = _repo.GetAllVenueScopes(); // Load all initially
                 }
 
-                // Temporarily remove handler
                 cmb_Venue_Scope.SelectedIndexChanged -= cmb_Venue_Scope_SelectedIndexChanged;
                 cmb_Venue_Scope.DataSource = null;
                 cmb_Venue_Scope.DisplayMember = "Value";
                 cmb_Venue_Scope.ValueMember = "Key";
                 cmb_Venue_Scope.DataSource = scopeList;
                 cmb_Venue_Scope.SelectedIndex = -1;
-                // Re-attach handler
                 cmb_Venue_Scope.SelectedIndexChanged += cmb_Venue_Scope_SelectedIndexChanged;
             }
-            catch (Exception ex) { /* ... handle error ... */ }
+            catch (Exception ex)
+            {
+                // Handle exception appropriately
+            }
         }
+
+        private string GetFriendlyScopeName(string internalScopeName)
+        {
+            switch (internalScopeName)
+            {
+                case "AH_Whole_Building":
+                case "CS_Whole_Building":
+                    return "Entire Venue";
+                case "CS_Lobby":
+                    return "Lobby Only";
+                case "CS_Main_Hall":
+                    return "Main Hall Only";
+                case "CS_Main_Hall_And_Mezzanine":
+                    return "Main Hall and Mezzanine";
+                case "PS_Room_A":
+                    return "Room A Only";
+                case "PS_Room_ABC":
+                    return "Room A, B and C";
+                case "PS_Room_BC":
+                    return "Room B and C";
+                default:
+                    return internalScopeName;
+            }
+        }
+
 
 
         private void LoadReservationDetails()

@@ -377,10 +377,15 @@ namespace pgso
 
         private void tsmi_Billing_Click(object sender, EventArgs e)
         {
-            frm_Billing billingForm = new frm_Billing(); // Create an instance of frm_Billing
-            billingForm.ShowDialog(); // Show the form
+   
 
+            frm_Billing billingForm = new frm_Billing();
+            
+            billingForm.ShowDialog();
         }
+
+
+
 
         private void panel_Calendar_Paint(object sender, PaintEventArgs e)
         {

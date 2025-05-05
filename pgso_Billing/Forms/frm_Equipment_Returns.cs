@@ -27,18 +27,29 @@ namespace pgso.pgso_Billing.Forms
             tb_Equipment.Text = _selectedEquipment.fld_Equipment_Name;
             tb_Quantity.Text = _selectedEquipment.fld_Quantity.ToString();
             tb_Returned.Text = _selectedEquipment.fld_Quantity_Returned.ToString();
+            this.Load += frm_Equipment_Returns_Load;
+
         }
 
         private void frm_Equipment_Returns_Load(object sender, EventArgs e)
         {
+
             tb_Equipment.Text = _selectedEquipment.fld_Equipment_Name;
             tb_Quantity.Text = _selectedEquipment.fld_Quantity.ToString();
 
             int alreadyReturned = _selectedEquipment.fld_Quantity_Returned;
             int damaged = _selectedEquipment.fld_Quantity_Damaged;
             int totalReturned = alreadyReturned + damaged;
+
             tb_Returned.Text = totalReturned.ToString();
+
+            // Calculate deficit
+            int totalIssued = _selectedEquipment.fld_Quantity;
+            int returnDeficit = totalIssued - totalReturned;
+
+            tb_Return_Deficit.Text = returnDeficit.ToString();
         }
+
 
         private async void btn_SubmitReturn_Click(object sender, EventArgs e)
         {
@@ -88,6 +99,8 @@ namespace pgso.pgso_Billing.Forms
                 this.Close();
             }
         }
+
+      
     }
 
 }

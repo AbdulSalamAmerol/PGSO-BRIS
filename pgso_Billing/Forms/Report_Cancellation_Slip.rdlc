@@ -962,7 +962,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fld_Full_Name.Value</Value>
+                              <Value>=UCase(Fields!fld_Full_Name.Value)</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
