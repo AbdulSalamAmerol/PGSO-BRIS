@@ -47,12 +47,7 @@ namespace pgso.pgso_Billing.Forms
 
                     tb_Extend_Venue.Text = billingData.fld_OT_Hours.ToString();
 
-                    // Disable the textbox if no OT hours exist
-                    if (billingData.fld_OT_Hours <= 0)
-                    {
-                        tb_Extend_Venue.ReadOnly = true;
-                        tb_Extend_Venue.TabStop = false;
-                    }
+                
                   
 
                 }
@@ -78,10 +73,10 @@ namespace pgso.pgso_Billing.Forms
 
                 int orExtensionInt = 0; // Default value
 
-                // Try parsing the input, but don't show an error message if it fails
+                // Try parsing the OR Extension
                 if (!int.TryParse(orExtensionText, out orExtensionInt))
                 {
-                    // If parsing fails, the value will remain 0 (default behavior)
+                    // Default remains 0 if parsing fails
                 }
 
                 // Validate Hours
@@ -93,7 +88,7 @@ namespace pgso.pgso_Billing.Forms
 
                 int roundedHours = (int)Math.Ceiling(inputHours);
 
-                // Update reservation with the new hours and OR number
+                // Call method to handle OT and OR extension logic
                 var result = await repo_Billing.UpdateReservationExtension(_reservationID, roundedHours, orExtensionInt);
                 if (result)
                 {

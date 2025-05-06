@@ -781,9 +781,10 @@ namespace pgso.Billing.Repositories
 
 
         //////
-
+        /*
         public async Task<bool> UpdateReservationExtension(int reservationID, int otHours, int orExtension)
         {
+
             try
             {
                 // Step 0: Check existing OT hours
@@ -822,45 +823,45 @@ namespace pgso.Billing.Repositories
 
                 // Step 3: Update records
                 string query = @"
-        UPDATE p
-        SET
-            p.fld_Final_Amount_Paid = @newFinalAmountPaid,
-            p.fld_Overtime_Fee = @newOvertimeFee
-        FROM tbl_Payment p
-        JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
-        WHERE r.pk_ReservationID = @reservationID;
+                                UPDATE p
+                                SET
+                                    p.fld_Final_Amount_Paid = @newFinalAmountPaid,
+                                    p.fld_Overtime_Fee = @newOvertimeFee
+                                FROM tbl_Payment p
+                                JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
+                                WHERE r.pk_ReservationID = @reservationID;
 
-        IF @orExtension > 0
-        BEGIN
-            UPDATE p
-            SET p.fld_Amount_Paid_Overtime = @newOvertimeFee
-            FROM tbl_Payment p
-            JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
-            WHERE r.pk_ReservationID = @reservationID;
-        END
-        IF @orExtension != 
-        BEGIN
-            UPDATE tbl_Reservation
-            SET
-                fld_Total_Amount = @totalAmount,
-                fld_OT_Hours = @otHours,
-                fld_OR_Extension = @orExtension
-            WHERE pk_ReservationID = @reservationID;";
+                                IF @orExtension > 0
+                                BEGIN
+                                    UPDATE p
+                                    SET p.fld_Amount_Paid_Overtime = @newOvertimeFee
+                                    FROM tbl_Payment p
+                                    JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
+                                    WHERE r.pk_ReservationID = @reservationID;
+                                END
+                                IF @orExtension != 
+                                BEGIN
+                                    UPDATE tbl_Reservation
+                                    SET
+                                        fld_Total_Amount = @totalAmount,
+                                        fld_OT_Hours = @otHours,
+                                        fld_OR_Extension = @orExtension
+                                    WHERE pk_ReservationID = @reservationID;";
 
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@otHours", otHours);
-                    cmd.Parameters.AddWithValue("@newFinalAmountPaid", newFinalAmountPaid);
-                    cmd.Parameters.AddWithValue("@newOvertimeFee", newOvertimeFee);
-                    cmd.Parameters.AddWithValue("@reservationID", reservationID);
-                    cmd.Parameters.AddWithValue("@orExtension", orExtension);
-                    cmd.Parameters.AddWithValue("@totalAmount", newTotalAmount);
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@otHours", otHours);
+                        cmd.Parameters.AddWithValue("@newFinalAmountPaid", newFinalAmountPaid);
+                        cmd.Parameters.AddWithValue("@newOvertimeFee", newOvertimeFee);
+                        cmd.Parameters.AddWithValue("@reservationID", reservationID);
+                        cmd.Parameters.AddWithValue("@orExtension", orExtension);
+                        cmd.Parameters.AddWithValue("@totalAmount", newTotalAmount);
 
-                    await conn.OpenAsync();
-                    int rowsAffected = await cmd.ExecuteNonQueryAsync();
-                    return rowsAffected > 0;
-                }
+                        await conn.OpenAsync();
+                        int rowsAffected = await cmd.ExecuteNonQueryAsync();
+                        return rowsAffected > 0;
+                    }
             }
             catch (SqlException sqlEx)
             {
@@ -873,6 +874,130 @@ namespace pgso.Billing.Repositories
                 return false;
             }
         }
+        */
+        public async Task<bool> UpdateReservationExtension(int reservationID, int otHours, int orExtension)
+        {
+            try
+            {
+                bool otUpdateSuccess = await HandleOvertimeExtension(reservationID, otHours);
+                if (!otUpdateSuccess) return false;
+
+                bool orUpdateSuccess = await HandleORExtension(reservationID, orExtension);
+                return orUpdateSuccess;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"General Error updating reservation {reservationID}: {ex.Message}");
+                return false;
+            }
+        }
+
+        private async Task<bool> HandleOvertimeExtension(int reservationID, int otHours)
+        {
+            try
+            {
+                string checkQuery = "SELECT fld_OT_Hours FROM tbl_Reservation WHERE pk_ReservationID = @reservationID";
+                int existingOT = 0;
+
+                using (SqlConnection checkConn = new SqlConnection(connectionString))
+                using (SqlCommand checkCmd = new SqlCommand(checkQuery, checkConn))
+                {
+                    checkCmd.Parameters.AddWithValue("@reservationID", reservationID);
+                    await checkConn.OpenAsync();
+                    object result = await checkCmd.ExecuteScalarAsync();
+                    existingOT = result != DBNull.Value ? Convert.ToInt32(result) : 0;
+                }
+
+                if (existingOT > 0 && otHours != existingOT)
+                {
+                    MessageBox.Show("Overtime Hours Already Exist in the Database", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+
+                decimal hourlyRate = await GetHourlyRate(reservationID);
+                decimal baseAmount = await GetBaseAmount(reservationID);
+
+                decimal newOvertimeFee = otHours * hourlyRate;
+                decimal newFinalAmountPaid = baseAmount + newOvertimeFee;
+                decimal newTotalAmount = baseAmount + newOvertimeFee;
+
+                string query = @"
+            UPDATE p
+            SET
+                p.fld_Final_Amount_Paid = @newFinalAmountPaid,
+                p.fld_Overtime_Fee = @newOvertimeFee
+            FROM tbl_Payment p
+            JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
+            WHERE r.pk_ReservationID = @reservationID;
+
+            UPDATE tbl_Reservation
+            SET
+                fld_Total_Amount = @totalAmount,
+                fld_OT_Hours = @otHours
+            WHERE pk_ReservationID = @reservationID;
+        ";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@newFinalAmountPaid", newFinalAmountPaid);
+                    cmd.Parameters.AddWithValue("@newOvertimeFee", newOvertimeFee);
+                    cmd.Parameters.AddWithValue("@totalAmount", newTotalAmount);
+                    cmd.Parameters.AddWithValue("@otHours", otHours);
+                    cmd.Parameters.AddWithValue("@reservationID", reservationID);
+
+                    await conn.OpenAsync();
+                    int rows = await cmd.ExecuteNonQueryAsync();
+                    return rows > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"OT Update Error: {ex.Message}");
+                return false;
+            }
+        }
+
+        private async Task<bool> HandleORExtension(int reservationID, int orExtension)
+        {
+            if (orExtension <= 0) return true; // Nothing to update
+
+            try
+            {
+                string query = @"
+            UPDATE p
+            SET p.fld_Amount_Paid_Overtime = (
+                SELECT fld_Overtime_Fee
+                FROM tbl_Payment p2
+                JOIN tbl_Reservation r2 ON r2.pk_ReservationID = p2.fk_ReservationID
+                WHERE r2.pk_ReservationID = @reservationID
+            )
+            FROM tbl_Payment p
+            JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
+            WHERE r.pk_ReservationID = @reservationID;
+
+            UPDATE tbl_Reservation
+            SET fld_OR_Extension = @orExtension
+            WHERE pk_ReservationID = @reservationID;
+        ";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@reservationID", reservationID);
+                    cmd.Parameters.AddWithValue("@orExtension", orExtension);
+
+                    await conn.OpenAsync();
+                    int rows = await cmd.ExecuteNonQueryAsync();
+                    return rows > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"OR Update Error: {ex.Message}");
+                return false;
+            }
+        }
 
 
 
@@ -881,10 +1006,10 @@ namespace pgso.Billing.Repositories
         public async Task<decimal> GetBaseAmount(int reservationID)
         {
             var query = @"
-        SELECT fld_Total_Amount
-        FROM tbl_Reservation
-        WHERE pk_ReservationID = @reservationID;";
-
+        SELECT r.fld_Total_Amount, p.fld_Overtime_Fee
+        FROM tbl_Reservation r
+        JOIN tbl_Payment p ON p.fk_ReservationID = r.pk_ReservationID
+        WHERE r.pk_ReservationID = @reservationID;";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -892,10 +1017,22 @@ namespace pgso.Billing.Repositories
                 cmd.Parameters.AddWithValue("@reservationID", reservationID);
                 await conn.OpenAsync();
 
-                var result = await cmd.ExecuteScalarAsync();
-                return result != null && decimal.TryParse(result.ToString(), out decimal amount) ? amount : 0;
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        decimal totalAmount = reader["fld_Total_Amount"] != DBNull.Value ? Convert.ToDecimal(reader["fld_Total_Amount"]) : 0m;
+                        decimal overtimeFee = reader["fld_Overtime_Fee"] != DBNull.Value ? Convert.ToDecimal(reader["fld_Overtime_Fee"]) : 0m;
+
+                        return totalAmount - overtimeFee;
+                    }
+                }
             }
+
+            return 0m;
         }
+
+
 
         public async Task<Model_Billing> GetCurrentExtensionDetails(int reservationID)
         {

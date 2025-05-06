@@ -377,7 +377,7 @@
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>8.46139cm</Top>
+        <Top>8.77889cm</Top>
         <Left>2.29792cm</Left>
         <Height>0.4cm</Height>
         <Width>3.6111cm</Width>
@@ -493,7 +493,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>9.95882cm</Top>
+        <Top>10.27632cm</Top>
         <Left>10.81061cm</Left>
         <Height>0.5cm</Height>
         <Width>6.5264cm</Width>
@@ -686,7 +686,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>8.95882cm</Top>
+        <Top>9.27632cm</Top>
         <Left>3.09576cm</Left>
         <Height>1cm</Height>
         <Width>14.24125cm</Width>
@@ -719,7 +719,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>11.97576cm</Top>
+        <Top>12.29326cm</Top>
         <Left>2.32437cm</Left>
         <Height>0.635cm</Height>
         <Width>3.92875cm</Width>
@@ -765,7 +765,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>13.40768cm</Top>
+        <Top>13.72518cm</Top>
         <Left>3.97756cm</Left>
         <Height>0.89958cm</Height>
         <Width>4.7625cm</Width>
@@ -799,7 +799,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>11.97576cm</Top>
+        <Top>12.29326cm</Top>
         <Left>11.75392cm</Left>
         <Height>0.635cm</Height>
         <Width>1.75917cm</Width>
@@ -851,7 +851,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>13.40768cm</Top>
+        <Top>13.72518cm</Top>
         <Left>13.66873cm</Left>
         <Height>0.89958cm</Height>
         <Width>3.66828cm</Width>
@@ -1159,7 +1159,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>6.48896cm</Width>
+              <Width>11.00452cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1224,7 +1224,7 @@
         <Top>7.68486cm</Top>
         <Left>6.35895cm</Left>
         <Height>0.4cm</Height>
-        <Width>6.48896cm</Width>
+        <Width>11.00452cm</Width>
         <ZIndex>22</ZIndex>
         <Style>
           <Border>
@@ -1331,161 +1331,6 @@
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
         <ZIndex>24</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-            <Width>0.25pt</Width>
-          </Border>
-        </Style>
-      </Tablix>
-      <Tablix Name="Tablix14">
-        <TablixBody>
-          <TablixColumns>
-            <TablixColumn>
-              <Width>2.73813cm</Width>
-            </TablixColumn>
-          </TablixColumns>
-          <TablixRows>
-            <TablixRow>
-              <Height>0.4cm</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="fld_Requesting_Person_Address9">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=IIf(Fields!fld_Reservation_Type.Value = "Equipment", "Number of Days: ", "Number of Hours: ")</Value>
-                              <Style>
-                                <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Visibility>
-                        <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) OR Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
-                      </Visibility>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>None</Style>
-                        </Border>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-          </TablixRows>
-        </TablixBody>
-        <TablixColumnHierarchy>
-          <TablixMembers>
-            <TablixMember />
-          </TablixMembers>
-        </TablixColumnHierarchy>
-        <TablixRowHierarchy>
-          <TablixMembers>
-            <TablixMember>
-              <Group Name="Group_Number_Hours_Or_Days">
-                <GroupExpressions>
-                  <GroupExpression>=Fields!fld_Number_Of_Days.Value</GroupExpression>
-                </GroupExpressions>
-              </Group>
-            </TablixMember>
-          </TablixMembers>
-        </TablixRowHierarchy>
-        <DataSetName>BillingDataset</DataSetName>
-        <Top>7.68486cm</Top>
-        <Left>14.28138cm</Left>
-        <Height>0.4cm</Height>
-        <Width>2.73813cm</Width>
-        <ZIndex>25</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-            <Width>0.25pt</Width>
-          </Border>
-        </Style>
-      </Tablix>
-      <Tablix Name="Tablix10">
-        <TablixBody>
-          <TablixColumns>
-            <TablixColumn>
-              <Width>0.32645cm</Width>
-            </TablixColumn>
-          </TablixColumns>
-          <TablixRows>
-            <TablixRow>
-              <Height>0.4cm</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="fld_Requesting_Person_Address4">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=IIf(Fields!fld_Reservation_Type.Value = "Venue", Fields!Total_Hours.Value, Fields!fld_Number_Of_Days.Value)</Value>
-                              <Style>
-                                <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
-                                <Format>0;0-</Format>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <Visibility>
-                        <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) OR Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
-                      </Visibility>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>None</Style>
-                        </Border>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-          </TablixRows>
-        </TablixBody>
-        <TablixColumnHierarchy>
-          <TablixMembers>
-            <TablixMember />
-          </TablixMembers>
-        </TablixColumnHierarchy>
-        <TablixRowHierarchy>
-          <TablixMembers>
-            <TablixMember>
-              <Group Name="Group_Hours_Or_Days">
-                <GroupExpressions>
-                  <GroupExpression>=Fields!fld_Number_Of_Days.Value</GroupExpression>
-                </GroupExpressions>
-              </Group>
-            </TablixMember>
-          </TablixMembers>
-        </TablixRowHierarchy>
-        <DataSetName>BillingDataset</DataSetName>
-        <Top>7.68486cm</Top>
-        <Left>17.03702cm</Left>
-        <Height>0.4cm</Height>
-        <Width>0.32645cm</Width>
-        <ZIndex>26</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1600,14 +1445,126 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>4.14542in</Top>
+        <Top>4.27042in</Top>
         <Left>1.2188in</Left>
         <Height>0.5in</Height>
         <Width>5.61721in</Width>
+        <ZIndex>25</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
+      <Textbox Name="txt_Date_of_Use2">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Reservation Status</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>8.08486cm</Top>
+        <Left>2.32437cm</Left>
+        <Height>0.4cm</Height>
+        <Width>3.85819cm</Width>
+        <ZIndex>26</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Textbox>
+      <Tablix Name="Tablix9">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>11.00452cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.4cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="fld_Requesting_Person_Address3">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=IIF(Fields!fld_Reservation_Status.Value = "Confirmed", "Reserved", Fields!fld_Reservation_Status.Value)</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Visibility>
+                        <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
+                      </Visibility>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </Textbox>
+                    <rd:Selected>true</rd:Selected>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Group_fld_Formatted_Start_Date2">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!Formatted_Start_Date.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>BillingDataset</DataSetName>
+        <Top>8.08486cm</Top>
+        <Left>6.35895cm</Left>
+        <Height>0.4cm</Height>
+        <Width>11.00452cm</Width>
         <ZIndex>27</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
+            <Width>0.25pt</Width>
           </Border>
         </Style>
       </Tablix>
