@@ -24,9 +24,6 @@ namespace pgso.pgso_Billing.Forms
             InitializeComponent();
             _reservationID = reservationID;
             this.Load += frm_Extend_Venue_Load;
-         
-
-
         }
         private async void frm_Extend_Venue_Load(object sender, EventArgs e)
         {
@@ -46,10 +43,6 @@ namespace pgso.pgso_Billing.Forms
                         tb_OR_Extension.Text = billingData.fld_OR_Extension.ToString();
 
                     tb_Extend_Venue.Text = billingData.fld_OT_Hours.ToString();
-
-                
-                  
-
                 }
 
             }

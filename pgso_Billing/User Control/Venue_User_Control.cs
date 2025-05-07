@@ -45,6 +45,10 @@ namespace pgso.pgso_Billing
                 }
 
                 OnRequestVenueExtension?.Invoke(_billingDetails.pk_ReservationID, reservationStatus); // Optionally pass status
+                _billingDetails = _repoBilling.GetBillingDetailsByReservationID(_billingDetails.pk_ReservationID);
+                LoadBillingDetails(_billingDetails);
+
+                RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); // 🔁 Notify parent to refresh billing
             }
             else
             {
@@ -425,18 +429,12 @@ namespace pgso.pgso_Billing
             {
                 var result = cancelForm.ShowDialog();
                 // If the cancellation was successful, refresh the billing details
-                if (result == DialogResult.OK)
-                {
-                    // Reload the billing details in this control
-                    var updatedDetails = new Repo_Billing().GetBillingDetailsByReservationID(_billingDetails.pk_ReservationID);
-                    if (updatedDetails != null)
-                    {
-                        _billingDetails = updatedDetails;
-                        LoadBillingDetails(_billingDetails);
-                    }
-                    // 🔔 Trigger refresh event to inform frm_Billing
-                    RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID);
-                }
+                
+                    _billingDetails = _repoBilling.GetBillingDetailsByReservationID(_billingDetails.pk_ReservationID);
+                    LoadBillingDetails(_billingDetails);
+
+                    RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); // 🔁 Notify parent to refresh billing
+                
             }
         }
 

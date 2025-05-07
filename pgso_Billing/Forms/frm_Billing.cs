@@ -223,6 +223,7 @@ namespace pgso
                     venueControl.RequestBillingRefresh += RefreshBillingRecords;
                     pnl_Billing_Details.Controls.Clear();
                     pnl_Billing_Details.Controls.Add(venueControl);
+                   
                     break;
 
                 case "Equipment":
