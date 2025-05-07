@@ -268,5 +268,13 @@ namespace pgso.pgso_Billing.User_Control
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var returnSlip = new frm_Return_Slip(_billingDetails.pk_ReservationID))
+            {
+                returnSlip.ShowDialog();
+            }
+        }
     }
 }

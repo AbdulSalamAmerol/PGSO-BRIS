@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this._BRIS_EXPERIMENT_3_0DataSet = new pgso._BRIS_EXPERIMENT_3_0DataSet();
             this.tblReservationEquipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbl_Reservation_EquipmentTableAdapter = new pgso._BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_Reservation_EquipmentTableAdapter();
@@ -63,6 +63,8 @@
             this.lbl_Rate_Type = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pnl_Billing_Details = new System.Windows.Forms.Panel();
+            this.btn_Cancel_Reservation = new System.Windows.Forms.Button();
+            this.btn_Confirm_Reservation = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.lbl_OR = new System.Windows.Forms.TextBox();
             this.tb_OR = new System.Windows.Forms.TextBox();
@@ -87,8 +89,7 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.btn_Confirm_Reservation = new System.Windows.Forms.Button();
-            this.btn_Cancel_Reservation = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblReservationEquipmentBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Equipment_Billing_Records)).BeginInit();
@@ -115,22 +116,22 @@
             this.dgv_Equipment_Billing_Records.AllowUserToDeleteRows = false;
             this.dgv_Equipment_Billing_Records.AllowUserToResizeColumns = false;
             this.dgv_Equipment_Billing_Records.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            this.dgv_Equipment_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
+            this.dgv_Equipment_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_Equipment_Billing_Records.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgv_Equipment_Billing_Records.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Equipment_Billing_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Equipment_Billing_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_Equipment_Billing_Records.ColumnHeadersHeight = 40;
             this.dgv_Equipment_Billing_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_Equipment_Billing_Records.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -151,14 +152,14 @@
             this.col_fk_Equipment_PricingID,
             this.col_Total,
             this.col_fk_Reservation_ID});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_Equipment_Billing_Records.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_Equipment_Billing_Records.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_Equipment_Billing_Records.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.dgv_Equipment_Billing_Records.Location = new System.Drawing.Point(16, 534);
             this.dgv_Equipment_Billing_Records.Margin = new System.Windows.Forms.Padding(0);
@@ -166,14 +167,14 @@
             this.dgv_Equipment_Billing_Records.Name = "dgv_Equipment_Billing_Records";
             this.dgv_Equipment_Billing_Records.ReadOnly = true;
             this.dgv_Equipment_Billing_Records.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Equipment_Billing_Records.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Equipment_Billing_Records.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgv_Equipment_Billing_Records.RowHeadersVisible = false;
             this.dgv_Equipment_Billing_Records.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgv_Equipment_Billing_Records.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -455,6 +456,7 @@
             // 
             this.pnl_Billing_Details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.pnl_Billing_Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Billing_Details.Controls.Add(this.button1);
             this.pnl_Billing_Details.Controls.Add(this.btn_Cancel_Reservation);
             this.pnl_Billing_Details.Controls.Add(this.btn_Confirm_Reservation);
             this.pnl_Billing_Details.Controls.Add(this.textBox2);
@@ -497,6 +499,34 @@
             this.pnl_Billing_Details.Name = "pnl_Billing_Details";
             this.pnl_Billing_Details.Size = new System.Drawing.Size(912, 1150);
             this.pnl_Billing_Details.TabIndex = 8;
+            // 
+            // btn_Cancel_Reservation
+            // 
+            this.btn_Cancel_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Cancel_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Cancel_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
+            this.btn_Cancel_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.btn_Cancel_Reservation.Location = new System.Drawing.Point(662, 78);
+            this.btn_Cancel_Reservation.Name = "btn_Cancel_Reservation";
+            this.btn_Cancel_Reservation.Size = new System.Drawing.Size(230, 34);
+            this.btn_Cancel_Reservation.TabIndex = 135;
+            this.btn_Cancel_Reservation.Text = "Cancel Reservation";
+            this.btn_Cancel_Reservation.UseVisualStyleBackColor = false;
+            this.btn_Cancel_Reservation.Click += new System.EventHandler(this.btn_Cancel_Reservation_Click);
+            // 
+            // btn_Confirm_Reservation
+            // 
+            this.btn_Confirm_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Confirm_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Confirm_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
+            this.btn_Confirm_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.btn_Confirm_Reservation.Location = new System.Drawing.Point(662, 43);
+            this.btn_Confirm_Reservation.Name = "btn_Confirm_Reservation";
+            this.btn_Confirm_Reservation.Size = new System.Drawing.Size(230, 34);
+            this.btn_Confirm_Reservation.TabIndex = 134;
+            this.btn_Confirm_Reservation.Text = "Confirm Reservation";
+            this.btn_Confirm_Reservation.UseVisualStyleBackColor = false;
+            this.btn_Confirm_Reservation.Click += new System.EventHandler(this.btn_Confirm_Reservation_Click);
             // 
             // textBox2
             // 
@@ -842,33 +872,18 @@
             this.textBox3.TabIndex = 95;
             this.textBox3.Text = "CLIENT INFORMATION";
             // 
-            // btn_Confirm_Reservation
+            // button1
             // 
-            this.btn_Confirm_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.btn_Confirm_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Confirm_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
-            this.btn_Confirm_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Confirm_Reservation.Location = new System.Drawing.Point(662, 43);
-            this.btn_Confirm_Reservation.Name = "btn_Confirm_Reservation";
-            this.btn_Confirm_Reservation.Size = new System.Drawing.Size(230, 34);
-            this.btn_Confirm_Reservation.TabIndex = 134;
-            this.btn_Confirm_Reservation.Text = "Confirm Reservation";
-            this.btn_Confirm_Reservation.UseVisualStyleBackColor = false;
-            this.btn_Confirm_Reservation.Click += new System.EventHandler(this.btn_Confirm_Reservation_Click);
-            // 
-            // btn_Cancel_Reservation
-            // 
-            this.btn_Cancel_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.btn_Cancel_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Cancel_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
-            this.btn_Cancel_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Cancel_Reservation.Location = new System.Drawing.Point(662, 78);
-            this.btn_Cancel_Reservation.Name = "btn_Cancel_Reservation";
-            this.btn_Cancel_Reservation.Size = new System.Drawing.Size(230, 34);
-            this.btn_Cancel_Reservation.TabIndex = 135;
-            this.btn_Cancel_Reservation.Text = "Cancel Reservation";
-            this.btn_Cancel_Reservation.UseVisualStyleBackColor = false;
-            this.btn_Cancel_Reservation.Click += new System.EventHandler(this.btn_Cancel_Reservation_Click);
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.button1.Location = new System.Drawing.Point(445, 483);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(106, 47);
+            this.button1.TabIndex = 136;
+            this.button1.Text = "RETURN SLIP";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Equipment_User_Control
             // 
@@ -946,5 +961,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button btn_Confirm_Reservation;
         private System.Windows.Forms.Button btn_Cancel_Reservation;
+        private System.Windows.Forms.Button button1;
     }
 }

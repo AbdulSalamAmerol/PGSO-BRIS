@@ -260,6 +260,12 @@
     <Compile Include="pgso_Billing\Forms\frm_Report_Billing_Venue_And_Equipment.Designer.cs">
       <DependentUpon>frm_Report_Billing_Venue_And_Equipment.cs</DependentUpon>
     </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Return_Slip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Return_Slip.Designer.cs">
+      <DependentUpon>frm_Return_Slip.cs</DependentUpon>
+    </Compile>
     <Compile Include="pgso_Billing\Models\Model_Billing.cs" />
     <Compile Include="pgso_Billing\Repositories\Repository_Billing.cs" />
     <Compile Include="pgso_Billing\Forms\frm_Billing.cs">
@@ -500,12 +506,18 @@
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Report_Billing_Venue_And_Equipment.resx">
       <DependentUpon>frm_Report_Billing_Venue_And_Equipment.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Return_Slip.resx">
+      <DependentUpon>frm_Return_Slip.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\Forms\Report_Billing_Equipment.rdlc" />
     <EmbeddedResource Include="pgso_Billing\Forms\Report_Billing_Venue.rdlc" />
     <EmbeddedResource Include="pgso_Billing\Forms\Report_Extension_Slip.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\Forms\Report_Cancellation_Slip.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\Report_Return_Slip.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\User Control\Equipment_User_Control.resx">
