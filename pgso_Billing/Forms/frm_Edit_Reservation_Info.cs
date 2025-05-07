@@ -140,69 +140,61 @@ namespace pgso.pgso_Billing.Forms
             {
                 Model_Billing details = _repo.GetReservationDetails(_reservationID);
 
-                 if (details.fld_Reservation_Status == "Confirmed")
-            {
-                cmb_Venue.Enabled = false;
-                cmb_Venue_Scope.Enabled = false;
-                cb_Aircon.Enabled = false;
-            }
-
-                if (details != null)
+                if (details == null)
                 {
-                    _originalBillingInfo = details; // Store the fetched details
-
-                    // Populate Date/Time Pickers
-                    dtp_Start_Date.Value = details.fld_Start_Date.Date;
-                    dtp_End_Date.Value = details.fld_End_Date.Date;
-                    DateTime baseDate = DateTime.Today; // Use a fixed date for time part
-                    dtp_Start_Time.Value = baseDate.Date + details.fld_Start_Time;
-                    dtp_End_Time.Value = baseDate.Date + details.fld_End_Time;
-                    // Get the time parts - confirmed reservation check
-                    _initialStartTime = dtp_Start_Time.Value.TimeOfDay;
-                    _initialEndTime = dtp_End_Time.Value.TimeOfDay;
-                    _initialDuration = _initialEndTime - _initialStartTime;
-
-                    // Set Venue
-                    if (cmb_Venue.DataSource != null && details.fk_VenueID.HasValue)
-                    {
-                        cmb_Venue.SelectedIndexChanged -= cmb_Venue_SelectedIndexChanged; // Prevent event firing
-                        cmb_Venue.SelectedValue = details.fk_VenueID.Value;
-                        cmb_Venue.SelectedIndexChanged += cmb_Venue_SelectedIndexChanged; // Re-attach
-                    }
-
-                    // Load scopes for the selected venue *before* setting scope selection
-                    if (details.fk_VenueID.HasValue)
-                    {
-                        LoadVenueScopeDropdown(details.fk_VenueID.Value); // Load filtered scopes
-                    }
-
-                    // Set Scope
-                    if (cmb_Venue_Scope.DataSource != null && details.fk_Venue_ScopeID.HasValue)
-                    {
-                        // Ensure the scope dropdown now contains the value before setting it
-                        cmb_Venue_Scope.SelectedIndexChanged -= cmb_Venue_Scope_SelectedIndexChanged; // Prevent event firing
-                        cmb_Venue_Scope.SelectedValue = details.fk_Venue_ScopeID.Value;
-                        cmb_Venue_Scope.SelectedIndexChanged += cmb_Venue_Scope_SelectedIndexChanged; // Re-attach
-                    }
-
-                    // Update Aircon checkbox visibility based on loaded venue/scope
-                    UpdateAirconCheckboxVisibility();
-
-                    // Set CheckBox state *after* ensuring it's visible
-                    if (cb_Aircon.Visible)
-                    {
-                        bool? airconStatus = _repo.GetAirconStatusFromPricing(details.fk_Venue_PricingID);
-                        cb_Aircon.Checked = airconStatus.HasValue && airconStatus.Value;
-                    }
-                    else
-                    {
-                        cb_Aircon.Checked = false; // Ensure unchecked if not visible/applicable
-                    }
+                    MessageBox.Show("Reservation not found.");
+                    return;
                 }
-                else { /* ... handle error ... */ }
+
+                _originalBillingInfo = details; // Store the fetched details
+
+                if (details.fld_Reservation_Status == "Confirmed")
+                {
+                    cmb_Venue.Enabled = false;
+                    cmb_Venue_Scope.Enabled = false;
+                    cb_Aircon.Enabled = false;
+                }
+
+                // Populate date/time pickers
+                dtp_Start_Date.Value = details.fld_Start_Date.Date;
+                dtp_End_Date.Value = details.fld_End_Date.Date;
+                DateTime baseDate = DateTime.Today;
+                dtp_Start_Time.Value = baseDate + details.fld_Start_Time;
+                dtp_End_Time.Value = baseDate + details.fld_End_Time;
+                _initialStartTime = dtp_Start_Time.Value.TimeOfDay;
+                _initialEndTime = dtp_End_Time.Value.TimeOfDay;
+                _initialDuration = _initialEndTime - _initialStartTime;
+
+                // Set venue
+                if (cmb_Venue.DataSource != null && details.fk_VenueID.HasValue)
+                {
+                    cmb_Venue.SelectedIndexChanged -= cmb_Venue_SelectedIndexChanged;
+                    cmb_Venue.SelectedValue = details.fk_VenueID.Value;
+                    cmb_Venue.SelectedIndexChanged += cmb_Venue_SelectedIndexChanged;
+                }
+
+                // Load and set scope
+                if (details.fk_VenueID.HasValue)
+                {
+                    LoadVenueScopeDropdown(details.fk_VenueID.Value);
+                }
+
+                if (cmb_Venue_Scope.DataSource != null && details.fk_Venue_ScopeID.HasValue)
+                {
+                    cmb_Venue_Scope.SelectedIndexChanged -= cmb_Venue_Scope_SelectedIndexChanged;
+                    cmb_Venue_Scope.SelectedValue = details.fk_Venue_ScopeID.Value;
+                    cmb_Venue_Scope.SelectedIndexChanged += cmb_Venue_Scope_SelectedIndexChanged;
+                }
+
+                // ✅ Let this handle visibility and Checked state from DB
+                UpdateAirconCheckboxVisibility(details.pk_ReservationID);
             }
-            catch (Exception ex) { /* ... handle error ... */ }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading reservation: {ex.Message}");
+            }
         }
+
 
         // --- EVENT HANDLER for Venue Change ---
         private void cmb_Venue_SelectedIndexChanged(object sender, EventArgs e)
@@ -218,43 +210,50 @@ namespace pgso.pgso_Billing.Forms
                 LoadVenueScopeDropdown(selectedVenueId);
 
             // Update Aircon visibility (might hide if no scopes or no AC options)
-            UpdateAirconCheckboxVisibility();
+            UpdateAirconCheckboxVisibility(_originalBillingInfo.pk_ReservationID);
         }
 
         // --- EVENT HANDLER for Scope Change ---
         private void cmb_Venue_Scope_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Update Aircon checkbox visibility based on the specific scope selected
-            UpdateAirconCheckboxVisibility();
+            UpdateAirconCheckboxVisibility(_originalBillingInfo.pk_ReservationID);
         }
 
         // --- Helper Method to Show/Hide Aircon Checkbox ---
-        private void UpdateAirconCheckboxVisibility()
+        private void UpdateAirconCheckboxVisibility(int reservationId)
         {
             int? venueId = cmb_Venue.SelectedValue as int?;
             int? scopeId = cmb_Venue_Scope.SelectedValue as int?;
 
-            bool showAircon = false;
-            if (venueId.HasValue && scopeId.HasValue) // Only check if both are selected
+            if (!venueId.HasValue || !scopeId.HasValue)
             {
-                try
-                {
-                    showAircon = _repo.CheckAirconAvailability(venueId.Value, scopeId.Value);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error checking Aircon availability: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    // Decide behaviour on error - hide checkbox?
-                    showAircon = false;
-                }
+                cb_Aircon.Visible = false;
+                return;
+            }
+
+            bool showAircon = false;
+
+            try
+            {
+                showAircon = _repo.CheckAirconAvailability(venueId.Value, scopeId.Value);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error checking Aircon availability: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             cb_Aircon.Visible = showAircon;
-            if (!showAircon)
+
+            if (showAircon)
             {
-                cb_Aircon.Checked = false; // Ensure it's unchecked if hidden
+                cb_Aircon.Checked = _repo.GetAirconUsageForReservation(reservationId);
             }
         }
+
+
+
+
 
 
         // --- Calculation Helper ---

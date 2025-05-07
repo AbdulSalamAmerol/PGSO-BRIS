@@ -2391,6 +2391,77 @@ namespace pgso.Billing.Repositories
             return GetAllVenueScopes(venueId);
         }
 
+        public bool GetAirconUsage(int venueId, int scopeId)
+        {
+            bool isAirconUsed = false;
+
+            using (SqlConnection conn = new SqlConnection(connectionString)) // Replace with your actual connection string variable
+            {
+                string query = @"
+            SELECT TOP 1 fld_Aircon
+            FROM tbl_Venue_Pricing
+            WHERE fk_VenueID = @VenueID AND fk_Venue_ScopeID = @ScopeID
+            ORDER BY fld_Aircon DESC"; // Prefer Aircon=true if multiple exist
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@VenueID", venueId);
+                    cmd.Parameters.AddWithValue("@ScopeID", scopeId);
+
+                    conn.Open();
+                    object result = cmd.ExecuteScalar();
+
+                    if (result != null && result != DBNull.Value)
+                    {
+                        isAirconUsed = Convert.ToBoolean(result);
+                    }
+                }
+            }
+
+            return isAirconUsed;
+        }
+        
+        public bool GetAirconUsageForReservation(int reservationId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"
+            SELECT vp.fld_Aircon
+            FROM tbl_Reservation r
+            JOIN tbl_Venue_Pricing vp ON r.fk_Venue_PricingID = vp.pk_Venue_PricingID
+            WHERE r.pk_ReservationID = @ReservationID";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ReservationID", reservationId);
+
+                    conn.Open();
+                    object result = cmd.ExecuteScalar();
+                    return result != null && result != DBNull.Value && Convert.ToBoolean(result);
+                }
+            }
+        }
+
+        public bool CheckAirconAvailability(int venueId, int scopeId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"
+            SELECT COUNT(*)
+            FROM tbl_Venue_Pricing
+            WHERE fk_VenueID = @VenueID AND fk_Venue_ScopeID = @ScopeID AND fld_Aircon = 1";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@VenueID", venueId);
+                    cmd.Parameters.AddWithValue("@ScopeID", scopeId);
+
+                    conn.Open();
+                    int count = (int)cmd.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+        }
 
         // Method to check if Aircon option exists for a Venue/Scope
         public bool CheckAirconAvailability(int venueId, int? scopeId)

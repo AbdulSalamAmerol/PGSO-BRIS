@@ -63,8 +63,8 @@ namespace pgso.pgso_Billing
             // ✅ Only allow if status is Confirmed or Pending
             if (_billingDetails.fld_Reservation_Status != "Confirmed" && _billingDetails.fld_Reservation_Status != "Pending")
             {
-                MessageBox.Show("Reservation Information Adjustment Error. ",
-                                "Edit Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("You can only edit reservations that are Confirmed or Pending.",
+                "Edit Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
