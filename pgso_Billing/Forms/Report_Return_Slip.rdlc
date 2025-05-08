@@ -327,7 +327,15 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>RHODA S. MORENO
+                <Value>LOTHA CYNTHIA V. BURTON</Value>
+                <Style>
+                  <FontFamily>calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value xml:space="preserve">
 </Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
@@ -336,9 +344,9 @@
                 </Style>
               </TextRun>
               <TextRun>
-                <Value>Provincial Treasurer</Value>
+                <Value>Acting Chief SOD / AO-I</Value>
                 <Style>
-                  <FontFamily>Calibri</FontFamily>
+                  <FontFamily>calibri</FontFamily>
                   <FontSize>9pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                 </Style>
@@ -367,7 +375,7 @@
         <Top>5.555cm</Top>
         <Left>2.32437cm</Left>
         <Height>1.07625cm</Height>
-        <Width>3.58465cm</Width>
+        <Width>15.01264cm</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border>
@@ -1184,7 +1192,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value EvaluationMode="Constant">Name of Activity / Event</Value>
+                <Value>Contact Number</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>9pt</FontSize>
@@ -1271,7 +1279,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>8.19014cm</Top>
+        <Top>8.59014cm</Top>
         <Left>6.35895cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
@@ -1335,7 +1343,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value EvaluationMode="Constant">Name of Activity / Event</Value>
+                <Value>Name of Activity / Event</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>9pt</FontSize>
@@ -1422,7 +1430,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>8.59014cm</Top>
+        <Top>8.19014cm</Top>
         <Left>6.35895cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>

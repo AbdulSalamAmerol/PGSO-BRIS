@@ -378,7 +378,7 @@ This Province</Value>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>9.41389cm</Top>
+        <Top>9.73139cm</Top>
         <Left>2.29792cm</Left>
         <Height>0.4cm</Height>
         <Width>2.1825cm</Width>
@@ -845,7 +845,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>9.86382cm</Top>
+        <Top>10.18132cm</Top>
         <Left>3.09576cm</Left>
         <Height>1cm</Height>
         <Width>14.24125cm</Width>
@@ -967,7 +967,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>11.86382cm</Top>
+        <Top>12.18132cm</Top>
         <Left>11.10732cm</Left>
         <Height>0.5cm</Height>
         <Width>6.22969cm</Width>
@@ -1235,7 +1235,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>10.86382cm</Top>
+        <Top>11.18132cm</Top>
         <Left>3.09576cm</Left>
         <Height>1cm</Height>
         <Width>14.24125cm</Width>
@@ -1268,7 +1268,7 @@ This Province</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>14.43683cm</Top>
+        <Top>15.07183cm</Top>
         <Left>2.32437cm</Left>
         <Height>0.635cm</Height>
         <Width>3.92875cm</Width>
@@ -1314,7 +1314,7 @@ This Province</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>15.86875cm</Top>
+        <Top>16.18625cm</Top>
         <Left>3.97756cm</Left>
         <Height>0.89958cm</Height>
         <Width>4.7625cm</Width>
@@ -1348,7 +1348,7 @@ This Province</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>14.43683cm</Top>
+        <Top>15.07183cm</Top>
         <Left>11.75392cm</Left>
         <Height>0.635cm</Height>
         <Width>1.75917cm</Width>
@@ -1400,7 +1400,7 @@ This Province</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>15.86875cm</Top>
+        <Top>16.18625cm</Top>
         <Left>13.66873cm</Left>
         <Height>0.89958cm</Height>
         <Width>3.66828cm</Width>
@@ -1700,7 +1700,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>8.63736cm</Top>
+        <Top>9.07264cm</Top>
         <Left>2.32437cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
@@ -1781,7 +1781,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>8.63736cm</Top>
+        <Top>9.07264cm</Top>
         <Left>6.35895cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
@@ -1811,7 +1811,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>8.27264cm</Top>
+        <Top>8.67264cm</Top>
         <Left>2.32437cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
@@ -1886,7 +1886,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>8.27264cm</Top>
+        <Top>8.67264cm</Top>
         <Left>6.35895cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
@@ -1932,7 +1932,7 @@ This Province</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>12.51167cm</Top>
+        <Top>12.82917cm</Top>
         <Left>2.32437cm</Left>
         <Height>1.74878cm</Height>
         <Width>15.0391cm</Width>
@@ -1948,8 +1948,70 @@ This Province</Value>
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="txt_Date_of_Use6">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Contact Number</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>8.27264cm</Top>
+        <Left>2.32437cm</Left>
+        <Height>0.4cm</Height>
+        <Width>3.85819cm</Width>
+        <ZIndex>27</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="fld_Requesting_Person_Address7">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Fields!fld_Contact_Number.Value</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>8.27264cm</Top>
+        <Left>6.35895cm</Left>
+        <Height>0.4cm</Height>
+        <Width>10.97806cm</Width>
+        <ZIndex>28</ZIndex>
+        <Style>
+          <Border>
+            <Color>LightGrey</Color>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>6.6017in</Height>
+    <Height>6.7267in</Height>
     <Style>
       <Border>
         <Style>None</Style>
