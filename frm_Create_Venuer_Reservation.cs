@@ -394,15 +394,19 @@ namespace pgso
                 double.TryParse(txtx_Num_Hours.Text.Replace(",", ""), out double numberOfHours) &&
                 decimal.TryParse(txt_Succeeding_Hour.Text.Replace(",", ""), out decimal hourlyRate))
             {
-                decimal totalAmount;
+                decimal totalAmount = 0;
 
+                // Fetch the additional charge based on the selected venue and scope
+                decimal additionalCharge = GetAdditionalChargeForVenue(selectedVenueID, (int)combo_scope.SelectedValue);
+
+                // Calculate the total amount
                 if (numberOfHours > 4)
                 {
-                    totalAmount = initialRate + (hourlyRate * (decimal)(numberOfHours - 4));
+                    totalAmount = initialRate + (hourlyRate * (decimal)(numberOfHours - 4)) + additionalCharge;
                 }
                 else
                 {
-                    totalAmount = initialRate;
+                    totalAmount = initialRate + additionalCharge;
                 }
 
                 txt_Total.Text = totalAmount.ToString("N2");
@@ -414,9 +418,66 @@ namespace pgso
         }
 
 
+
         //ilagaya yung sinend
 
         // Load rate(from db) based on selected venue, venue scope, reservation type, and aircon selection
+
+        // This method fetches the additional charge for the venue and scope
+        private decimal GetAdditionalChargeForVenue(int venueID, int venueScopeID)
+        {
+            decimal additionalCharge = 0;
+
+            try
+            {
+                // Ensure the connection is open
+                if (conn.State == System.Data.ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+
+                // Close any existing DataReader if it's still open
+                if (conn != null && conn.State == System.Data.ConnectionState.Open)
+                {
+                    using (SqlCommand cmd = new SqlCommand(@"
+                SELECT fld_Additional_Charge 
+                FROM dbo.tbl_Venue_Pricing 
+                WHERE fk_VenueID = @VenueID 
+                AND fk_Venue_ScopeID = @VenueScopeID", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@VenueID", venueID);
+                        cmd.Parameters.AddWithValue("@VenueScopeID", venueScopeID);
+
+                        // Execute the command to retrieve the additional charge
+                        var result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            additionalCharge = Convert.ToDecimal(result);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception (you can log or show a message)
+                MessageBox.Show("Error retrieving additional charge: " + ex.Message);
+            }
+            finally
+            {
+                // Close the connection after the operation
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return additionalCharge;
+        }
+
+
+
+        // Load rate based on selected venue, venue scope, reservation type, and aircon selection
+
         private void LoadRate()
         {
             try
@@ -538,6 +599,7 @@ namespace pgso
         // Submit data to tbl_Reservation/tbl_Reservation_Venue/tbl_Requesting_Person
         private void btn_submit_Click(object sender, EventArgs e)
         {
+
             // Get values directly from form controls
             DateTime startDate = date_of_use_start.Value.Date;
             DateTime endDate = date_of_use_end.Value.Date;
@@ -563,6 +625,7 @@ namespace pgso
 
             // Validate required fields
             if (string.IsNullOrWhiteSpace(txt_controlnum.Text))
+
             {
                 MessageBox.Show("Control number is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
