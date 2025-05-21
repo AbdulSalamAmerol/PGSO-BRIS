@@ -17,7 +17,9 @@ namespace pgso.pgso_Billing.Forms
         private readonly int _reservationId;
         private Model_Billing _billingDetail; // changed to a single object
         private readonly Repo_Billing _repoBilling = new Repo_Billing();
+        public event Action<int, string> OnRequestVenueExtension;// Check if extension is applicable
 
+        public event Action<int?> RequestBillingRefresh;
         public frm_Cancellation_Reason(int reservationID)
         {
             InitializeComponent();
@@ -77,10 +79,19 @@ namespace pgso.pgso_Billing.Forms
                     bool deductionSuccess = await Task.Run(() => _repoBilling.ApplyCancellationDeduction(_reservationId));
 
                     if (deductionSuccess)
+                    {
                         MessageBox.Show("Reservation cancelled and deduction applied.");
+                        RequestBillingRefresh?.Invoke(_billingDetail.pk_ReservationID); // 🔁 Notify parent to refresh billing
+                        this.Close();
+                    }
+
                     else
+                    {
                         MessageBox.Show("Cancellation applied, but deduction failed.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    this.Close();
+                        RequestBillingRefresh?.Invoke(_billingDetail.pk_ReservationID); // 🔁 Notify parent to refresh billing
+                        this.Close();
+                    }
+
                 }
 
 

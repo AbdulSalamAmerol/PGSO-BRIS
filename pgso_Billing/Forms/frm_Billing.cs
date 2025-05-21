@@ -57,6 +57,7 @@ namespace pgso
             }
         }
 
+        //FILTERING
         private void frm_Billing_Load(object sender, EventArgs e)
         {
 
@@ -95,8 +96,77 @@ namespace pgso
             {
                 MessageBox.Show("Failed to load billing records: " + ex.Message);
             }
+
+            ////FILTERING
+            cmb_Billing_Filter.Items.Clear();
+            cmb_Billing_Filter.Items.AddRange(new string[] { "All", "Pending", "Confirmed", "Cancelled" });
+            cmb_Billing_Filter.SelectedIndex = 0; // Default to "All"
+            cmb_Billing_Filter.SelectedIndexChanged += cmb_Billing_Filter_SelectedIndexChanged;
+            //SORTING
+            cmb_Billing_Sort.Items.Clear();
+            cmb_Billing_Sort.Items.AddRange(new string[] { "Control Number", "Reservation Date", "Requesting Person", "Reservation Type", "Reservation Status", "Amount Due" });
+            cmb_Billing_Sort.SelectedIndex = 0; // Default selection
+            cmb_Billing_Sort.SelectedIndexChanged += cmb_Billing_Sort_SelectedIndexChanged;
         }
 
+        //SORT
+
+        //FILTERING
+        private void cmb_Billing_Sort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplySortingAndFiltering();
+        }
+
+        private void cmb_Billing_Filter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplySortingAndFiltering();
+        }
+        //FILTERING
+        private void ApplySortingAndFiltering()
+        {
+            IEnumerable<Model_Billing> filtered = all_billing_model;
+
+            // Filter by status if not "All"
+            string filterValue = cmb_Billing_Filter.SelectedItem?.ToString();
+            if (!string.IsNullOrEmpty(filterValue) && filterValue != "All")
+            {
+                filtered = filtered.Where(b => b.fld_Reservation_Status == filterValue);
+            }
+
+            // Sort by selected column
+            string sortBy = cmb_Billing_Sort.SelectedItem?.ToString();
+
+            switch (sortBy)
+            {
+                case "Control Number":
+                    filtered = filtered.OrderBy(b => b.pk_ReservationID);
+                    break;
+                case "Reservation Date":
+                    filtered = filtered.OrderBy(b => b.fld_Start_Date); // adjust property name
+                    break;
+                case "Requesting Person":
+                    filtered = filtered.OrderBy(b => b.fld_Full_Name); // adjust property name
+                    break;
+                case "Reservation Type":
+                    filtered = filtered.OrderBy(b => b.fld_Reservation_Type);
+                    break;
+                case "Reservation Status":
+                    filtered = filtered.OrderBy(b => b.fld_Reservation_Status);
+                    break;
+                case "Amount Due":
+                    filtered = filtered.OrderBy(b => b.fld_Amount_Due);
+                    break;
+                default:
+                    break;
+            }
+
+            dgv_billing_binding_source.DataSource = filtered.ToList();
+            dgv_Billing_Records.DataSource = dgv_billing_binding_source;
+        }
+
+
+
+        // Block all resizes
         protected override void WndProc(ref Message m)
         {
             const int WM_NCLBUTTONDOWN = 0xA1;
@@ -108,6 +178,8 @@ namespace pgso
 
             base.WndProc(ref m);
         }
+
+        //Search Bar
         private void sb_Billing_Search_Bar_TextChanged(object sender, EventArgs e)
         {
             string searchTerm = sb_Billing_Search_Bar.Text.Trim().ToLower();
@@ -180,8 +252,6 @@ namespace pgso
             {
                 // You can use e.RowIndex and e.ColumnIndex to get the clicked cell's data
                 var clickedCellValue = dgv_Billing_Records[e.ColumnIndex, e.RowIndex].Value;
-
-               
             }
 
             string columnName = dgv_Billing_Records.Columns[e.ColumnIndex].Name;
@@ -212,7 +282,6 @@ namespace pgso
             {
                 case "Venue":
                     var venueControl = new Venue_User_Control(billing, repo_billing);
-                 
                     venueControl.Dock = DockStyle.Fill;
                     venueControl.LoadBillingDetails(billing);
                     venueControl.OnRequestVenueExtension += (reservationID, status) =>
@@ -236,9 +305,11 @@ namespace pgso
                         // When the equipment billing is updated, refresh the billing records
                         RefreshBillingRecords(highlightReservationID: reservationID);
                     };
-
-
                     billingControl = equipmentControl;
+                    equipmentControl.RequestBillingRefresh += RefreshBillingRecords;
+                    pnl_Billing_Details.Controls.Clear();
+                    pnl_Billing_Details.Controls.Add(equipmentControl);
+
                     break;
 
                 default:
@@ -291,16 +362,22 @@ namespace pgso
                     // Check if the value is not null and equals "Cancelled" (case-sensitive)
                     if (cellValue != null && cellValue != DBNull.Value && cellValue.ToString() == "Cancelled")
                     {
-                        // Set the background color for the entire row to LightCoral (a shade of red)
-                        row.DefaultCellStyle.BackColor = Color.LightCoral;
-                        // Optional: Change text color for better contrast if needed
-                        // row.DefaultCellStyle.ForeColor = Color.White;
+
+                        row.DefaultCellStyle.BackColor = Color.FromArgb(255, 228, 225);
+
                     }
-                    else
+
+                    if (cellValue != null && cellValue != DBNull.Value && cellValue.ToString() == "Confirmed")
                     {
-                        // Set the default background color for all other rows to light gray
-                        row.DefaultCellStyle.BackColor = Color.FromArgb(242, 239, 231); // Light grayish color
+                        row.DefaultCellStyle.BackColor = Color.FromArgb(225, 235, 245);
                     }
+
+                    if (cellValue != null && cellValue != DBNull.Value && cellValue.ToString() == "Pending")
+                    {
+                        row.DefaultCellStyle.BackColor = Color.FromArgb(242, 239, 231);
+                    }
+
+
                 }
                 catch (Exception ex)
                 {
@@ -308,23 +385,12 @@ namespace pgso
                     Console.WriteLine($"Error during cell formatting: {ex.Message}");
                     // Ensure a default color even if an error occurs
                     row.DefaultCellStyle.BackColor = Color.White;
-                }
+                
 
-                // Apply alignment for specific columns
-                if (
-                    e.ColumnIndex == dgv_Billing_Records.Columns["col_Approved"].Index ||
-                    e.ColumnIndex == dgv_Billing_Records.Columns["col_Extend"].Index ||
-                    e.ColumnIndex == dgv_Billing_Records.Columns["col_Cancel"].Index ||
-                    e.ColumnIndex == dgv_Billing_Records.Columns["col_Print"].Index ||
-                    e.ColumnIndex == dgv_Billing_Records.Columns["fld_Control_Number"].Index) // Add col_Control_Number here
-                {
-                    // Align these columns' contents in the middle
-                    e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                }
-                else
-                {
+    
+            
                     // Left align for other columns
-                    e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                    e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 }
             }
         }
@@ -379,16 +445,6 @@ namespace pgso
             }
         }
 
-        // Inside the class where HandleApprovalAsync is defined
-
-        // Inside frm_Billing.cs
-
-        // Make sure you have an instance of your repository available in frm_Billing.
-        // You seem to be using 'repo_billing', so we will assume that's the correct instance.
-        // Example:
-        // private Repository_Model repo_billing = new Repository_Model();
-        // Or it might be passed into frm_Billing's constructor.
-
         private async Task HandleApprovalAsync(int reservationID, string currentStatus)
         {
             if (currentStatus != "Pending")
@@ -397,15 +453,9 @@ namespace pgso
                 return;
             }
 
-            // --- Step 1: Create an instance of your OR form using the NEW constructor ---
-            // Pass the reservationID and the repository instance (repo_billing)
-            // Use 'using' to ensure the form is disposed of properly
-            using (frm_OR orForm = new frm_OR(reservationID, repo_billing)) // <<< MODIFIED LINE HERE
+            using (frm_OR orForm = new frm_OR(reservationID, repo_billing)) 
             {
-                // --- Step 2: Show the form modally and wait for the user ---
-                // ShowDialog() pauses execution here until frm_OR is closed.
-                // Inside frm_OR, the btn_OR_Confirm logic now handles the second confirmation
-                // and the database update for fld_OR before setting DialogResult to OK.
+
                 DialogResult result = orForm.ShowDialog(this); // 'this' sets the owner window (frm_Billing)
 
                 // --- Step 3: Check if the user confirmed AND the OR update was successful in frm_OR ---
@@ -486,24 +536,6 @@ namespace pgso
             } // The 'using' statement ensures orForm.Dispose() is called here
         }
 
-        // Assume these methods and variables exist within frm_Billing.cs:
-        // private Repository_Model repo_billing; // Instance of your repository
-        // private async Task<bool> UpdateReservationStatusAsync(int reservationID, string status) { ... }
-        // private void ShowStatusMessage(bool success, string action) { ... }
-        // private void RefreshBillingRecords(int reservationID) { ... }
-        // private Panel pnl_Billing_Details;
-        // Model_Billing, Venue_User_Control, Equipment_User_Control types are defined.
-
-        // Make sure you have these methods defined elsewhere in your class:
-        // private async Task<bool> UpdateReservationStatusAsync(int reservationID, string status) { ... }
-        // private void ShowStatusMessage(bool success, string action) { ... }
-        // private void RefreshBillingRecords(int reservationID) { ... }
-        // Assuming repo_billing is an instance variable or accessible.
-        // Assuming pnl_Billing_Details is the name of your Panel control.
-        // Assuming Model_Billing, Venue_User_Control, Equipment_User_Control exist.
-
-
-
         private async Task HandleCancellationAsync(int reservationID, string currentStatus)
         {
             if (currentStatus != "Pending" && currentStatus != "Confirmed")
@@ -532,9 +564,9 @@ namespace pgso
                 {
                     bool deductionSuccess = await Task.Run(() => repo_billing.ApplyCancellationDeduction(reservationID));
                     if (deductionSuccess)
-                        MessageBox.Show("Reservation cancelled and deduction applied.");
+                        MessageBox.Show("Reservation cancelled and deduction applied. WHAT THE FUCK");
                     else
-                        MessageBox.Show("Cancellation applied, but deduction failed.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Cancellation applied, but deduction failed. WHAT THE FUCK", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 ShowStatusMessage(success, "cancelled");

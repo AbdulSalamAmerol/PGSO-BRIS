@@ -218,12 +218,6 @@
     <Compile Include="pgso_Billing\Forms\frm_Extension_Slip.Designer.cs">
       <DependentUpon>frm_Extension_Slip.cs</DependentUpon>
     </Compile>
-    <Compile Include="pgso_Billing\Forms\frm_nona.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="pgso_Billing\Forms\frm_nona.Designer.cs">
-      <DependentUpon>frm_nona.cs</DependentUpon>
-    </Compile>
     <Compile Include="pgso_Billing\Forms\frm_OR.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -234,9 +234,9 @@
             this.btn_Cancellation_Slip.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Cancellation_Slip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
             this.btn_Cancellation_Slip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Cancellation_Slip.Location = new System.Drawing.Point(310, 461);
+            this.btn_Cancellation_Slip.Location = new System.Drawing.Point(438, 458);
             this.btn_Cancellation_Slip.Name = "btn_Cancellation_Slip";
-            this.btn_Cancellation_Slip.Size = new System.Drawing.Size(106, 47);
+            this.btn_Cancellation_Slip.Size = new System.Drawing.Size(114, 47);
             this.btn_Cancellation_Slip.TabIndex = 58;
             this.btn_Cancellation_Slip.Text = "CANCELLATION SLIP";
             this.btn_Cancellation_Slip.UseVisualStyleBackColor = false;
@@ -248,9 +248,9 @@
             this.btn_Extension_Slip.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Extension_Slip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
             this.btn_Extension_Slip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Extension_Slip.Location = new System.Drawing.Point(430, 461);
+            this.btn_Extension_Slip.Location = new System.Drawing.Point(557, 458);
             this.btn_Extension_Slip.Name = "btn_Extension_Slip";
-            this.btn_Extension_Slip.Size = new System.Drawing.Size(106, 47);
+            this.btn_Extension_Slip.Size = new System.Drawing.Size(114, 47);
             this.btn_Extension_Slip.TabIndex = 57;
             this.btn_Extension_Slip.Text = "EXTENSION SLIP";
             this.btn_Extension_Slip.UseVisualStyleBackColor = false;
@@ -315,13 +315,14 @@
             this.lbl_OR.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_OR.Font = new System.Drawing.Font("Arial", 17F, System.Drawing.FontStyle.Italic);
             this.lbl_OR.ForeColor = System.Drawing.Color.Red;
-            this.lbl_OR.Location = new System.Drawing.Point(328, 41);
+            this.lbl_OR.Location = new System.Drawing.Point(331, 35);
             this.lbl_OR.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_OR.MinimumSize = new System.Drawing.Size(4, 25);
             this.lbl_OR.Name = "lbl_OR";
             this.lbl_OR.ReadOnly = true;
             this.lbl_OR.Size = new System.Drawing.Size(199, 27);
             this.lbl_OR.TabIndex = 51;
+            this.lbl_OR.Text = "DESCRIPTION";
             // 
             // tb_OR
             // 
@@ -330,13 +331,13 @@
             this.tb_OR.Cursor = System.Windows.Forms.Cursors.Default;
             this.tb_OR.Font = new System.Drawing.Font("Arial", 17F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.tb_OR.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.tb_OR.Location = new System.Drawing.Point(4, 39);
+            this.tb_OR.Location = new System.Drawing.Point(5, 36);
             this.tb_OR.Margin = new System.Windows.Forms.Padding(0);
             this.tb_OR.Name = "tb_OR";
             this.tb_OR.ReadOnly = true;
             this.tb_OR.Size = new System.Drawing.Size(324, 27);
             this.tb_OR.TabIndex = 50;
-            this.tb_OR.Text = "OFFICIAL RECEIPT NUMBER";
+            this.tb_OR.Text = "OFFICIAL RECEIPT NUMBER:";
             // 
             // newbtn_Extend_Venue
             // 
@@ -358,7 +359,7 @@
             this.btn_Change_Reservation_info.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Change_Reservation_info.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
             this.btn_Change_Reservation_info.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Change_Reservation_info.Location = new System.Drawing.Point(673, 458);
+            this.btn_Change_Reservation_info.Location = new System.Drawing.Point(675, 458);
             this.btn_Change_Reservation_info.Name = "btn_Change_Reservation_info";
             this.btn_Change_Reservation_info.Size = new System.Drawing.Size(106, 47);
             this.btn_Change_Reservation_info.TabIndex = 48;
@@ -1499,12 +1500,12 @@
             this.textBox36.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox36.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox36.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold);
-            this.textBox36.Location = new System.Drawing.Point(19, 454);
+            this.textBox36.Location = new System.Drawing.Point(6, 454);
             this.textBox36.Margin = new System.Windows.Forms.Padding(0);
             this.textBox36.MinimumSize = new System.Drawing.Size(0, 30);
             this.textBox36.Name = "textBox36";
             this.textBox36.ReadOnly = true;
-            this.textBox36.Size = new System.Drawing.Size(309, 23);
+            this.textBox36.Size = new System.Drawing.Size(309, 30);
             this.textBox36.TabIndex = 29;
             this.textBox36.Text = "BILLING DETAILS";
             // 
@@ -1588,13 +1589,14 @@
             this.lbl_Control_Number.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Control_Number.Font = new System.Drawing.Font("Arial", 17F, System.Drawing.FontStyle.Italic);
             this.lbl_Control_Number.ForeColor = System.Drawing.Color.Red;
-            this.lbl_Control_Number.Location = new System.Drawing.Point(238, 8);
+            this.lbl_Control_Number.Location = new System.Drawing.Point(240, 4);
             this.lbl_Control_Number.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Control_Number.MinimumSize = new System.Drawing.Size(4, 25);
             this.lbl_Control_Number.Name = "lbl_Control_Number";
             this.lbl_Control_Number.ReadOnly = true;
             this.lbl_Control_Number.Size = new System.Drawing.Size(289, 27);
             this.lbl_Control_Number.TabIndex = 23;
+            this.lbl_Control_Number.Text = "DESCRIPTION";
             // 
             // lbl_Reservation_Status
             // 
@@ -1735,13 +1737,13 @@
             this.textBox15.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox15.Font = new System.Drawing.Font("Arial", 17F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.textBox15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.textBox15.Location = new System.Drawing.Point(4, 8);
+            this.textBox15.Location = new System.Drawing.Point(5, 5);
             this.textBox15.Margin = new System.Windows.Forms.Padding(0);
             this.textBox15.Name = "textBox15";
             this.textBox15.ReadOnly = true;
             this.textBox15.Size = new System.Drawing.Size(235, 27);
             this.textBox15.TabIndex = 12;
-            this.textBox15.Text = "CONTROL NUMBER";
+            this.textBox15.Text = "CONTROL NUMBER:";
             // 
             // textBox13
             // 

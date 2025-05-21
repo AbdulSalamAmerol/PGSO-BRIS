@@ -47,7 +47,8 @@ namespace pgso.pgso_Billing.User_Control
             lbl_Reservation_Status.Text = billingDetailsList.fld_Reservation_Status;
             btn_Delete_Equipment_Billing.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
             btn_Add_Equipment_Billing.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
-            
+            btn_Return.Enabled = (billingDetailsList.fld_Reservation_Status == "Confirmed");
+
 
             try
             {
@@ -234,6 +235,7 @@ namespace pgso.pgso_Billing.User_Control
                         LoadBillingDetails(_billingDetails);
 
                         RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); // 🔁 Notify parent to refresh billing
+                        
                     }
                     else
                     {
@@ -252,20 +254,19 @@ namespace pgso.pgso_Billing.User_Control
         {
             using (var cancelForm = new frm_Cancellation_Reason(_billingDetails.pk_ReservationID))
             {
-                var result = cancelForm.ShowDialog();
-                // If the cancellation was successful, refresh the billing details
-                if (result == DialogResult.OK)
+                // 🔗 Wire the event from the form to this control
+                cancelForm.RequestBillingRefresh += (reservationId) =>
                 {
-                    // Reload the billing details in this control
-                    var updatedDetails = new Repo_Billing().GetBillingDetailsByReservationID(_billingDetails.pk_ReservationID);
+                    var updatedDetails = new Repo_Billing().GetBillingDetailsByReservationID(reservationId ?? _billingDetails.pk_ReservationID);
                     if (updatedDetails != null)
                     {
                         _billingDetails = updatedDetails;
                         LoadBillingDetails(_billingDetails);
+                        RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); // Notify frm_Billing
                     }
-                    // 🔔 Trigger refresh event to inform frm_Billing
-                    RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID);
-                }
+                };
+
+                var result = cancelForm.ShowDialog();
             }
         }
 

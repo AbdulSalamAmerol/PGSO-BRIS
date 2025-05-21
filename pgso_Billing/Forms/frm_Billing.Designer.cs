@@ -71,7 +71,7 @@
             this.btn_Reports = new System.Windows.Forms.Button();
             this.sb_Billing_Search_Bar = new System.Windows.Forms.TextBox();
             this.btn_Create_Venue_Reservation = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmb_Billing_Sort = new System.Windows.Forms.ComboBox();
             this.flp_Top = new System.Windows.Forms.FlowLayoutPanel();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
@@ -395,7 +395,7 @@
             this.panel1.Controls.Add(this.btn_Reports);
             this.panel1.Controls.Add(this.sb_Billing_Search_Bar);
             this.panel1.Controls.Add(this.btn_Create_Venue_Reservation);
-            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.cmb_Billing_Sort);
             this.panel1.Location = new System.Drawing.Point(11, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
@@ -506,16 +506,16 @@
             this.btn_Create_Venue_Reservation.UseVisualStyleBackColor = false;
             this.btn_Create_Venue_Reservation.Click += new System.EventHandler(this.btn_Create_Venue_Reservation_Click);
             // 
-            // comboBox1
+            // cmb_Billing_Sort
             // 
-            this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(785, 84);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(180, 24);
-            this.comboBox1.TabIndex = 9;
+            this.cmb_Billing_Sort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.cmb_Billing_Sort.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmb_Billing_Sort.FormattingEnabled = true;
+            this.cmb_Billing_Sort.Location = new System.Drawing.Point(785, 84);
+            this.cmb_Billing_Sort.Margin = new System.Windows.Forms.Padding(0);
+            this.cmb_Billing_Sort.Name = "cmb_Billing_Sort";
+            this.cmb_Billing_Sort.Size = new System.Drawing.Size(180, 24);
+            this.cmb_Billing_Sort.TabIndex = 9;
             // 
             // flp_Top
             // 
@@ -612,7 +612,7 @@
         private System.Windows.Forms.Button btn_Reports;
         private System.Windows.Forms.ComboBox cmb_Billing_Filter;
         private System.Windows.Forms.Button btn_Create_Venue_Reservation;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmb_Billing_Sort;
         private System.Windows.Forms.TextBox sb_Billing_Search_Bar;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Control_Number;
