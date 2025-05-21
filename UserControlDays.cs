@@ -1,141 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using pgso_connect;
 
-
 namespace pgso
 {
     public partial class UserControlDays : UserControl
     {
         public event EventHandler<DateClickedEventArgs> DateClicked;
+        private DateTime date;
+        public DateTime Date { get; set; }
+        private bool isClickable = false; // Track if the day is clickable
 
         public UserControlDays()
         {
             InitializeComponent();
+            this.Click += UserControlDays_Click;
+            lblDays.Click += UserControlDays_Click;
+            lbl_Reservations.Click += UserControlDays_Click;
 
-            // Set combo box styles
-            combo_Venues.DropDownStyle = ComboBoxStyle.DropDownList;
-            combo_Equipments.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            // Event subscriptions
-            combo_Venues.SelectedIndexChanged += Combo_Venues_SelectedIndexChanged;
-            combo_Equipments.SelectedIndexChanged += Combo_Equipments_SelectedIndexChanged;
-
-            // Prevent click events from bubbling up
-            combo_Venues.Click += (s, e) => { /* Consume the click */ };
-            combo_Equipments.Click += (s, e) => { /* Consume the click */ };
         }
 
-        public void days(int numday)
+        public void days(int numday, int month, int year)
         {
             lblDays.Text = numday.ToString();
-        }
-        public void ClearReservations()
-        {
-            combo_Venues.DataSource = null;
-            combo_Equipments.DataSource = null;
-            combo_Venues.Items.Clear();
-            combo_Equipments.Items.Clear();
-            this.BackColor = SystemColors.ControlDark;
-        }
-        public void SetReservations(List<(string DisplayName, string ControlNumber)> venueReservations,
-                             List<(string DisplayName, string ControlNumber)> equipmentReservations)
-        {
-            venueReservations = venueReservations ?? new List<(string, string)>();
-            equipmentReservations = equipmentReservations ?? new List<(string, string)>();
-
-            // Filter out null or empty DisplayName values
-            venueReservations = venueReservations.Where(v => !string.IsNullOrEmpty(v.DisplayName)).ToList();
-            equipmentReservations = equipmentReservations.Where(e => !string.IsNullOrEmpty(e.DisplayName)).ToList();
-
-            // Debugging: Log invalid entries
-            var invalidVenueReservations = venueReservations.Where(v => string.IsNullOrEmpty(v.DisplayName)).ToList();
-            var invalidEquipmentReservations = equipmentReservations.Where(e => string.IsNullOrEmpty(e.DisplayName)).ToList();
-
-            if (invalidVenueReservations.Any())
-            {
-                MessageBox.Show($"Invalid venue reservations: {string.Join(", ", invalidVenueReservations.Select(v => v.ControlNumber))}", "Debug");
-            }
-
-            if (invalidEquipmentReservations.Any())
-            {
-                MessageBox.Show($"Invalid equipment reservations: {string.Join(", ", invalidEquipmentReservations.Select(e => e.ControlNumber))}", "Debug");
-            }
-
-            // Set combo box data sources
-            combo_Venues.DataSource = venueReservations.Select(v => v.DisplayName).ToList();
-            combo_Equipments.DataSource = equipmentReservations.Select(e => e.DisplayName).ToList();
-
-            // Handle duplicates in reservations
-            combo_Venues.Tag = venueReservations
-                .GroupBy(v => v.DisplayName)
-                .ToDictionary(g => g.Key, g => g.First().ControlNumber);
-
-            combo_Equipments.Tag = equipmentReservations
-                .GroupBy(e => e.DisplayName)
-                .ToDictionary(g => g.Key, g => g.First().ControlNumber);
-
-            // Set visibility and other properties as before
-            bool hasVenueReservations = venueReservations.Any();
-            bool hasEquipmentReservations = equipmentReservations.Any();
-
-            combo_Venues.Visible = hasVenueReservations;
-            combo_Equipments.Visible = hasEquipmentReservations;
-
-            this.BackColor = hasVenueReservations || hasEquipmentReservations ? Color.Salmon : SystemColors.ControlDark;
-
-            combo_Venues.ForeColor = hasVenueReservations ? Color.Green : Color.Black;
-            combo_Equipments.ForeColor = hasEquipmentReservations ? Color.Blue : Color.Black;
+            date = new DateTime(year, month, numday); // full date is stored here
+            this.Date = date; //  Set the public property
+            LoadReservationSummary();
         }
 
 
-        private void Combo_Venues_SelectedIndexChanged(object sender, EventArgs e)
+
+
+
+        private void UserControlDays_Click(object sender, EventArgs e)
         {
-            if (combo_Venues.SelectedItem != null && combo_Venues.Focused)
+            if (!isClickable)
+                return; // Ignore clicks if not clickable
+
+            using (var detailsForm = new frm_ReservationDetails(this.Date))
             {
-                var selectedName = combo_Venues.SelectedItem.ToString();
-                var controlNumbers = (Dictionary<string, string>)combo_Venues.Tag;
-                if (controlNumbers.TryGetValue(selectedName, out var controlNumber))
-                {
-                    ShowReservationDetails(controlNumber, "Venue");
-                }
-            }
-        }
-
-        private void Combo_Equipments_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (combo_Equipments.SelectedItem != null && combo_Equipments.Focused)
-            {
-                var selectedName = combo_Equipments.SelectedItem.ToString();
-                var controlNumbers = (Dictionary<string, string>)combo_Equipments.Tag;
-                if (controlNumbers.TryGetValue(selectedName, out var controlNumber))
-                {
-                    ShowReservationDetails(controlNumber, "Equipment");
-                }
-            }
-        }
-
-        private void ShowReservationDetails(string controlNumber, string type)
-        {
-            using (var detailsForm = new frm_ReservationDetails())
-            {
-                detailsForm.SetReservationDetails(controlNumber, type);
-
-                // Ensure the parent form is set as the owner
-                var parentForm = this.FindForm();
-                if (parentForm != null)
-                {
-                    detailsForm.Owner = parentForm;
-                }
-
-                // Show the form as a modal dialog
                 detailsForm.ShowDialog();
             }
         }
@@ -143,28 +54,184 @@ namespace pgso
 
 
 
-        // These can remain empty as we're handling visibility in SetReservations
-        private void lblReservations_Click(object sender, EventArgs e) { }
-        private void lblEquipmentReservations_Click(object sender, EventArgs e) { }
+        //count  the number of reservations
+        private void LoadReservationSummary()
+        {
+            try
+            {
+                Connection db = new Connection();
+                if (db.strCon.State == ConnectionState.Closed)
+                    db.strCon.Open();
+
+                // Venue counts
+                int venuePending = 0, venueConfirmed = 0;
+                string venueQuery = @"
+            SELECT r.fld_Reservation_Status, COUNT(DISTINCT r.fld_Control_Number) AS TotalCount
+            FROM tbl_Reservation r
+            LEFT JOIN tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
+            WHERE @SelectedDate BETWEEN r.fld_Start_Date AND r.fld_End_Date
+            AND r.fld_Reservation_Status IN ('Pending', 'Confirmed')
+            AND r.fld_Reservation_Type IN ('Venue', 'Both')
+            GROUP BY r.fld_Reservation_Status";
+                using (SqlCommand venueCmd = new SqlCommand(venueQuery, db.strCon))
+                {
+                    venueCmd.Parameters.AddWithValue("@SelectedDate", date);
+                    using (var reader = venueCmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string status = reader["fld_Reservation_Status"].ToString();
+                            int count = Convert.ToInt32(reader["TotalCount"]);
+                            if (status == "Pending") venuePending = count;
+                            else if (status == "Confirmed") venueConfirmed = count;
+                        }
+                    }
+                }
+
+                // Equipment counts
+                int equipmentPending = 0, equipmentConfirmed = 0;
+                string equipmentQuery = @"
+            SELECT r.fld_Reservation_Status, COUNT(DISTINCT r.fld_Control_Number) AS TotalCount
+            FROM tbl_Reservation r
+            INNER JOIN tbl_Reservation_Equipment re ON r.pk_ReservationID = re.fk_ReservationID
+            WHERE @SelectedDate BETWEEN re.fld_Start_Date_Eq AND re.fld_End_Date_Eq
+            AND r.fld_Reservation_Status IN ('Pending', 'Confirmed')
+            AND r.fld_Reservation_Type IN ('Equipment', 'Both')
+            GROUP BY r.fld_Reservation_Status";
+                using (SqlCommand equipmentCmd = new SqlCommand(equipmentQuery, db.strCon))
+                {
+                    equipmentCmd.Parameters.AddWithValue("@SelectedDate", date);
+                    using (var reader = equipmentCmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string status = reader["fld_Reservation_Status"].ToString();
+                            int count = Convert.ToInt32(reader["TotalCount"]);
+                            if (status == "Pending") equipmentPending = count;
+                            else if (status == "Confirmed") equipmentConfirmed = count;
+                        }
+                    }
+                }
+
+                // Set clickability and update label
+                bool hasReservations = (venuePending + venueConfirmed + equipmentPending + equipmentConfirmed) > 0;
+                isClickable = hasReservations;
+                this.BackColor = hasReservations ? Color.LightBlue : SystemColors.Control;
+
+                // Updated display format
+                lbl_Reservations.Text =
+                    $"Venue: Pending: {venuePending} Confirmed: {venueConfirmed}\n" +
+                    $"Equipment: Pending: {equipmentPending} Confirmed: {equipmentConfirmed}";
+                lbl_Reservations.Visible = hasReservations;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading reservation summary: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+
+
+
+
+
+
+        public void ClearReservations()
+        {
+
+            lbl_Reservations.Text = string.Empty;
+            this.BackColor = SystemColors.Control;
+        }
+
+        public void SetReservations(List<(string DisplayName, string ControlNumber, string Status)> venueReservations,
+                         List<(string DisplayName, string ControlNumber, string Status)> equipmentReservations)
+        {
+            venueReservations = venueReservations ?? new List<(string, string, string)>();
+            equipmentReservations = equipmentReservations ?? new List<(string, string, string)>();
+
+            // Count pending/confirmed for each type
+            var venuePending = venueReservations.Count(v => v.Status == "Pending");
+            var venueConfirmed = venueReservations.Count(v => v.Status == "Confirmed");
+
+            var equipmentPending = equipmentReservations.Count(e => e.Status == "Pending");
+            var equipmentConfirmed = equipmentReservations.Count(e => e.Status == "Confirmed");
+
+            bool hasVenueReservations = (venuePending + venueConfirmed) > 0;
+            bool hasEquipmentReservations = (equipmentPending + equipmentConfirmed) > 0;
+            isClickable = hasVenueReservations || hasEquipmentReservations;
+
+            this.BackColor = isClickable ? Color.LightBlue : SystemColors.Control;
+
+            // Build the display text conditionally
+            var displayText = new StringBuilder();
+
+            if (hasVenueReservations)
+            {
+                displayText.AppendLine($"Venue: Pending: {venuePending}");
+                displayText.Append($"           Confirmed: {venueConfirmed}");
+            }
+
+            if (hasEquipmentReservations)
+            {
+                // Add a newline only if we already have venue reservations
+                if (hasVenueReservations)
+                {
+                    displayText.AppendLine(); // This adds the newline at the end of venue section
+                }
+                displayText.AppendLine($"Equipment: Pending: {equipmentPending}");
+                displayText.Append($"               Confirmed: {equipmentConfirmed}");
+            }
+
+            lbl_Reservations.Text = displayText.ToString();
+            lbl_Reservations.Visible = isClickable;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private void ShowReservationDetails(string controlNumber, string type)
+        {
+            using (var detailsForm = new frm_ReservationDetails(date))
+            {
+                var parentForm = this.FindForm();
+                if (parentForm != null)
+                {
+                    detailsForm.Owner = parentForm;
+                }
+                detailsForm.ShowDialog();
+            }
+        }
+
 
         private void UserControlDays_Load(object sender, EventArgs e)
         {
-
+            // Initialization code if needed
         }
 
-        private void UserControlDays_Load_1(object sender, EventArgs e)
-        {
 
-        }
     }
 
     public class DateClickedEventArgs : EventArgs
     {
-        public string Day { get; }
+        public DateTime SelectedDate { get; }
 
-        public DateClickedEventArgs(string day)
+        public DateClickedEventArgs(DateTime selectedDate)
         {
-            Day = day;
+            SelectedDate = selectedDate;
         }
     }
 }

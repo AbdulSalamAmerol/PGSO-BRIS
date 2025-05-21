@@ -45,7 +45,7 @@ namespace pgso
         }
         private void DisplayCalendar()
         {
-            frm_Calendar_Venue calendar = new frm_Calendar_Venue();
+            frm_Calendar calendar = new frm_Calendar();
             calendar.TopLevel = false;
             calendar.FormBorderStyle = FormBorderStyle.None;
             calendar.Dock = DockStyle.Fill;
@@ -351,7 +351,7 @@ namespace pgso
 
         private void calendarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frm_Calendar_Venue Calendar = new frm_Calendar_Venue();
+            frm_Calendar Calendar = new frm_Calendar();
             Calendar.TopLevel = false;
             Calendar.FormBorderStyle = FormBorderStyle.None;
             Calendar.Dock = DockStyle.Fill;

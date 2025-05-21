@@ -116,15 +116,24 @@ namespace pgso
 
                 cmd.Parameters.AddWithValue("@ScopeName", txt_Venue_Scope_Name.Text); // Assuming you have a TextBox for Scope Name
                 int newVenueScopeId = (int)cmd.ExecuteScalar();
+                // Determine aircon value based on radio buttons
+                // Determine aircon value based on radio buttons
+                object airconValue;
+                if (radio_Yes1.Checked)
+                    airconValue = true;
+                else if (radio_No1.Checked)
+                    airconValue = false;
+                else
+                    airconValue = DBNull.Value;
 
                 // 3. Insert into Venue Pricing with the foreign keys
                 cmd = new SqlCommand(
                     @"INSERT INTO tbl_Venue_Pricing 
-              (fld_Aircon, fld_Rate_type, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Additional_Charge, fk_VenueID, fk_Venue_ScopeID) 
-              VALUES (@Aircon, @RateType, @FirstFourHoursRate, @HourlyRate, @AdditionalCharge, @VenueID, @VenueScopeID)",
+      (fld_Aircon, fld_Rate_type, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Additional_Charge, fk_VenueID, fk_Venue_ScopeID) 
+      VALUES (@Aircon, @RateType, @FirstFourHoursRate, @HourlyRate, @AdditionalCharge, @VenueID, @VenueScopeID)",
                     conn, transaction);
 
-                cmd.Parameters.AddWithValue("@Aircon", chk_Aircon.Checked);
+                cmd.Parameters.AddWithValue("@Aircon", airconValue);
                 cmd.Parameters.AddWithValue("@RateType", txt_RT1.Text);
                 cmd.Parameters.AddWithValue("@FirstFourHoursRate", firstFourHoursRate);
                 cmd.Parameters.AddWithValue("@HourlyRate", hourlyRate);
@@ -132,6 +141,7 @@ namespace pgso
                 cmd.Parameters.AddWithValue("@VenueID", newVenueId);
                 cmd.Parameters.AddWithValue("@VenueScopeID", newVenueScopeId);
                 cmd.ExecuteNonQuery();
+
 
                 transaction.Commit();
 
@@ -201,54 +211,26 @@ namespace pgso
             txt_First_Four_Hours_Rate_KeyPress(sender, e); // Reuse the same validation
         }
 
-        private void radio_Yes_CheckedChanged(object sender, EventArgs e)
-        {
+        private void radio_Yes_CheckedChanged(object sender, EventArgs e){}
 
-        }
+        private void panel_Venue_Add_Paint(object sender, PaintEventArgs e){}
 
-        private void panel_Venue_Add_Paint(object sender, PaintEventArgs e)
-        {
+        private void combo_Rate_Type_SelectedIndexChanged(object sender, EventArgs e){}
 
-        }
+        private void radioButton2_CheckedChanged(object sender, EventArgs e){}
 
-        private void combo_Rate_Type_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void txt_Venue_Name_TextChanged(object sender, EventArgs e){}
 
-        }
+        private void txt_Venue_Scope_Name_TextChanged(object sender, EventArgs e) {}
 
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
+        private void txt_RT1_TextChanged(object sender, EventArgs e){}
 
-        }
+        private void radio_No1_CheckedChanged(object sender, EventArgs e){}
 
-        private void txt_Venue_Name_TextChanged(object sender, EventArgs e)
-        {
+        private void txt_First_Four_Hours_Rate_TextChanged(object sender, EventArgs e){}
 
-        }
+        private void txt_Hourly_Rate_TextChanged(object sender, EventArgs e){}
 
-        private void txt_Venue_Scope_Name_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_RT1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radio_No1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_First_Four_Hours_Rate_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_Hourly_Rate_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void label2_Click(object sender, EventArgs e){}
     }
 }

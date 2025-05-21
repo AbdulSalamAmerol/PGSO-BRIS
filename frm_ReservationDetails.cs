@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows.Forms;
 using pgso_connect;
 
@@ -8,97 +9,190 @@ namespace pgso
 {
     public partial class frm_ReservationDetails : Form
     {
-        public frm_ReservationDetails()
+        private DateTime selectedDate;
+
+        public frm_ReservationDetails(DateTime date)
         {
             InitializeComponent();
+            selectedDate = date;
+            dt_equipment.RowPostPaint += dt_equipment_RowPostPaint;
+            dt_venue.RowPostPaint += dt_venue_RowPostPaint;
+            dt_venue.CellFormatting += dt_venue_CellFormatting;
+            dt_equipment.CellFormatting += dt_equipment_CellFormatting;
+        }
+        private void dt_venue_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dt_venue.Columns[e.ColumnIndex].Name == "fld_Reservation_Status" && e.Value != null)
+            {
+                string status = e.Value.ToString();
+                if (status == "Pending")
+                {
+                    e.CellStyle.BackColor = Color.Yellow;
+                }
+                else if (status == "Confirmed")
+                {
+                    e.CellStyle.BackColor = Color.Lime;
+                }
+            }
         }
 
+        private void dt_equipment_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dt_equipment.Columns[e.ColumnIndex].Name == "fld_Reservation_StatusE" && e.Value != null)
+            {
+                string status = e.Value.ToString();
+                if (status == "Pending")
+                {
+                    e.CellStyle.BackColor = Color.Yellow;
+                }
+                else if (status == "Confirmed")
+                {
+                    e.CellStyle.BackColor = Color.Lime;
+                }
+            }
+        }
         private void frm_ReservationDetails_Load(object sender, EventArgs e)
         {
-
+            lbl_Date.Text = selectedDate.ToShortDateString();
+            LoadReservationDetails();
+        }
+        private void dt_venue_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            int itemColIndex = dt_venue.Columns["Item"].Index;
+            dt_venue.Rows[e.RowIndex].Cells[itemColIndex].Value = (e.RowIndex + 1).ToString();
+        }
+        private void dt_equipment_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            int itemColIndex = dt_equipment.Columns["Items"].Index;
+            dt_equipment.Rows[e.RowIndex].Cells[itemColIndex].Value = (e.RowIndex + 1).ToString();
         }
 
-
-        public void SetReservationDetails(string controlNumber, string type)
+        private void LoadReservationDetails()
         {
-            string reservationDetails = GetReservationDetailsFromDatabase(controlNumber, type);
-            lblReservationType.Text = $"Type: {type}";
-            lblReservationDetails.Text = reservationDetails;
-        }
-
-
-        private string GetReservationDetailsFromDatabase(string controlNumber, string type)
-        {
-            string details = "No details found.";
             try
             {
                 Connection db = new Connection();
                 if (db.strCon.State == ConnectionState.Closed)
                     db.strCon.Open();
 
-                string query = type == "Venue"
-                    ? @"SELECT
-                v.fld_Venue_Name,
-                vs.fld_Venue_Scope_Name,
-                r.fld_Activity_Name,
-                r.fld_Reservation_Status
-               FROM tbl_Reservation r
-               LEFT JOIN tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
-               LEFT JOIN tbl_Venue_Scope vs ON r.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
-               WHERE r.fld_Control_Number = @controlNumber"
-                    : @"SELECT
-                e.fld_Equipment_Name,
-                r.fld_Activity_Name,
-                r.fld_Reservation_Status
-               FROM tbl_Reservation_Equipment re
-               INNER JOIN tbl_Equipment e ON re.fk_EquipmentID = e.pk_EquipmentID
-               INNER JOIN tbl_Reservation r ON re.fk_ReservationID = r.pk_ReservationID
-               WHERE r.fld_Control_Number = @controlNumber";
+                // Load venue reservations (no filtering)
+                string venueQuery = @"
+                    SELECT 
+                        r.fld_Control_Number,
+                        ISNULL(v.fld_Venue_Name, 'N/A') AS fld_Venue_Name,
+                        ISNULL(vs.fld_Venue_Scope_Name, 'N/A') AS fld_Venue_Scope_Name,
+                        r.fld_Reservation_Status
+                    FROM tbl_Reservation r
+                    INNER JOIN tbl_Reservation_Venues rv ON r.pk_ReservationID = rv.fk_ReservationID
+                    LEFT JOIN tbl_Venue v ON rv.fk_VenueID = v.pk_VenueID
+                    LEFT JOIN tbl_Venue_Scope vs ON r.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
+                    WHERE 
+                        @SelectedDate BETWEEN rv.fld_Start_Date AND rv.fld_End_Date
+                        AND r.fld_Reservation_Type IN ('Venue', 'Both')
+                        AND r.fld_Reservation_Status IN ('Pending', 'Confirmed')";
 
-                using (SqlCommand cmd = new SqlCommand(query, db.strCon))
+                SqlCommand venueCmd = new SqlCommand(venueQuery, db.strCon);
+                venueCmd.Parameters.AddWithValue("@SelectedDate", selectedDate.Date);
+
+                SqlDataAdapter venueAdapter = new SqlDataAdapter(venueCmd);
+                DataTable venueTable = new DataTable();
+                venueAdapter.Fill(venueTable);
+                dt_venue.DataSource = venueTable;
+
+                // Load equipment reservations (no filtering)
+                string equipmentQuery = @"
+                    SELECT 
+                        r.fld_Control_Number,
+                        e.fld_Equipment_Name,
+                        re.fld_Quantity,
+                        re.fld_Equipment_Status
+                    FROM tbl_Reservation r
+                    INNER JOIN tbl_Reservation_Equipment re ON r.pk_ReservationID = re.fk_ReservationID
+                    INNER JOIN tbl_Equipment e ON re.fk_EquipmentID = e.pk_EquipmentID
+                    WHERE 
+                        @SelectedDate BETWEEN re.fld_Start_Date_Eq AND re.fld_End_Date_Eq
+                        AND r.fld_Reservation_Type IN ('Equipment', 'Both')
+                        AND re.fld_Equipment_Status IN ('Pending', 'Confirmed')";
+
+                SqlCommand equipmentCmd = new SqlCommand(equipmentQuery, db.strCon);
+                equipmentCmd.Parameters.AddWithValue("@SelectedDate", selectedDate.Date);
+
+                SqlDataAdapter equipmentAdapter = new SqlDataAdapter(equipmentCmd);
+                DataTable equipmentTable = new DataTable();
+                equipmentAdapter.Fill(equipmentTable);
+                dt_equipment.DataSource = equipmentTable;
+
+                // Logic
+                bool hasVenue = venueTable.Rows.Count > 0;
+                bool hasEquipment = equipmentTable.Rows.Count > 0;
+
+                // Hide/show grids
+                dt_venue.Visible = hasVenue;
+                dt_equipment.Visible = hasEquipment;
+
+                // Hide headers & borders when invisible
+                dt_venue.ColumnHeadersVisible = hasVenue;
+                dt_venue.BorderStyle = hasVenue ? BorderStyle.FixedSingle : BorderStyle.None;
+
+                dt_equipment.ColumnHeadersVisible = hasEquipment;
+                dt_equipment.BorderStyle = hasEquipment ? BorderStyle.FixedSingle : BorderStyle.None;
+
+                if (hasVenue && hasEquipment)
                 {
-                    cmd.Parameters.AddWithValue("@controlNumber", controlNumber);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            details = type == "Venue"
-                                ? $"Control Number: {controlNumber}\n" + // Include control number
-                                  $"Venue: {reader["fld_Venue_Name"]}\n" +
-                                  $"Scope: {reader["fld_Venue_Scope_Name"]}\n" +
-                                  $"Activity: {reader["fld_Activity_Name"]}\n" +
-                                  $"Status: {reader["fld_Reservation_Status"]}"
-                                : $"Control Number: {controlNumber}\n" + // Include control number
-                                  $"Equipment: {reader["fld_Equipment_Name"]}\n" +
-                                  $"Activity: {reader["fld_Activity_Name"]}\n" +
-                                  $"Status: {reader["fld_Reservation_Status"]}";
-                        }
-                    }
+                    this.Size = new Size(946, 400); // Both shown
+                    dt_venue.Location = new Point(12, 50);
+                    dt_equipment.Location = new Point(480, 50);
+                    lbl_Venue.Location = new Point(9, 30);         // <-- Set Y to 30
+                    lbl_Equipment.Location = new Point(480, 30);   // <-- Set Y to 30
+                    lbl_Venue.Visible = true;
+                    lbl_Equipment.Visible = true;
                 }
+
+                else if (hasVenue) // Venue only
+                {
+                    this.Size = new Size(489, 380);
+                    dt_venue.Location = new Point((this.ClientSize.Width - dt_venue.Width) / 2, 50);
+                    button1.Location = new Point(385, 340);
+                    lbl_Venue.Location = new Point((this.ClientSize.Width - lbl_Venue.Width) / 2, 25);
+                    lbl_Venue.Visible = true;
+                    lbl_Equipment.Visible = false;
+                }
+                else if (hasEquipment) // Equipment only
+                {
+                    button1.Location = new Point(385, 340);
+                    this.Size = new Size(489, 380);
+                    dt_equipment.Location = new Point((this.ClientSize.Width - dt_equipment.Width) / 2, 50);
+                    lbl_Equipment.Location = new Point((this.ClientSize.Width - lbl_Equipment.Width) / 2, 25);
+                    lbl_Venue.Visible = false;
+                    lbl_Equipment.Visible = true;
+                }
+                else
+                {
+                    this.Size = new Size(489, 417);
+                    lbl_Venue.Visible = false;
+                    lbl_Equipment.Visible = false;
+                    MessageBox.Show("No reservations found for the selected date.");
+                }
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error fetching details: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading reservation details: {ex.Message}", "Error",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            return details;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void dt_venue_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.Hide();
+
         }
 
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
-
-        private void frm_ReservationDetails_Load_1(object sender, EventArgs e)
+        private void dt_equipment_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

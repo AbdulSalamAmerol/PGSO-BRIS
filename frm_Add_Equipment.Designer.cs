@@ -53,7 +53,7 @@
             // txt_Price_Add
             // 
             this.txt_Price_Add.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Price_Add.Location = new System.Drawing.Point(23, 147);
+            this.txt_Price_Add.Location = new System.Drawing.Point(23, 133);
             this.txt_Price_Add.Name = "txt_Price_Add";
             this.txt_Price_Add.Size = new System.Drawing.Size(249, 26);
             this.txt_Price_Add.TabIndex = 1;
@@ -62,7 +62,7 @@
             // txt_Price_Subsequent_Add
             // 
             this.txt_Price_Subsequent_Add.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Price_Subsequent_Add.Location = new System.Drawing.Point(23, 211);
+            this.txt_Price_Subsequent_Add.Location = new System.Drawing.Point(23, 185);
             this.txt_Price_Subsequent_Add.Name = "txt_Price_Subsequent_Add";
             this.txt_Price_Subsequent_Add.Size = new System.Drawing.Size(249, 26);
             this.txt_Price_Subsequent_Add.TabIndex = 2;
@@ -82,7 +82,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(19, 124);
+            this.label2.Location = new System.Drawing.Point(19, 110);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(127, 20);
             this.label2.TabIndex = 4;
@@ -92,7 +92,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(19, 188);
+            this.label3.Location = new System.Drawing.Point(19, 162);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(216, 20);
             this.label3.TabIndex = 5;
@@ -100,26 +100,30 @@
             // 
             // btn_Submit_Add
             // 
-            this.btn_Submit_Add.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btn_Submit_Add.BackColor = System.Drawing.Color.Green;
+            this.btn_Submit_Add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Submit_Add.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Submit_Add.Location = new System.Drawing.Point(197, 259);
+            this.btn_Submit_Add.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btn_Submit_Add.Location = new System.Drawing.Point(197, 217);
             this.btn_Submit_Add.Name = "btn_Submit_Add";
             this.btn_Submit_Add.Size = new System.Drawing.Size(75, 31);
             this.btn_Submit_Add.TabIndex = 6;
             this.btn_Submit_Add.Text = "Submit";
-            this.btn_Submit_Add.UseVisualStyleBackColor = true;
+            this.btn_Submit_Add.UseVisualStyleBackColor = false;
             this.btn_Submit_Add.Click += new System.EventHandler(this.btn_Submit_Add_Click);
             // 
             // btn_Cancel_Add
             // 
-            this.btn_Cancel_Add.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btn_Cancel_Add.BackColor = System.Drawing.Color.Crimson;
+            this.btn_Cancel_Add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Cancel_Add.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Cancel_Add.Location = new System.Drawing.Point(116, 259);
+            this.btn_Cancel_Add.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btn_Cancel_Add.Location = new System.Drawing.Point(116, 217);
             this.btn_Cancel_Add.Name = "btn_Cancel_Add";
             this.btn_Cancel_Add.Size = new System.Drawing.Size(75, 31);
             this.btn_Cancel_Add.TabIndex = 7;
             this.btn_Cancel_Add.Text = "Cancel";
-            this.btn_Cancel_Add.UseVisualStyleBackColor = true;
+            this.btn_Cancel_Add.UseVisualStyleBackColor = false;
             this.btn_Cancel_Add.Click += new System.EventHandler(this.btn_Cancel_Add_Click);
             // 
             // panel_Add_Equipment
@@ -135,7 +139,7 @@
             this.panel_Add_Equipment.Controls.Add(this.label2);
             this.panel_Add_Equipment.Location = new System.Drawing.Point(3, 5);
             this.panel_Add_Equipment.Name = "panel_Add_Equipment";
-            this.panel_Add_Equipment.Size = new System.Drawing.Size(293, 300);
+            this.panel_Add_Equipment.Size = new System.Drawing.Size(293, 259);
             this.panel_Add_Equipment.TabIndex = 8;
             this.panel_Add_Equipment.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Add_Equipment_Paint);
             // 
@@ -153,7 +157,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(322, 344);
+            this.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.ClientSize = new System.Drawing.Size(301, 265);
             this.Controls.Add(this.panel_Add_Equipment);
             this.Name = "frm_Add_Equipment";
             this.Text = "Manage Equipment Form";
