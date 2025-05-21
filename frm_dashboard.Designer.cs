@@ -38,7 +38,7 @@ namespace pgso
             // menuStrip1
             // 
             this.menuStrip1.AutoSize = false;
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.menuStrip1.BackColor = System.Drawing.Color.MediumAquamarine;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.calendarToolStripMenuItem,
             this.createReservationToolStripMenuItem,
@@ -54,8 +54,8 @@ namespace pgso
             // calendarToolStripMenuItem
             // 
             this.calendarToolStripMenuItem.Name = "calendarToolStripMenuItem";
-            this.calendarToolStripMenuItem.Size = new System.Drawing.Size(76, 25);
-            this.calendarToolStripMenuItem.Text = "Dashboard";
+            this.calendarToolStripMenuItem.Size = new System.Drawing.Size(66, 25);
+            this.calendarToolStripMenuItem.Text = "Calendar";
             this.calendarToolStripMenuItem.Click += new System.EventHandler(this.calendarToolStripMenuItem_Click);
             // 
             // createReservationToolStripMenuItem

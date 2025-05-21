@@ -30,6 +30,7 @@ namespace pgso
         {
             InitializeComponent();
             dt_equipment.CellClick += dt_equipment_CellClick; // Handle cell click event
+            dt_equipment.RowPostPaint += dt_equipment_RowPostPaint;
 
             // Populate the ComboBox with filter options
             combobox_Filter.Items.AddRange(new string[] { "All", "Pending", "Cancelled", "Confirmed" });
@@ -41,10 +42,29 @@ namespace pgso
             txt_Status.TextChanged += Control_ValueChanged;
              dt_equipment.CellFormatting += dt_equipment_CellFormatting;
 
+            btn_Update.Enabled = false; // Disable by default
+
+            dt_equipment.CellClick += dt_equipment_CellClick;
+
+            // Only these fields should enable the update button
+            txt_Fname.TextChanged += Control_ValueChanged;
+            txt_Sname.TextChanged += Control_ValueChanged;
+            txt_Requesting_Office.TextChanged += Control_ValueChanged;
+            txt_Address.TextChanged += Control_ValueChanged;
+
+
+
             //datagridview column header bg color
             dt_equipment.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.LightBlue;
             dt_equipment.EnableHeadersVisualStyles = false;
             dt_equipment.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 10, System.Drawing.FontStyle.Bold);
+        }
+        private void dt_equipment_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            // Find the "Item" column index
+            int itemColIndex = dt_equipment.Columns["Item"].Index;
+            // Set the value to the row number (1-based)
+            dt_equipment.Rows[e.RowIndex].Cells[itemColIndex].Value = (e.RowIndex + 1).ToString();
         }
 
         private void Control_ValueChanged(object sender, EventArgs e)
@@ -68,43 +88,42 @@ namespace pgso
                 }
                 else
                 {
-                    bindingSource.Filter = $"fld_Reservation_Status = '{selectedStatus}'";
+                    bindingSource.Filter = $"fld_Equipment_Status = '{selectedStatus}'";
+
                 }
             }
         }
         private void dt_equipment_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            // Check if the column is one of the numeric columns
+            // Check if the column is the total amount column
             if (dt_equipment.Columns[e.ColumnIndex].Name == "fld_Total_Amount")
             {
                 if (e.Value != null && decimal.TryParse(e.Value.ToString(), out decimal value))
                 {
-                    e.Value = value.ToString("N0"); // Format as comma-separated with no decimal places
+                    e.Value = "₱" + value.ToString("N2"); // New line with peso sign
                     e.FormattingApplied = true;
                 }
-
             }
         }
         private void dt_equipment_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) // Ensure the row index is valid
+            if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dt_equipment.Rows[e.RowIndex];
 
-                // Populate the basic information
                 txt_CN.Text = row.Cells["fld_Control_number"].Value.ToString();
-                txt_Status.Text = row.Cells["fld_Reservation_Status"].Value.ToString();
-                txt_Equipment_Name.Text = row.Cells["fld_Equipment_Name"].Value.ToString(); // Display only the selected equipment
-                txt_Quantity.Text = row.Cells["fld_Quantity"].Value.ToString(); // Display the quantity for the selected equipment
+                txt_Status.Text = row.Cells["fld_Equipment_Status"].Value.ToString();
+                txt_Equipment_Name.Text = row.Cells["fld_Equipment_Name"].Value.ToString();
+                txt_Quantity.Text = row.Cells["fld_Quantity"].Value.ToString();
 
-                // Fetch and display additional information
                 string controlNumber = row.Cells["fld_Control_number"].Value.ToString();
                 string equipmentName = row.Cells["fld_Equipment_Name"].Value.ToString();
                 FetchAndDisplayAdditionalInfo(controlNumber, equipmentName);
+
+                btn_Update.Enabled = false; // Reset after loading data
             }
-
         }
-
+        //display in the panel
         private void FetchAndDisplayAdditionalInfo(string controlNumber, string equipmentName)
         {
             try
@@ -113,29 +132,28 @@ namespace pgso
                     db.strCon.Open();
 
                 string query = @"
-                    SELECT 
-                        rp.fld_First_Name, 
-                        rp.fld_Surname,
-                        rp.fld_Requesting_Office,
-                        rp.fld_Requesting_Person_Address,
-                        r.fld_Start_Date,
-                        r.fld_End_Date,
-                        r.fld_Start_Time,
-                        r.fld_End_Time,
-                        r.fld_Activity_Name,
-                        r.fld_Reservation_Type,
-                        rpe.fld_Quantity,
-                        rpe.fld_Total_Equipment_Cost
-                    FROM 
-                        tbl_Reservation r
-                    LEFT JOIN 
-                        tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-                    LEFT JOIN 
-                        tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
-                    LEFT JOIN
-                        tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
-                    WHERE 
-                        r.fld_Control_number = @ControlNumber AND e.fld_Equipment_Name = @EquipmentName";
+            SELECT 
+                rp.fld_First_Name, 
+                rp.fld_Surname,
+                rp.fld_Requesting_Office,
+                rp.fld_Requesting_Person_Address,
+                rpe.fld_Start_Date_Eq,
+                rpe.fld_End_Date_Eq,
+                rpe.fld_Number_Of_Days,
+                r.fld_Activity_Name,
+                r.fld_Reservation_Type,
+                rpe.fld_Quantity,
+                rpe.fld_Total_Equipment_Cost
+            FROM 
+                tbl_Reservation r
+            LEFT JOIN 
+                tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+            LEFT JOIN 
+                tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
+            LEFT JOIN
+                tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
+            WHERE 
+                r.fld_Control_number = @ControlNumber AND e.fld_Equipment_Name = @EquipmentName";
 
                 using (SqlCommand cmd = new SqlCommand(query, db.strCon))
                 {
@@ -149,28 +167,49 @@ namespace pgso
                             // Populate the fields with the specific equipment details
                             txt_Fname.Text = reader["fld_First_Name"].ToString();
                             txt_Sname.Text = reader["fld_Surname"].ToString();
+                            txt_Requesting_Office.Text = reader["fld_Requesting_Office"].ToString();
                             txt_Address.Text = reader["fld_Requesting_Person_Address"].ToString();
-
-                            txt_Date_Start.Text = Convert.ToDateTime(reader["fld_Start_Date"]).ToString("MM/dd/yyyy");
-                            txt_DateEnd.Text = Convert.ToDateTime(reader["fld_End_Date"]).ToString("MM/dd/yyyy");
-
-                            txt_HourStart.Text = DateTime.Today.Add(TimeSpan.Parse(reader["fld_Start_Time"].ToString())).ToString("hh:mm tt");
-                            txt_HourEnd.Text = DateTime.Today.Add(TimeSpan.Parse(reader["fld_End_Time"].ToString())).ToString("hh:mm tt");
-
+                            txt_Number_of_Days.Text = reader["fld_Number_Of_Days"].ToString();
                             txt_Purpose.Text = reader["fld_Activity_Name"].ToString();
                             txt_Quantity.Text = reader["fld_Quantity"].ToString();
 
-                            // Format the total cost with commas
+                            // Format the total cost with peso sign and commas
                             if (decimal.TryParse(reader["fld_Total_Equipment_Cost"].ToString(), out decimal totalCost))
                             {
-                                txt_Total.Text = totalCost.ToString("N0"); // Format as comma-separated with no decimal places
+                                txt_Total.Text = "₱" + totalCost.ToString("N2");
                             }
                             else
                             {
-                                txt_Total.Text = "0"; // Default to 0 if parsing fails
+                                txt_Total.Text = "₱0.00";
                             }
 
                             txt_Reservation_type.Text = reader["fld_Reservation_Type"].ToString();
+
+                            // Get the start and end dates
+                            string startDate = reader["fld_Start_Date_Eq"] != DBNull.Value
+                                ? Convert.ToDateTime(reader["fld_Start_Date_Eq"]).ToString("MM/dd/yyyy")
+                                : null;
+
+                            string endDate = reader["fld_End_Date_Eq"] != DBNull.Value
+                                ? Convert.ToDateTime(reader["fld_End_Date_Eq"]).ToString("MM/dd/yyyy")
+                                : null;
+
+                            // Format the date display
+                            if (!string.IsNullOrEmpty(startDate) && !string.IsNullOrEmpty(endDate) && startDate != endDate)
+                            {
+                                // Display as a date range
+                                txt_Date_Start.Text = $"{startDate} - {endDate}";
+                            }
+                            else if (!string.IsNullOrEmpty(startDate))
+                            {
+                                // Display as a single date
+                                txt_Date_Start.Text = startDate;
+                            }
+                            else
+                            {
+                                // No date available
+                                txt_Date_Start.Text = "N/A";
+                            }
                         }
                     }
                 }
@@ -187,6 +226,7 @@ namespace pgso
         }
 
 
+
         private void RefreshData()
         {
             try
@@ -195,24 +235,34 @@ namespace pgso
                     db.strCon.Open();
 
                 string queryApproved = @"
-            SELECT 
-                r.fld_Control_number, 
-                r.fld_Reservation_Status,
-                e.fld_Equipment_Name,
-                rpe.fld_Quantity,
-                r.fld_Total_Amount,
-                rp.fld_First_Name,
-                rp.fld_Surname
-            FROM 
-                tbl_Reservation r
-            LEFT JOIN
-                tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
-            LEFT JOIN
-                tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
-            LEFT JOIN
-                tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-            WHERE  
-                r.fld_Reservation_Type = 'Equipment'";
+                SELECT 
+                    r.fld_Control_number, 
+                   rpe.fld_Equipment_Status,
+                    r.fld_Created_At,
+rpe.fld_Equipment_Status,
+
+                    e.fld_Equipment_Name,
+                    rpe.fld_Quantity,
+                    r.fld_Total_Amount,
+                     '₱' + CONVERT(VARCHAR, CAST(r.fld_Total_Amount AS MONEY), 1) AS fld_Total_Amount,
+                    rp.fld_First_Name,
+                    rp.fld_Surname,
+                    CASE 
+                        WHEN rpe.fld_Start_Date_Eq = rpe.fld_End_Date_Eq 
+                            THEN FORMAT(rpe.fld_Start_Date_Eq, 'M/d/yyyy')
+                        ELSE 
+                            FORMAT(rpe.fld_Start_Date_Eq, 'M/d/yyyy') + ' - ' + FORMAT(rpe.fld_End_Date_Eq, 'M/d/yyyy')
+                    END AS Date
+                FROM 
+                    tbl_Reservation r
+                LEFT JOIN
+                    tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
+                LEFT JOIN
+                    tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
+                LEFT JOIN
+                    tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                WHERE  
+                    r.fld_Reservation_Type = 'Equipment'";
 
                 LoadData(queryApproved, dt_equipment, "Approved");
             }
@@ -272,8 +322,20 @@ namespace pgso
             }
         }
 
+
         private void btn_Update_Click(object sender, EventArgs e)
         {
+            var result = MessageBox.Show(
+                "Are you sure you want to update?",
+                "Confirm Submission",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+            {
+
+                return; // Cancel submission if user selects No
+            }
             if (string.IsNullOrEmpty(txt_CN.Text))
             {
                 MessageBox.Show("Please select a reservation first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -286,28 +348,32 @@ namespace pgso
                 {
                     connection.Open();
 
-                    string reservationQuery = @"
-                        UPDATE tbl_Reservation 
-                        SET fld_Reservation_Status = @Status
-                        WHERE fld_Control_number = @ControlNumber";
+                    // Update equipment status in tbl_Reservation_Equipment
+                    string equipmentStatusQuery = @"
+                UPDATE tbl_Reservation_Equipment
+                SET fld_Equipment_Status = @Status
+                WHERE fk_ReservationID = (SELECT pk_ReservationID FROM tbl_Reservation WHERE fld_Control_number = @ControlNumber)
+                  AND fk_EquipmentID = (SELECT pk_EquipmentID FROM tbl_Equipment WHERE fld_Equipment_Name = @EquipmentName)";
 
-                    using (var command = new SqlCommand(reservationQuery, connection))
+                    using (var command = new SqlCommand(equipmentStatusQuery, connection))
                     {
                         command.Parameters.AddWithValue("@Status", txt_Status.Text.Trim());
                         command.Parameters.AddWithValue("@ControlNumber", txt_CN.Text.Trim());
+                        command.Parameters.AddWithValue("@EquipmentName", txt_Equipment_Name.Text.Trim());
                         command.ExecuteNonQuery();
                     }
 
+                    // Update requesting person details
                     string personQuery = @"
-                        UPDATE tbl_Requesting_Person
-                        SET fld_First_Name = @FirstName,
-                            fld_Surname = @LastName,
-                            fld_Requesting_Office = @RequestingOffice,
-                            fld_Requesting_Person_Address = @Address
-                        WHERE pk_Requesting_PersonID = 
-                            (SELECT fk_Requesting_PersonID 
-                             FROM tbl_Reservation 
-                             WHERE fld_Control_number = @ControlNumber)";
+                UPDATE tbl_Requesting_Person
+                SET fld_First_Name = @FirstName,
+                    fld_Surname = @LastName,
+                    fld_Requesting_Office = @RequestingOffice,
+                    fld_Requesting_Person_Address = @Address
+                WHERE pk_Requesting_PersonID = 
+                    (SELECT fk_Requesting_PersonID 
+                     FROM tbl_Reservation 
+                     WHERE fld_Control_number = @ControlNumber)";
 
                     using (var command = new SqlCommand(personQuery, connection))
                     {
@@ -338,6 +404,26 @@ namespace pgso
         }
 
         private void txt_Total_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dt_equipment_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void txt_Number_of_Days_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_Address_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_Requesting_Office_TextChanged(object sender, EventArgs e)
         {
 
         }

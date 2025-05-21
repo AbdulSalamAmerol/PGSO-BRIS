@@ -29,51 +29,39 @@
         private void InitializeComponent()
         {
             this.lblDays = new System.Windows.Forms.Label();
-            this.combo_Venues = new System.Windows.Forms.ComboBox();
-            this.combo_Equipments = new System.Windows.Forms.ComboBox();
+            this.lbl_Reservations = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblDays
             // 
             this.lblDays.AutoSize = true;
-            this.lblDays.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDays.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDays.Location = new System.Drawing.Point(3, 0);
             this.lblDays.Name = "lblDays";
-            this.lblDays.Size = new System.Drawing.Size(32, 22);
+            this.lblDays.Size = new System.Drawing.Size(32, 23);
             this.lblDays.TabIndex = 0;
             this.lblDays.Text = "00";
             // 
-            // combo_Venues
+            // lbl_Reservations
             // 
-            this.combo_Venues.BackColor = System.Drawing.Color.Honeydew;
-            this.combo_Venues.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.combo_Venues.FormattingEnabled = true;
-            this.combo_Venues.Location = new System.Drawing.Point(21, 25);
-            this.combo_Venues.Name = "combo_Venues";
-            this.combo_Venues.Size = new System.Drawing.Size(142, 25);
-            this.combo_Venues.TabIndex = 3;
-            // 
-            // combo_Equipments
-            // 
-            this.combo_Equipments.BackColor = System.Drawing.Color.AliceBlue;
-            this.combo_Equipments.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.combo_Equipments.FormattingEnabled = true;
-            this.combo_Equipments.Location = new System.Drawing.Point(21, 56);
-            this.combo_Equipments.Name = "combo_Equipments";
-            this.combo_Equipments.Size = new System.Drawing.Size(142, 25);
-            this.combo_Equipments.TabIndex = 4;
+            this.lbl_Reservations.AutoSize = true;
+            this.lbl_Reservations.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Reservations.Location = new System.Drawing.Point(4, 22);
+            this.lbl_Reservations.Name = "lbl_Reservations";
+            this.lbl_Reservations.Size = new System.Drawing.Size(22, 17);
+            this.lbl_Reservations.TabIndex = 5;
+            this.lbl_Reservations.Text = "00";
             // 
             // UserControlDays
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.MistyRose;
-            this.Controls.Add(this.combo_Equipments);
-            this.Controls.Add(this.combo_Venues);
+            this.BackColor = System.Drawing.Color.LightBlue;
+            this.Controls.Add(this.lbl_Reservations);
             this.Controls.Add(this.lblDays);
             this.Name = "UserControlDays";
             this.Size = new System.Drawing.Size(195, 104);
-            this.Load += new System.EventHandler(this.UserControlDays_Load_1);
+            this.Load += new System.EventHandler(this.UserControlDays_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -82,7 +70,6 @@
         #endregion
 
         private System.Windows.Forms.Label lblDays;
-        private System.Windows.Forms.ComboBox combo_Venues;
-        private System.Windows.Forms.ComboBox combo_Equipments;
+        private System.Windows.Forms.Label lbl_Reservations;
     }
 }

@@ -17,6 +17,8 @@ namespace pgso
         private DataTable dt = new DataTable();
         private List<DateTime> reservedDates;
         private List<SelectedEquipment> selectedEquipmentList = new List<SelectedEquipment>();
+        private string contactPlaceholder = "09685744...";
+        private bool isContactPlaceholderActive = true;
 
         public class SelectedEquipment
         {
@@ -29,27 +31,33 @@ namespace pgso
         }
         public frm_Create_Equipment_Reservation()
         {
+    
+
             InitializeComponent();
             InitializeFormComponents();
             InitializeDataGridView();
             LoadUtilities();
             txt_Control_Num.Text = GenerateControlNumber();
+            combo_Origin.DropDownStyle = ComboBoxStyle.DropDownList;
+            combo_Utility.DropDownStyle = ComboBoxStyle.DropDownList;
+            // Set placeholder for txt_Contact
+            SetContactPlaceholder();
+            txt_Contact.Enter += Txt_Contact_Enter;
+            txt_Contact.Leave += Txt_Contact_Leave;
 
         }
 
         private void InitializeFormComponents()
         {
-            Time_Start.Format = DateTimePickerFormat.Custom;
-            Time_Start.CustomFormat = "hh:mm tt";
-            Time_End.Format = DateTimePickerFormat.Custom;
-            Time_End.CustomFormat = "hh:mm tt";
+         
 
             // Set the minimum date to the current date for both Date_Start and Date_End
             Date_Start.MinDate = DateTime.Now.Date;
             Date_End.MinDate = DateTime.Now.Date;
 
-         
 
+
+            txt_Contact.TextChanged += txt_Contact_TextChanged;
 
             combo_Origin.Items.Add("Call");
             combo_Origin.Items.Add("Letter");
@@ -64,7 +72,7 @@ namespace pgso
 
             Date_Start.Value = DateTime.Now;
             Date_End.Value = DateTime.Now;
-
+           // btn_Remove.Enabled = false;
             CalculateNumberOfDays();
         }
 
@@ -113,7 +121,8 @@ namespace pgso
                     "SELECT MAX(fld_Control_Number) FROM tbl_Reservation " +
                     "WHERE fld_Control_Number LIKE 'CN-___-" + currentYear + "'", conn);
 
-                string lastControlNumber = (string)cmd.ExecuteScalar();
+                object result = cmd.ExecuteScalar();
+                string lastControlNumber = result != DBNull.Value && result != null ? result.ToString() : null;
 
                 int nextNumber = 1; // Default if no records exist
 
@@ -143,6 +152,36 @@ namespace pgso
             finally
             {
                 DBClose();
+            }
+        }
+
+        private void SetContactPlaceholder()
+        {
+            txt_Contact.Text = contactPlaceholder;
+            txt_Contact.ForeColor = System.Drawing.Color.Gray;
+            isContactPlaceholderActive = true;
+        }
+
+        private void RemoveContactPlaceholder()
+        {
+            if (isContactPlaceholderActive)
+            {
+                txt_Contact.Text = "";
+                txt_Contact.ForeColor = System.Drawing.Color.Black;
+                isContactPlaceholderActive = false;
+            }
+        }
+
+        private void Txt_Contact_Enter(object sender, EventArgs e)
+        {
+            RemoveContactPlaceholder();
+        }
+
+        private void Txt_Contact_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txt_Contact.Text))
+            {
+                SetContactPlaceholder();
             }
         }
 
@@ -334,17 +373,20 @@ namespace pgso
         {
             dgv_Selected_Equipments.Rows.Clear();
 
+            int itemNumber = 1;
             foreach (var item in selectedEquipmentList)
             {
                 dgv_Selected_Equipments.Rows.Add(
+                    itemNumber, // Item number
                     item.EquipmentName,
                     item.Quantity,
                     item.NumDays,
-                   // item.Rate.ToString("0.00"),
-                    item.CalculatedTotal.ToString("0.00")
+                    item.CalculatedTotal.ToString("N2")
                 );
+                itemNumber++;
             }
         }
+
 
         private void btn_RemoveEquipment_Click(object sender, EventArgs e)
         {
@@ -361,6 +403,32 @@ namespace pgso
 
         private void btn_submit_Click_1(object sender, EventArgs e)
         {
+            var result = MessageBox.Show(
+                "Are you sure you want to submit?",
+                "Confirm Submission",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+            {
+                return; // Cancel submission if user selects No
+            }
+            // First check all equipment for zero stock
+            foreach (var equipment in selectedEquipmentList)
+            {
+                int remainingStock = GetRemainingStock(equipment.EquipmentID);
+                if (remainingStock == 0)
+                {
+                    MessageBox.Show($"Cannot submit reservation. {equipment.EquipmentName} now has zero remaining stock.");
+                    return;
+                }
+
+                if (equipment.Quantity > remainingStock)
+                {
+                    MessageBox.Show($"Cannot submit reservation. The quantity for {equipment.EquipmentName} exceeds the remaining stock of {remainingStock}.");
+                    return;
+                }
+            }
             if (selectedEquipmentList.Count == 0)
             {
                 MessageBox.Show("Please add at least one equipment");
@@ -380,32 +448,30 @@ namespace pgso
                 DBConnect();
                 transaction = conn.BeginTransaction();
 
-                if (Time_Start.Value.TimeOfDay >= Time_End.Value.TimeOfDay)
-                {
-                    MessageBox.Show("Start time must be before end time.");
-                    return;
-                }
 
-                // Calculate the total amount from the DataGridView
+                // Calculate total amount from DataGridView
                 decimal totalAmount = 0;
                 foreach (DataGridViewRow row in dgv_Selected_Equipments.Rows)
                 {
                     if (row.Cells["Total"].Value != null)
                     {
-                        totalAmount += Convert.ToDecimal(row.Cells["Total"].Value);
+                        // Remove commas before converting
+                        string value = row.Cells["Total"].Value.ToString().Replace(",", "");
+                        totalAmount += Convert.ToDecimal(value);
                     }
                 }
 
                 // Insert Requesting Person
                 cmd = new SqlCommand(@"
-        INSERT INTO tbl_Requesting_Person 
-        (fld_Surname, fld_First_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office) 
-        OUTPUT INSERTED.pk_Requesting_PersonID 
-        VALUES (@Surname, @FirstName, @Address, @ContactNumber, @RequestOrigin, @RequestingOffice)",
-                    conn, transaction);
+                    INSERT INTO tbl_Requesting_Person 
+                    (fld_Surname, fld_First_Name, fld_Middle_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office) 
+                    OUTPUT INSERTED.pk_Requesting_PersonID 
+                    VALUES (@Surname, @FirstName, @MiddleName, @Address, @ContactNumber, @RequestOrigin, @RequestingOffice)",
+                  conn, transaction);
 
                 cmd.Parameters.AddWithValue("@Surname", txt_Surname.Text);
                 cmd.Parameters.AddWithValue("@FirstName", txt_First_Name.Text);
+                cmd.Parameters.AddWithValue("@MiddleName", txt_Middle_Name.Text);
                 cmd.Parameters.AddWithValue("@Address", txt_Address.Text);
                 cmd.Parameters.AddWithValue("@ContactNumber", txt_Contact.Text);
                 cmd.Parameters.AddWithValue("@RequestOrigin", combo_Origin.Text);
@@ -413,46 +479,43 @@ namespace pgso
 
                 int personID = (int)cmd.ExecuteScalar();
 
-                // Insert Reservation with the total amount from the DataGridView
+                // Insert Reservation (without start date, end date, status)
                 cmd = new SqlCommand(@"
-        INSERT INTO tbl_Reservation 
-        (fld_Control_Number, fld_Reservation_Type, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_time, fld_Activity_Name, fld_Number_Of_Participants, fld_Reservation_Status, fld_Total_Amount, fk_Requesting_PersonID) 
-        OUTPUT INSERTED.pk_ReservationID 
-        VALUES (@fld_Control_Number, @fld_Reservation_Type, @fld_Start_Date, @fld_End_Date, @fld_Start_Time, @fld_End_time, @fld_Activity_Name, @fld_Number_Of_Participants, @fld_Reservation_Status, @fld_Total_Amount, @Requesting_PersonID)",
+                INSERT INTO tbl_Reservation 
+                (fld_Control_Number, fld_Reservation_Type, fld_Activity_Name, fld_Number_Of_Participants, fld_Created_At, fld_Total_Amount, fk_Requesting_PersonID) 
+                OUTPUT INSERTED.pk_ReservationID 
+                VALUES (@fld_Control_Number, @fld_Reservation_Type, @fld_Activity_Name, @fld_Number_Of_Participants, @Created_At, @fld_Total_Amount, @Requesting_PersonID)",
                     conn, transaction);
 
                 cmd.Parameters.AddWithValue("@fld_Control_Number", txt_Control_Num.Text);
                 cmd.Parameters.AddWithValue("@fld_Reservation_Type", "Equipment");
-                cmd.Parameters.AddWithValue("@fld_Start_Date", Date_Start.Value);
-                cmd.Parameters.AddWithValue("@fld_End_Date", Date_End.Value);
-                cmd.Parameters.AddWithValue("@fld_Start_Time", Time_Start.Value.TimeOfDay);
-                cmd.Parameters.AddWithValue("@fld_End_time", Time_End.Value.TimeOfDay);
+
                 cmd.Parameters.AddWithValue("@fld_Activity_Name", txt_Activity.Text);
                 cmd.Parameters.AddWithValue("@fld_Number_Of_Participants", "00");
-                cmd.Parameters.AddWithValue("@fld_Reservation_Status", "Pending");
-                cmd.Parameters.AddWithValue("@fld_Total_Amount", totalAmount); // Use the total amount from the DataGridView
+                cmd.Parameters.AddWithValue("@fld_Total_Amount", totalAmount);
                 cmd.Parameters.AddWithValue("@Requesting_PersonID", personID);
+                cmd.Parameters.AddWithValue("@Created_At", DateTime.Now); // <-- Current Date and Time
 
                 int reservationID = (int)cmd.ExecuteScalar();
 
-                // Insert each equipment reservation and update available quantity
+                // Insert equipment reservation and update stock
                 foreach (var equipment in selectedEquipmentList)
                 {
                     // Get pricing ID
                     cmd = new SqlCommand(@"
-            SELECT pk_Equipment_PricingID 
-            FROM tbl_Equipment_Pricing 
-            WHERE fk_EquipmentID = @FacilityID",
+                SELECT pk_Equipment_PricingID 
+                FROM tbl_Equipment_Pricing 
+                WHERE fk_EquipmentID = @FacilityID",
                         conn, transaction);
 
                     cmd.Parameters.AddWithValue("@FacilityID", equipment.EquipmentID);
                     int venuePricingID = (int)cmd.ExecuteScalar();
 
-                    // Insert equipment
+                    // Insert into tbl_Reservation_Equipment with dates and status
                     cmd = new SqlCommand(@"
-            INSERT INTO tbl_Reservation_Equipment 
-            (fk_ReservationID, fk_EquipmentID, fk_Equipment_PricingID, fld_Quantity, fld_Number_Of_Days, fld_Total_Equipment_Cost) 
-            VALUES (@fk_ReservationID, @fk_EquipmentID, @fk_Equipment_PricingID, @fld_Quantity, @fld_Number_Of_Days, @fld_Total_Equipment_Cost)",
+                INSERT INTO tbl_Reservation_Equipment 
+                (fk_ReservationID, fk_EquipmentID, fk_Equipment_PricingID, fld_Quantity, fld_Number_Of_Days, fld_Total_Equipment_Cost, fld_Start_Date_Eq, fld_End_Date_Eq, fld_Equipment_Status) 
+                VALUES (@fk_ReservationID, @fk_EquipmentID, @fk_Equipment_PricingID, @fld_Quantity, @fld_Number_Of_Days, @fld_Total_Equipment_Cost, @fld_Start_Date_Eq, @fld_End_Date_Eq, @fld_Equipment_Status)",
                         conn, transaction);
 
                     cmd.Parameters.AddWithValue("@fk_ReservationID", reservationID);
@@ -460,15 +523,18 @@ namespace pgso
                     cmd.Parameters.AddWithValue("@fk_Equipment_PricingID", venuePricingID);
                     cmd.Parameters.AddWithValue("@fld_Quantity", equipment.Quantity);
                     cmd.Parameters.AddWithValue("@fld_Number_Of_Days", txt_Days_Of_Use.Text);
-                    cmd.Parameters.AddWithValue("@fld_Total_Equipment_Cost", equipment.CalculatedTotal); // Include total cost
+                    cmd.Parameters.AddWithValue("@fld_Total_Equipment_Cost", equipment.CalculatedTotal);
+                    cmd.Parameters.AddWithValue("@fld_Start_Date_Eq", Date_Start.Value);
+                    cmd.Parameters.AddWithValue("@fld_End_Date_Eq", Date_End.Value);
+                    cmd.Parameters.AddWithValue("@fld_Equipment_Status", "Pending");
 
                     cmd.ExecuteNonQuery();
 
-                    // Update available quantity in tbl_Equipment
+                    // Update available quantity
                     cmd = new SqlCommand(@"
-            UPDATE tbl_Equipment 
-            SET fld_Total_Stock = fld_Total_Stock - @Quantity 
-            WHERE pk_EquipmentID = @EquipmentID",
+                UPDATE tbl_Equipment 
+                SET fld_Remaining_Stock = fld_Remaining_Stock - @Quantity 
+                WHERE pk_EquipmentID = @EquipmentID",
                         conn, transaction);
 
                     cmd.Parameters.AddWithValue("@Quantity", equipment.Quantity);
@@ -479,13 +545,12 @@ namespace pgso
 
                 transaction.Commit();
                 MessageBox.Show("Reservation submitted successfully!");
-
-                // Clear form after successful submission
+                this.Close();
+                // Clear form
                 selectedEquipmentList.Clear();
                 UpdateSelectedEquipmentDisplay();
                 ClearForm();
                 RefreshCalendarView();
-                // Refresh the control number
                 txt_Control_Num.Text = GenerateControlNumber();
             }
             catch (SqlException ex)
@@ -512,12 +577,13 @@ namespace pgso
         }
 
 
+
         private void RefreshCalendarView()
         {
             // Find all open calendar forms and refresh them
             foreach (Form form in Application.OpenForms)
             {
-                if (form is frm_Calendar_Venue calendarForm)
+                if (form is frm_Calendar calendarForm)
                 {
                     if (calendarForm.InvokeRequired)
                     {
@@ -541,6 +607,7 @@ namespace pgso
             txt_Surname.Text = "";
             txt_First_Name.Text = "";
             txt_Address.Text = "";
+            txt_Middle_Name.Text = "";
             txt_Contact.Text = "";
             txt_Requesting_Office.Text = "";
             txt_Activity.Text = "";
@@ -552,8 +619,7 @@ namespace pgso
             combo_Utility.SelectedIndex = -1;
             Date_Start.Value = DateTime.Now;
             Date_End.Value = DateTime.Now;
-            Time_Start.Value = DateTime.Now;
-            Time_End.Value = DateTime.Now;
+
         }
 
         private bool IsValidContactNumber(string contactNumber)
@@ -587,39 +653,69 @@ namespace pgso
         private void frm_createutilityreservation_Load(object sender, EventArgs e)
         {
             // Form load logic if needed
+            DisableManualInput(Date_Start);
+            DisableManualInput(Date_End);
         }
-
+        private void DisableManualInput(DateTimePicker dateTimePicker)
+        {
+            dateTimePicker.ShowUpDown = false; // Ensure dropdown calendar is shown
+            dateTimePicker.KeyPress += (s, e) => e.Handled = true; // Suppress key presses
+            dateTimePicker.KeyDown += (s, e) => e.Handled = true; // Suppress key down events
+        }
         private void btn_AddEquipment_Click_1(object sender, EventArgs e)
         {
+            // Validate equipment selection
             if (combo_Utility.SelectedValue == null || string.IsNullOrEmpty(txt_Quantity.Text))
             {
                 MessageBox.Show("Please select equipment and enter quantity");
                 return;
             }
 
+            // Parse equipment ID
             if (!int.TryParse(combo_Utility.SelectedValue.ToString(), out int equipmentId))
             {
                 MessageBox.Show("Invalid equipment selected");
                 return;
             }
 
+            // Parse quantity (this was missing in your code)
             if (!int.TryParse(txt_Quantity.Text, out int quantity) || quantity <= 0)
             {
-                MessageBox.Show("Invalid quantity");
+                MessageBox.Show("Please enter a valid quantity (must be a positive number)");
                 return;
             }
 
-            string equipmentName = combo_Utility.Text;
-            decimal rate = decimal.Parse(txt_Total.Tag.ToString());
-            decimal totalAmount = decimal.Parse(txt_Total.Text);
+            // Check remaining stock
+            int remainingStock = GetRemainingStock(equipmentId);
+            if (remainingStock <= 0)
+            {
+                MessageBox.Show("This equipment has no remaining stock and cannot be reserved.");
+                return;
+            }
 
+            // Validate quantity against remaining stock
+            if (quantity > remainingStock)
+            {
+                MessageBox.Show($"The quantity exceeds the remaining stock of this equipment. Only {remainingStock} items are available.");
+                return;
+            }
+
+            // Parse numeric values safely
+            if (!decimal.TryParse(txt_Total.Tag.ToString(), out decimal rate) ||
+                !decimal.TryParse(txt_Total.Text, out decimal totalAmount) ||
+                !decimal.TryParse(txt_Days_Of_Use.Text, out decimal numDays))
+            {
+                MessageBox.Show("Invalid numeric values detected");
+                return;
+            }
+
+            // Add to selected equipment list
             selectedEquipmentList.Add(new SelectedEquipment
             {
                 EquipmentID = equipmentId,
-                EquipmentName = equipmentName,
+                EquipmentName = combo_Utility.Text,
                 Quantity = quantity,
-                //Rate = rate,
-                NumDays = decimal.Parse(txt_Days_Of_Use.Text),
+                NumDays = numDays,
                 CalculatedTotal = totalAmount
             });
 
@@ -638,12 +734,15 @@ namespace pgso
 
         private void txt_Price_Subsequent_TextChanged(object sender, EventArgs e)
         {
+            txt_Price_Subsequent.TextChanged -= txt_Price_Subsequent_TextChanged;
+            FormatCurrencyTextBox(txt_Price_Subsequent);
+            txt_Price_Subsequent.TextChanged += txt_Price_Subsequent_TextChanged;
+
             CalculateTotalAmount();
         }
 
         private void Date_Start_ValueChanged(object sender, EventArgs e)
         {
-
         }
 
         private void btn_clearform_Click(object sender, EventArgs e)
@@ -666,8 +765,7 @@ namespace pgso
             // Reset DateTimePickers to current date and time
             Date_Start.Value = DateTime.Now;
             Date_End.Value = DateTime.Now;
-            Time_Start.Value = DateTime.Now;
-            Time_End.Value = DateTime.Now;
+
 
             // Refresh the control number
             txt_Control_Num.Text = GenerateControlNumber();
@@ -775,6 +873,31 @@ namespace pgso
         {
             // Enable the Remove button if any row is selected
             //btn_Remove.Enabled = dgv_Selected_Equipments.SelectedRows.Count > 0;
+        }
+
+
+        private void txt_Total_TextChanged(object sender, EventArgs e)
+        {
+            txt_Total.TextChanged -= txt_Total_TextChanged;
+            FormatCurrencyTextBox(txt_Total);
+            txt_Total.TextChanged += txt_Total_TextChanged;
+        }
+        private void FormatCurrencyTextBox(TextBox textBox)
+        {
+            // Remove commas and try to parse the value
+            if (decimal.TryParse(textBox.Text.Replace(",", ""), out decimal value))
+                textBox.Text = value.ToString("N2");
+            textBox.SelectionStart = textBox.Text.Length; // Keep caret at end
+        }
+
+        private void txt_Contact_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_Contact.Text.Length > 11)
+            {
+                MessageBox.Show("Only 11 characters are allowed for the contact number.", "Input Limit", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txt_Contact.Text = txt_Contact.Text.Substring(0, 11);
+                txt_Contact.SelectionStart = txt_Contact.Text.Length; // Keep caret at end
+            }
         }
     }
 }

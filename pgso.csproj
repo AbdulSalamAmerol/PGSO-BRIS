@@ -160,11 +160,11 @@
     <Compile Include="frm_Calendar_Equipments.Designer.cs">
       <DependentUpon>frm_Calendar_Equipments.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_Calendar_Venue.cs">
+    <Compile Include="frm_Calendar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_Calendar_Venue.Designer.cs">
-      <DependentUpon>frm_Calendar_Venue.cs</DependentUpon>
+    <Compile Include="frm_Calendar.Designer.cs">
+      <DependentUpon>frm_Calendar.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_Equipment.cs">
       <SubType>Form</SubType>
@@ -252,8 +252,8 @@
     <EmbeddedResource Include="frm_Calendar_Equipments.resx">
       <DependentUpon>frm_Calendar_Equipments.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_Calendar_Venue.resx">
-      <DependentUpon>frm_Calendar_Venue.cs</DependentUpon>
+    <EmbeddedResource Include="frm_Calendar.resx">
+      <DependentUpon>frm_Calendar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Equipment.resx">
       <DependentUpon>frm_Equipment.cs</DependentUpon>
