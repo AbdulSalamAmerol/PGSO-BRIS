@@ -674,5 +674,107 @@ namespace pgso
 
             // Optionally, reset any other controls as needed
         }
+
+        private int GetRemainingStock(int equipmentId)
+        {
+            try
+            {
+                DBConnect();
+                string query = "SELECT fld_Remaining_Stock FROM tbl_Equipment WHERE pk_EquipmentID = @EquipmentID";
+                cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@EquipmentID", equipmentId);
+
+                object result = cmd.ExecuteScalar();
+                int stock = result != null ? Convert.ToInt32(result) : 0;
+                return stock > 0 ? stock : 0; // Return 0 if stock is negative
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error checking remaining stock: " + ex.Message);
+                return 0;
+            }
+            finally
+            {
+                DBClose();
+            }
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_Quantity_TextChanged_1(object sender, EventArgs e)
+        {
+            CalculateTotalAmount();
+
+            if (combo_Utility.SelectedValue != null && !string.IsNullOrEmpty(txt_Quantity.Text))
+            {
+                if (int.TryParse(combo_Utility.SelectedValue.ToString(), out int equipmentId) &&
+                    int.TryParse(txt_Quantity.Text, out int quantity))
+                {
+                    int remainingStock = GetRemainingStock(equipmentId);
+
+                    if (quantity > remainingStock)
+                    {
+                        string availableStock = remainingStock > 0 ? remainingStock.ToString() : "0";
+                        MessageBox.Show($"The quantity exceeds the remaining stock of this equipment. Only {availableStock} items are available.");
+                        txt_Quantity.Text = availableStock;
+                        txt_Quantity.SelectAll();
+                        txt_Quantity.Focus();
+                    }
+                }
+            }
+        }
+
+        private void label22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void combo_Origin_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            combo_Origin.DropDownStyle = ComboBoxStyle.DropDownList;
+
+        }
+
+        private void combo_Utility_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            combo_Utility.DropDownStyle = ComboBoxStyle.DropDownList;
+
+        }
+
+        //remove the selected row in the datagridview
+        private void btn_Remove_Click(object sender, EventArgs e)
+        {
+            if (dgv_Selected_Equipments.SelectedRows.Count > 0)
+            {
+                int selectedIndex = dgv_Selected_Equipments.SelectedRows[0].Index;
+                if (selectedIndex >= 0 && selectedIndex < selectedEquipmentList.Count)
+                {
+                    selectedEquipmentList.RemoveAt(selectedIndex);
+                    dgv_Selected_Equipments.Rows.RemoveAt(selectedIndex);
+
+                    // Disable Remove button if no rows are left
+                    btn_Remove.Enabled = dgv_Selected_Equipments.Rows.Count > 0;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to remove.");
+            }
+        }
+
+        //enable the btnremove after clicking the cell
+        private void dgv_Selected_Equipments_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Enable the Remove button if any row is selected
+            //btn_Remove.Enabled = dgv_Selected_Equipments.SelectedRows.Count > 0;
+        }
     }
 }
