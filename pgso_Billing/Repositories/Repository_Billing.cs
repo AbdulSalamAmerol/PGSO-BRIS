@@ -2401,7 +2401,7 @@ namespace pgso.Billing.Repositories
             SELECT TOP 1 fld_Aircon
             FROM tbl_Venue_Pricing
             WHERE fk_VenueID = @VenueID AND fk_Venue_ScopeID = @ScopeID
-            ORDER BY fld_Aircon DESC"; // Prefer Aircon=true if multiple exist
+            ORDER BY fld_Aircon DESC"; 
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
