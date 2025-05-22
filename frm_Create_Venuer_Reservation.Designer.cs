@@ -291,6 +291,7 @@ namespace pgso
             this.txt_Succeeding_Hour.ReadOnly = true;
             this.txt_Succeeding_Hour.Size = new System.Drawing.Size(178, 24);
             this.txt_Succeeding_Hour.TabIndex = 58;
+            this.txt_Succeeding_Hour.TextChanged += new System.EventHandler(this.txt_Succeeding_Hour_TextChanged);
             // 
             // label24
             // 

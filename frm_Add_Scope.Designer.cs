@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.combo_Venue = new System.Windows.Forms.ComboBox();
-            this.txt_Scope_Name = new System.Windows.Forms.TextBox();
             this.tbn_Save = new System.Windows.Forms.Button();
             this.combo_Rate_Type = new System.Windows.Forms.ComboBox();
             this.txt_First4Hrs_Rate = new System.Windows.Forms.TextBox();
@@ -44,6 +43,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.combo_Scope = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // combo_Venue
@@ -56,16 +56,6 @@
             this.combo_Venue.Name = "combo_Venue";
             this.combo_Venue.Size = new System.Drawing.Size(172, 25);
             this.combo_Venue.TabIndex = 0;
-            // 
-            // txt_Scope_Name
-            // 
-            this.txt_Scope_Name.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_Scope_Name.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Scope_Name.Location = new System.Drawing.Point(150, 39);
-            this.txt_Scope_Name.Name = "txt_Scope_Name";
-            this.txt_Scope_Name.Size = new System.Drawing.Size(172, 23);
-            this.txt_Scope_Name.TabIndex = 1;
             // 
             // tbn_Save
             // 
@@ -237,12 +227,22 @@
             this.label7.TabIndex = 17;
             this.label7.Text = "With Aircon:";
             // 
+            // combo_Scope
+            // 
+            this.combo_Scope.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.combo_Scope.FormattingEnabled = true;
+            this.combo_Scope.Location = new System.Drawing.Point(150, 37);
+            this.combo_Scope.Name = "combo_Scope";
+            this.combo_Scope.Size = new System.Drawing.Size(172, 25);
+            this.combo_Scope.TabIndex = 18;
+            // 
             // frm_Add_Scope
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MediumAquamarine;
             this.ClientSize = new System.Drawing.Size(338, 254);
+            this.Controls.Add(this.combo_Scope);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -257,7 +257,6 @@
             this.Controls.Add(this.txt_First4Hrs_Rate);
             this.Controls.Add(this.combo_Rate_Type);
             this.Controls.Add(this.tbn_Save);
-            this.Controls.Add(this.txt_Scope_Name);
             this.Controls.Add(this.combo_Venue);
             this.Name = "frm_Add_Scope";
             this.Text = "Add Venue Scope";
@@ -270,7 +269,6 @@
         #endregion
 
         private System.Windows.Forms.ComboBox combo_Venue;
-        private System.Windows.Forms.TextBox txt_Scope_Name;
         private System.Windows.Forms.Button tbn_Save;
         private System.Windows.Forms.ComboBox combo_Rate_Type;
         private System.Windows.Forms.TextBox txt_First4Hrs_Rate;
@@ -285,5 +283,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox combo_Scope;
     }
 }

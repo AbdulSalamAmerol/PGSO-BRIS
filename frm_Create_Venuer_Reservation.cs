@@ -19,6 +19,9 @@ namespace pgso
         public frm_Create_Venuer_Reservation()
         {
             InitializeComponent();
+           
+            radio_Yes.Checked = false;
+            radio_No.Checked = false;
             txt_contact.MaxLength = 11; // Limit to 12 characters
             txt_rate.TextChanged += FormatDecimalWithCommas;
             txt_Succeeding_Hour.TextChanged += FormatDecimalWithCommas;
@@ -361,21 +364,23 @@ namespace pgso
         {
             combo_venues.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            if (combo_venues.SelectedValue != null)
+            if (combo_venues.SelectedValue != null &&
+                int.TryParse(combo_venues.SelectedValue.ToString(), out selectedVenueID))
             {
-                if (int.TryParse(combo_venues.SelectedValue.ToString(), out selectedVenueID))
+                // Load reservation types and scope for the new venue
+                LoadReservationTypesByVenue(selectedVenueID);
+                LoadVenueScope(selectedVenueID);
+                LoadReservedDates(selectedVenueID);
+
+                // Reset panel state until scope is selected
+                panel_Aircon.Enabled = false;
+                radio_Yes.Checked = false;
+                radio_No.Checked = false;
+
+                // If a scope is already selected, reload rates
+                if (combo_scope.SelectedValue != null)
                 {
-                    LoadReservationTypesByVenue(selectedVenueID);
-                    LoadVenueScope(selectedVenueID);
-                    LoadReservedDates(selectedVenueID);
-
-                    // Check aircon status after loading scope and reservation type
-                    if (IsReservationTypeAndScopeSelected())
-                    {
-                        CheckAirconPanelStatus();
-                    }
-
-
+                    LoadRate();
                 }
             }
         }
@@ -421,103 +426,60 @@ namespace pgso
         {
             try
             {
-                if (!IsReservationTypeAndScopeSelected()) return;
+                if (!IsReservationTypeAndScopeSelected())
+                    return;
 
                 string rateQuery = @"
-            SELECT fld_First4Hrs_Rate, fld_Hourly_Rate 
+            SELECT pk_Venue_PricingID, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Aircon 
             FROM tbl_Venue_Pricing 
-            WHERE fld_Rate_Type = @RateType 
-            AND fk_VenueID = @VenueID 
-            AND fk_Venue_ScopeID = @VenueScopeID ";
-
-                bool? usesAircon = null;
-                if (radio_Yes.Checked)
-                    usesAircon = true;
-                else if (radio_No.Checked)
-                    usesAircon = false;
-
-                if (usesAircon.HasValue)
-                {
-                    rateQuery += "AND fld_Aircon = @UsesAircon";
-                }
-
-                else
-                {
-                    rateQuery += "AND fld_Aircon IS NULL";
-                }
+            WHERE fk_VenueID = @VenueID 
+            AND fk_Venue_ScopeID = @VenueScopeID 
+            AND fld_Rate_Type = @RateType";
 
                 DBConnect();
                 using (SqlCommand rateCmd = new SqlCommand(rateQuery, conn))
                 {
-                    rateCmd.Parameters.AddWithValue("@RateType", combo_ReservationType.SelectedValue.ToString());
                     rateCmd.Parameters.AddWithValue("@VenueID", selectedVenueID);
                     rateCmd.Parameters.AddWithValue("@VenueScopeID", combo_scope.SelectedValue);
-                    if (usesAircon.HasValue)
-                        rateCmd.Parameters.AddWithValue("@UsesAircon", usesAircon.Value);
+                    rateCmd.Parameters.AddWithValue("@RateType", combo_ReservationType.SelectedValue.ToString());
 
                     using (SqlDataReader reader = rateCmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
+                            // Update rates
                             txt_rate.Text = reader["fld_First4Hrs_Rate"].ToString();
                             txt_Succeeding_Hour.Text = reader["fld_Hourly_Rate"].ToString();
+
+                            // Update panel based on fld_Aircon
+                            if (reader["fld_Aircon"] == DBNull.Value)
+                            {
+                                panel_Aircon.Enabled = false;
+                                radio_Yes.Checked = false;
+                                radio_No.Checked = false;
+                            }
+                            else
+                            {
+                                panel_Aircon.Enabled = true;
+                                bool airconValue = (bool)reader["fld_Aircon"];
+                                radio_Yes.Checked = airconValue;
+                                radio_No.Checked = !airconValue;
+                            }
                         }
                         else
                         {
-                            txt_rate.Text = "0.00";
-                            txt_Succeeding_Hour.Text = "0.00";
+                            // No matching record found
+                            panel_Aircon.Enabled = false;
+                            radio_Yes.Checked = false;
+                            radio_No.Checked = false;
                         }
                     }
                 }
-
                 CalculateTotalAmount();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error loading rate: " + ex.Message);
-            }
-            finally
-            {
-                DBClose();
-            }
-        }
-        private void CheckAirconPanelStatus()
-        {
-            // Default to disabled if selections are invalid
-            if (combo_venues.SelectedValue == null || combo_scope.SelectedValue == null || combo_ReservationType.SelectedValue == null)
-            {
-                panel_Aircon.Enabled = false;
-                return;
-            }
-
-            try
-            {
-                DBConnect();
-                int venueID = Convert.ToInt32(combo_venues.SelectedValue);
-                int scopeID = Convert.ToInt32(combo_scope.SelectedValue);
-                string rateType = combo_ReservationType.SelectedValue.ToString();
-
-                string query = @"
-        SELECT fld_Aircon 
-        FROM tbl_Venue_Pricing
-        WHERE fk_VenueID = @VenueID
-          AND fk_Venue_ScopeID = @VenueScopeID
-          AND fld_Rate_Type = @RateType";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@VenueID", venueID);
-                    cmd.Parameters.AddWithValue("@VenueScopeID", scopeID);
-                    cmd.Parameters.AddWithValue("@RateType", rateType);
-
-                    object result = cmd.ExecuteScalar();
-                    panel_Aircon.Enabled = (result != null && result != DBNull.Value);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error checking aircon: " + ex.Message);
-                panel_Aircon.Enabled = false;
             }
             finally
             {
@@ -543,6 +505,8 @@ namespace pgso
             DateTime endDate = date_of_use_end.Value.Date;
             TimeSpan startTime = TimeStart.Value.TimeOfDay;
             TimeSpan endTime = TimeEnd.Value.TimeOfDay;
+
+            // Confirm submission
             var result = MessageBox.Show(
                 "Are you sure you want to submit?",
                 "Confirm Submission",
@@ -553,6 +517,7 @@ namespace pgso
             {
                 return; // Cancel submission if user selects No
             }
+
             // Validate time conflict
             if (HasTimeConflict(startDate, endDate, startTime, endTime, selectedVenueID))
             {
@@ -581,7 +546,7 @@ namespace pgso
             }
 
             // Validate contact number
-            string contactNumber = txt_contact.Text;
+            string contactNumber = isContactPlaceholderActive ? "" : txt_contact.Text;
             if (string.IsNullOrEmpty(contactNumber) || !IsValidContactNumber(contactNumber))
             {
                 MessageBox.Show("Contact number is invalid. Please enter a valid contact number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -590,14 +555,7 @@ namespace pgso
 
             // Calculate total amount
             CalculateTotalAmount();
-
-            decimal initialRate, hourlyRate, totalAmount;
-
-            bool isTotalValid = decimal.TryParse(txt_Total.Text.Replace(",", ""), out totalAmount);
-            bool isRateValid = decimal.TryParse(txt_rate.Text.Replace(",", ""), out initialRate);
-            bool isHourlyValid = decimal.TryParse(txt_Succeeding_Hour.Text.Replace(",", ""), out hourlyRate);
-
-            if (!isTotalValid)
+            if (!decimal.TryParse(txt_Total.Text.Replace(",", ""), out decimal totalAmount))
             {
                 MessageBox.Show("Invalid total amount. Please check the input values.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -612,10 +570,10 @@ namespace pgso
 
                 // Step 1: Insert into tbl_Requesting_Person
                 cmd = new SqlCommand(@"
-        INSERT INTO tbl_Requesting_Person 
-        (fld_Surname, fld_First_Name, fld_Middle_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office) 
-        OUTPUT INSERTED.pk_Requesting_PersonID 
-        VALUES (@Surname, @FirstName, @MiddleName, @Address, @ContactNumber, @RequestOrigin, @Requesting_Office)", conn, transaction);
+INSERT INTO tbl_Requesting_Person 
+(fld_Surname, fld_First_Name, fld_Middle_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office) 
+OUTPUT INSERTED.pk_Requesting_PersonID 
+VALUES (@Surname, @FirstName, @MiddleName, @Address, @ContactNumber, @RequestOrigin, @Requesting_Office)", conn, transaction);
 
                 cmd.Parameters.AddWithValue("@Surname", txt_surname.Text);
                 cmd.Parameters.AddWithValue("@FirstName", txt_firstname.Text);
@@ -627,37 +585,51 @@ namespace pgso
 
                 int personID = (int)cmd.ExecuteScalar();
 
-                // Step 2: Get venue pricing ID
+                // Step 2: Get venue pricing ID (modified to handle NULL fld_Aircon)
                 int venueID = selectedVenueID;
                 int venueScopeID = (int)combo_scope.SelectedValue;
                 string reservationType = combo_ReservationType.SelectedValue.ToString();
-                bool usesAircon = radio_Yes.Checked;
 
-                cmd = new SqlCommand(@"
-        SELECT pk_Venue_PricingID 
-        FROM tbl_Venue_Pricing 
-        WHERE fk_VenueID = @VenueID 
-        AND fk_Venue_ScopeID = @VenueScopeID 
-        AND fld_Rate_Type = @RateType 
-        AND fld_Aircon = @UsesAircon", conn, transaction);
+                string pricingQuery = @"
+SELECT pk_Venue_PricingID 
+FROM tbl_Venue_Pricing 
+WHERE fk_VenueID = @VenueID 
+AND fk_Venue_ScopeID = @VenueScopeID 
+AND fld_Rate_Type = @RateType 
+AND (fld_Aircon = @UsesAircon OR (fld_Aircon IS NULL AND @UsesAircon IS NULL))";
 
+                cmd = new SqlCommand(pricingQuery, conn, transaction);
                 cmd.Parameters.AddWithValue("@VenueID", venueID);
                 cmd.Parameters.AddWithValue("@VenueScopeID", venueScopeID);
                 cmd.Parameters.AddWithValue("@RateType", reservationType);
-                cmd.Parameters.AddWithValue("@UsesAircon", usesAircon);
 
-                int venuePricingID = (int)cmd.ExecuteScalar();
+                // Handle aircon parameter based on panel state
+                if (panel_Aircon.Enabled)
+                {
+                    cmd.Parameters.AddWithValue("@UsesAircon", radio_Yes.Checked);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@UsesAircon", DBNull.Value);
+                }
+
+                object pricingResult = cmd.ExecuteScalar();
+                if (pricingResult == null)
+                {
+                    throw new Exception("Could not find matching pricing record for the selected venue, scope, and aircon combination.");
+                }
+                int venuePricingID = (int)pricingResult;
 
                 // Step 3: Insert into tbl_Reservation
                 cmd = new SqlCommand(@"
-        INSERT INTO tbl_Reservation 
-        (fld_Control_Number, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time, fld_Activity_Name, 
-        fld_Number_Of_Participants, fld_Reservation_Status, fld_Reservation_Type, fld_Total_Amount, 
-        fk_Requesting_PersonID, fk_VenueID, fk_Venue_PricingID, fk_Venue_ScopeID, fld_Created_At) 
-        OUTPUT INSERTED.pk_ReservationID 
-        VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityName, 
-        @NumberOfParticipants, @ReservationStatus, @ReservationType, @TotalAmount, 
-        @RequestingPersonID, @VenueID, @VenuePricingID, @VenueScopeID, @CreatedAt)", conn, transaction);
+INSERT INTO tbl_Reservation 
+(fld_Control_Number, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time, fld_Activity_Name, 
+fld_Number_Of_Participants, fld_Reservation_Status, fld_Reservation_Type, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Total_Amount, 
+fk_Requesting_PersonID, fk_VenueID, fk_Venue_PricingID, fk_Venue_ScopeID, fld_Created_At) 
+OUTPUT INSERTED.pk_ReservationID 
+VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityName, 
+@NumberOfParticipants, @ReservationStatus, @ReservationType, @FirstFourHrs, @SucceedingHrs, @TotalAmount,
+@RequestingPersonID, @VenueID, @VenuePricingID, @VenueScopeID, @CreatedAt)", conn, transaction);
 
                 cmd.Parameters.AddWithValue("@ControlNumber", txt_controlnum.Text);
                 cmd.Parameters.AddWithValue("@StartDate", startDate);
@@ -666,6 +638,10 @@ namespace pgso
                 cmd.Parameters.AddWithValue("@EndTime", endTime);
                 cmd.Parameters.AddWithValue("@ActivityName", txt_activity.Text);
                 cmd.Parameters.AddWithValue("@NumberOfParticipants", num_participants.Value);
+
+                cmd.Parameters.AddWithValue("@SucceedingHrs", decimal.Parse(txt_Succeeding_Hour.Text.Replace(",", "")));
+                cmd.Parameters.AddWithValue("@FirstFourHrs", decimal.Parse(txt_rate.Text.Replace(",", "")));
+
                 cmd.Parameters.AddWithValue("@ReservationStatus", "Pending");
                 cmd.Parameters.AddWithValue("@ReservationType", "Venue");
                 cmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
@@ -679,11 +655,11 @@ namespace pgso
 
                 // Step 4: Insert into tbl_Reservation_Venues
                 using (SqlCommand venueCmd = new SqlCommand(@"
-        INSERT INTO tbl_Reservation_Venues 
-        (fk_ReservationID, fk_VenueID, fk_Venue_ScopeID, fld_Start_Date, fld_End_Date, 
-        fld_Start_Time, fld_End_Time, fld_Total_Amount, fld_Participants) 
-        VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate, 
-                @StartTime, @EndTime, @TotalAmount, @Participants)", conn, transaction))
+INSERT INTO tbl_Reservation_Venues 
+(fk_ReservationID, fk_VenueID, fk_Venue_ScopeID, fld_Start_Date, fld_End_Date, 
+fld_Start_Time, fld_End_Time, fld_Total_Amount, fld_Participants) 
+VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate, 
+        @StartTime, @EndTime, @TotalAmount, @Participants)", conn, transaction))
                 {
                     venueCmd.Parameters.AddWithValue("@ReservationID", reservationID);
                     venueCmd.Parameters.AddWithValue("@VenueID", venueID);
@@ -768,9 +744,18 @@ namespace pgso
         }
         private void combo_scope_SelectedIndexChanged(object sender, EventArgs e)
         {
+            combo_scope.DropDownStyle = ComboBoxStyle.DropDownList;
+
             if (IsReservationTypeAndScopeSelected())
             {
-                LoadRate();
+                LoadRate(); // This will update panel_Aircon based on fld_Aircon
+            }
+            else
+            {
+                // No valid selection yet - disable panel
+                panel_Aircon.Enabled = false;
+                radio_Yes.Checked = false;
+                radio_No.Checked = false;
             }
         }
         private void TimeStart_ValueChanged(object sender, EventArgs e)
@@ -1216,6 +1201,11 @@ namespace pgso
         }
 
         private void txt_Total_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_Succeeding_Hour_TextChanged(object sender, EventArgs e)
         {
 
         }

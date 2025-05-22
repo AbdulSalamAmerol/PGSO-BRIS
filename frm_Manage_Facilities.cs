@@ -210,6 +210,9 @@ namespace pgso
         private void btn_Add_Venue_Click(object sender, EventArgs e)
         {
             frm_Add_Venues frm_Add_Venues = new frm_Add_Venues();
+            frm_Add_Venues.VenueAdded += (s, args) => {
+                RefreshData(); // Refresh when venue is added
+            };
             frm_Add_Venues.Show();
         }
         //sa datagridview click for venues
@@ -852,6 +855,9 @@ namespace pgso
         private void btn_AddScope_Click(object sender, EventArgs e)
         {
             frm_Add_Scope frm_Add_Scope = new frm_Add_Scope();
+            frm_Add_Scope.ScopeAdded += (s, args) => {
+                RefreshData(); // Refresh when scope is added
+            };
             frm_Add_Scope.Show();
         }
 
