@@ -369,11 +369,7 @@ namespace pgso
                     LoadVenueScope(selectedVenueID);
                     LoadReservedDates(selectedVenueID);
 
-                    // Check aircon status after loading scope and reservation type
-                    if (IsReservationTypeAndScopeSelected())
-                    {
-                        CheckAirconPanelStatus();
-                    }
+                   
 
 
                 }
@@ -481,50 +477,7 @@ namespace pgso
                 DBClose();
             }
         }
-        private void CheckAirconPanelStatus()
-        {
-            // Default to disabled if selections are invalid
-            if (combo_venues.SelectedValue == null || combo_scope.SelectedValue == null || combo_ReservationType.SelectedValue == null)
-            {
-                panel_Aircon.Enabled = false;
-                return;
-            }
-
-            try
-            {
-                DBConnect();
-                int venueID = Convert.ToInt32(combo_venues.SelectedValue);
-                int scopeID = Convert.ToInt32(combo_scope.SelectedValue);
-                string rateType = combo_ReservationType.SelectedValue.ToString();
-
-                string query = @"
-        SELECT fld_Aircon 
-        FROM tbl_Venue_Pricing
-        WHERE fk_VenueID = @VenueID
-          AND fk_Venue_ScopeID = @VenueScopeID
-          AND fld_Rate_Type = @RateType";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@VenueID", venueID);
-                    cmd.Parameters.AddWithValue("@VenueScopeID", scopeID);
-                    cmd.Parameters.AddWithValue("@RateType", rateType);
-
-                    object result = cmd.ExecuteScalar();
-                    panel_Aircon.Enabled = (result != null && result != DBNull.Value);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error checking aircon: " + ex.Message);
-                panel_Aircon.Enabled = false;
-            }
-            finally
-            {
-                DBClose();
-            }
-        }
-
+       
 
         private void UpdateTotalAmount()
         {
