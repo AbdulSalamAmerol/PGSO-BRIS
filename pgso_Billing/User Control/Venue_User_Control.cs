@@ -124,6 +124,22 @@ namespace pgso.pgso_Billing
             lbl_Number_Of_Participants.Text = billingDetails.fld_Number_Of_Participants.ToString();
             lbl_Reservation_Status.Text = billingDetails.fld_Reservation_Status;
 
+            switch (billingDetails.fld_Reservation_Status)
+            {
+                case "Pending":
+                    lbl_Reservation_Status.BackColor = Color.FromArgb(242, 239, 231);
+                    break;
+                case "Confirmed":
+                    lbl_Reservation_Status.BackColor = Color.FromArgb(225, 235, 245);
+                    break;
+                case "Cancelled":
+                    lbl_Reservation_Status.BackColor = Color.FromArgb(255, 228, 225);
+                    break;
+                default:
+                    lbl_Reservation_Status.BackColor = SystemColors.Control; // default or fallback color
+                    break;
+            }
+
             // Venue details
             lbl_Venue_Name.Text = billingDetails.fld_Venue_Name;
             lbl_Venue_Scope.Text = billingDetails.fld_Venue_Scope_Name;

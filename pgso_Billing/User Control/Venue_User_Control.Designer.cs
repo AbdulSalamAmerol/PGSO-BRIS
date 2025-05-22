@@ -202,10 +202,10 @@
             // 
             // btn_Confirm_Reservation
             // 
-            this.btn_Confirm_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Confirm_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(235)))), ((int)(((byte)(245)))));
             this.btn_Confirm_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Confirm_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
-            this.btn_Confirm_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.btn_Confirm_Reservation.ForeColor = System.Drawing.Color.Black;
             this.btn_Confirm_Reservation.Location = new System.Drawing.Point(662, 43);
             this.btn_Confirm_Reservation.Name = "btn_Confirm_Reservation";
             this.btn_Confirm_Reservation.Size = new System.Drawing.Size(230, 34);
@@ -216,10 +216,10 @@
             // 
             // btn_Cancel_Reservation
             // 
-            this.btn_Cancel_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Cancel_Reservation.BackColor = System.Drawing.Color.MistyRose;
             this.btn_Cancel_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Cancel_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
-            this.btn_Cancel_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.btn_Cancel_Reservation.ForeColor = System.Drawing.Color.Black;
             this.btn_Cancel_Reservation.Location = new System.Drawing.Point(662, 79);
             this.btn_Cancel_Reservation.Name = "btn_Cancel_Reservation";
             this.btn_Cancel_Reservation.Size = new System.Drawing.Size(230, 34);
@@ -1505,7 +1505,7 @@
             this.textBox36.MinimumSize = new System.Drawing.Size(0, 30);
             this.textBox36.Name = "textBox36";
             this.textBox36.ReadOnly = true;
-            this.textBox36.Size = new System.Drawing.Size(309, 30);
+            this.textBox36.Size = new System.Drawing.Size(309, 23);
             this.textBox36.TabIndex = 29;
             this.textBox36.Text = "BILLING DETAILS";
             // 
@@ -1602,14 +1602,15 @@
             // 
             this.lbl_Reservation_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Reservation_Status.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Reservation_Status.Font = new System.Drawing.Font("Arial", 14F);
+            this.lbl_Reservation_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Reservation_Status.Location = new System.Drawing.Point(662, 11);
             this.lbl_Reservation_Status.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Reservation_Status.MinimumSize = new System.Drawing.Size(4, 25);
             this.lbl_Reservation_Status.Name = "lbl_Reservation_Status";
             this.lbl_Reservation_Status.ReadOnly = true;
-            this.lbl_Reservation_Status.Size = new System.Drawing.Size(230, 29);
+            this.lbl_Reservation_Status.Size = new System.Drawing.Size(230, 27);
             this.lbl_Reservation_Status.TabIndex = 22;
+            this.lbl_Reservation_Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbl_Number_Of_Participants
             // 

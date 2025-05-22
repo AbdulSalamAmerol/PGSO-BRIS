@@ -12,8 +12,6 @@ using System.Threading.Tasks;
 using pgso.pgso_Billing.User_Control;
 using pgso.pgso_Billing;
 
-
-
 namespace pgso
 {
     public partial class frm_Billing : Form
@@ -32,7 +30,7 @@ namespace pgso
             pb_Logo.SizeMode = PictureBoxSizeMode.Zoom;
             pb_Logo.BackColor = Color.Transparent;
 
-            // Center it inside the 698x698 panel
+            // Center it inside the panel
             pb_Logo.Location = new Point(
                 (pnl_Billing_Details.Width - pb_Logo.Width) / 2,
                 (pnl_Billing_Details.Height - pb_Logo.Height) / 2
@@ -66,8 +64,6 @@ namespace pgso
             this.MinimumSize = new Size(1920, 1200);
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.StartPosition = FormStartPosition.Manual;
-            
-
 
             dgv_Billing_Records.Columns["col_Amount_Due"].DefaultCellStyle.Format = "C2";
             dgv_Billing_Records.Columns["col_Amount_Due"].DefaultCellStyle.FormatProvider = new System.Globalization.CultureInfo("en-PH");
@@ -224,9 +220,7 @@ namespace pgso
             return billingDetails;
         }
 
-        //Close form when going to dashbaord
-      
-
+   
         private void LoadVenueBillingControl(Model_Billing billingDetails)
         {
             pnl_Billing_Details.Controls.Clear(); // Or wherever you load the control
@@ -344,7 +338,7 @@ namespace pgso
             }
         }
 
-        // Palitan Ito, mag red lang yung mga equipment na hindi naibalik lahat
+        // Datagridview Color Format
         private void dgv_Billing_Records_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             // Check if it's a data row (ignore header and new row placeholder)
@@ -385,13 +379,11 @@ namespace pgso
                     Console.WriteLine($"Error during cell formatting: {ex.Message}");
                     // Ensure a default color even if an error occurs
                     row.DefaultCellStyle.BackColor = Color.White;
-                
 
-    
-            
-                    // Left align for other columns
-                    e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                
                 }
+                // Left align for other columns
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
         }
 
@@ -774,9 +766,12 @@ namespace pgso
         {
             if (dgv_Billing_Records.Columns["col_Print"] is DataGridViewImageColumn imgCol)
             {
-                imgCol.Image = ResizeImage(ByteArrayToImage(Properties.Resources.Printer_Icon), 24, 24);
+                Image rawImage = ByteArrayToImage(Properties.Resources.Printer_Icon);
+                Image resized = ResizeImage(rawImage, 20, 20); // smaller icon
+                Image padded = AddMarginToImage(resized, 30, 30); // add transparent padding
+                imgCol.Image = padded;
             }
-
+            /*  REMOVED FEATURE
             if (dgv_Billing_Records.Columns["col_Cancel"] is DataGridViewImageColumn imgCol_Cancel)
             {
                 imgCol_Cancel.Image = ResizeImage(Properties.Resources.Cancelled_Icon, 24, 24);
@@ -791,6 +786,20 @@ namespace pgso
             {
                 imgCol_Extend.Image = ResizeImage(Properties.Resources.Extend_Icon, 24, 24);
             }
+            */
+        }
+        //Margin for Icons Formatting
+        private Image AddMarginToImage(Image original, int totalWidth, int totalHeight)
+        {
+            Bitmap bmp = new Bitmap(totalWidth, totalHeight);
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.Clear(Color.Transparent); // or set to match DataGridView background
+                int x = (totalWidth - original.Width) / 2;
+                int y = (totalHeight - original.Height) / 2;
+                g.DrawImage(original, x, y, original.Width, original.Height);
+            }
+            return bmp;
         }
 
 
