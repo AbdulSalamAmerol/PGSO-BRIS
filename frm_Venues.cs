@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace pgso
@@ -19,11 +20,17 @@ namespace pgso
             InitializeComponent();
             InitializeControls();
             SetupEventHandlers();
+            dt_all.RowPostPaint += dt_all_RowPostPaint;
+
         }
 
         //The BindingSource is set as the DataSource of the DataGridView here
         private void InitializeControls()
         {
+             dt_all.AutoGenerateColumns = false;
+    
+    
+
             dt_all.AutoGenerateColumns = false;
             dt_all.DataSource = bindingSource;
             combobox_Filter.Items.AddRange(new[] { "All", "Pending", "Cancelled", "Confirmed" });
@@ -41,16 +48,11 @@ namespace pgso
             txt_FName.TextChanged += Control_ValueChanged;
             txt_LName.TextChanged += Control_ValueChanged;
             txt_Address.TextChanged += Control_ValueChanged;
+            txt_Office.TextChanged += Control_ValueChanged;
             txt_Status.TextChanged += Control_ValueChanged;
             txt_Activity.TextChanged += Control_ValueChanged;
             txt_Participants.TextChanged += Control_ValueChanged;
-            //Date_Start.ValueChanged += Control_ValueChanged;
-            //Date_End.ValueChanged += Control_ValueChanged;
-            //Time_Start.ValueChanged += Control_ValueChanged;
-            // Time_End.ValueChanged += Control_ValueChanged;
-
-            // btn_Update.Click += btn_Update_Click;
-            //btn_Refresh.Click += Btn_Refresh_Click;
+            
             dt_all.CellFormatting += dt_all_CellFormatting;
             //datagridview column header bg color
             dt_all.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.LightBlue;
@@ -66,18 +68,28 @@ namespace pgso
 
         private void dt_all_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            // Check if the column is one of the numeric columns
-            if (dt_all.Columns[e.ColumnIndex].Name == "fld_Total")
+            // Check if the column is the total amount column
+            if (dt_all.Columns[e.ColumnIndex].Name == "fld_Total_Amount" ||
+                dt_all.Columns[e.ColumnIndex].Name == "fld_Total")
             {
                 if (e.Value != null && decimal.TryParse(e.Value.ToString(), out decimal value))
                 {
-                    e.Value = value.ToString("N0"); // Format as comma-separated with no decimal places
+                    e.Value = "₱" + value.ToString("N2"); // New line with peso sign
                     e.FormattingApplied = true;
                 }
-
             }
         }
+
+
+        private void dt_all_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            int itemColIndex = dt_all.Columns["Item"].Index;
+            dt_all.Rows[e.RowIndex].Cells[itemColIndex].Value = (e.RowIndex + 1).ToString();
+        }
+
+
         //Fetches dat from database and binds it to the binding source
+        //filter
         //datagridvuew
         private void LoadReservationData()
         {
@@ -90,17 +102,35 @@ namespace pgso
                     SELECT DISTINCT
                         r.fld_Control_number, 
                         r.fld_Reservation_Status,
+                        r.fld_Created_At,
                         r.fld_Total_Amount,
+                        '₱' + CONVERT(VARCHAR, CAST(r.fld_Total_Amount AS MONEY), 1) AS fld_Total_Amount,
                         (SELECT TOP 1 v.fld_Venue_Name 
                          FROM tbl_Reservation_Venues rv 
                          JOIN tbl_Venue v ON rv.fk_VenueID = v.pk_VenueID 
                          WHERE rv.fk_ReservationID = r.pk_ReservationID) AS fld_Venue_Name,
                         rp.fld_First_Name,
-                        rp.fld_Surname
+                        rp.fld_Surname,
+
+                        Date = STUFF((
+                            SELECT CHAR(10) +
+                                CASE
+                                    WHEN rv2.fld_Start_Date = rv2.fld_End_Date THEN
+                                        FORMAT(rv2.fld_Start_Date, 'MM/dd/yyyy')
+                                    ELSE
+                                        FORMAT(rv2.fld_Start_Date, 'MM/dd/yyyy') + ' - ' + FORMAT(rv2.fld_End_Date, 'MM/dd/yyyy')
+                                END
+                            FROM tbl_Reservation_Venues rv2
+                            WHERE rv2.fk_ReservationID = r.pk_ReservationID
+                            FOR XML PATH(''), TYPE
+                        ).value('.', 'NVARCHAR(MAX)'), 1, 1, '')
                     FROM tbl_Reservation r
                     LEFT JOIN tbl_Requesting_Person rp 
                         ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
                     WHERE r.fld_Reservation_Type = 'Venue'";
+
+
+
 
                     var dataTable = new DataTable();
                     using (var adapter = new SqlDataAdapter(query, connection))
@@ -118,6 +148,7 @@ namespace pgso
             }
         }
 
+
         //pag napindot, magpapkita muna tong mga to bago si LoadReservationDetails
         private void Dt_all_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -128,16 +159,15 @@ namespace pgso
                 txt_CN.Text = currentControlNumber;
                 txt_Status.Text = row.Cells["fld_Reservation_Status"].Value?.ToString() ?? "";
 
-                // Format the Total Amount with commas
+                // Format the Total Amount with peso sign and commas
                 if (decimal.TryParse(row.Cells["fld_Total_Amount"].Value?.ToString(), out decimal totalAmount))
                 {
-                    txt_Total.Text = totalAmount.ToString("N0"); // Format as comma-separated with no decimal places
+                    txt_Total.Text = "₱" + totalAmount.ToString("N2"); // New line with peso sign
                 }
                 else
                 {
-                    txt_Total.Text = "0"; // Default value if parsing fails
+                    txt_Total.Text = "₱0.00"; // New line with peso sign
                 }
-
                 if (!string.IsNullOrEmpty(currentControlNumber))
                 {
                     LoadReservationDetails(currentControlNumber);
@@ -158,8 +188,10 @@ namespace pgso
                 using (var connection = new SqlConnection(db.strCon.ConnectionString))
                 {
                     connection.Open();
+
+                    // Query to retrieve reservation details and all associated dates and times
                     string query = @"
-                SELECT TOP 1
+                SELECT 
                     r.fld_Reservation_Status AS Status,
                     rp.fld_First_Name AS FirstName, 
                     rp.fld_Surname AS LastName,
@@ -168,12 +200,12 @@ namespace pgso
                     r.fld_Activity_Name AS ActivityName,
                     rv.fld_Participants AS Participants,
                     v.fld_Venue_Name AS VenueName,
+                    vs.fld_Venue_Scope_Name AS Scope,
+                    vp.fld_Rate_Type AS RateType,
                     rv.fld_Start_Date AS StartDate,
                     rv.fld_End_Date AS EndDate,
                     rv.fld_Start_Time AS StartTime,
-                    rv.fld_End_Time AS EndTime,
-                    vs.fld_Venue_Scope_Name AS Scope,
-                    vp.fld_Rate_Type AS RateType
+                    rv.fld_End_Time AS EndTime
                 FROM tbl_Reservation r
                 LEFT JOIN tbl_Requesting_Person rp 
                     ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
@@ -193,8 +225,12 @@ namespace pgso
 
                         using (var reader = command.ExecuteReader())
                         {
-                            if (reader.Read())
+                            // Use a HashSet to avoid duplicate entries
+                            HashSet<string> formattedEntries = new HashSet<string>();
+
+                            while (reader.Read())
                             {
+                                // Populate textboxes with reservation details
                                 txt_FName.Text = reader["FirstName"]?.ToString() ?? "N/A";
                                 txt_LName.Text = reader["LastName"]?.ToString() ?? "N/A";
                                 txt_Address.Text = reader["Address"]?.ToString() ?? "N/A";
@@ -205,22 +241,30 @@ namespace pgso
                                 txt_Scope.Text = reader["Scope"]?.ToString() ?? "N/A";
                                 txt_Type.Text = reader["RateType"]?.ToString() ?? "N/A";
 
-                                // Display date in MM/dd/yyyy format
-                                txt_Date_Start.Text = reader["StartDate"] != DBNull.Value
+                                // Get the date and times
+                                string startDate = reader["StartDate"] != DBNull.Value
                                     ? Convert.ToDateTime(reader["StartDate"]).ToString("MM/dd/yyyy")
-                                    : "N/A";
-                                txt_Date_End.Text = reader["EndDate"] != DBNull.Value
-                                    ? Convert.ToDateTime(reader["EndDate"]).ToString("MM/dd/yyyy")
-                                    : "N/A";
+                                    : null;
 
-                                // Display time in 12-hour format with AM/PM
-                                txt_Hour_Start.Text = reader["StartTime"] != DBNull.Value
-                                    ? DateTime.Today.Add(TimeSpan.Parse(reader["StartTime"].ToString())).ToString("hh:mm tt")
-                                    : "N/A";
-                                txt_Hour_End.Text = reader["EndTime"] != DBNull.Value
-                                    ? DateTime.Today.Add(TimeSpan.Parse(reader["EndTime"].ToString())).ToString("hh:mm tt")
-                                    : "N/A";
+                                string startTime = reader["StartTime"] != DBNull.Value
+                                    ? DateTime.Today.Add(TimeSpan.Parse(reader["StartTime"].ToString())).ToString("hh:mmtt")
+                                    : null;
+
+                                string endTime = reader["EndTime"] != DBNull.Value
+                                    ? DateTime.Today.Add(TimeSpan.Parse(reader["EndTime"].ToString())).ToString("hh:mmtt")
+                                    : null;
+
+                                // Combine time and date into the desired format
+                                if (!string.IsNullOrEmpty(startDate) && !string.IsNullOrEmpty(startTime) && !string.IsNullOrEmpty(endTime))
+                                {
+                                    formattedEntries.Add($"{startTime} - {endTime} {startDate}");
+                                }
                             }
+
+                            // Display the formatted data in a single text box
+                            txt_Date_Start.Text = formattedEntries.Count > 0
+                                ? string.Join(Environment.NewLine, formattedEntries)
+                                : "N/A";
                         }
                     }
                 }
@@ -233,6 +277,12 @@ namespace pgso
         }
 
 
+
+
+
+
+
+
         private void Control_ValueChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(currentControlNumber))
@@ -242,8 +292,21 @@ namespace pgso
             }
         }
 
+
         private void btn_Update_Click(object sender, EventArgs e)
         {
+
+            var result = MessageBox.Show(
+                "Are you sure you want to update?",
+                "Confirm Submission",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+            {
+              
+                return; // Cancel submission if user selects No
+            }
             if (string.IsNullOrEmpty(currentControlNumber))
             {
                 MessageBox.Show("Please select a reservation first.", "Error",
@@ -369,6 +432,31 @@ namespace pgso
         }
 
         private void panel_Information_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_Search_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void combobox_Filter_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_Office_TextChanged(object sender, EventArgs e)
         {
 
         }

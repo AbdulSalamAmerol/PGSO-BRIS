@@ -1,6 +1,6 @@
 ﻿namespace pgso
 {
-    partial class frm_Calendar_Venue
+    partial class frm_Calendar
     {
         /// <summary>
         /// Required designer variable.
@@ -72,7 +72,7 @@
             this.lbl_Date.Name = "lbl_Date";
             this.lbl_Date.Size = new System.Drawing.Size(214, 23);
             this.lbl_Date.TabIndex = 3;
-            this.lbl_Date.Text = "MONTH YAER";
+            this.lbl_Date.Text = "MONTH YEAR";
             this.lbl_Date.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label1
@@ -92,7 +92,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(184, 20);
             this.label5.TabIndex = 8;
-            this.label5.Text = "Thrusday";
+            this.label5.Text = "Thursday";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label6
@@ -117,7 +117,7 @@
             // 
             // tbale_Calendars
             // 
-            this.tbale_Calendars.BackColor = System.Drawing.Color.MistyRose;
+            this.tbale_Calendars.BackColor = System.Drawing.Color.LightCyan;
             this.tbale_Calendars.ColumnCount = 7;
             this.tbale_Calendars.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
             this.tbale_Calendars.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
@@ -140,7 +140,7 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.LightSalmon;
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.MediumTurquoise;
             this.tableLayoutPanel1.ColumnCount = 7;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190F));
@@ -193,7 +193,7 @@
             this.label9.Text = "Tuesday";
             this.label9.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // frm_Calendar_Venue
+            // frm_Calendar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -205,7 +205,7 @@
             this.Controls.Add(this.btn_Next);
             this.Controls.Add(this.tbale_Calendars);
             this.Controls.Add(this.lbl_Date);
-            this.Name = "frm_Calendar_Venue";
+            this.Name = "frm_Calendar";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frm_Calendar";

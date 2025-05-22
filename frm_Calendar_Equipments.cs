@@ -131,7 +131,7 @@ namespace pgso
         }
         private void btn_Venues_Click(object sender, EventArgs e)
         {
-            frm_Calendar_Venue frm_Calendar_Vanue = new frm_Calendar_Venue();
+            frm_Calendar frm_Calendar_Vanue = new frm_Calendar();
             frm_Calendar_Vanue.Show();
         }
 

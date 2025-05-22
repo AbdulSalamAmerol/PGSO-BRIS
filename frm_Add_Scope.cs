@@ -91,7 +91,15 @@ namespace pgso
             int venueId = (int)combo_Venue.SelectedValue;
             string scopeName = txt_Scope_Name.Text;
             string rateType = combo_Rate_Type.SelectedItem.ToString();
-            bool aircon = radio_Aircon_Yes.Checked; // True if "Yes" is selected, False if "No" is selected
+
+            // Determine aircon value: null if neither radio is checked
+            object airconValue;
+            if (radio_Aircon_Yes.Checked)
+                airconValue = true;
+            else if (radio_Aircon_YNo.Checked)
+                airconValue = false;
+            else
+                airconValue = DBNull.Value;
 
             try
             {
@@ -123,18 +131,18 @@ namespace pgso
 
                         // Insert the pricing details
                         string pricingQuery = @"
-                            INSERT INTO tbl_Venue_Pricing (
-                                fk_VenueID, fk_Venue_ScopeID, fld_Aircon, fld_Rate_Type, 
-                                fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Additional_Charge
-                            ) 
-                            VALUES (
-                                @venueId, @scopeId, @aircon, @rateType, 
-                                @first4HrsRate, @hourlyRate, @additionalCharge
-                            )";
+                    INSERT INTO tbl_Venue_Pricing (
+                        fk_VenueID, fk_Venue_ScopeID, fld_Aircon, fld_Rate_Type, 
+                        fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Additional_Charge
+                    ) 
+                    VALUES (
+                        @venueId, @scopeId, @aircon, @rateType, 
+                        @first4HrsRate, @hourlyRate, @additionalCharge
+                    )";
                         SqlCommand pricingCmd = new SqlCommand(pricingQuery, db.strCon, transaction);
                         pricingCmd.Parameters.AddWithValue("@venueId", venueId);
                         pricingCmd.Parameters.AddWithValue("@scopeId", scopeId);
-                        pricingCmd.Parameters.AddWithValue("@aircon", aircon);
+                        pricingCmd.Parameters.AddWithValue("@aircon", airconValue);
                         pricingCmd.Parameters.AddWithValue("@rateType", rateType);
                         pricingCmd.Parameters.AddWithValue("@first4HrsRate", first4HrsRate);
                         pricingCmd.Parameters.AddWithValue("@hourlyRate", hourlyRate);
@@ -162,6 +170,17 @@ namespace pgso
                 if (db.strCon.State == ConnectionState.Open)
                     db.strCon.Close();
             }
+        }
+
+
+        private void frm_Add_Scope_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radio_Aircon_YNo_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
