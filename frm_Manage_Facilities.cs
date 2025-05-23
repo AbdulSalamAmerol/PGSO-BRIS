@@ -86,6 +86,7 @@ namespace pgso
 
                 //EQUIPMENT
                 string queryEquipment = @"
+
                 SELECT 
                     e.fld_Equipment_Name, 
                     ep.fld_Equipment_Price,
@@ -308,7 +309,9 @@ namespace pgso
                     string equipmentPriceSubsequent = row.Cells["fld_Equipment_Price_Subsequent"].Value.ToString();
 
                    
+
                     ShowEditForm(equipmentName, equipmentPrice, equipmentPriceSubsequent, row.Cells["fld_Total_Stock"].Value.ToString());
+
 
                 }
                 else if (e.ColumnIndex == dt_Equipments.Columns["Delete"].Index)
