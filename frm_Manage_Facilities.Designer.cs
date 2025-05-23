@@ -426,6 +426,7 @@
             this.DeleteVenue.ReadOnly = true;
             this.DeleteVenue.Width = 60;
             // 
+
             // frm_Manage_Facilities
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -477,7 +478,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Additional_Charge;
         private System.Windows.Forms.DataGridViewImageColumn EditVenue;
         private System.Windows.Forms.DataGridViewImageColumn DeleteVenue;
+
         private System.Windows.Forms.TextBox txt_Search_Equipmet;
         private System.Windows.Forms.TextBox txt_Search_Venue;
+
     }
 }
