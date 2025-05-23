@@ -13,6 +13,13 @@ namespace pgso
         private readonly Connection db = new Connection();
         private CheckBox chk_Aircon; // Add this line
 
+        public event EventHandler VenueAdded;
+
+        private void OnVenueAdded()
+        {
+            VenueAdded?.Invoke(this, EventArgs.Empty);
+        }
+
         public frm_Add_Venues()
         {
             InitializeComponent();
@@ -148,6 +155,8 @@ namespace pgso
                 MessageBox.Show("Venue added successfully!", "Success",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                OnVenueAdded();
+                this.Close();
                 // Clear form after successful submission
                 ClearForm();
             }

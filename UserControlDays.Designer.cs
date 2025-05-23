@@ -46,7 +46,7 @@
             // 
             this.lbl_Reservations.AutoSize = true;
             this.lbl_Reservations.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Reservations.Location = new System.Drawing.Point(4, 22);
+            this.lbl_Reservations.Location = new System.Drawing.Point(14, 21);
             this.lbl_Reservations.Name = "lbl_Reservations";
             this.lbl_Reservations.Size = new System.Drawing.Size(22, 17);
             this.lbl_Reservations.TabIndex = 5;

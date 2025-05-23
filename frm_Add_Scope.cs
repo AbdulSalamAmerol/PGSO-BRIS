@@ -9,12 +9,23 @@ namespace pgso
     public partial class frm_Add_Scope : Form
     {
         private Connection db = new Connection();
+        private bool allowCustomScopeEntry = false;
+        public event EventHandler ScopeAdded;
 
+        private void OnScopeAdded()
+        {
+            ScopeAdded?.Invoke(this, EventArgs.Empty);
+        }
         public frm_Add_Scope()
         {
             InitializeComponent();
             LoadVenues();
             LoadRateTypes();
+
+            // Set up the combo box properties
+            combo_Scope.DropDownStyle = ComboBoxStyle.DropDown;
+            combo_Scope.KeyPress += Combo_Scope_KeyPress;
+            combo_Scope.SelectedIndexChanged += Combo_Scope_SelectedIndexChanged;
         }
 
         private void LoadVenues()
@@ -34,6 +45,7 @@ namespace pgso
                 combo_Venue.DataSource = dt;
                 combo_Venue.ValueMember = "pk_VenueID";
                 combo_Venue.DisplayMember = "fld_Venue_Name";
+                combo_Venue.SelectedIndexChanged += Combo_Venue_SelectedIndexChanged;
 
                 reader.Close();
             }
@@ -56,17 +68,75 @@ namespace pgso
             combo_Rate_Type.SelectedIndex = 0; // Default to "Regular"
         }
 
-        private void btn_Save_Click(object sender, EventArgs e)
+        private void LoadScopesForVenue(int venueId)
         {
-           
+            try
+            {
+                if (db.strCon.State == ConnectionState.Closed)
+                    db.strCon.Open();
+
+                string query = @"SELECT DISTINCT vs.fld_Venue_Scope_Name 
+                                FROM tbl_Venue_Scope vs
+                                INNER JOIN tbl_Venue_Pricing vp ON vs.pk_Venue_ScopeID = vp.fk_Venue_ScopeID
+                                WHERE vp.fk_VenueID = @venueId
+                                ORDER BY vs.fld_Venue_Scope_Name";
+
+                SqlCommand cmd = new SqlCommand(query, db.strCon);
+                cmd.Parameters.AddWithValue("@venueId", venueId);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                combo_Scope.Items.Clear();
+                while (reader.Read())
+                {
+                    combo_Scope.Items.Add(reader["fld_Venue_Scope_Name"].ToString());
+                }
+
+                // Add an empty item at the beginning
+                if (combo_Scope.Items.Count > 0)
+                {
+                    combo_Scope.SelectedIndex = 0;
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading scopes: " + ex.Message);
+            }
+            finally
+            {
+                if (db.strCon.State == ConnectionState.Open)
+                    db.strCon.Close();
+            }
+        }
+
+        private void Combo_Venue_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (combo_Venue.SelectedValue != null && combo_Venue.SelectedValue is int)
+            {
+                int venueId = (int)combo_Venue.SelectedValue;
+                LoadScopesForVenue(venueId);
+            }
+        }
+
+        private void Combo_Scope_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // When a scope is selected from the dropdown, disable custom entry mode
+            allowCustomScopeEntry = false;
+        }
+
+        private void Combo_Scope_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // When user starts typing, enable custom entry mode
+            allowCustomScopeEntry = true;
         }
 
         private void tbn_Save_Click(object sender, EventArgs e)
         {
             // Validate inputs
-            if (combo_Venue.SelectedValue == null || string.IsNullOrEmpty(txt_Scope_Name.Text))
+            if (combo_Venue.SelectedValue == null || string.IsNullOrEmpty(combo_Scope.Text))
             {
-                MessageBox.Show("Please select a venue and enter a scope name.");
+                MessageBox.Show("Please select a venue and enter/select a scope.");
                 return;
             }
 
@@ -89,7 +159,7 @@ namespace pgso
             }
 
             int venueId = (int)combo_Venue.SelectedValue;
-            string scopeName = txt_Scope_Name.Text;
+            string scopeName = combo_Scope.Text; // Get the text from combo box
             string rateType = combo_Rate_Type.SelectedItem.ToString();
 
             // Determine aircon value: null if neither radio is checked
@@ -131,14 +201,14 @@ namespace pgso
 
                         // Insert the pricing details
                         string pricingQuery = @"
-                    INSERT INTO tbl_Venue_Pricing (
-                        fk_VenueID, fk_Venue_ScopeID, fld_Aircon, fld_Rate_Type, 
-                        fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Additional_Charge
-                    ) 
-                    VALUES (
-                        @venueId, @scopeId, @aircon, @rateType, 
-                        @first4HrsRate, @hourlyRate, @additionalCharge
-                    )";
+                        INSERT INTO tbl_Venue_Pricing (
+                            fk_VenueID, fk_Venue_ScopeID, fld_Aircon, fld_Rate_Type, 
+                            fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Additional_Charge
+                        ) 
+                        VALUES (
+                            @venueId, @scopeId, @aircon, @rateType, 
+                            @first4HrsRate, @hourlyRate, @additionalCharge
+                        )";
                         SqlCommand pricingCmd = new SqlCommand(pricingQuery, db.strCon, transaction);
                         pricingCmd.Parameters.AddWithValue("@venueId", venueId);
                         pricingCmd.Parameters.AddWithValue("@scopeId", scopeId);
@@ -152,6 +222,7 @@ namespace pgso
 
                         transaction.Commit();
                         MessageBox.Show("Scope and pricing added successfully!");
+                        OnScopeAdded();
                         this.Close();
                     }
                     catch (Exception ex)
@@ -172,15 +243,14 @@ namespace pgso
             }
         }
 
-
         private void frm_Add_Scope_Load(object sender, EventArgs e)
         {
-
+            // You can initialize additional controls here if needed
         }
 
         private void radio_Aircon_YNo_CheckedChanged(object sender, EventArgs e)
         {
-
+            // Handle radio button changes if needed
         }
     }
 }
