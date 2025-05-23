@@ -39,6 +39,7 @@ namespace pgso
             // 
             this.menuStrip1.AutoSize = false;
             this.menuStrip1.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.menuStrip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.calendarToolStripMenuItem,
             this.createReservationToolStripMenuItem,
@@ -54,7 +55,7 @@ namespace pgso
             // calendarToolStripMenuItem
             // 
             this.calendarToolStripMenuItem.Name = "calendarToolStripMenuItem";
-            this.calendarToolStripMenuItem.Size = new System.Drawing.Size(66, 25);
+            this.calendarToolStripMenuItem.Size = new System.Drawing.Size(69, 25);
             this.calendarToolStripMenuItem.Text = "Calendar";
             this.calendarToolStripMenuItem.Click += new System.EventHandler(this.calendarToolStripMenuItem_Click);
             // 
@@ -65,20 +66,20 @@ namespace pgso
             this.equipmentToolStripMenuItem});
             this.createReservationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("createReservationToolStripMenuItem.Image")));
             this.createReservationToolStripMenuItem.Name = "createReservationToolStripMenuItem";
-            this.createReservationToolStripMenuItem.Size = new System.Drawing.Size(133, 25);
+            this.createReservationToolStripMenuItem.Size = new System.Drawing.Size(139, 25);
             this.createReservationToolStripMenuItem.Text = "Create Reservation";
             // 
             // venueToolStripMenuItem
             // 
             this.venueToolStripMenuItem.Name = "venueToolStripMenuItem";
-            this.venueToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.venueToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.venueToolStripMenuItem.Text = "Venues";
             this.venueToolStripMenuItem.Click += new System.EventHandler(this.venueToolStripMenuItem_Click);
             // 
             // equipmentToolStripMenuItem
             // 
             this.equipmentToolStripMenuItem.Name = "equipmentToolStripMenuItem";
-            this.equipmentToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.equipmentToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.equipmentToolStripMenuItem.Text = "Equipments";
             this.equipmentToolStripMenuItem.Click += new System.EventHandler(this.equipmentToolStripMenuItem_Click);
             // 
@@ -89,21 +90,21 @@ namespace pgso
             this.equipmentToolStripMenuItem1});
             this.viewReservationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("viewReservationToolStripMenuItem.Image")));
             this.viewReservationToolStripMenuItem.Name = "viewReservationToolStripMenuItem";
-            this.viewReservationToolStripMenuItem.Size = new System.Drawing.Size(142, 25);
+            this.viewReservationToolStripMenuItem.Size = new System.Drawing.Size(149, 25);
             this.viewReservationToolStripMenuItem.Text = "Manage Reservation";
             this.viewReservationToolStripMenuItem.Click += new System.EventHandler(this.viewReservationToolStripMenuItem_Click);
             // 
             // venueToolStripMenuItem1
             // 
             this.venueToolStripMenuItem1.Name = "venueToolStripMenuItem1";
-            this.venueToolStripMenuItem1.Size = new System.Drawing.Size(137, 22);
+            this.venueToolStripMenuItem1.Size = new System.Drawing.Size(140, 22);
             this.venueToolStripMenuItem1.Text = "Venues";
             this.venueToolStripMenuItem1.Click += new System.EventHandler(this.venueToolStripMenuItem1_Click);
             // 
             // equipmentToolStripMenuItem1
             // 
             this.equipmentToolStripMenuItem1.Name = "equipmentToolStripMenuItem1";
-            this.equipmentToolStripMenuItem1.Size = new System.Drawing.Size(137, 22);
+            this.equipmentToolStripMenuItem1.Size = new System.Drawing.Size(140, 22);
             this.equipmentToolStripMenuItem1.Text = "Equipments";
             this.equipmentToolStripMenuItem1.Click += new System.EventHandler(this.equipmentToolStripMenuItem1_Click);
             // 
@@ -111,7 +112,7 @@ namespace pgso
             // 
             this.manageFacilitiesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("manageFacilitiesToolStripMenuItem.Image")));
             this.manageFacilitiesToolStripMenuItem.Name = "manageFacilitiesToolStripMenuItem";
-            this.manageFacilitiesToolStripMenuItem.Size = new System.Drawing.Size(126, 25);
+            this.manageFacilitiesToolStripMenuItem.Size = new System.Drawing.Size(132, 25);
             this.manageFacilitiesToolStripMenuItem.Text = "Manage Facilities";
             this.manageFacilitiesToolStripMenuItem.Click += new System.EventHandler(this.manageFacilitiesToolStripMenuItem_Click);
             // 

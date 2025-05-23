@@ -17,7 +17,9 @@ namespace pgso
         private Connection db = new Connection();
         private SqlConnection dbConnection;
         private SqlCommand cmd;
-
+        // Add these fields at the top of your class
+        private DataTable venuesTable;
+        private DataTable equipmentsTable;
         public frm_Manage_Facilities()
         {
             InitializeComponent();
@@ -41,6 +43,16 @@ namespace pgso
             dt_Venues.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.LightBlue;
             dt_Venues.EnableHeadersVisualStyles = false;
             dt_Venues.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 10, System.Drawing.FontStyle.Bold);
+            // In InitializeControls() or after InitializeComponent()
+            txt_Search_Venue.ForeColor = System.Drawing.Color.Gray;
+            txt_Search_Venue.Text = "Search Venue";
+            txt_Search_Venue.GotFocus += Txt_Search_GotFocus;
+            txt_Search_Venue.LostFocus += Txt_Search_LostFocus;
+            // In InitializeControls() or after InitializeComponent()
+            txt_Search_Equipmet.ForeColor = System.Drawing.Color.Gray;
+            txt_Search_Equipmet.Text = "Search Equipment";
+            txt_Search_Equipmet.GotFocus += Txt_Search_GotFocus2;
+            txt_Search_Equipmet.LostFocus += Txt_Search_LostFocus2;
         }
 
 
@@ -52,6 +64,41 @@ namespace pgso
         {
             int itemColIndex = dt_Venues.Columns["Item"].Index;
             dt_Venues.Rows[e.RowIndex].Cells[itemColIndex].Value = (e.RowIndex + 1).ToString();
+        }
+        private void Txt_Search_GotFocus(object sender, EventArgs e)
+        {
+            if (txt_Search_Venue.Text == "Search Venue")
+            {
+                txt_Search_Venue.Text = "";
+                txt_Search_Venue.ForeColor = System.Drawing.Color.Black;
+            }
+        }
+
+        private void Txt_Search_LostFocus(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txt_Search_Venue.Text))
+            {
+                txt_Search_Venue.Text = "Search Venue";
+                txt_Search_Venue.ForeColor = System.Drawing.Color.Gray;
+            }
+        }
+
+        private void Txt_Search_GotFocus2(object sender, EventArgs e)
+        {
+            if (txt_Search_Equipmet.Text == "Search Equipment")
+            {
+                txt_Search_Equipmet.Text = "";
+                txt_Search_Equipmet.ForeColor = System.Drawing.Color.Black;
+            }
+        }
+
+        private void Txt_Search_LostFocus2(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txt_Search_Equipmet.Text))
+            {
+                txt_Search_Equipmet.Text = "Search Equipment";
+                txt_Search_Equipmet.ForeColor = System.Drawing.Color.Gray;
+            }
         }
         private void dt_Equipments_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
@@ -189,6 +236,12 @@ namespace pgso
 
                 dataGridView.AutoGenerateColumns = true;
                 dataGridView.DataSource = tempDt;
+
+                // Store the data for filtering
+                if (dataGridView == dt_Venues)
+                    venuesTable = tempDt;
+                else if (dataGridView == dt_Equipments)
+                    equipmentsTable = tempDt;
 
                 if (tempDt.Rows.Count == 0)
                 {
@@ -863,6 +916,23 @@ namespace pgso
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
+
+        }
+
+        private void txt_Search_Venue_TextChanged(object sender, EventArgs e)
+        {
+            if (venuesTable == null) return;
+            string filter = txt_Search_Venue.Text.Replace("'", "''");
+            (dt_Venues.DataSource as DataTable).DefaultView.RowFilter =
+                $"[fld_Venue_Name] LIKE '%{filter}%'";
+        }
+
+        private void txt_Search_Equipmet_TextChanged(object sender, EventArgs e)
+        {
+            if (equipmentsTable == null) return;
+            string filter = txt_Search_Equipmet.Text.Replace("'", "''"); // Escape single quotes
+            (dt_Equipments.DataSource as DataTable).DefaultView.RowFilter =
+                $"[fld_Equipment_Name] LIKE '%{filter}%'";
 
         }
     }

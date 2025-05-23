@@ -12,6 +12,7 @@ namespace pgso
         private Connection db = new Connection(); // Use the Connection class
         private BindingSource bindingSource = new BindingSource();
         public event EventHandler DashboardRefreshRequested;
+        private const string SearchPlaceholder = "Search by control number, equipment, or name...";
 
         // Method to raise the event
         protected virtual void OnDashboardRefreshRequested()
@@ -28,10 +29,13 @@ namespace pgso
 
         public frm_Equipment()
         {
+
+            
+
             InitializeComponent();
             dt_equipment.CellClick += dt_equipment_CellClick; // Handle cell click event
             dt_equipment.RowPostPaint += dt_equipment_RowPostPaint;
-
+           
             // Populate the ComboBox with filter options
             combobox_Filter.Items.AddRange(new string[] { "All", "Pending", "Cancelled", "Confirmed" });
             combobox_Filter.SelectedIndexChanged += combobox_Filter_SelectedIndexChanged; // Add event handler
@@ -41,8 +45,14 @@ namespace pgso
             txt_Address.TextChanged += Control_ValueChanged;
             txt_Status.TextChanged += Control_ValueChanged;
              dt_equipment.CellFormatting += dt_equipment_CellFormatting;
+            // Set up placeholder for search box
+            textBox1.ForeColor = System.Drawing.Color.Gray;
+            textBox1.Text = "Control Number/Venue";
+            textBox1.GotFocus += Txt_Search_GotFocus;
+            textBox1.LostFocus += Txt_Search_LostFocus;
 
             btn_Update.Enabled = false; // Disable by default
+ 
 
             dt_equipment.CellClick += dt_equipment_CellClick;
 
@@ -55,10 +65,29 @@ namespace pgso
 
 
             //datagridview column header bg color
-            dt_equipment.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.LightBlue;
+            dt_equipment.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.MediumAquamarine;
             dt_equipment.EnableHeadersVisualStyles = false;
-            dt_equipment.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 10, System.Drawing.FontStyle.Bold);
+            dt_equipment.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Microsoft sans serif", 10, System.Drawing.FontStyle.Bold);
+
         }
+        private void Txt_Search_GotFocus(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "Control Number/Venue")
+            {
+                textBox1.Text = "";
+                textBox1.ForeColor = System.Drawing.Color.Black;
+            }
+        }
+
+        private void Txt_Search_LostFocus(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                textBox1.Text = "Control Number/Venue";
+                textBox1.ForeColor = System.Drawing.Color.Gray;
+            }
+        }
+
         private void dt_equipment_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             // Find the "Item" column index
@@ -95,13 +124,44 @@ namespace pgso
         }
         private void dt_equipment_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            // Check if the column is the total amount column
+            // Format the total amount column
             if (dt_equipment.Columns[e.ColumnIndex].Name == "fld_Total_Amount")
             {
                 if (e.Value != null && decimal.TryParse(e.Value.ToString(), out decimal value))
                 {
-                    e.Value = "₱" + value.ToString("N2"); // New line with peso sign
+                    e.Value = "₱" + value.ToString("N2");
                     e.FormattingApplied = true;
+                }
+            }
+
+            // Color the entire row based on the equipment status
+            if (dt_equipment.Columns.Contains("fld_Equipment_Status"))
+            {
+                var statusCell = dt_equipment.Rows[e.RowIndex].Cells["fld_Equipment_Status"];
+                if (statusCell.Value != null)
+                {
+                    string status = statusCell.Value.ToString();
+                    if (status.Equals("Confirmed", StringComparison.OrdinalIgnoreCase))
+                    {
+                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(225, 235, 245);
+                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+                    }
+                    else if (status.Equals("Pending", StringComparison.OrdinalIgnoreCase))
+                    {
+                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(242, 239, 231);
+                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+                    }
+                    else if (status.Equals("Cancelled", StringComparison.OrdinalIgnoreCase))
+                    {
+                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(255, 228, 225);
+                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+                    }
+                    else
+                    {
+                        // Optional: reset to default for other statuses
+                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.White;
+                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+                    }
                 }
             }
         }
@@ -235,34 +295,34 @@ namespace pgso
                     db.strCon.Open();
 
                 string queryApproved = @"
-                SELECT 
-                    r.fld_Control_number, 
-                   rpe.fld_Equipment_Status,
-                    r.fld_Created_At,
-rpe.fld_Equipment_Status,
-
-                    e.fld_Equipment_Name,
-                    rpe.fld_Quantity,
-                    r.fld_Total_Amount,
-                     '₱' + CONVERT(VARCHAR, CAST(r.fld_Total_Amount AS MONEY), 1) AS fld_Total_Amount,
-                    rp.fld_First_Name,
-                    rp.fld_Surname,
-                    CASE 
-                        WHEN rpe.fld_Start_Date_Eq = rpe.fld_End_Date_Eq 
-                            THEN FORMAT(rpe.fld_Start_Date_Eq, 'M/d/yyyy')
-                        ELSE 
-                            FORMAT(rpe.fld_Start_Date_Eq, 'M/d/yyyy') + ' - ' + FORMAT(rpe.fld_End_Date_Eq, 'M/d/yyyy')
-                    END AS Date
-                FROM 
-                    tbl_Reservation r
-                LEFT JOIN
-                    tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
-                LEFT JOIN
-                    tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
-                LEFT JOIN
-                    tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-                WHERE  
-                    r.fld_Reservation_Type = 'Equipment'";
+    SELECT 
+        r.fld_Control_number, 
+        rpe.fld_Equipment_Status,
+        r.fld_Created_At,
+        rpe.fld_Equipment_Status,
+        e.fld_Equipment_Name,
+        rpe.fld_Quantity,
+        r.fld_Total_Amount,
+        '₱' + CONVERT(VARCHAR, CAST(r.fld_Total_Amount AS MONEY), 1) AS fld_Total_Amount,
+        rp.fld_First_Name,
+        rp.fld_Surname,
+        CASE 
+            WHEN rpe.fld_Start_Date_Eq = rpe.fld_End_Date_Eq 
+                THEN FORMAT(rpe.fld_Start_Date_Eq, 'M/d/yyyy')
+            ELSE 
+                FORMAT(rpe.fld_Start_Date_Eq, 'M/d/yyyy') + ' - ' + FORMAT(rpe.fld_End_Date_Eq, 'M/d/yyyy')
+        END AS Date
+    FROM 
+        tbl_Reservation r
+    LEFT JOIN
+        tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
+    LEFT JOIN
+        tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
+    LEFT JOIN
+        tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+    WHERE  
+        r.fld_Reservation_Type = 'Equipment'
+    ORDER BY r.fld_Created_At DESC"; // Changed to DESC for newest first
 
                 LoadData(queryApproved, dt_equipment, "Approved");
             }
@@ -312,7 +372,7 @@ rpe.fld_Equipment_Status,
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             string filterText = textBox1.Text.Trim();
-            if (string.IsNullOrEmpty(filterText))
+            if (string.IsNullOrEmpty(filterText) || filterText == "Control Number/Venue")
             {
                 bindingSource.RemoveFilter();
             }
