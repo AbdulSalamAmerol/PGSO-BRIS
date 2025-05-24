@@ -28,8 +28,12 @@ namespace pgso
         private void InitializeControls()
         {
              dt_all.AutoGenerateColumns = false;
-    
-    
+
+            // In InitializeControls() or after InitializeComponent()
+            txt_Search.ForeColor = System.Drawing.Color.Gray;
+            txt_Search.Text = "Control Number/Venue";
+            txt_Search.GotFocus += Txt_Search_GotFocus;
+            txt_Search.LostFocus += Txt_Search_LostFocus;
 
             dt_all.AutoGenerateColumns = false;
             dt_all.DataSource = bindingSource;
@@ -55,7 +59,7 @@ namespace pgso
             
             dt_all.CellFormatting += dt_all_CellFormatting;
             //datagridview column header bg color
-            dt_all.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.LightBlue;
+            dt_all.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.MediumAquamarine;
             dt_all.EnableHeadersVisualStyles = false;
             dt_all.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 10, System.Drawing.FontStyle.Bold);
 
@@ -65,7 +69,23 @@ namespace pgso
         {
             LoadReservationData();
         }
+        private void Txt_Search_GotFocus(object sender, EventArgs e)
+        {
+            if (txt_Search.Text == "Control Number/Venue")
+            {
+                txt_Search.Text = "";
+                txt_Search.ForeColor = System.Drawing.Color.Black;
+            }
+        }
 
+        private void Txt_Search_LostFocus(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txt_Search.Text))
+            {
+                txt_Search.Text = "Control Number/Venue";
+                txt_Search.ForeColor = System.Drawing.Color.Gray;
+            }
+        }
         private void dt_all_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             // Check if the column is the total amount column
@@ -99,38 +119,35 @@ namespace pgso
                 {
                     connection.Open();
                     string query = @"
-                    SELECT DISTINCT
-                        r.fld_Control_number, 
-                        r.fld_Reservation_Status,
-                        r.fld_Created_At,
-                        r.fld_Total_Amount,
-                        '₱' + CONVERT(VARCHAR, CAST(r.fld_Total_Amount AS MONEY), 1) AS fld_Total_Amount,
-                        (SELECT TOP 1 v.fld_Venue_Name 
-                         FROM tbl_Reservation_Venues rv 
-                         JOIN tbl_Venue v ON rv.fk_VenueID = v.pk_VenueID 
-                         WHERE rv.fk_ReservationID = r.pk_ReservationID) AS fld_Venue_Name,
-                        rp.fld_First_Name,
-                        rp.fld_Surname,
-
-                        Date = STUFF((
-                            SELECT CHAR(10) +
-                                CASE
-                                    WHEN rv2.fld_Start_Date = rv2.fld_End_Date THEN
-                                        FORMAT(rv2.fld_Start_Date, 'MM/dd/yyyy')
-                                    ELSE
-                                        FORMAT(rv2.fld_Start_Date, 'MM/dd/yyyy') + ' - ' + FORMAT(rv2.fld_End_Date, 'MM/dd/yyyy')
-                                END
-                            FROM tbl_Reservation_Venues rv2
-                            WHERE rv2.fk_ReservationID = r.pk_ReservationID
-                            FOR XML PATH(''), TYPE
-                        ).value('.', 'NVARCHAR(MAX)'), 1, 1, '')
-                    FROM tbl_Reservation r
-                    LEFT JOIN tbl_Requesting_Person rp 
-                        ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-                    WHERE r.fld_Reservation_Type = 'Venue'";
-
-
-
+            SELECT DISTINCT
+                r.fld_Control_number, 
+                r.fld_Reservation_Status,
+                r.fld_Created_At,
+                r.fld_Total_Amount,
+                '₱' + CONVERT(VARCHAR, CAST(r.fld_Total_Amount AS MONEY), 1) AS fld_Total_Amount,
+                (SELECT TOP 1 v.fld_Venue_Name 
+                 FROM tbl_Reservation_Venues rv 
+                 JOIN tbl_Venue v ON rv.fk_VenueID = v.pk_VenueID 
+                 WHERE rv.fk_ReservationID = r.pk_ReservationID) AS fld_Venue_Name,
+                rp.fld_First_Name,
+                rp.fld_Surname,
+                Date = STUFF((
+                    SELECT CHAR(10) +
+                        CASE
+                            WHEN rv2.fld_Start_Date = rv2.fld_End_Date THEN
+                                FORMAT(rv2.fld_Start_Date, 'MM/dd/yyyy')
+                            ELSE
+                                FORMAT(rv2.fld_Start_Date, 'MM/dd/yyyy') + ' - ' + FORMAT(rv2.fld_End_Date, 'MM/dd/yyyy')
+                        END
+                    FROM tbl_Reservation_Venues rv2
+                    WHERE rv2.fk_ReservationID = r.pk_ReservationID
+                    FOR XML PATH(''), TYPE
+                ).value('.', 'NVARCHAR(MAX)'), 1, 1, '')
+            FROM tbl_Reservation r
+            LEFT JOIN tbl_Requesting_Person rp 
+                ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+            WHERE r.fld_Reservation_Type = 'Venue'
+            ORDER BY r.fld_Created_At DESC"; // <-- Added ORDER BY here
 
                     var dataTable = new DataTable();
                     using (var adapter = new SqlDataAdapter(query, connection))
@@ -396,13 +413,44 @@ namespace pgso
 
         private void Dt_all_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex >= 0 && e.Value != null)
+            // Format the total amount columns
+            if (dt_all.Columns[e.ColumnIndex].Name == "fld_Total_Amount" ||
+                dt_all.Columns[e.ColumnIndex].Name == "fld_Total")
             {
-                var columnName = dt_all.Columns[e.ColumnIndex].Name;
-                if (columnName.Contains("Amount") && decimal.TryParse(e.Value.ToString(), out decimal amount))
+                if (e.Value != null && decimal.TryParse(e.Value.ToString(), out decimal value))
                 {
-                    e.Value = amount.ToString("N2");
+                    e.Value = "₱" + value.ToString("N2");
                     e.FormattingApplied = true;
+                }
+            }
+
+            // Color the entire row based on the status value
+            if (dt_all.Columns.Contains("fld_Reservation_Status"))
+            {
+                var statusCell = dt_all.Rows[e.RowIndex].Cells["fld_Reservation_Status"];
+                if (statusCell.Value != null)
+                {
+                    string status = statusCell.Value.ToString();
+                    if (status.Equals("Confirmed", StringComparison.OrdinalIgnoreCase))
+                    {
+                        dt_all.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(225, 235, 245);
+                    }
+                    else if (status.Equals("Pending", StringComparison.OrdinalIgnoreCase))
+                    {
+                        dt_all.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(242, 239, 231);
+                        dt_all.Rows[e.RowIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+                    }
+                    else if (status.Equals("Cancelled", StringComparison.OrdinalIgnoreCase))
+                    {
+                        dt_all.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(255, 228, 225);
+                        dt_all.Rows[e.RowIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+                    }
+                    else
+                    {
+                        // Optional: reset to default if status is something else
+                        dt_all.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.White;
+                        dt_all.Rows[e.RowIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+                    }
                 }
             }
         }

@@ -16,6 +16,7 @@ namespace pgso
         private List<DateTime> reservedDates; // List to store reserved dates
         private string contactPlaceholder = "09685744...";
         private bool isContactPlaceholderActive = true;
+        private decimal additionalCharge = 0m;
         public frm_Create_Venuer_Reservation()
         {
             InitializeComponent();
@@ -397,8 +398,8 @@ namespace pgso
         private void CalculateTotalAmount()
         {
             if (decimal.TryParse(txt_rate.Text.Replace(",", ""), out decimal initialRate) &&
-                double.TryParse(txtx_Num_Hours.Text.Replace(",", ""), out double numberOfHours) &&
-                decimal.TryParse(txt_Succeeding_Hour.Text.Replace(",", ""), out decimal hourlyRate))
+    double.TryParse(txtx_Num_Hours.Text.Replace(",", ""), out double numberOfHours) &&
+    decimal.TryParse(txt_Succeeding_Hour.Text.Replace(",", ""), out decimal hourlyRate))
             {
                 decimal totalAmount = 0;
 
@@ -414,6 +415,8 @@ namespace pgso
                 {
                     totalAmount = initialRate + additionalCharge;
                 }
+
+                totalAmount += additionalCharge; // Add this line
 
                 txt_Total.Text = totalAmount.ToString("N2");
             }
@@ -492,11 +495,11 @@ namespace pgso
                     return;
 
                 string rateQuery = @"
-            SELECT pk_Venue_PricingID, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Aircon 
-            FROM tbl_Venue_Pricing 
-            WHERE fk_VenueID = @VenueID 
-            AND fk_Venue_ScopeID = @VenueScopeID 
-            AND fld_Rate_Type = @RateType";
+SELECT pk_Venue_PricingID, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Aircon, fld_Additional_Charge
+FROM tbl_Venue_Pricing 
+WHERE fk_VenueID = @VenueID 
+AND fk_Venue_ScopeID = @VenueScopeID 
+AND fld_Rate_Type = @RateType";
 
                 DBConnect();
                 using (SqlCommand rateCmd = new SqlCommand(rateQuery, conn))
@@ -512,7 +515,7 @@ namespace pgso
                             // Update rates
                             txt_rate.Text = reader["fld_First4Hrs_Rate"].ToString();
                             txt_Succeeding_Hour.Text = reader["fld_Hourly_Rate"].ToString();
-
+                            additionalCharge = reader["fld_Additional_Charge"] != DBNull.Value ? Convert.ToDecimal(reader["fld_Additional_Charge"]) : 0m;
                             // Update panel based on fld_Aircon
                             if (reader["fld_Aircon"] == DBNull.Value)
                             {

@@ -131,7 +131,7 @@
             this.dt_equipment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -190,20 +190,20 @@
             // lbl_Date
             // 
             this.lbl_Date.AutoSize = true;
-            this.lbl_Date.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Date.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
             this.lbl_Date.Location = new System.Drawing.Point(12, 9);
             this.lbl_Date.Name = "lbl_Date";
-            this.lbl_Date.Size = new System.Drawing.Size(69, 23);
+            this.lbl_Date.Size = new System.Drawing.Size(66, 24);
             this.lbl_Date.TabIndex = 5;
             this.lbl_Date.Text = "label2";
             // 
             // lbl_Venue
             // 
             this.lbl_Venue.AutoSize = true;
-            this.lbl_Venue.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Venue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.lbl_Venue.Location = new System.Drawing.Point(9, 46);
             this.lbl_Venue.Name = "lbl_Venue";
-            this.lbl_Venue.Size = new System.Drawing.Size(48, 16);
+            this.lbl_Venue.Size = new System.Drawing.Size(51, 16);
             this.lbl_Venue.TabIndex = 6;
             this.lbl_Venue.Text = "Venue";
             this.lbl_Venue.Visible = false;
@@ -211,10 +211,10 @@
             // lbl_Equipment
             // 
             this.lbl_Equipment.AutoSize = true;
-            this.lbl_Equipment.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Equipment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.lbl_Equipment.Location = new System.Drawing.Point(463, 46);
             this.lbl_Equipment.Name = "lbl_Equipment";
-            this.lbl_Equipment.Size = new System.Drawing.Size(76, 16);
+            this.lbl_Equipment.Size = new System.Drawing.Size(80, 16);
             this.lbl_Equipment.TabIndex = 7;
             this.lbl_Equipment.Text = "Equipment";
             this.lbl_Equipment.Visible = false;
@@ -223,7 +223,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(930, 397);
             this.Controls.Add(this.lbl_Equipment);
             this.Controls.Add(this.lbl_Venue);

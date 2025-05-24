@@ -19,35 +19,52 @@ namespace pgso
             dt_venue.RowPostPaint += dt_venue_RowPostPaint;
             dt_venue.CellFormatting += dt_venue_CellFormatting;
             dt_equipment.CellFormatting += dt_equipment_CellFormatting;
+
         }
         private void dt_venue_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dt_venue.Columns[e.ColumnIndex].Name == "fld_Reservation_Status" && e.Value != null)
+            if (dt_venue.Columns.Contains("fld_Reservation_Status"))
             {
-                string status = e.Value.ToString();
-                if (status == "Pending")
+                var statusCell = dt_venue.Rows[e.RowIndex].Cells["fld_Reservation_Status"];
+                if (statusCell.Value != null)
                 {
-                    e.CellStyle.BackColor = Color.Yellow;
-                }
-                else if (status == "Confirmed")
-                {
-                    e.CellStyle.BackColor = Color.Lime;
+                    string status = statusCell.Value.ToString();
+                    if (status == "Pending")
+                    {
+                        dt_venue.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(242, 239, 231);
+                    }
+                    else if (status == "Confirmed")
+                    {
+                        dt_venue.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(225, 235, 245);
+                    }
+                    else
+                    {
+                        dt_venue.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                    }
                 }
             }
         }
 
         private void dt_equipment_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dt_equipment.Columns[e.ColumnIndex].Name == "fld_Reservation_StatusE" && e.Value != null)
+            if (dt_equipment.Columns.Contains("fld_Reservation_StatusE"))
             {
-                string status = e.Value.ToString();
-                if (status == "Pending")
+                var statusCell = dt_equipment.Rows[e.RowIndex].Cells["fld_Reservation_StatusE"];
+                if (statusCell.Value != null)
                 {
-                    e.CellStyle.BackColor = Color.Yellow;
-                }
-                else if (status == "Confirmed")
-                {
-                    e.CellStyle.BackColor = Color.Lime;
+                    string status = statusCell.Value.ToString();
+                    if (status == "Pending")
+                    {
+                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(242, 239, 231);
+                    }
+                    else if (status == "Confirmed")
+                    {
+                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(225, 235, 245);
+                    }
+                    else
+                    {
+                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                    }
                 }
             }
         }
