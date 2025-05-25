@@ -168,8 +168,8 @@ namespace pgso
 
             if (hasVenueReservations)
             {
-                displayText.AppendLine($"Venue: Request: {venuePending}");
-                displayText.Append($"          Approved: {venueConfirmed}");
+                displayText.AppendLine($"Venue:Request: {venuePending}");
+                displayText.Append($"Approved: {venueConfirmed}");
             }
 
             if (hasEquipmentReservations)
@@ -179,8 +179,8 @@ namespace pgso
                 {
                     displayText.AppendLine(); // This adds the newline at the end of venue section
                 }
-                displayText.AppendLine($"Equipment: Request: {equipmentPending}");
-                displayText.Append($"              Approved: {equipmentConfirmed}");
+                displayText.AppendLine($"Equipment:Request: {equipmentPending}");
+                displayText.Append($"Approved: {equipmentConfirmed}");
             }
 
             lbl_Reservations.Text = displayText.ToString();
