@@ -60,7 +60,6 @@ namespace pgso
         {
 
             dgv_Billing_Records.CellClick += dgv_Billing_Records_CellContentClick;
-            sb_Billing_Search_Bar.AutoSize = false;
             this.MinimumSize = new Size(1920, 1200);
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.StartPosition = FormStartPosition.Manual;
@@ -383,7 +382,7 @@ namespace pgso
                 
                 }
                 // Left align for other columns
-                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             }
         }
 
@@ -894,10 +893,10 @@ namespace pgso
             Equipment.ShowDialog();
         }
 
-      
+        private void cmb_Billing_Filter_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
 
-
-
+        }
     }
 
 }

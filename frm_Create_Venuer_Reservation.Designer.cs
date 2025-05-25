@@ -87,6 +87,7 @@ namespace pgso
             this.label2 = new System.Windows.Forms.Label();
             this.txt_firstname = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btn_Billing = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel_Aircon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_participants)).BeginInit();
@@ -96,6 +97,7 @@ namespace pgso
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.panel1.Controls.Add(this.btn_Billing);
             this.panel1.Controls.Add(this.panel_Aircon);
             this.panel1.Controls.Add(this.label28);
             this.panel1.Controls.Add(this.txt_Middle_Name);
@@ -760,6 +762,16 @@ namespace pgso
             this.label1.TabIndex = 0;
             this.label1.Text = "Requesting Person:";
             // 
+            // btn_Billing
+            // 
+            this.btn_Billing.Location = new System.Drawing.Point(294, 528);
+            this.btn_Billing.Name = "btn_Billing";
+            this.btn_Billing.Size = new System.Drawing.Size(105, 30);
+            this.btn_Billing.TabIndex = 68;
+            this.btn_Billing.Text = "Billing";
+            this.btn_Billing.UseVisualStyleBackColor = true;
+            this.btn_Billing.Click += new System.EventHandler(this.btn_Billing_Click);
+            // 
             // frm_Create_Venuer_Reservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -846,5 +858,6 @@ namespace pgso
         private System.Windows.Forms.TextBox txt_Middle_Name;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Panel panel_Aircon;
+        private System.Windows.Forms.Button btn_Billing;
     }
 }

@@ -66,11 +66,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.cmb_Billing_Filter = new System.Windows.Forms.ComboBox();
             this.btn_Reports = new System.Windows.Forms.Button();
             this.sb_Billing_Search_Bar = new System.Windows.Forms.TextBox();
-            this.btn_Create_Venue_Reservation = new System.Windows.Forms.Button();
             this.cmb_Billing_Sort = new System.Windows.Forms.ComboBox();
             this.flp_Top = new System.Windows.Forms.FlowLayoutPanel();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
@@ -162,7 +160,7 @@
             this.dgv_Billing_Records.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgv_Billing_Records.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_Billing_Records.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            this.dgv_Billing_Records.Location = new System.Drawing.Point(11, 118);
+            this.dgv_Billing_Records.Location = new System.Drawing.Point(11, 50);
             this.dgv_Billing_Records.Margin = new System.Windows.Forms.Padding(0);
             this.dgv_Billing_Records.MultiSelect = false;
             this.dgv_Billing_Records.Name = "dgv_Billing_Records";
@@ -179,7 +177,7 @@
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgv_Billing_Records.RowsDefaultCellStyle = dataGridViewCellStyle14;
             this.dgv_Billing_Records.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Billing_Records.Size = new System.Drawing.Size(975, 1032);
+            this.dgv_Billing_Records.Size = new System.Drawing.Size(975, 1100);
             this.dgv_Billing_Records.TabIndex = 0;
             this.dgv_Billing_Records.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Billing_Records_CellContentClick);
             this.dgv_Billing_Records.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgv_Billing_Records_CellFormatting);
@@ -378,7 +376,7 @@
             this.tlp_Billing_UControls.MinimumSize = new System.Drawing.Size(997, 1150);
             this.tlp_Billing_UControls.Name = "tlp_Billing_UControls";
             this.tlp_Billing_UControls.RowCount = 2;
-            this.tlp_Billing_UControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 118F));
+            this.tlp_Billing_UControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tlp_Billing_UControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlp_Billing_UControls.Size = new System.Drawing.Size(997, 1150);
             this.tlp_Billing_UControls.TabIndex = 4;
@@ -390,62 +388,45 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.cmb_Billing_Filter);
             this.panel1.Controls.Add(this.btn_Reports);
             this.panel1.Controls.Add(this.sb_Billing_Search_Bar);
-            this.panel1.Controls.Add(this.btn_Create_Venue_Reservation);
             this.panel1.Controls.Add(this.cmb_Billing_Sort);
             this.panel1.Location = new System.Drawing.Point(11, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(975, 118);
+            this.panel1.Size = new System.Drawing.Size(975, 50);
             this.panel1.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(10, 91);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(3, 19);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 16);
+            this.label3.Size = new System.Drawing.Size(77, 20);
             this.label3.TabIndex = 16;
             this.label3.Text = "SEARCH";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(413, 91);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(284, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 16);
+            this.label1.Size = new System.Drawing.Size(65, 20);
             this.label1.TabIndex = 15;
             this.label1.Text = "FILTER";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(722, 92);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(562, 19);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 16);
+            this.label2.Size = new System.Drawing.Size(53, 20);
             this.label2.TabIndex = 14;
             this.label2.Text = "SORT";
-            // 
-            // button1
-            // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.button1.Location = new System.Drawing.Point(183, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 54);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Create Equipment Reservation";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // cmb_Billing_Filter
             // 
@@ -456,11 +437,12 @@
             this.cmb_Billing_Filter.FormattingEnabled = true;
             this.cmb_Billing_Filter.IntegralHeight = false;
             this.cmb_Billing_Filter.ItemHeight = 16;
-            this.cmb_Billing_Filter.Location = new System.Drawing.Point(489, 84);
+            this.cmb_Billing_Filter.Location = new System.Drawing.Point(353, 14);
             this.cmb_Billing_Filter.Margin = new System.Windows.Forms.Padding(0);
             this.cmb_Billing_Filter.Name = "cmb_Billing_Filter";
             this.cmb_Billing_Filter.Size = new System.Drawing.Size(182, 24);
             this.cmb_Billing_Filter.TabIndex = 0;
+            this.cmb_Billing_Filter.SelectedIndexChanged += new System.EventHandler(this.cmb_Billing_Filter_SelectedIndexChanged_1);
             // 
             // btn_Reports
             // 
@@ -469,9 +451,9 @@
             this.btn_Reports.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Reports.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Reports.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Reports.Location = new System.Drawing.Point(810, 5);
+            this.btn_Reports.Location = new System.Drawing.Point(852, 6);
             this.btn_Reports.Name = "btn_Reports";
-            this.btn_Reports.Size = new System.Drawing.Size(155, 54);
+            this.btn_Reports.Size = new System.Drawing.Size(100, 39);
             this.btn_Reports.TabIndex = 1;
             this.btn_Reports.Text = "REPORTS";
             this.btn_Reports.UseVisualStyleBackColor = false;
@@ -482,36 +464,22 @@
             this.sb_Billing_Search_Bar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.sb_Billing_Search_Bar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.sb_Billing_Search_Bar.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.sb_Billing_Search_Bar.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sb_Billing_Search_Bar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sb_Billing_Search_Bar.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.sb_Billing_Search_Bar.Location = new System.Drawing.Point(95, 84);
+            this.sb_Billing_Search_Bar.Location = new System.Drawing.Point(83, 16);
             this.sb_Billing_Search_Bar.Margin = new System.Windows.Forms.Padding(0);
+            this.sb_Billing_Search_Bar.MinimumSize = new System.Drawing.Size(0, 24);
             this.sb_Billing_Search_Bar.Name = "sb_Billing_Search_Bar";
-            this.sb_Billing_Search_Bar.Size = new System.Drawing.Size(261, 23);
+            this.sb_Billing_Search_Bar.Size = new System.Drawing.Size(182, 19);
             this.sb_Billing_Search_Bar.TabIndex = 1;
             this.sb_Billing_Search_Bar.TextChanged += new System.EventHandler(this.sb_Billing_Search_Bar_TextChanged);
-            // 
-            // btn_Create_Venue_Reservation
-            // 
-            this.btn_Create_Venue_Reservation.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_Create_Venue_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.btn_Create_Venue_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Create_Venue_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Create_Venue_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Create_Venue_Reservation.Location = new System.Drawing.Point(13, 5);
-            this.btn_Create_Venue_Reservation.Name = "btn_Create_Venue_Reservation";
-            this.btn_Create_Venue_Reservation.Size = new System.Drawing.Size(155, 54);
-            this.btn_Create_Venue_Reservation.TabIndex = 11;
-            this.btn_Create_Venue_Reservation.Text = "Create Venue Reservation";
-            this.btn_Create_Venue_Reservation.UseVisualStyleBackColor = false;
-            this.btn_Create_Venue_Reservation.Click += new System.EventHandler(this.btn_Create_Venue_Reservation_Click);
             // 
             // cmb_Billing_Sort
             // 
             this.cmb_Billing_Sort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.cmb_Billing_Sort.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_Billing_Sort.FormattingEnabled = true;
-            this.cmb_Billing_Sort.Location = new System.Drawing.Point(785, 84);
+            this.cmb_Billing_Sort.Location = new System.Drawing.Point(618, 15);
             this.cmb_Billing_Sort.Margin = new System.Windows.Forms.Padding(0);
             this.cmb_Billing_Sort.Name = "cmb_Billing_Sort";
             this.cmb_Billing_Sort.Size = new System.Drawing.Size(180, 24);
@@ -611,10 +579,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btn_Reports;
         private System.Windows.Forms.ComboBox cmb_Billing_Filter;
-        private System.Windows.Forms.Button btn_Create_Venue_Reservation;
         private System.Windows.Forms.ComboBox cmb_Billing_Sort;
-        private System.Windows.Forms.TextBox sb_Billing_Search_Bar;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Control_Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Date_Created;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Start_Date;
@@ -633,5 +598,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox sb_Billing_Search_Bar;
     }
 }

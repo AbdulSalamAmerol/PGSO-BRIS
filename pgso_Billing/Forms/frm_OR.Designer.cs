@@ -32,7 +32,6 @@
             this.btn_OR_Confirm = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -40,9 +39,9 @@
             // txtORNumber
             // 
             this.txtORNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtORNumber.Location = new System.Drawing.Point(222, 86);
+            this.txtORNumber.Location = new System.Drawing.Point(250, 22);
             this.txtORNumber.Name = "txtORNumber";
-            this.txtORNumber.Size = new System.Drawing.Size(181, 23);
+            this.txtORNumber.Size = new System.Drawing.Size(190, 23);
             this.txtORNumber.TabIndex = 2;
             // 
             // btn_OR_Confirm
@@ -50,7 +49,7 @@
             this.btn_OR_Confirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
             this.btn_OR_Confirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_OR_Confirm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_OR_Confirm.Location = new System.Drawing.Point(165, 144);
+            this.btn_OR_Confirm.Location = new System.Drawing.Point(207, 59);
             this.btn_OR_Confirm.Name = "btn_OR_Confirm";
             this.btn_OR_Confirm.Size = new System.Drawing.Size(110, 50);
             this.btn_OR_Confirm.TabIndex = 3;
@@ -63,7 +62,7 @@
             this.btn_Cancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
             this.btn_Cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Cancel.Location = new System.Drawing.Point(293, 144);
+            this.btn_Cancel.Location = new System.Drawing.Point(330, 59);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(110, 50);
             this.btn_Cancel.TabIndex = 4;
@@ -76,33 +75,21 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.btn_Cancel);
-            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btn_OR_Confirm);
             this.panel1.Controls.Add(this.txtORNumber);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(430, 225);
+            this.panel1.Size = new System.Drawing.Size(460, 122);
             this.panel1.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(11, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(311, 50);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "OFFICIAL RECEIPT NUMBER\r\nACKNOWLEDGEMENT FORM";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(24, 89);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(11, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(196, 17);
+            this.label2.Size = new System.Drawing.Size(233, 20);
             this.label2.TabIndex = 5;
             this.label2.Text = "OFFICIAL RECEIPT NUMBER ";
             // 
@@ -111,7 +98,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            this.ClientSize = new System.Drawing.Size(430, 225);
+            this.ClientSize = new System.Drawing.Size(460, 122);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -130,7 +117,6 @@
         private System.Windows.Forms.Button btn_OR_Confirm;
         private System.Windows.Forms.Button btn_Cancel;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
     }
 }

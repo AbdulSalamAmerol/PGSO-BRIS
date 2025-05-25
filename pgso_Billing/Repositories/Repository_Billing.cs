@@ -596,7 +596,9 @@ namespace pgso.Billing.Repositories
                             rp.fld_Requesting_Office,
                             r.fld_OR,
                             p.fld_Amount_Paid_Overtime,
-                            r.fld_OT_Payment_Status
+                            r.fld_OT_Payment_Status,
+                            r.fld_OR_Extension,
+                            r.fld_Extension_Status
                         FROM dbo.tbl_Reservation r
                         LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
                         LEFT JOIN dbo.tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
@@ -668,7 +670,9 @@ namespace pgso.Billing.Repositories
                                     fld_Requesting_Office = reader.IsDBNull(47) ? "" : reader.GetString(47),
                                     fld_OR = reader.IsDBNull(48) ? 0 : reader.GetInt32(48),
                                     fld_Amount_Paid_Overtime = reader.IsDBNull(49) ? 0 : reader.GetDecimal(49),
-                                    fld_OT_Payment_Status = reader.IsDBNull(50) ? "" : reader.GetString(50)
+                                    fld_OT_Payment_Status = reader.IsDBNull(50) ? "" : reader.GetString(50),
+                                    fld_OR_Extension = reader.IsDBNull(51) ? 0 : reader.GetInt32(51),    
+                                    fld_Extension_Status = reader.IsDBNull(52) ? "" : reader.GetString(52)
                                 };
                             }
                         }
@@ -965,20 +969,34 @@ namespace pgso.Billing.Repositories
             try
             {
                 string query = @"
-            UPDATE p
-            SET p.fld_Amount_Paid_Overtime = (
-                SELECT fld_Overtime_Fee
-                FROM tbl_Payment p2
-                JOIN tbl_Reservation r2 ON r2.pk_ReservationID = p2.fk_ReservationID
-                WHERE r2.pk_ReservationID = @reservationID
-            )
-            FROM tbl_Payment p
-            JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
-            WHERE r.pk_ReservationID = @reservationID;
+        -- Update Amount Paid for Overtime
+        UPDATE p
+        SET p.fld_Amount_Paid_Overtime = (
+            SELECT fld_Overtime_Fee
+            FROM tbl_Payment p2
+            JOIN tbl_Reservation r2 ON r2.pk_ReservationID = p2.fk_ReservationID
+            WHERE r2.pk_ReservationID = @reservationID
+        )
+        FROM tbl_Payment p
+        JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
+        WHERE r.pk_ReservationID = @reservationID;
 
-            UPDATE tbl_Reservation
-            SET fld_OR_Extension = @orExtension
-            WHERE pk_ReservationID = @reservationID;
+        -- Update OR Extension
+        UPDATE tbl_Reservation
+        SET fld_OR_Extension = @orExtension
+        WHERE pk_ReservationID = @reservationID;
+
+        -- Only update fld_Extension_Status to 'Confirmed' if fld_Overtime_Fee is not null and greater than 0
+        UPDATE tbl_Reservation
+        SET fld_Extension_Status = 'Confirmed'
+        WHERE pk_ReservationID = @reservationID
+        AND EXISTS (
+            SELECT 1
+            FROM tbl_Payment p
+            WHERE p.fk_ReservationID = @reservationID
+            AND p.fld_Overtime_Fee IS NOT NULL
+            AND p.fld_Overtime_Fee > 0
+        );
         ";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))

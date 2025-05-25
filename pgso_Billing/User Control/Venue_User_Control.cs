@@ -88,10 +88,6 @@ namespace pgso.pgso_Billing
             }
         }
 
-
-
-
-
         // Method to load billing details into the controls
         public void LoadBillingDetails(Model_Billing billingDetails)
         {
@@ -106,15 +102,26 @@ namespace pgso.pgso_Billing
             lbl_Origin_Request.Text = billingDetails.fld_Request_Origin;
             lbl_Contact_Number.Text = billingDetails.fld_Contact_Number;
             lbl_Address.Text = billingDetails.fld_Requesting_Person_Address;
-            bool showOR = billingDetails.fld_OR != null && billingDetails.fld_OR != 0;
-            lbl_OR.Visible = tb_OR.Visible = showOR;
-
-            if (showOR)
+            //bool showOR = billingDetails.fld_OR != null && billingDetails.fld_OR != 0;
+            //lbl_OR.Visible = tb_OR.Visible = showOR;
+            lbl_OR_2.Text = billingDetails.fld_OR_Extension.ToString();
+            btn_Extension_Slip.Enabled = (billingDetails.fld_OT_Hours > 0);
+            btn_Confirm_Reservation.Enabled = (billingDetails.fld_Reservation_Status == "Pending");
+            btn_Cancellation_Slip.Enabled = (billingDetails.fld_Reservation_Status == "Cancelled");
+            btn_Cancel_Reservation.Enabled =
+            (billingDetails.fld_Reservation_Status == "Pending" || billingDetails.fld_Reservation_Status == "Confirmed")
+            && billingDetails.fld_OR_Extension <= 0;
+            newbtn_Extend_Venue.Enabled = (billingDetails.fld_Reservation_Status == "Confirmed");
+            btn_Change_Reservation_info.Enabled = true;
+            
+            tb_Extension_Status.Text = billingDetails.fld_Extension_Status;
+            if (billingDetails.fld_Reservation_Status == "Cancelled" || billingDetails.fld_OT_Hours > 0)
             {
-                lbl_OR.Text = billingDetails.fld_OR.ToString();
+                btn_Change_Reservation_info.Enabled = false;
             }
 
-
+            lbl_OR.Text = billingDetails.fld_OR.ToString();
+            lbl_OR.Visible = billingDetails.fld_OR > 0;
             // Format reservation dates (start and end)
             lbl_Reservation_Dates.Text = $"{billingDetails.fld_Start_Date.ToString("MM/dd/yyyy")} - {billingDetails.fld_End_Date.ToString("MM/dd/yyyy")}";
 
@@ -123,22 +130,6 @@ namespace pgso.pgso_Billing
 
             lbl_Number_Of_Participants.Text = billingDetails.fld_Number_Of_Participants.ToString();
             lbl_Reservation_Status.Text = billingDetails.fld_Reservation_Status;
-
-            switch (billingDetails.fld_Reservation_Status)
-            {
-                case "Pending":
-                    lbl_Reservation_Status.BackColor = Color.FromArgb(242, 239, 231);
-                    break;
-                case "Confirmed":
-                    lbl_Reservation_Status.BackColor = Color.FromArgb(225, 235, 245);
-                    break;
-                case "Cancelled":
-                    lbl_Reservation_Status.BackColor = Color.FromArgb(255, 228, 225);
-                    break;
-                default:
-                    lbl_Reservation_Status.BackColor = SystemColors.Control; // default or fallback color
-                    break;
-            }
 
             // Venue details
             lbl_Venue_Name.Text = billingDetails.fld_Venue_Name;
@@ -176,8 +167,9 @@ namespace pgso.pgso_Billing
             }
 
 
-
+            
             lbl_Rate_Type.Text = billingDetails.fld_Rate_Type;
+            lbl_Rate_Type2.Text = billingDetails.fld_Rate_Type;
             lbl_Is_Aircon.Text = billingDetails.fld_Aircon ? "Yes" : "No";
 
             // Venue pricing details (based on hourly charges, etc.)
@@ -235,8 +227,6 @@ namespace pgso.pgso_Billing
             lbl_Refund_Amount.Text = (billingDetails.fld_Cancellation_Fee).ToString("C");
 
             //lbl_Final_Amount_Paid.Text = (billingDetails.fld_Final_Amount_Paid).ToString("C");
-            tb13.Visible = false;
-            lbl_Final_Amount_Paid.Visible = false;
             lbl_Overtime_Fee.Text = billingDetails.fld_Overtime_Fee.ToString("C");
             textBox24.Text = (billingDetails.fld_First4Hrs_Rate / 4).ToString("C");
             lbl_Total_Amount_2.Text = (billingDetails.fld_Overtime_Fee+billingDetails.fld_Cancellation_Fee).ToString("C");
@@ -247,7 +237,6 @@ namespace pgso.pgso_Billing
             lbl_Paid_Amount_2.Text = billingDetails.fld_Amount_Paid_Overtime.ToString("C");
 
             lbl_Balance_2.Text = (billingDetails.fld_Overtime_Fee - billingDetails.fld_Amount_Paid_Overtime).ToString("C");
-            lbl_Balance_3.Text = (billingDetails.fld_Cancellation_Fee - billingDetails.fld_Cancellation_Fee).ToString("C");
             Console.WriteLine("WHATAFAKER  "+billingDetails.fld_Amount_Paid_Overtime);
         }
 
@@ -262,8 +251,10 @@ namespace pgso.pgso_Billing
 
             if (billingDetails.fld_Overtime_Fee == 0 && billingDetails.fld_Cancellation_Fee == 0)
             {
-               
+
                 // Hide all specified controls
+                lbl_OR_2.Visible = false;
+                OR2.Visible = false;
                 tb1.Visible = false;
                 tb2.Visible = false;
                 tb3.Visible = false;
@@ -276,26 +267,26 @@ namespace pgso.pgso_Billing
                 tb10.Visible = false;
                 tb11.Visible = false;
                 tb12.Visible = false;
-                tb13.Visible = false;
-                tb14.Visible = false;
                 lbl_h1.Visible = false;
                 lbl_h2.Visible = false;
-         
+                tb_Rate_Type.Visible = false;
+                tb_Status.Visible = false;
                 label34.Visible = false;
            
-                label38.Visible = false;
         
                 label45.Visible = false;
                 label46.Visible = false;
-             
+
+                lbl_Rate_Type2.Visible = false;
+                tb_Extension_Status.Visible = false;
 
 
 
-        
-  
-     
-             
-          
+
+
+
+
+
                 label19.Visible = false;
                 label20.Visible = false;
             
@@ -303,8 +294,6 @@ namespace pgso.pgso_Billing
            
                 label34.Visible = false;
               
-                lbl_Balance_3.Visible = false;
-                lbl_Final_Amount_Paid.Visible = false;
                 lbl_OT_Hours.Visible = false;
                 lbl_OT_Hourly_Charge.Visible = false;
                 lbl_Overtime_Fee.Visible = false;
@@ -315,8 +304,10 @@ namespace pgso.pgso_Billing
             }
             if (billingDetails.fld_Overtime_Fee > 0)
             {
-               
-                
+                tb_Rate_Type.Visible = true;
+                tb_Status.Visible = true;
+                lbl_OR_2.Visible = (billingDetails.fld_OR_Extension > 0);
+                OR2.Visible = true;
                 tb1.Visible = true;
                 tb2.Visible = true;
                 tb3.Visible = true;
@@ -329,8 +320,6 @@ namespace pgso.pgso_Billing
                 tb10.Visible = true;
                 tb11.Visible = true;
                 tb12.Visible = true;
-                tb13.Visible = true;
-                tb14.Visible = true;
 
                 lbl_h1.Visible = true;
                 lbl_h2.Visible = true;
@@ -338,7 +327,6 @@ namespace pgso.pgso_Billing
 
                 label34.Visible = true;
         
-                label38.Visible = true;
 
                 label45.Visible = true;
                 label46.Visible = true;
@@ -351,8 +339,6 @@ namespace pgso.pgso_Billing
                 label27.Visible = true;
       
                 
-                lbl_Balance_3.Visible = true;
-                lbl_Final_Amount_Paid.Visible = true;
                 lbl_OT_Hours.Visible = true;
                 lbl_OT_Hourly_Charge.Visible = true;
                 lbl_Overtime_Fee.Visible = true;
@@ -360,14 +346,20 @@ namespace pgso.pgso_Billing
                 lbl_Total_Amount_2.Visible = true;
                 lbl_Paid_Amount_2.Visible = true;
                 lbl_Balance_2.Visible = true;
-
+                lbl_Rate_Type2.Visible = true;
+                tb_Extension_Status.Visible = true;
 
 
             }
 
             if (billingDetails.fld_Reservation_Status == "Cancelled")
             {
-                
+                tb_Rate_Type.Visible = true;
+                tb_Status.Visible = true;
+                lbl_Rate_Type2.Visible = true;
+                tb_Extension_Status.Visible = true;
+                lbl_OR_2.Visible = (billingDetails.fld_OR_Extension > 0);
+                OR2.Visible = true;
                 tb1.Visible = true;
                 tb2.Visible = true;
                 tb3.Visible = true;
@@ -380,8 +372,6 @@ namespace pgso.pgso_Billing
                 tb10.Visible = true;
                 tb11.Visible = true;
                 tb12.Visible = true;
-                tb13.Visible = true;
-                tb14.Visible = true;
 
                 lbl_h1.Visible = true;
                 lbl_h2.Visible = true;
@@ -389,7 +379,6 @@ namespace pgso.pgso_Billing
 
                 label34.Visible = true;
      
-                label38.Visible = true;
 
                 label45.Visible = true;
                 label46.Visible = true;
@@ -402,8 +391,6 @@ namespace pgso.pgso_Billing
                 label27.Visible = true;
           
 
-                lbl_Balance_3.Visible = true;
-                lbl_Final_Amount_Paid.Visible = true;
                 lbl_OT_Hours.Visible = false;
                 lbl_OT_Hourly_Charge.Visible = false;
                 lbl_Overtime_Fee.Visible = false;

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -345,7 +345,7 @@ namespace pgso
                 if (int.TryParse(txt_Quantity.Text, out int quantity) && quantity > 0 &&
                     int.TryParse(txt_Days_Of_Use.Text, out int numberOfDays) && numberOfDays > 0)
                 {
-
+                    
 
                     // Calculate the total amount by adding the rate and subsequent total, then multiplying by the quantity
                     decimal totalAmount = ((rate * quantity) + (subsequentRate * quantity * (numberOfDays - 1)));
@@ -503,7 +503,6 @@ namespace pgso
                 {
                     // Get pricing ID
                     cmd = new SqlCommand(@"
-
                 SELECT pk_Equipment_PricingID 
                 FROM tbl_Equipment_Pricing 
                 WHERE fk_EquipmentID = @FacilityID",
@@ -511,32 +510,12 @@ namespace pgso
 
                     cmd.Parameters.AddWithValue("@FacilityID", equipment.EquipmentID);
                     int venuePricingID = (int)cmd.ExecuteScalar();
-                    // ABZ - AKO NAG ADD NITO TO 
-                    // Check remaining stock
-                    cmd = new SqlCommand(@"
-                    SELECT fld_Remaining_Stock 
-                    FROM tbl_Equipment 
-                    WHERE pk_EquipmentID = @EquipmentID", conn, transaction);
-
-                    cmd.Parameters.AddWithValue("@EquipmentID", equipment.EquipmentID);
-                    int remainingStock = (int)cmd.ExecuteScalar();
-
-                    if (equipment.Quantity > remainingStock)
-                    {
-                        // Handle the case when not enough stock is available
-                        throw new InvalidOperationException($"? Not enough stock for equipment ID {equipment.EquipmentID}. Requested: {equipment.Quantity}, Available: {remainingStock}");
-                        // OR: Show MessageBox / log and continue
-                        // MessageBox.Show($"Not enough stock for equipment {equipment.EquipmentID}.");
-                        // continue;
-                    }
-
 
                     // Insert into tbl_Reservation_Equipment with dates and status
                     cmd = new SqlCommand(@"
                 INSERT INTO tbl_Reservation_Equipment 
                 (fk_ReservationID, fk_EquipmentID, fk_Equipment_PricingID, fld_Quantity, fld_Number_Of_Days, fld_Total_Equipment_Cost, fld_Start_Date_Eq, fld_End_Date_Eq, fld_Equipment_Status) 
                 VALUES (@fk_ReservationID, @fk_EquipmentID, @fk_Equipment_PricingID, @fld_Quantity, @fld_Number_Of_Days, @fld_Total_Equipment_Cost, @fld_Start_Date_Eq, @fld_End_Date_Eq, @fld_Equipment_Status)",
-
                         conn, transaction);
 
                     cmd.Parameters.AddWithValue("@fk_ReservationID", reservationID);
@@ -544,23 +523,18 @@ namespace pgso
                     cmd.Parameters.AddWithValue("@fk_Equipment_PricingID", venuePricingID);
                     cmd.Parameters.AddWithValue("@fld_Quantity", equipment.Quantity);
                     cmd.Parameters.AddWithValue("@fld_Number_Of_Days", txt_Days_Of_Use.Text);
-
                     cmd.Parameters.AddWithValue("@fld_Total_Equipment_Cost", equipment.CalculatedTotal);
                     cmd.Parameters.AddWithValue("@fld_Start_Date_Eq", Date_Start.Value);
                     cmd.Parameters.AddWithValue("@fld_End_Date_Eq", Date_End.Value);
                     cmd.Parameters.AddWithValue("@fld_Equipment_Status", "Pending");
 
-
-
                     cmd.ExecuteNonQuery();
 
                     // Update available quantity
                     cmd = new SqlCommand(@"
-
                 UPDATE tbl_Equipment 
                 SET fld_Remaining_Stock = fld_Remaining_Stock - @Quantity 
                 WHERE pk_EquipmentID = @EquipmentID",
-
                         conn, transaction);
 
                     cmd.Parameters.AddWithValue("@Quantity", equipment.Quantity);
@@ -568,7 +542,6 @@ namespace pgso
 
                     cmd.ExecuteNonQuery();
                 }
-
 
                 transaction.Commit();
                 MessageBox.Show("Reservation submitted successfully!");

@@ -44,22 +44,7 @@ namespace pgso.pgso_Billing.User_Control
         public void LoadBillingDetails(Model_Billing billingDetailsList)
         {
             pnl_Billing_Details.Visible = true;
-            lbl_Reservation_Status.Text = billingDetailsList.fld_Reservation_Status;
-            switch (billingDetailsList.fld_Reservation_Status)
-            {
-                case "Pending":
-                    lbl_Reservation_Status.BackColor = Color.FromArgb(242, 239, 231);
-                    break;
-                case "Confirmed":
-                    lbl_Reservation_Status.BackColor = Color.FromArgb(225, 235, 245);
-                    break;
-                case "Cancelled":
-                    lbl_Reservation_Status.BackColor = Color.FromArgb(255, 228, 225);
-                    break;
-                default:
-                    lbl_Reservation_Status.BackColor = SystemColors.Control;
-                    break;
-            }
+        
             btn_Delete_Equipment_Billing.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
             btn_Add_Equipment_Billing.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
             btn_Return.Enabled = (billingDetailsList.fld_Reservation_Status == "Confirmed");
@@ -291,6 +276,16 @@ namespace pgso.pgso_Billing.User_Control
             {
                 returnSlip.ShowDialog();
             }
+        }
+
+        private void btn_Confirm_Reservation_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_Cancel_Reservation_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

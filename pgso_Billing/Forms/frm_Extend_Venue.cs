@@ -38,7 +38,7 @@ namespace pgso.pgso_Billing.Forms
                 {
                     // Check if OR extension is 0 or less
                     if (billingData.fld_OR_Extension <= 0)
-                        tb_OR_Extension.Text = "Enter Official Receipt";
+                        tb_OR_Extension.Text = "Enter Official Receipt Number";
                     else
                         tb_OR_Extension.Text = billingData.fld_OR_Extension.ToString();
 

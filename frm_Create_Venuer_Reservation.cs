@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -367,7 +367,6 @@ namespace pgso
             if (combo_venues.SelectedValue != null &&
                 int.TryParse(combo_venues.SelectedValue.ToString(), out selectedVenueID))
             {
-
                 // Load reservation types and scope for the new venue
                 LoadReservationTypesByVenue(selectedVenueID);
                 LoadVenueScope(selectedVenueID);
@@ -400,19 +399,15 @@ namespace pgso
                 double.TryParse(txtx_Num_Hours.Text.Replace(",", ""), out double numberOfHours) &&
                 decimal.TryParse(txt_Succeeding_Hour.Text.Replace(",", ""), out decimal hourlyRate))
             {
-                decimal totalAmount = 0;
+                decimal totalAmount;
 
-                // Fetch the additional charge based on the selected venue and scope
-                decimal additionalCharge = GetAdditionalChargeForVenue(selectedVenueID, (int)combo_scope.SelectedValue);
-
-                // Calculate the total amount
                 if (numberOfHours > 4)
                 {
-                    totalAmount = initialRate + (hourlyRate * (decimal)(numberOfHours - 4)) + additionalCharge;
+                    totalAmount = initialRate + (hourlyRate * (decimal)(numberOfHours - 4));
                 }
                 else
                 {
-                    totalAmount = initialRate + additionalCharge;
+                    totalAmount = initialRate;
                 }
 
                 txt_Total.Text = totalAmount.ToString("N2");
@@ -424,66 +419,9 @@ namespace pgso
         }
 
 
-
         //ilagaya yung sinend
 
         // Load rate(from db) based on selected venue, venue scope, reservation type, and aircon selection
-
-        // This method fetches the additional charge for the venue and scope
-        private decimal GetAdditionalChargeForVenue(int venueID, int venueScopeID)
-        {
-            decimal additionalCharge = 0;
-
-            try
-            {
-                // Ensure the connection is open
-                if (conn.State == System.Data.ConnectionState.Closed)
-                {
-                    conn.Open();
-                }
-
-                // Close any existing DataReader if it's still open
-                if (conn != null && conn.State == System.Data.ConnectionState.Open)
-                {
-                    using (SqlCommand cmd = new SqlCommand(@"
-                SELECT fld_Additional_Charge 
-                FROM dbo.tbl_Venue_Pricing 
-                WHERE fk_VenueID = @VenueID 
-                AND fk_Venue_ScopeID = @VenueScopeID", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@VenueID", venueID);
-                        cmd.Parameters.AddWithValue("@VenueScopeID", venueScopeID);
-
-                        // Execute the command to retrieve the additional charge
-                        var result = cmd.ExecuteScalar();
-                        if (result != null)
-                        {
-                            additionalCharge = Convert.ToDecimal(result);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle the exception (you can log or show a message)
-                MessageBox.Show("Error retrieving additional charge: " + ex.Message);
-            }
-            finally
-            {
-                // Close the connection after the operation
-                if (conn.State == System.Data.ConnectionState.Open)
-                {
-                    conn.Close();
-                }
-            }
-
-            return additionalCharge;
-        }
-
-
-
-        // Load rate based on selected venue, venue scope, reservation type, and aircon selection
-
         private void LoadRate()
         {
             try
@@ -549,6 +487,7 @@ namespace pgso
             }
         }
 
+
         private void UpdateTotalAmount()
         {
             decimal totalAmount = 0;
@@ -561,7 +500,6 @@ namespace pgso
         // Submit data to tbl_Reservation/tbl_Reservation_Venue/tbl_Requesting_Person
         private void btn_submit_Click(object sender, EventArgs e)
         {
-
             // Get values directly from form controls
             DateTime startDate = date_of_use_start.Value.Date;
             DateTime endDate = date_of_use_end.Value.Date;
@@ -590,7 +528,6 @@ namespace pgso
 
             // Validate required fields
             if (string.IsNullOrWhiteSpace(txt_controlnum.Text))
-
             {
                 MessageBox.Show("Control number is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -1271,6 +1208,14 @@ VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate,
         private void txt_Succeeding_Hour_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_Billing_Click(object sender, EventArgs e)
+        {
+            using (var BillingForm = new frm_Billing())
+            {
+                BillingForm.ShowDialog();
+            }
         }
     }
 }

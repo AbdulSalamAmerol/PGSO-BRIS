@@ -36,10 +36,6 @@ namespace pgso
             LoadReservationSummary();
         }
 
-
-
-
-
         private void UserControlDays_Click(object sender, EventArgs e)
         {
             if (!isClickable)
@@ -49,10 +45,12 @@ namespace pgso
             {
                 detailsForm.ShowDialog();
             }
+
+            //using (var createReservationForm = new frm_Create_Venuer_Reservation())
+            //{
+             //   createReservationForm.ShowDialog();
+            //}
         }
-
-
-
 
         //count  the number of reservations
         private void LoadReservationSummary()

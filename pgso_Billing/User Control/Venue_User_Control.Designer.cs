@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.pnl_Billing_Details = new System.Windows.Forms.Panel();
+            this.lbl_Reservation_Status = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.btn_Confirm_Reservation = new System.Windows.Forms.Button();
             this.btn_Cancel_Reservation = new System.Windows.Forms.Button();
             this.btn_Cancellation_Slip = new System.Windows.Forms.Button();
@@ -44,7 +46,13 @@
             this.lbl_Is_Aircon = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.tb_Extension_Status = new System.Windows.Forms.TextBox();
+            this.lbl_OR_2 = new System.Windows.Forms.TextBox();
+            this.tb_Status = new System.Windows.Forms.TextBox();
+            this.lbl_Rate_Type2 = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
+            this.tb_Rate_Type = new System.Windows.Forms.TextBox();
+            this.OR2 = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.textBox44 = new System.Windows.Forms.TextBox();
             this.textBox47 = new System.Windows.Forms.TextBox();
@@ -54,11 +62,6 @@
             this.label45 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.lbl_Final_Amount_Paid = new System.Windows.Forms.TextBox();
-            this.tb13 = new System.Windows.Forms.TextBox();
-            this.lbl_Balance_3 = new System.Windows.Forms.TextBox();
-            this.tb14 = new System.Windows.Forms.TextBox();
             this.lbl_Balance_2 = new System.Windows.Forms.TextBox();
             this.lbl_Total_Amount_2 = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
@@ -120,8 +123,6 @@
             this.lbl_Venue_Name = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
             this.textBox26 = new System.Windows.Forms.TextBox();
-            this.lbl_Control_Number = new System.Windows.Forms.TextBox();
-            this.lbl_Reservation_Status = new System.Windows.Forms.TextBox();
             this.lbl_Number_Of_Participants = new System.Windows.Forms.TextBox();
             this.lbl_Activity_Name = new System.Windows.Forms.TextBox();
             this.lbl_Reservation_Time = new System.Windows.Forms.TextBox();
@@ -131,8 +132,6 @@
             this.lbl_Origin_Request = new System.Windows.Forms.TextBox();
             this.lbl_Requesting_Office = new System.Windows.Forms.TextBox();
             this.lbl_Requesting_Person = new System.Windows.Forms.TextBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.textBox10 = new System.Windows.Forms.TextBox();
@@ -141,6 +140,8 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.lbl_Control_Number = new System.Windows.Forms.TextBox();
             this.pnl_Billing_Details.SuspendLayout();
             this.panel5.SuspendLayout();
             this.SuspendLayout();
@@ -149,6 +150,8 @@
             // 
             this.pnl_Billing_Details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.pnl_Billing_Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Billing_Details.Controls.Add(this.lbl_Reservation_Status);
+            this.pnl_Billing_Details.Controls.Add(this.textBox2);
             this.pnl_Billing_Details.Controls.Add(this.btn_Confirm_Reservation);
             this.pnl_Billing_Details.Controls.Add(this.btn_Cancel_Reservation);
             this.pnl_Billing_Details.Controls.Add(this.btn_Cancellation_Slip);
@@ -173,7 +176,6 @@
             this.pnl_Billing_Details.Controls.Add(this.textBox14);
             this.pnl_Billing_Details.Controls.Add(this.textBox26);
             this.pnl_Billing_Details.Controls.Add(this.lbl_Control_Number);
-            this.pnl_Billing_Details.Controls.Add(this.lbl_Reservation_Status);
             this.pnl_Billing_Details.Controls.Add(this.lbl_Number_Of_Participants);
             this.pnl_Billing_Details.Controls.Add(this.lbl_Activity_Name);
             this.pnl_Billing_Details.Controls.Add(this.lbl_Reservation_Time);
@@ -184,7 +186,6 @@
             this.pnl_Billing_Details.Controls.Add(this.lbl_Requesting_Office);
             this.pnl_Billing_Details.Controls.Add(this.lbl_Requesting_Person);
             this.pnl_Billing_Details.Controls.Add(this.textBox15);
-            this.pnl_Billing_Details.Controls.Add(this.textBox13);
             this.pnl_Billing_Details.Controls.Add(this.textBox12);
             this.pnl_Billing_Details.Controls.Add(this.textBox11);
             this.pnl_Billing_Details.Controls.Add(this.textBox10);
@@ -200,15 +201,43 @@
             this.pnl_Billing_Details.Size = new System.Drawing.Size(912, 1150);
             this.pnl_Billing_Details.TabIndex = 7;
             // 
+            // lbl_Reservation_Status
+            // 
+            this.lbl_Reservation_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Reservation_Status.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Reservation_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Reservation_Status.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.lbl_Reservation_Status.Location = new System.Drawing.Point(770, 454);
+            this.lbl_Reservation_Status.Name = "lbl_Reservation_Status";
+            this.lbl_Reservation_Status.Size = new System.Drawing.Size(119, 23);
+            this.lbl_Reservation_Status.TabIndex = 62;
+            this.lbl_Reservation_Status.Text = "...";
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox2.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold);
+            this.textBox2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.textBox2.Location = new System.Drawing.Point(633, 455);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(121, 23);
+            this.textBox2.TabIndex = 61;
+            this.textBox2.Text = "STATUS:";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // btn_Confirm_Reservation
             // 
-            this.btn_Confirm_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(235)))), ((int)(((byte)(245)))));
+            this.btn_Confirm_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
             this.btn_Confirm_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Confirm_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
-            this.btn_Confirm_Reservation.ForeColor = System.Drawing.Color.Black;
-            this.btn_Confirm_Reservation.Location = new System.Drawing.Point(662, 43);
+            this.btn_Confirm_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.btn_Confirm_Reservation.Location = new System.Drawing.Point(3, 43);
             this.btn_Confirm_Reservation.Name = "btn_Confirm_Reservation";
-            this.btn_Confirm_Reservation.Size = new System.Drawing.Size(230, 34);
+            this.btn_Confirm_Reservation.Size = new System.Drawing.Size(220, 38);
             this.btn_Confirm_Reservation.TabIndex = 60;
             this.btn_Confirm_Reservation.Text = "Confirm Reservation";
             this.btn_Confirm_Reservation.UseVisualStyleBackColor = false;
@@ -216,13 +245,13 @@
             // 
             // btn_Cancel_Reservation
             // 
-            this.btn_Cancel_Reservation.BackColor = System.Drawing.Color.MistyRose;
+            this.btn_Cancel_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
             this.btn_Cancel_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Cancel_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
-            this.btn_Cancel_Reservation.ForeColor = System.Drawing.Color.Black;
-            this.btn_Cancel_Reservation.Location = new System.Drawing.Point(662, 79);
+            this.btn_Cancel_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.btn_Cancel_Reservation.Location = new System.Drawing.Point(226, 43);
             this.btn_Cancel_Reservation.Name = "btn_Cancel_Reservation";
-            this.btn_Cancel_Reservation.Size = new System.Drawing.Size(230, 34);
+            this.btn_Cancel_Reservation.Size = new System.Drawing.Size(220, 38);
             this.btn_Cancel_Reservation.TabIndex = 59;
             this.btn_Cancel_Reservation.Text = "Cancel Reservation";
             this.btn_Cancel_Reservation.UseVisualStyleBackColor = false;
@@ -232,13 +261,13 @@
             // 
             this.btn_Cancellation_Slip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
             this.btn_Cancellation_Slip.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Cancellation_Slip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            this.btn_Cancellation_Slip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
             this.btn_Cancellation_Slip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Cancellation_Slip.Location = new System.Drawing.Point(438, 458);
+            this.btn_Cancellation_Slip.Location = new System.Drawing.Point(462, 43);
             this.btn_Cancellation_Slip.Name = "btn_Cancellation_Slip";
-            this.btn_Cancellation_Slip.Size = new System.Drawing.Size(114, 47);
+            this.btn_Cancellation_Slip.Size = new System.Drawing.Size(220, 38);
             this.btn_Cancellation_Slip.TabIndex = 58;
-            this.btn_Cancellation_Slip.Text = "CANCELLATION SLIP";
+            this.btn_Cancellation_Slip.Text = "Cancellation Slip";
             this.btn_Cancellation_Slip.UseVisualStyleBackColor = false;
             this.btn_Cancellation_Slip.Click += new System.EventHandler(this.btn_Cancellation_Slip_Click);
             // 
@@ -246,13 +275,13 @@
             // 
             this.btn_Extension_Slip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
             this.btn_Extension_Slip.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Extension_Slip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            this.btn_Extension_Slip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
             this.btn_Extension_Slip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Extension_Slip.Location = new System.Drawing.Point(557, 458);
+            this.btn_Extension_Slip.Location = new System.Drawing.Point(685, 43);
             this.btn_Extension_Slip.Name = "btn_Extension_Slip";
-            this.btn_Extension_Slip.Size = new System.Drawing.Size(114, 47);
+            this.btn_Extension_Slip.Size = new System.Drawing.Size(220, 38);
             this.btn_Extension_Slip.TabIndex = 57;
-            this.btn_Extension_Slip.Text = "EXTENSION SLIP";
+            this.btn_Extension_Slip.Text = "Extension Slip";
             this.btn_Extension_Slip.UseVisualStyleBackColor = false;
             this.btn_Extension_Slip.Click += new System.EventHandler(this.btn_Extension_Slip_Click);
             // 
@@ -271,7 +300,7 @@
             this.textBox7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
             this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.Location = new System.Drawing.Point(-1, 115);
+            this.textBox7.Location = new System.Drawing.Point(-1, 85);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(912, 8);
             this.textBox7.TabIndex = 0;
@@ -282,7 +311,7 @@
             this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox5.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(8, 229);
+            this.textBox5.Location = new System.Drawing.Point(8, 199);
             this.textBox5.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.textBox5.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox5.Name = "textBox5";
@@ -298,7 +327,7 @@
             this.textBox42.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox42.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox42.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox42.Location = new System.Drawing.Point(8, 198);
+            this.textBox42.Location = new System.Drawing.Point(8, 168);
             this.textBox42.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.textBox42.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox42.Name = "textBox42";
@@ -313,14 +342,14 @@
             this.lbl_OR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_OR.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_OR.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_OR.Font = new System.Drawing.Font("Arial", 17F, System.Drawing.FontStyle.Italic);
+            this.lbl_OR.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_OR.ForeColor = System.Drawing.Color.Red;
-            this.lbl_OR.Location = new System.Drawing.Point(331, 35);
+            this.lbl_OR.Location = new System.Drawing.Point(298, 481);
             this.lbl_OR.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_OR.MinimumSize = new System.Drawing.Size(4, 25);
             this.lbl_OR.Name = "lbl_OR";
             this.lbl_OR.ReadOnly = true;
-            this.lbl_OR.Size = new System.Drawing.Size(199, 27);
+            this.lbl_OR.Size = new System.Drawing.Size(272, 23);
             this.lbl_OR.TabIndex = 51;
             this.lbl_OR.Text = "DESCRIPTION";
             // 
@@ -329,13 +358,13 @@
             this.tb_OR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.tb_OR.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb_OR.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb_OR.Font = new System.Drawing.Font("Arial", 17F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.tb_OR.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_OR.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.tb_OR.Location = new System.Drawing.Point(5, 36);
+            this.tb_OR.Location = new System.Drawing.Point(8, 482);
             this.tb_OR.Margin = new System.Windows.Forms.Padding(0);
             this.tb_OR.Name = "tb_OR";
             this.tb_OR.ReadOnly = true;
-            this.tb_OR.Size = new System.Drawing.Size(324, 27);
+            this.tb_OR.Size = new System.Drawing.Size(278, 23);
             this.tb_OR.TabIndex = 50;
             this.tb_OR.Text = "OFFICIAL RECEIPT NUMBER:";
             // 
@@ -343,13 +372,13 @@
             // 
             this.newbtn_Extend_Venue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
             this.newbtn_Extend_Venue.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.newbtn_Extend_Venue.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newbtn_Extend_Venue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newbtn_Extend_Venue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.newbtn_Extend_Venue.Location = new System.Drawing.Point(785, 458);
+            this.newbtn_Extend_Venue.Location = new System.Drawing.Point(744, 97);
             this.newbtn_Extend_Venue.Name = "newbtn_Extend_Venue";
-            this.newbtn_Extend_Venue.Size = new System.Drawing.Size(106, 47);
+            this.newbtn_Extend_Venue.Size = new System.Drawing.Size(88, 25);
             this.newbtn_Extend_Venue.TabIndex = 49;
-            this.newbtn_Extend_Venue.Text = "OVERTIME";
+            this.newbtn_Extend_Venue.Text = "Extension";
             this.newbtn_Extend_Venue.UseVisualStyleBackColor = false;
             this.newbtn_Extend_Venue.Click += new System.EventHandler(this.newbtn_Extend_Venue_Click);
             // 
@@ -357,13 +386,13 @@
             // 
             this.btn_Change_Reservation_info.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
             this.btn_Change_Reservation_info.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Change_Reservation_info.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
+            this.btn_Change_Reservation_info.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Change_Reservation_info.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Change_Reservation_info.Location = new System.Drawing.Point(675, 458);
+            this.btn_Change_Reservation_info.Location = new System.Drawing.Point(835, 97);
             this.btn_Change_Reservation_info.Name = "btn_Change_Reservation_info";
-            this.btn_Change_Reservation_info.Size = new System.Drawing.Size(106, 47);
+            this.btn_Change_Reservation_info.Size = new System.Drawing.Size(70, 25);
             this.btn_Change_Reservation_info.TabIndex = 48;
-            this.btn_Change_Reservation_info.Text = "EDIT";
+            this.btn_Change_Reservation_info.Text = "Edit";
             this.btn_Change_Reservation_info.UseVisualStyleBackColor = false;
             this.btn_Change_Reservation_info.Click += new System.EventHandler(this.btn_Change_Reservation_info_Click);
             // 
@@ -372,12 +401,12 @@
             this.lbl_Is_Aircon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Is_Aircon.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Is_Aircon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Is_Aircon.Location = new System.Drawing.Point(662, 288);
+            this.lbl_Is_Aircon.Location = new System.Drawing.Point(642, 258);
             this.lbl_Is_Aircon.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Is_Aircon.MinimumSize = new System.Drawing.Size(4, 25);
             this.lbl_Is_Aircon.Name = "lbl_Is_Aircon";
             this.lbl_Is_Aircon.ReadOnly = true;
-            this.lbl_Is_Aircon.Size = new System.Drawing.Size(230, 27);
+            this.lbl_Is_Aircon.Size = new System.Drawing.Size(249, 27);
             this.lbl_Is_Aircon.TabIndex = 47;
             // 
             // textBox1
@@ -386,7 +415,7 @@
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(486, 289);
+            this.textBox1.Location = new System.Drawing.Point(466, 259);
             this.textBox1.Margin = new System.Windows.Forms.Padding(0);
             this.textBox1.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox1.Name = "textBox1";
@@ -399,7 +428,13 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.panel5.Controls.Add(this.tb_Extension_Status);
+            this.panel5.Controls.Add(this.lbl_OR_2);
+            this.panel5.Controls.Add(this.tb_Status);
+            this.panel5.Controls.Add(this.lbl_Rate_Type2);
             this.panel5.Controls.Add(this.label25);
+            this.panel5.Controls.Add(this.tb_Rate_Type);
+            this.panel5.Controls.Add(this.OR2);
             this.panel5.Controls.Add(this.label20);
             this.panel5.Controls.Add(this.textBox44);
             this.panel5.Controls.Add(this.textBox47);
@@ -409,11 +444,6 @@
             this.panel5.Controls.Add(this.label45);
             this.panel5.Controls.Add(this.label44);
             this.panel5.Controls.Add(this.label43);
-            this.panel5.Controls.Add(this.label38);
-            this.panel5.Controls.Add(this.lbl_Final_Amount_Paid);
-            this.panel5.Controls.Add(this.tb13);
-            this.panel5.Controls.Add(this.lbl_Balance_3);
-            this.panel5.Controls.Add(this.tb14);
             this.panel5.Controls.Add(this.lbl_Balance_2);
             this.panel5.Controls.Add(this.lbl_Total_Amount_2);
             this.panel5.Controls.Add(this.label34);
@@ -474,6 +504,65 @@
             this.panel5.TabIndex = 44;
             this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
+            // tb_Extension_Status
+            // 
+            this.tb_Extension_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb_Extension_Status.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb_Extension_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_Extension_Status.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.tb_Extension_Status.Location = new System.Drawing.Point(770, 304);
+            this.tb_Extension_Status.Name = "tb_Extension_Status";
+            this.tb_Extension_Status.Size = new System.Drawing.Size(119, 23);
+            this.tb_Extension_Status.TabIndex = 66;
+            this.tb_Extension_Status.Text = "...";
+            // 
+            // lbl_OR_2
+            // 
+            this.lbl_OR_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_OR_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_OR_2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_OR_2.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_OR_2.ForeColor = System.Drawing.Color.Red;
+            this.lbl_OR_2.Location = new System.Drawing.Point(299, 333);
+            this.lbl_OR_2.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_OR_2.MinimumSize = new System.Drawing.Size(4, 25);
+            this.lbl_OR_2.Name = "lbl_OR_2";
+            this.lbl_OR_2.ReadOnly = true;
+            this.lbl_OR_2.Size = new System.Drawing.Size(189, 25);
+            this.lbl_OR_2.TabIndex = 62;
+            this.lbl_OR_2.Text = "DESCRIPTION";
+            // 
+            // tb_Status
+            // 
+            this.tb_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb_Status.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb_Status.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb_Status.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold);
+            this.tb_Status.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.tb_Status.Location = new System.Drawing.Point(633, 305);
+            this.tb_Status.Margin = new System.Windows.Forms.Padding(0);
+            this.tb_Status.Name = "tb_Status";
+            this.tb_Status.ReadOnly = true;
+            this.tb_Status.Size = new System.Drawing.Size(121, 23);
+            this.tb_Status.TabIndex = 65;
+            this.tb_Status.Text = "STATUS:";
+            this.tb_Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbl_Rate_Type2
+            // 
+            this.lbl_Rate_Type2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Rate_Type2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Rate_Type2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Rate_Type2.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold);
+            this.lbl_Rate_Type2.Location = new System.Drawing.Point(770, 334);
+            this.lbl_Rate_Type2.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Rate_Type2.MinimumSize = new System.Drawing.Size(0, 25);
+            this.lbl_Rate_Type2.Name = "lbl_Rate_Type2";
+            this.lbl_Rate_Type2.ReadOnly = true;
+            this.lbl_Rate_Type2.Size = new System.Drawing.Size(119, 25);
+            this.lbl_Rate_Type2.TabIndex = 64;
+            this.lbl_Rate_Type2.Text = "...";
+            // 
             // label25
             // 
             this.label25.AutoSize = true;
@@ -486,12 +575,43 @@
             this.label25.Size = new System.Drawing.Size(912, 8);
             this.label25.TabIndex = 160;
             // 
+            // tb_Rate_Type
+            // 
+            this.tb_Rate_Type.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb_Rate_Type.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb_Rate_Type.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb_Rate_Type.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold);
+            this.tb_Rate_Type.Location = new System.Drawing.Point(633, 334);
+            this.tb_Rate_Type.Margin = new System.Windows.Forms.Padding(0);
+            this.tb_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
+            this.tb_Rate_Type.Name = "tb_Rate_Type";
+            this.tb_Rate_Type.ReadOnly = true;
+            this.tb_Rate_Type.Size = new System.Drawing.Size(121, 25);
+            this.tb_Rate_Type.TabIndex = 63;
+            this.tb_Rate_Type.Text = "RATE TYPE:";
+            this.tb_Rate_Type.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // OR2
+            // 
+            this.OR2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.OR2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.OR2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.OR2.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OR2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.OR2.Location = new System.Drawing.Point(9, 334);
+            this.OR2.Margin = new System.Windows.Forms.Padding(0);
+            this.OR2.Name = "OR2";
+            this.OR2.ReadOnly = true;
+            this.OR2.Size = new System.Drawing.Size(283, 23);
+            this.OR2.TabIndex = 61;
+            this.OR2.Text = "OFFICIAL RECEIPT NUMBER:";
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.BackColor = System.Drawing.Color.Gray;
             this.label20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label20.Location = new System.Drawing.Point(-1, 340);
+            this.label20.Location = new System.Drawing.Point(-1, 367);
             this.label20.MaximumSize = new System.Drawing.Size(687, 2);
             this.label20.MinimumSize = new System.Drawing.Size(912, 4);
             this.label20.Name = "label20";
@@ -536,7 +656,7 @@
             this.tb7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb7.Cursor = System.Windows.Forms.Cursors.Default;
             this.tb7.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb7.Location = new System.Drawing.Point(5, 394);
+            this.tb7.Location = new System.Drawing.Point(8, 421);
             this.tb7.Margin = new System.Windows.Forms.Padding(0);
             this.tb7.MinimumSize = new System.Drawing.Size(2, 25);
             this.tb7.Multiline = true;
@@ -561,7 +681,7 @@
             // 
             this.label46.AutoSize = true;
             this.label46.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label46.Location = new System.Drawing.Point(717, 381);
+            this.label46.Location = new System.Drawing.Point(717, 408);
             this.label46.MaximumSize = new System.Drawing.Size(687, 2);
             this.label46.MinimumSize = new System.Drawing.Size(2, 255);
             this.label46.Name = "label46";
@@ -572,7 +692,7 @@
             // 
             this.label45.AutoSize = true;
             this.label45.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label45.Location = new System.Drawing.Point(565, 381);
+            this.label45.Location = new System.Drawing.Point(565, 408);
             this.label45.MaximumSize = new System.Drawing.Size(687, 2);
             this.label45.MinimumSize = new System.Drawing.Size(2, 45);
             this.label45.Name = "label45";
@@ -601,88 +721,13 @@
             this.label43.Size = new System.Drawing.Size(2, 145);
             this.label43.TabIndex = 144;
             // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.BackColor = System.Drawing.Color.Gray;
-            this.label38.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label38.Location = new System.Drawing.Point(-1, 594);
-            this.label38.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label38.MinimumSize = new System.Drawing.Size(912, 4);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(912, 4);
-            this.label38.TabIndex = 136;
-            // 
-            // lbl_Final_Amount_Paid
-            // 
-            this.lbl_Final_Amount_Paid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Final_Amount_Paid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Final_Amount_Paid.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Final_Amount_Paid.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.lbl_Final_Amount_Paid.Location = new System.Drawing.Point(242, 607);
-            this.lbl_Final_Amount_Paid.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Final_Amount_Paid.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Final_Amount_Paid.Name = "lbl_Final_Amount_Paid";
-            this.lbl_Final_Amount_Paid.ReadOnly = true;
-            this.lbl_Final_Amount_Paid.Size = new System.Drawing.Size(175, 22);
-            this.lbl_Final_Amount_Paid.TabIndex = 135;
-            this.lbl_Final_Amount_Paid.Text = "Amount";
-            // 
-            // tb13
-            // 
-            this.tb13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb13.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb13.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb13.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.tb13.Location = new System.Drawing.Point(9, 607);
-            this.tb13.Margin = new System.Windows.Forms.Padding(0);
-            this.tb13.MinimumSize = new System.Drawing.Size(2, 25);
-            this.tb13.Name = "tb13";
-            this.tb13.ReadOnly = true;
-            this.tb13.Size = new System.Drawing.Size(211, 22);
-            this.tb13.TabIndex = 134;
-            this.tb13.Text = "TOTAL PAID AMOUNT";
-            this.tb13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_Balance_3
-            // 
-            this.lbl_Balance_3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Balance_3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Balance_3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Balance_3.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.lbl_Balance_3.Location = new System.Drawing.Point(717, 608);
-            this.lbl_Balance_3.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Balance_3.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Balance_3.Name = "lbl_Balance_3";
-            this.lbl_Balance_3.ReadOnly = true;
-            this.lbl_Balance_3.Size = new System.Drawing.Size(149, 22);
-            this.lbl_Balance_3.TabIndex = 133;
-            this.lbl_Balance_3.Text = "Amount";
-            this.lbl_Balance_3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // tb14
-            // 
-            this.tb14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb14.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb14.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb14.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.tb14.Location = new System.Drawing.Point(531, 608);
-            this.tb14.Margin = new System.Windows.Forms.Padding(0);
-            this.tb14.MinimumSize = new System.Drawing.Size(2, 25);
-            this.tb14.Name = "tb14";
-            this.tb14.ReadOnly = true;
-            this.tb14.Size = new System.Drawing.Size(171, 22);
-            this.tb14.TabIndex = 132;
-            this.tb14.Text = "TOTAL BALANCE";
-            this.tb14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // lbl_Balance_2
             // 
             this.lbl_Balance_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Balance_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Balance_2.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Balance_2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.lbl_Balance_2.Location = new System.Drawing.Point(717, 551);
+            this.lbl_Balance_2.Location = new System.Drawing.Point(717, 596);
             this.lbl_Balance_2.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Balance_2.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Balance_2.Name = "lbl_Balance_2";
@@ -698,7 +743,7 @@
             this.lbl_Total_Amount_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Total_Amount_2.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Total_Amount_2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.lbl_Total_Amount_2.Location = new System.Drawing.Point(717, 476);
+            this.lbl_Total_Amount_2.Location = new System.Drawing.Point(717, 503);
             this.lbl_Total_Amount_2.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Total_Amount_2.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Total_Amount_2.Name = "lbl_Total_Amount_2";
@@ -713,7 +758,7 @@
             this.label34.AutoSize = true;
             this.label34.BackColor = System.Drawing.Color.Gray;
             this.label34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label34.Location = new System.Drawing.Point(-1, 547);
+            this.label34.Location = new System.Drawing.Point(-1, 574);
             this.label34.MaximumSize = new System.Drawing.Size(687, 2);
             this.label34.MinimumSize = new System.Drawing.Size(912, 4);
             this.label34.Name = "label34";
@@ -725,7 +770,7 @@
             this.lbl_h2.AutoSize = true;
             this.lbl_h2.BackColor = System.Drawing.Color.Gray;
             this.lbl_h2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbl_h2.Location = new System.Drawing.Point(-1, 463);
+            this.lbl_h2.Location = new System.Drawing.Point(-1, 490);
             this.lbl_h2.MaximumSize = new System.Drawing.Size(912, 4);
             this.lbl_h2.MinimumSize = new System.Drawing.Size(912, 2);
             this.lbl_h2.Name = "lbl_h2";
@@ -738,7 +783,7 @@
             this.tb12.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb12.Cursor = System.Windows.Forms.Cursors.Default;
             this.tb12.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.tb12.Location = new System.Drawing.Point(589, 556);
+            this.tb12.Location = new System.Drawing.Point(589, 596);
             this.tb12.Margin = new System.Windows.Forms.Padding(0);
             this.tb12.MinimumSize = new System.Drawing.Size(2, 25);
             this.tb12.Name = "tb12";
@@ -754,7 +799,7 @@
             this.tb11.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb11.Cursor = System.Windows.Forms.Cursors.Default;
             this.tb11.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.tb11.Location = new System.Drawing.Point(544, 513);
+            this.tb11.Location = new System.Drawing.Point(544, 540);
             this.tb11.Margin = new System.Windows.Forms.Padding(0);
             this.tb11.MinimumSize = new System.Drawing.Size(2, 25);
             this.tb11.Name = "tb11";
@@ -770,7 +815,7 @@
             this.tb10.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb10.Cursor = System.Windows.Forms.Cursors.Default;
             this.tb10.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.tb10.Location = new System.Drawing.Point(517, 481);
+            this.tb10.Location = new System.Drawing.Point(517, 508);
             this.tb10.Margin = new System.Windows.Forms.Padding(0);
             this.tb10.MinimumSize = new System.Drawing.Size(2, 25);
             this.tb10.Name = "tb10";
@@ -785,7 +830,7 @@
             this.label27.AutoSize = true;
             this.label27.BackColor = System.Drawing.Color.Gray;
             this.label27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label27.Location = new System.Drawing.Point(-1, 378);
+            this.label27.Location = new System.Drawing.Point(-1, 405);
             this.label27.MaximumSize = new System.Drawing.Size(687, 2);
             this.label27.MinimumSize = new System.Drawing.Size(912, 2);
             this.label27.Name = "label27";
@@ -798,7 +843,7 @@
             this.tb2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb2.Cursor = System.Windows.Forms.Cursors.Default;
             this.tb2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb2.Location = new System.Drawing.Point(9, 351);
+            this.tb2.Location = new System.Drawing.Point(9, 378);
             this.tb2.Margin = new System.Windows.Forms.Padding(0);
             this.tb2.MinimumSize = new System.Drawing.Size(0, 25);
             this.tb2.Name = "tb2";
@@ -813,7 +858,7 @@
             this.tb5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb5.Cursor = System.Windows.Forms.Cursors.Default;
             this.tb5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb5.Location = new System.Drawing.Point(551, 349);
+            this.tb5.Location = new System.Drawing.Point(551, 376);
             this.tb5.Margin = new System.Windows.Forms.Padding(0);
             this.tb5.MinimumSize = new System.Drawing.Size(0, 25);
             this.tb5.Name = "tb5";
@@ -829,7 +874,7 @@
             this.tb4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb4.Cursor = System.Windows.Forms.Cursors.Default;
             this.tb4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb4.Location = new System.Drawing.Point(371, 349);
+            this.tb4.Location = new System.Drawing.Point(371, 376);
             this.tb4.Margin = new System.Windows.Forms.Padding(0);
             this.tb4.Name = "tb4";
             this.tb4.ReadOnly = true;
@@ -843,7 +888,7 @@
             this.tb6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb6.Cursor = System.Windows.Forms.Cursors.Default;
             this.tb6.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb6.Location = new System.Drawing.Point(759, 349);
+            this.tb6.Location = new System.Drawing.Point(759, 376);
             this.tb6.Margin = new System.Windows.Forms.Padding(0);
             this.tb6.MinimumSize = new System.Drawing.Size(0, 25);
             this.tb6.Name = "tb6";
@@ -859,7 +904,7 @@
             this.tb3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb3.Cursor = System.Windows.Forms.Cursors.Default;
             this.tb3.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb3.Location = new System.Drawing.Point(192, 351);
+            this.tb3.Location = new System.Drawing.Point(192, 378);
             this.tb3.Margin = new System.Windows.Forms.Padding(0);
             this.tb3.MinimumSize = new System.Drawing.Size(0, 19);
             this.tb3.Name = "tb3";
@@ -874,12 +919,12 @@
             this.tb1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb1.Cursor = System.Windows.Forms.Cursors.Default;
             this.tb1.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold);
-            this.tb1.Location = new System.Drawing.Point(3, 308);
+            this.tb1.Location = new System.Drawing.Point(9, 305);
             this.tb1.Margin = new System.Windows.Forms.Padding(0);
             this.tb1.MinimumSize = new System.Drawing.Size(2, 25);
             this.tb1.Name = "tb1";
             this.tb1.ReadOnly = true;
-            this.tb1.Size = new System.Drawing.Size(250, 23);
+            this.tb1.Size = new System.Drawing.Size(250, 25);
             this.tb1.TabIndex = 102;
             this.tb1.Text = "OTHER BILLING DETAILS";
             // 
@@ -912,7 +957,7 @@
             this.lbl_h1.AutoSize = true;
             this.lbl_h1.BackColor = System.Drawing.Color.Gray;
             this.lbl_h1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbl_h1.Location = new System.Drawing.Point(0, 426);
+            this.lbl_h1.Location = new System.Drawing.Point(0, 453);
             this.lbl_h1.MaximumSize = new System.Drawing.Size(687, 2);
             this.lbl_h1.MinimumSize = new System.Drawing.Size(912, 2);
             this.lbl_h1.Name = "lbl_h1";
@@ -998,7 +1043,7 @@
             this.tb8.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb8.Cursor = System.Windows.Forms.Cursors.Default;
             this.tb8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F);
-            this.tb8.Location = new System.Drawing.Point(194, 386);
+            this.tb8.Location = new System.Drawing.Point(194, 413);
             this.tb8.Margin = new System.Windows.Forms.Padding(0);
             this.tb8.MinimumSize = new System.Drawing.Size(2, 25);
             this.tb8.Multiline = true;
@@ -1014,7 +1059,7 @@
             this.lbl_Paid_Amount_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Paid_Amount_2.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Paid_Amount_2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.lbl_Paid_Amount_2.Location = new System.Drawing.Point(717, 512);
+            this.lbl_Paid_Amount_2.Location = new System.Drawing.Point(717, 539);
             this.lbl_Paid_Amount_2.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Paid_Amount_2.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Paid_Amount_2.Name = "lbl_Paid_Amount_2";
@@ -1030,7 +1075,7 @@
             this.lbl_OT_Hours.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_OT_Hours.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_OT_Hours.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_OT_Hours.Location = new System.Drawing.Point(441, 394);
+            this.lbl_OT_Hours.Location = new System.Drawing.Point(441, 421);
             this.lbl_OT_Hours.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_OT_Hours.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_OT_Hours.Name = "lbl_OT_Hours";
@@ -1046,7 +1091,7 @@
             this.lbl_Overtime_Fee.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Overtime_Fee.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Overtime_Fee.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Overtime_Fee.Location = new System.Drawing.Point(717, 391);
+            this.lbl_Overtime_Fee.Location = new System.Drawing.Point(717, 418);
             this.lbl_Overtime_Fee.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Overtime_Fee.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Overtime_Fee.Name = "lbl_Overtime_Fee";
@@ -1078,7 +1123,7 @@
             this.lbl_Refund_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Refund_Amount.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Refund_Amount.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Refund_Amount.Location = new System.Drawing.Point(717, 435);
+            this.lbl_Refund_Amount.Location = new System.Drawing.Point(717, 462);
             this.lbl_Refund_Amount.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Refund_Amount.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_Refund_Amount.Name = "lbl_Refund_Amount";
@@ -1109,7 +1154,7 @@
             this.tb9.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb9.Cursor = System.Windows.Forms.Cursors.Default;
             this.tb9.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb9.Location = new System.Drawing.Point(5, 435);
+            this.tb9.Location = new System.Drawing.Point(8, 462);
             this.tb9.Margin = new System.Windows.Forms.Padding(0);
             this.tb9.MinimumSize = new System.Drawing.Size(2, 25);
             this.tb9.Multiline = true;
@@ -1125,7 +1170,7 @@
             this.lbl_OT_Hourly_Charge.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_OT_Hourly_Charge.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_OT_Hourly_Charge.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_OT_Hourly_Charge.Location = new System.Drawing.Point(565, 391);
+            this.lbl_OT_Hourly_Charge.Location = new System.Drawing.Point(565, 418);
             this.lbl_OT_Hourly_Charge.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_OT_Hourly_Charge.MinimumSize = new System.Drawing.Size(2, 25);
             this.lbl_OT_Hourly_Charge.Name = "lbl_OT_Hourly_Charge";
@@ -1469,13 +1514,13 @@
             this.lbl_Rate_Type.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Rate_Type.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Rate_Type.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Rate_Type.Font = new System.Drawing.Font("Arial", 13F);
-            this.lbl_Rate_Type.Location = new System.Drawing.Point(122, 484);
+            this.lbl_Rate_Type.Font = new System.Drawing.Font("Arial", 15F);
+            this.lbl_Rate_Type.Location = new System.Drawing.Point(770, 480);
             this.lbl_Rate_Type.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
             this.lbl_Rate_Type.Name = "lbl_Rate_Type";
             this.lbl_Rate_Type.ReadOnly = true;
-            this.lbl_Rate_Type.Size = new System.Drawing.Size(87, 20);
+            this.lbl_Rate_Type.Size = new System.Drawing.Size(119, 23);
             this.lbl_Rate_Type.TabIndex = 35;
             this.lbl_Rate_Type.Text = "...";
             // 
@@ -1484,15 +1529,16 @@
             this.textBox35.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox35.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox35.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox35.Font = new System.Drawing.Font("Arial", 13F);
-            this.textBox35.Location = new System.Drawing.Point(19, 484);
+            this.textBox35.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold);
+            this.textBox35.Location = new System.Drawing.Point(633, 480);
             this.textBox35.Margin = new System.Windows.Forms.Padding(0);
             this.textBox35.MinimumSize = new System.Drawing.Size(0, 25);
             this.textBox35.Name = "textBox35";
             this.textBox35.ReadOnly = true;
-            this.textBox35.Size = new System.Drawing.Size(103, 20);
+            this.textBox35.Size = new System.Drawing.Size(121, 23);
             this.textBox35.TabIndex = 30;
-            this.textBox35.Text = "Rate Type";
+            this.textBox35.Text = "RATE TYPE:";
+            this.textBox35.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox36
             // 
@@ -1500,7 +1546,7 @@
             this.textBox36.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox36.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox36.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold);
-            this.textBox36.Location = new System.Drawing.Point(6, 454);
+            this.textBox36.Location = new System.Drawing.Point(9, 455);
             this.textBox36.Margin = new System.Windows.Forms.Padding(0);
             this.textBox36.MinimumSize = new System.Drawing.Size(0, 30);
             this.textBox36.Name = "textBox36";
@@ -1514,12 +1560,12 @@
             this.lbl_Venue_Scope.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Venue_Scope.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Venue_Scope.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Venue_Scope.Location = new System.Drawing.Point(662, 257);
+            this.lbl_Venue_Scope.Location = new System.Drawing.Point(642, 227);
             this.lbl_Venue_Scope.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Venue_Scope.MinimumSize = new System.Drawing.Size(4, 25);
             this.lbl_Venue_Scope.Name = "lbl_Venue_Scope";
             this.lbl_Venue_Scope.ReadOnly = true;
-            this.lbl_Venue_Scope.Size = new System.Drawing.Size(230, 27);
+            this.lbl_Venue_Scope.Size = new System.Drawing.Size(249, 27);
             this.lbl_Venue_Scope.TabIndex = 28;
             // 
             // textBox17
@@ -1528,7 +1574,7 @@
             this.textBox17.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox17.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox17.Location = new System.Drawing.Point(486, 259);
+            this.textBox17.Location = new System.Drawing.Point(466, 229);
             this.textBox17.Margin = new System.Windows.Forms.Padding(0);
             this.textBox17.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox17.Name = "textBox17";
@@ -1543,12 +1589,11 @@
             this.lbl_Venue_Name.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Venue_Name.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Venue_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Venue_Name.Location = new System.Drawing.Point(662, 227);
+            this.lbl_Venue_Name.Location = new System.Drawing.Point(642, 197);
             this.lbl_Venue_Name.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Venue_Name.MinimumSize = new System.Drawing.Size(4, 25);
             this.lbl_Venue_Name.Name = "lbl_Venue_Name";
             this.lbl_Venue_Name.ReadOnly = true;
-            this.lbl_Venue_Name.Size = new System.Drawing.Size(230, 27);
+            this.lbl_Venue_Name.Size = new System.Drawing.Size(249, 27);
             this.lbl_Venue_Name.TabIndex = 26;
             // 
             // textBox14
@@ -1557,7 +1602,7 @@
             this.textBox14.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox14.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox14.Location = new System.Drawing.Point(486, 229);
+            this.textBox14.Location = new System.Drawing.Point(466, 199);
             this.textBox14.Margin = new System.Windows.Forms.Padding(0);
             this.textBox14.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox14.Name = "textBox14";
@@ -1573,7 +1618,7 @@
             this.textBox26.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox26.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox26.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox26.Location = new System.Drawing.Point(452, 128);
+            this.textBox26.Location = new System.Drawing.Point(432, 98);
             this.textBox26.Margin = new System.Windows.Forms.Padding(0);
             this.textBox26.MinimumSize = new System.Drawing.Size(2, 30);
             this.textBox26.Name = "textBox26";
@@ -1582,47 +1627,17 @@
             this.textBox26.TabIndex = 24;
             this.textBox26.Text = "RESERVATION INFORMATION";
             // 
-            // lbl_Control_Number
-            // 
-            this.lbl_Control_Number.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Control_Number.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Control_Number.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Control_Number.Font = new System.Drawing.Font("Arial", 17F, System.Drawing.FontStyle.Italic);
-            this.lbl_Control_Number.ForeColor = System.Drawing.Color.Red;
-            this.lbl_Control_Number.Location = new System.Drawing.Point(240, 4);
-            this.lbl_Control_Number.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Control_Number.MinimumSize = new System.Drawing.Size(4, 25);
-            this.lbl_Control_Number.Name = "lbl_Control_Number";
-            this.lbl_Control_Number.ReadOnly = true;
-            this.lbl_Control_Number.Size = new System.Drawing.Size(289, 27);
-            this.lbl_Control_Number.TabIndex = 23;
-            this.lbl_Control_Number.Text = "DESCRIPTION";
-            // 
-            // lbl_Reservation_Status
-            // 
-            this.lbl_Reservation_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Reservation_Status.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Reservation_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Reservation_Status.Location = new System.Drawing.Point(662, 11);
-            this.lbl_Reservation_Status.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Reservation_Status.MinimumSize = new System.Drawing.Size(4, 25);
-            this.lbl_Reservation_Status.Name = "lbl_Reservation_Status";
-            this.lbl_Reservation_Status.ReadOnly = true;
-            this.lbl_Reservation_Status.Size = new System.Drawing.Size(230, 27);
-            this.lbl_Reservation_Status.TabIndex = 22;
-            this.lbl_Reservation_Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // lbl_Number_Of_Participants
             // 
             this.lbl_Number_Of_Participants.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Number_Of_Participants.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Number_Of_Participants.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Number_Of_Participants.Location = new System.Drawing.Point(662, 319);
+            this.lbl_Number_Of_Participants.Location = new System.Drawing.Point(642, 289);
             this.lbl_Number_Of_Participants.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Number_Of_Participants.MinimumSize = new System.Drawing.Size(4, 25);
             this.lbl_Number_Of_Participants.Name = "lbl_Number_Of_Participants";
             this.lbl_Number_Of_Participants.ReadOnly = true;
-            this.lbl_Number_Of_Participants.Size = new System.Drawing.Size(230, 27);
+            this.lbl_Number_Of_Participants.Size = new System.Drawing.Size(249, 27);
             this.lbl_Number_Of_Participants.TabIndex = 21;
             // 
             // lbl_Activity_Name
@@ -1630,13 +1645,13 @@
             this.lbl_Activity_Name.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Activity_Name.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Activity_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Activity_Name.Location = new System.Drawing.Point(662, 350);
+            this.lbl_Activity_Name.Location = new System.Drawing.Point(642, 320);
             this.lbl_Activity_Name.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Activity_Name.MinimumSize = new System.Drawing.Size(4, 25);
             this.lbl_Activity_Name.Multiline = true;
             this.lbl_Activity_Name.Name = "lbl_Activity_Name";
             this.lbl_Activity_Name.ReadOnly = true;
-            this.lbl_Activity_Name.Size = new System.Drawing.Size(230, 73);
+            this.lbl_Activity_Name.Size = new System.Drawing.Size(249, 116);
             this.lbl_Activity_Name.TabIndex = 20;
             // 
             // lbl_Reservation_Time
@@ -1644,12 +1659,12 @@
             this.lbl_Reservation_Time.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Reservation_Time.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Reservation_Time.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Reservation_Time.Location = new System.Drawing.Point(662, 196);
+            this.lbl_Reservation_Time.Location = new System.Drawing.Point(642, 166);
             this.lbl_Reservation_Time.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Reservation_Time.MinimumSize = new System.Drawing.Size(4, 25);
             this.lbl_Reservation_Time.Name = "lbl_Reservation_Time";
             this.lbl_Reservation_Time.ReadOnly = true;
-            this.lbl_Reservation_Time.Size = new System.Drawing.Size(230, 27);
+            this.lbl_Reservation_Time.Size = new System.Drawing.Size(249, 27);
             this.lbl_Reservation_Time.TabIndex = 19;
             // 
             // lbl_Reservation_Dates
@@ -1657,12 +1672,12 @@
             this.lbl_Reservation_Dates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Reservation_Dates.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Reservation_Dates.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Reservation_Dates.Location = new System.Drawing.Point(662, 165);
+            this.lbl_Reservation_Dates.Location = new System.Drawing.Point(642, 135);
             this.lbl_Reservation_Dates.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Reservation_Dates.MinimumSize = new System.Drawing.Size(4, 25);
             this.lbl_Reservation_Dates.Name = "lbl_Reservation_Dates";
             this.lbl_Reservation_Dates.ReadOnly = true;
-            this.lbl_Reservation_Dates.Size = new System.Drawing.Size(230, 27);
+            this.lbl_Reservation_Dates.Size = new System.Drawing.Size(249, 27);
             this.lbl_Reservation_Dates.TabIndex = 18;
             // 
             // lbl_Address
@@ -1670,13 +1685,12 @@
             this.lbl_Address.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Address.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Address.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Address.Location = new System.Drawing.Point(186, 290);
+            this.lbl_Address.Location = new System.Drawing.Point(186, 260);
             this.lbl_Address.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Address.MinimumSize = new System.Drawing.Size(230, 25);
             this.lbl_Address.Multiline = true;
             this.lbl_Address.Name = "lbl_Address";
             this.lbl_Address.ReadOnly = true;
-            this.lbl_Address.Size = new System.Drawing.Size(230, 133);
+            this.lbl_Address.Size = new System.Drawing.Size(249, 176);
             this.lbl_Address.TabIndex = 17;
             // 
             // lbl_Contact_Number
@@ -1684,12 +1698,11 @@
             this.lbl_Contact_Number.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Contact_Number.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Contact_Number.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Contact_Number.Location = new System.Drawing.Point(186, 258);
+            this.lbl_Contact_Number.Location = new System.Drawing.Point(186, 228);
             this.lbl_Contact_Number.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Contact_Number.MinimumSize = new System.Drawing.Size(230, 25);
             this.lbl_Contact_Number.Name = "lbl_Contact_Number";
             this.lbl_Contact_Number.ReadOnly = true;
-            this.lbl_Contact_Number.Size = new System.Drawing.Size(230, 27);
+            this.lbl_Contact_Number.Size = new System.Drawing.Size(249, 27);
             this.lbl_Contact_Number.TabIndex = 16;
             // 
             // lbl_Origin_Request
@@ -1697,12 +1710,11 @@
             this.lbl_Origin_Request.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Origin_Request.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Origin_Request.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Origin_Request.Location = new System.Drawing.Point(186, 227);
+            this.lbl_Origin_Request.Location = new System.Drawing.Point(186, 197);
             this.lbl_Origin_Request.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Origin_Request.MinimumSize = new System.Drawing.Size(230, 25);
             this.lbl_Origin_Request.Name = "lbl_Origin_Request";
             this.lbl_Origin_Request.ReadOnly = true;
-            this.lbl_Origin_Request.Size = new System.Drawing.Size(230, 27);
+            this.lbl_Origin_Request.Size = new System.Drawing.Size(249, 27);
             this.lbl_Origin_Request.TabIndex = 15;
             // 
             // lbl_Requesting_Office
@@ -1710,12 +1722,11 @@
             this.lbl_Requesting_Office.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Requesting_Office.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Requesting_Office.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Requesting_Office.Location = new System.Drawing.Point(186, 196);
+            this.lbl_Requesting_Office.Location = new System.Drawing.Point(186, 166);
             this.lbl_Requesting_Office.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Requesting_Office.MinimumSize = new System.Drawing.Size(230, 25);
             this.lbl_Requesting_Office.Name = "lbl_Requesting_Office";
             this.lbl_Requesting_Office.ReadOnly = true;
-            this.lbl_Requesting_Office.Size = new System.Drawing.Size(230, 27);
+            this.lbl_Requesting_Office.Size = new System.Drawing.Size(249, 27);
             this.lbl_Requesting_Office.TabIndex = 14;
             // 
             // lbl_Requesting_Person
@@ -1723,13 +1734,139 @@
             this.lbl_Requesting_Person.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Requesting_Person.Cursor = System.Windows.Forms.Cursors.Default;
             this.lbl_Requesting_Person.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Requesting_Person.Location = new System.Drawing.Point(186, 165);
+            this.lbl_Requesting_Person.Location = new System.Drawing.Point(186, 135);
             this.lbl_Requesting_Person.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Requesting_Person.MinimumSize = new System.Drawing.Size(230, 25);
             this.lbl_Requesting_Person.Name = "lbl_Requesting_Person";
             this.lbl_Requesting_Person.ReadOnly = true;
-            this.lbl_Requesting_Person.Size = new System.Drawing.Size(230, 27);
+            this.lbl_Requesting_Person.Size = new System.Drawing.Size(249, 27);
             this.lbl_Requesting_Person.TabIndex = 13;
+            // 
+            // textBox12
+            // 
+            this.textBox12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox12.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox12.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox12.Location = new System.Drawing.Point(466, 292);
+            this.textBox12.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox12.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.ReadOnly = true;
+            this.textBox12.Size = new System.Drawing.Size(161, 20);
+            this.textBox12.TabIndex = 9;
+            this.textBox12.Text = "No. of Participants";
+            this.textBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox11
+            // 
+            this.textBox11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox11.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox11.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox11.Location = new System.Drawing.Point(466, 323);
+            this.textBox11.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox11.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.ReadOnly = true;
+            this.textBox11.Size = new System.Drawing.Size(161, 20);
+            this.textBox11.TabIndex = 8;
+            this.textBox11.Text = "Activity";
+            this.textBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox10
+            // 
+            this.textBox10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox10.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox10.Location = new System.Drawing.Point(466, 168);
+            this.textBox10.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox10.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.ReadOnly = true;
+            this.textBox10.Size = new System.Drawing.Size(161, 20);
+            this.textBox10.TabIndex = 7;
+            this.textBox10.Text = "Reservation Time";
+            this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox9
+            // 
+            this.textBox9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox9.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox9.Location = new System.Drawing.Point(466, 137);
+            this.textBox9.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox9.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
+            this.textBox9.Size = new System.Drawing.Size(161, 20);
+            this.textBox9.TabIndex = 6;
+            this.textBox9.Text = "Reservation Dates";
+            this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox8
+            // 
+            this.textBox8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox8.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox8.Location = new System.Drawing.Point(8, 260);
+            this.textBox8.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.textBox8.MinimumSize = new System.Drawing.Size(110, 16);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.ReadOnly = true;
+            this.textBox8.Size = new System.Drawing.Size(166, 20);
+            this.textBox8.TabIndex = 5;
+            this.textBox8.Text = "Address";
+            this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox6
+            // 
+            this.textBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox6.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox6.Location = new System.Drawing.Point(8, 230);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.textBox6.MinimumSize = new System.Drawing.Size(110, 16);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.ReadOnly = true;
+            this.textBox6.Size = new System.Drawing.Size(166, 20);
+            this.textBox6.TabIndex = 3;
+            this.textBox6.Text = "Contact Number";
+            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox4
+            // 
+            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox4.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox4.Location = new System.Drawing.Point(8, 137);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.textBox4.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(166, 20);
+            this.textBox4.TabIndex = 1;
+            this.textBox4.Text = "Requesting Person";
+            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox3.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.textBox3.Location = new System.Drawing.Point(6, 98);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox3.MinimumSize = new System.Drawing.Size(2, 30);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(297, 22);
+            this.textBox3.TabIndex = 0;
+            this.textBox3.Text = "CLIENT INFORMATION";
             // 
             // textBox15
             // 
@@ -1746,148 +1883,21 @@
             this.textBox15.TabIndex = 12;
             this.textBox15.Text = "CONTROL NUMBER:";
             // 
-            // textBox13
+            // lbl_Control_Number
             // 
-            this.textBox13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox13.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox13.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox13.Location = new System.Drawing.Point(486, 14);
-            this.textBox13.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox13.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.ReadOnly = true;
-            this.textBox13.Size = new System.Drawing.Size(161, 22);
-            this.textBox13.TabIndex = 10;
-            this.textBox13.Text = "Status";
-            this.textBox13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox12
-            // 
-            this.textBox12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox12.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox12.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox12.Location = new System.Drawing.Point(486, 322);
-            this.textBox12.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox12.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.ReadOnly = true;
-            this.textBox12.Size = new System.Drawing.Size(161, 20);
-            this.textBox12.TabIndex = 9;
-            this.textBox12.Text = "No. of Participants";
-            this.textBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox11
-            // 
-            this.textBox11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox11.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox11.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox11.Location = new System.Drawing.Point(486, 353);
-            this.textBox11.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox11.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.ReadOnly = true;
-            this.textBox11.Size = new System.Drawing.Size(161, 20);
-            this.textBox11.TabIndex = 8;
-            this.textBox11.Text = "Activity";
-            this.textBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox10
-            // 
-            this.textBox10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox10.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox10.Location = new System.Drawing.Point(486, 198);
-            this.textBox10.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox10.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(161, 20);
-            this.textBox10.TabIndex = 7;
-            this.textBox10.Text = "Reservation Time";
-            this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox9
-            // 
-            this.textBox9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox9.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox9.Location = new System.Drawing.Point(486, 167);
-            this.textBox9.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox9.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(161, 20);
-            this.textBox9.TabIndex = 6;
-            this.textBox9.Text = "Reservation Dates";
-            this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox8
-            // 
-            this.textBox8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox8.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox8.Location = new System.Drawing.Point(8, 290);
-            this.textBox8.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox8.MinimumSize = new System.Drawing.Size(110, 16);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.ReadOnly = true;
-            this.textBox8.Size = new System.Drawing.Size(166, 20);
-            this.textBox8.TabIndex = 5;
-            this.textBox8.Text = "Address";
-            this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox6
-            // 
-            this.textBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox6.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(8, 260);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox6.MinimumSize = new System.Drawing.Size(110, 16);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(166, 20);
-            this.textBox6.TabIndex = 3;
-            this.textBox6.Text = "Contact Number";
-            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox4
-            // 
-            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox4.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(8, 167);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.textBox4.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(166, 20);
-            this.textBox4.TabIndex = 1;
-            this.textBox4.Text = "Requesting Person";
-            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox3
-            // 
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox3.Location = new System.Drawing.Point(6, 128);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox3.MinimumSize = new System.Drawing.Size(2, 30);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(297, 22);
-            this.textBox3.TabIndex = 0;
-            this.textBox3.Text = "CLIENT INFORMATION";
+            this.lbl_Control_Number.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Control_Number.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Control_Number.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Control_Number.Font = new System.Drawing.Font("Arial", 17F, System.Drawing.FontStyle.Italic);
+            this.lbl_Control_Number.ForeColor = System.Drawing.Color.Red;
+            this.lbl_Control_Number.Location = new System.Drawing.Point(240, 4);
+            this.lbl_Control_Number.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Control_Number.MinimumSize = new System.Drawing.Size(4, 25);
+            this.lbl_Control_Number.Name = "lbl_Control_Number";
+            this.lbl_Control_Number.ReadOnly = true;
+            this.lbl_Control_Number.Size = new System.Drawing.Size(289, 27);
+            this.lbl_Control_Number.TabIndex = 23;
+            this.lbl_Control_Number.Text = "DESCRIPTION";
             // 
             // Venue_User_Control
             // 
@@ -1945,9 +1955,6 @@
         private System.Windows.Forms.TextBox lbl_Venue_Name;
         private System.Windows.Forms.TextBox textBox14;
         private System.Windows.Forms.TextBox textBox26;
-        private System.Windows.Forms.TextBox lbl_Control_Number;
-        private System.Windows.Forms.TextBox lbl_Reservation_Status;
-        private System.Windows.Forms.TextBox lbl_Number_Of_Participants;
         private System.Windows.Forms.TextBox lbl_Activity_Name;
         private System.Windows.Forms.TextBox lbl_Reservation_Time;
         private System.Windows.Forms.TextBox lbl_Reservation_Dates;
@@ -1956,9 +1963,6 @@
         private System.Windows.Forms.TextBox lbl_Origin_Request;
         private System.Windows.Forms.TextBox lbl_Requesting_Office;
         private System.Windows.Forms.TextBox lbl_Requesting_Person;
-        private System.Windows.Forms.TextBox textBox15;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.TextBox textBox9;
@@ -1997,10 +2001,6 @@
         private System.Windows.Forms.TextBox tb10;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox42;
-        private System.Windows.Forms.TextBox lbl_Balance_3;
-        private System.Windows.Forms.TextBox tb14;
-        private System.Windows.Forms.TextBox lbl_Final_Amount_Paid;
-        private System.Windows.Forms.TextBox tb13;
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.Label label45;
@@ -2018,7 +2018,18 @@
         private System.Windows.Forms.Button btn_Cancel_Reservation;
         private System.Windows.Forms.Button btn_Confirm_Reservation;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Label lbl_h2;
+        private System.Windows.Forms.TextBox lbl_OR_2;
+        private System.Windows.Forms.TextBox OR2;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox lbl_Number_Of_Participants;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox lbl_Reservation_Status;
+        private System.Windows.Forms.TextBox tb_Extension_Status;
+        private System.Windows.Forms.TextBox tb_Status;
+        private System.Windows.Forms.TextBox lbl_Rate_Type2;
+        private System.Windows.Forms.TextBox tb_Rate_Type;
+        private System.Windows.Forms.TextBox lbl_Control_Number;
+        private System.Windows.Forms.TextBox textBox15;
     }
 }
