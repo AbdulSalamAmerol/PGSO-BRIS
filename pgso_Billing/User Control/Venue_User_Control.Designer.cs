@@ -123,6 +123,7 @@
             this.lbl_Venue_Name = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
             this.textBox26 = new System.Windows.Forms.TextBox();
+            this.lbl_Control_Number = new System.Windows.Forms.TextBox();
             this.lbl_Number_Of_Participants = new System.Windows.Forms.TextBox();
             this.lbl_Activity_Name = new System.Windows.Forms.TextBox();
             this.lbl_Reservation_Time = new System.Windows.Forms.TextBox();
@@ -132,6 +133,7 @@
             this.lbl_Origin_Request = new System.Windows.Forms.TextBox();
             this.lbl_Requesting_Office = new System.Windows.Forms.TextBox();
             this.lbl_Requesting_Person = new System.Windows.Forms.TextBox();
+            this.textBox15 = new System.Windows.Forms.TextBox();
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.textBox10 = new System.Windows.Forms.TextBox();
@@ -140,8 +142,6 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.lbl_Control_Number = new System.Windows.Forms.TextBox();
             this.pnl_Billing_Details.SuspendLayout();
             this.panel5.SuspendLayout();
             this.SuspendLayout();
@@ -528,7 +528,7 @@
             this.lbl_OR_2.MinimumSize = new System.Drawing.Size(4, 25);
             this.lbl_OR_2.Name = "lbl_OR_2";
             this.lbl_OR_2.ReadOnly = true;
-            this.lbl_OR_2.Size = new System.Drawing.Size(189, 25);
+            this.lbl_OR_2.Size = new System.Drawing.Size(189, 23);
             this.lbl_OR_2.TabIndex = 62;
             this.lbl_OR_2.Text = "DESCRIPTION";
             // 
@@ -559,7 +559,7 @@
             this.lbl_Rate_Type2.MinimumSize = new System.Drawing.Size(0, 25);
             this.lbl_Rate_Type2.Name = "lbl_Rate_Type2";
             this.lbl_Rate_Type2.ReadOnly = true;
-            this.lbl_Rate_Type2.Size = new System.Drawing.Size(119, 25);
+            this.lbl_Rate_Type2.Size = new System.Drawing.Size(119, 23);
             this.lbl_Rate_Type2.TabIndex = 64;
             this.lbl_Rate_Type2.Text = "...";
             // 
@@ -586,7 +586,7 @@
             this.tb_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
             this.tb_Rate_Type.Name = "tb_Rate_Type";
             this.tb_Rate_Type.ReadOnly = true;
-            this.tb_Rate_Type.Size = new System.Drawing.Size(121, 25);
+            this.tb_Rate_Type.Size = new System.Drawing.Size(121, 23);
             this.tb_Rate_Type.TabIndex = 63;
             this.tb_Rate_Type.Text = "RATE TYPE:";
             this.tb_Rate_Type.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -924,9 +924,9 @@
             this.tb1.MinimumSize = new System.Drawing.Size(2, 25);
             this.tb1.Name = "tb1";
             this.tb1.ReadOnly = true;
-            this.tb1.Size = new System.Drawing.Size(250, 25);
+            this.tb1.Size = new System.Drawing.Size(358, 25);
             this.tb1.TabIndex = 102;
-            this.tb1.Text = "OTHER BILLING DETAILS";
+            this.tb1.Text = "MISCELLANEOUS BILLING DETAILS";
             // 
             // label19
             // 
@@ -1627,6 +1627,22 @@
             this.textBox26.TabIndex = 24;
             this.textBox26.Text = "RESERVATION INFORMATION";
             // 
+            // lbl_Control_Number
+            // 
+            this.lbl_Control_Number.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Control_Number.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Control_Number.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Control_Number.Font = new System.Drawing.Font("Arial", 17F, System.Drawing.FontStyle.Italic);
+            this.lbl_Control_Number.ForeColor = System.Drawing.Color.Red;
+            this.lbl_Control_Number.Location = new System.Drawing.Point(240, 4);
+            this.lbl_Control_Number.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Control_Number.MinimumSize = new System.Drawing.Size(4, 25);
+            this.lbl_Control_Number.Name = "lbl_Control_Number";
+            this.lbl_Control_Number.ReadOnly = true;
+            this.lbl_Control_Number.Size = new System.Drawing.Size(289, 27);
+            this.lbl_Control_Number.TabIndex = 23;
+            this.lbl_Control_Number.Text = "DESCRIPTION";
+            // 
             // lbl_Number_Of_Participants
             // 
             this.lbl_Number_Of_Participants.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
@@ -1740,6 +1756,21 @@
             this.lbl_Requesting_Person.ReadOnly = true;
             this.lbl_Requesting_Person.Size = new System.Drawing.Size(249, 27);
             this.lbl_Requesting_Person.TabIndex = 13;
+            // 
+            // textBox15
+            // 
+            this.textBox15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox15.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox15.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox15.Font = new System.Drawing.Font("Arial", 17F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.textBox15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.textBox15.Location = new System.Drawing.Point(5, 5);
+            this.textBox15.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.ReadOnly = true;
+            this.textBox15.Size = new System.Drawing.Size(235, 27);
+            this.textBox15.TabIndex = 12;
+            this.textBox15.Text = "CONTROL NUMBER:";
             // 
             // textBox12
             // 
@@ -1867,37 +1898,6 @@
             this.textBox3.Size = new System.Drawing.Size(297, 22);
             this.textBox3.TabIndex = 0;
             this.textBox3.Text = "CLIENT INFORMATION";
-            // 
-            // textBox15
-            // 
-            this.textBox15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox15.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox15.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox15.Font = new System.Drawing.Font("Arial", 17F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.textBox15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.textBox15.Location = new System.Drawing.Point(5, 5);
-            this.textBox15.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.ReadOnly = true;
-            this.textBox15.Size = new System.Drawing.Size(235, 27);
-            this.textBox15.TabIndex = 12;
-            this.textBox15.Text = "CONTROL NUMBER:";
-            // 
-            // lbl_Control_Number
-            // 
-            this.lbl_Control_Number.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Control_Number.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Control_Number.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Control_Number.Font = new System.Drawing.Font("Arial", 17F, System.Drawing.FontStyle.Italic);
-            this.lbl_Control_Number.ForeColor = System.Drawing.Color.Red;
-            this.lbl_Control_Number.Location = new System.Drawing.Point(240, 4);
-            this.lbl_Control_Number.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Control_Number.MinimumSize = new System.Drawing.Size(4, 25);
-            this.lbl_Control_Number.Name = "lbl_Control_Number";
-            this.lbl_Control_Number.ReadOnly = true;
-            this.lbl_Control_Number.Size = new System.Drawing.Size(289, 27);
-            this.lbl_Control_Number.TabIndex = 23;
-            this.lbl_Control_Number.Text = "DESCRIPTION";
             // 
             // Venue_User_Control
             // 
