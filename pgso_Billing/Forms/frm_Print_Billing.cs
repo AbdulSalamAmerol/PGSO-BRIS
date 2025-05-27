@@ -55,8 +55,6 @@
                 if (_billingData == null || _billingData.Count == 0) return;
 
                 // Set the report definition path or embedded resource
-                //Print_Billing_Report_Viewer.LocalReport.ReportPath = @"C:\Users\amero\source\repos\pgso\pgso_Billing\Forms\Print_Billing.rdlc";
-                // Or, if embedded:
                  Print_Billing_Report_Viewer.LocalReport.ReportEmbeddedResource = "pgso.pgso_Billing.Forms.Report_Print_Billing.rdlc";
 
                 // Prepare Report Data Source

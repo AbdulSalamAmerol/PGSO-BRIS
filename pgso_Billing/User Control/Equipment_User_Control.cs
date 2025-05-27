@@ -287,5 +287,20 @@ namespace pgso.pgso_Billing.User_Control
         {
 
         }
+
+        private void textBox15_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_Control_Number_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

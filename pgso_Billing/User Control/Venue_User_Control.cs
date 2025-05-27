@@ -287,7 +287,7 @@ namespace pgso.pgso_Billing
 
 
 
-                label19.Visible = false;
+                label19.Visible = true;
                 label20.Visible = false;
             
                 label27.Visible = false;
@@ -482,6 +482,31 @@ namespace pgso.pgso_Billing
                                     "Approval Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+        }
+
+        private void textBox24_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_Additional_Hourly_Charge_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_OR_2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_OT_Hours_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnl_Billing_Details_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 

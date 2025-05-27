@@ -58,8 +58,6 @@ namespace pgso
         //FILTERING
         private void frm_Billing_Load(object sender, EventArgs e)
         {
-
-            dgv_Billing_Records.CellClick += dgv_Billing_Records_CellContentClick;
             this.MinimumSize = new Size(1920, 1200);
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.StartPosition = FormStartPosition.Manual;
@@ -84,7 +82,7 @@ namespace pgso
                 dgv_billing_binding_source.DataSource = groupedBillingData;
                 dgv_Billing_Records.DataSource = dgv_billing_binding_source;
                 SetIconColumns(); // Set icons for the columns
-                // Adjust column display order (if needed)
+              
                 
             }
             catch (Exception ex)
@@ -104,9 +102,6 @@ namespace pgso
             cmb_Billing_Sort.SelectedIndexChanged += cmb_Billing_Sort_SelectedIndexChanged;
         }
 
-        //SORT
-
-        //FILTERING
         private void cmb_Billing_Sort_SelectedIndexChanged(object sender, EventArgs e)
         {
             ApplySortingAndFiltering();
@@ -116,7 +111,7 @@ namespace pgso
         {
             ApplySortingAndFiltering();
         }
-        //FILTERING
+
         private void ApplySortingAndFiltering()
         {
             IEnumerable<Model_Billing> filtered = all_billing_model;
@@ -134,22 +129,22 @@ namespace pgso
             switch (sortBy)
             {
                 case "Control Number":
-                    filtered = filtered.OrderBy(b => b.pk_ReservationID);
+                    filtered = filtered.OrderByDescending(b => b.pk_ReservationID);
                     break;
                 case "Reservation Date":
-                    filtered = filtered.OrderBy(b => b.fld_Start_Date); // adjust property name
+                    filtered = filtered.OrderByDescending(b => b.fld_Start_Date);
                     break;
                 case "Requesting Person":
-                    filtered = filtered.OrderBy(b => b.fld_Full_Name); // adjust property name
+                    filtered = filtered.OrderByDescending(b => b.fld_Full_Name);
                     break;
                 case "Reservation Type":
-                    filtered = filtered.OrderBy(b => b.fld_Reservation_Type);
+                    filtered = filtered.OrderByDescending(b => b.fld_Reservation_Type);
                     break;
                 case "Reservation Status":
-                    filtered = filtered.OrderBy(b => b.fld_Reservation_Status);
+                    filtered = filtered.OrderByDescending(b => b.fld_Reservation_Status);
                     break;
                 case "Amount Due":
-                    filtered = filtered.OrderBy(b => b.fld_Amount_Due);
+                    filtered = filtered.OrderByDescending(b => b.fld_Amount_Due);
                     break;
                 default:
                     break;
@@ -322,7 +317,7 @@ namespace pgso
                 case "col_Print":
                     await PrintBilling(reservationID, currentStatus);
                     break;
-
+                    /* Removed Feature
                 case "col_Approved":
                     await HandleApprovalAsync(reservationID, currentStatus);
                     break;
@@ -334,6 +329,7 @@ namespace pgso
                 case "col_Extend":
                     HandleExtension(reservationID, e.RowIndex);
                     break;
+                    */
             }
         }
 
@@ -381,8 +377,17 @@ namespace pgso
 
                 
                 }
-                // Left align for other columns
-                e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                
+                // Alignment logic
+                string columnName = dgv_Billing_Records.Columns[e.ColumnIndex].Name;
+                if (columnName == "fld_Control_Number" || columnName == "col_Print")
+                {
+                    e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                }
+                else
+                {
+                    e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                }
             }
         }
 
@@ -636,7 +641,7 @@ namespace pgso
         {
             try
             {
-                MessageBox.Show("Refreshing billing records...");
+                
 
                 all_billing_model = repo_billing.GetAllBillingRecords() ?? new List<Model_Billing>();
 
@@ -651,8 +656,6 @@ namespace pgso
                 groupedBillingData = GroupAndFormatBillingData(all_billing_model);
                 dgv_Billing_Records.DataSource = groupedBillingData;
                 dgv_Billing_Records.Refresh();
-
-                MessageBox.Show($"Refreshed data. Total records: {groupedBillingData.Count}");
 
                 // Reselect the row if a reservation ID is passed
                 if (highlightReservationID.HasValue)
@@ -683,7 +686,7 @@ namespace pgso
                         if (selectedRow != null)
                         {
                             dgv_Billing_Records.FirstDisplayedScrollingRowIndex = selectedRow.Index;
-                            MessageBox.Show("Row selected and scrolled into view.");
+                           
                         }
                     }
                     else
@@ -743,7 +746,7 @@ namespace pgso
                         Name = "col_Reservation_Name",
                         HeaderText = "RESERVATION",
                         DataPropertyName = "DisplayReservationName",
-                        AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
                     });
                 }
                 if (dgv_Billing_Records.Columns.Contains("col_Reservation_Name"))

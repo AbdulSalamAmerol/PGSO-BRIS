@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this._BRIS_EXPERIMENT_3_0DataSet = new pgso._BRIS_EXPERIMENT_3_0DataSet();
             this.tblReservationEquipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbl_Reservation_EquipmentTableAdapter = new pgso._BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_Reservation_EquipmentTableAdapter();
@@ -63,6 +63,14 @@
             this.pnl_Billing_Details = new System.Windows.Forms.Panel();
             this.lbl_Control_Number = new System.Windows.Forms.TextBox();
             this.textBox15 = new System.Windows.Forms.TextBox();
+            this.lbl_Reservation_Status = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.lbl_Rate_Type = new System.Windows.Forms.TextBox();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.lbl_OR = new System.Windows.Forms.TextBox();
+            this.tb_OR = new System.Windows.Forms.TextBox();
+            this.btn_Confirm_Reservation = new System.Windows.Forms.Button();
+            this.btn_Cancel_Reservation = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox16 = new System.Windows.Forms.TextBox();
@@ -82,14 +90,6 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.btn_Confirm_Reservation = new System.Windows.Forms.Button();
-            this.btn_Cancel_Reservation = new System.Windows.Forms.Button();
-            this.lbl_OR = new System.Windows.Forms.TextBox();
-            this.tb_OR = new System.Windows.Forms.TextBox();
-            this.lbl_Reservation_Status = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.lbl_Rate_Type = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblReservationEquipmentBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Equipment_Billing_Records)).BeginInit();
@@ -116,22 +116,22 @@
             this.dgv_Equipment_Billing_Records.AllowUserToDeleteRows = false;
             this.dgv_Equipment_Billing_Records.AllowUserToResizeColumns = false;
             this.dgv_Equipment_Billing_Records.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            this.dgv_Equipment_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
+            this.dgv_Equipment_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_Equipment_Billing_Records.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgv_Equipment_Billing_Records.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Equipment_Billing_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Equipment_Billing_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_Equipment_Billing_Records.ColumnHeadersHeight = 40;
             this.dgv_Equipment_Billing_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_Equipment_Billing_Records.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -152,14 +152,14 @@
             this.col_fk_Equipment_PricingID,
             this.col_Total,
             this.col_fk_Reservation_ID});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_Equipment_Billing_Records.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_Equipment_Billing_Records.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_Equipment_Billing_Records.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.dgv_Equipment_Billing_Records.Location = new System.Drawing.Point(9, 567);
             this.dgv_Equipment_Billing_Records.Margin = new System.Windows.Forms.Padding(0);
@@ -167,14 +167,14 @@
             this.dgv_Equipment_Billing_Records.Name = "dgv_Equipment_Billing_Records";
             this.dgv_Equipment_Billing_Records.ReadOnly = true;
             this.dgv_Equipment_Billing_Records.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Equipment_Billing_Records.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Equipment_Billing_Records.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgv_Equipment_Billing_Records.RowHeadersVisible = false;
             this.dgv_Equipment_Billing_Records.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgv_Equipment_Billing_Records.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -357,15 +357,12 @@
             // 
             this.lbl_fld_Total_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_fld_Total_Amount.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_fld_Total_Amount.Location = new System.Drawing.Point(777, 1110);
+            this.lbl_fld_Total_Amount.Location = new System.Drawing.Point(763, 1110);
             this.lbl_fld_Total_Amount.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_fld_Total_Amount.MaximumSize = new System.Drawing.Size(115, 25);
-            this.lbl_fld_Total_Amount.MinimumSize = new System.Drawing.Size(115, 25);
             this.lbl_fld_Total_Amount.Name = "lbl_fld_Total_Amount";
-            this.lbl_fld_Total_Amount.Size = new System.Drawing.Size(115, 27);
+            this.lbl_fld_Total_Amount.Size = new System.Drawing.Size(137, 27);
             this.lbl_fld_Total_Amount.TabIndex = 51;
             this.lbl_fld_Total_Amount.Text = "Amount";
-            this.lbl_fld_Total_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btn_Delete_Equipment_Billing
             // 
@@ -404,7 +401,7 @@
             this.textBox36.MinimumSize = new System.Drawing.Size(0, 30);
             this.textBox36.Name = "textBox36";
             this.textBox36.ReadOnly = true;
-            this.textBox36.Size = new System.Drawing.Size(309, 30);
+            this.textBox36.Size = new System.Drawing.Size(309, 22);
             this.textBox36.TabIndex = 91;
             this.textBox36.Text = "BILLING DETAILS";
             // 
@@ -412,20 +409,22 @@
             // 
             this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(525, 1112);
+            this.textBox1.Location = new System.Drawing.Point(506, 1112);
             this.textBox1.Margin = new System.Windows.Forms.Padding(0);
             this.textBox1.MaximumSize = new System.Drawing.Size(115, 25);
             this.textBox1.MinimumSize = new System.Drawing.Size(250, 25);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(250, 25);
             this.textBox1.TabIndex = 94;
-            this.textBox1.Text = "OVERALL TOTAL AMOUNT";
+            this.textBox1.Text = "OVERALL TOTAL AMOUNT :";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // pnl_Billing_Details
             // 
             this.pnl_Billing_Details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.pnl_Billing_Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Billing_Details.Controls.Add(this.lbl_Control_Number);
+            this.pnl_Billing_Details.Controls.Add(this.textBox15);
             this.pnl_Billing_Details.Controls.Add(this.lbl_Reservation_Status);
             this.pnl_Billing_Details.Controls.Add(this.textBox10);
             this.pnl_Billing_Details.Controls.Add(this.lbl_Rate_Type);
@@ -434,8 +433,6 @@
             this.pnl_Billing_Details.Controls.Add(this.tb_OR);
             this.pnl_Billing_Details.Controls.Add(this.btn_Confirm_Reservation);
             this.pnl_Billing_Details.Controls.Add(this.btn_Cancel_Reservation);
-            this.pnl_Billing_Details.Controls.Add(this.lbl_Control_Number);
-            this.pnl_Billing_Details.Controls.Add(this.textBox15);
             this.pnl_Billing_Details.Controls.Add(this.button1);
             this.pnl_Billing_Details.Controls.Add(this.textBox2);
             this.pnl_Billing_Details.Controls.Add(this.textBox16);
@@ -475,31 +472,151 @@
             this.lbl_Control_Number.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Control_Number.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Control_Number.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Control_Number.Font = new System.Drawing.Font("Arial", 17F, System.Drawing.FontStyle.Italic);
+            this.lbl_Control_Number.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Italic);
             this.lbl_Control_Number.ForeColor = System.Drawing.Color.Red;
-            this.lbl_Control_Number.Location = new System.Drawing.Point(240, 4);
+            this.lbl_Control_Number.Location = new System.Drawing.Point(272, 4);
             this.lbl_Control_Number.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Control_Number.MinimumSize = new System.Drawing.Size(4, 25);
             this.lbl_Control_Number.Name = "lbl_Control_Number";
             this.lbl_Control_Number.ReadOnly = true;
-            this.lbl_Control_Number.Size = new System.Drawing.Size(289, 27);
-            this.lbl_Control_Number.TabIndex = 138;
+            this.lbl_Control_Number.Size = new System.Drawing.Size(289, 26);
+            this.lbl_Control_Number.TabIndex = 150;
             this.lbl_Control_Number.Text = "DESCRIPTION";
+            this.lbl_Control_Number.TextChanged += new System.EventHandler(this.lbl_Control_Number_TextChanged);
             // 
             // textBox15
             // 
             this.textBox15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.textBox15.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox15.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox15.Font = new System.Drawing.Font("Arial", 17F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.textBox15.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.textBox15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.textBox15.Location = new System.Drawing.Point(5, 5);
             this.textBox15.Margin = new System.Windows.Forms.Padding(0);
             this.textBox15.Name = "textBox15";
             this.textBox15.ReadOnly = true;
-            this.textBox15.Size = new System.Drawing.Size(235, 27);
-            this.textBox15.TabIndex = 137;
+            this.textBox15.Size = new System.Drawing.Size(265, 26);
+            this.textBox15.TabIndex = 149;
             this.textBox15.Text = "CONTROL NUMBER:";
+            this.textBox15.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
+            // 
+            // lbl_Reservation_Status
+            // 
+            this.lbl_Reservation_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Reservation_Status.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Reservation_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Reservation_Status.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.lbl_Reservation_Status.Location = new System.Drawing.Point(777, 459);
+            this.lbl_Reservation_Status.Name = "lbl_Reservation_Status";
+            this.lbl_Reservation_Status.Size = new System.Drawing.Size(123, 23);
+            this.lbl_Reservation_Status.TabIndex = 148;
+            this.lbl_Reservation_Status.Text = "...";
+            // 
+            // textBox10
+            // 
+            this.textBox10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox10.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
+            this.textBox10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.textBox10.Location = new System.Drawing.Point(640, 460);
+            this.textBox10.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.ReadOnly = true;
+            this.textBox10.Size = new System.Drawing.Size(121, 23);
+            this.textBox10.TabIndex = 147;
+            this.textBox10.Text = "STATUS:";
+            this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbl_Rate_Type
+            // 
+            this.lbl_Rate_Type.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Rate_Type.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Rate_Type.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Rate_Type.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbl_Rate_Type.Location = new System.Drawing.Point(777, 485);
+            this.lbl_Rate_Type.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
+            this.lbl_Rate_Type.Name = "lbl_Rate_Type";
+            this.lbl_Rate_Type.ReadOnly = true;
+            this.lbl_Rate_Type.Size = new System.Drawing.Size(123, 23);
+            this.lbl_Rate_Type.TabIndex = 146;
+            this.lbl_Rate_Type.Text = "...";
+            // 
+            // textBox14
+            // 
+            this.textBox14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox14.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox14.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox14.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
+            this.textBox14.Location = new System.Drawing.Point(640, 485);
+            this.textBox14.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox14.MinimumSize = new System.Drawing.Size(0, 25);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.ReadOnly = true;
+            this.textBox14.Size = new System.Drawing.Size(121, 23);
+            this.textBox14.TabIndex = 145;
+            this.textBox14.Text = "RATE TYPE:";
+            this.textBox14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbl_OR
+            // 
+            this.lbl_OR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_OR.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_OR.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_OR.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_OR.ForeColor = System.Drawing.Color.Red;
+            this.lbl_OR.Location = new System.Drawing.Point(314, 482);
+            this.lbl_OR.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_OR.MinimumSize = new System.Drawing.Size(4, 25);
+            this.lbl_OR.Name = "lbl_OR";
+            this.lbl_OR.ReadOnly = true;
+            this.lbl_OR.Size = new System.Drawing.Size(272, 23);
+            this.lbl_OR.TabIndex = 144;
+            this.lbl_OR.Text = "DESCRIPTION";
+            // 
+            // tb_OR
+            // 
+            this.tb_OR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb_OR.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb_OR.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb_OR.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_OR.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.tb_OR.Location = new System.Drawing.Point(8, 482);
+            this.tb_OR.Margin = new System.Windows.Forms.Padding(0);
+            this.tb_OR.Name = "tb_OR";
+            this.tb_OR.ReadOnly = true;
+            this.tb_OR.Size = new System.Drawing.Size(304, 23);
+            this.tb_OR.TabIndex = 143;
+            this.tb_OR.Text = "OFFICIAL RECEIPT NUMBER:";
+            // 
+            // btn_Confirm_Reservation
+            // 
+            this.btn_Confirm_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Confirm_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Confirm_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
+            this.btn_Confirm_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.btn_Confirm_Reservation.Location = new System.Drawing.Point(3, 43);
+            this.btn_Confirm_Reservation.Name = "btn_Confirm_Reservation";
+            this.btn_Confirm_Reservation.Size = new System.Drawing.Size(220, 38);
+            this.btn_Confirm_Reservation.TabIndex = 142;
+            this.btn_Confirm_Reservation.Text = "Confirm Reservation";
+            this.btn_Confirm_Reservation.UseVisualStyleBackColor = false;
+            this.btn_Confirm_Reservation.Click += new System.EventHandler(this.btn_Confirm_Reservation_Click_1);
+            // 
+            // btn_Cancel_Reservation
+            // 
+            this.btn_Cancel_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Cancel_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Cancel_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
+            this.btn_Cancel_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.btn_Cancel_Reservation.Location = new System.Drawing.Point(226, 43);
+            this.btn_Cancel_Reservation.Name = "btn_Cancel_Reservation";
+            this.btn_Cancel_Reservation.Size = new System.Drawing.Size(220, 38);
+            this.btn_Cancel_Reservation.TabIndex = 141;
+            this.btn_Cancel_Reservation.Text = "Cancel Reservation";
+            this.btn_Cancel_Reservation.UseVisualStyleBackColor = false;
+            this.btn_Cancel_Reservation.Click += new System.EventHandler(this.btn_Cancel_Reservation_Click_1);
             // 
             // button1
             // 
@@ -545,7 +662,7 @@
             this.textBox5.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(166, 25);
+            this.textBox5.Size = new System.Drawing.Size(166, 20);
             this.textBox5.TabIndex = 127;
             this.textBox5.Text = "Request Origin";
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -561,7 +678,7 @@
             this.textBox42.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox42.Name = "textBox42";
             this.textBox42.ReadOnly = true;
-            this.textBox42.Size = new System.Drawing.Size(166, 25);
+            this.textBox42.Size = new System.Drawing.Size(166, 20);
             this.textBox42.TabIndex = 126;
             this.textBox42.Text = "Requesting Office";
             this.textBox42.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -577,7 +694,7 @@
             this.textBox26.MinimumSize = new System.Drawing.Size(2, 30);
             this.textBox26.Name = "textBox26";
             this.textBox26.ReadOnly = true;
-            this.textBox26.Size = new System.Drawing.Size(370, 30);
+            this.textBox26.Size = new System.Drawing.Size(370, 22);
             this.textBox26.TabIndex = 116;
             this.textBox26.Text = "RESERVATION INFORMATION";
             // 
@@ -678,7 +795,7 @@
             this.textBox11.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox11.Name = "textBox11";
             this.textBox11.ReadOnly = true;
-            this.textBox11.Size = new System.Drawing.Size(161, 25);
+            this.textBox11.Size = new System.Drawing.Size(161, 20);
             this.textBox11.TabIndex = 101;
             this.textBox11.Text = "Activity";
             this.textBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -694,7 +811,7 @@
             this.textBox9.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(161, 25);
+            this.textBox9.Size = new System.Drawing.Size(161, 20);
             this.textBox9.TabIndex = 99;
             this.textBox9.Text = "Reservation Dates";
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -742,7 +859,7 @@
             this.textBox4.MinimumSize = new System.Drawing.Size(2, 25);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(166, 25);
+            this.textBox4.Size = new System.Drawing.Size(166, 20);
             this.textBox4.TabIndex = 96;
             this.textBox4.Text = "Requesting Person";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -758,127 +875,10 @@
             this.textBox3.MinimumSize = new System.Drawing.Size(2, 30);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(297, 30);
+            this.textBox3.Size = new System.Drawing.Size(297, 22);
             this.textBox3.TabIndex = 95;
             this.textBox3.Text = "CLIENT INFORMATION";
-            // 
-            // btn_Confirm_Reservation
-            // 
-            this.btn_Confirm_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.btn_Confirm_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Confirm_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
-            this.btn_Confirm_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Confirm_Reservation.Location = new System.Drawing.Point(3, 43);
-            this.btn_Confirm_Reservation.Name = "btn_Confirm_Reservation";
-            this.btn_Confirm_Reservation.Size = new System.Drawing.Size(220, 38);
-            this.btn_Confirm_Reservation.TabIndex = 142;
-            this.btn_Confirm_Reservation.Text = "Confirm Reservation";
-            this.btn_Confirm_Reservation.UseVisualStyleBackColor = false;
-            this.btn_Confirm_Reservation.Click += new System.EventHandler(this.btn_Confirm_Reservation_Click_1);
-            // 
-            // btn_Cancel_Reservation
-            // 
-            this.btn_Cancel_Reservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.btn_Cancel_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Cancel_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold);
-            this.btn_Cancel_Reservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Cancel_Reservation.Location = new System.Drawing.Point(226, 43);
-            this.btn_Cancel_Reservation.Name = "btn_Cancel_Reservation";
-            this.btn_Cancel_Reservation.Size = new System.Drawing.Size(220, 38);
-            this.btn_Cancel_Reservation.TabIndex = 141;
-            this.btn_Cancel_Reservation.Text = "Cancel Reservation";
-            this.btn_Cancel_Reservation.UseVisualStyleBackColor = false;
-            this.btn_Cancel_Reservation.Click += new System.EventHandler(this.btn_Cancel_Reservation_Click_1);
-            // 
-            // lbl_OR
-            // 
-            this.lbl_OR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_OR.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_OR.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_OR.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_OR.ForeColor = System.Drawing.Color.Red;
-            this.lbl_OR.Location = new System.Drawing.Point(298, 481);
-            this.lbl_OR.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_OR.MinimumSize = new System.Drawing.Size(4, 25);
-            this.lbl_OR.Name = "lbl_OR";
-            this.lbl_OR.ReadOnly = true;
-            this.lbl_OR.Size = new System.Drawing.Size(272, 25);
-            this.lbl_OR.TabIndex = 144;
-            this.lbl_OR.Text = "DESCRIPTION";
-            // 
-            // tb_OR
-            // 
-            this.tb_OR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb_OR.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_OR.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb_OR.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_OR.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.tb_OR.Location = new System.Drawing.Point(8, 482);
-            this.tb_OR.Margin = new System.Windows.Forms.Padding(0);
-            this.tb_OR.Name = "tb_OR";
-            this.tb_OR.ReadOnly = true;
-            this.tb_OR.Size = new System.Drawing.Size(278, 23);
-            this.tb_OR.TabIndex = 143;
-            this.tb_OR.Text = "OFFICIAL RECEIPT NUMBER:";
-            // 
-            // lbl_Reservation_Status
-            // 
-            this.lbl_Reservation_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Reservation_Status.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Reservation_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Reservation_Status.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.lbl_Reservation_Status.Location = new System.Drawing.Point(777, 459);
-            this.lbl_Reservation_Status.Name = "lbl_Reservation_Status";
-            this.lbl_Reservation_Status.Size = new System.Drawing.Size(123, 23);
-            this.lbl_Reservation_Status.TabIndex = 148;
-            this.lbl_Reservation_Status.Text = "...";
-            // 
-            // textBox10
-            // 
-            this.textBox10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox10.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox10.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold);
-            this.textBox10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.textBox10.Location = new System.Drawing.Point(640, 460);
-            this.textBox10.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(121, 23);
-            this.textBox10.TabIndex = 147;
-            this.textBox10.Text = "STATUS:";
-            this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_Rate_Type
-            // 
-            this.lbl_Rate_Type.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Rate_Type.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Rate_Type.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Rate_Type.Font = new System.Drawing.Font("Arial", 15F);
-            this.lbl_Rate_Type.Location = new System.Drawing.Point(777, 485);
-            this.lbl_Rate_Type.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
-            this.lbl_Rate_Type.Name = "lbl_Rate_Type";
-            this.lbl_Rate_Type.ReadOnly = true;
-            this.lbl_Rate_Type.Size = new System.Drawing.Size(123, 25);
-            this.lbl_Rate_Type.TabIndex = 146;
-            this.lbl_Rate_Type.Text = "...";
-            // 
-            // textBox14
-            // 
-            this.textBox14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox14.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox14.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox14.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold);
-            this.textBox14.Location = new System.Drawing.Point(640, 485);
-            this.textBox14.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox14.MinimumSize = new System.Drawing.Size(0, 25);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.ReadOnly = true;
-            this.textBox14.Size = new System.Drawing.Size(121, 25);
-            this.textBox14.TabIndex = 145;
-            this.textBox14.Text = "RATE TYPE:";
-            this.textBox14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // Equipment_User_Control
             // 
@@ -947,8 +947,6 @@
         private System.Windows.Forms.TextBox textBox16;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox lbl_Control_Number;
-        private System.Windows.Forms.TextBox textBox15;
         private System.Windows.Forms.Button btn_Confirm_Reservation;
         private System.Windows.Forms.Button btn_Cancel_Reservation;
         private System.Windows.Forms.TextBox lbl_OR;
@@ -957,5 +955,7 @@
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.TextBox lbl_Rate_Type;
         private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.TextBox lbl_Control_Number;
+        private System.Windows.Forms.TextBox textBox15;
     }
 }
