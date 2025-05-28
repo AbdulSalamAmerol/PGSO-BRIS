@@ -396,11 +396,6 @@ namespace pgso
     //        panel_Display.Location = new Point(20, 50); // Set a fixed position (50px from top-left corner)
         }
 
-        private void createReservationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
 
         //Manage Facilities End
     }

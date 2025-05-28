@@ -30,7 +30,6 @@
         {
             this.lblDays = new System.Windows.Forms.Label();
             this.lbl_Reservations = new System.Windows.Forms.Label();
-            this.lbl_Equipment = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblDays
@@ -53,22 +52,11 @@
             this.lbl_Reservations.TabIndex = 5;
             this.lbl_Reservations.Text = "00";
             // 
-            // lbl_Equipment
-            // 
-            this.lbl_Equipment.AutoSize = true;
-            this.lbl_Equipment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Equipment.Location = new System.Drawing.Point(14, 58);
-            this.lbl_Equipment.Name = "lbl_Equipment";
-            this.lbl_Equipment.Size = new System.Drawing.Size(21, 16);
-            this.lbl_Equipment.TabIndex = 6;
-            this.lbl_Equipment.Text = "00";
-            // 
             // UserControlDays
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
-            this.Controls.Add(this.lbl_Equipment);
             this.Controls.Add(this.lbl_Reservations);
             this.Controls.Add(this.lblDays);
             this.Name = "UserControlDays";
@@ -83,6 +71,5 @@
 
         private System.Windows.Forms.Label lblDays;
         private System.Windows.Forms.Label lbl_Reservations;
-        private System.Windows.Forms.Label lbl_Equipment;
     }
 }

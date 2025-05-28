@@ -75,7 +75,6 @@ namespace pgso
             this.createReservationToolStripMenuItem.Name = "createReservationToolStripMenuItem";
             this.createReservationToolStripMenuItem.Size = new System.Drawing.Size(139, 25);
             this.createReservationToolStripMenuItem.Text = "Create Reservation";
-            this.createReservationToolStripMenuItem.Click += new System.EventHandler(this.createReservationToolStripMenuItem_Click);
             // 
             // venueToolStripMenuItem
             // 
@@ -143,8 +142,8 @@ namespace pgso
             // 
             this.manageFacilitiesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("manageFacilitiesToolStripMenuItem.Image")));
             this.manageFacilitiesToolStripMenuItem.Name = "manageFacilitiesToolStripMenuItem";
-            this.manageFacilitiesToolStripMenuItem.Size = new System.Drawing.Size(110, 25);
-            this.manageFacilitiesToolStripMenuItem.Text = "Lookup Table";
+            this.manageFacilitiesToolStripMenuItem.Size = new System.Drawing.Size(132, 25);
+            this.manageFacilitiesToolStripMenuItem.Text = "Manage Facilities";
             this.manageFacilitiesToolStripMenuItem.Click += new System.EventHandler(this.manageFacilitiesToolStripMenuItem_Click);
             // 
             // panel_Display
