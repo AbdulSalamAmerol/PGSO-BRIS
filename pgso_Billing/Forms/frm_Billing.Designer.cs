@@ -413,7 +413,7 @@
             // 
             // fld_Full_Name
             // 
-            this.fld_Full_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.fld_Full_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.fld_Full_Name.DataPropertyName = "fld_Full_Name";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.fld_Full_Name.DefaultCellStyle = dataGridViewCellStyle6;
@@ -422,7 +422,6 @@
             this.fld_Full_Name.Name = "fld_Full_Name";
             this.fld_Full_Name.ReadOnly = true;
             this.fld_Full_Name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.fld_Full_Name.Width = 166;
             // 
             // col_Reservation_Name
             // 
