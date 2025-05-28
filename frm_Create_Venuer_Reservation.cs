@@ -27,7 +27,7 @@ namespace pgso
         public frm_Create_Venuer_Reservation()
         {
             InitializeComponent();
-           
+
             radio_Yes.Checked = false;
             radio_No.Checked = false;
             txt_contact.MaxLength = 11; // Limit to 12 characters
@@ -79,12 +79,12 @@ namespace pgso
 
             // Set DropDownStyle to DropDownList during initialization
             combo_Request.DropDownStyle = ComboBoxStyle.DropDownList;
-           // combo_Special.Enabled = false;
+            // combo_Special.Enabled = false;
         }
         private void frm_createvenuereservation_Load(object sender, EventArgs e)
         {
             LoadVenues();
-             date_of_use_start.ValueChanged += date_of_use_start_ValueChanged;
+            date_of_use_start.ValueChanged += date_of_use_start_ValueChanged;
             date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
             TimeStart.ValueChanged += TimeStart_ValueChanged;
             TimeEnd.ValueChanged += TimeEnd_ValueChanged;
@@ -94,7 +94,7 @@ namespace pgso
             DisableManualInput(date_of_use_end);
             DisableManualInput(TimeStart);
             DisableManualInput(TimeEnd);
-        
+
         }
 
         // Open database connection
@@ -503,7 +503,7 @@ AND fld_Rate_Type = @RateType";
         {
             decimal totalAmount = 0;
 
-            
+
 
             // Update the txt_Total with the aggregated total amount
             txt_Total.Text = totalAmount.ToString("0.00");
@@ -684,7 +684,7 @@ VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityNam
                     venueCmd.Parameters.AddWithValue("@EndTime", endTime);
                     venueCmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
                     venueCmd.Parameters.AddWithValue("@Participants", num_participants.Value);
-           
+
 
                     // Binary parameter (special handling)
                     var scannedDocParam = venueCmd.Parameters.Add("@ScannedDoc", SqlDbType.VarBinary);
@@ -828,7 +828,7 @@ VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityNam
         // Helper method to validate the contact number
         private bool IsValidContactNumber(string contactNumber)
         {
-      
+
             // Ensure the contact number is 10-15 digits long and may contain spaces, dashes, and parentheses
             string cleanedContactNumber = new string(contactNumber.Where(char.IsDigit).ToArray());
             return cleanedContactNumber.Length >= 10 && cleanedContactNumber.Length <= 15;
@@ -1146,7 +1146,7 @@ VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityNam
 
         }
 
-        
+
         private bool HasTimeConflict(DateTime startDate, DateTime endDate, TimeSpan startTime, TimeSpan endTime, int venueID)
         {
             try
@@ -1253,23 +1253,16 @@ VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityNam
                     return;
                 }
 
-                // Let user select a scanner if multiple are available
+                // Always show a dialog to select a scanner
                 DeviceInfo selectedScanner = null;
-                if (scanners.Count == 1)
+                using (Form scannerSelectForm = new Form()
                 {
-                    selectedScanner = scanners[0];
-                }
-                else
+                    Text = "Select Scanner",
+                    Width = 350,
+                    Height = 220,
+                    StartPosition = FormStartPosition.CenterScreen
+                })
                 {
-                    // Create a form to let user choose scanner
-                    Form scannerSelectForm = new Form()
-                    {
-                        Text = "Select Scanner",
-                        Width = 300,
-                        Height = 200,
-                        StartPosition = FormStartPosition.CenterScreen
-                    };
-
                     ListBox scannerList = new ListBox()
                     {
                         Dock = DockStyle.Fill
@@ -1303,6 +1296,12 @@ VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityNam
                     {
                         return; // User cancelled
                     }
+                }
+
+                if (selectedScanner == null)
+                {
+                    MessageBox.Show("No scanner selected.");
+                    return;
                 }
 
                 // Show scanning message
@@ -1392,11 +1391,93 @@ VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityNam
 
         }
 
+
+
+        // Inside frm_Create_Venuer_Reservation class
+
         private void button1_Click(object sender, EventArgs e)
         {
-            ScanDocument();
+            
         }
+        // Inside frm_Create_Venuer_Reservation class
 
+        /*
+        private Image AutoCropImage(Image originalImage)
+        {
+            Bitmap bmp = new Bitmap(originalImage);
+            int width = bmp.Width;
+            int height = bmp.Height;
+
+            int minX = width;
+            int minY = height;
+            int maxX = 0;
+            int maxY = 0;
+
+            // Define a threshold for what is considered a "blank" pixel.
+            // For grayscale, a pixel value close to 255 (white) would be blank.
+            // For color, you might check if R, G, B are all close to 255.
+            // Adjust this threshold based on your typical scanned document's background color.
+            int colorThreshold = 245; // Pixels brighter than this are considered "blank"
+
+            // Find the bounding box of non-blank pixels
+            bool contentFound = false;
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    Color pixelColor = bmp.GetPixel(x, y);
+
+                    // Check if the pixel is "not blank" (i.e., darker than the threshold)
+                    // You might need a more sophisticated check for color images,
+                    // e.g., checking the average of R, G, B, or checking against a specific background color.
+                    if (pixelColor.R < colorThreshold || pixelColor.G < colorThreshold || pixelColor.B < colorThreshold)
+                    {
+                        minX = Math.Min(minX, x);
+                        minY = Math.Min(minY, y);
+                        maxX = Math.Max(maxX, x);
+                        maxY = Math.Max(maxY, y);
+                        contentFound = true;
+                    }
+                }
+            }
+
+            if (!contentFound)
+            {
+                // No content found (image is entirely blank or very faint), return original or an empty image
+                return originalImage;
+            }
+
+            // Adjust bounding box to ensure it's within image bounds
+            minX = Math.Max(0, minX);
+            minY = Math.Max(0, minY);
+            maxX = Math.Min(width - 1, maxX);
+            maxY = Math.Min(height - 1, maxY);
+
+            // Calculate width and height of the cropped area
+            int cropWidth = maxX - minX + 1;
+            int cropHeight = maxY - minY + 1;
+
+            if (cropWidth <= 0 || cropHeight <= 0)
+            {
+                // This can happen if only a single line of pixels was detected or similar edge cases.
+                // Return the original image or handle as an error.
+                return originalImage;
+            }
+
+            // Create the rectangle for cropping
+            Rectangle cropRect = new Rectangle(minX, minY, cropWidth, cropHeight);
+
+            // Create a new bitmap from the cropped region
+            Bitmap croppedBmp = new Bitmap(cropRect.Width, cropRect.Height);
+            using (Graphics g = Graphics.FromImage(croppedBmp))
+            {
+                g.DrawImage(bmp, new Rectangle(0, 0, croppedBmp.Width, croppedBmp.Height),
+                                  cropRect, GraphicsUnit.Pixel);
+            }
+
+            return croppedBmp;
+        }
+        */
         private void combo_Special_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (combo_Special.SelectedItem == null)
@@ -1422,6 +1503,11 @@ VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityNam
                     // No action needed
                     break;
             }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            ScanDocument();
         }
     }
 }

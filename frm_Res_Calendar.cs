@@ -27,6 +27,8 @@ namespace pgso
             this.panel_Display.Controls.Clear();
             this.panel_Display.Controls.Add(Venues);
             Venues.Show();
+            this.Size = new Size(950, 650);
+
         }
         private void DisplayVenueFirst()
         {
@@ -37,6 +39,8 @@ namespace pgso
             this.panel_Display.Controls.Clear();
             this.panel_Display.Controls.Add(Venues);
             Venues.Show();
+            this.Size = new Size(950, 650);
+
         }
         private void equipmetToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -47,6 +51,7 @@ namespace pgso
             this.panel_Display.Controls.Clear();
             this.panel_Display.Controls.Add(Venues);
             Venues.Show();
+            this .Size = new Size(697, 690);
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)

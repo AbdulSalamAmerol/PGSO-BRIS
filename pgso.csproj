@@ -178,6 +178,12 @@
     <Compile Include="frm_Equipment_Calendar.Designer.cs">
       <DependentUpon>frm_Equipment_Calendar.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_Equipment_Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Equipment_Edit.Designer.cs">
+      <DependentUpon>frm_Equipment_Edit.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_Equipment_Res.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -250,6 +256,12 @@
     <Compile Include="frm_Venue_Calendar.Designer.cs">
       <DependentUpon>frm_Venue_Calendar.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_Venue_Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Venue_Edit.Designer.cs">
+      <DependentUpon>frm_Venue_Edit.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_Venue_Res.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -291,6 +303,9 @@
     <EmbeddedResource Include="frm_Equipment_Calendar.resx">
       <DependentUpon>frm_Equipment_Calendar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frm_Equipment_Edit.resx">
+      <DependentUpon>frm_Equipment_Edit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_Equipment_Res.resx">
       <DependentUpon>frm_Equipment_Res.cs</DependentUpon>
     </EmbeddedResource>
@@ -327,6 +342,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Venue_Calendar.resx">
       <DependentUpon>frm_Venue_Calendar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Venue_Edit.resx">
+      <DependentUpon>frm_Venue_Edit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Venue_Res.resx">
       <DependentUpon>frm_Venue_Res.cs</DependentUpon>

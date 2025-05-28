@@ -1,6 +1,6 @@
 ﻿namespace pgso
 {
-    partial class frm_Venues
+    partial class frm_Venue_Edit
     {
         /// <summary>
         /// Required designer variable.
@@ -32,15 +32,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dt_all = new System.Windows.Forms.DataGridView();
-            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Venue_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreatedAt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Reservation_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Total_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel_Information = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.combobox_Filter = new System.Windows.Forms.ComboBox();
+            this.txt_Search = new System.Windows.Forms.TextBox();
             this.txt_Scope = new System.Windows.Forms.TextBox();
             this.btn_Update = new System.Windows.Forms.Button();
             this.txt_Venue = new System.Windows.Forms.TextBox();
@@ -53,6 +49,14 @@
             this.txt_Type = new System.Windows.Forms.TextBox();
             this.txt_Address = new System.Windows.Forms.TextBox();
             this.txt_Office = new System.Windows.Forms.TextBox();
+            this.dt_all = new System.Windows.Forms.DataGridView();
+            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Venue_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreatedAt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Reservation_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Total_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txt_FName = new System.Windows.Forms.TextBox();
             this.txt_CN = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -68,151 +72,58 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txt_Search = new System.Windows.Forms.TextBox();
-            this.combobox_Filter = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
+            this.panel_Information = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dt_all)).BeginInit();
             this.panel_Information.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dt_all
+            // label17
             // 
-            this.dt_all.AllowUserToAddRows = false;
-            this.dt_all.AllowUserToDeleteRows = false;
-            this.dt_all.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dt_all.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dt_all.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dt_all.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dt_all.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Item,
-            this.fld_Control_Number,
-            this.fld_Venue_Name,
-            this.Date,
-            this.CreatedAt,
-            this.fld_Reservation_Status,
-            this.fld_Total_Amount});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dt_all.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dt_all.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dt_all.Location = new System.Drawing.Point(12, 76);
-            this.dt_all.Name = "dt_all";
-            this.dt_all.ReadOnly = true;
-            this.dt_all.RowHeadersVisible = false;
-            this.dt_all.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.dt_all.Size = new System.Drawing.Size(965, 550);
-            this.dt_all.TabIndex = 6;
-            this.dt_all.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_all_CellContentClick);
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(12, 22);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(90, 25);
+            this.label17.TabIndex = 22;
+            this.label17.Text = "VENUES";
             // 
-            // Item
+            // label14
             // 
-            this.Item.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Item.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Item.HeaderText = "Item";
-            this.Item.Name = "Item";
-            this.Item.ReadOnly = true;
-            this.Item.Width = 50;
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.label14.Location = new System.Drawing.Point(538, 61);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(57, 16);
+            this.label14.TabIndex = 21;
+            this.label14.Text = "Filter by:";
             // 
-            // fld_Control_Number
+            // label13
             // 
-            this.fld_Control_Number.DataPropertyName = "fld_Control_Number";
-            this.fld_Control_Number.HeaderText = "Control Number";
-            this.fld_Control_Number.Name = "fld_Control_Number";
-            this.fld_Control_Number.ReadOnly = true;
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(13, 64);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(55, 17);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "Search:";
             // 
-            // fld_Venue_Name
+            // combobox_Filter
             // 
-            this.fld_Venue_Name.DataPropertyName = "fld_Venue_Name";
-            this.fld_Venue_Name.HeaderText = "Venue";
-            this.fld_Venue_Name.Name = "fld_Venue_Name";
-            this.fld_Venue_Name.ReadOnly = true;
+            this.combobox_Filter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.combobox_Filter.FormattingEnabled = true;
+            this.combobox_Filter.Location = new System.Drawing.Point(604, 57);
+            this.combobox_Filter.Name = "combobox_Filter";
+            this.combobox_Filter.Size = new System.Drawing.Size(121, 24);
+            this.combobox_Filter.TabIndex = 19;
             // 
-            // Date
+            // txt_Search
             // 
-            this.Date.DataPropertyName = "Date";
-            this.Date.HeaderText = "Date of Use";
-            this.Date.Name = "Date";
-            this.Date.ReadOnly = true;
-            // 
-            // CreatedAt
-            // 
-            this.CreatedAt.DataPropertyName = "fld_Created_At";
-            this.CreatedAt.HeaderText = "Date Requested";
-            this.CreatedAt.Name = "CreatedAt";
-            this.CreatedAt.ReadOnly = true;
-            // 
-            // fld_Reservation_Status
-            // 
-            this.fld_Reservation_Status.DataPropertyName = "fld_Reservation_Status";
-            this.fld_Reservation_Status.HeaderText = "Status";
-            this.fld_Reservation_Status.Name = "fld_Reservation_Status";
-            this.fld_Reservation_Status.ReadOnly = true;
-            this.fld_Reservation_Status.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // fld_Total_Amount
-            // 
-            this.fld_Total_Amount.DataPropertyName = "fld_Total_Amount";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fld_Total_Amount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.fld_Total_Amount.HeaderText = "Total";
-            this.fld_Total_Amount.Name = "fld_Total_Amount";
-            this.fld_Total_Amount.ReadOnly = true;
-            // 
-            // panel_Information
-            // 
-            this.panel_Information.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel_Information.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel_Information.Controls.Add(this.txt_Scope);
-            this.panel_Information.Controls.Add(this.btn_Update);
-            this.panel_Information.Controls.Add(this.txt_Venue);
-            this.panel_Information.Controls.Add(this.txt_Date_Start);
-            this.panel_Information.Controls.Add(this.txt_LName);
-            this.panel_Information.Controls.Add(this.txt_Total);
-            this.panel_Information.Controls.Add(this.txt_Status);
-            this.panel_Information.Controls.Add(this.txt_Participants);
-            this.panel_Information.Controls.Add(this.txt_Activity);
-            this.panel_Information.Controls.Add(this.txt_Type);
-            this.panel_Information.Controls.Add(this.txt_Address);
-            this.panel_Information.Controls.Add(this.txt_Office);
-            this.panel_Information.Controls.Add(this.txt_FName);
-            this.panel_Information.Controls.Add(this.txt_CN);
-            this.panel_Information.Controls.Add(this.label16);
-            this.panel_Information.Controls.Add(this.label10);
-            this.panel_Information.Controls.Add(this.label9);
-            this.panel_Information.Controls.Add(this.label6);
-            this.panel_Information.Controls.Add(this.label8);
-            this.panel_Information.Controls.Add(this.label12);
-            this.panel_Information.Controls.Add(this.label5);
-            this.panel_Information.Controls.Add(this.label4);
-            this.panel_Information.Controls.Add(this.label11);
-            this.panel_Information.Controls.Add(this.label15);
-            this.panel_Information.Controls.Add(this.label3);
-            this.panel_Information.Controls.Add(this.label2);
-            this.panel_Information.Controls.Add(this.label1);
-            this.panel_Information.Location = new System.Drawing.Point(983, 37);
-            this.panel_Information.Name = "panel_Information";
-            this.panel_Information.Size = new System.Drawing.Size(375, 472);
-            this.panel_Information.TabIndex = 7;
-            this.panel_Information.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Information_Paint);
+            this.txt_Search.BackColor = System.Drawing.Color.White;
+            this.txt_Search.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Search.Location = new System.Drawing.Point(74, 59);
+            this.txt_Search.Name = "txt_Search";
+            this.txt_Search.Size = new System.Drawing.Size(185, 26);
+            this.txt_Search.TabIndex = 18;
             // 
             // txt_Scope
             // 
@@ -222,7 +133,6 @@
             this.txt_Scope.ReadOnly = true;
             this.txt_Scope.Size = new System.Drawing.Size(205, 21);
             this.txt_Scope.TabIndex = 17;
-            this.txt_Scope.TextChanged += new System.EventHandler(this.txt_Scope_TextChanged);
             // 
             // btn_Update
             // 
@@ -236,7 +146,7 @@
             this.btn_Update.TabIndex = 66;
             this.btn_Update.Text = "Update";
             this.btn_Update.UseVisualStyleBackColor = false;
-            this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
+            this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click_1);
             // 
             // txt_Venue
             // 
@@ -246,7 +156,6 @@
             this.txt_Venue.ReadOnly = true;
             this.txt_Venue.Size = new System.Drawing.Size(205, 21);
             this.txt_Venue.TabIndex = 16;
-            this.txt_Venue.TextChanged += new System.EventHandler(this.txt_Venue_TextChanged);
             // 
             // txt_Date_Start
             // 
@@ -330,7 +239,104 @@
             this.txt_Office.Name = "txt_Office";
             this.txt_Office.Size = new System.Drawing.Size(204, 21);
             this.txt_Office.TabIndex = 50;
-            this.txt_Office.TextChanged += new System.EventHandler(this.txt_Office_TextChanged);
+            // 
+            // dt_all
+            // 
+            this.dt_all.AllowUserToAddRows = false;
+            this.dt_all.AllowUserToDeleteRows = false;
+            this.dt_all.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dt_all.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dt_all.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dt_all.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dt_all.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Item,
+            this.fld_Control_Number,
+            this.fld_Venue_Name,
+            this.Date,
+            this.CreatedAt,
+            this.fld_Reservation_Status,
+            this.fld_Total_Amount});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dt_all.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dt_all.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dt_all.Location = new System.Drawing.Point(12, 89);
+            this.dt_all.Name = "dt_all";
+            this.dt_all.ReadOnly = true;
+            this.dt_all.RowHeadersVisible = false;
+            this.dt_all.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            this.dt_all.Size = new System.Drawing.Size(713, 452);
+            this.dt_all.TabIndex = 16;
+            // 
+            // Item
+            // 
+            this.Item.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Item.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Item.HeaderText = "Item";
+            this.Item.Name = "Item";
+            this.Item.ReadOnly = true;
+            this.Item.Width = 50;
+            // 
+            // fld_Control_Number
+            // 
+            this.fld_Control_Number.DataPropertyName = "fld_Control_Number";
+            this.fld_Control_Number.HeaderText = "Control Number";
+            this.fld_Control_Number.Name = "fld_Control_Number";
+            this.fld_Control_Number.ReadOnly = true;
+            // 
+            // fld_Venue_Name
+            // 
+            this.fld_Venue_Name.DataPropertyName = "fld_Venue_Name";
+            this.fld_Venue_Name.HeaderText = "Venue";
+            this.fld_Venue_Name.Name = "fld_Venue_Name";
+            this.fld_Venue_Name.ReadOnly = true;
+            // 
+            // Date
+            // 
+            this.Date.DataPropertyName = "Date";
+            this.Date.HeaderText = "Date of Use";
+            this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
+            // 
+            // CreatedAt
+            // 
+            this.CreatedAt.DataPropertyName = "fld_Created_At";
+            this.CreatedAt.HeaderText = "Date Requested";
+            this.CreatedAt.Name = "CreatedAt";
+            this.CreatedAt.ReadOnly = true;
+            // 
+            // fld_Reservation_Status
+            // 
+            this.fld_Reservation_Status.DataPropertyName = "fld_Reservation_Status";
+            this.fld_Reservation_Status.HeaderText = "Status";
+            this.fld_Reservation_Status.Name = "fld_Reservation_Status";
+            this.fld_Reservation_Status.ReadOnly = true;
+            this.fld_Reservation_Status.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // fld_Total_Amount
+            // 
+            this.fld_Total_Amount.DataPropertyName = "fld_Total_Amount";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fld_Total_Amount.DefaultCellStyle = dataGridViewCellStyle3;
+            this.fld_Total_Amount.HeaderText = "Total";
+            this.fld_Total_Amount.Name = "fld_Total_Amount";
+            this.fld_Total_Amount.ReadOnly = true;
             // 
             // txt_FName
             // 
@@ -479,78 +485,57 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Control Number:";
             // 
-            // txt_Search
+            // panel_Information
             // 
-            this.txt_Search.BackColor = System.Drawing.Color.White;
-            this.txt_Search.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Search.Location = new System.Drawing.Point(74, 46);
-            this.txt_Search.Name = "txt_Search";
-            this.txt_Search.Size = new System.Drawing.Size(185, 26);
-            this.txt_Search.TabIndex = 8;
-            this.txt_Search.TextChanged += new System.EventHandler(this.txt_Search_TextChanged_1);
+            this.panel_Information.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel_Information.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel_Information.Controls.Add(this.txt_Scope);
+            this.panel_Information.Controls.Add(this.btn_Update);
+            this.panel_Information.Controls.Add(this.txt_Venue);
+            this.panel_Information.Controls.Add(this.txt_Date_Start);
+            this.panel_Information.Controls.Add(this.txt_LName);
+            this.panel_Information.Controls.Add(this.txt_Total);
+            this.panel_Information.Controls.Add(this.txt_Status);
+            this.panel_Information.Controls.Add(this.txt_Participants);
+            this.panel_Information.Controls.Add(this.txt_Activity);
+            this.panel_Information.Controls.Add(this.txt_Type);
+            this.panel_Information.Controls.Add(this.txt_Address);
+            this.panel_Information.Controls.Add(this.txt_Office);
+            this.panel_Information.Controls.Add(this.txt_FName);
+            this.panel_Information.Controls.Add(this.txt_CN);
+            this.panel_Information.Controls.Add(this.label16);
+            this.panel_Information.Controls.Add(this.label10);
+            this.panel_Information.Controls.Add(this.label9);
+            this.panel_Information.Controls.Add(this.label6);
+            this.panel_Information.Controls.Add(this.label8);
+            this.panel_Information.Controls.Add(this.label12);
+            this.panel_Information.Controls.Add(this.label5);
+            this.panel_Information.Controls.Add(this.label4);
+            this.panel_Information.Controls.Add(this.label11);
+            this.panel_Information.Controls.Add(this.label15);
+            this.panel_Information.Controls.Add(this.label3);
+            this.panel_Information.Controls.Add(this.label2);
+            this.panel_Information.Controls.Add(this.label1);
+            this.panel_Information.Location = new System.Drawing.Point(731, 57);
+            this.panel_Information.Name = "panel_Information";
+            this.panel_Information.Size = new System.Drawing.Size(375, 472);
+            this.panel_Information.TabIndex = 17;
             // 
-            // combobox_Filter
-            // 
-            this.combobox_Filter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.combobox_Filter.FormattingEnabled = true;
-            this.combobox_Filter.Location = new System.Drawing.Point(846, 44);
-            this.combobox_Filter.Name = "combobox_Filter";
-            this.combobox_Filter.Size = new System.Drawing.Size(121, 24);
-            this.combobox_Filter.TabIndex = 9;
-            this.combobox_Filter.SelectedIndexChanged += new System.EventHandler(this.combobox_Filter_SelectedIndexChanged_1);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.label14.Location = new System.Drawing.Point(780, 48);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(57, 16);
-            this.label14.TabIndex = 14;
-            this.label14.Text = "Filter by:";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(13, 51);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(55, 17);
-            this.label13.TabIndex = 13;
-            this.label13.Text = "Search:";
-            this.label13.Click += new System.EventHandler(this.label13_Click);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(12, 9);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(90, 25);
-            this.label17.TabIndex = 15;
-            this.label17.Text = "VENUES";
-            // 
-            // frm_Venues
+            // frm_Venue_Edit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(1370, 661);
+            this.ClientSize = new System.Drawing.Size(1118, 661);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.combobox_Filter);
             this.Controls.Add(this.txt_Search);
-            this.Controls.Add(this.panel_Information);
             this.Controls.Add(this.dt_all);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "frm_Venues";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "VENUES";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frm_Venues_Load);
+            this.Controls.Add(this.panel_Information);
+            this.Name = "frm_Venue_Edit";
+            this.Text = "frm_Venue_Edit";
             ((System.ComponentModel.ISupportInitialize)(this.dt_all)).EndInit();
             this.panel_Information.ResumeLayout(false);
             this.panel_Information.PerformLayout();
@@ -560,27 +545,17 @@
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dt_all;
-        private System.Windows.Forms.Panel panel_Information;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txt_Search;
-        private System.Windows.Forms.ComboBox combobox_Filter;
+
+        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox txt_FName;
-        private System.Windows.Forms.TextBox txt_CN;
+        private System.Windows.Forms.ComboBox combobox_Filter;
+        private System.Windows.Forms.TextBox txt_Search;
+        private System.Windows.Forms.TextBox txt_Scope;
+        private System.Windows.Forms.Button btn_Update;
+        private System.Windows.Forms.TextBox txt_Venue;
+        private System.Windows.Forms.TextBox txt_Date_Start;
+        private System.Windows.Forms.TextBox txt_LName;
         private System.Windows.Forms.TextBox txt_Total;
         private System.Windows.Forms.TextBox txt_Status;
         private System.Windows.Forms.TextBox txt_Participants;
@@ -588,12 +563,7 @@
         private System.Windows.Forms.TextBox txt_Type;
         private System.Windows.Forms.TextBox txt_Address;
         private System.Windows.Forms.TextBox txt_Office;
-        private System.Windows.Forms.TextBox txt_LName;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Button btn_Update;
-        private System.Windows.Forms.TextBox txt_Venue;
-        private System.Windows.Forms.TextBox txt_Scope;
-        private System.Windows.Forms.TextBox txt_Date_Start;
+        private System.Windows.Forms.DataGridView dt_all;
         private System.Windows.Forms.DataGridViewTextBoxColumn Item;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Control_Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Venue_Name;
@@ -601,5 +571,21 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CreatedAt;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Reservation_Status;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Total_Amount;
+        private System.Windows.Forms.TextBox txt_FName;
+        private System.Windows.Forms.TextBox txt_CN;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel_Information;
     }
 }

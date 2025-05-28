@@ -76,5 +76,17 @@ namespace pgso
         {
 
         }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_Venue_Edit vedit = new frm_Venue_Edit();
+            vedit.TopLevel = false;
+            vedit.FormBorderStyle = FormBorderStyle.None;
+            vedit.Dock = DockStyle.Fill;
+            this.panel1.Controls.Clear();
+            this.panel1.Controls.Add(vedit);
+            vedit.Show();
+            this.Size = new Size(1386, 700);
+        }
     }
 }

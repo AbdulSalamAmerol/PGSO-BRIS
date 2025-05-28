@@ -55,9 +55,9 @@ namespace pgso
         {
             if (lbl_Reservations.Visible)
             {
-                using (var venueForm = new frm_Venue_Calendar(this.Date))
+                using (var editForm = new frm_Venue_Edit(this.Date))
                 {
-                    venueForm.ShowDialog();
+                    editForm.ShowDialog();
                 }
             }
         }
@@ -66,7 +66,7 @@ namespace pgso
         {
             if (lbl_Equipment.Visible)
             {
-                using (var equipmentForm = new frm_Equipment_Calendar(this.Date))
+                using (var equipmentForm = new frm_Equipment_Edit(this.Date))
                 {
                     equipmentForm.ShowDialog();
                 }
@@ -77,13 +77,13 @@ namespace pgso
 
         private void UserControlDays_Click(object sender, EventArgs e)
         {
-    if (!hasReservations)
-    {
-        using (var calendarForm = new frm_Res_Calendar())
-        {
-            calendarForm.ShowDialog();
-        }
-    }
+            if (!hasReservations)
+            {
+                using (var calendarForm = new frm_Res_Calendar())
+                {
+                    calendarForm.ShowDialog();
+                }
+            }
             else
             {
                 using (var calendarForm = new frm_Res_Calendar())
@@ -247,7 +247,10 @@ namespace pgso
             // Initialization code if needed
         }
 
+        private void lbl_Reservations_Click_1(object sender, EventArgs e)
+        {
 
+        }
     }
 
     public class DateClickedEventArgs : EventArgs

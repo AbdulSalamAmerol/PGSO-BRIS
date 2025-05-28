@@ -152,7 +152,7 @@ namespace pgso
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(640, 146);
+            this.pictureBox1.Location = new System.Drawing.Point(643, 230);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(261, 328);
             this.pictureBox1.TabIndex = 71;
@@ -170,7 +170,7 @@ namespace pgso
             this.button1.TabIndex = 70;
             this.button1.Text = "Scan ID";
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // combo_Special
             // 

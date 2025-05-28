@@ -52,6 +52,7 @@
             this.lbl_Reservations.Size = new System.Drawing.Size(21, 16);
             this.lbl_Reservations.TabIndex = 5;
             this.lbl_Reservations.Text = "00";
+            this.lbl_Reservations.Click += new System.EventHandler(this.lbl_Reservations_Click_1);
             // 
             // lbl_Equipment
             // 
