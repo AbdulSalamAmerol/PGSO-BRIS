@@ -26,7 +26,14 @@ namespace pgso
             OnDashboardRefreshRequested();
             this.Close();
         }
-
+        private void UpdateTextBoxEditability()
+        {
+            bool isPending = txt_Status.Text.Equals("Pending", StringComparison.OrdinalIgnoreCase);
+            txt_Fname.Enabled = isPending;
+            txt_Sname.Enabled = isPending;
+            txt_Requesting_Office.Enabled = isPending;
+            txt_Address.Enabled = isPending;
+        }
         public frm_Equipment()
         {
 
@@ -181,6 +188,8 @@ namespace pgso
                 FetchAndDisplayAdditionalInfo(controlNumber, equipmentName);
 
                 btn_Update.Enabled = false; // Reset after loading data
+
+                UpdateTextBoxEditability(); // <-- Add this line
             }
         }
         //display in the panel

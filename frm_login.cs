@@ -19,6 +19,33 @@ namespace pgso
         {
             InitializeComponent();
 
+        }
+
+        private void frm_login_Load(object sender, EventArgs e)
+        {
+            // SKIPS LOGIN in DEBUG MODE / Auto-login when running inside Visual Studio Debug Mode
+            /*if (Debugger.IsAttached)
+            {
+                this.Hide();
+                frm_Dashboard dashboard = new frm_Dashboard();
+                dashboard.ShowDialog();
+                this.Close();
+            }*/
+        }
+        //improve ito soon.Pansamantala muna to. basta makalogin muna
+        private void button1_Click(object sender, EventArgs e)
+        {
+          
+
+            strSQL = "SELECT * FROM users WHERE name='" + combouname.Text + "' AND password='" + txtpassword.Text + "'";
+
+            cmd = new SqlCommand(strSQL, con.strCon);
+            cmd.CommandTimeout = 360;
+            da = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            da.Fill(dt);
+
+
             this.StartPosition = FormStartPosition.CenterScreen; // Ensure this is set
 
             if (string.IsNullOrEmpty(mycon))
