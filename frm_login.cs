@@ -1,31 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Net.Sockets;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Diagnostics;
-using pgso_connect;
+using System.Configuration;
 
 namespace pgso
 {
-    public partial class frm_Login: Form
-    {
-        Connection con = new Connection();
 
-        SqlCommand cmd;
-        string strSQL;
-        SqlDataAdapter da;
-        DataTable dt;
+    public partial class frm_Login : Form
+    {
+        public static string LoggedInUsername { get; private set; } // Static variable to store the logged-in username
+        public static string UserType { get; private set; } // Static variable to store the user type
+
+        static string mycon = ConfigurationManager.ConnectionStrings["pgso.Properties.Settings.strCon"]?.ConnectionString ?? "";
+
+
         public frm_Login()
         {
             InitializeComponent();
+
         }
 
         private void frm_login_Load(object sender, EventArgs e)
@@ -52,67 +45,149 @@ namespace pgso
             dt = new DataTable();
             da.Fill(dt);
 
-           if (dt.Rows.Count != 0)
 
+            this.StartPosition = FormStartPosition.CenterScreen; // Ensure this is set
+
+            if (string.IsNullOrEmpty(mycon))
             {
-                DataRow row = dt.Rows[0];
-                this.Hide();
-
-                frm_Dashboard frm = new frm_Dashboard();
-                frm.ShowDialog();
-
+                MessageBox.Show("Error: Database connection string is not initialized. Check App.config settings.",
+                                "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            checkBox1.Checked = false;
 
-            else
-            {
-                MessageBox.Show("Invalid username or password");
-
-            }
+            // Set password text visibility based on the checkbox state
+            txtpassword.UseSystemPasswordChar = !checkBox1.Checked;
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void frm_login_Load(object sender, EventArgs e)
         {
-
+            // Logic to execute when the form loads
+           // MessageBox.Show("Login form is loading...");
         }
 
        
 
-        
-
-        private void lbl_register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LogAuditAction(string username, string action, string userType)
         {
-           // frm_register frm = new frm_register();
-           // frm.ShowDialog();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(mycon))
+                {
+                    con.Open();
+
+                    // Update the table name if necessary
+                    string getUserIdQuery = "SELECT pk_UserID FROM tbl_User WHERE fld_Username = @Username";
+                    SqlCommand getUserIdCmd = new SqlCommand(getUserIdQuery, con);
+                    getUserIdCmd.Parameters.AddWithValue("@Username", username);
+
+                    object userIdObj = getUserIdCmd.ExecuteScalar();
+                    if (userIdObj == null)
+                    {
+                        MessageBox.Show("User not found.");
+                        return;
+                    }
+
+                    int userId = Convert.ToInt32(userIdObj);
+
+                    string insertAuditLogQuery = "INSERT INTO tbl_Audit_Log (fk_UserID, fld_ActionType, fld_Changed_By, fld_Changed_At) " +
+                                                 "VALUES (@UserID, @Action, @ChangedBy, @ChangedAt)";
+
+                    SqlCommand insertAuditLogCmd = new SqlCommand(insertAuditLogQuery, con);
+                    insertAuditLogCmd.Parameters.AddWithValue("@UserID", userId);
+                    insertAuditLogCmd.Parameters.AddWithValue("@Action", action);
+                    insertAuditLogCmd.Parameters.AddWithValue("@ChangedBy", userType);
+                    insertAuditLogCmd.Parameters.AddWithValue("@ChangedAt", DateTime.Now);
+
+                    insertAuditLogCmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error logging action: " + ex.Message);
+            }
         }
 
-        private void label5_Click(object sender, EventArgs e)
+        private void combouname1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-
-        private void lbl_dateandtime_Click(object sender, EventArgs e)
+        private void btnlogin_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(combouname1.Text) || string.IsNullOrWhiteSpace(txtpassword.Text))
+            {
+                MessageBox.Show("All fields are required.");
+                return;
+            }
 
+            try
+            {
+                using (SqlConnection con = new SqlConnection(mycon))
+                {
+                    string query = "SELECT * FROM tbl_User WHERE fld_Username = @Username COLLATE SQL_Latin1_General_CP1_CS_AS AND fld_PasswordHash = @Password COLLATE SQL_Latin1_General_CP1_CS_AS AND fld_Role = @Role COLLATE SQL_Latin1_General_CP1_CS_AS";
+
+                    SqlDataAdapter sda = new SqlDataAdapter(query, con);
+                    sda.SelectCommand.Parameters.AddWithValue("@Username", combouname1.Text);
+                    sda.SelectCommand.Parameters.AddWithValue("@Password", txtpassword.Text);
+                    sda.SelectCommand.Parameters.AddWithValue("@Role", combousertype.Text);
+
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+
+                    if (dt.Rows.Count == 1)
+                    {
+                        DataRow row = dt.Rows[0];
+                        LoggedInUsername = combouname1.Text; // Set the logged-in username
+                        UserType = row["fld_Role"].ToString().Trim(); // Set the user type
+
+                        // Check if the user is an admin
+                        if (UserType == "Admin")
+                        {
+                            // Log the login action
+                            LogAuditAction(LoggedInUsername, "Logged In", UserType);
+
+                            // Show the dashboard
+                            this.Hide();
+                            frm_Dashboard dashboard = new frm_Dashboard();
+                            dashboard.ShowDialog();
+                            this.Close();
+                        }
+                        else if (UserType == "Staff")
+                        {
+                            // Log the login action
+                            LogAuditAction(LoggedInUsername, "Logged In", UserType);
+
+                            // Show the dashboard for staff
+                            this.Hide();
+                            frm_Dashboard dashboard = new frm_Dashboard();
+                            dashboard.ShowDialog();
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Access denied. Only admins and staff can log in.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid username or password.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            txtpassword.UseSystemPasswordChar = !checkBox1.Checked;
         }
 
-        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dateTimePicker1_ValueChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
@@ -122,12 +197,12 @@ namespace pgso
 
         }
 
-        private void btneye_Click(object sender, EventArgs e)
+        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void combouname1_TextChanged(object sender, EventArgs e)
         {
 
         }

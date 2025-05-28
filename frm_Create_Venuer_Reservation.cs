@@ -1392,6 +1392,7 @@ VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityNam
 
         }
 
+
         private void button1_Click(object sender, EventArgs e)
         {
             ScanDocument();
@@ -1421,6 +1422,7 @@ VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityNam
                 default:
                     // No action needed
                     break;
+
             }
         }
     }

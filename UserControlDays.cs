@@ -51,6 +51,7 @@ namespace pgso
             LoadReservationSummary();
         }
 
+
         private void lbl_Reservations_Click(object sender, EventArgs e)
         {
             if (lbl_Reservations.Visible)
@@ -75,6 +76,7 @@ namespace pgso
 
 
 
+
         private void UserControlDays_Click(object sender, EventArgs e)
         {
     if (!hasReservations)
@@ -91,10 +93,12 @@ namespace pgso
                     calendarForm.ShowDialog();
                 }
             }
+
+            //using (var createReservationForm = new frm_Create_Venuer_Reservation())
+            //{
+             //   createReservationForm.ShowDialog();
+            //}
         }
-
-
-
 
         //count  the number of reservations
         private void LoadReservationSummary()
