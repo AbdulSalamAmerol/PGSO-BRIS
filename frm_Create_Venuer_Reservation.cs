@@ -1,15 +1,22 @@
-﻿using System;
+﻿using pgso_connect;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using pgso_connect;
+using WIA;
+using System.Drawing;
+
 
 namespace pgso
 {
     public partial class frm_Create_Venuer_Reservation : Form
     {
+        private byte[] scannedImageBytes;
+
         private SqlConnection conn;
         private SqlCommand cmd;
         private int selectedVenueID;  // Class-level variable to store selected venue ID
@@ -64,14 +71,15 @@ namespace pgso
             combo_Request.Items.Add("Walk In");
             CalculateTotalAmount();
             txt_controlnum.Text = GenerateControlNumber();
-
+            combo_Special.Items.AddRange(new[] { "PWD", "SENIOR CITIZEN", "OTHERS" });
+            combo_Special.DropDownStyle = ComboBoxStyle.DropDownList;
             // Set MinDate to prevent selecting past dates
             date_of_use_start.MinDate = DateTime.Now.Date;
             date_of_use_end.MinDate = DateTime.Now.Date;
 
             // Set DropDownStyle to DropDownList during initialization
             combo_Request.DropDownStyle = ComboBoxStyle.DropDownList;
-
+           // combo_Special.Enabled = false;
         }
         private void frm_createvenuereservation_Load(object sender, EventArgs e)
         {
@@ -574,9 +582,9 @@ AND fld_Rate_Type = @RateType";
                 // Step 1: Insert into tbl_Requesting_Person
                 cmd = new SqlCommand(@"
 INSERT INTO tbl_Requesting_Person 
-(fld_Surname, fld_First_Name, fld_Middle_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office) 
+(fld_Surname, fld_First_Name, fld_Middle_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office, fld_Is_Special) 
 OUTPUT INSERTED.pk_Requesting_PersonID 
-VALUES (@Surname, @FirstName, @MiddleName, @Address, @ContactNumber, @RequestOrigin, @Requesting_Office)", conn, transaction);
+VALUES (@Surname, @FirstName, @MiddleName, @Address, @ContactNumber, @RequestOrigin, @Requesting_Office, @fld_Is_Special)", conn, transaction);
 
                 cmd.Parameters.AddWithValue("@Surname", txt_surname.Text);
                 cmd.Parameters.AddWithValue("@FirstName", txt_firstname.Text);
@@ -585,6 +593,8 @@ VALUES (@Surname, @FirstName, @MiddleName, @Address, @ContactNumber, @RequestOri
                 cmd.Parameters.AddWithValue("@ContactNumber", contactNumber);
                 cmd.Parameters.AddWithValue("@RequestOrigin", combo_Request.Text);
                 cmd.Parameters.AddWithValue("@Requesting_Office", txt_Requesting_Office.Text);
+                cmd.Parameters.AddWithValue("@fld_Is_Special", combo_Special.Text);
+
 
                 int personID = (int)cmd.ExecuteScalar();
 
@@ -594,12 +604,12 @@ VALUES (@Surname, @FirstName, @MiddleName, @Address, @ContactNumber, @RequestOri
                 string reservationType = combo_ReservationType.SelectedValue.ToString();
 
                 string pricingQuery = @"
-SELECT pk_Venue_PricingID 
-FROM tbl_Venue_Pricing 
-WHERE fk_VenueID = @VenueID 
-AND fk_Venue_ScopeID = @VenueScopeID 
-AND fld_Rate_Type = @RateType 
-AND (fld_Aircon = @UsesAircon OR (fld_Aircon IS NULL AND @UsesAircon IS NULL))";
+                SELECT pk_Venue_PricingID 
+                FROM tbl_Venue_Pricing 
+                WHERE fk_VenueID = @VenueID 
+                AND fk_Venue_ScopeID = @VenueScopeID 
+                AND fld_Rate_Type = @RateType 
+                AND (fld_Aircon = @UsesAircon OR (fld_Aircon IS NULL AND @UsesAircon IS NULL))";
 
                 cmd = new SqlCommand(pricingQuery, conn, transaction);
                 cmd.Parameters.AddWithValue("@VenueID", venueID);
@@ -658,12 +668,13 @@ VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityNam
 
                 // Step 4: Insert into tbl_Reservation_Venues
                 using (SqlCommand venueCmd = new SqlCommand(@"
-INSERT INTO tbl_Reservation_Venues 
-(fk_ReservationID, fk_VenueID, fk_Venue_ScopeID, fld_Start_Date, fld_End_Date, 
-fld_Start_Time, fld_End_Time, fld_Total_Amount, fld_Participants) 
-VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate, 
-        @StartTime, @EndTime, @TotalAmount, @Participants)", conn, transaction))
+    INSERT INTO tbl_Reservation_Venues 
+    (fk_ReservationID, fk_VenueID, fk_Venue_ScopeID, fld_Start_Date, fld_End_Date, 
+     fld_Start_Time, fld_End_Time, fld_Total_Amount, fld_Participants, fld_Scanned_Document) 
+    VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate, 
+            @StartTime, @EndTime, @TotalAmount, @Participants, @ScannedDoc)", conn, transaction))
                 {
+                    // Standard parameters
                     venueCmd.Parameters.AddWithValue("@ReservationID", reservationID);
                     venueCmd.Parameters.AddWithValue("@VenueID", venueID);
                     venueCmd.Parameters.AddWithValue("@ScopeID", venueScopeID);
@@ -673,9 +684,15 @@ VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate,
                     venueCmd.Parameters.AddWithValue("@EndTime", endTime);
                     venueCmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
                     venueCmd.Parameters.AddWithValue("@Participants", num_participants.Value);
+           
+
+                    // Binary parameter (special handling)
+                    var scannedDocParam = venueCmd.Parameters.Add("@ScannedDoc", SqlDbType.VarBinary);
+                    scannedDocParam.Value = scannedImageBytes ?? (object)DBNull.Value;
 
                     venueCmd.ExecuteNonQuery();
                 }
+
 
                 // Commit transaction
                 transaction.Commit();
@@ -739,6 +756,21 @@ VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate,
         private void combo_ReservationType_SelectedIndexChanged(object sender, EventArgs e)
         {
             combo_ReservationType.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            string selectedRateType = "";
+            // This works for data-bound ComboBox
+            if (combo_ReservationType.SelectedValue != null)
+                selectedRateType = combo_ReservationType.SelectedValue.ToString();
+
+            if (selectedRateType.Equals("Special", StringComparison.OrdinalIgnoreCase))
+            {
+                combo_Special.Enabled = true;
+            }
+            else
+            {
+                combo_Special.Enabled = false;
+                combo_Special.SelectedIndex = -1;
+            }
 
             if (IsReservationTypeAndScopeSelected())
             {
@@ -1198,6 +1230,153 @@ VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate,
             return true;
         }
 
+        //scan
+        private void ScanDocument()
+        {
+            try
+            {
+                var deviceManager = new DeviceManager();
+                List<DeviceInfo> scanners = new List<DeviceInfo>();
+
+                // Find all scanners
+                for (int i = 1; i <= deviceManager.DeviceInfos.Count; i++)
+                {
+                    if (deviceManager.DeviceInfos[i].Type == WiaDeviceType.ScannerDeviceType)
+                    {
+                        scanners.Add(deviceManager.DeviceInfos[i]);
+                    }
+                }
+
+                if (scanners.Count == 0)
+                {
+                    MessageBox.Show("No scanners found. Please connect a scanner and try again.");
+                    return;
+                }
+
+                // Let user select a scanner if multiple are available
+                DeviceInfo selectedScanner = null;
+                if (scanners.Count == 1)
+                {
+                    selectedScanner = scanners[0];
+                }
+                else
+                {
+                    // Create a form to let user choose scanner
+                    Form scannerSelectForm = new Form()
+                    {
+                        Text = "Select Scanner",
+                        Width = 300,
+                        Height = 200,
+                        StartPosition = FormStartPosition.CenterScreen
+                    };
+
+                    ListBox scannerList = new ListBox()
+                    {
+                        Dock = DockStyle.Fill
+                    };
+
+                    foreach (var scanner in scanners)
+                    {
+                        scannerList.Items.Add(scanner.Properties["Name"].get_Value().ToString());
+                    }
+
+                    Button selectButton = new Button()
+                    {
+                        Text = "Select",
+                        Dock = DockStyle.Bottom
+                    };
+
+                    selectButton.Click += (s, e) =>
+                    {
+                        if (scannerList.SelectedIndex >= 0)
+                        {
+                            selectedScanner = scanners[scannerList.SelectedIndex];
+                            scannerSelectForm.DialogResult = DialogResult.OK;
+                            scannerSelectForm.Close();
+                        }
+                    };
+
+                    scannerSelectForm.Controls.Add(scannerList);
+                    scannerSelectForm.Controls.Add(selectButton);
+
+                    if (scannerSelectForm.ShowDialog() != DialogResult.OK)
+                    {
+                        return; // User cancelled
+                    }
+                }
+
+                // Show scanning message
+                Form scanningMessage = new Form()
+                {
+                    FormBorderStyle = FormBorderStyle.None,
+                    StartPosition = FormStartPosition.CenterScreen,
+                    Width = 200,
+                    Height = 100,
+                    TopMost = true
+                };
+
+                Label messageLabel = new Label()
+                {
+                    Text = $"Scanning with {selectedScanner.Properties["Name"].get_Value()}...",
+                    Dock = DockStyle.Fill,
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
+
+                scanningMessage.Controls.Add(messageLabel);
+                scanningMessage.Show();
+                Application.DoEvents();
+
+                // Continue with scanning
+                var device = selectedScanner.Connect();
+                var item = device.Items[1];
+                SetScannerSettings(item);
+                var imageFile = (ImageFile)item.Transfer(WIA.FormatID.wiaFormatJPEG);
+                var imageBytes = (byte[])imageFile.FileData.get_BinaryData();
+                scannedImageBytes = imageBytes;
+
+                // Display preview
+                using (var ms = new MemoryStream(imageBytes))
+                {
+                    pictureBox1.Image?.Dispose();
+                    pictureBox1.Image = Image.FromStream(ms);
+                    pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+
+                scanningMessage.Close();
+            }
+            catch (COMException ex)
+            {
+                MessageBox.Show($"Scanner error: {ex.Message}\nError code: {ex.ErrorCode}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
+
+        private void SetScannerSettings(IItem item)
+        {
+            try
+            {
+                const string wiaColorMode = "6146";
+                const string wiaResolution = "6147";
+
+                // Set color mode to color (1)
+                SetWIAProperty(item.Properties, wiaColorMode, 1);
+
+                // Set resolution to 300 DPI
+                SetWIAProperty(item.Properties, wiaResolution, 300);
+            }
+            catch { /* Ignore if scanner doesn't support these settings */ }
+        }
+
+
+        private void SetWIAProperty(IProperties properties, object propName, object propValue)
+        {
+            Property prop = properties.get_Item(ref propName);
+            prop.set_Value(ref propValue);
+        }
+
         private void panel_Aircon_Paint(object sender, PaintEventArgs e)
         {
 
@@ -1211,6 +1390,38 @@ VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate,
         private void txt_Succeeding_Hour_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ScanDocument();
+        }
+
+        private void combo_Special_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (combo_Special.SelectedItem == null)
+                return;
+
+            string selected = combo_Special.SelectedItem.ToString();
+
+            switch (selected)
+            {
+                case "PWD":
+                    // Optionally, show a message or enable a textbox for ID number, etc.
+                    // Example: MessageBox.Show("PWD selected.");
+                    break;
+                case "SENIOR CITIZEN":
+                    // Optionally, show a message or enable a textbox for ID number, etc.
+                    // Example: MessageBox.Show("Senior Citizen selected.");
+                    break;
+                case "OTHERS":
+                    // Optionally, show a textbox or dialog for user to specify details
+                    // Example: MessageBox.Show("Please specify the details for 'OTHERS'.");
+                    break;
+                default:
+                    // No action needed
+                    break;
+            }
         }
     }
 }

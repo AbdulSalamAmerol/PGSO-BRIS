@@ -172,6 +172,18 @@
     <Compile Include="frm_Equipment.Designer.cs">
       <DependentUpon>frm_Equipment.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_Equipment_Calendar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Equipment_Calendar.Designer.cs">
+      <DependentUpon>frm_Equipment_Calendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Equipment_Res.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Equipment_Res.Designer.cs">
+      <DependentUpon>frm_Equipment_Res.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_ReservationDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,11 +232,29 @@
     <Compile Include="frm_Print_Reservation.Designer.cs">
       <DependentUpon>frm_Print_Reservation.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_Res_Calendar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Res_Calendar.Designer.cs">
+      <DependentUpon>frm_Res_Calendar.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_Venues.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_Venues.Designer.cs">
       <DependentUpon>frm_Venues.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Venue_Calendar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Venue_Calendar.Designer.cs">
+      <DependentUpon>frm_Venue_Calendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Venue_Res.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Venue_Res.Designer.cs">
+      <DependentUpon>frm_Venue_Res.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -258,6 +288,12 @@
     <EmbeddedResource Include="frm_Equipment.resx">
       <DependentUpon>frm_Equipment.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frm_Equipment_Calendar.resx">
+      <DependentUpon>frm_Equipment_Calendar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Equipment_Res.resx">
+      <DependentUpon>frm_Equipment_Res.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_ReservationDetails.resx">
       <DependentUpon>frm_ReservationDetails.cs</DependentUpon>
     </EmbeddedResource>
@@ -283,8 +319,17 @@
     <EmbeddedResource Include="frm_Print_Reservation.resx">
       <DependentUpon>frm_Print_Reservation.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frm_Res_Calendar.resx">
+      <DependentUpon>frm_Res_Calendar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_Venues.resx">
       <DependentUpon>frm_Venues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Venue_Calendar.resx">
+      <DependentUpon>frm_Venue_Calendar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Venue_Res.resx">
+      <DependentUpon>frm_Venue_Res.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -315,6 +360,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="WIA">
+      <Guid>{94A0E92D-43C0-494E-AC29-FD45948A5221}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

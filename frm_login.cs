@@ -31,13 +31,13 @@ namespace pgso
         private void frm_login_Load(object sender, EventArgs e)
         {
             // SKIPS LOGIN in DEBUG MODE / Auto-login when running inside Visual Studio Debug Mode
-            if (Debugger.IsAttached)
+            /*if (Debugger.IsAttached)
             {
                 this.Hide();
                 frm_Dashboard dashboard = new frm_Dashboard();
                 dashboard.ShowDialog();
                 this.Close();
-            }
+            }*/
         }
         //improve ito soon.Pansamantala muna to. basta makalogin muna
         private void button1_Click(object sender, EventArgs e)

@@ -77,6 +77,14 @@ namespace pgso
                 txt_Search.ForeColor = System.Drawing.Color.Black;
             }
         }
+        private void UpdateTextBoxEditability()
+        {
+            bool isPending = txt_Status.Text.Equals("Pending", StringComparison.OrdinalIgnoreCase);
+            txt_FName.Enabled = isPending;
+            txt_LName.Enabled = isPending;
+            txt_Office.Enabled = isPending;
+            txt_Address.Enabled = isPending;
+        }
 
         private void Txt_Search_LostFocus(object sender, EventArgs e)
         {
@@ -192,6 +200,7 @@ namespace pgso
 
                 btn_Update.Enabled = false;
                 hasChanges = false;
+                UpdateTextBoxEditability();
             }
         }
 
