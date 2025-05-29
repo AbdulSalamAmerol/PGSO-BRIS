@@ -3,58 +3,74 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Diagnostics;
+
 namespace pgso
 {
-    public partial class frm_Venues : Form
+    public partial class frm_Venue_Edit : Form
     {
         private readonly Connection db = new Connection();
         private readonly BindingSource bindingSource = new BindingSource();
         private bool hasChanges = false;
         private string currentControlNumber = string.Empty;
-       
-        private Image lastDisplayedImage = null;
+        private DateTime selectedDate;
 
-        public frm_Venues()
+        // Main constructor with date parameter
+        public frm_Venue_Edit(DateTime date)
         {
             InitializeComponent();
+
+            // Validate and set the date
+            if (date < new DateTime(1753, 1, 1) || date > new DateTime(9999, 12, 31))
+                selectedDate = DateTime.Today;
+            else
+                selectedDate = date;
+
             InitializeControls();
             SetupEventHandlers();
             dt_all.RowPostPaint += dt_all_RowPostPaint;
 
+            // Load data immediately
+            LoadReservationData(selectedDate);
         }
 
-        //The BindingSource is set as the DataSource of the DataGridView here
+        // Default constructor (if needed)
+        public frm_Venue_Edit() : this(DateTime.Today) { }
+
         private void InitializeControls()
         {
-             dt_all.AutoGenerateColumns = false;
+            dt_all.AutoGenerateColumns = false;
 
-            // In InitializeControls() or after InitializeComponent()
+            // Search box setup
             txt_Search.ForeColor = System.Drawing.Color.Gray;
             txt_Search.Text = "Control Number/Venue";
             txt_Search.GotFocus += Txt_Search_GotFocus;
             txt_Search.LostFocus += Txt_Search_LostFocus;
 
+            // DataGridView setup
             dt_all.AutoGenerateColumns = false;
             dt_all.DataSource = bindingSource;
+
+            // Filter combobox setup
             combobox_Filter.Items.AddRange(new[] { "All", "Pending", "Cancelled", "Confirmed" });
             combobox_Filter.SelectedIndex = 0;
-            btn_Update.Enabled = false;
 
-           
+            // Initial button state
+            btn_Update.Enabled = false;
         }
 
         private void SetupEventHandlers()
         {
+            // DataGridView events
             dt_all.CellClick += Dt_all_CellClick;
             dt_all.CellFormatting += Dt_all_CellFormatting;
+
+            // Filter and search events
             combobox_Filter.SelectedIndexChanged += Combobox_Filter_SelectedIndexChanged;
             txt_Search.TextChanged += Txt_Search_TextChanged;
 
+            // TextBox change events
             txt_FName.TextChanged += Control_ValueChanged;
             txt_LName.TextChanged += Control_ValueChanged;
             txt_Address.TextChanged += Control_ValueChanged;
@@ -62,62 +78,14 @@ namespace pgso
             txt_Status.TextChanged += Control_ValueChanged;
             txt_Activity.TextChanged += Control_ValueChanged;
             txt_Participants.TextChanged += Control_ValueChanged;
-            
-            //dt_all.CellFormatting += dt_all_CellFormatting;
-            //datagridview column header bg color
+
+            // Styling
             dt_all.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.MediumAquamarine;
             dt_all.EnableHeadersVisualStyles = false;
             dt_all.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 10, System.Drawing.FontStyle.Bold);
-            picturebox_IMG.Click += picturebox_IMG_Click;
         }
 
-        private void frm_Venues_Load(object sender, EventArgs e)
-        {
-            LoadReservationData();
-        }
-        private void Txt_Search_GotFocus(object sender, EventArgs e)
-        {
-            if (txt_Search.Text == "Control Number/Venue")
-            {
-                txt_Search.Text = "";
-                txt_Search.ForeColor = System.Drawing.Color.Black;
-            }
-        }
-
-        private void Txt_Search_LostFocus(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txt_Search.Text))
-            {
-                txt_Search.Text = "Control Number/Venue";
-                txt_Search.ForeColor = System.Drawing.Color.Gray;
-            }
-        }
-        private void dt_all_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            // Check if the column is the total amount column
-            if (dt_all.Columns[e.ColumnIndex].Name == "fld_Total_Amount" ||
-                dt_all.Columns[e.ColumnIndex].Name == "fld_Total")
-            {
-                if (e.Value != null && decimal.TryParse(e.Value.ToString(), out decimal value))
-                {
-                    e.Value = "₱" + value.ToString("N2"); // New line with peso sign
-                    e.FormattingApplied = true;
-                }
-            }
-        }
-
-
-        private void dt_all_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            int itemColIndex = dt_all.Columns["Item"].Index;
-            dt_all.Rows[e.RowIndex].Cells[itemColIndex].Value = (e.RowIndex + 1).ToString();
-        }
-
-
-        //Fetches dat from database and binds it to the binding source
-        //filter
-        //datagridvuew
-        private void LoadReservationData()
+        private void LoadReservationData(DateTime date)
         {
             try
             {
@@ -125,59 +93,43 @@ namespace pgso
                 {
                     connection.Open();
                     string query = @"
-    SELECT DISTINCT
-        r.fld_Control_number, 
-        r.fld_Reservation_Status,
-        r.fld_Created_At,
-        r.fld_Total_Amount,
-        (SELECT TOP 1 v.fld_Venue_Name 
-         FROM tbl_Reservation_Venues rv 
-         JOIN tbl_Venue v ON rv.fk_VenueID = v.pk_VenueID 
-         WHERE rv.fk_ReservationID = r.pk_ReservationID) AS fld_Venue_Name,
-        rp.fld_First_Name,
-        rp.fld_Surname,
-        (SELECT TOP 1 rv2.fld_Scanned_Document
-         FROM tbl_Reservation_Venues rv2
-         WHERE rv2.fk_ReservationID = r.pk_ReservationID) AS fld_Scanned_Document,
-        (SELECT TOP 1 
-            CASE 
-                WHEN rv3.fld_Start_Date = rv3.fld_End_Date 
-                    THEN FORMAT(rv3.fld_Start_Date, 'M/d/yyyy')
-                ELSE 
-                    FORMAT(rv3.fld_Start_Date, 'M/d/yyyy') + ' - ' + FORMAT(rv3.fld_End_Date, 'M/d/yyyy')
-            END
-         FROM tbl_Reservation_Venues rv3
-         WHERE rv3.fk_ReservationID = r.pk_ReservationID) AS [Date]
-    FROM tbl_Reservation r
-    LEFT JOIN tbl_Requesting_Person rp 
-        ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-    WHERE r.fld_Reservation_Type = 'Venue'
-    ORDER BY r.fld_Created_At DESC";
+                    SELECT DISTINCT
+                        r.fld_Control_number, 
+                        r.fld_Reservation_Status,
+                        r.fld_Created_At,
+                        r.fld_Total_Amount,
+                        '₱' + CONVERT(VARCHAR, CAST(r.fld_Total_Amount AS MONEY), 1) AS fld_Total_Amount,
+                        (SELECT TOP 1 v.fld_Venue_Name 
+                         FROM tbl_Reservation_Venues rv 
+                         JOIN tbl_Venue v ON rv.fk_VenueID = v.pk_VenueID 
+                         WHERE rv.fk_ReservationID = r.pk_ReservationID) AS fld_Venue_Name,
+                        rp.fld_First_Name,
+                        rp.fld_Surname,
+                        Date = STUFF((
+                            SELECT CHAR(10) +
+                                CASE
+                                    WHEN rv2.fld_Start_Date = rv2.fld_End_Date THEN
+                                        FORMAT(rv2.fld_Start_Date, 'MM/dd/yyyy')
+                                    ELSE
+                                        FORMAT(rv2.fld_Start_Date, 'MM/dd/yyyy') + ' - ' + FORMAT(rv2.fld_End_Date, 'MM/dd/yyyy')
+                                END
+                            FROM tbl_Reservation_Venues rv2
+                            WHERE rv2.fk_ReservationID = r.pk_ReservationID
+                            FOR XML PATH(''), TYPE
+                        ).value('.', 'NVARCHAR(MAX)'), 1, 1, '')
+                    FROM tbl_Reservation r
+                    LEFT JOIN tbl_Requesting_Person rp 
+                        ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                    INNER JOIN tbl_Reservation_Venues rv ON r.pk_ReservationID = rv.fk_ReservationID
+                    WHERE r.fld_Reservation_Type = 'Venue'
+                      AND @SelectedDate BETWEEN rv.fld_Start_Date AND rv.fld_End_Date
+                    ORDER BY r.fld_Created_At DESC";
 
                     var dataTable = new DataTable();
                     using (var adapter = new SqlDataAdapter(query, connection))
                     {
+                        adapter.SelectCommand.Parameters.AddWithValue("@SelectedDate", date.Date);
                         adapter.Fill(dataTable);
-                    }
-
-                    // Add a placeholder image for rows with no image data
-                    // Add a placeholder image for rows with no image data
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        if (row["fld_Scanned_Document"] == DBNull.Value)
-                        {
-                            using (Bitmap bmp = new Bitmap(100, 100))
-                            using (Graphics g = Graphics.FromImage(bmp))
-                            {
-                                g.Clear(Color.LightGray);
-                                g.DrawString("No Image", new Font("Arial", 8), Brushes.Black, 10, 45);
-                                using (MemoryStream ms = new MemoryStream())
-                                {
-                                    bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg); // Use JPEG here
-                                    row["fld_Scanned_Document"] = ms.ToArray();
-                                }
-                            }
-                        }
                     }
 
                     bindingSource.DataSource = dataTable;
@@ -190,18 +142,10 @@ namespace pgso
             }
         }
 
-
-        //pag napindot, magpapkita muna tong mga to bago si LoadReservationDetails
         private void Dt_all_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return; // Ignore header clicks
-
-            // Only handle clicks on the image column
-
-            
-            else
+            if (e.RowIndex >= 0)
             {
-                // Your existing row selection code
                 var row = dt_all.Rows[e.RowIndex];
                 currentControlNumber = row.Cells["fld_Control_number"].Value?.ToString() ?? "";
                 txt_CN.Text = currentControlNumber;
@@ -223,36 +167,10 @@ namespace pgso
 
                 btn_Update.Enabled = false;
                 hasChanges = false;
-                // After setting other fields in Dt_all_CellClick
-                var dataRowView = dt_all.Rows[e.RowIndex].DataBoundItem as DataRowView;
-                if (dataRowView != null)
-                {
-                    var imageData = dataRowView["fld_Scanned_Document"] as byte[];
-                    if (imageData != null && imageData.Length > 0)
-                    {
-                        using (var ms = new MemoryStream(imageData))
-                        {
-                            using (var img = Image.FromStream(ms))
-                            {
-                                // Clone the image to detach from the stream
-                                var clonedImg = new Bitmap(img);
-                                picturebox_IMG.Image = clonedImg;
-                                lastDisplayedImage = clonedImg;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        picturebox_IMG.Image = null;
-                        lastDisplayedImage = null;
-                    }
-                }
+                UpdateTextBoxEditability();
             }
         }
 
-
-
-        //display niya ito sa mga text boxes
         private void LoadReservationDetails(string controlNumber)
         {
             try
@@ -260,36 +178,29 @@ namespace pgso
                 using (var connection = new SqlConnection(db.strCon.ConnectionString))
                 {
                     connection.Open();
-
-                    // Query to retrieve reservation details and all associated dates and times
                     string query = @"
-                SELECT 
-                    r.fld_Reservation_Status AS Status,
-                    rp.fld_First_Name AS FirstName, 
-                    rp.fld_Surname AS LastName,
-                    rp.fld_Requesting_Person_Address AS Address,
-                    rp.fld_Requesting_Office AS Office,
-                    r.fld_Activity_Name AS ActivityName,
-                    rv.fld_Participants AS Participants,
-                    v.fld_Venue_Name AS VenueName,
-                    vs.fld_Venue_Scope_Name AS Scope,
-                    vp.fld_Rate_Type AS RateType,
-                    rv.fld_Start_Date AS StartDate,
-                    rv.fld_End_Date AS EndDate,
-                    rv.fld_Start_Time AS StartTime,
-                    rv.fld_End_Time AS EndTime
-                FROM tbl_Reservation r
-                LEFT JOIN tbl_Requesting_Person rp 
-                    ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-                LEFT JOIN tbl_Reservation_Venues rv 
-                    ON r.pk_ReservationID = rv.fk_ReservationID
-                LEFT JOIN tbl_Venue v 
-                    ON rv.fk_VenueID = v.pk_VenueID
-                LEFT JOIN tbl_Venue_Scope vs 
-                    ON rv.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
-                LEFT JOIN tbl_Venue_Pricing vp 
-                    ON (rv.fk_VenueID = vp.fk_VenueID AND rv.fk_Venue_ScopeID = vp.fk_Venue_ScopeID)
-                WHERE r.fld_Control_number = @ControlNumber";
+                    SELECT 
+                        r.fld_Reservation_Status AS Status,
+                        rp.fld_First_Name AS FirstName, 
+                        rp.fld_Surname AS LastName,
+                        rp.fld_Requesting_Person_Address AS Address,
+                        rp.fld_Requesting_Office AS Office,
+                        r.fld_Activity_Name AS ActivityName,
+                        rv.fld_Participants AS Participants,
+                        v.fld_Venue_Name AS VenueName,
+                        vs.fld_Venue_Scope_Name AS Scope,
+                        vp.fld_Rate_Type AS RateType,
+                        rv.fld_Start_Date AS StartDate,
+                        rv.fld_End_Date AS EndDate,
+                        rv.fld_Start_Time AS StartTime,
+                        rv.fld_End_Time AS EndTime
+                    FROM tbl_Reservation r
+                    LEFT JOIN tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                    LEFT JOIN tbl_Reservation_Venues rv ON r.pk_ReservationID = rv.fk_ReservationID
+                    LEFT JOIN tbl_Venue v ON rv.fk_VenueID = v.pk_VenueID
+                    LEFT JOIN tbl_Venue_Scope vs ON rv.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
+                    LEFT JOIN tbl_Venue_Pricing vp ON (rv.fk_VenueID = vp.fk_VenueID AND rv.fk_Venue_ScopeID = vp.fk_Venue_ScopeID)
+                    WHERE r.fld_Control_number = @ControlNumber";
 
                     using (var command = new SqlCommand(query, connection))
                     {
@@ -297,12 +208,10 @@ namespace pgso
 
                         using (var reader = command.ExecuteReader())
                         {
-                            // Use a HashSet to avoid duplicate entries
                             HashSet<string> formattedEntries = new HashSet<string>();
 
                             while (reader.Read())
                             {
-                                // Populate textboxes with reservation details
                                 txt_FName.Text = reader["FirstName"]?.ToString() ?? "N/A";
                                 txt_LName.Text = reader["LastName"]?.ToString() ?? "N/A";
                                 txt_Address.Text = reader["Address"]?.ToString() ?? "N/A";
@@ -313,7 +222,6 @@ namespace pgso
                                 txt_Scope.Text = reader["Scope"]?.ToString() ?? "N/A";
                                 txt_Type.Text = reader["RateType"]?.ToString() ?? "N/A";
 
-                                // Get the date and times
                                 string startDate = reader["StartDate"] != DBNull.Value
                                     ? Convert.ToDateTime(reader["StartDate"]).ToString("MM/dd/yyyy")
                                     : null;
@@ -326,14 +234,12 @@ namespace pgso
                                     ? DateTime.Today.Add(TimeSpan.Parse(reader["EndTime"].ToString())).ToString("hh:mmtt")
                                     : null;
 
-                                // Combine time and date into the desired format
                                 if (!string.IsNullOrEmpty(startDate) && !string.IsNullOrEmpty(startTime) && !string.IsNullOrEmpty(endTime))
                                 {
                                     formattedEntries.Add($"{startTime} - {endTime} {startDate}");
                                 }
                             }
 
-                            // Display the formatted data in a single text box
                             txt_Date_Start.Text = formattedEntries.Count > 0
                                 ? string.Join(Environment.NewLine, formattedEntries)
                                 : "N/A";
@@ -348,12 +254,14 @@ namespace pgso
             }
         }
 
-
-
-
-
-
-
+        private void UpdateTextBoxEditability()
+        {
+            bool isPending = txt_Status.Text.Equals("Pending", StringComparison.OrdinalIgnoreCase);
+            txt_FName.Enabled = isPending;
+            txt_LName.Enabled = isPending;
+            txt_Office.Enabled = isPending;
+            txt_Address.Enabled = isPending;
+        }
 
         private void Control_ValueChanged(object sender, EventArgs e)
         {
@@ -364,10 +272,8 @@ namespace pgso
             }
         }
 
-
         private void btn_Update_Click(object sender, EventArgs e)
         {
-
             var result = MessageBox.Show(
                 "Are you sure you want to update?",
                 "Confirm Submission",
@@ -376,9 +282,9 @@ namespace pgso
 
             if (result != DialogResult.Yes)
             {
-              
-                return; // Cancel submission if user selects No
+                return;
             }
+
             if (string.IsNullOrEmpty(currentControlNumber))
             {
                 MessageBox.Show("Please select a reservation first.", "Error",
@@ -392,11 +298,11 @@ namespace pgso
                 {
                     connection.Open();
 
-                    // Update tbl_Reservation for the status
+                    // Update reservation status
                     string reservationQuery = @"
-                UPDATE tbl_Reservation 
-                SET fld_Reservation_Status = @Status
-                WHERE fld_Control_number = @ControlNumber";
+                    UPDATE tbl_Reservation 
+                    SET fld_Reservation_Status = @Status
+                    WHERE fld_Control_number = @ControlNumber";
 
                     using (var command = new SqlCommand(reservationQuery, connection))
                     {
@@ -405,7 +311,7 @@ namespace pgso
                         command.ExecuteNonQuery();
                     }
 
-                    // Update tbl_Requesting_Person for the first name, last name, and address
+                    // Update requesting person details
                     string personQuery = @"
                         UPDATE tbl_Requesting_Person
                         SET fld_First_Name = @FirstName,
@@ -425,10 +331,9 @@ namespace pgso
                         command.ExecuteNonQuery();
                     }
 
-                    // Display success message only once after both updates
                     MessageBox.Show("Reservation updated successfully!", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadReservationData();
+                    LoadReservationData(selectedDate);
                     btn_Update.Enabled = false;
                     hasChanges = false;
                 }
@@ -440,12 +345,9 @@ namespace pgso
             }
         }
 
-
-
-
         private void Btn_Refresh_Click(object sender, EventArgs e)
         {
-            LoadReservationData();
+            LoadReservationData(selectedDate);
             btn_Update.Enabled = false;
             hasChanges = false;
         }
@@ -468,9 +370,9 @@ namespace pgso
 
         private void Dt_all_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            // Handle total amount formatting
+            // Format total amount columns
             if (dt_all.Columns[e.ColumnIndex].Name == "fld_Total_Amount" ||
-                 dt_all.Columns[e.ColumnIndex].Name == "fld_Total")
+                dt_all.Columns[e.ColumnIndex].Name == "fld_Total")
             {
                 if (e.Value != null && decimal.TryParse(e.Value.ToString(), out decimal value))
                 {
@@ -479,7 +381,7 @@ namespace pgso
                 }
             }
 
-            // Color the entire row based on the status value
+            // Color rows based on status
             if (dt_all.Columns.Contains("fld_Reservation_Status"))
             {
                 var statusCell = dt_all.Rows[e.RowIndex].Cells["fld_Reservation_Status"];
@@ -509,83 +411,118 @@ namespace pgso
             }
         }
 
-        // Empty event handlers
-        private void panel1_Paint(object sender, PaintEventArgs e) { }
-        private void txt_Update_TextChanged(object sender, EventArgs e) { }
-
-        private void dt_all_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dt_all_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-
+            int itemColIndex = dt_all.Columns["Item"].Index;
+            dt_all.Rows[e.RowIndex].Cells[itemColIndex].Value = (e.RowIndex + 1).ToString();
         }
 
-        private void txt_Scope_TextChanged(object sender, EventArgs e)
+        private void Txt_Search_GotFocus(object sender, EventArgs e)
         {
-
-        }
-
-        private void txt_Venue_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void combo_Venue_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel_Information_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_Search_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void combobox_Filter_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label18_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_Office_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void picturebox_IMG_Click(object sender, EventArgs e)
-        {
-            if (lastDisplayedImage != null)
+            if (txt_Search.Text == "Control Number/Venue")
             {
-                try
-                {
-                    string tempFile = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.jpg");
-                    lastDisplayedImage.Save(tempFile, System.Drawing.Imaging.ImageFormat.Jpeg);
+                txt_Search.Text = "";
+                txt_Search.ForeColor = System.Drawing.Color.Black;
+            }
+        }
 
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = tempFile,
-                        UseShellExecute = true
-                    });
-                }
-                catch (Exception ex)
+        private void Txt_Search_LostFocus(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txt_Search.Text))
+            {
+                txt_Search.Text = "Control Number/Venue";
+                txt_Search.ForeColor = System.Drawing.Color.Gray;
+            }
+        }
+
+        private void dt_all_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dt_all.Columns[e.ColumnIndex].Name == "fld_Total_Amount" ||
+                dt_all.Columns[e.ColumnIndex].Name == "fld_Total")
+            {
+                if (e.Value != null && decimal.TryParse(e.Value.ToString(), out decimal value))
                 {
-                    MessageBox.Show($"Error opening image: {ex.Message}");
+                    e.Value = "₱" + value.ToString("N2");
+                    e.FormattingApplied = true;
                 }
             }
-            else
+        }
+
+        private void btn_Update_Click_1(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                "Are you sure you want to update?",
+                "Confirm Submission",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
             {
-                MessageBox.Show("No image to open.");
+                return; // Cancel submission if user selects No
+            }
+            if (string.IsNullOrEmpty(currentControlNumber))
+            {
+                MessageBox.Show("Please select a reservation first.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                using (var connection = new SqlConnection(db.strCon.ConnectionString))
+                {
+                    connection.Open();
+
+                    // Optionally use a transaction
+                    using (var transaction = connection.BeginTransaction())
+                    {
+                        // Update tbl_Reservation for the status
+                        string reservationQuery = @"
+                    UPDATE tbl_Reservation 
+                    SET fld_Reservation_Status = @Status
+                    WHERE fld_Control_number = @ControlNumber";
+
+                        using (var command = new SqlCommand(reservationQuery, connection, transaction))
+                        {
+                            command.Parameters.AddWithValue("@Status", txt_Status.Text.Trim());
+                            command.Parameters.AddWithValue("@ControlNumber", currentControlNumber);
+                            command.ExecuteNonQuery();
+                        }
+
+                        // Update tbl_Requesting_Person for the first name, last name, and address
+                        string personQuery = @"
+                    UPDATE tbl_Requesting_Person
+                    SET fld_First_Name = @FirstName,
+                        fld_Surname = @LastName,
+                        fld_Requesting_Person_Address = @Address
+                    WHERE pk_Requesting_PersonID = 
+                        (SELECT fk_Requesting_PersonID 
+                         FROM tbl_Reservation 
+                         WHERE fld_Control_number = @ControlNumber)";
+
+                        using (var command = new SqlCommand(personQuery, connection, transaction))
+                        {
+                            command.Parameters.AddWithValue("@FirstName", txt_FName.Text.Trim());
+                            command.Parameters.AddWithValue("@LastName", txt_LName.Text.Trim());
+                            command.Parameters.AddWithValue("@Address", txt_Address.Text.Trim());
+                            command.Parameters.AddWithValue("@ControlNumber", currentControlNumber);
+                            command.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                    }
+
+                    MessageBox.Show("Reservation updated successfully!", "Success",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadReservationData(selectedDate); // <-- Corrected
+                    btn_Update.Enabled = false;
+                    hasChanges = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating reservation: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

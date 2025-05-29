@@ -53,12 +53,37 @@ namespace pgso
             txt_Search_Equipmet.Text = "Search Equipment";
             txt_Search_Equipmet.GotFocus += Txt_Search_GotFocus2;
             txt_Search_Equipmet.LostFocus += Txt_Search_LostFocus2;
+
+            panel1.Location = new Point(12, 56);
+            panel1.Size = new Size(1272, 694);
+
+            panel2.Location = new Point(12, 56);
+            panel2.Size = new Size(1272, 694);
+
+            dt_Equipments.Location = new Point(7, 50);
+            dt_Equipments.Size = new Size(1254, 550);
+
+            dt_Venues.Location = new Point(7, 52);
+            dt_Venues.Size = new Size(1254, 550);
+
+
+            // ComboBox setup
+            //combo_Facilities.Items.Clear();
+            combo_Facilities.Items.Clear();
+            combo_Facilities.Items.Add("Venue");
+            combo_Facilities.Items.Add("Equipment");
+            combo_Facilities.SelectedIndexChanged += combo_Facilities_SelectedIndexChanged;
+            combo_Facilities.SelectedIndex = 0; // Show Venue panel by default
+
+
         }
 
 
         private void frm_Manage_Facilities_Load(object sender, EventArgs e)
         {
             RefreshData();
+            panel2.Visible = true;  // Venue panel
+            panel1.Visible = false; // Equipment panel
         }
         private void dt_Venues_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
@@ -937,6 +962,20 @@ namespace pgso
             (dt_Equipments.DataSource as DataTable).DefaultView.RowFilter =
                 $"[fld_Equipment_Name] LIKE '%{filter}%'";
 
+        }
+
+        private void combo_Facilities_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (combo_Facilities.SelectedItem?.ToString() == "Venue")
+            {
+                panel2.Visible = true;
+                panel1.Visible = false;
+            }
+            else if (combo_Facilities.SelectedItem?.ToString() == "Equipment")
+            {
+                panel2.Visible = false;
+                panel1.Visible = true;
+            }
         }
     }
 }

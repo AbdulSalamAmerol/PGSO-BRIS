@@ -237,7 +237,7 @@ namespace pgso.pgso_Billing
             lbl_Paid_Amount_2.Text = billingDetails.fld_Amount_Paid_Overtime.ToString("C");
 
             lbl_Balance_2.Text = (billingDetails.fld_Overtime_Fee - billingDetails.fld_Amount_Paid_Overtime).ToString("C");
-            Console.WriteLine("WHATAFAKER  "+billingDetails.fld_Amount_Paid_Overtime);
+            Console.WriteLine(billingDetails.fld_Amount_Paid_Overtime);
         }
 
         private void HideOvertimeAndRefundDetails(Model_Billing billingDetails)

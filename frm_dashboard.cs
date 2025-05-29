@@ -365,7 +365,6 @@ namespace pgso
 
         }
 
-
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
@@ -373,19 +372,8 @@ namespace pgso
 
         private void viewReservationToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
         }
-
-        private void tsmi_Billing_Click(object sender, EventArgs e)
-        {
-   
-
-            frm_Billing billingForm = new frm_Billing();
-            
-            billingForm.ShowDialog();
-        }
-
-
-
 
         private void panel_Calendar_Paint(object sender, PaintEventArgs e)
         {
@@ -394,6 +382,21 @@ namespace pgso
             //panel_Display.Anchor = AnchorStyles.Top | AnchorStyles.Left; // Fix to top-left corner
   //          panel_Display.Size = new Size(2000, 800); // Set a fixed size (width: 800px, height: 600px)
     //        panel_Display.Location = new Point(20, 50); // Set a fixed position (50px from top-left corner)
+        }
+
+        private void createReservationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void billingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_Billing Billing = new frm_Billing();
+    
+     
+    
+       
+            Billing.ShowDialog();
         }
 
 

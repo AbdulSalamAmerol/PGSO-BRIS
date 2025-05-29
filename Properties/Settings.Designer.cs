@@ -44,5 +44,13 @@ namespace pgso.Properties {
                 return ((string)(this["BRIS_EXPERIMENT_3_0ConnectionString"]));
             }
         }
+
+        public bool RememberMe { get; internal set; }
+        public string SavedUsername { get; internal set; }
+        public string SavedUserType { get; internal set; }
+        public string LastUsername { get; internal set; }
+        public string LastUserType { get; internal set; }
     }
+
+
 }

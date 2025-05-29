@@ -93,7 +93,7 @@ namespace pgso
             ////FILTERING
             cmb_Billing_Filter.Items.Clear();
             cmb_Billing_Filter.Items.AddRange(new string[] { "All", "Pending", "Confirmed", "Cancelled" });
-            cmb_Billing_Filter.SelectedIndex = 0; // Default to "All"
+            cmb_Billing_Filter.SelectedIndex = 1; // Default to "All"
             cmb_Billing_Filter.SelectedIndexChanged += cmb_Billing_Filter_SelectedIndexChanged;
             //SORTING
             cmb_Billing_Sort.Items.Clear();
@@ -569,9 +569,6 @@ namespace pgso
             }
         }
 
-
-
-
         private async Task<bool> UpdateReservationStatusAsync(int reservationID, string newStatus)
         {
             try
@@ -713,7 +710,8 @@ namespace pgso
                         item.fld_Reservation_Type,
                         item.fld_Start_Date,
                         item.fld_Total_Amount,
-                        item.fld_Reservation_Status
+                        item.fld_Reservation_Status,
+                        item.fld_Created_At
                     })
                     .Select(group =>
                     {

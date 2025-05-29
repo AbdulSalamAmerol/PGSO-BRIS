@@ -31,6 +31,18 @@ namespace pgso
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.combo_Special = new System.Windows.Forms.ComboBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label25 = new System.Windows.Forms.Label();
+            this.txtx_Num_Hours = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txt_Succeeding_Hour = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txt_rate = new System.Windows.Forms.TextBox();
+            this.txt_Total = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
             this.panel_Aircon = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
             this.radio_Yes = new System.Windows.Forms.RadioButton();
@@ -40,12 +52,6 @@ namespace pgso
             this.label27 = new System.Windows.Forms.Label();
             this.txt_Requesting_Office = new System.Windows.Forms.TextBox();
             this.combo_Request = new System.Windows.Forms.ComboBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.txt_Total = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.txt_Succeeding_Hour = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.txtx_Num_Hours = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.num_participants = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
@@ -61,8 +67,6 @@ namespace pgso
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.txt_surname = new System.Windows.Forms.TextBox();
-            this.txt_rate = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.date_of_use_end = new System.Windows.Forms.DateTimePicker();
@@ -83,8 +87,9 @@ namespace pgso
             this.label2 = new System.Windows.Forms.Label();
             this.txt_firstname = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btn_Billing = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel2.SuspendLayout();
             this.panel_Aircon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_participants)).BeginInit();
             this.SuspendLayout();
@@ -92,19 +97,16 @@ namespace pgso
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.MediumAquamarine;
-            this.panel1.Controls.Add(this.btn_Billing);
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.combo_Special);
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.panel_Aircon);
             this.panel1.Controls.Add(this.label28);
             this.panel1.Controls.Add(this.txt_Middle_Name);
             this.panel1.Controls.Add(this.label27);
             this.panel1.Controls.Add(this.txt_Requesting_Office);
             this.panel1.Controls.Add(this.combo_Request);
-            this.panel1.Controls.Add(this.label26);
-            this.panel1.Controls.Add(this.txt_Total);
-            this.panel1.Controls.Add(this.label25);
-            this.panel1.Controls.Add(this.txt_Succeeding_Hour);
-            this.panel1.Controls.Add(this.label24);
-            this.panel1.Controls.Add(this.txtx_Num_Hours);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.num_participants);
             this.panel1.Controls.Add(this.label11);
@@ -120,8 +122,6 @@ namespace pgso
             this.panel1.Controls.Add(this.label19);
             this.panel1.Controls.Add(this.label18);
             this.panel1.Controls.Add(this.txt_surname);
-            this.panel1.Controls.Add(this.txt_rate);
-            this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.date_of_use_end);
@@ -146,9 +146,143 @@ namespace pgso
             this.panel1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(659, 574);
+            this.panel1.Size = new System.Drawing.Size(916, 574);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(643, 230);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(261, 328);
+            this.pictureBox1.TabIndex = 71;
+            this.pictureBox1.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Green;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button1.Location = new System.Drawing.Point(191, 480);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(108, 30);
+            this.button1.TabIndex = 70;
+            this.button1.Text = "Scan ID";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // combo_Special
+            // 
+            this.combo_Special.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.combo_Special.FormattingEnabled = true;
+            this.combo_Special.Location = new System.Drawing.Point(191, 450);
+            this.combo_Special.Name = "combo_Special";
+            this.combo_Special.Size = new System.Drawing.Size(442, 24);
+            this.combo_Special.TabIndex = 69;
+            this.combo_Special.SelectedIndexChanged += new System.EventHandler(this.combo_Special_SelectedIndexChanged);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label25);
+            this.panel2.Controls.Add(this.txtx_Num_Hours);
+            this.panel2.Controls.Add(this.label24);
+            this.panel2.Controls.Add(this.txt_Succeeding_Hour);
+            this.panel2.Controls.Add(this.label14);
+            this.panel2.Controls.Add(this.txt_rate);
+            this.panel2.Controls.Add(this.txt_Total);
+            this.panel2.Controls.Add(this.label26);
+            this.panel2.Location = new System.Drawing.Point(12, 336);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(30, 31);
+            this.panel2.TabIndex = 68;
+            this.panel2.Visible = false;
+            // 
+            // label25
+            // 
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.Color.Black;
+            this.label25.Location = new System.Drawing.Point(3, 41);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(145, 38);
+            this.label25.TabIndex = 59;
+            this.label25.Text = " Succeeding Hours Rate";
+            this.label25.Click += new System.EventHandler(this.label25_Click);
+            // 
+            // txtx_Num_Hours
+            // 
+            this.txtx_Num_Hours.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtx_Num_Hours.Location = new System.Drawing.Point(150, 11);
+            this.txtx_Num_Hours.Name = "txtx_Num_Hours";
+            this.txtx_Num_Hours.ReadOnly = true;
+            this.txtx_Num_Hours.Size = new System.Drawing.Size(10, 22);
+            this.txtx_Num_Hours.TabIndex = 56;
+            this.txtx_Num_Hours.TextChanged += new System.EventHandler(this.txtx_Num_Hours_TextChanged);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.Color.Black;
+            this.label24.Location = new System.Drawing.Point(3, 14);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(127, 16);
+            this.label24.TabIndex = 57;
+            this.label24.Text = "Number of Hours:";
+            // 
+            // txt_Succeeding_Hour
+            // 
+            this.txt_Succeeding_Hour.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Succeeding_Hour.Location = new System.Drawing.Point(150, 46);
+            this.txt_Succeeding_Hour.Name = "txt_Succeeding_Hour";
+            this.txt_Succeeding_Hour.ReadOnly = true;
+            this.txt_Succeeding_Hour.Size = new System.Drawing.Size(10, 22);
+            this.txt_Succeeding_Hour.TabIndex = 58;
+            this.txt_Succeeding_Hour.TextChanged += new System.EventHandler(this.txt_Succeeding_Hour_TextChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Black;
+            this.label14.Location = new System.Drawing.Point(161, 27);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(135, 16);
+            this.label14.TabIndex = 29;
+            this.label14.Text = "First 4 Hours Rate:";
+            this.label14.Click += new System.EventHandler(this.label14_Click);
+            // 
+            // txt_rate
+            // 
+            this.txt_rate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_rate.Location = new System.Drawing.Point(298, 21);
+            this.txt_rate.Name = "txt_rate";
+            this.txt_rate.ReadOnly = true;
+            this.txt_rate.Size = new System.Drawing.Size(10, 22);
+            this.txt_rate.TabIndex = 30;
+            this.txt_rate.TextChanged += new System.EventHandler(this.txt_rate_TextChanged);
+            // 
+            // txt_Total
+            // 
+            this.txt_Total.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Total.Location = new System.Drawing.Point(298, 51);
+            this.txt_Total.Name = "txt_Total";
+            this.txt_Total.ReadOnly = true;
+            this.txt_Total.Size = new System.Drawing.Size(10, 22);
+            this.txt_Total.TabIndex = 60;
+            this.txt_Total.TextChanged += new System.EventHandler(this.txt_Total_TextChanged);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.ForeColor = System.Drawing.Color.Black;
+            this.label26.Location = new System.Drawing.Point(243, 58);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(47, 16);
+            this.label26.TabIndex = 61;
+            this.label26.Text = "Total:";
+            this.label26.Click += new System.EventHandler(this.label26_Click);
             // 
             // panel_Aircon
             // 
@@ -246,70 +380,6 @@ namespace pgso
             this.combo_Request.TabIndex = 62;
             this.combo_Request.SelectedIndexChanged += new System.EventHandler(this.combo_Request_SelectedIndexChanged);
             // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.ForeColor = System.Drawing.Color.Black;
-            this.label26.Location = new System.Drawing.Point(449, 491);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(47, 16);
-            this.label26.TabIndex = 61;
-            this.label26.Text = "Total:";
-            this.label26.Click += new System.EventHandler(this.label26_Click);
-            // 
-            // txt_Total
-            // 
-            this.txt_Total.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Total.Location = new System.Drawing.Point(504, 484);
-            this.txt_Total.Name = "txt_Total";
-            this.txt_Total.ReadOnly = true;
-            this.txt_Total.Size = new System.Drawing.Size(132, 22);
-            this.txt_Total.TabIndex = 60;
-            this.txt_Total.TextChanged += new System.EventHandler(this.txt_Total_TextChanged);
-            // 
-            // label25
-            // 
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.ForeColor = System.Drawing.Color.Black;
-            this.label25.Location = new System.Drawing.Point(41, 484);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(145, 38);
-            this.label25.TabIndex = 59;
-            this.label25.Text = " Succeeding Hours Rate";
-            this.label25.Click += new System.EventHandler(this.label25_Click);
-            // 
-            // txt_Succeeding_Hour
-            // 
-            this.txt_Succeeding_Hour.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Succeeding_Hour.Location = new System.Drawing.Point(188, 489);
-            this.txt_Succeeding_Hour.Name = "txt_Succeeding_Hour";
-            this.txt_Succeeding_Hour.ReadOnly = true;
-            this.txt_Succeeding_Hour.Size = new System.Drawing.Size(178, 22);
-            this.txt_Succeeding_Hour.TabIndex = 58;
-            this.txt_Succeeding_Hour.TextChanged += new System.EventHandler(this.txt_Succeeding_Hour_TextChanged);
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.ForeColor = System.Drawing.Color.Black;
-            this.label24.Location = new System.Drawing.Point(41, 457);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(127, 16);
-            this.label24.TabIndex = 57;
-            this.label24.Text = "Number of Hours:";
-            // 
-            // txtx_Num_Hours
-            // 
-            this.txtx_Num_Hours.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtx_Num_Hours.Location = new System.Drawing.Point(188, 454);
-            this.txtx_Num_Hours.Name = "txtx_Num_Hours";
-            this.txtx_Num_Hours.ReadOnly = true;
-            this.txtx_Num_Hours.Size = new System.Drawing.Size(178, 22);
-            this.txtx_Num_Hours.TabIndex = 56;
-            this.txtx_Num_Hours.TextChanged += new System.EventHandler(this.txtx_Num_Hours_TextChanged);
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -401,9 +471,9 @@ namespace pgso
             this.label17.ForeColor = System.Drawing.Color.Black;
             this.label17.Location = new System.Drawing.Point(40, 430);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(44, 16);
+            this.label17.Size = new System.Drawing.Size(84, 16);
             this.label17.TabIndex = 49;
-            this.label17.Text = "Rate:";
+            this.label17.Text = "Rate Type:";
             this.label17.Click += new System.EventHandler(this.label17_Click);
             // 
             // label16
@@ -470,28 +540,6 @@ namespace pgso
             this.txt_surname.Size = new System.Drawing.Size(114, 22);
             this.txt_surname.TabIndex = 43;
             this.txt_surname.TextChanged += new System.EventHandler(this.txt_surname_TextChanged);
-            // 
-            // txt_rate
-            // 
-            this.txt_rate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_rate.Location = new System.Drawing.Point(504, 454);
-            this.txt_rate.Name = "txt_rate";
-            this.txt_rate.ReadOnly = true;
-            this.txt_rate.Size = new System.Drawing.Size(130, 22);
-            this.txt_rate.TabIndex = 30;
-            this.txt_rate.TextChanged += new System.EventHandler(this.txt_rate_TextChanged);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.Black;
-            this.label14.Location = new System.Drawing.Point(367, 460);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(135, 16);
-            this.label14.TabIndex = 29;
-            this.label14.Text = "First 4 Hours Rate:";
-            this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
             // label13
             // 
@@ -705,22 +753,12 @@ namespace pgso
             this.label1.TabIndex = 0;
             this.label1.Text = "Requesting Person:";
             // 
-            // btn_Billing
-            // 
-            this.btn_Billing.Location = new System.Drawing.Point(294, 528);
-            this.btn_Billing.Name = "btn_Billing";
-            this.btn_Billing.Size = new System.Drawing.Size(105, 30);
-            this.btn_Billing.TabIndex = 68;
-            this.btn_Billing.Text = "Billing";
-            this.btn_Billing.UseVisualStyleBackColor = true;
-            this.btn_Billing.Click += new System.EventHandler(this.btn_Billing_Click);
-            // 
             // frm_Create_Venuer_Reservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(659, 574);
+            this.ClientSize = new System.Drawing.Size(916, 574);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frm_Create_Venuer_Reservation";
@@ -729,6 +767,9 @@ namespace pgso
             this.Load += new System.EventHandler(this.frm_ammunganhall_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel_Aircon.ResumeLayout(false);
             this.panel_Aircon.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_participants)).EndInit();
@@ -795,6 +836,9 @@ namespace pgso
         private System.Windows.Forms.TextBox txt_Middle_Name;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Panel panel_Aircon;
-        private System.Windows.Forms.Button btn_Billing;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ComboBox combo_Special;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button1;
     }
 }

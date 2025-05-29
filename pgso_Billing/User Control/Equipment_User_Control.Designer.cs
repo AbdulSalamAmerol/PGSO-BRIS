@@ -602,7 +602,7 @@
             this.btn_Confirm_Reservation.TabIndex = 142;
             this.btn_Confirm_Reservation.Text = "Confirm Reservation";
             this.btn_Confirm_Reservation.UseVisualStyleBackColor = false;
-            this.btn_Confirm_Reservation.Click += new System.EventHandler(this.btn_Confirm_Reservation_Click_1);
+            this.btn_Confirm_Reservation.Click += new System.EventHandler(this.btn_Confirm_Reservation_Click);
             // 
             // btn_Cancel_Reservation
             // 
@@ -616,7 +616,7 @@
             this.btn_Cancel_Reservation.TabIndex = 141;
             this.btn_Cancel_Reservation.Text = "Cancel Reservation";
             this.btn_Cancel_Reservation.UseVisualStyleBackColor = false;
-            this.btn_Cancel_Reservation.Click += new System.EventHandler(this.btn_Cancel_Reservation_Click_1);
+            this.btn_Cancel_Reservation.Click += new System.EventHandler(this.btn_Cancel_Reservation_Click);
             // 
             // button1
             // 

@@ -464,10 +464,10 @@ namespace pgso
 
                 // Insert Requesting Person
                 cmd = new SqlCommand(@"
-                    INSERT INTO tbl_Requesting_Person 
-                    (fld_Surname, fld_First_Name, fld_Middle_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office) 
-                    OUTPUT INSERTED.pk_Requesting_PersonID 
-                    VALUES (@Surname, @FirstName, @MiddleName, @Address, @ContactNumber, @RequestOrigin, @RequestingOffice)",
+             INSERT INTO tbl_Requesting_Person 
+             (fld_Surname, fld_First_Name, fld_Middle_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office) 
+             OUTPUT INSERTED.pk_Requesting_PersonID 
+             VALUES (@Surname, @FirstName, @MiddleName, @Address, @ContactNumber, @RequestOrigin, @RequestingOffice)",
                   conn, transaction);
 
                 cmd.Parameters.AddWithValue("@Surname", txt_Surname.Text);
@@ -482,10 +482,10 @@ namespace pgso
 
                 // Insert Reservation (without start date, end date, status)
                 cmd = new SqlCommand(@"
-                    INSERT INTO tbl_Reservation
-                    (fld_Control_Number, fld_Reservation_Type, fld_Activity_Name, fld_Number_Of_Participants, fld_Created_At, fld_Total_Amount, fk_Requesting_PersonID, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time) -- Added fld_Start_Date
-                    OUTPUT INSERTED.pk_ReservationID
-                    VALUES (@fld_Control_Number, @fld_Reservation_Type, @fld_Activity_Name, @fld_Number_Of_Participants, @Created_At, @fld_Total_Amount, @Requesting_PersonID, @fld_Start_Date, @fld_End_Date, @fld_Start_Time, @fld_End_Time)", // Added @fld_Start_Date parameter
+             INSERT INTO tbl_Reservation
+             (fld_Control_Number, fld_Reservation_Type, fld_Activity_Name, fld_Number_Of_Participants, fld_Created_At, fld_Total_Amount, fk_Requesting_PersonID, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time) -- Added fld_Start_Date
+             OUTPUT INSERTED.pk_ReservationID
+             VALUES (@fld_Control_Number, @fld_Reservation_Type, @fld_Activity_Name, @fld_Number_Of_Participants, @Created_At, @fld_Total_Amount, @Requesting_PersonID, @fld_Start_Date, @fld_End_Date, @fld_Start_Time, @fld_End_Time)", // Added @fld_Start_Date parameter
                  conn, transaction);
 
                 cmd.Parameters.AddWithValue("@fld_Control_Number", txt_Control_Num.Text);
@@ -510,9 +510,9 @@ namespace pgso
                 {
                     // Get pricing ID
                     cmd = new SqlCommand(@"
-                SELECT pk_Equipment_PricingID 
-                FROM tbl_Equipment_Pricing 
-                WHERE fk_EquipmentID = @FacilityID",
+         SELECT pk_Equipment_PricingID 
+         FROM tbl_Equipment_Pricing 
+         WHERE fk_EquipmentID = @FacilityID",
                         conn, transaction);
 
                     cmd.Parameters.AddWithValue("@FacilityID", equipment.EquipmentID);
@@ -520,9 +520,9 @@ namespace pgso
 
                     // Insert into tbl_Reservation_Equipment with dates and status
                     cmd = new SqlCommand(@"
-                INSERT INTO tbl_Reservation_Equipment 
-                (fk_ReservationID, fk_EquipmentID, fk_Equipment_PricingID, fld_Quantity, fld_Number_Of_Days, fld_Total_Equipment_Cost, fld_Start_Date_Eq, fld_End_Date_Eq, fld_Equipment_Status) 
-                VALUES (@fk_ReservationID, @fk_EquipmentID, @fk_Equipment_PricingID, @fld_Quantity, @fld_Number_Of_Days, @fld_Total_Equipment_Cost, @fld_Start_Date_Eq, @fld_End_Date_Eq, @fld_Equipment_Status)",
+         INSERT INTO tbl_Reservation_Equipment 
+         (fk_ReservationID, fk_EquipmentID, fk_Equipment_PricingID, fld_Quantity, fld_Number_Of_Days, fld_Total_Equipment_Cost, fld_Start_Date_Eq, fld_End_Date_Eq, fld_Equipment_Status) 
+         VALUES (@fk_ReservationID, @fk_EquipmentID, @fk_Equipment_PricingID, @fld_Quantity, @fld_Number_Of_Days, @fld_Total_Equipment_Cost, @fld_Start_Date_Eq, @fld_End_Date_Eq, @fld_Equipment_Status)",
                         conn, transaction);
 
                     cmd.Parameters.AddWithValue("@fk_ReservationID", reservationID);
@@ -539,9 +539,9 @@ namespace pgso
 
                     // Update available quantity
                     cmd = new SqlCommand(@"
-                UPDATE tbl_Equipment 
-                SET fld_Remaining_Stock = fld_Remaining_Stock - @Quantity 
-                WHERE pk_EquipmentID = @EquipmentID",
+         UPDATE tbl_Equipment 
+         SET fld_Remaining_Stock = fld_Remaining_Stock - @Quantity 
+         WHERE pk_EquipmentID = @EquipmentID",
                         conn, transaction);
 
                     cmd.Parameters.AddWithValue("@Quantity", equipment.Quantity);

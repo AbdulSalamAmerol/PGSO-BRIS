@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -235,18 +236,14 @@ namespace pgso.pgso_Billing.User_Control
                         LoadBillingDetails(_billingDetails);
 
                         RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); // 🔁 Notify parent to refresh billing
-                        
+
                     }
                     else
                     {
                         MessageBox.Show("Failed to update reservation status to 'Confirmed'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Approval process cancelled or OR Number entry failed.",
-                                    "Approval Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+               
             }
         }
 

@@ -72,7 +72,7 @@ namespace pgso.Billing.Repositories
 
                                    
                                     p.pk_PaymentID,
-                                    p.fld_Created_At,
+                                    r.fld_Created_At,
                                     p.fld_Amount_Due,
                                     p.fld_Amount_Paid,
                                     p.fld_Payment_Status,
@@ -90,8 +90,8 @@ namespace pgso.Billing.Repositories
                                     re.fld_Date_Returned,
                                     re.fld_Quantity_Returned,
                                     re.fld_Quantity_Damaged,
-                                    p. fld_Amount_Paid_Overtime,
-                                    r. fld_OT_Payment_Status
+                                    p.fld_Amount_Paid_Overtime,
+                                    r.fld_OT_Payment_Status
 
 
                                 FROM dbo.tbl_Reservation r
@@ -181,6 +181,7 @@ namespace pgso.Billing.Repositories
                                 fld_Quantity_Damaged = reader.IsDBNull(49) ? 0 : reader.GetInt32(49),
                                 fld_Amount_Paid_Overtime = reader.IsDBNull(50) ? 0 : reader.GetDecimal(50),
                                 fld_OT_Payment_Status = reader.IsDBNull(51) ? "" : reader.GetString(51)
+
                             };
 
 
@@ -254,7 +255,7 @@ namespace pgso.Billing.Repositories
                         re.fld_Total_Equipment_Cost,
 
                         p.pk_PaymentID,
-                        p.fld_Created_At,
+                        r.fld_Created_At,
                         p.fld_Amount_Due,
                         p.fld_Amount_Paid,
                         p.fld_Payment_Status,
