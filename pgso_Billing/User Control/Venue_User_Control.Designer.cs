@@ -1032,7 +1032,7 @@
             this.lbl_OT_Hours.ReadOnly = true;
             this.lbl_OT_Hours.Size = new System.Drawing.Size(67, 20);
             this.lbl_OT_Hours.TabIndex = 59;
-            this.lbl_OT_Hours.Text = "0 HRS";
+            this.lbl_OT_Hours.Text = "0 HR/S";
             this.lbl_OT_Hours.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.lbl_OT_Hours.TextChanged += new System.EventHandler(this.lbl_OT_Hours_TextChanged);
             // 
@@ -1333,7 +1333,7 @@
             this.textBox34.ReadOnly = true;
             this.textBox34.Size = new System.Drawing.Size(60, 20);
             this.textBox34.TabIndex = 46;
-            this.textBox34.Text = "4 HRS";
+            this.textBox34.Text = "4 HR/S";
             this.textBox34.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox45
@@ -1350,7 +1350,7 @@
             this.textBox45.ReadOnly = true;
             this.textBox45.Size = new System.Drawing.Size(200, 25);
             this.textBox45.TabIndex = 55;
-            this.textBox45.Text = "Operational Expences";
+            this.textBox45.Text = "Operational Expenses";
             // 
             // textBox39
             // 
@@ -1396,7 +1396,7 @@
             this.lbl_Total_Hour.ReadOnly = true;
             this.lbl_Total_Hour.Size = new System.Drawing.Size(60, 20);
             this.lbl_Total_Hour.TabIndex = 47;
-            this.lbl_Total_Hour.Text = "0 HRS";
+            this.lbl_Total_Hour.Text = "0 HR/S";
             this.lbl_Total_Hour.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbl_Additional_Hourly_Charge

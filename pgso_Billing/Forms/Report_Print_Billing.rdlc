@@ -618,7 +618,11 @@ This Province</Value>
                               <Value>=IIf(
  DateDiff("d", Fields!fld_Start_Date_Eq.Value, Fields!fld_End_Date_Eq.Value) = 0,
  Format(Fields!fld_Start_Date_Eq.Value, "MMMM d, yyyy"),
- Format(Fields!fld_Start_Date_Eq.Value, "MMMM d") &amp; " - " &amp; Format(Fields!fld_End_Date_Eq.Value, "d, yyyy")
+ IIf(
+   Month(Fields!fld_Start_Date_Eq.Value) = Month(Fields!fld_End_Date_Eq.Value),
+   Format(Fields!fld_Start_Date_Eq.Value, "MMMM d") &amp; " - " &amp; Format(Fields!fld_End_Date_Eq.Value, "d, yyyy"),
+   Format(Fields!fld_Start_Date_Eq.Value, "MMMM d") &amp; " - " &amp; Format(Fields!fld_End_Date_Eq.Value, "MMMM d, yyyy")
+ )
 )</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
@@ -3114,7 +3118,15 @@ This Province</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=IIf(DateDiff("d", Fields!fld_Start_Date_Eq.Value, Fields!fld_End_Date_Eq.Value) = 0, Format(Fields!fld_Start_Date_Eq.Value, "MMMM d, yyyy"), Format(Fields!fld_Start_Date_Eq.Value, "MMMM d") &amp; " - " &amp; Format(Fields!fld_End_Date_Eq.Value, "d, yyyy"))</Value>
+                              <Value>=IIf(
+ DateDiff("d", Fields!fld_Start_Date_Eq.Value, Fields!fld_End_Date_Eq.Value) = 0,
+ Format(Fields!fld_Start_Date_Eq.Value, "MMMM d, yyyy"),
+ IIf(
+   Month(Fields!fld_Start_Date_Eq.Value) = Month(Fields!fld_End_Date_Eq.Value),
+   Format(Fields!fld_Start_Date_Eq.Value, "MMMM d") &amp; " - " &amp; Format(Fields!fld_End_Date_Eq.Value, "d, yyyy"),
+   Format(Fields!fld_Start_Date_Eq.Value, "MMMM d") &amp; " - " &amp; Format(Fields!fld_End_Date_Eq.Value, "MMMM d, yyyy")
+ )
+)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <FontFamily>Calibri</FontFamily>
