@@ -46,20 +46,6 @@
             this.pnl_Billing_Details = new System.Windows.Forms.Panel();
             this.pb_Logo = new System.Windows.Forms.PictureBox();
             this.dgv_Billing_Records = new System.Windows.Forms.DataGridView();
-            this.tlp_Billing_UControls = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmb_Billing_Filter = new System.Windows.Forms.ComboBox();
-            this.btn_Reports = new System.Windows.Forms.Button();
-            this.sb_Billing_Search_Bar = new System.Windows.Forms.TextBox();
-            this.cmb_Billing_Sort = new System.Windows.Forms.ComboBox();
-            this.flp_Top = new System.Windows.Forms.FlowLayoutPanel();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
             this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Date_Created = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Start_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,6 +61,20 @@
             this.col_Approved = new System.Windows.Forms.DataGridViewImageColumn();
             this.col_Cancel = new System.Windows.Forms.DataGridViewImageColumn();
             this.col_Extend = new System.Windows.Forms.DataGridViewImageColumn();
+            this.tlp_Billing_UControls = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmb_Billing_Filter = new System.Windows.Forms.ComboBox();
+            this.btn_Reports = new System.Windows.Forms.Button();
+            this.sb_Billing_Search_Bar = new System.Windows.Forms.TextBox();
+            this.cmb_Billing_Sort = new System.Windows.Forms.ComboBox();
+            this.flp_Top = new System.Windows.Forms.FlowLayoutPanel();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
             this.pnl_Billing_Details.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Billing_Records)).BeginInit();
@@ -181,183 +181,6 @@
             this.dgv_Billing_Records.TabIndex = 0;
             this.dgv_Billing_Records.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Billing_Records_CellContentClick);
             this.dgv_Billing_Records.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgv_Billing_Records_CellFormatting);
-            // 
-            // tlp_Billing_UControls
-            // 
-            this.tlp_Billing_UControls.ColumnCount = 3;
-            this.tlp_Billing_UControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 11F));
-            this.tlp_Billing_UControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_Billing_UControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 11F));
-            this.tlp_Billing_UControls.Controls.Add(this.dgv_Billing_Records, 1, 1);
-            this.tlp_Billing_UControls.Controls.Add(this.panel1, 1, 0);
-            this.tlp_Billing_UControls.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tlp_Billing_UControls.Location = new System.Drawing.Point(0, 11);
-            this.tlp_Billing_UControls.MaximumSize = new System.Drawing.Size(1037, 1150);
-            this.tlp_Billing_UControls.MinimumSize = new System.Drawing.Size(997, 1150);
-            this.tlp_Billing_UControls.Name = "tlp_Billing_UControls";
-            this.tlp_Billing_UControls.RowCount = 2;
-            this.tlp_Billing_UControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tlp_Billing_UControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_Billing_UControls.Size = new System.Drawing.Size(997, 1150);
-            this.tlp_Billing_UControls.TabIndex = 4;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.cmb_Billing_Filter);
-            this.panel1.Controls.Add(this.btn_Reports);
-            this.panel1.Controls.Add(this.sb_Billing_Search_Bar);
-            this.panel1.Controls.Add(this.cmb_Billing_Sort);
-            this.panel1.Location = new System.Drawing.Point(11, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(975, 50);
-            this.panel1.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 19);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 20);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "SEARCH";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(284, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 20);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "FILTER";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(562, 19);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 20);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "SORT";
-            // 
-            // cmb_Billing_Filter
-            // 
-            this.cmb_Billing_Filter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.cmb_Billing_Filter.DropDownHeight = 300;
-            this.cmb_Billing_Filter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cmb_Billing_Filter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmb_Billing_Filter.FormattingEnabled = true;
-            this.cmb_Billing_Filter.IntegralHeight = false;
-            this.cmb_Billing_Filter.ItemHeight = 16;
-            this.cmb_Billing_Filter.Location = new System.Drawing.Point(353, 14);
-            this.cmb_Billing_Filter.Margin = new System.Windows.Forms.Padding(0);
-            this.cmb_Billing_Filter.Name = "cmb_Billing_Filter";
-            this.cmb_Billing_Filter.Size = new System.Drawing.Size(182, 24);
-            this.cmb_Billing_Filter.TabIndex = 0;
-            this.cmb_Billing_Filter.SelectedIndexChanged += new System.EventHandler(this.cmb_Billing_Filter_SelectedIndexChanged_1);
-            // 
-            // btn_Reports
-            // 
-            this.btn_Reports.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_Reports.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
-            this.btn_Reports.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Reports.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Reports.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Reports.Location = new System.Drawing.Point(852, 6);
-            this.btn_Reports.Name = "btn_Reports";
-            this.btn_Reports.Size = new System.Drawing.Size(100, 39);
-            this.btn_Reports.TabIndex = 1;
-            this.btn_Reports.Text = "REPORTS";
-            this.btn_Reports.UseVisualStyleBackColor = false;
-            this.btn_Reports.Click += new System.EventHandler(this.btn_Reports_Click);
-            // 
-            // sb_Billing_Search_Bar
-            // 
-            this.sb_Billing_Search_Bar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.sb_Billing_Search_Bar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.sb_Billing_Search_Bar.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.sb_Billing_Search_Bar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sb_Billing_Search_Bar.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.sb_Billing_Search_Bar.Location = new System.Drawing.Point(83, 16);
-            this.sb_Billing_Search_Bar.Margin = new System.Windows.Forms.Padding(0);
-            this.sb_Billing_Search_Bar.MinimumSize = new System.Drawing.Size(0, 24);
-            this.sb_Billing_Search_Bar.Name = "sb_Billing_Search_Bar";
-            this.sb_Billing_Search_Bar.Size = new System.Drawing.Size(182, 19);
-            this.sb_Billing_Search_Bar.TabIndex = 1;
-            this.sb_Billing_Search_Bar.TextChanged += new System.EventHandler(this.sb_Billing_Search_Bar_TextChanged);
-            // 
-            // cmb_Billing_Sort
-            // 
-            this.cmb_Billing_Sort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.cmb_Billing_Sort.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmb_Billing_Sort.FormattingEnabled = true;
-            this.cmb_Billing_Sort.Location = new System.Drawing.Point(618, 15);
-            this.cmb_Billing_Sort.Margin = new System.Windows.Forms.Padding(0);
-            this.cmb_Billing_Sort.Name = "cmb_Billing_Sort";
-            this.cmb_Billing_Sort.Size = new System.Drawing.Size(180, 24);
-            this.cmb_Billing_Sort.TabIndex = 9;
-            // 
-            // flp_Top
-            // 
-            this.flp_Top.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flp_Top.Location = new System.Drawing.Point(0, 0);
-            this.flp_Top.MaximumSize = new System.Drawing.Size(0, 10);
-            this.flp_Top.MinimumSize = new System.Drawing.Size(0, 11);
-            this.flp_Top.Name = "flp_Top";
-            this.flp_Top.Size = new System.Drawing.Size(1902, 11);
-            this.flp_Top.TabIndex = 5;
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewImageColumn1.FillWeight = 3F;
-            this.dataGridViewImageColumn1.HeaderText = "PRINT";
-            this.dataGridViewImageColumn1.Image = global::pgso.Properties.Resources.print;
-            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn1.MinimumWidth = 20;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            // 
-            // dataGridViewImageColumn2
-            // 
-            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewImageColumn2.HeaderText = "CANCEL";
-            this.dataGridViewImageColumn2.Image = global::pgso.Properties.Resources.Cancelled_Icon;
-            this.dataGridViewImageColumn2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn2.MinimumWidth = 60;
-            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
-            this.dataGridViewImageColumn2.ReadOnly = true;
-            // 
-            // dataGridViewImageColumn3
-            // 
-            this.dataGridViewImageColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewImageColumn3.FillWeight = 3F;
-            this.dataGridViewImageColumn3.HeaderText = "PRINT";
-            this.dataGridViewImageColumn3.Image = global::pgso.Properties.Resources.print;
-            this.dataGridViewImageColumn3.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn3.MinimumWidth = 20;
-            this.dataGridViewImageColumn3.Name = "dataGridViewImageColumn3";
-            this.dataGridViewImageColumn3.ReadOnly = true;
-            // 
-            // dataGridViewImageColumn4
-            // 
-            this.dataGridViewImageColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewImageColumn4.FillWeight = 3F;
-            this.dataGridViewImageColumn4.HeaderText = "PRINT";
-            this.dataGridViewImageColumn4.Image = global::pgso.Properties.Resources.print;
-            this.dataGridViewImageColumn4.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn4.MinimumWidth = 20;
-            this.dataGridViewImageColumn4.Name = "dataGridViewImageColumn4";
-            this.dataGridViewImageColumn4.ReadOnly = true;
-            this.dataGridViewImageColumn4.Visible = false;
             // 
             // fld_Control_Number
             // 
@@ -545,6 +368,183 @@
             this.col_Extend.ReadOnly = true;
             this.col_Extend.Visible = false;
             this.col_Extend.Width = 60;
+            // 
+            // tlp_Billing_UControls
+            // 
+            this.tlp_Billing_UControls.ColumnCount = 3;
+            this.tlp_Billing_UControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 11F));
+            this.tlp_Billing_UControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_Billing_UControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 11F));
+            this.tlp_Billing_UControls.Controls.Add(this.dgv_Billing_Records, 1, 1);
+            this.tlp_Billing_UControls.Controls.Add(this.panel1, 1, 0);
+            this.tlp_Billing_UControls.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tlp_Billing_UControls.Location = new System.Drawing.Point(0, 11);
+            this.tlp_Billing_UControls.MaximumSize = new System.Drawing.Size(1037, 1150);
+            this.tlp_Billing_UControls.MinimumSize = new System.Drawing.Size(997, 1150);
+            this.tlp_Billing_UControls.Name = "tlp_Billing_UControls";
+            this.tlp_Billing_UControls.RowCount = 2;
+            this.tlp_Billing_UControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlp_Billing_UControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_Billing_UControls.Size = new System.Drawing.Size(997, 1150);
+            this.tlp_Billing_UControls.TabIndex = 4;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.cmb_Billing_Filter);
+            this.panel1.Controls.Add(this.btn_Reports);
+            this.panel1.Controls.Add(this.sb_Billing_Search_Bar);
+            this.panel1.Controls.Add(this.cmb_Billing_Sort);
+            this.panel1.Location = new System.Drawing.Point(11, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(975, 50);
+            this.panel1.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(3, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 20);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "SEARCH";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(284, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 20);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "FILTER";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(562, 19);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 20);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "SORT";
+            // 
+            // cmb_Billing_Filter
+            // 
+            this.cmb_Billing_Filter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.cmb_Billing_Filter.DropDownHeight = 300;
+            this.cmb_Billing_Filter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cmb_Billing_Filter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmb_Billing_Filter.FormattingEnabled = true;
+            this.cmb_Billing_Filter.IntegralHeight = false;
+            this.cmb_Billing_Filter.ItemHeight = 16;
+            this.cmb_Billing_Filter.Location = new System.Drawing.Point(353, 14);
+            this.cmb_Billing_Filter.Margin = new System.Windows.Forms.Padding(0);
+            this.cmb_Billing_Filter.Name = "cmb_Billing_Filter";
+            this.cmb_Billing_Filter.Size = new System.Drawing.Size(182, 24);
+            this.cmb_Billing_Filter.TabIndex = 0;
+            this.cmb_Billing_Filter.SelectedIndexChanged += new System.EventHandler(this.cmb_Billing_Filter_SelectedIndexChanged_1);
+            // 
+            // btn_Reports
+            // 
+            this.btn_Reports.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_Reports.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(166)))), ((int)(((byte)(167)))));
+            this.btn_Reports.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Reports.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Reports.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.btn_Reports.Location = new System.Drawing.Point(852, 6);
+            this.btn_Reports.Name = "btn_Reports";
+            this.btn_Reports.Size = new System.Drawing.Size(100, 39);
+            this.btn_Reports.TabIndex = 1;
+            this.btn_Reports.Text = "REPORTS";
+            this.btn_Reports.UseVisualStyleBackColor = false;
+            this.btn_Reports.Click += new System.EventHandler(this.btn_Reports_Click);
+            // 
+            // sb_Billing_Search_Bar
+            // 
+            this.sb_Billing_Search_Bar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.sb_Billing_Search_Bar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.sb_Billing_Search_Bar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.sb_Billing_Search_Bar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sb_Billing_Search_Bar.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.sb_Billing_Search_Bar.Location = new System.Drawing.Point(83, 16);
+            this.sb_Billing_Search_Bar.Margin = new System.Windows.Forms.Padding(0);
+            this.sb_Billing_Search_Bar.MinimumSize = new System.Drawing.Size(0, 24);
+            this.sb_Billing_Search_Bar.Name = "sb_Billing_Search_Bar";
+            this.sb_Billing_Search_Bar.Size = new System.Drawing.Size(182, 19);
+            this.sb_Billing_Search_Bar.TabIndex = 1;
+            this.sb_Billing_Search_Bar.TextChanged += new System.EventHandler(this.sb_Billing_Search_Bar_TextChanged);
+            // 
+            // cmb_Billing_Sort
+            // 
+            this.cmb_Billing_Sort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.cmb_Billing_Sort.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmb_Billing_Sort.FormattingEnabled = true;
+            this.cmb_Billing_Sort.Location = new System.Drawing.Point(618, 15);
+            this.cmb_Billing_Sort.Margin = new System.Windows.Forms.Padding(0);
+            this.cmb_Billing_Sort.Name = "cmb_Billing_Sort";
+            this.cmb_Billing_Sort.Size = new System.Drawing.Size(180, 24);
+            this.cmb_Billing_Sort.TabIndex = 9;
+            // 
+            // flp_Top
+            // 
+            this.flp_Top.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flp_Top.Location = new System.Drawing.Point(0, 0);
+            this.flp_Top.MaximumSize = new System.Drawing.Size(0, 10);
+            this.flp_Top.MinimumSize = new System.Drawing.Size(0, 11);
+            this.flp_Top.Name = "flp_Top";
+            this.flp_Top.Size = new System.Drawing.Size(1902, 11);
+            this.flp_Top.TabIndex = 5;
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewImageColumn1.FillWeight = 3F;
+            this.dataGridViewImageColumn1.HeaderText = "PRINT";
+            this.dataGridViewImageColumn1.Image = global::pgso.Properties.Resources.print;
+            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn1.MinimumWidth = 20;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn2
+            // 
+            this.dataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewImageColumn2.HeaderText = "CANCEL";
+            this.dataGridViewImageColumn2.Image = global::pgso.Properties.Resources.Cancelled_Icon;
+            this.dataGridViewImageColumn2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn2.MinimumWidth = 60;
+            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            this.dataGridViewImageColumn2.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn3
+            // 
+            this.dataGridViewImageColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewImageColumn3.FillWeight = 3F;
+            this.dataGridViewImageColumn3.HeaderText = "PRINT";
+            this.dataGridViewImageColumn3.Image = global::pgso.Properties.Resources.print;
+            this.dataGridViewImageColumn3.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn3.MinimumWidth = 20;
+            this.dataGridViewImageColumn3.Name = "dataGridViewImageColumn3";
+            this.dataGridViewImageColumn3.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn4
+            // 
+            this.dataGridViewImageColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewImageColumn4.FillWeight = 3F;
+            this.dataGridViewImageColumn4.HeaderText = "PRINT";
+            this.dataGridViewImageColumn4.Image = global::pgso.Properties.Resources.print;
+            this.dataGridViewImageColumn4.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn4.MinimumWidth = 20;
+            this.dataGridViewImageColumn4.Name = "dataGridViewImageColumn4";
+            this.dataGridViewImageColumn4.ReadOnly = true;
+            this.dataGridViewImageColumn4.Visible = false;
             // 
             // frm_Billing
             // 

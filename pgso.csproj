@@ -162,11 +162,12 @@
   <ItemGroup>
     <Compile Include="BillingDataSet.cs">
       <DependentUpon>BillingDataSet.xsd</DependentUpon>
+      <SubType>code</SubType>
     </Compile>
     <Compile Include="BillingDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>BillingDataSet.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

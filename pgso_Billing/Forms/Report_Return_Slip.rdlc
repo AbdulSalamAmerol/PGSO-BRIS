@@ -1307,7 +1307,7 @@
                 </Style>
               </TextRun>
               <TextRun>
-                <Value>Receiving Staff</Value>
+                <Value>Prepared By</Value>
                 <Style>
                   <FontFamily>calibri</FontFamily>
                   <FontSize>9pt</FontSize>
@@ -1452,6 +1452,47 @@
   </Body>
   <Width>7.1in</Width>
   <Page>
+    <PageFooter>
+      <Height>1in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="txt_Date_of_Use7">
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>="Generated from the RBIS: " &amp; Format(Now(), "M/d/yy h:mm tt") &amp; " by " &amp; Fields!fld_Username.Value</Value>
+                  <Style>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>9pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <Top>0.14111cm</Top>
+          <Left>2.32437cm</Left>
+          <Height>0.4cm</Height>
+          <Width>15.01264cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+              <Width>0.25pt</Width>
+            </Border>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>
     <LeftMargin>0.25in</LeftMargin>
@@ -1703,6 +1744,14 @@
         <Field Name="fld_End_Date_Eq">
           <DataField>fld_End_Date_Eq</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="fld_Cancellation_Reason">
+          <DataField>fld_Cancellation_Reason</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fld_Username">
+          <DataField>fld_Username</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

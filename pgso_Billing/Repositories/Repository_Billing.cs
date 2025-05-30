@@ -91,19 +91,20 @@ namespace pgso.Billing.Repositories
                                     re.fld_Quantity_Returned,
                                     re.fld_Quantity_Damaged,
                                     p.fld_Amount_Paid_Overtime,
-                                    r.fld_OT_Payment_Status
+                                    r.fld_OT_Payment_Status,
+                                    u.fld_Username
 
-
-                                FROM dbo.tbl_Reservation r
-                                LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-                                LEFT JOIN dbo.tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
-                                LEFT JOIN dbo.tbl_Venue_Pricing vp ON r.fk_Venue_PricingID = vp.pk_Venue_PricingID
-                                LEFT JOIN dbo.tbl_Venue_Scope vs ON r.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
-                                LEFT JOIN dbo.tbl_Reservation_Equipment re ON r.pk_ReservationID = re.fk_ReservationID
-                                LEFT JOIN dbo.tbl_Equipment e ON re.fk_EquipmentID = e.pk_EquipmentID
-                                LEFT JOIN dbo.tbl_Equipment_Pricing ep ON re.fk_Equipment_PricingID = ep.pk_Equipment_PricingID
-                                LEFT JOIN dbo.tbl_Payment p ON r.pk_ReservationID = p.fk_ReservationID
-                                ORDER BY  r.pk_ReservationID DESC";
+                                    FROM dbo.tbl_Reservation r
+                                    LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                                    LEFT JOIN dbo.tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
+                                    LEFT JOIN dbo.tbl_Venue_Pricing vp ON r.fk_Venue_PricingID = vp.pk_Venue_PricingID
+                                    LEFT JOIN dbo.tbl_Venue_Scope vs ON r.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
+                                    LEFT JOIN dbo.tbl_Reservation_Equipment re ON r.pk_ReservationID = re.fk_ReservationID
+                                    LEFT JOIN dbo.tbl_Equipment e ON re.fk_EquipmentID = e.pk_EquipmentID
+                                    LEFT JOIN dbo.tbl_Equipment_Pricing ep ON re.fk_Equipment_PricingID = ep.pk_Equipment_PricingID
+                                    LEFT JOIN dbo.tbl_Payment p ON r.pk_ReservationID = p.fk_ReservationID
+                                    LEFT JOIN dbo.tbl_User u ON r.fk_UserID = u.pk_UserID
+                                    ORDER BY r.pk_ReservationID DESC";
 
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -113,8 +114,6 @@ namespace pgso.Billing.Repositories
                         {
                             int reservationId = reader.GetInt32(0);
                             string controlNumber = reader.GetString(1);
-
-                            Console.WriteLine($"📝 Fetched Reservation: {reservationId}, {controlNumber}");
 
                             Model_Billing billing = new Model_Billing
                             {
@@ -180,7 +179,8 @@ namespace pgso.Billing.Repositories
                                 fld_Quantity_Returned = reader.IsDBNull(48) ? 0 : reader.GetInt32(48),
                                 fld_Quantity_Damaged = reader.IsDBNull(49) ? 0 : reader.GetInt32(49),
                                 fld_Amount_Paid_Overtime = reader.IsDBNull(50) ? 0 : reader.GetDecimal(50),
-                                fld_OT_Payment_Status = reader.IsDBNull(51) ? "" : reader.GetString(51)
+                                fld_OT_Payment_Status = reader.IsDBNull(51) ? "" : reader.GetString(51),
+                                fld_Username = reader.IsDBNull(52) ? "" : reader.GetString(52) 
 
                             };
 
@@ -269,7 +269,9 @@ namespace pgso.Billing.Repositories
                         re.fld_End_Date_Eq,
                         p.fld_Amount_Paid_Overtime,
                         r.fld_OT_Payment_Status,
-                        fld_Cancellation_Reason 
+                        r.fld_Cancellation_Reason,
+                        u.fld_Username,
+                        vp.fld_Additional_Charge
                         
 
                     FROM dbo.tbl_Reservation r
@@ -281,6 +283,7 @@ namespace pgso.Billing.Repositories
                     LEFT JOIN dbo.tbl_Equipment e ON re.fk_EquipmentID = e.pk_EquipmentID
                     LEFT JOIN dbo.tbl_Equipment_Pricing ep ON re.fk_Equipment_PricingID = ep.pk_Equipment_PricingID
                     LEFT JOIN dbo.tbl_Payment p ON r.pk_ReservationID = p.fk_ReservationID
+                    LEFT JOIN dbo.tbl_User u ON r.fk_UserID = u.pk_UserID
                     WHERE r.pk_ReservationID = @reservationId";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -346,7 +349,10 @@ namespace pgso.Billing.Repositories
                                     fld_End_Date_Eq = reader.IsDBNull(44) ? DateTime.MinValue : reader.GetDateTime(44),
                                     fld_Amount_Paid_Overtime = reader.IsDBNull(45) ? 0 : reader.GetDecimal(45),
                                     fld_OT_Payment_Status = reader.IsDBNull(46) ? "" : reader.GetString(46),
-                                    fld_Cancellation_Reason = reader.IsDBNull(47) ? "" : reader.GetString(47)
+                                    fld_Cancellation_Reason = reader.IsDBNull(47) ? "" : reader.GetString(47),
+                                    fld_Username = reader.IsDBNull(48) ? "testAdminPGSO" : reader.GetString(48),
+                                    fld_Additional_Charge = reader.IsDBNull(49) ? 0 : reader.GetDecimal(49)
+
                                 };
 
                                 billingRecords.Add(billing);

@@ -54,11 +54,18 @@
                 </Style>
               </TextRun>
               <TextRun>
-                <Value>
-078(332)3000 ( Local 317)</Value>
+                <Value xml:space="preserve">
+</Value>
                 <Style>
                   <FontFamily>Verdana</FontFamily>
                   <FontSize>9pt</FontSize>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>Contact No.: 078(332)3000 ( Local 317)</Value>
+                <Style>
+                  <FontFamily>Verdana</FontFamily>
+                  <FontSize>7pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -80,9 +87,9 @@
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>0.82021cm</Top>
-        <Left>4.7625cm</Left>
-        <Height>2.40423cm</Height>
+        <Top>0.5cm</Top>
+        <Left>4.91403cm</Left>
+        <Height>2.22783cm</Height>
         <Width>10.14955cm</Width>
         <Style>
           <Border>
@@ -94,8 +101,8 @@
         <Source>Embedded</Source>
         <Value>Logo_Collection_Slip_1</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>0.82021cm</Top>
-        <Left>14.91205cm</Left>
+        <Top>0.5cm</Top>
+        <Left>15.06358cm</Left>
         <Height>1.64042cm</Height>
         <Width>1.905cm</Width>
         <ZIndex>1</ZIndex>
@@ -109,8 +116,8 @@
         <Source>Embedded</Source>
         <Value>logo_Vizcaya</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>0.82021cm</Top>
-        <Left>3.01625cm</Left>
+        <Top>0.5cm</Top>
+        <Left>3.16778cm</Left>
         <Height>1.64042cm</Height>
         <Width>1.71097cm</Width>
         <ZIndex>2</ZIndex>
@@ -120,38 +127,11 @@
           </Border>
         </Style>
       </Image>
-      <Textbox Name="txt_Date_rdlc">
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>DATE:</Value>
-                <Style>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <Top>4.44183cm</Top>
-        <Left>2.29792cm</Left>
-        <Height>0.4cm</Height>
-        <Width>0.9125cm</Width>
-        <ZIndex>3</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Textbox>
       <Tablix Name="Tablix5">
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>4.22662cm</Width>
+              <Width>6.78623cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -160,13 +140,13 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="fld_Created_At_rdlc3">
+                    <Textbox Name="fld_Created_At_rdlc4">
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Formatted_Created_At.Value</Value>
+                              <Value>="DATE: " &amp; Format(Fields!fld_Created_At.Value, "MMMM d, yyyy")</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
@@ -208,51 +188,23 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>4.44183cm</Top>
-        <Left>3.21042cm</Left>
+        <Top>3.59245cm</Top>
+        <Left>2.47591cm</Left>
         <Height>0.4cm</Height>
-        <Width>4.22662cm</Width>
-        <ZIndex>4</ZIndex>
+        <Width>6.78623cm</Width>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
+          <FontSize>8pt</FontSize>
         </Style>
       </Tablix>
-      <Textbox Name="txt_Control_No_rdlc">
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Control No.</Value>
-                <Style>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <Top>4.44183cm</Top>
-        <Left>13.159cm</Left>
-        <Height>0.4cm</Height>
-        <Width>1.70625cm</Width>
-        <ZIndex>5</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Textbox>
       <Tablix Name="fld_Control_Number_rdlc">
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.47177cm</Width>
+              <Width>6.49344cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -268,7 +220,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=First(Fields!fld_Control_Number.Value)</Value>
+                              <Value>="Control Number: " &amp; Fields!fld_Control_Number.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>9pt</FontSize>
@@ -310,15 +262,16 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>4.44183cm</Top>
-        <Left>14.86525cm</Left>
+        <Top>3.59245cm</Top>
+        <Left>10.99512cm</Left>
         <Height>0.4cm</Height>
-        <Width>2.47177cm</Width>
-        <ZIndex>6</ZIndex>
+        <Width>6.49344cm</Width>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
+          <FontSize>8pt</FontSize>
         </Style>
       </Tablix>
       <Textbox Name="Rhoda">
@@ -331,7 +284,7 @@
 </Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -340,7 +293,7 @@
 This Province</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                 </Style>
               </TextRun>
@@ -350,11 +303,11 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>5.555cm</Top>
-        <Left>2.29792cm</Left>
+        <Top>4.38812cm</Top>
+        <Left>2.47591cm</Left>
         <Height>1.18209cm</Height>
-        <Width>15.0391cm</Width>
-        <ZIndex>7</ZIndex>
+        <Width>3.58465cm</Width>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -367,10 +320,10 @@ This Province</Value>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>EXTENSION RATES</Value>
+                <Value>Extension Charge/s</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -378,11 +331,11 @@ This Province</Value>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>9.73139cm</Top>
-        <Left>2.29792cm</Left>
+        <Top>8.65854cm</Top>
+        <Left>2.47592cm</Left>
         <Height>0.4cm</Height>
-        <Width>2.87042cm</Width>
-        <ZIndex>8</ZIndex>
+        <Width>3.85818cm</Width>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -394,10 +347,7 @@ This Province</Value>
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.33583cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>3.82391cm</Width>
+              <Width>2.45142cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -406,49 +356,17 @@ This Province</Value>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox59">
+                    <Textbox Name="fld_Requesting_Person_Address11">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>TOTAL : </Value>
+                              <Value>=(Fields!fld_Hourly_Rate.Value) * (Fields!fld_OT_Hours.Value)</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox59</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <VerticalAlign>Middle</VerticalAlign>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="fld_Requesting_Person_Address10">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!fld_OT_Hours.Value * Fields!fld_Hourly_Rate.Value</Value>
-                              <Style>
-                                <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                                 <Format>'₱'#,0.00</Format>
                               </Style>
                             </TextRun>
@@ -460,8 +378,7 @@ This Province</Value>
                       </Paragraphs>
                       <Style>
                         <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>5pt</PaddingRight>
@@ -479,7 +396,6 @@ This Province</Value>
         <TablixColumnHierarchy>
           <TablixMembers>
             <TablixMember />
-            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -494,11 +410,11 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>11.22882cm</Top>
-        <Left>11.20375cm</Left>
+        <Top>10.20347cm</Top>
+        <Left>15.09005cm</Left>
         <Height>0.5cm</Height>
-        <Width>6.15974cm</Width>
-        <ZIndex>9</ZIndex>
+        <Width>2.45142cm</Width>
+        <ZIndex>7</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -510,16 +426,16 @@ This Province</Value>
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>5.54152cm</Width>
+              <Width>6.77234cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.54cm</Width>
+              <Width>2.57644cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.33583cm</Width>
+              <Width>2.494cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.82391cm</Width>
+              <Width>2.42495cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -535,10 +451,10 @@ This Province</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Venue</Value>
+                              <Value>Description</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -563,17 +479,17 @@ This Province</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox2">
+                    <Textbox Name="Textbox3">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Hours Extended</Value>
+                              <Value>Extension Hour/s</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -582,7 +498,7 @@ This Province</Value>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox2</rd:DefaultName>
+                      <rd:DefaultName>Textbox3</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -598,17 +514,17 @@ This Province</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox4">
+                    <Textbox Name="Textbox7">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Rate per Hour</Value>
+                              <Value>Hourly Charge</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -617,7 +533,7 @@ This Province</Value>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox4</rd:DefaultName>
+                      <rd:DefaultName>Textbox7</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -643,7 +559,7 @@ This Province</Value>
                               <Value>Cost</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -680,10 +596,21 @@ This Province</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fld_Venue_Name.Value</Value>
+                              <Value>=Fields!fld_Venue_Name.Value &amp; " / " &amp; 
+Switch(
+  Fields!fld_Venue_Scope_Name.Value = "AH_Whole_Building", "Entire Venue",
+  Fields!fld_Venue_Scope_Name.Value = "CS_Lobby", "Lobby Only",
+  Fields!fld_Venue_Scope_Name.Value = "CS_Main_Hall_And_Mezzanine", "Main Hall and Mezzanine",
+  Fields!fld_Venue_Scope_Name.Value = "CS_Whole_Building", "Entire Venue",
+  Fields!fld_Venue_Scope_Name.Value = "ENTIRE VENUE", "Entire Venue",
+  Fields!fld_Venue_Scope_Name.Value = "PS_Room_A", "Room A",
+  Fields!fld_Venue_Scope_Name.Value = "PS_Room_ABC", "Room A, B and C",
+  Fields!fld_Venue_Scope_Name.Value = "PS_Room_BC", "Room B and C",
+  True, Fields!fld_Venue_Scope_Name.Value 
+)</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -706,7 +633,8 @@ This Province</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="fld_Hourly_Rate">
+                    <Textbox Name="fld_OT_Hours">
+                      <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
@@ -715,45 +643,7 @@ This Province</Value>
                               <Value>=Fields!fld_OT_Hours.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
-                                <Format>0;(0)</Format>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>fld_Hourly_Rate</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="fld_OT_Hours">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!fld_Hourly_Rate.Value</Value>
-                              <Style>
-                                <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
-                                <Format>'₱'#,0.00;('₱'#,0.00)</Format>
+                                <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -768,7 +658,40 @@ This Province</Value>
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="fld_Hourly_Rate">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!fld_Hourly_Rate.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <Format>'₱'#,0.00;('₱'#,0.00)</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>fld_Hourly_Rate</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -787,10 +710,10 @@ This Province</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fld_OT_Hours.Value * Fields!fld_Hourly_Rate.Value</Value>
+                              <Value>=(Fields!fld_Hourly_Rate.Value) * (Fields!fld_OT_Hours.Value)</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                                 <Format>'₱'#,0.00</Format>
                                 <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                               </Style>
@@ -812,6 +735,7 @@ This Province</Value>
                         <PaddingRight>5pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -839,11 +763,11 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>10.22882cm</Top>
-        <Left>3.12223cm</Left>
+        <Top>9.15597cm</Top>
+        <Left>3.27376cm</Left>
         <Height>1cm</Height>
-        <Width>14.24126cm</Width>
-        <ZIndex>10</ZIndex>
+        <Width>14.26773cm</Width>
+        <ZIndex>8</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) OR Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
         </Visibility>
@@ -864,7 +788,7 @@ This Province</Value>
                 <Value>Recommending Approval:</Value>
                 <Style>
                   <FontFamily>calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -872,11 +796,11 @@ This Province</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>12.21433cm</Top>
-        <Left>2.35084cm</Left>
+        <Top>11.14148cm</Top>
+        <Left>2.50237cm</Left>
         <Height>0.635cm</Height>
         <Width>3.92875cm</Width>
-        <ZIndex>11</ZIndex>
+        <ZIndex>9</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -899,7 +823,7 @@ This Province</Value>
 </Value>
                 <Style>
                   <FontFamily>calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -907,7 +831,7 @@ This Province</Value>
                 <Value>Acting Chief SOD / AO-I</Value>
                 <Style>
                   <FontFamily>calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                 </Style>
               </TextRun>
@@ -918,11 +842,11 @@ This Province</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>13.32875cm</Top>
-        <Left>4.00403cm</Left>
+        <Top>11.9384cm</Top>
+        <Left>4.15556cm</Left>
         <Height>0.89958cm</Height>
         <Width>4.7625cm</Width>
-        <ZIndex>12</ZIndex>
+        <ZIndex>10</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -944,7 +868,7 @@ This Province</Value>
                 <Value>Approved:</Value>
                 <Style>
                   <FontFamily>calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -952,11 +876,11 @@ This Province</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>12.21433cm</Top>
-        <Left>11.78039cm</Left>
+        <Top>11.14148cm</Top>
+        <Left>11.93192cm</Left>
         <Height>0.635cm</Height>
         <Width>1.75917cm</Width>
-        <ZIndex>13</ZIndex>
+        <ZIndex>11</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -978,7 +902,7 @@ This Province</Value>
                 <Value>KATHYLEEN D. MARCELO</Value>
                 <Style>
                   <FontFamily>calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -993,7 +917,7 @@ This Province</Value>
                 <Value>PGS OFFICER</Value>
                 <Style>
                   <FontFamily>calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                 </Style>
               </TextRun>
@@ -1004,11 +928,11 @@ This Province</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>13.32875cm</Top>
-        <Left>13.6952cm</Left>
+        <Top>11.9384cm</Top>
+        <Left>13.84673cm</Left>
         <Height>0.89958cm</Height>
         <Width>3.66828cm</Width>
-        <ZIndex>14</ZIndex>
+        <ZIndex>12</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1021,11 +945,11 @@ This Province</Value>
         </Style>
       </Textbox>
       <Line Name="Line2">
-        <Top>1.26946in</Top>
-        <Left>0.9047in</Left>
+        <Top>1.11561in</Top>
+        <Left>0.97477in</Left>
         <Height>0in</Height>
         <Width>5.92091in</Width>
-        <ZIndex>15</ZIndex>
+        <ZIndex>13</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1050,11 +974,11 @@ This Province</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.39446in</Top>
-        <Left>2.93422in</Left>
+        <Top>1.15728in</Top>
+        <Left>3.24388in</Left>
         <Height>0.25in</Height>
-        <Width>2.3859in</Width>
-        <ZIndex>16</ZIndex>
+        <Width>2.14632in</Width>
+        <ZIndex>14</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1074,7 +998,7 @@ This Province</Value>
                 <Value EvaluationMode="Constant">Name of Requesting Party</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1083,11 +1007,11 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>7.47792cm</Top>
-        <Left>2.29792cm</Left>
+        <Top>6.30576cm</Top>
+        <Left>2.47591cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
-        <ZIndex>17</ZIndex>
+        <ZIndex>15</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1118,7 +1042,7 @@ This Province</Value>
                               <Value>=UCase(Fields!fld_Full_Name.Value)</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -1158,11 +1082,11 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>7.47792cm</Top>
-        <Left>6.3325cm</Left>
+        <Top>6.30576cm</Top>
+        <Left>6.51049cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
-        <ZIndex>18</ZIndex>
+        <ZIndex>16</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1179,7 +1103,7 @@ This Province</Value>
                 <Value EvaluationMode="Constant">Address</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1188,11 +1112,11 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>7.87792cm</Top>
-        <Left>2.29792cm</Left>
+        <Top>6.70576cm</Top>
+        <Left>2.47591cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
-        <ZIndex>19</ZIndex>
+        <ZIndex>17</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1223,7 +1147,7 @@ This Province</Value>
                               <Value>=Fields!fld_Requesting_Person_Address.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -1263,11 +1187,11 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>7.87792cm</Top>
-        <Left>6.3325cm</Left>
+        <Top>6.70576cm</Top>
+        <Left>6.51049cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
-        <ZIndex>20</ZIndex>
+        <ZIndex>18</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1284,7 +1208,7 @@ This Province</Value>
                 <Value EvaluationMode="Constant">Date of Use</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1293,11 +1217,11 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>9.07792cm</Top>
-        <Left>2.29792cm</Left>
+        <Top>7.90576cm</Top>
+        <Left>2.47592cm</Left>
         <Height>0.4cm</Height>
-        <Width>3.85819cm</Width>
-        <ZIndex>21</ZIndex>
+        <Width>3.85818cm</Width>
+        <ZIndex>19</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) OR Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
         </Visibility>
@@ -1312,7 +1236,7 @@ This Province</Value>
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>11.00452cm</Width>
+              <Width>11.03098cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1328,10 +1252,14 @@ This Province</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Formatted_Start_Date.Value</Value>
+                              <Value>=IIf(
+    Fields!Formatted_Start_Date.Value = Fields!Formatted_End_Date.Value,
+    Fields!Formatted_Start_Date.Value,
+    Fields!Formatted_Start_Date.Value &amp; " - " &amp; Fields!Formatted_End_Date.Value
+)</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -1374,11 +1302,11 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>9.07792cm</Top>
-        <Left>6.3325cm</Left>
+        <Top>7.90576cm</Top>
+        <Left>6.5105cm</Left>
         <Height>0.4cm</Height>
-        <Width>11.00452cm</Width>
-        <ZIndex>22</ZIndex>
+        <Width>11.03098cm</Width>
+        <ZIndex>20</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1395,7 +1323,7 @@ This Province</Value>
                 <Value EvaluationMode="Constant">Name of Activity / Event</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1404,11 +1332,11 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>8.67792cm</Top>
-        <Left>2.29792cm</Left>
+        <Top>7.50576cm</Top>
+        <Left>2.47591cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
-        <ZIndex>23</ZIndex>
+        <ZIndex>21</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1420,7 +1348,7 @@ This Province</Value>
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>11.00452cm</Width>
+              <Width>11.03098cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1439,7 +1367,7 @@ This Province</Value>
                               <Value>=Fields!fld_Activity_Name.Value</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -1479,11 +1407,11 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>8.67792cm</Top>
-        <Left>6.3325cm</Left>
+        <Top>7.50576cm</Top>
+        <Left>6.51049cm</Left>
         <Height>0.4cm</Height>
-        <Width>11.00452cm</Width>
-        <ZIndex>24</ZIndex>
+        <Width>11.03098cm</Width>
+        <ZIndex>22</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1500,7 +1428,7 @@ This Province</Value>
                 <Value>Contact Number</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1509,11 +1437,11 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>8.27792cm</Top>
-        <Left>2.29792cm</Left>
+        <Top>7.10576cm</Top>
+        <Left>2.47591cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
-        <ZIndex>25</ZIndex>
+        <ZIndex>23</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1531,7 +1459,7 @@ This Province</Value>
                 <Value>=Fields!fld_Contact_Number.Value</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -1541,11 +1469,11 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>8.27792cm</Top>
-        <Left>6.3325cm</Left>
+        <Top>7.10576cm</Top>
+        <Left>6.51049cm</Left>
         <Height>0.4cm</Height>
-        <Width>10.97806cm</Width>
-        <ZIndex>26</ZIndex>
+        <Width>10.97538cm</Width>
+        <ZIndex>24</ZIndex>
         <Style>
           <Border>
             <Color>LightGrey</Color>
@@ -1553,8 +1481,1851 @@ This Province</Value>
           </Border>
         </Style>
       </Textbox>
+      <Tablix Name="Tablix17">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>2.45142cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.5cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="fld_Requesting_Person_Address12">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value EvaluationMode="Constant">TOTAL:</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <Format>'₱'#,0.00</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>5pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Group_fld_Total_Amount2">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!fld_Total_Amount.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>BillingDataset</DataSetName>
+        <Top>10.20347cm</Top>
+        <Left>12.63863cm</Left>
+        <Height>0.5cm</Height>
+        <Width>2.45142cm</Width>
+        <ZIndex>25</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Tablix>
+      <Textbox Name="Textbox65">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>        Below is the extension charge/s of the requesting party.</Value>
+                <Style>
+                  <FontFamily>calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox60</rd:DefaultName>
+        <Top>5.73481cm</Top>
+        <Left>2.47591cm</Left>
+        <Height>0.39457cm</Height>
+        <Width>15.01265cm</Width>
+        <ZIndex>26</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="fld_Created_At_rdlc5">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>="PGSO("&amp; Fields!fld_Username.Value &amp;")"&amp; Format(Now(), "M/d/yy h:mm tt")</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <Format>MMM d, yyyy</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>6.11645in</Top>
+        <Left>2.50236cm</Left>
+        <Height>0.4cm</Height>
+        <Width>10.90259cm</Width>
+        <ZIndex>27</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="txt_Date_of_Use8">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>GO - PITD</Value>
+                <Style>
+                  <FontStyle>Italic</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>6.11645in</Top>
+        <Left>13.84672cm</Left>
+        <Height>0.4cm</Height>
+        <Width>3.69474cm</Width>
+        <ZIndex>28</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Report_Header_Title2">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Republic of the Philippines</Value>
+                <Style>
+                  <FontFamily>Verdana</FontFamily>
+                  <FontSize>9pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>PROVINCE OF NUEVA VIZCAYA</Value>
+                <Style>
+                  <FontFamily>Verdana</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Municipality of Bayombong
+~o0o~
+</Value>
+                <Style>
+                  <FontFamily>Verdana</FontFamily>
+                  <FontSize>9pt</FontSize>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>PROVINCIAL GENERAL SERVICES OFFICE</Value>
+                <Style>
+                  <FontFamily>Verdana</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value xml:space="preserve">
+</Value>
+                <Style>
+                  <FontFamily>Verdana</FontFamily>
+                  <FontSize>9pt</FontSize>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>Contact No.: 078(332)3000 ( Local 317)</Value>
+                <Style>
+                  <FontFamily>Verdana</FontFamily>
+                  <FontSize>7pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style>
+                  <FontFamily>Verdana</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>6.57183in</Top>
+        <Left>4.91135cm</Left>
+        <Height>2.22783cm</Height>
+        <Width>10.14955cm</Width>
+        <ZIndex>29</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Image Name="Logo_Collection_Slip_3">
+        <Source>Embedded</Source>
+        <Value>Logo_Collection_Slip_1</Value>
+        <Sizing>FitProportional</Sizing>
+        <Top>6.57183in</Top>
+        <Left>15.0609cm</Left>
+        <Height>1.64042cm</Height>
+        <Width>1.905cm</Width>
+        <ZIndex>30</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
+      <Image Name="Logo_Collection_Slip_4">
+        <Source>Embedded</Source>
+        <Value>logo_Vizcaya</Value>
+        <Sizing>FitProportional</Sizing>
+        <Top>6.57183in</Top>
+        <Left>3.1651cm</Left>
+        <Height>1.64042cm</Height>
+        <Width>1.71097cm</Width>
+        <ZIndex>31</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
+      <Tablix Name="Tablix9">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>6.78623cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.4cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="fld_Created_At_rdlc6">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>="DATE: " &amp; Format(Fields!fld_Created_At.Value, "MMMM d, yyyy")</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>9pt</FontSize>
+                                <Format>MMM d, yyyy</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Date_Group2">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!Formatted_Created_At.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>BillingDataset</DataSetName>
+        <Top>19.77831cm</Top>
+        <Left>2.47322cm</Left>
+        <Height>0.4cm</Height>
+        <Width>6.78623cm</Width>
+        <ZIndex>32</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <FontSize>8pt</FontSize>
+        </Style>
+      </Tablix>
+      <Tablix Name="fld_Control_Number_rdlc2">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>6.49344cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.4cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="fld_Created_At_rdlc3">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>="Control Number: " &amp; Fields!fld_Control_Number.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>9pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="GROUP2">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!fld_Control_Number.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>BillingDataset</DataSetName>
+        <Top>19.77831cm</Top>
+        <Left>10.99243cm</Left>
+        <Height>0.4cm</Height>
+        <Width>6.49344cm</Width>
+        <ZIndex>33</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <FontSize>8pt</FontSize>
+        </Style>
+      </Tablix>
+      <Textbox Name="Rhoda2">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>RHODA S. MORENO
+</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>Provincial Treasurer
+This Province</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>20.57398cm</Top>
+        <Left>2.47322cm</Left>
+        <Height>1.18209cm</Height>
+        <Width>3.58465cm</Width>
+        <ZIndex>34</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox68">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Recommending Approval:</Value>
+                <Style>
+                  <FontFamily>calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox60</rd:DefaultName>
+        <Top>27.32734cm</Top>
+        <Left>2.49968cm</Left>
+        <Height>0.635cm</Height>
+        <Width>3.92875cm</Width>
+        <ZIndex>35</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox69">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>LOTHA CYNTHIA V. BURTON
+</Value>
+                <Style>
+                  <FontFamily>calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>Acting Chief SOD / AO-I</Value>
+                <Style>
+                  <FontFamily>calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox60</rd:DefaultName>
+        <Top>28.12426cm</Top>
+        <Left>4.15287cm</Left>
+        <Height>0.89958cm</Height>
+        <Width>4.7625cm</Width>
+        <ZIndex>36</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox70">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Approved:</Value>
+                <Style>
+                  <FontFamily>calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox60</rd:DefaultName>
+        <Top>27.32734cm</Top>
+        <Left>11.92923cm</Left>
+        <Height>0.635cm</Height>
+        <Width>1.75917cm</Width>
+        <ZIndex>37</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox71">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>KATHYLEEN D. MARCELO</Value>
+                <Style>
+                  <FontFamily>calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>PGS OFFICER</Value>
+                <Style>
+                  <FontFamily>calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox60</rd:DefaultName>
+        <Top>28.12426cm</Top>
+        <Left>13.84404cm</Left>
+        <Height>0.89958cm</Height>
+        <Width>3.66828cm</Width>
+        <ZIndex>38</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Line Name="Line3">
+        <Top>7.488in</Top>
+        <Left>0.97371in</Left>
+        <Height>0in</Height>
+        <Width>5.92091in</Width>
+        <ZIndex>39</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+            <Width>2pt</Width>
+          </Border>
+        </Style>
+      </Line>
+      <Textbox Name="Textbox6">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>EXTENSION SLIP</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>7.52966in</Top>
+        <Left>3.24282in</Left>
+        <Height>0.25in</Height>
+        <Width>2.26089in</Width>
+        <ZIndex>40</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="txt_Name_Of_Requesting_Party2">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value EvaluationMode="Constant">Name of Requesting Party</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>22.49162cm</Top>
+        <Left>2.47322cm</Left>
+        <Height>0.4cm</Height>
+        <Width>3.85819cm</Width>
+        <ZIndex>41</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Textbox>
+      <Tablix Name="Tablix10">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>11.00452cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.4cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="fld_Full_Name2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=UCase(Fields!fld_Full_Name.Value)</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Group_fld_Full_Name2">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!fld_Full_Name.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>BillingDataset</DataSetName>
+        <Top>22.49162cm</Top>
+        <Left>6.5078cm</Left>
+        <Height>0.4cm</Height>
+        <Width>11.00452cm</Width>
+        <ZIndex>42</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Tablix>
+      <Textbox Name="txt_Address2">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value EvaluationMode="Constant">Address</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>22.89162cm</Top>
+        <Left>2.47322cm</Left>
+        <Height>0.4cm</Height>
+        <Width>3.85819cm</Width>
+        <ZIndex>43</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Textbox>
+      <Tablix Name="Tablix12">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>11.00452cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.4cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="fld_Requesting_Person_Address3">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!fld_Requesting_Person_Address.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Group_fld_Requesting_Person_Address2">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!fld_Requesting_Person_Address.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>BillingDataset</DataSetName>
+        <Top>22.89162cm</Top>
+        <Left>6.5078cm</Left>
+        <Height>0.4cm</Height>
+        <Width>11.00452cm</Width>
+        <ZIndex>44</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Tablix>
+      <Textbox Name="txt_Date_of_Use2">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value EvaluationMode="Constant">Date of Use</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>24.09162cm</Top>
+        <Left>2.47322cm</Left>
+        <Height>0.4cm</Height>
+        <Width>3.85819cm</Width>
+        <ZIndex>45</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Textbox>
+      <Tablix Name="Tablix13">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>11.03098cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.4cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="fld_Requesting_Person_Address4">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=IIf(Fields!Formatted_Start_Date.Value = Fields!Formatted_End_Date.Value, Fields!Formatted_Start_Date.Value, Fields!Formatted_Start_Date.Value &amp; " - " &amp; Fields!Formatted_End_Date.Value)</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Visibility>
+                        <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
+                      </Visibility>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Group_fld_Formatted_Start_Date2">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!Formatted_Start_Date.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>BillingDataset</DataSetName>
+        <Top>24.09162cm</Top>
+        <Left>6.5105cm</Left>
+        <Height>0.4cm</Height>
+        <Width>11.03098cm</Width>
+        <ZIndex>46</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Tablix>
+      <Textbox Name="txt_Date_of_Use9">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value EvaluationMode="Constant">Name of Activity / Event</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>23.69162cm</Top>
+        <Left>2.47322cm</Left>
+        <Height>0.4cm</Height>
+        <Width>3.85819cm</Width>
+        <ZIndex>47</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Textbox>
+      <Tablix Name="Tablix14">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>11.03098cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.4cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="fld_Requesting_Person_Address6">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!fld_Activity_Name.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Group_fld_Activity_Name2">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!fld_Activity_Name.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>BillingDataset</DataSetName>
+        <Top>23.69162cm</Top>
+        <Left>6.5078cm</Left>
+        <Height>0.4cm</Height>
+        <Width>11.03098cm</Width>
+        <ZIndex>48</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Tablix>
+      <Textbox Name="txt_Date_of_Use10">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Contact Number</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>23.29162cm</Top>
+        <Left>2.47322cm</Left>
+        <Height>0.4cm</Height>
+        <Width>3.85819cm</Width>
+        <ZIndex>49</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="fld_Requesting_Person_Address8">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Fields!fld_Contact_Number.Value</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>23.25634cm</Top>
+        <Left>6.5078cm</Left>
+        <Height>0.4cm</Height>
+        <Width>10.97807cm</Width>
+        <ZIndex>50</ZIndex>
+        <Style>
+          <Border>
+            <Color>LightGrey</Color>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox77">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>        Below is the extension charge/s of the requesting party.</Value>
+                <Style>
+                  <FontFamily>calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox60</rd:DefaultName>
+        <Top>21.92066cm</Top>
+        <Left>2.47322cm</Left>
+        <Height>0.39457cm</Height>
+        <Width>15.01265cm</Width>
+        <ZIndex>51</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="fld_Created_At_rdlc7">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>="PGSO(" &amp; First(Fields!fld_Username.Value, "BillingDataset") &amp; ") " &amp; Format(Now(), "M/d/yy h:mm tt")</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                  <Format>MMM d, yyyy</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>12.74145in</Top>
+        <Left>2.49968cm</Left>
+        <Height>0.4cm</Height>
+        <Width>10.90259cm</Width>
+        <ZIndex>52</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="txt_Date_of_Use11">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>GO - PITD</Value>
+                <Style>
+                  <FontStyle>Italic</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>9pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>12.74145in</Top>
+        <Left>13.84404cm</Left>
+        <Height>0.4cm</Height>
+        <Width>3.69474cm</Width>
+        <ZIndex>53</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Textbox>
+      <Line Name="Line4">
+        <Top>6.40393in</Top>
+        <Left>0.97477in</Left>
+        <Height>0in</Height>
+        <Width>5.92091in</Width>
+        <ZIndex>54</ZIndex>
+        <Style>
+          <Border>
+            <Style>Dotted</Style>
+          </Border>
+        </Style>
+      </Line>
+      <Line Name="Line5">
+        <Top>12.72756in</Top>
+        <Left>0.98519in</Left>
+        <Height>0in</Height>
+        <Width>5.92091in</Width>
+        <ZIndex>55</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+        </Style>
+      </Line>
+      <Line Name="Line6">
+        <Top>6.11645in</Top>
+        <Left>0.98519in</Left>
+        <Height>0in</Height>
+        <Width>5.92091in</Width>
+        <ZIndex>56</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+        </Style>
+      </Line>
+      <Textbox Name="txt_Date_of_Use7">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Extension Charge/s</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>24.88418cm</Top>
+        <Left>2.41895cm</Left>
+        <Height>0.4cm</Height>
+        <Width>3.85818cm</Width>
+        <ZIndex>57</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Textbox>
+      <Tablix Name="Tablix16">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>2.45142cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.5cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="fld_Requesting_Person_Address15">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=(Fields!fld_Hourly_Rate.Value) * (Fields!fld_OT_Hours.Value)</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <Format>'₱'#,0.00</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>5pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Group_fld_Total_Amount5">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!fld_Total_Amount.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>BillingDataset</DataSetName>
+        <Top>26.42911cm</Top>
+        <Left>15.03308cm</Left>
+        <Height>0.5cm</Height>
+        <Width>2.45142cm</Width>
+        <ZIndex>58</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Tablix>
+      <Tablix Name="Tablix20">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>6.77234cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.57644cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.494cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.42495cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.5cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox54">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Description</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox50</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox4">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Extension Hour/s</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox8">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Hourly Charge</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox7</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox55">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Cost</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox52</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>5pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.5cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox56">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!fld_Venue_Name.Value &amp; " / " &amp; Switch(Fields!fld_Venue_Scope_Name.Value = "AH_Whole_Building", "Entire Venue", Fields!fld_Venue_Scope_Name.Value = "CS_Lobby", "Lobby Only", Fields!fld_Venue_Scope_Name.Value = "CS_Main_Hall_And_Mezzanine", "Main Hall and Mezzanine", Fields!fld_Venue_Scope_Name.Value = "CS_Whole_Building", "Entire Venue", Fields!fld_Venue_Scope_Name.Value = "ENTIRE VENUE", "Entire Venue", Fields!fld_Venue_Scope_Name.Value = "PS_Room_A", "Room A", Fields!fld_Venue_Scope_Name.Value = "PS_Room_ABC", "Room A, B and C", Fields!fld_Venue_Scope_Name.Value = "PS_Room_BC", "Room B and C", True, Fields!fld_Venue_Scope_Name.Value)</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox51</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="fld_OT_Hours2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!fld_OT_Hours.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>fld_OT_Hours</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="fld_Hourly_Rate2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!fld_Hourly_Rate.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <Format>'₱'#,0.00;('₱'#,0.00)</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>fld_Hourly_Rate</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox57">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=(Fields!fld_Hourly_Rate.Value) * (Fields!fld_OT_Hours.Value)</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <Format>'₱'#,0.00</Format>
+                                <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox53</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>5pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <KeepWithGroup>After</KeepWithGroup>
+            </TablixMember>
+            <TablixMember>
+              <Group Name="Details2" />
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>BillingDataset</DataSetName>
+        <Top>25.38161cm</Top>
+        <Left>3.21679cm</Left>
+        <Height>1cm</Height>
+        <Width>14.26773cm</Width>
+        <ZIndex>59</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Tablix>
+      <Tablix Name="Tablix18">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>2.45142cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.5cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="fld_Requesting_Person_Address16">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value EvaluationMode="Constant">TOTAL:</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <Format>'₱'#,0.00</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>5pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Group_fld_Total_Amount6">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!fld_Total_Amount.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>BillingDataset</DataSetName>
+        <Top>26.42911cm</Top>
+        <Left>12.58166cm</Left>
+        <Height>0.5cm</Height>
+        <Width>2.45142cm</Width>
+        <ZIndex>60</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Tablix>
     </ReportItems>
-    <Height>6in</Height>
+    <Height>13in</Height>
     <Style>
       <Border>
         <Style>None</Style>
@@ -1563,12 +3334,9 @@ This Province</Value>
   </Body>
   <Width>7.83601in</Width>
   <Page>
-    <PageHeight>11.69in</PageHeight>
-    <PageWidth>8.27in</PageWidth>
+    <PageHeight>13in</PageHeight>
     <LeftMargin>0.25in</LeftMargin>
     <RightMargin>0.25in</RightMargin>
-    <TopMargin>0.25in</TopMargin>
-    <BottomMargin>0.25in</BottomMargin>
     <ColumnSpacing>0.05118in</ColumnSpacing>
     <Style>
       <Border>
@@ -1814,6 +3582,14 @@ This Province</Value>
         <Field Name="fld_End_Date_Eq">
           <DataField>fld_End_Date_Eq</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="fld_Cancellation_Reason">
+          <DataField>fld_Cancellation_Reason</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="fld_Username">
+          <DataField>fld_Username</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
