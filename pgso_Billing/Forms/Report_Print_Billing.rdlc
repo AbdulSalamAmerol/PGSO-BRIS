@@ -303,8 +303,8 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>4.39083cm</Top>
-        <Left>2.4356cm</Left>
+        <Top>4.54375cm</Top>
+        <Left>2.46207cm</Left>
         <Height>1.18209cm</Height>
         <Width>3.58465cm</Width>
         <ZIndex>5</ZIndex>
@@ -320,7 +320,7 @@ This Province</Value>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>RENTAL RATES</Value>
+                <Value>RENTAL CHARGES</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>8pt</FontSize>
@@ -334,7 +334,7 @@ This Province</Value>
         <Top>8.34375cm</Top>
         <Left>2.43561cm</Left>
         <Height>0.4cm</Height>
-        <Width>2.1825cm</Width>
+        <Width>3.85549cm</Width>
         <ZIndex>6</ZIndex>
         <Style>
           <Border>
@@ -1810,7 +1810,7 @@ Switch(
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value EvaluationMode="Constant">Name of Activity / Event</Value>
+                <Value>Activity / Event</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>8pt</FontSize>
@@ -1925,7 +1925,7 @@ Switch(
               </TextRun>
               <TextRun>
                 <Value>
-  - Reservations must be made at least three (3) days before the scheduled activity to avoid overlapping schedules.
+  - Payment must be made at least three (3) days before the scheduled activity to avoid cancellation.
   - Strictly “No Pay, No Use”.
 </Value>
                 <Style>
@@ -2045,7 +2045,7 @@ Switch(
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Succeeding Hours After Four Hours</Value>
+                              <Value>Excess Hours</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -2412,37 +2412,6 @@ Switch(
           </Border>
         </Style>
       </Tablix>
-      <Textbox Name="Textbox65">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>        Below is the rental charge/s of the requesting party.</Value>
-                <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>8pt</FontSize>
-                  <FontWeight>Normal</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>5.73752cm</Top>
-        <Left>2.4356cm</Left>
-        <Height>0.39457cm</Height>
-        <Width>15.01265cm</Width>
-        <ZIndex>30</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-            <Width>0.25pt</Width>
-          </Border>
-        </Style>
-      </Textbox>
       <Textbox Name="fld_Created_At_rdlc5">
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
@@ -2466,7 +2435,7 @@ Switch(
         <Left>2.46205cm</Left>
         <Height>0.4cm</Height>
         <Width>10.90259cm</Width>
-        <ZIndex>31</ZIndex>
+        <ZIndex>30</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2496,7 +2465,7 @@ Switch(
         <Left>13.80641cm</Left>
         <Height>0.4cm</Height>
         <Width>3.69474cm</Width>
-        <ZIndex>32</ZIndex>
+        <ZIndex>31</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2593,7 +2562,7 @@ Switch(
         <Left>4.87104cm</Left>
         <Height>2.22783cm</Height>
         <Width>10.14955cm</Width>
-        <ZIndex>33</ZIndex>
+        <ZIndex>32</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2608,7 +2577,7 @@ Switch(
         <Left>15.02059cm</Left>
         <Height>1.64042cm</Height>
         <Width>1.905cm</Width>
-        <ZIndex>34</ZIndex>
+        <ZIndex>33</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2623,7 +2592,7 @@ Switch(
         <Left>3.12479cm</Left>
         <Height>1.64042cm</Height>
         <Width>1.71097cm</Width>
-        <ZIndex>35</ZIndex>
+        <ZIndex>34</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2695,7 +2664,7 @@ Switch(
         <Left>2.43291cm</Left>
         <Height>0.4cm</Height>
         <Width>6.78623cm</Width>
-        <ZIndex>36</ZIndex>
+        <ZIndex>35</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2769,7 +2738,7 @@ Switch(
         <Left>10.95212cm</Left>
         <Height>0.4cm</Height>
         <Width>6.49344cm</Width>
-        <ZIndex>37</ZIndex>
+        <ZIndex>36</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2806,11 +2775,11 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>20.89419cm</Top>
+        <Top>20.99419cm</Top>
         <Left>2.43291cm</Left>
         <Height>1.18209cm</Height>
         <Width>3.58465cm</Width>
-        <ZIndex>38</ZIndex>
+        <ZIndex>37</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2823,7 +2792,7 @@ This Province</Value>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>RENTAL RATES</Value>
+                <Value>RENTAL CHARGES</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>8pt</FontSize>
@@ -2837,8 +2806,8 @@ This Province</Value>
         <Top>24.84711cm</Top>
         <Left>2.43292cm</Left>
         <Height>0.4cm</Height>
-        <Width>2.1825cm</Width>
-        <ZIndex>39</ZIndex>
+        <Width>3.85818cm</Width>
+        <ZIndex>38</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3309,7 +3278,7 @@ This Province</Value>
         <Left>3.23076cm</Left>
         <Height>1cm</Height>
         <Width>14.24125cm</Width>
-        <ZIndex>40</ZIndex>
+        <ZIndex>39</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, True, False)</Hidden>
         </Visibility>
@@ -3394,7 +3363,7 @@ This Province</Value>
         <Left>15.04705cm</Left>
         <Height>0.5cm</Height>
         <Width>2.45142cm</Width>
-        <ZIndex>41</ZIndex>
+        <ZIndex>40</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3738,7 +3707,7 @@ This Province</Value>
         <Left>3.23076cm</Left>
         <Height>1cm</Height>
         <Width>14.24125cm</Width>
-        <ZIndex>42</ZIndex>
+        <ZIndex>41</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
         </Visibility>
@@ -3771,7 +3740,7 @@ This Province</Value>
         <Left>2.45937cm</Left>
         <Height>0.635cm</Height>
         <Width>3.92875cm</Width>
-        <ZIndex>43</ZIndex>
+        <ZIndex>42</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3817,7 +3786,7 @@ This Province</Value>
         <Left>4.11256cm</Left>
         <Height>0.89958cm</Height>
         <Width>4.7625cm</Width>
-        <ZIndex>44</ZIndex>
+        <ZIndex>43</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3851,7 +3820,7 @@ This Province</Value>
         <Left>11.88892cm</Left>
         <Height>0.635cm</Height>
         <Width>1.75917cm</Width>
-        <ZIndex>45</ZIndex>
+        <ZIndex>44</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3903,7 +3872,7 @@ This Province</Value>
         <Left>13.80373cm</Left>
         <Height>0.89958cm</Height>
         <Width>3.66828cm</Width>
-        <ZIndex>46</ZIndex>
+        <ZIndex>45</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3920,7 +3889,7 @@ This Province</Value>
         <Left>0.95784in</Left>
         <Height>0in</Height>
         <Width>5.92091in</Width>
-        <ZIndex>47</ZIndex>
+        <ZIndex>46</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -3960,7 +3929,7 @@ This Province</Value>
         <Left>2.97695in</Left>
         <Height>0.25in</Height>
         <Width>2.38589in</Width>
-        <ZIndex>48</ZIndex>
+        <ZIndex>47</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3993,7 +3962,7 @@ This Province</Value>
         <Left>2.43291cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
-        <ZIndex>49</ZIndex>
+        <ZIndex>48</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4068,7 +4037,7 @@ This Province</Value>
         <Left>6.46749cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
-        <ZIndex>50</ZIndex>
+        <ZIndex>49</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4098,7 +4067,7 @@ This Province</Value>
         <Left>2.43291cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
-        <ZIndex>51</ZIndex>
+        <ZIndex>50</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4173,7 +4142,7 @@ This Province</Value>
         <Left>6.46749cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
-        <ZIndex>52</ZIndex>
+        <ZIndex>51</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4203,7 +4172,7 @@ This Province</Value>
         <Left>2.43291cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
-        <ZIndex>53</ZIndex>
+        <ZIndex>52</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
         </Visibility>
@@ -4284,7 +4253,7 @@ This Province</Value>
         <Left>6.47019cm</Left>
         <Height>0.4cm</Height>
         <Width>11.03098cm</Width>
-        <ZIndex>54</ZIndex>
+        <ZIndex>53</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4298,7 +4267,7 @@ This Province</Value>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value EvaluationMode="Constant">Name of Activity / Event</Value>
+                <Value>Activity / Event</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>8pt</FontSize>
@@ -4314,7 +4283,7 @@ This Province</Value>
         <Left>2.43291cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
-        <ZIndex>55</ZIndex>
+        <ZIndex>54</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4389,7 +4358,7 @@ This Province</Value>
         <Left>6.46749cm</Left>
         <Height>0.4cm</Height>
         <Width>11.03098cm</Width>
-        <ZIndex>56</ZIndex>
+        <ZIndex>55</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4413,7 +4382,7 @@ This Province</Value>
               </TextRun>
               <TextRun>
                 <Value>
-  - Reservations must be made at least three (3) days before the scheduled activity to avoid overlapping schedules.
+  - Payment must be made at least three (3) days before the scheduled activity to avoid cancellation.
   - Strictly “No Pay, No Use”.
 </Value>
                 <Style>
@@ -4430,7 +4399,7 @@ This Province</Value>
         <Left>2.45937cm</Left>
         <Height>1.08732cm</Height>
         <Width>15.0391cm</Width>
-        <ZIndex>57</ZIndex>
+        <ZIndex>56</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4464,7 +4433,7 @@ This Province</Value>
         <Left>2.43291cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
-        <ZIndex>58</ZIndex>
+        <ZIndex>57</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4496,7 +4465,7 @@ This Province</Value>
         <Left>6.46749cm</Left>
         <Height>0.4cm</Height>
         <Width>10.97807cm</Width>
-        <ZIndex>59</ZIndex>
+        <ZIndex>58</ZIndex>
         <Style>
           <Border>
             <Color>LightGrey</Color>
@@ -4533,7 +4502,7 @@ This Province</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Succeeding Hours After Four Hours</Value>
+                              <Value>Excess Hours </Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -4691,7 +4660,7 @@ This Province</Value>
         <Left>3.23076cm</Left>
         <Height>0.5cm</Height>
         <Width>14.24124cm</Width>
-        <ZIndex>60</ZIndex>
+        <ZIndex>59</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
         </Visibility>
@@ -4810,7 +4779,7 @@ This Province</Value>
         <Left>3.23076cm</Left>
         <Height>0.5cm</Height>
         <Width>14.24124cm</Width>
-        <ZIndex>61</ZIndex>
+        <ZIndex>60</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
         </Visibility>
@@ -4892,7 +4861,7 @@ This Province</Value>
         <Left>12.59563cm</Left>
         <Height>0.5cm</Height>
         <Width>2.45142cm</Width>
-        <ZIndex>62</ZIndex>
+        <ZIndex>61</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4900,37 +4869,6 @@ This Province</Value>
           </Border>
         </Style>
       </Tablix>
-      <Textbox Name="Textbox77">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>        Below is the rental charge/s of the requesting party.</Value>
-                <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>8pt</FontSize>
-                  <FontWeight>Normal</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>22.24087cm</Top>
-        <Left>2.43291cm</Left>
-        <Height>0.39457cm</Height>
-        <Width>15.01265cm</Width>
-        <ZIndex>63</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-            <Width>0.25pt</Width>
-          </Border>
-        </Style>
-      </Textbox>
       <Textbox Name="fld_Created_At_rdlc7">
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
@@ -4954,7 +4892,7 @@ This Province</Value>
         <Left>2.45937cm</Left>
         <Height>0.4cm</Height>
         <Width>10.90259cm</Width>
-        <ZIndex>64</ZIndex>
+        <ZIndex>62</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4984,7 +4922,7 @@ This Province</Value>
         <Left>13.80373cm</Left>
         <Height>0.4cm</Height>
         <Width>3.69474cm</Width>
-        <ZIndex>65</ZIndex>
+        <ZIndex>63</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4997,7 +4935,7 @@ This Province</Value>
         <Left>0.9589in</Left>
         <Height>0in</Height>
         <Width>5.92091in</Width>
-        <ZIndex>66</ZIndex>
+        <ZIndex>64</ZIndex>
         <Style>
           <Border>
             <Style>Dotted</Style>
@@ -5009,7 +4947,7 @@ This Province</Value>
         <Left>0.96932in</Left>
         <Height>0in</Height>
         <Width>5.92091in</Width>
-        <ZIndex>67</ZIndex>
+        <ZIndex>65</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -5021,7 +4959,7 @@ This Province</Value>
         <Left>0.96932in</Left>
         <Height>0in</Height>
         <Width>5.92091in</Width>
-        <ZIndex>68</ZIndex>
+        <ZIndex>66</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>

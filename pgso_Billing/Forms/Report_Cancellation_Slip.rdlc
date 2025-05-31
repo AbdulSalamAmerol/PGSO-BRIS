@@ -303,7 +303,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>4.31145cm</Top>
+        <Top>4.41145cm</Top>
         <Left>2.40323cm</Left>
         <Height>1.18209cm</Height>
         <Width>3.58465cm</Width>
@@ -332,7 +332,7 @@ This Province</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>13.92231cm</Top>
+        <Top>14.55731cm</Top>
         <Left>2.42969cm</Left>
         <Height>0.635cm</Height>
         <Width>3.92875cm</Width>
@@ -412,7 +412,7 @@ This Province</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>13.92231cm</Top>
+        <Top>14.55731cm</Top>
         <Left>11.85924cm</Left>
         <Height>0.635cm</Height>
         <Width>1.75917cm</Width>
@@ -856,7 +856,7 @@ This Province</Value>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value EvaluationMode="Constant">Name of Activity / Event</Value>
+                <Value>Activity / Event</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>8pt</FontSize>
@@ -1017,37 +1017,6 @@ This Province</Value>
           </Border>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox65">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>        Below is the amount subject to refund for the requesting party.</Value>
-                <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>8pt</FontSize>
-                  <FontWeight>Normal</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>5.65814cm</Top>
-        <Left>2.40323cm</Left>
-        <Height>0.39457cm</Height>
-        <Width>15.01265cm</Width>
-        <ZIndex>22</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-            <Width>0.25pt</Width>
-          </Border>
-        </Style>
-      </Textbox>
       <Textbox Name="fld_Created_At_rdlc5">
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
@@ -1071,7 +1040,7 @@ This Province</Value>
         <Left>2.42968cm</Left>
         <Height>0.4cm</Height>
         <Width>10.90259cm</Width>
-        <ZIndex>23</ZIndex>
+        <ZIndex>22</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1101,7 +1070,7 @@ This Province</Value>
         <Left>13.77404cm</Left>
         <Height>0.4cm</Height>
         <Width>3.69474cm</Width>
-        <ZIndex>24</ZIndex>
+        <ZIndex>23</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1198,7 +1167,7 @@ This Province</Value>
         <Left>4.83867cm</Left>
         <Height>2.22783cm</Height>
         <Width>10.14955cm</Width>
-        <ZIndex>25</ZIndex>
+        <ZIndex>24</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1213,7 +1182,7 @@ This Province</Value>
         <Left>14.98822cm</Left>
         <Height>1.64042cm</Height>
         <Width>1.905cm</Width>
-        <ZIndex>26</ZIndex>
+        <ZIndex>25</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1228,7 +1197,7 @@ This Province</Value>
         <Left>3.09242cm</Left>
         <Height>1.64042cm</Height>
         <Width>1.71097cm</Width>
-        <ZIndex>27</ZIndex>
+        <ZIndex>26</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1300,7 +1269,7 @@ This Province</Value>
         <Left>2.40054cm</Left>
         <Height>0.4cm</Height>
         <Width>6.78623cm</Width>
-        <ZIndex>28</ZIndex>
+        <ZIndex>27</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1374,7 +1343,7 @@ This Province</Value>
         <Left>10.91975cm</Left>
         <Height>0.4cm</Height>
         <Width>6.49344cm</Width>
-        <ZIndex>29</ZIndex>
+        <ZIndex>28</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1411,11 +1380,11 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>22.08481cm</Top>
+        <Top>22.20481cm</Top>
         <Left>2.40054cm</Left>
         <Height>1.18209cm</Height>
         <Width>3.58465cm</Width>
-        <ZIndex>30</ZIndex>
+        <ZIndex>29</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1440,11 +1409,11 @@ This Province</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>31.69567cm</Top>
+        <Top>32.33067cm</Top>
         <Left>2.427cm</Left>
         <Height>0.635cm</Height>
         <Width>3.92875cm</Width>
-        <ZIndex>31</ZIndex>
+        <ZIndex>30</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1490,7 +1459,7 @@ This Province</Value>
         <Left>4.08019cm</Left>
         <Height>0.89958cm</Height>
         <Width>4.7625cm</Width>
-        <ZIndex>32</ZIndex>
+        <ZIndex>31</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1520,11 +1489,11 @@ This Province</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>31.69567cm</Top>
+        <Top>32.33067cm</Top>
         <Left>11.85655cm</Left>
         <Height>0.635cm</Height>
         <Width>1.75917cm</Width>
-        <ZIndex>33</ZIndex>
+        <ZIndex>32</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1576,7 +1545,7 @@ This Province</Value>
         <Left>13.77136cm</Left>
         <Height>0.89958cm</Height>
         <Width>3.66828cm</Width>
-        <ZIndex>34</ZIndex>
+        <ZIndex>33</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1593,7 +1562,7 @@ This Province</Value>
         <Left>0.9451in</Left>
         <Height>0in</Height>
         <Width>5.92091in</Width>
-        <ZIndex>35</ZIndex>
+        <ZIndex>34</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1622,7 +1591,7 @@ This Province</Value>
         <Left>3.21421in</Left>
         <Height>0.25in</Height>
         <Width>2.35372in</Width>
-        <ZIndex>36</ZIndex>
+        <ZIndex>35</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1655,7 +1624,7 @@ This Province</Value>
         <Left>2.40054cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
-        <ZIndex>37</ZIndex>
+        <ZIndex>36</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1730,7 +1699,7 @@ This Province</Value>
         <Left>6.43512cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
-        <ZIndex>38</ZIndex>
+        <ZIndex>37</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1760,7 +1729,7 @@ This Province</Value>
         <Left>2.40054cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
-        <ZIndex>39</ZIndex>
+        <ZIndex>38</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1835,7 +1804,7 @@ This Province</Value>
         <Left>6.43512cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
-        <ZIndex>40</ZIndex>
+        <ZIndex>39</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1865,7 +1834,7 @@ This Province</Value>
         <Left>2.40054cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
-        <ZIndex>41</ZIndex>
+        <ZIndex>40</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
         </Visibility>
@@ -1946,7 +1915,7 @@ This Province</Value>
         <Left>6.43782cm</Left>
         <Height>0.4cm</Height>
         <Width>11.03098cm</Width>
-        <ZIndex>42</ZIndex>
+        <ZIndex>41</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1960,7 +1929,7 @@ This Province</Value>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value EvaluationMode="Constant">Name of Activity / Event</Value>
+                <Value>Activity / Event</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>8pt</FontSize>
@@ -1976,7 +1945,7 @@ This Province</Value>
         <Left>2.40054cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
-        <ZIndex>43</ZIndex>
+        <ZIndex>42</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2051,7 +2020,7 @@ This Province</Value>
         <Left>6.43512cm</Left>
         <Height>0.4cm</Height>
         <Width>11.03098cm</Width>
-        <ZIndex>44</ZIndex>
+        <ZIndex>43</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2081,7 +2050,7 @@ This Province</Value>
         <Left>2.40054cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
-        <ZIndex>45</ZIndex>
+        <ZIndex>44</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2113,42 +2082,11 @@ This Province</Value>
         <Left>6.43512cm</Left>
         <Height>0.4cm</Height>
         <Width>10.97807cm</Width>
-        <ZIndex>46</ZIndex>
+        <ZIndex>45</ZIndex>
         <Style>
           <Border>
             <Color>LightGrey</Color>
             <Style>None</Style>
-          </Border>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox77">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>        Below is the amount subject to refund for the requesting party.</Value>
-                <Style>
-                  <FontFamily>calibri</FontFamily>
-                  <FontSize>8pt</FontSize>
-                  <FontWeight>Normal</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox60</rd:DefaultName>
-        <Top>23.43149cm</Top>
-        <Left>2.40054cm</Left>
-        <Height>0.39457cm</Height>
-        <Width>15.01265cm</Width>
-        <ZIndex>47</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-            <Width>0.25pt</Width>
           </Border>
         </Style>
       </Textbox>
@@ -2175,7 +2113,7 @@ This Province</Value>
         <Left>2.427cm</Left>
         <Height>0.4cm</Height>
         <Width>10.90259cm</Width>
-        <ZIndex>48</ZIndex>
+        <ZIndex>46</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2205,7 +2143,7 @@ This Province</Value>
         <Left>13.77136cm</Left>
         <Height>0.4cm</Height>
         <Width>3.69474cm</Width>
-        <ZIndex>49</ZIndex>
+        <ZIndex>47</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2218,7 +2156,7 @@ This Province</Value>
         <Left>0.94616in</Left>
         <Height>0in</Height>
         <Width>5.92091in</Width>
-        <ZIndex>50</ZIndex>
+        <ZIndex>48</ZIndex>
         <Style>
           <Border>
             <Style>Dotted</Style>
@@ -2230,7 +2168,7 @@ This Province</Value>
         <Left>0.95658in</Left>
         <Height>0in</Height>
         <Width>5.92091in</Width>
-        <ZIndex>51</ZIndex>
+        <ZIndex>49</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -2242,7 +2180,7 @@ This Province</Value>
         <Left>0.95658in</Left>
         <Height>0in</Height>
         <Width>5.92091in</Width>
-        <ZIndex>52</ZIndex>
+        <ZIndex>50</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -2255,7 +2193,7 @@ This Province</Value>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>REFUND DISBURSEMEN BREAKDOWN</Value>
+                <Value>REFUND DISBURSEMENT BREAKDOWN</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>8pt</FontSize>
@@ -2270,7 +2208,7 @@ This Province</Value>
         <Left>2.43096cm</Left>
         <Height>0.4cm</Height>
         <Width>6.41173cm</Width>
-        <ZIndex>53</ZIndex>
+        <ZIndex>51</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2733,7 +2671,7 @@ This Province</Value>
         <Left>3.2288cm</Left>
         <Height>1cm</Height>
         <Width>14.24125cm</Width>
-        <ZIndex>54</ZIndex>
+        <ZIndex>52</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, True, False)</Hidden>
         </Visibility>
@@ -2767,7 +2705,7 @@ This Province</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fld_Total_Amount.Value</Value>
+                              <Value>=(Fields!fld_Total_Amount.Value) - ((Fields!fld_Total_Amount.Value) * (0.05))</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -2814,11 +2752,11 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>11.89161cm</Top>
+        <Top>12.42078cm</Top>
         <Left>15.04509cm</Left>
         <Height>0.5cm</Height>
         <Width>2.42496cm</Width>
-        <ZIndex>55</ZIndex>
+        <ZIndex>53</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3162,7 +3100,7 @@ This Province</Value>
         <Left>3.2288cm</Left>
         <Height>1cm</Height>
         <Width>14.24125cm</Width>
-        <ZIndex>56</ZIndex>
+        <ZIndex>54</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
         </Visibility>
@@ -3360,7 +3298,7 @@ This Province</Value>
         <Left>3.2288cm</Left>
         <Height>0.5cm</Height>
         <Width>14.24124cm</Width>
-        <ZIndex>57</ZIndex>
+        <ZIndex>55</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
         </Visibility>
@@ -3479,7 +3417,7 @@ This Province</Value>
         <Left>3.2288cm</Left>
         <Height>0.5cm</Height>
         <Width>14.24124cm</Width>
-        <ZIndex>58</ZIndex>
+        <ZIndex>56</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
         </Visibility>
@@ -3557,11 +3495,11 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>11.89161cm</Top>
+        <Top>12.42078cm</Top>
         <Left>12.59367cm</Left>
         <Height>0.5cm</Height>
         <Width>2.45142cm</Width>
-        <ZIndex>59</ZIndex>
+        <ZIndex>57</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3569,13 +3507,13 @@ This Province</Value>
           </Border>
         </Style>
       </Tablix>
-      <Textbox Name="txt_Date_of_Use7">
+      <Textbox Name="txt_Date_of_Use12">
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>REFUND DISBURSEMEN BREAKDOWN</Value>
+                <Value>Reason for Cancellation</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>8pt</FontSize>
@@ -3586,10 +3524,67 @@ This Province</Value>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>26.24813cm</Top>
-        <Left>2.40739cm</Left>
+        <Top>12.7831cm</Top>
+        <Left>2.43096cm</Left>
         <Height>0.4cm</Height>
-        <Width>6.4353cm</Width>
+        <Width>6.41173cm</Width>
+        <ZIndex>58</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="txt_Date_of_Use13">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!fld_Cancellation_Reason.Value, "BillingDataset")</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>13.21838cm</Top>
+        <Left>2.43365cm</Left>
+        <Height>1.16255cm</Height>
+        <Width>14.97954cm</Width>
+        <ZIndex>59</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Textbox>
+      <Textbox Name="txt_Date_of_Use14">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Reason for Cancellation</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>30.59173cm</Top>
+        <Left>2.45741cm</Left>
+        <Height>0.4cm</Height>
+        <Width>6.41173cm</Width>
         <ZIndex>60</ZIndex>
         <Style>
           <Border>
@@ -3598,6 +3593,154 @@ This Province</Value>
           </Border>
         </Style>
       </Textbox>
+      <Textbox Name="txt_Date_of_Use15">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!fld_Cancellation_Reason.Value, "BillingDataset")</Value>
+                <Style>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>31.02701cm</Top>
+        <Left>2.4601cm</Left>
+        <Height>1.16255cm</Height>
+        <Width>14.97954cm</Width>
+        <ZIndex>61</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Textbox>
+      <Tablix Name="Tablix27">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>11.81629cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.42495cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.5cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox65">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Less Service Charge of 5%</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox51</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox75">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>="-₱" &amp; FormatNumber(Fields!fld_Total_Amount.Value * 0.05, 2)</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <Format>'₱'#,0.00</Format>
+                                <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox53</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>5pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+                      </Style>
+                    </Textbox>
+                    <rd:Selected>true</rd:Selected>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details8" />
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>BillingDataset</DataSetName>
+        <Top>11.92078cm</Top>
+        <Left>3.22486cm</Left>
+        <Height>0.5cm</Height>
+        <Width>14.24124cm</Width>
+        <ZIndex>62</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Tablix>
       <Tablix Name="Tablix18">
         <TablixBody>
           <TablixColumns>
@@ -4049,11 +4192,11 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>26.69806cm</Top>
-        <Left>3.20523cm</Left>
+        <Top>26.71123cm</Top>
+        <Left>3.16835cm</Left>
         <Height>1cm</Height>
         <Width>14.24125cm</Width>
-        <ZIndex>61</ZIndex>
+        <ZIndex>63</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, True, False)</Hidden>
         </Visibility>
@@ -4087,7 +4230,7 @@ This Province</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!fld_Total_Amount.Value</Value>
+                              <Value>=Fields!fld_Total_Amount.Value - (Fields!fld_Total_Amount.Value * 0.05)</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -4134,11 +4277,11 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>29.69806cm</Top>
-        <Left>15.02152cm</Left>
+        <Top>30.2404cm</Top>
+        <Left>14.98464cm</Left>
         <Height>0.5cm</Height>
         <Width>2.42496cm</Width>
-        <ZIndex>62</ZIndex>
+        <ZIndex>64</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4478,11 +4621,11 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>27.69806cm</Top>
-        <Left>3.20523cm</Left>
+        <Top>27.71123cm</Top>
+        <Left>3.16835cm</Left>
         <Height>1cm</Height>
         <Width>14.24125cm</Width>
-        <ZIndex>63</ZIndex>
+        <ZIndex>65</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
         </Visibility>
@@ -4676,11 +4819,11 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>28.69806cm</Top>
-        <Left>3.20523cm</Left>
+        <Top>28.71123cm</Top>
+        <Left>3.16835cm</Left>
         <Height>0.5cm</Height>
         <Width>14.24124cm</Width>
-        <ZIndex>64</ZIndex>
+        <ZIndex>66</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
         </Visibility>
@@ -4795,11 +4938,11 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>29.19806cm</Top>
-        <Left>3.20523cm</Left>
+        <Top>29.21123cm</Top>
+        <Left>3.16835cm</Left>
         <Height>0.5cm</Height>
         <Width>14.24124cm</Width>
-        <ZIndex>65</ZIndex>
+        <ZIndex>67</ZIndex>
         <Visibility>
           <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
         </Visibility>
@@ -4877,67 +5020,10 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>29.69806cm</Top>
-        <Left>12.5701cm</Left>
+        <Top>30.2404cm</Top>
+        <Left>12.53322cm</Left>
         <Height>0.5cm</Height>
         <Width>2.45142cm</Width>
-        <ZIndex>66</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-            <Width>0.25pt</Width>
-          </Border>
-        </Style>
-      </Tablix>
-      <Textbox Name="txt_Date_of_Use12">
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Reason for Cancellation</Value>
-                <Style>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontSize>8pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <Top>12.1481cm</Top>
-        <Left>2.43096cm</Left>
-        <Height>0.4cm</Height>
-        <Width>6.41173cm</Width>
-        <ZIndex>67</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-            <Width>0.25pt</Width>
-          </Border>
-        </Style>
-      </Textbox>
-      <Textbox Name="txt_Date_of_Use13">
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=First(Fields!fld_Cancellation_Reason.Value, "BillingDataset")</Value>
-                <Style>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontSize>8pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <Top>12.58338cm</Top>
-        <Left>2.43365cm</Left>
-        <Height>1.16255cm</Height>
-        <Width>14.97954cm</Width>
         <ZIndex>68</ZIndex>
         <Style>
           <Border>
@@ -4945,14 +5031,133 @@ This Province</Value>
             <Width>0.25pt</Width>
           </Border>
         </Style>
-      </Textbox>
-      <Textbox Name="txt_Date_of_Use14">
+      </Tablix>
+      <Tablix Name="Tablix28">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>11.81629cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.42495cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.5cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox76">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Less Service Charge of 5%</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox51</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox77">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>="-₱" &amp; FormatNumber(Fields!fld_Total_Amount.Value * 0.05, 2)</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <Format>'₱'#,0.00</Format>
+                                <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox53</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>5pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details9" />
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>BillingDataset</DataSetName>
+        <Top>29.7404cm</Top>
+        <Left>3.16441cm</Left>
+        <Height>0.5cm</Height>
+        <Width>14.24124cm</Width>
+        <ZIndex>69</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Tablix>
+      <Textbox Name="txt_Date_of_Use7">
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Reason for Cancellation</Value>
+                <Value>REFUND DISBURSEMENT BREAKDOWN</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>8pt</FontSize>
@@ -4963,38 +5168,10 @@ This Province</Value>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>29.95673cm</Top>
-        <Left>2.45741cm</Left>
+        <Top>26.27595cm</Top>
+        <Left>2.40054cm</Left>
         <Height>0.4cm</Height>
         <Width>6.41173cm</Width>
-        <ZIndex>69</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-            <Width>0.25pt</Width>
-          </Border>
-        </Style>
-      </Textbox>
-      <Textbox Name="txt_Date_of_Use15">
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=First(Fields!fld_Cancellation_Reason.Value, "BillingDataset")</Value>
-                <Style>
-                  <FontFamily>Calibri</FontFamily>
-                  <FontSize>8pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <Top>30.39201cm</Top>
-        <Left>2.4601cm</Left>
-        <Height>1.16255cm</Height>
-        <Width>14.97954cm</Width>
         <ZIndex>70</ZIndex>
         <Style>
           <Border>
