@@ -75,7 +75,7 @@ namespace pgso.pgso_Billing.User_Control
             }
             lbl_Control_Number.Text = billingDetailsList.fld_Control_Number;
             lbl_Requesting_Person.Text = $"{billingDetailsList.fld_First_Name} {billingDetailsList.fld_Middle_Name} {billingDetailsList.fld_Surname}";
-            lbl_Requesting_Office.Text = billingDetailsList.fld_Requesting_Person_Address;
+            lbl_Requesting_Office.Text = billingDetailsList.fld_Requesting_Office;
             lbl_Origin_Request.Text = billingDetailsList.fld_Request_Origin;
             lbl_Contact_Number.Text = billingDetailsList.fld_Contact_Number;
             lbl_Address.Text = billingDetailsList.fld_Requesting_Person_Address;
