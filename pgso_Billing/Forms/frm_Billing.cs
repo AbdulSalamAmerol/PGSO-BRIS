@@ -95,36 +95,53 @@ namespace pgso
             cmb_Billing_Filter.Items.AddRange(new string[] { "All", "Pending", "Confirmed", "Cancelled" });
             cmb_Billing_Filter.SelectedIndexChanged += cmb_Billing_Filter_SelectedIndexChanged;
             cmb_Billing_Filter.SelectedIndex = 1; // Default to "Pending"
-            cmb_Billing_Filter_SelectedIndexChanged(null, null); // Manually trigger filtering
+            
             //SORTING
             cmb_Billing_Sort.Items.Clear();
             cmb_Billing_Sort.Items.AddRange(new string[] { "Control Number", "Reservation Date", "Requesting Person", "Reservation Type", "Reservation Status", "Amount Due" });
             cmb_Billing_Sort.SelectedIndex = 0; // Default selection
             cmb_Billing_Sort.SelectedIndexChanged += cmb_Billing_Sort_SelectedIndexChanged;
-        }
-
-        private void cmb_Billing_Sort_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ApplySortingAndFiltering();
+            ApplySearchFilter(""); // ✅ This will apply default filter + sort on load
         }
 
         private void cmb_Billing_Filter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ApplySortingAndFiltering();
+            ApplySearchFilter(sb_Billing_Search_Bar.Text.Trim().ToLower());
         }
 
-        private void ApplySortingAndFiltering()
+        private void cmb_Billing_Sort_SelectedIndexChanged(object sender, EventArgs e)
         {
-            IEnumerable<Model_Billing> filtered = groupedBillingData; // ✅ Use grouped data to preserve EquipmentNames
+            ApplySearchFilter(sb_Billing_Search_Bar.Text.Trim().ToLower());
+        }
 
-            // Filter by status if not "All"
+        private void ApplySearchFilter(string searchTerm)
+        {
+            IEnumerable<Model_Billing> filtered = groupedBillingData;
+
+            if (groupedBillingData == null)
+                return;
+
+            // Apply filter
             string filterValue = cmb_Billing_Filter.SelectedItem?.ToString();
             if (!string.IsNullOrEmpty(filterValue) && filterValue != "All")
             {
                 filtered = filtered.Where(b => b.fld_Reservation_Status.Equals(filterValue, StringComparison.OrdinalIgnoreCase));
             }
 
-            // Sort by selected column
+            // Apply search
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                filtered = filtered.Where(item =>
+                    (item.fld_Control_Number?.ToLower().Contains(searchTerm) ?? false) ||
+                    (item.fld_Full_Name?.ToLower().Contains(searchTerm) ?? false) ||
+                    (item.fld_Venue_Name?.ToLower().Contains(searchTerm) ?? false) ||
+                    (item.fld_Reservation_Type?.ToLower().Contains(searchTerm) ?? false) ||
+                    (item.fld_Reservation_Status?.ToLower().Contains(searchTerm) ?? false) ||
+                    (item.EquipmentNames.Any(equipment => equipment.ToLower().Contains(searchTerm)))
+                );
+            }
+
+            // Apply sort
             string sortBy = cmb_Billing_Sort.SelectedItem?.ToString();
             switch (sortBy)
             {
@@ -148,12 +165,15 @@ namespace pgso
                     break;
             }
 
-            // ✅ Restore the grouped dataset (with filtering + sorting applied)
             dgv_billing_binding_source.DataSource = filtered.ToList();
             dgv_Billing_Records.DataSource = dgv_billing_binding_source;
         }
 
-
+        //Search Bar
+        private void sb_Billing_Search_Bar_TextChanged(object sender, EventArgs e)
+        {
+            ApplySearchFilter(sb_Billing_Search_Bar.Text.Trim().ToLower());
+        }
 
 
         // Block all resizes
@@ -169,30 +189,7 @@ namespace pgso
             base.WndProc(ref m);
         }
 
-        //Search Bar
-        private void sb_Billing_Search_Bar_TextChanged(object sender, EventArgs e)
-        {
-            string searchTerm = sb_Billing_Search_Bar.Text.Trim().ToLower();
-
-            if (string.IsNullOrEmpty(searchTerm))
-            {
-                // ✅ Restore the grouped dataset (prevents missing equipment names)
-                dgv_billing_binding_source.DataSource = groupedBillingData;
-            }
-            else
-            {
-                var filteredData = groupedBillingData.Where(item =>
-                    (item.fld_Control_Number?.ToLower().Contains(searchTerm) ?? false) ||
-                    (item.fld_Full_Name?.ToLower().Contains(searchTerm) ?? false) ||
-                    (item.fld_Venue_Name?.ToLower().Contains(searchTerm) ?? false) ||
-                    (item.fld_Reservation_Type?.ToLower().Contains(searchTerm) ?? false) ||
-                    (item.fld_Reservation_Status?.ToLower().Contains(searchTerm) ?? false) ||
-                    (item.EquipmentNames.Any(equipment => equipment.ToLower().Contains(searchTerm)))
-                ).ToList();
-
-                dgv_billing_binding_source.DataSource = filteredData;
-            }
-        }// 🔍 Fixed Search Method
+       
 
         private Dictionary<int, Model_Billing> billingDetailsCache = new Dictionary<int, Model_Billing>(); //for cache
         private Model_Billing GetBillingDetailsByReservationID(int reservationID)
