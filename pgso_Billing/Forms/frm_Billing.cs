@@ -93,8 +93,9 @@ namespace pgso
             ////FILTERING
             cmb_Billing_Filter.Items.Clear();
             cmb_Billing_Filter.Items.AddRange(new string[] { "All", "Pending", "Confirmed", "Cancelled" });
-            cmb_Billing_Filter.SelectedIndex = 1; // Default to "All"
             cmb_Billing_Filter.SelectedIndexChanged += cmb_Billing_Filter_SelectedIndexChanged;
+            cmb_Billing_Filter.SelectedIndex = 1; // Default to "Pending"
+            cmb_Billing_Filter_SelectedIndexChanged(null, null); // Manually trigger filtering
             //SORTING
             cmb_Billing_Sort.Items.Clear();
             cmb_Billing_Sort.Items.AddRange(new string[] { "Control Number", "Reservation Date", "Requesting Person", "Reservation Type", "Reservation Status", "Amount Due" });
@@ -114,18 +115,17 @@ namespace pgso
 
         private void ApplySortingAndFiltering()
         {
-            IEnumerable<Model_Billing> filtered = all_billing_model;
+            IEnumerable<Model_Billing> filtered = groupedBillingData; // ✅ Use grouped data to preserve EquipmentNames
 
             // Filter by status if not "All"
             string filterValue = cmb_Billing_Filter.SelectedItem?.ToString();
             if (!string.IsNullOrEmpty(filterValue) && filterValue != "All")
             {
-                filtered = filtered.Where(b => b.fld_Reservation_Status == filterValue);
+                filtered = filtered.Where(b => b.fld_Reservation_Status.Equals(filterValue, StringComparison.OrdinalIgnoreCase));
             }
 
             // Sort by selected column
             string sortBy = cmb_Billing_Sort.SelectedItem?.ToString();
-
             switch (sortBy)
             {
                 case "Control Number":
@@ -144,15 +144,15 @@ namespace pgso
                     filtered = filtered.OrderByDescending(b => b.fld_Reservation_Status);
                     break;
                 case "Amount Due":
-                    filtered = filtered.OrderByDescending(b => b.fld_Amount_Due);
-                    break;
-                default:
+                    filtered = filtered.OrderByDescending(b => b.fld_Total_Amount);
                     break;
             }
 
+            // ✅ Restore the grouped dataset (with filtering + sorting applied)
             dgv_billing_binding_source.DataSource = filtered.ToList();
             dgv_Billing_Records.DataSource = dgv_billing_binding_source;
         }
+
 
 
 
@@ -337,59 +337,53 @@ namespace pgso
         private void dgv_Billing_Records_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             // Check if it's a data row (ignore header and new row placeholder)
-            if (e.RowIndex >= 0 && e.RowIndex < this.dgv_Billing_Records.Rows.Count && !this.dgv_Billing_Records.Rows[e.RowIndex].IsNewRow)
+            if (e.RowIndex >= 0 && e.RowIndex < dgv_Billing_Records.Rows.Count && !dgv_Billing_Records.Rows[e.RowIndex].IsNewRow)
             {
-                // Get the current row being formatted
-                DataGridViewRow row = this.dgv_Billing_Records.Rows[e.RowIndex];
+                DataGridViewRow row = dgv_Billing_Records.Rows[e.RowIndex];
                 string statusColumnName = "col_Reservation_Status";
 
                 try
                 {
-                    // Get the value from the specified status column for the current row
                     object cellValue = row.Cells[statusColumnName].Value;
+                    var billing = row.DataBoundItem as Model_Billing;
 
-                    // Check if the value is not null and equals "Cancelled" (case-sensitive)
-                    if (cellValue != null && cellValue != DBNull.Value && cellValue.ToString() == "Cancelled")
+                    if (billing != null && billing.fld_Created_At != null)
                     {
+                        TimeSpan timeSinceCreated = DateTime.Now - billing.fld_Created_At;
 
-                        row.DefaultCellStyle.BackColor = Color.FromArgb(255, 228, 225);
-
+                        if (cellValue?.ToString() == "Pending" && timeSinceCreated.TotalHours >= 72)
+                        {
+                            // 🔥 Expired pending reservation (3+ days old)
+                            row.DefaultCellStyle.BackColor = Color.FromArgb(230, 220, 250); // Light black
+                            row.DefaultCellStyle.ForeColor = Color.Black;
+                        }
+                        else
+                        {
+                            // Handle regular color coding
+                            if (cellValue?.ToString() == "Cancelled")
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(255, 228, 225);
+                            else if (cellValue?.ToString() == "Confirmed")
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(225, 235, 245);
+                            else if (cellValue?.ToString() == "Pending")
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(242, 239, 231);
+                        }
                     }
-
-                    if (cellValue != null && cellValue != DBNull.Value && cellValue.ToString() == "Confirmed")
-                    {
-                        row.DefaultCellStyle.BackColor = Color.FromArgb(225, 235, 245);
-                    }
-
-                    if (cellValue != null && cellValue != DBNull.Value && cellValue.ToString() == "Pending")
-                    {
-                        row.DefaultCellStyle.BackColor = Color.FromArgb(242, 239, 231);
-                    }
-
-
                 }
                 catch (Exception ex)
                 {
-                    // Optional: Log error if the column name is wrong or other issues occur
                     Console.WriteLine($"Error during cell formatting: {ex.Message}");
-                    // Ensure a default color even if an error occurs
                     row.DefaultCellStyle.BackColor = Color.White;
-
-                
                 }
-                
+
                 // Alignment logic
                 string columnName = dgv_Billing_Records.Columns[e.ColumnIndex].Name;
                 if (columnName == "fld_Control_Number" || columnName == "col_Print")
-                {
                     e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                }
                 else
-                {
                     e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                }
             }
         }
+
 
 
 
