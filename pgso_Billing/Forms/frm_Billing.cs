@@ -354,18 +354,21 @@ namespace pgso
                         if (cellValue?.ToString() == "Pending" && timeSinceCreated.TotalHours >= 72)
                         {
                             // 🔥 Expired pending reservation (3+ days old)
-                            row.DefaultCellStyle.BackColor = Color.FromArgb(230, 220, 250); // Light black
+                            row.DefaultCellStyle.BackColor = Color.FromArgb(255, 228, 225); // RED
                             row.DefaultCellStyle.ForeColor = Color.Black;
                         }
                         else
                         {
                             // Handle regular color coding
                             if (cellValue?.ToString() == "Cancelled")
-                                row.DefaultCellStyle.BackColor = Color.FromArgb(255, 228, 225);
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(200, 220, 255); // BLUE
+
                             else if (cellValue?.ToString() == "Confirmed")
-                                row.DefaultCellStyle.BackColor = Color.FromArgb(225, 235, 245);
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(225, 255, 225); // GREEN
+                               
                             else if (cellValue?.ToString() == "Pending")
-                                row.DefaultCellStyle.BackColor = Color.FromArgb(242, 239, 231);
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 255); // WHITE
+                                row.DefaultCellStyle.ForeColor = Color.Black;
                         }
                     }
                 }

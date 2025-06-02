@@ -201,11 +201,11 @@
             // 
             this.lbl_Reservation_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Reservation_Status.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Reservation_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Reservation_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Reservation_Status.ForeColor = System.Drawing.SystemColors.MenuText;
             this.lbl_Reservation_Status.Location = new System.Drawing.Point(770, 454);
             this.lbl_Reservation_Status.Name = "lbl_Reservation_Status";
-            this.lbl_Reservation_Status.Size = new System.Drawing.Size(119, 23);
+            this.lbl_Reservation_Status.Size = new System.Drawing.Size(119, 22);
             this.lbl_Reservation_Status.TabIndex = 62;
             this.lbl_Reservation_Status.Text = "...";
             // 
@@ -1436,13 +1436,13 @@
             this.lbl_Rate_Type.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Rate_Type.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Rate_Type.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Rate_Type.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbl_Rate_Type.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Rate_Type.Location = new System.Drawing.Point(770, 480);
             this.lbl_Rate_Type.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
             this.lbl_Rate_Type.Name = "lbl_Rate_Type";
             this.lbl_Rate_Type.ReadOnly = true;
-            this.lbl_Rate_Type.Size = new System.Drawing.Size(119, 23);
+            this.lbl_Rate_Type.Size = new System.Drawing.Size(119, 25);
             this.lbl_Rate_Type.TabIndex = 35;
             this.lbl_Rate_Type.Text = "...";
             // 
