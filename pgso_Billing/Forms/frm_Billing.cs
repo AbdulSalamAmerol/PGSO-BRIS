@@ -55,7 +55,7 @@ namespace pgso
             }
         }
 
-        //FILTERING
+     
         private void frm_Billing_Load(object sender, EventArgs e)
         {
             this.MinimumSize = new Size(1920, 1200);
@@ -377,10 +377,10 @@ namespace pgso
 
                 // Alignment logic
                 string columnName = dgv_Billing_Records.Columns[e.ColumnIndex].Name;
-                if (columnName == "fld_Control_Number" || columnName == "col_Print")
+                if (columnName == "fld_Control_Number" || columnName == "col_Print" || columnName == "fld_Full_Name")
                     e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 else
-                    e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                    e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
         }
 
@@ -889,6 +889,11 @@ namespace pgso
         }
 
         private void cmb_Billing_Filter_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
