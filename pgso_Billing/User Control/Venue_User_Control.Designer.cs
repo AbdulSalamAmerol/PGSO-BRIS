@@ -347,7 +347,6 @@
             this.lbl_OR.ReadOnly = true;
             this.lbl_OR.Size = new System.Drawing.Size(190, 23);
             this.lbl_OR.TabIndex = 51;
-            this.lbl_OR.Text = "DESCRIPTION";
             // 
             // tb_OR
             // 
@@ -1442,7 +1441,7 @@
             this.lbl_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
             this.lbl_Rate_Type.Name = "lbl_Rate_Type";
             this.lbl_Rate_Type.ReadOnly = true;
-            this.lbl_Rate_Type.Size = new System.Drawing.Size(119, 25);
+            this.lbl_Rate_Type.Size = new System.Drawing.Size(119, 22);
             this.lbl_Rate_Type.TabIndex = 35;
             this.lbl_Rate_Type.Text = "...";
             // 

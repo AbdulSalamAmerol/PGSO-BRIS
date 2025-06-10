@@ -627,13 +627,11 @@ namespace pgso
             reportBillingForm.ShowDialog(); // Opens the form as a modal dialog
 
         }
-        
+
         private void RefreshBillingRecords(int? highlightReservationID = null)
         {
             try
             {
-                
-
                 all_billing_model = repo_billing.GetAllBillingRecords() ?? new List<Model_Billing>();
 
                 if (all_billing_model.Count == 0)
@@ -643,12 +641,13 @@ namespace pgso
                     return;
                 }
 
-                // Group the data
+                // ✅ Update grouped data
                 groupedBillingData = GroupAndFormatBillingData(all_billing_model);
-                dgv_Billing_Records.DataSource = groupedBillingData;
-                dgv_Billing_Records.Refresh();
 
-                // Reselect the row if a reservation ID is passed
+                // ✅ Re-apply filter, search, and sort
+                ApplySearchFilter(sb_Billing_Search_Bar.Text.Trim().ToLower());
+
+                // ✅ Highlight row if needed
                 if (highlightReservationID.HasValue)
                 {
                     bool rowFound = false;
@@ -656,11 +655,11 @@ namespace pgso
                     {
                         if (Convert.ToInt32(row.Cells["pk_ReservationID"].Value) == highlightReservationID.Value)
                         {
-                            row.Selected = true; // Select the entire row
+                            row.Selected = true;
 
-                            // Set the CurrentCell to any visible cell (avoiding invisible cells)
-                            dgv_Billing_Records.CurrentCell = row.Cells.Cast<DataGridViewCell>()
-                                .FirstOrDefault(c => c.Visible); // Ensure we use a visible cell
+                            dgv_Billing_Records.CurrentCell = row.Cells
+                                .Cast<DataGridViewCell>()
+                                .FirstOrDefault(c => c.Visible);
 
                             rowFound = true;
                             break;
@@ -669,7 +668,6 @@ namespace pgso
 
                     if (rowFound)
                     {
-                        // Scroll to the selected row
                         var selectedRow = dgv_Billing_Records.Rows
                             .Cast<DataGridViewRow>()
                             .FirstOrDefault(r => r.Selected);
@@ -677,7 +675,6 @@ namespace pgso
                         if (selectedRow != null)
                         {
                             dgv_Billing_Records.FirstDisplayedScrollingRowIndex = selectedRow.Index;
-                           
                         }
                     }
                     else
@@ -691,6 +688,7 @@ namespace pgso
                 MessageBox.Show("Failed to refresh billing records: " + ex.Message);
             }
         }
+
 
         // DGV Grouping and Formatting
         private List<Model_Billing> GroupAndFormatBillingData(List<Model_Billing> billingData)

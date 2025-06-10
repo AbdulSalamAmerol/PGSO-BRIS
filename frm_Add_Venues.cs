@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace pgso
@@ -107,8 +108,8 @@ namespace pgso
                 // 1. Insert into Venue table and get the new ID
                 cmd = new SqlCommand(
                     @"INSERT INTO tbl_Venue (fld_Venue_Name) 
-              OUTPUT INSERTED.pk_VenueID 
-              VALUES (@VenueName)",
+                      OUTPUT INSERTED.pk_VenueID 
+                      VALUES (@VenueName)",
                     conn, transaction);
 
                 cmd.Parameters.AddWithValue("@VenueName", txt_Venue_Name.Text);
@@ -117,8 +118,8 @@ namespace pgso
                 // 2. Insert into Venue Scope table and get the new ID
                 cmd = new SqlCommand(
                     @"INSERT INTO tbl_Venue_Scope (fld_Venue_Scope_Name) 
-              OUTPUT INSERTED.pk_Venue_ScopeID 
-              VALUES (@ScopeName)",
+                      OUTPUT INSERTED.pk_Venue_ScopeID 
+                      VALUES (@ScopeName)",
                     conn, transaction);
 
                 cmd.Parameters.AddWithValue("@ScopeName", txt_Venue_Scope_Name.Text); // Assuming you have a TextBox for Scope Name
@@ -136,9 +137,17 @@ namespace pgso
                 // 3. Insert into Venue Pricing with the foreign keys
                 cmd = new SqlCommand(
                     @"INSERT INTO tbl_Venue_Pricing 
-      (fld_Aircon, fld_Rate_type, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Additional_Charge, fk_VenueID, fk_Venue_ScopeID) 
-      VALUES (@Aircon, @RateType, @FirstFourHoursRate, @HourlyRate, @AdditionalCharge, @VenueID, @VenueScopeID)",
+                  (fld_Aircon, fld_Rate_type, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Additional_Charge, fk_VenueID, fk_Venue_ScopeID, fld_Caterer_Fee) 
+                  VALUES (@Aircon, @RateType, @FirstFourHoursRate, @HourlyRate, @AdditionalCharge, @VenueID, @VenueScopeID, @CatererFee)",
                     conn, transaction);
+                if (string.IsNullOrWhiteSpace(txt_Caterer_Fee.Text) ||
+    !decimal.TryParse(txt_Caterer_Fee.Text, out decimal catererFee) ||
+    catererFee < 0)
+                {
+                    MessageBox.Show("Please enter a valid caterer fee.", "Validation Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 cmd.Parameters.AddWithValue("@Aircon", airconValue);
                 cmd.Parameters.AddWithValue("@RateType", txt_RT1.Text);
@@ -147,7 +156,49 @@ namespace pgso
                 cmd.Parameters.AddWithValue("@AdditionalCharge", additionalCharge);
                 cmd.Parameters.AddWithValue("@VenueID", newVenueId);
                 cmd.Parameters.AddWithValue("@VenueScopeID", newVenueScopeId);
+                cmd.Parameters.AddWithValue("@CatererFee", catererFee);
                 cmd.ExecuteNonQuery();
+
+                // auditlog start
+                string affectedTable = "tbl_Venue_Pricing";
+                string actionType = "Added Venue Scope & Pricing";
+                string affectedRecordPk = $"{newVenueId}-{newVenueScopeId}-{txt_RT1.Text}"; // Composite key for uniqueness
+
+                string changedBy = frm_login.LoggedInUserRole;
+                DateTime changedAt = DateTime.Now;
+                int userId = frm_login.LoggedInUserId;
+
+                // Serialize new scope/pricing data for audit log
+                string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                {
+                    VenueID = newVenueId,
+                    ScopeID = newVenueScopeId,
+                    ScopeName = txt_Venue_Scope_Name.Text,
+                    RateType = txt_RT1.Text,
+                    First4HrsRate = firstFourHoursRate,
+                    HourlyRate = hourlyRate,
+                    AdditionalCharge = additionalCharge,
+                    CatererFee = catererFee,
+                    Aircon = airconValue
+                });
+
+                using (SqlCommand auditCmd = new SqlCommand(@"
+                INSERT INTO tbl_Audit_Log
+                (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                {
+                    auditCmd.Parameters.AddWithValue("@UserID", userId);
+                    auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                    auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                    auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                    auditCmd.Parameters.AddWithValue("@PrevJson", DBNull.Value); // No previous data for create
+                    auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                    auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
+                    auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                    auditCmd.ExecuteNonQuery();
+                }
+                // end auditlog
 
 
                 transaction.Commit();
@@ -241,5 +292,10 @@ namespace pgso
         private void txt_Hourly_Rate_TextChanged(object sender, EventArgs e){}
 
         private void label2_Click(object sender, EventArgs e){}
+
+        private void txt_Additional_Charges_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

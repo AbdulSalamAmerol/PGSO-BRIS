@@ -1,17 +1,18 @@
-﻿namespace pgso
+﻿using System;
+
+namespace pgso
 {
-    partial class frm_Login
+    partial class frm_login
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, </param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,7 +21,7 @@
             }
             base.Dispose(disposing);
         }
-            
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -29,239 +30,201 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_Login));
-            this.txtpassword = new System.Windows.Forms.TextBox();
-            this.btnlogin = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.showpass = new System.Windows.Forms.PictureBox();
-            this.LBdatetime = new System.Windows.Forms.Label();
-            this.combouname1 = new System.Windows.Forms.TextBox();
-            this.combouname = new System.Windows.Forms.TextBox();
-            this.combousertype = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_login));
+            this.PicB_logo = new System.Windows.Forms.PictureBox();
+            this.lb_pitd = new System.Windows.Forms.Label();
+            this.panel_bg_pgso = new System.Windows.Forms.Panel();
+            this.lb_pgis = new System.Windows.Forms.Label();
+            this.lb_pgso = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel_grop_login = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btn_Login = new System.Windows.Forms.Button();
+            this.CB_remember = new System.Windows.Forms.CheckBox();
+            this.TXT_password = new System.Windows.Forms.TextBox();
+            this.TXT_username = new System.Windows.Forms.TextBox();
+            this.LB_datetime = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.PicB_logo)).BeginInit();
+            this.panel_bg_pgso.SuspendLayout();
+            this.panel_grop_login.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.showpass)).BeginInit();
             this.SuspendLayout();
             // 
-            // txtpassword
+            // PicB_logo
             // 
-            this.txtpassword.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.txtpassword.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtpassword.Location = new System.Drawing.Point(6, 97);
-            this.txtpassword.Name = "txtpassword";
-            this.txtpassword.Size = new System.Drawing.Size(290, 23);
-            this.txtpassword.TabIndex = 3;
+            this.PicB_logo.Image = ((System.Drawing.Image)(resources.GetObject("PicB_logo.Image")));
+            this.PicB_logo.Location = new System.Drawing.Point(115, 52);
+            this.PicB_logo.Name = "PicB_logo";
+            this.PicB_logo.Size = new System.Drawing.Size(100, 71);
+            this.PicB_logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PicB_logo.TabIndex = 0;
+            this.PicB_logo.TabStop = false;
             // 
-            // btnlogin
+            // lb_pitd
             // 
-            this.btnlogin.BackColor = System.Drawing.Color.ForestGreen;
-            this.btnlogin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnlogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnlogin.ForeColor = System.Drawing.Color.White;
-            this.btnlogin.Location = new System.Drawing.Point(6, 152);
-            this.btnlogin.Name = "btnlogin";
-            this.btnlogin.Size = new System.Drawing.Size(289, 27);
-            this.btnlogin.TabIndex = 0;
-            this.btnlogin.Text = "Login";
-            this.btnlogin.UseVisualStyleBackColor = false;
-            this.btnlogin.Click += new System.EventHandler(this.btnlogin_Click);
+            this.lb_pitd.AutoSize = true;
+            this.lb_pitd.Location = new System.Drawing.Point(4, 3);
+            this.lb_pitd.Name = "lb_pitd";
+            this.lb_pitd.Size = new System.Drawing.Size(245, 13);
+            this.lb_pitd.TabIndex = 1;
+            this.lb_pitd.Text = "@2025 Provincial Information Technology Division";
             // 
-            // pictureBox1
+            // panel_bg_pgso
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(123, 47);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(79, 78);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
+            this.panel_bg_pgso.BackColor = System.Drawing.Color.Green;
+            this.panel_bg_pgso.Controls.Add(this.lb_pgis);
+            this.panel_bg_pgso.Controls.Add(this.lb_pgso);
+            this.panel_bg_pgso.Location = new System.Drawing.Point(7, 142);
+            this.panel_bg_pgso.Name = "panel_bg_pgso";
+            this.panel_bg_pgso.Size = new System.Drawing.Size(310, 69);
+            this.panel_bg_pgso.TabIndex = 2;
             // 
-            // label4
+            // lb_pgis
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Stencil", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Transparent;
-            this.label4.Location = new System.Drawing.Point(91, -5);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(132, 42);
-            this.label4.TabIndex = 13;
-            this.label4.Text = ".PGSO.";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lb_pgis.AutoSize = true;
+            this.lb_pgis.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_pgis.ForeColor = System.Drawing.Color.Yellow;
+            this.lb_pgis.Location = new System.Drawing.Point(4, 44);
+            this.lb_pgis.Name = "lb_pgis";
+            this.lb_pgis.Size = new System.Drawing.Size(300, 20);
+            this.lb_pgis.TabIndex = 1;
+            this.lb_pgis.Text = "Provicial Government Information System";
             // 
-            // label5
+            // lb_pgso
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Yellow;
-            this.label5.Location = new System.Drawing.Point(5, 37);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(293, 24);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Provincial General Services Office";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.ForestGreen;
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Location = new System.Drawing.Point(6, 131);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(302, 64);
-            this.panel2.TabIndex = 15;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(93, 196);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(127, 16);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "Login to access GSRBS";
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.showpass);
-            this.panel3.Controls.Add(this.LBdatetime);
-            this.panel3.Controls.Add(this.combouname1);
-            this.panel3.Controls.Add(this.combouname);
-            this.panel3.Controls.Add(this.combousertype);
-            this.panel3.Controls.Add(this.checkBox1);
-            this.panel3.Controls.Add(this.btnlogin);
-            this.panel3.Controls.Add(this.txtpassword);
-            this.panel3.Location = new System.Drawing.Point(6, 217);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(302, 192);
-            this.panel3.TabIndex = 16;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
-            // 
-            // showpass
-            // 
-            this.showpass.Image = ((System.Drawing.Image)(resources.GetObject("showpass.Image")));
-            this.showpass.Location = new System.Drawing.Point(264, 99);
-            this.showpass.Name = "showpass";
-            this.showpass.Size = new System.Drawing.Size(30, 19);
-            this.showpass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.showpass.TabIndex = 16;
-            this.showpass.TabStop = false;
-            this.showpass.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // LBdatetime
-            // 
-            this.LBdatetime.AutoSize = true;
-            this.LBdatetime.Location = new System.Drawing.Point(86, 9);
-            this.LBdatetime.Name = "LBdatetime";
-            this.LBdatetime.Size = new System.Drawing.Size(0, 13);
-            this.LBdatetime.TabIndex = 15;
-            // 
-            // combouname1
-            // 
-            this.combouname1.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.combouname1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.combouname1.Location = new System.Drawing.Point(6, 69);
-            this.combouname1.Name = "combouname1";
-            this.combouname1.Size = new System.Drawing.Size(289, 23);
-            this.combouname1.TabIndex = 14;
-            this.combouname1.Enter += new System.EventHandler(this.combouname1_Enter);
-            this.combouname1.Leave += new System.EventHandler(this.combouname1_Leave);
-            // 
-            // combouname
-            // 
-            this.combouname.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.combouname.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.combouname.Location = new System.Drawing.Point(45, 422);
-            this.combouname.Name = "combouname";
-            this.combouname.Size = new System.Drawing.Size(190, 22);
-            this.combouname.TabIndex = 9;
-            this.combouname.TextChanged += new System.EventHandler(this.combouname1_TextChanged);
-            // 
-            // combousertype
-            // 
-            this.combousertype.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.combousertype.FormattingEnabled = true;
-            this.combousertype.Items.AddRange(new object[] {
-            "Admin",
-            "Staff"});
-            this.combousertype.Location = new System.Drawing.Point(6, 36);
-            this.combousertype.Name = "combousertype";
-            this.combousertype.Size = new System.Drawing.Size(289, 25);
-            this.combousertype.TabIndex = 12;
-            this.combousertype.SelectedIndexChanged += new System.EventHandler(this.combousertype_SelectedIndexChanged_1);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(171, 124);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(117, 19);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "Remember me?";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.lb_pgso.AutoSize = true;
+            this.lb_pgso.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_pgso.ForeColor = System.Drawing.Color.White;
+            this.lb_pgso.Location = new System.Drawing.Point(100, 0);
+            this.lb_pgso.Name = "lb_pgso";
+            this.lb_pgso.Size = new System.Drawing.Size(133, 37);
+            this.lb_pgso.TabIndex = 0;
+            this.lb_pgso.Text = ".PGSO.";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(-1, 1);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(74, 214);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(251, 13);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "@2025 - Provincial Information Technology Division";
+            this.label1.Size = new System.Drawing.Size(184, 20);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Login to Access GSRBS";
             // 
-            // frm_Login
+            // panel_grop_login
+            // 
+            this.panel_grop_login.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_grop_login.Controls.Add(this.pictureBox1);
+            this.panel_grop_login.Controls.Add(this.btn_Login);
+            this.panel_grop_login.Controls.Add(this.CB_remember);
+            this.panel_grop_login.Controls.Add(this.TXT_password);
+            this.panel_grop_login.Controls.Add(this.TXT_username);
+            this.panel_grop_login.Controls.Add(this.LB_datetime);
+            this.panel_grop_login.Location = new System.Drawing.Point(7, 238);
+            this.panel_grop_login.Name = "panel_grop_login";
+            this.panel_grop_login.Size = new System.Drawing.Size(310, 166);
+            this.panel_grop_login.TabIndex = 4;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(275, 65);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(25, 24);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // btn_Login
+            // 
+            this.btn_Login.BackColor = System.Drawing.Color.Green;
+            this.btn_Login.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Login.ForeColor = System.Drawing.Color.White;
+            this.btn_Login.Location = new System.Drawing.Point(8, 118);
+            this.btn_Login.Name = "btn_Login";
+            this.btn_Login.Size = new System.Drawing.Size(292, 31);
+            this.btn_Login.TabIndex = 5;
+            this.btn_Login.Text = "Login";
+            this.btn_Login.UseVisualStyleBackColor = false;
+            this.btn_Login.Click += new System.EventHandler(this.btn_Login_Click);
+            // 
+            // CB_remember
+            // 
+            this.CB_remember.AutoSize = true;
+            this.CB_remember.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CB_remember.Location = new System.Drawing.Point(163, 95);
+            this.CB_remember.Name = "CB_remember";
+            this.CB_remember.Size = new System.Drawing.Size(142, 24);
+            this.CB_remember.TabIndex = 4;
+            this.CB_remember.Text = "Remember Me?";
+            this.CB_remember.UseVisualStyleBackColor = true;
+            // 
+            // TXT_password
+            // 
+            this.TXT_password.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_password.Location = new System.Drawing.Point(7, 63);
+            this.TXT_password.Name = "TXT_password";
+            this.TXT_password.Size = new System.Drawing.Size(296, 26);
+            this.TXT_password.TabIndex = 3;
+            this.TXT_password.TextChanged += new System.EventHandler(this.TXT_password_TextChanged);
+            // 
+            // TXT_username
+            // 
+            this.TXT_username.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_username.Location = new System.Drawing.Point(7, 33);
+            this.TXT_username.Name = "TXT_username";
+            this.TXT_username.Size = new System.Drawing.Size(296, 26);
+            this.TXT_username.TabIndex = 2;
+            this.TXT_username.TextChanged += new System.EventHandler(this.TXT_username_TextChanged);
+            // 
+            // LB_datetime
+            // 
+            this.LB_datetime.AutoSize = true;
+            this.LB_datetime.Location = new System.Drawing.Point(83, 4);
+            this.LB_datetime.Name = "LB_datetime";
+            this.LB_datetime.Size = new System.Drawing.Size(0, 13);
+            this.LB_datetime.TabIndex = 0;
+            // 
+            // frm_login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(316, 427);
+            this.ClientSize = new System.Drawing.Size(323, 417);
+            this.Controls.Add(this.panel_grop_login);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.panel_bg_pgso);
+            this.Controls.Add(this.lb_pitd);
+            this.Controls.Add(this.PicB_logo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frm_Login";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "log_in";
+            this.Name = "frm_login";
+            this.Text = "frm_login";
             this.Load += new System.EventHandler(this.frm_login_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.PicB_logo)).EndInit();
+            this.panel_bg_pgso.ResumeLayout(false);
+            this.panel_bg_pgso.PerformLayout();
+            this.panel_grop_login.ResumeLayout(false);
+            this.panel_grop_login.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.showpass)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button btnlogin;
-        private System.Windows.Forms.TextBox txtpassword;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.ComboBox combousertype;
-        private System.Windows.Forms.TextBox combouname;
-        private System.Windows.Forms.TextBox combouname1;
-        private System.Windows.Forms.Label LBdatetime;
+
+        private System.Windows.Forms.PictureBox PicB_logo;
+        private System.Windows.Forms.Label lb_pitd;
+        private System.Windows.Forms.Panel panel_bg_pgso;
+        private System.Windows.Forms.Label lb_pgis;
+        private System.Windows.Forms.Label lb_pgso;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox showpass;
+        private System.Windows.Forms.Panel panel_grop_login;
+        private System.Windows.Forms.Label LB_datetime;
+        private System.Windows.Forms.Button btn_Login;
+        public System.Windows.Forms.CheckBox CB_remember;
+        private System.Windows.Forms.TextBox TXT_password;
+        private System.Windows.Forms.TextBox TXT_username;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
-

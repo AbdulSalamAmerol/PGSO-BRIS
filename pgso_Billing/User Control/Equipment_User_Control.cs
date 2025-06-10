@@ -124,12 +124,13 @@ namespace pgso.pgso_Billing.User_Control
             lbl_Reservation_Status.Text = billingDetailsList.fld_Reservation_Status;
             lbl_fld_Total_Amount.Text = billingDetailsList.fld_Total_Amount.ToString("C");
 
-            bool showOR = billingDetailsList.fld_OR != null && billingDetailsList.fld_OR != 0;
+            bool showOR = billingDetailsList.fld_OR != null;
             lbl_OR.Visible = tb_OR.Visible = showOR;
 
             if (showOR)
             {
-                lbl_OR.Text = billingDetailsList.fld_OR.ToString();
+                int orValue = Convert.ToInt32(billingDetailsList.fld_OR);
+                lbl_OR.Text = orValue == 0 ? "PLGU" : orValue.ToString();
             }
             // First, center align *everything* by default
             dgv_Equipment_Billing_Records.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;

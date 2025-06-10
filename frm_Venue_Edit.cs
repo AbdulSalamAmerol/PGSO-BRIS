@@ -72,7 +72,7 @@ namespace pgso
 
             // TextBox change events
             txt_FName.TextChanged += Control_ValueChanged;
-            txt_LName.TextChanged += Control_ValueChanged;
+           
             txt_Address.TextChanged += Control_ValueChanged;
             txt_Office.TextChanged += Control_ValueChanged;
             txt_Status.TextChanged += Control_ValueChanged;
@@ -93,37 +93,27 @@ namespace pgso
                 {
                     connection.Open();
                     string query = @"
-                    SELECT DISTINCT
-                        r.fld_Control_number, 
-                        r.fld_Reservation_Status,
-                        r.fld_Created_At,
-                        r.fld_Total_Amount,
-                        '₱' + CONVERT(VARCHAR, CAST(r.fld_Total_Amount AS MONEY), 1) AS fld_Total_Amount,
-                        (SELECT TOP 1 v.fld_Venue_Name 
-                         FROM tbl_Reservation_Venues rv 
-                         JOIN tbl_Venue v ON rv.fk_VenueID = v.pk_VenueID 
-                         WHERE rv.fk_ReservationID = r.pk_ReservationID) AS fld_Venue_Name,
-                        rp.fld_First_Name,
-                        rp.fld_Surname,
-                        Date = STUFF((
-                            SELECT CHAR(10) +
-                                CASE
-                                    WHEN rv2.fld_Start_Date = rv2.fld_End_Date THEN
-                                        FORMAT(rv2.fld_Start_Date, 'MM/dd/yyyy')
-                                    ELSE
-                                        FORMAT(rv2.fld_Start_Date, 'MM/dd/yyyy') + ' - ' + FORMAT(rv2.fld_End_Date, 'MM/dd/yyyy')
-                                END
-                            FROM tbl_Reservation_Venues rv2
-                            WHERE rv2.fk_ReservationID = r.pk_ReservationID
-                            FOR XML PATH(''), TYPE
-                        ).value('.', 'NVARCHAR(MAX)'), 1, 1, '')
-                    FROM tbl_Reservation r
-                    LEFT JOIN tbl_Requesting_Person rp 
-                        ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-                    INNER JOIN tbl_Reservation_Venues rv ON r.pk_ReservationID = rv.fk_ReservationID
-                    WHERE r.fld_Reservation_Type = 'Venue'
-                      AND @SelectedDate BETWEEN rv.fld_Start_Date AND rv.fld_End_Date
-                    ORDER BY r.fld_Created_At DESC";
+SELECT DISTINCT
+    r.fld_Control_number, 
+    r.fld_Reservation_Status,
+    r.fld_Created_At,
+    r.fld_Total_Amount,
+    '₱' + CONVERT(VARCHAR, CAST(r.fld_Total_Amount AS MONEY), 1) AS fld_Total_Amount,
+    v.fld_Venue_Name,
+    rp.fld_First_Name,
+    Date = 
+        CASE
+            WHEN r.fld_Start_Date = r.fld_End_Date THEN
+                FORMAT(r.fld_Start_Date, 'MM/dd/yyyy')
+            ELSE
+                FORMAT(r.fld_Start_Date, 'MM/dd/yyyy') + ' - ' + FORMAT(r.fld_End_Date, 'MM/dd/yyyy')
+        END
+FROM tbl_Reservation r
+LEFT JOIN tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+LEFT JOIN tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
+WHERE r.fld_Reservation_Type = 'Venue'
+  AND @SelectedDate BETWEEN r.fld_Start_Date AND r.fld_End_Date
+ORDER BY r.fld_Created_At DESC";
 
                     var dataTable = new DataTable();
                     using (var adapter = new SqlDataAdapter(query, connection))
@@ -179,29 +169,28 @@ namespace pgso
                 {
                     connection.Open();
                     string query = @"
-                    SELECT 
-                        r.fld_Reservation_Status AS Status,
-                        rp.fld_First_Name AS FirstName, 
-                        rp.fld_Surname AS LastName,
-                        rp.fld_Requesting_Person_Address AS Address,
-                        rp.fld_Requesting_Office AS Office,
-                        r.fld_Activity_Name AS ActivityName,
-                        rv.fld_Participants AS Participants,
-                        v.fld_Venue_Name AS VenueName,
-                        vs.fld_Venue_Scope_Name AS Scope,
-                        vp.fld_Rate_Type AS RateType,
-                        rv.fld_Start_Date AS StartDate,
-                        rv.fld_End_Date AS EndDate,
-                        rv.fld_Start_Time AS StartTime,
-                        rv.fld_End_Time AS EndTime
-                    FROM tbl_Reservation r
-                    LEFT JOIN tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-                    LEFT JOIN tbl_Reservation_Venues rv ON r.pk_ReservationID = rv.fk_ReservationID
-                    LEFT JOIN tbl_Venue v ON rv.fk_VenueID = v.pk_VenueID
-                    LEFT JOIN tbl_Venue_Scope vs ON rv.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
-                    LEFT JOIN tbl_Venue_Pricing vp ON (rv.fk_VenueID = vp.fk_VenueID AND rv.fk_Venue_ScopeID = vp.fk_Venue_ScopeID)
-                    WHERE r.fld_Control_number = @ControlNumber";
-
+SELECT 
+    r.fld_Reservation_Status AS Status,
+    rp.fld_First_Name AS FirstName, 
+    rp.fld_Middle_Name AS MiddleName,
+    rp.fld_Surname AS Surname,
+    rp.fld_Requesting_Person_Address AS Address,
+    rp.fld_Requesting_Office AS Office,
+    r.fld_Activity_Name AS ActivityName,
+    r.fld_Number_Of_Participants AS Participants,
+    v.fld_Venue_Name AS VenueName,
+    vs.fld_Venue_Scope_Name AS Scope,
+    vp.fld_Rate_Type AS RateType,
+    r.fld_Start_Date AS StartDate,
+    r.fld_End_Date AS EndDate,
+    r.fld_Start_Time AS StartTime,
+    r.fld_End_Time AS EndTime
+FROM tbl_Reservation r
+LEFT JOIN tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+LEFT JOIN tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
+LEFT JOIN tbl_Venue_Scope vs ON r.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
+LEFT JOIN tbl_Venue_Pricing vp ON (r.fk_VenueID = vp.fk_VenueID AND r.fk_Venue_ScopeID = vp.fk_Venue_ScopeID)
+WHERE r.fld_Control_number = @ControlNumber";
                     using (var command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ControlNumber", controlNumber);
@@ -212,8 +201,14 @@ namespace pgso
 
                             while (reader.Read())
                             {
-                                txt_FName.Text = reader["FirstName"]?.ToString() ?? "N/A";
-                                txt_LName.Text = reader["LastName"]?.ToString() ?? "N/A";
+                                // Concatenate first, middle, and surname
+                                string firstName = reader["FirstName"]?.ToString() ?? "";
+                                string middleName = reader["MiddleName"]?.ToString() ?? "";
+                                string surname = reader["Surname"]?.ToString() ?? "";
+                                string fullName = $"{firstName} {middleName} {surname}".Replace("  ", " ").Trim();
+
+                                txt_FName.Text = string.IsNullOrWhiteSpace(fullName) ? "N/A" : fullName;
+
                                 txt_Address.Text = reader["Address"]?.ToString() ?? "N/A";
                                 txt_Office.Text = reader["Office"]?.ToString() ?? "N/A";
                                 txt_Activity.Text = reader["ActivityName"]?.ToString() ?? "N/A";
@@ -257,10 +252,10 @@ namespace pgso
         private void UpdateTextBoxEditability()
         {
             bool isPending = txt_Status.Text.Equals("Pending", StringComparison.OrdinalIgnoreCase);
-            txt_FName.Enabled = isPending;
-            txt_LName.Enabled = isPending;
-            txt_Office.Enabled = isPending;
-            txt_Address.Enabled = isPending;
+            //txt_FName.Enabled = isPending;
+  
+            //txt_Office.Enabled = isPending;
+            //txt_Address.Enabled = isPending;
         }
 
         private void Control_ValueChanged(object sender, EventArgs e)
@@ -315,7 +310,7 @@ namespace pgso
                     string personQuery = @"
                         UPDATE tbl_Requesting_Person
                         SET fld_First_Name = @FirstName,
-                            fld_Surname = @LastName,
+
                             fld_Requesting_Person_Address = @Address
                         WHERE pk_Requesting_PersonID = 
                             (SELECT fk_Requesting_PersonID 
@@ -325,7 +320,7 @@ namespace pgso
                     using (var command = new SqlCommand(personQuery, connection))
                     {
                         command.Parameters.AddWithValue("@FirstName", txt_FName.Text.Trim());
-                        command.Parameters.AddWithValue("@LastName", txt_LName.Text.Trim());
+   
                         command.Parameters.AddWithValue("@Address", txt_Address.Text.Trim());
                         command.Parameters.AddWithValue("@ControlNumber", currentControlNumber);
                         command.ExecuteNonQuery();
@@ -364,8 +359,8 @@ namespace pgso
             bindingSource.Filter = string.IsNullOrEmpty(searchText) ? "" :
                 $"fld_Control_number LIKE '%{searchText}%' OR " +
                 $"fld_Venue_Name LIKE '%{searchText}%' OR " +
-                $"fld_First_Name LIKE '%{searchText}%' OR " +
-                $"fld_Surname LIKE '%{searchText}%'";
+                $"fld_First_Name LIKE '%{searchText}%'";
+    
         }
 
         private void Dt_all_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -493,7 +488,7 @@ namespace pgso
                         string personQuery = @"
                     UPDATE tbl_Requesting_Person
                     SET fld_First_Name = @FirstName,
-                        fld_Surname = @LastName,
+ 
                         fld_Requesting_Person_Address = @Address
                     WHERE pk_Requesting_PersonID = 
                         (SELECT fk_Requesting_PersonID 
@@ -503,7 +498,6 @@ namespace pgso
                         using (var command = new SqlCommand(personQuery, connection, transaction))
                         {
                             command.Parameters.AddWithValue("@FirstName", txt_FName.Text.Trim());
-                            command.Parameters.AddWithValue("@LastName", txt_LName.Text.Trim());
                             command.Parameters.AddWithValue("@Address", txt_Address.Text.Trim());
                             command.Parameters.AddWithValue("@ControlNumber", currentControlNumber);
                             command.ExecuteNonQuery();
@@ -524,6 +518,11 @@ namespace pgso
                 MessageBox.Show($"Error updating reservation: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void txt_FName_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

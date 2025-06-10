@@ -120,8 +120,16 @@ namespace pgso.pgso_Billing
                 btn_Change_Reservation_info.Enabled = false;
             }
 
-            lbl_OR.Text = billingDetails.fld_OR.ToString();
-            lbl_OR.Visible = billingDetails.fld_OR > 0;
+            if (billingDetails.fld_OR == 0)
+            {
+                lbl_OR.Visible = false; // hides the label entirely
+            }
+            else
+            {
+                lbl_OR.Text = billingDetails.fld_OR.ToString();
+                lbl_OR.Visible = true;
+            }
+            lbl_OR.Visible = billingDetails.fld_OR != null;
             // Format reservation dates (start and end)
             lbl_Reservation_Dates.Text = $"{billingDetails.fld_Start_Date.ToString("MM/dd/yyyy")} - {billingDetails.fld_End_Date.ToString("MM/dd/yyyy")}";
 

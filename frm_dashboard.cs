@@ -1,7 +1,8 @@
 ﻿using pgso_connect;
 using System;
-using System.Data.SqlClient;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -19,7 +20,8 @@ namespace pgso
         private int currentMonth;
         private ComboBox cmbMonth;
         private NumericUpDown numYear;
-
+        private Connection db = new Connection();
+        public static bool NeedsCalendarRefresh = false;
         //dashboard properties
         public frm_Dashboard()
         {
@@ -312,13 +314,7 @@ namespace pgso
         //Manage FACILITIES START
         private void manageFacilitiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frm_Manage_Facilities Facilities = new frm_Manage_Facilities();
-            Facilities.TopLevel = false;
-            Facilities.FormBorderStyle = FormBorderStyle.None;
-            Facilities.Dock = DockStyle.Fill;
-            this.panel_Display.Controls.Clear();
-            this.panel_Display.Controls.Add(Facilities);
-            Facilities.Show();
+
         }
 
 
@@ -392,11 +388,197 @@ namespace pgso
         private void billingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frm_Billing Billing = new frm_Billing();
-    
-     
-    
-       
             Billing.ShowDialog();
+
+            // After Billing closes, refresh the calendar display
+            DisplayCalendar(); // This will reload frm_Calendar and thus refresh UserControlDays
+        }
+
+        private void equipmentToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            frm_Manage_Equipment mngequipment = new frm_Manage_Equipment();
+            mngequipment.TopLevel = false;
+            mngequipment.FormBorderStyle = FormBorderStyle.None;
+            mngequipment.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(mngequipment);
+            mngequipment.Show();
+        }
+
+        private void venueToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            frm_Manage_Venue mngvenues = new frm_Manage_Venue();
+            mngvenues.TopLevel = false;
+            mngvenues.FormBorderStyle = FormBorderStyle.None;
+            mngvenues.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(mngvenues);
+            mngvenues.Show();
+        }
+
+        private void clientToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_Client_Info client = new frm_Client_Info();
+            client.TopLevel = false;
+            client.FormBorderStyle = FormBorderStyle.None;
+            client.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(client);
+            client.Show();
+        }
+
+        private void auditLogsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void activityLogsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_Logs activity = new frm_Logs();
+            activity.TopLevel = false;
+            activity.FormBorderStyle = FormBorderStyle.None;
+            activity.Dock = DockStyle.Fill;
+            this.panel_Display.Controls.Clear();
+            this.panel_Display.Controls.Add(activity);
+            activity.Show();
+        }
+
+
+
+
+
+
+        private bool isLoggedOut = false;
+
+        private void PerformLogout()
+        {
+            if (!isLoggedOut)
+            {
+                try
+                {
+                    string username = frm_login.LoggedInUsername;
+                    string userType = !string.IsNullOrEmpty(frm_login.UserType) ? frm_login.UserType : "Unknown";
+
+                    if (db.strCon.State == ConnectionState.Closed)
+                        db.strCon.Open();
+
+                    LogAuditAction(username, "Log out", userType);
+
+                    System.Threading.Thread.Sleep(1000); // Simulate delay for logging
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error logging logout action: " + ex.Message);
+                }
+                finally
+                {
+                    isLoggedOut = true;
+                }
+            }
+        
+        }
+
+
+        //logout
+        private void LogAuditAction(string username, string action, string userType)
+        {
+            try
+            {
+                if (db.strCon.State == ConnectionState.Closed)
+                    db.strCon.Open();
+
+                // Query to get the UserID based on the username
+                string getUserIdQuery = "SELECT pk_UserID FROM tbl_User WHERE fld_Username = @Username";
+                using (SqlCommand getUserIdCmd = new SqlCommand(getUserIdQuery, db.strCon))
+                {
+                    getUserIdCmd.Parameters.AddWithValue("@Username", username);
+
+                    object userIdObj = getUserIdCmd.ExecuteScalar();
+                    if (userIdObj == null)
+                    {
+                        MessageBox.Show("User not found. Cannot log the action.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    int userId = Convert.ToInt32(userIdObj);
+
+                    // Insert the audit log
+                    string insertAuditLogQuery = "INSERT INTO tbl_Audit_Log (fk_UserID, fld_Changed_By, fld_ActionType, fld_Changed_At) VALUES (@UserID, @ChangedBy, @ActionType, @ChangedAt)";
+                    using (SqlCommand insertAuditLogCmd = new SqlCommand(insertAuditLogQuery, db.strCon))
+                    {
+                        insertAuditLogCmd.Parameters.AddWithValue("@UserID", userId);
+                        insertAuditLogCmd.Parameters.AddWithValue("@ChangedBy", userType);
+                        insertAuditLogCmd.Parameters.AddWithValue("@ActionType", action);
+                        insertAuditLogCmd.Parameters.AddWithValue("@ChangedAt", DateTime.Now);
+
+                        insertAuditLogCmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error logging action: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+
+
+        private void btn_logout_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to log out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                PerformLogout(); // Log the logout 7ffccccccccccccccccccccccaction
+                Application.Exit();
+            }
+
+        }
+        //KAY JOSE ITO, YUNG MAYMGA CONNECTION STRUING NA GANITO
+
+        private void auditLogsToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                //palitan mo to ng connection string mo, ito yung ginawa ko kasio mweheehhehe
+                using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["pgso.Properties.Settings.strCon"].ConnectionString))
+                {
+                    con.Open();
+
+                    // Query to fetch audit logs
+                    string query = "SELECT fld_Changed_By, fld_ActionType, fld_Changed_At FROM tbl_Audit_Log ORDER BY fld_Changed_At DESC";
+
+                    SqlDataAdapter sda = new SqlDataAdapter(query, con);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+
+                    // Display logs in frm_Logs
+                    frm_Logs logsForm = new frm_Logs();
+                    logsForm.TopLevel = false;
+                    logsForm.FormBorderStyle = FormBorderStyle.None;
+                    logsForm.Dock = DockStyle.Fill;
+                    this.panel_Display.Controls.Clear();
+                    this.panel_Display.Controls.Add(logsForm);
+
+                    // Assuming frm_Logs has a DataGridView named dgvLogs
+                    //logsForm.dt_Audit.DataSource = dt;
+                    logsForm.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading audit logs: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+            if (NeedsCalendarRefresh)
+            {
+                DisplayCalendar(); // This reloads the calendar and UserControlDays
+                NeedsCalendarRefresh = false;
+            }
         }
 
 
