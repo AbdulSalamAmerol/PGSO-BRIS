@@ -375,6 +375,7 @@
             // col_Date_Created
             // 
             this.col_Date_Created.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.col_Date_Created.DataPropertyName = "fld_Created_At";
             this.col_Date_Created.HeaderText = "DATE CREATED";
             this.col_Date_Created.Name = "col_Date_Created";
             this.col_Date_Created.ReadOnly = true;

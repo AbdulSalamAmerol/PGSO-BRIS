@@ -1,25 +1,32 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows.Forms;
-using System.Configuration;
 
 namespace pgso
 {
-
-    public partial class frm_Login : Form
+    public partial class frm_login : Form
     {
-        public static string LoggedInUsername { get; private set; } // Static variable to store the logged-in username
-        public static string UserType { get; private set; } // Static variable to store the user type
+        public static int LoggedInUserId { get; private set; }
+        public static string LoggedInUsername { get; private set; }
+        public static string UserType { get; private set; }
+        public static string username;
+        public static string LoggedInUserRole { get; set; }
 
-        static string mycon = ConfigurationManager.ConnectionStrings["pgso.Properties.Settings.strCon"]?.ConnectionString ?? "";
+        private static string mycon = ConfigurationManager.ConnectionStrings["pgso.Properties.Settings.strCon"]?.ConnectionString ?? "";
 
 
-        public frm_Login()
+        private const string usernamePlaceholder = "Enter username";
+        private const string passwordPlaceholder = "Enter password";
+
+        private Timer timer1;
+
+        public frm_login()
         {
             InitializeComponent();
-
-            this.StartPosition = FormStartPosition.CenterScreen; // Ensure this is set
+            this.StartPosition = FormStartPosition.CenterScreen;
 
             if (string.IsNullOrEmpty(mycon))
             {
@@ -27,19 +34,215 @@ namespace pgso
                                 "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            checkBox1.Checked = false;
+            LoadRememberedCredentials();
 
-            // Set password text visibility based on the checkbox state
-            txtpassword.UseSystemPasswordChar = !checkBox1.Checked;
+            CB_remember.Checked = false;
+            TXT_password.UseSystemPasswordChar = !CB_remember.Checked;
+
+            SetUsernamePlaceholder();
+            SetPasswordPlaceholder();
+
+            TXT_username.Enter += TXT_username_Enter;
+            TXT_username.Leave += TXT_username_Leave;
+            TXT_username.TextChanged += TXT_username_TextChanged;
+
+            TXT_password.Enter += TXT_password_Enter;
+            TXT_password.Leave += TXT_password_Leave;
+            TXT_password.TextChanged += TXT_password_TextChanged;
+
+            timer1 = new Timer();
+            timer1.Interval = 1000;
+            timer1.Start();
+
+            LB_datetime.Text = DateTime.Now.ToString("MMMM dd, yyyy hh:mm:ss tt");
         }
 
-        private void frm_login_Load(object sender, EventArgs e)
+        private void LoadRememberedCredentials()
         {
-            // Logic to execute when the form loads
-           // MessageBox.Show("Login form is loading...");
+            if (Properties.Settings.Default.RememberMeChecked &&
+                !string.IsNullOrWhiteSpace(Properties.Settings.Default.RememberedUsername))
+            {
+                TXT_username.Text = Properties.Settings.Default.RememberedUsername;
+                TXT_username.ForeColor = Color.Black;
+                CB_remember.Checked = true;
+            }
+            else
+            {
+                SetUsernamePlaceholder();
+                CB_remember.Checked = false;
+            }
         }
 
-       
+        private void SetUsernamePlaceholder()
+        {
+            if (string.IsNullOrWhiteSpace(TXT_username.Text))
+            {
+                TXT_username.Text = usernamePlaceholder;
+                TXT_username.ForeColor = Color.Gray;
+            }
+        }
+
+        private void SetPasswordPlaceholder()
+        {
+            if (string.IsNullOrWhiteSpace(TXT_password.Text))
+            {
+                TXT_password.UseSystemPasswordChar = false;
+                TXT_password.Text = passwordPlaceholder;
+                TXT_password.ForeColor = Color.Gray;
+            }
+        }
+
+        private void TXT_username_Enter(object sender, EventArgs e)
+        {
+            if (TXT_username.Text == usernamePlaceholder)
+            {
+                TXT_username.Text = "";
+                TXT_username.ForeColor = Color.Black;
+            }
+        }
+
+        private void TXT_username_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TXT_username.Text))
+            {
+                SetUsernamePlaceholder();
+            }
+        }
+
+        private void TXT_username_TextChanged(object sender, EventArgs e)
+        {
+            if (TXT_username.Text != usernamePlaceholder && TXT_username.ForeColor == Color.Gray)
+            {
+                TXT_username.Text = TXT_username.Text.Replace(usernamePlaceholder, "");
+                TXT_username.ForeColor = Color.Black;
+                TXT_username.SelectionStart = TXT_username.Text.Length;
+                TXT_username.SelectionLength = 0;
+            }
+        }
+
+        private void TXT_password_Enter(object sender, EventArgs e)
+        {
+            if (TXT_password.Text == passwordPlaceholder)
+            {
+                TXT_password.Text = "";
+                TXT_password.UseSystemPasswordChar = !CB_remember.Checked;
+                TXT_password.ForeColor = Color.Black;
+            }
+        }
+
+        private void TXT_password_Leave(object sender, EventArgs e)
+        {
+            SetPasswordPlaceholder();
+        }
+
+        private void TXT_password_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(TXT_password.Text) &&
+                TXT_password.Text != passwordPlaceholder &&
+                !TXT_password.Multiline)
+            {
+                TXT_password.UseSystemPasswordChar = true;
+                TXT_password.ForeColor = Color.Black;
+            }
+            else
+            {
+                TXT_password.UseSystemPasswordChar = false;
+                TXT_password.ForeColor = Color.Gray;
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (TXT_password.Text != passwordPlaceholder)
+            {
+                TXT_password.UseSystemPasswordChar = !TXT_password.UseSystemPasswordChar;
+            }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            if (TXT_password.Text != passwordPlaceholder)
+            {
+                TXT_password.UseSystemPasswordChar = false;
+            }
+        }
+
+        private void btn_Login_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TXT_username.Text) || string.IsNullOrWhiteSpace(TXT_password.Text))
+            {
+                MessageBox.Show("All fields are required.");
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(mycon))
+                {
+                    string query = "SELECT * FROM tbl_User " +
+                                   "WHERE fld_Username = @Username COLLATE SQL_Latin1_General_CP1_CS_AS " +
+                                   "AND fld_PasswordHash = @Password COLLATE SQL_Latin1_General_CP1_CS_AS";
+
+                    SqlDataAdapter sda = new SqlDataAdapter(query, con);
+                    sda.SelectCommand.Parameters.AddWithValue("@Username", TXT_username.Text);
+                    sda.SelectCommand.Parameters.AddWithValue("@Password", TXT_password.Text);
+
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+
+                    if (dt.Rows.Count == 1)
+                    {
+                        DataRow row = dt.Rows[0];
+                        LoggedInUserId = Convert.ToInt32(row["pk_UserID"]); // Store user ID
+                        LoggedInUsername = row["fld_Username"].ToString();  // Store username from DB
+                        UserType = row["fld_Role"].ToString().Trim();
+
+                        username = row["fld_Username"].ToString();
+
+                        LoggedInUserRole = UserType;
+                        if (CB_remember.Checked)
+                        {
+                            Properties.Settings.Default.RememberedUsername = TXT_username.Text;
+                            Properties.Settings.Default.RememberMeChecked = true;
+                        }
+                        else
+                        {
+                            Properties.Settings.Default.RememberedUsername = "";
+                            Properties.Settings.Default.RememberMeChecked = false;
+                        }
+
+                        Properties.Settings.Default.Save();
+
+                        if (UserType == "Admin" || UserType == "Staff")
+                        {
+                            LogAuditAction(LoggedInUsername, "Logged In", UserType);
+
+                            this.Hide();
+                            frm_Dashboard dashboard = new frm_Dashboard();
+                            dashboard.ShowDialog();
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Access denied. Only admins and staff can log in.");
+                        }
+                    }
+                    else
+                    {
+                        Properties.Settings.Default.RememberedUsername = "";
+                        Properties.Settings.Default.RememberedUserType = "";
+                        Properties.Settings.Default.RememberMeChecked = false;
+                        Properties.Settings.Default.Save();
+
+                        MessageBox.Show("Invalid username or password.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
 
         private void LogAuditAction(string username, string action, string userType)
         {
@@ -49,7 +252,6 @@ namespace pgso
                 {
                     con.Open();
 
-                    // Update the table name if necessary
                     string getUserIdQuery = "SELECT pk_UserID FROM tbl_User WHERE fld_Username = @Username";
                     SqlCommand getUserIdCmd = new SqlCommand(getUserIdQuery, con);
                     getUserIdCmd.Parameters.AddWithValue("@Username", username);
@@ -81,103 +283,22 @@ namespace pgso
             }
         }
 
-        private void combouname1_SelectedIndexChanged(object sender, EventArgs e)
+        protected override void OnShown(EventArgs e)
         {
+            base.OnShown(e);
 
-        }
+            SetPasswordPlaceholder();
 
-        private void btnlogin_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(combouname1.Text) || string.IsNullOrWhiteSpace(txtpassword.Text))
+            if (string.IsNullOrWhiteSpace(TXT_username.Text))
             {
-                MessageBox.Show("All fields are required.");
-                return;
+                SetUsernamePlaceholder();
             }
-
-            try
+            else if (TXT_username.Text != usernamePlaceholder)
             {
-                using (SqlConnection con = new SqlConnection(mycon))
-                {
-                    string query = "SELECT * FROM tbl_User WHERE fld_Username = @Username COLLATE SQL_Latin1_General_CP1_CS_AS AND fld_PasswordHash = @Password COLLATE SQL_Latin1_General_CP1_CS_AS AND fld_Role = @Role COLLATE SQL_Latin1_General_CP1_CS_AS";
-
-                    SqlDataAdapter sda = new SqlDataAdapter(query, con);
-                    sda.SelectCommand.Parameters.AddWithValue("@Username", combouname1.Text);
-                    sda.SelectCommand.Parameters.AddWithValue("@Password", txtpassword.Text);
-                    sda.SelectCommand.Parameters.AddWithValue("@Role", combousertype.Text);
-
-                    DataTable dt = new DataTable();
-                    sda.Fill(dt);
-
-                    if (dt.Rows.Count == 1)
-                    {
-                        DataRow row = dt.Rows[0];
-                        LoggedInUsername = combouname1.Text; // Set the logged-in username
-                        UserType = row["fld_Role"].ToString().Trim(); // Set the user type
-
-                        // Check if the user is an admin
-                        if (UserType == "Admin")
-                        {
-                            // Log the login action
-                            LogAuditAction(LoggedInUsername, "Logged In", UserType);
-
-                            // Show the dashboard
-                            this.Hide();
-                            frm_Dashboard dashboard = new frm_Dashboard();
-                            dashboard.ShowDialog();
-                            this.Close();
-                        }
-                        else if (UserType == "Staff")
-                        {
-                            // Log the login action
-                            LogAuditAction(LoggedInUsername, "Logged In", UserType);
-
-                            // Show the dashboard for staff
-                            this.Hide();
-                            frm_Dashboard dashboard = new frm_Dashboard();
-                            dashboard.ShowDialog();
-                            this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Access denied. Only admins and staff can log in.");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Invalid username or password.");
-                    }
-                }
+                TXT_username.SelectionStart = TXT_username.Text.Length;
+                TXT_username.SelectionLength = 0;
+                TXT_username.ForeColor = Color.Black;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
-
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            txtpassword.UseSystemPasswordChar = !checkBox1.Checked;
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtpassword_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
-
-        private void combouname1_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

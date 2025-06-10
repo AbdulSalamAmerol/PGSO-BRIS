@@ -12,33 +12,34 @@ using System.Windows.Forms;
 
 namespace pgso
 {
-    public partial class frm_Manage_Facilities : Form
+    public partial class frm_Manage_Venue : Form
     {
         private Connection db = new Connection();
         private SqlConnection dbConnection;
         private SqlCommand cmd;
-        // Add these fields at the top of your class
+
         private DataTable venuesTable;
-        private DataTable equipmentsTable;
-        public frm_Manage_Facilities()
+
+        private int currentPage = 1;
+        private int pageSize = 30;
+        private int totalPages = 1;
+        private int rateTypeStartIndex = -1;
+        private int airconStartIndex = -1;
+        public frm_Manage_Venue()
         {
             InitializeComponent();
-            dt_Equipments.CellContentClick += dt_Equipments_CellContentClick;
-            dt_Equipments.CellClick += dt_Equipments_CellClick;
+           
             dt_Venues.CellClick += dt_Venues_CellClick;
             dt_Venues.RowPostPaint += dt_Venues_RowPostPaint;
-            dt_Equipments.RowPostPaint += dt_Equipments_RowPostPaint;
-            dt_Venues.Columns["DeleteVenue"].Visible = false;
-            dt_Equipments.Columns["Delete"].Visible = false;
+           
+           dt_Venues.Columns["DeleteVenue"].Visible = false;
+            
 
             // Attach CellFormatting event
             dt_Venues.CellFormatting += dt_Venues_CellFormatting;
-            dt_Equipments.CellFormatting += dt_Equipments_CellFormatting;
+           
 
-            //datagridview column header bg color
-            dt_Equipments.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.LightBlue;
-            dt_Equipments.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 10, System.Drawing.FontStyle.Bold); 
-            dt_Equipments.EnableHeadersVisualStyles = false;
+          
 
             dt_Venues.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.LightBlue;
             dt_Venues.EnableHeadersVisualStyles = false;
@@ -49,10 +50,43 @@ namespace pgso
             txt_Search_Venue.GotFocus += Txt_Search_GotFocus;
             txt_Search_Venue.LostFocus += Txt_Search_LostFocus;
             // In InitializeControls() or after InitializeComponent()
-            txt_Search_Equipmet.ForeColor = System.Drawing.Color.Gray;
-            txt_Search_Equipmet.Text = "Search Equipment";
-            txt_Search_Equipmet.GotFocus += Txt_Search_GotFocus2;
-            txt_Search_Equipmet.LostFocus += Txt_Search_LostFocus2;
+
+
+            // Always show frm_Add_Venues in the panel on form creation
+            ShowAddVenueForm();
+
+            // Always show frm_Add_Scope in the panel on form creation
+            ShowAddScopeForm();
+
+            // Panels are disabled by default
+            panel_Add_Venue.Enabled = false;
+            panel_AddScope.Enabled = false;
+
+            combo_Filter.SelectedIndexChanged += combo_Filter_SelectedIndexChanged;
+            combo_Sort.SelectedIndexChanged += combo_Sort_SelectedIndexChanged;
+
+            // Add filter options
+            combo_Filter.Items.Clear();
+            combo_Filter.Items.Add("All");
+            combo_Filter.Items.Add("Venue");
+            combo_Filter.Items.Add("Airconditioned Yes");
+            combo_Filter.Items.Add("Airconditioned No");
+            combo_Filter.Items.Add("Rate Type");
+            combo_Filter.SelectedIndex = 0; // Default selection
+
+            // Add sort options
+            combo_Sort.Items.Clear();
+            combo_Sort.Items.Add("ASC");
+            combo_Sort.Items.Add("DESC");
+            combo_Sort.Items.Add("Lowest Rate4");
+            combo_Sort.Items.Add("Highest Rate4");
+            combo_Sort.SelectedIndex = 0; // Default selection
+
+            combo_Filter.SelectedIndexChanged += combo_Filter_SelectedIndexChanged;
+            combo_Sort.SelectedIndexChanged += combo_Sort_SelectedIndexChanged;
+
+            combo_Filter.DrawMode = DrawMode.OwnerDrawFixed;
+            combo_Filter.DrawItem += combo_Filter_DrawItem;
         }
 
 
@@ -63,7 +97,8 @@ namespace pgso
         private void dt_Venues_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             int itemColIndex = dt_Venues.Columns["Item"].Index;
-            dt_Venues.Rows[e.RowIndex].Cells[itemColIndex].Value = (e.RowIndex + 1).ToString();
+            int globalRowNumber = (currentPage - 1) * pageSize + e.RowIndex + 1;
+            dt_Venues.Rows[e.RowIndex].Cells[itemColIndex].Value = globalRowNumber.ToString();
         }
         private void Txt_Search_GotFocus(object sender, EventArgs e)
         {
@@ -83,28 +118,10 @@ namespace pgso
             }
         }
 
-        private void Txt_Search_GotFocus2(object sender, EventArgs e)
-        {
-            if (txt_Search_Equipmet.Text == "Search Equipment")
-            {
-                txt_Search_Equipmet.Text = "";
-                txt_Search_Equipmet.ForeColor = System.Drawing.Color.Black;
-            }
-        }
+        
 
-        private void Txt_Search_LostFocus2(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txt_Search_Equipmet.Text))
-            {
-                txt_Search_Equipmet.Text = "Search Equipment";
-                txt_Search_Equipmet.ForeColor = System.Drawing.Color.Gray;
-            }
-        }
-        private void dt_Equipments_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            int itemColIndex = dt_Equipments.Columns["Items"].Index;
-            dt_Equipments.Rows[e.RowIndex].Cells[itemColIndex].Value = (e.RowIndex + 1).ToString();
-        }
+        
+        
 
         //displays the data in the datagridview
         private void RefreshData()
@@ -117,36 +134,23 @@ namespace pgso
                 //VENUES
                 string queryVenues = @"
                 SELECT 
-                    v.fld_Venue_Name, 
-                    vs.fld_Venue_Scope_Name,
-                    vp.fld_Aircon,
-                    vp.fld_Rate_Type,
-                    vp.fld_First4Hrs_Rate,
-                    vp.fld_Hourly_Rate,
-                    vp.fld_Additional_Charge
-                 FROM 
-                     tbl_Venue v
-                 JOIN 
-                    tbl_Venue_Pricing vp ON v.pk_VenueID = vp.fk_VenueID
-                 JOIN 
-                    tbl_Venue_Scope vs ON vs.pk_Venue_ScopeID = vp.fk_Venue_ScopeID";
+    vp.pk_Venue_PricingID, -- Add this
+    v.fld_Venue_Name, 
+    vs.fld_Venue_Scope_Name,
+    vp.fld_Aircon,
+    vp.fld_Rate_Type,
+    vp.fld_First4Hrs_Rate,
+    vp.fld_Hourly_Rate,
+    vp.fld_Additional_Charge,
+    vp.fld_Caterer_Fee
+ FROM 
+     tbl_Venue v
+ JOIN 
+    tbl_Venue_Pricing vp ON v.pk_VenueID = vp.fk_VenueID
+ JOIN 
+    tbl_Venue_Scope vs ON vs.pk_Venue_ScopeID = vp.fk_Venue_ScopeID";
 
-                //EQUIPMENT
-                string queryEquipment = @"
-
-                SELECT 
-                    e.fld_Equipment_Name, 
-                    ep.fld_Equipment_Price,
-                    ep.fld_Equipment_Price_Subsequent,
-                    e.fld_Total_Stock,
-                    e.fld_Remaining_Stock
-                FROM 
-                    tbl_Equipment e
-                JOIN 
-                    tbl_Equipment_Pricing ep ON e.pk_EquipmentID = ep.fk_EquipmentID";
-
-
-                LoadData(queryEquipment, dt_Equipments, "equipment");
+                
                 LoadData(queryVenues, dt_Venues, "venues");
             }
             catch (Exception ex)
@@ -197,27 +201,7 @@ namespace pgso
 
 
 
-        private void dt_Equipments_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            string colName = dt_Equipments.Columns[e.ColumnIndex].Name;
-
-            if (colName == "fld_Equipment_Price" || colName == "fld_Equipment_Price_Subsequent")
-            {
-                if (e.Value != null && decimal.TryParse(e.Value.ToString(), out decimal value))
-                {
-                    e.Value = "₱" + value.ToString("N2"); // Peso sign, 2 decimal places
-                    e.FormattingApplied = true;
-                }
-            }
-            else if (colName == "fld_Total_Stock" || colName == "fld_Remaining_Stock")
-            {
-                if (e.Value != null && decimal.TryParse(e.Value.ToString(), out decimal value))
-                {
-                    e.Value = value.ToString("N0"); // No Peso sign, no decimal places
-                    e.FormattingApplied = true;
-                }
-            }
-        }
+        
 
 
 
@@ -241,8 +225,9 @@ namespace pgso
                 // Store the data for filtering
                 if (dataGridView == dt_Venues)
                     venuesTable = tempDt;
-                else if (dataGridView == dt_Equipments)
-                    equipmentsTable = tempDt;
+
+                if (dataGridView == dt_Venues)
+                    PopulateFilterCombo();
 
                 if (tempDt.Rows.Count == 0)
                 {
@@ -263,21 +248,23 @@ namespace pgso
 
         private void btn_Add_Venue_Click(object sender, EventArgs e)
         {
-            frm_Add_Venues frm_Add_Venues = new frm_Add_Venues();
-            frm_Add_Venues.VenueAdded += (s, args) => {
-                RefreshData(); // Refresh when venue is added
-            };
-            frm_Add_Venues.Show();
+            panel_Add_Venue.Enabled = true;
+            panel_AddScope.Enabled = false; // Disable the other panel
+            ShowAddVenueForm();
+            RefreshData();
+
         }
         //sa datagridview click for venues
         private void dt_Venues_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
             if (e.RowIndex < 0) return;
 
             DataGridViewRow row = dt_Venues.Rows[e.RowIndex];
 
             if (e.ColumnIndex == dt_Venues.Columns["EditVenue"].Index)
             {
+                int pricingId = Convert.ToInt32(row.Cells["pk_Venue_PricingID"].Value);
                 string venueName = row.Cells["fld_Venue_Name"].Value.ToString();
                 string venueScopeName = row.Cells["fld_Venue_Scope_Name"].Value.ToString();
                 bool aircon = Convert.ToBoolean(row.Cells["fld_Aircon"].Value);
@@ -285,10 +272,11 @@ namespace pgso
                 decimal first4HrsRate = Convert.ToDecimal(row.Cells["fld_First4Hrs_Rate"].Value);
                 decimal hourlyRate = Convert.ToDecimal(row.Cells["fld_Hourly_Rate"].Value);
                 decimal additionalCharge = Convert.ToDecimal(row.Cells["fld_Additional_Charge"].Value);
+                decimal catererFee = 0;
+                if (row.Cells["fld_Caterer_Fee"] != null && row.Cells["fld_Caterer_Fee"].Value != DBNull.Value)
+                    catererFee = Convert.ToDecimal(row.Cells["fld_Caterer_Fee"].Value);
 
-                ShowEditForm(venueName, venueScopeName, aircon, rateType, first4HrsRate, hourlyRate, additionalCharge);
-
-
+                ShowEditForm(pricingId, venueName, venueScopeName, aircon, rateType, first4HrsRate, hourlyRate, additionalCharge, catererFee);
             }
             else if (e.ColumnIndex == dt_Venues.Columns["DeleteVenue"].Index)
             {
@@ -348,84 +336,7 @@ namespace pgso
         }
 
 
-        //Click the data grid view for Equipments para ma-edit or delete
-        private void dt_Equipments_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dt_Equipments.Rows[e.RowIndex];
-
-                if (e.ColumnIndex == dt_Equipments.Columns["Edit"].Index)
-                {
-                    string equipmentName = row.Cells["fld_Equipment_Name"].Value.ToString();
-                    string equipmentPrice = row.Cells["fld_Equipment_Price"].Value.ToString();
-                    string equipmentPriceSubsequent = row.Cells["fld_Equipment_Price_Subsequent"].Value.ToString();
-
-                   
-
-                    ShowEditForm(equipmentName, equipmentPrice, equipmentPriceSubsequent, row.Cells["fld_Total_Stock"].Value.ToString());
-
-
-                }
-                else if (e.ColumnIndex == dt_Equipments.Columns["Delete"].Index)
-                {
-                    string equipmentName = row.Cells["fld_Equipment_Name"].Value.ToString();
-
-                    DialogResult result = MessageBox.Show(
-                        $"Are you sure you want to delete the equipment '{equipmentName}'?\n\nWARNING: This will also delete all reservations associated with this equipment.",
-                        "Confirm Delete",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Warning);
-
-                    if (result == DialogResult.Yes)
-                    {
-                        try
-                        {
-                            if (db.strCon.State == ConnectionState.Closed)
-                                db.strCon.Open();
-
-                            using (SqlTransaction transaction = db.strCon.BeginTransaction())
-                            {
-                                try
-                                {
-                                    int equipmentId = GetEquipmentId(equipmentName, transaction);
-                                    if (equipmentId == 0)
-                                    {
-                                        MessageBox.Show("Equipment not found in database!");
-                                        return;
-                                    }
-
-                                    DeleteEquipmentReservations(equipmentId, transaction);
-                                    DeleteEquipmentPricing(equipmentId, transaction);
-                                    DeleteEquipment(equipmentId, transaction);
-
-                                    transaction.Commit();
-                                    MessageBox.Show("Equipment and all associated reservations deleted successfully!");
-                                    RefreshData();
-                                }
-                                catch (Exception ex)
-                                {
-                                    transaction.Rollback();
-                                    MessageBox.Show($"Error deleting equipment: {ex.Message}",
-                                        "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Database connection error: {ex.Message}",
-                                "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        finally
-                        {
-                            if (db.strCon.State == ConnectionState.Open)
-                                db.strCon.Close();
-                        }
-                    }
-                }
-
-            }
-        }
+       
 
         // Helper methods
         private int GetVenueId(string venueName, SqlTransaction transaction)
@@ -521,388 +432,203 @@ namespace pgso
             }
         }
 
-        private void DeleteEquipmentPricing(int equipmentId, SqlTransaction transaction)
-        {
-            string deletePricingQuery = "DELETE FROM tbl_Equipment_Pricing WHERE fk_EquipmentID = @equipmentId";
-            using (SqlCommand cmd = new SqlCommand(deletePricingQuery, db.strCon, transaction))
-            {
-                cmd.Parameters.AddWithValue("@equipmentId", equipmentId);
-                cmd.ExecuteNonQuery();
-            }
-        }
 
-        private void DeleteEquipment(int equipmentId, SqlTransaction transaction)
-        {
-            string deleteEquipmentQuery = "DELETE FROM tbl_Equipment WHERE pk_EquipmentID = @equipmentId";
-            using (SqlCommand cmd = new SqlCommand(deleteEquipmentQuery, db.strCon, transaction))
-            {
-                cmd.Parameters.AddWithValue("@equipmentId", equipmentId);
-                cmd.ExecuteNonQuery();
-            }
-        }
-
-        //Edit form for EQUIPMENTS
-        private void ShowEditForm(string equipmentName, string equipmentPrice, string equipmentPriceSubsequent, string equipmentQuantity)
-        {
-            Form editForm = new Form();
-            editForm.Text = "Edit Equipment";
-            editForm.Size = new Size(400, 300);
-
-            // Create and add controls
-            Label lblName = new Label() { Text = "Equipment Name", Left = 10, Top = 20 };
-            TextBox txtName = new TextBox() { Left = 150, Top = 20, Width = 200, Text = equipmentName };
-
-            Label lblPrice = new Label() { Text = "Equipment Price", Left = 10, Top = 60 };
-            TextBox txtPrice = new TextBox() { Left = 150, Top = 60, Width = 200, Text = equipmentPrice };
-
-            Label lblPriceSubsequent = new Label() { Text = "Subsequent Price", Left = 10, Top = 100 };
-            TextBox txtPriceSubsequent = new TextBox() { Left = 150, Top = 100, Width = 200, Text = equipmentPriceSubsequent };
-
-            Label lblQuantity = new Label() { Text = "Quantity", Left = 10, Top = 140 };
-            TextBox txtQuantity = new TextBox() { Left = 150, Top = 140, Width = 200, Text = equipmentQuantity };
-
-            Button btnSave = new Button() { Text = "Save", Left = 150, Top = 180, Width = 100 };
-            btnSave.Click += (s, args) =>
-            {
-                try
-                {
-                    if (db.strCon.State == ConnectionState.Closed)
-                        db.strCon.Open();
-
-                    using (SqlTransaction transaction = db.strCon.BeginTransaction())
-                    {
-                        try
-                        {
-                            string getIdQuery = @"
-                        SELECT 
-                            e.pk_EquipmentID,
-                            ep.pk_Equipment_PricingID
-                        FROM tbl_Equipment e
-                        JOIN tbl_Equipment_Pricing ep ON e.pk_EquipmentID = ep.fk_EquipmentID
-                        WHERE e.fld_Equipment_Name = @originalName";
-
-                            int equipmentId = 0;
-                            int pricingId = 0;
-
-                            using (SqlCommand cmdGetId = new SqlCommand(getIdQuery, db.strCon, transaction))
-                            {
-                                cmdGetId.Parameters.AddWithValue("@originalName", equipmentName);
-                                using (SqlDataReader reader = cmdGetId.ExecuteReader())
-                                {
-                                    if (reader.Read())
-                                    {
-                                        equipmentId = reader.GetInt32(0);
-                                        pricingId = reader.GetInt32(1);
-                                    }
-                                }
-                            }
-
-                            if (equipmentId == 0 || pricingId == 0)
-                            {
-                                MessageBox.Show("Equipment not found in database!");
-                                return;
-                            }
-
-                            // Update equipment name and quantity if changed
-                            if (txtName.Text != equipmentName || txtQuantity.Text != equipmentQuantity)
-                            {
-                                string updateEquipmentQuery = @"
-                        UPDATE tbl_Equipment
-                        SET fld_Equipment_Name = @newName, fld_Remaining_Stock = @newQuantity
-                        WHERE pk_EquipmentID = @equipmentId";
-
-                                using (SqlCommand cmdUpdate = new SqlCommand(updateEquipmentQuery, db.strCon, transaction))
-                                {
-                                    cmdUpdate.Parameters.AddWithValue("@newName", txtName.Text);
-                                    cmdUpdate.Parameters.AddWithValue("@newQuantity", txtQuantity.Text);
-                                    cmdUpdate.Parameters.AddWithValue("@equipmentId", equipmentId);
-                                    cmdUpdate.ExecuteNonQuery();
-                                }
-                            }
-
-                            // Update pricing if changed
-                            bool priceChanged = txtPrice.Text != equipmentPrice;
-                            bool subsequentPriceChanged = txtPriceSubsequent.Text != equipmentPriceSubsequent;
-
-                            if (priceChanged || subsequentPriceChanged)
-                            {
-                                string updatePriceQuery = @"
-                        UPDATE tbl_Equipment_Pricing
-                        SET " +
-                                    (priceChanged ? "fld_Equipment_Price = @price" : "") +
-                                    (priceChanged && subsequentPriceChanged ? ", " : "") +
-                                    (subsequentPriceChanged ? "fld_Equipment_Price_Subsequent = @priceSubsequent" : "") +
-                                    " WHERE pk_Equipment_PricingID = @pricingId";
-
-                                using (SqlCommand cmdPrice = new SqlCommand(updatePriceQuery, db.strCon, transaction))
-                                {
-                                    if (priceChanged)
-                                        cmdPrice.Parameters.AddWithValue("@price", txtPrice.Text);
-                                    if (subsequentPriceChanged)
-                                        cmdPrice.Parameters.AddWithValue("@priceSubsequent", txtPriceSubsequent.Text);
-                                    cmdPrice.Parameters.AddWithValue("@pricingId", pricingId);
-                                    cmdPrice.ExecuteNonQuery();
-                                }
-                            }
-
-                            transaction.Commit();
-                            MessageBox.Show("Equipment updated successfully!");
-                            editForm.Close();
-                            RefreshData();
-                        }
-                        catch (Exception ex)
-                        {
-                            transaction.Rollback();
-                            MessageBox.Show($"Error updating equipment: {ex.Message}\n\nPlease check if the equipment name already exists.",
-                                            "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Database connection error: {ex.Message}",
-                                    "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    if (db.strCon.State == ConnectionState.Open)
-                        db.strCon.Close();
-                }
-            };
-
-            editForm.Controls.Add(lblName);
-            editForm.Controls.Add(txtName);
-            editForm.Controls.Add(lblPrice);
-            editForm.Controls.Add(txtPrice);
-            editForm.Controls.Add(lblPriceSubsequent);
-            editForm.Controls.Add(txtPriceSubsequent);
-            editForm.Controls.Add(lblQuantity);
-            editForm.Controls.Add(txtQuantity);
-            editForm.Controls.Add(btnSave);
-
-            editForm.Show();
-        }
 
         //Edit form for Venues
-        private void ShowEditForm(string venueName, string venueScopeName, bool aircon, string rateType,
-    decimal first4HrsRate, decimal hourlyRate, decimal additionalCharge)
+        private void ShowEditForm(int pricingId, string venueName, string venueScopeName, bool aircon, string rateType,
+            decimal first4HrsRate, decimal hourlyRate, decimal additionalCharge, decimal catererFee = 0)
         {
-            Form editForm = new Form();
-            editForm.Text = "Edit Venue";
-            editForm.Size = new Size(400, 380);
+    Form editForm = new Form();
+    editForm.Text = "Edit Venue";
+    editForm.Size = new Size(400, 360);
 
-            // Create and add controls
-            Label lblVenueName = new Label() { Text = "Venue Name", Left = 10, Top = 20, Font = new Font("Century Gothic", 11, FontStyle.Bold) };
-            TextBox txtVenueName = new TextBox() { Left = 150, Top = 20, MinimumSize = new Size(200, 25), Font = new Font("Century Gothic", 11, FontStyle.Regular), Text = venueName };
+    Font editFont = new Font("Microsoft Sans Serif", 12, FontStyle.Regular);
+    Font labelFont = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
 
-            Label lblVenueScopeName = new Label() { Text = "Venue Scope Name", Left = 10, Top = 60, Font = new Font("Century Gothic", 11, FontStyle.Bold) };
-            TextBox txtVenueScopeName = new TextBox() { Left = 150, Top = 60, MinimumSize = new Size(200, 25), Font = new Font("Century Gothic", 11, FontStyle.Regular), Text = venueScopeName };
+    // Venue Name
+    Label lblVenueName = new Label() { Text = "Venue Name", Left = 10, Top = 20, Font = labelFont };
+    TextBox txtVenueName = new TextBox() { Left = 150, Top = 20, Width = 200, Font = editFont, Text = venueName };
 
-            Label lblAircon = new Label() { Text = "Aircon", Left = 10, Top = 100, Font = new Font("Century Gothic", 11, FontStyle.Bold) };
-            CheckBox chkAircon = new CheckBox() { Left = 150, Top = 100, Checked = aircon};
+    // Scope Name
+    Label lblVenueScopeName = new Label() { Text = "Venue Scope Name", Left = 10, Top = 60, Font = labelFont };
+    TextBox txtVenueScopeName = new TextBox() { Left = 150, Top = 60, Width = 200, Font = editFont, Text = venueScopeName };
 
-            Label lblRateType = new Label() { Text = "Rate Type", Left = 10, Top = 140, Font = new Font("Century Gothic", 11, FontStyle.Bold) };
-            TextBox txtRateType = new TextBox() { Left = 150, Top = 140, MinimumSize = new Size(200, 25), Font = new Font("Century Gothic", 11, FontStyle.Regular), Text = rateType };
+    // First 4 Hrs Rate
+    Label lblFirst4HrsRate = new Label() { Text = "First 4 Hrs Rate", Left = 10, Top = 100, Font = labelFont };
+    TextBox txtFirst4HrsRate = new TextBox() { Left = 150, Top = 100, Width = 200, Font = editFont, Text = first4HrsRate.ToString("N2") };
 
-            Label lblFirst4HrsRate = new Label() { Text = "First 4 Hrs Rate", Left = 10, Top = 180, Font = new Font("Century Gothic", 11, FontStyle.Bold) };
-            TextBox txtFirst4HrsRate = new TextBox() { Left = 150, Top = 180, MinimumSize = new Size(200, 25), Font = new Font("Century Gothic", 11, FontStyle.Regular), Text = first4HrsRate.ToString() };
+    // Hourly Rate
+    Label lblHourlyRate = new Label() { Text = "Hourly Rate", Left = 10, Top = 140, Font = labelFont };
+    TextBox txtHourlyRate = new TextBox() { Left = 150, Top = 140, Width = 200, Font = editFont, Text = hourlyRate.ToString("N2") };
 
-            Label lblHourlyRate = new Label() { Text = "Hourly Rate", Left = 10, Top = 220, Font = new Font("Century Gothic", 11, FontStyle.Bold) };
-            TextBox txtHourlyRate = new TextBox() { Left = 150, Top = 220, MinimumSize = new Size(200, 25), Font = new Font("Century Gothic", 11, FontStyle.Regular), Text = hourlyRate.ToString() };
+    // Additional Charge
+    Label lblAdditionalCharge = new Label() { Text = "Additional Charge", Left = 10, Top = 180, Font = labelFont };
+    TextBox txtAdditionalCharge = new TextBox() { Left = 150, Top = 180, Width = 200, Font = editFont, Text = additionalCharge.ToString("N2") };
 
-            Label lblAdditionalCharge = new Label() { Text = "Additional Charge", Left = 10, Top = 260, Font = new Font("Century Gothic", 11, FontStyle.Bold) };
-            TextBox txtAdditionalCharge = new TextBox() { Left = 150, Top = 260, MinimumSize = new Size(200, 25), Font = new Font("Century Gothic", 11, FontStyle.Regular), Text = additionalCharge.ToString() };
+    // Caterer Fee
+    Label lblCatererFee = new Label() { Text = "Caterer Fee", Left = 10, Top = 220, Font = labelFont };
+    TextBox txtCatererFee = new TextBox() { Left = 150, Top = 220, Width = 200, Font = editFont, Text = catererFee.ToString("N2") };
 
-            Button btnSave = new Button() { Text = "Save", Left = 150, Top = 300, MinimumSize = new Size(200, 30), Font = new Font("Century Gothic", 11, FontStyle.Regular) };
-            btnSave.Click += (s, args) =>
+    // Save Button
+    Button btnSave = new Button() { Text = "Save", Left = 150, Top = 270, Width = 200, Height = 35, Font = editFont };
+    btnSave.Click += (s, args) =>
+    {
+        try
+        {
+            if (db.strCon.State == ConnectionState.Closed)
+                db.strCon.Open();
+
+            using (SqlTransaction transaction = db.strCon.BeginTransaction())
             {
                 try
                 {
-                    if (db.strCon.State == ConnectionState.Closed)
-                        db.strCon.Open();
+                    // Get VenueID and ScopeID
+                    int venueId = 0;
+                    int scopeId = 0;
+                    string getIdQuery = @"
+                        SELECT v.pk_VenueID, vs.pk_Venue_ScopeID
+                        FROM tbl_Venue v
+                        JOIN tbl_Venue_Pricing vp ON v.pk_VenueID = vp.fk_VenueID
+                        JOIN tbl_Venue_Scope vs ON vs.pk_Venue_ScopeID = vp.fk_Venue_ScopeID
+                        WHERE v.fld_Venue_Name = @originalName AND vs.fld_Venue_Scope_Name = @originalScopeName";
 
-                    using (SqlTransaction transaction = db.strCon.BeginTransaction())
+                    using (SqlCommand cmdGetId = new SqlCommand(getIdQuery, db.strCon, transaction))
                     {
-                        try
+                        cmdGetId.Parameters.AddWithValue("@originalName", venueName);
+                        cmdGetId.Parameters.AddWithValue("@originalScopeName", venueScopeName);
+                        using (SqlDataReader reader = cmdGetId.ExecuteReader())
                         {
-                            string getIdQuery = @"
-                            SELECT 
-                                v.pk_VenueID
-                            FROM tbl_Venue v
-                            WHERE v.fld_Venue_Name = @originalName";
-
-                            int venueId = 0;
-
-                            using (SqlCommand cmdGetId = new SqlCommand(getIdQuery, db.strCon, transaction))
+                            if (reader.Read())
                             {
-                                cmdGetId.Parameters.AddWithValue("@originalName", venueName);
-                                using (SqlDataReader reader = cmdGetId.ExecuteReader())
-                                {
-                                    if (reader.Read())
-                                    {
-                                        venueId = reader.GetInt32(0);
-                                    }
-                                }
-                            }
-
-                            if (venueId == 0)
-                            {
-                                MessageBox.Show("Venue not found in database!");
-                                return;
-                            }
-
-                            // Track if any changes were made
-                            bool changesMade = false;
-
-                            // Update pricing if changed
-                            bool airconChanged = chkAircon.Checked != aircon;
-                            bool rateTypeChanged = txtRateType.Text != rateType;
-                            bool first4HrsRateChanged = decimal.Parse(txtFirst4HrsRate.Text) != first4HrsRate;
-                            bool hourlyRateChanged = decimal.Parse(txtHourlyRate.Text) != hourlyRate;
-                            bool additionalChargeChanged = decimal.Parse(txtAdditionalCharge.Text) != additionalCharge;
-
-                            if (airconChanged || rateTypeChanged || first4HrsRateChanged || hourlyRateChanged || additionalChargeChanged)
-                            {
-                                changesMade = true;
-
-                                string updatePriceQuery = @"
-                                UPDATE tbl_Venue_Pricing
-                                SET " +
-                                (airconChanged ? "fld_Aircon = @aircon" : "") +
-                                (airconChanged && rateTypeChanged ? ", " : "") +
-                                (rateTypeChanged ? "fld_Rate_Type = @rateType" : "") +
-                                ((airconChanged || rateTypeChanged) && first4HrsRateChanged ? ", " : "") +
-                                (first4HrsRateChanged ? "fld_First4Hrs_Rate = @first4HrsRate" : "") +
-                                ((airconChanged || rateTypeChanged || first4HrsRateChanged) && hourlyRateChanged ? ", " : "") +
-                                (hourlyRateChanged ? "fld_Hourly_Rate = @hourlyRate" : "") +
-                                ((airconChanged || rateTypeChanged || first4HrsRateChanged || hourlyRateChanged) && additionalChargeChanged ? ", " : "") +
-                                (additionalChargeChanged ? "fld_Additional_Charge = @additionalCharge" : "") +
-                                " WHERE fk_VenueID = @venueId AND fk_Venue_ScopeID = (SELECT pk_Venue_ScopeID FROM tbl_Venue_Scope WHERE fld_Venue_Scope_Name = @scopeName) " +
-                                "AND fld_Rate_Type = @originalRateType AND fld_Aircon = @originalAircon " +
-                                "AND fld_Hourly_Rate = @originalHourlyRate AND fld_Additional_Charge = @originalAdditionalCharge";
-
-                                using (SqlCommand cmdPrice = new SqlCommand(updatePriceQuery, db.strCon, transaction))
-                                {
-                                    if (airconChanged)
-                                        cmdPrice.Parameters.AddWithValue("@aircon", chkAircon.Checked);
-                                    if (rateTypeChanged)
-                                        cmdPrice.Parameters.AddWithValue("@rateType", txtRateType.Text);
-                                    if (first4HrsRateChanged)
-                                        cmdPrice.Parameters.AddWithValue("@first4HrsRate", decimal.Parse(txtFirst4HrsRate.Text));
-                                    if (hourlyRateChanged)
-                                        cmdPrice.Parameters.AddWithValue("@hourlyRate", decimal.Parse(txtHourlyRate.Text));
-                                    if (additionalChargeChanged)
-                                        cmdPrice.Parameters.AddWithValue("@additionalCharge", decimal.Parse(txtAdditionalCharge.Text));
-
-                                    cmdPrice.Parameters.AddWithValue("@originalRateType", rateType);
-                                    cmdPrice.Parameters.AddWithValue("@originalAircon", aircon);
-                                    cmdPrice.Parameters.AddWithValue("@originalHourlyRate", hourlyRate);
-                                    cmdPrice.Parameters.AddWithValue("@originalAdditionalCharge", additionalCharge);
-
-                                    cmdPrice.Parameters.AddWithValue("@scopeName", txtVenueScopeName.Text);
-                                    cmdPrice.Parameters.AddWithValue("@venueId", venueId);
-                                    cmdPrice.ExecuteNonQuery();
-                                }
-                            }
-
-                            // Update venue name if changed
-                            if (txtVenueName.Text != venueName)
-                            {
-                                changesMade = true;
-
-                                string updateVenueQuery = @"
-                                UPDATE tbl_Venue
-                                SET fld_Venue_Name = @newVenueName
-                                WHERE pk_VenueID = @venueId";
-
-                                using (SqlCommand cmdUpdateVenue = new SqlCommand(updateVenueQuery, db.strCon, transaction))
-                                {
-                                    cmdUpdateVenue.Parameters.AddWithValue("@newVenueName", txtVenueName.Text);
-                                    cmdUpdateVenue.Parameters.AddWithValue("@venueId", venueId);
-                                    cmdUpdateVenue.ExecuteNonQuery();
-                                }
-                            }
-
-                            // Update venue scope if changed
-                            if (txtVenueScopeName.Text != venueScopeName)
-                            {
-                                changesMade = true;
-
-                                string updateScopeQuery = @"
-                                UPDATE tbl_Venue_Scope
-                                SET fld_Venue_Scope_Name = @newScopeName
-                                WHERE pk_Venue_ScopeID = (
-                                    SELECT fk_Venue_ScopeID
-                                    FROM tbl_Venue_Pricing
-                                    WHERE fk_VenueID = @venueId
-                                )";
-
-                                using (SqlCommand cmdUpdateScope = new SqlCommand(updateScopeQuery, db.strCon, transaction))
-                                {
-                                    cmdUpdateScope.Parameters.AddWithValue("@newScopeName", txtVenueScopeName.Text);
-                                    cmdUpdateScope.Parameters.AddWithValue("@venueId", venueId);
-                                    cmdUpdateScope.ExecuteNonQuery();
-                                }
-                            }
-
-                            if (changesMade)
-                            {
-                                transaction.Commit();
-                                MessageBox.Show("Updated Successfully!");
-                                editForm.Close();
-                                RefreshData();
-                            }
-                            else
-                            {
-                                MessageBox.Show("No Changes");
-                                editForm.Close();
-
+                                venueId = reader.GetInt32(0);
+                                scopeId = reader.GetInt32(1);
                             }
                         }
-                        catch (Exception ex)
+                    }
+
+                    if (venueId == 0 || scopeId == 0)
+                    {
+                        MessageBox.Show("Venue or scope not found in database!");
+                        return;
+                    }
+
+                    bool changesMade = false;
+
+                    // Update pricing if changed
+                    decimal newFirst4HrsRate = decimal.Parse(txtFirst4HrsRate.Text);
+                    decimal newHourlyRate = decimal.Parse(txtHourlyRate.Text);
+                    decimal newAdditionalCharge = decimal.Parse(txtAdditionalCharge.Text);
+                    decimal newCatererFee = decimal.Parse(txtCatererFee.Text);
+
+                    if (newFirst4HrsRate != first4HrsRate || newHourlyRate != hourlyRate ||
+                        newAdditionalCharge != additionalCharge || newCatererFee != catererFee)
+                    {
+                        changesMade = true;
+                        string updatePriceQuery = @"
+    UPDATE tbl_Venue_Pricing
+    SET fld_First4Hrs_Rate = @first4HrsRate,
+        fld_Hourly_Rate = @hourlyRate,
+        fld_Additional_Charge = @additionalCharge,
+        fld_Caterer_Fee = @catererFee
+    WHERE pk_Venue_PricingID = @pricingId";
+
+                        using (SqlCommand cmdPrice = new SqlCommand(updatePriceQuery, db.strCon, transaction))
                         {
-                            transaction.Rollback();
-                            MessageBox.Show($"Error updating venue: {ex.Message}\n\nPlease check if the venue name already exists.",
-                                            "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            cmdPrice.Parameters.AddWithValue("@first4HrsRate", newFirst4HrsRate);
+                            cmdPrice.Parameters.AddWithValue("@hourlyRate", newHourlyRate);
+                            cmdPrice.Parameters.AddWithValue("@additionalCharge", newAdditionalCharge);
+                            cmdPrice.Parameters.AddWithValue("@catererFee", newCatererFee);
+                            cmdPrice.Parameters.AddWithValue("@pricingId", pricingId); // <-- THIS IS THE FIX
+                            cmdPrice.ExecuteNonQuery();
                         }
+                    }
+
+                    // Update venue name if changed
+                    if (txtVenueName.Text != venueName)
+                    {
+                        changesMade = true;
+                        string updateVenueQuery = @"
+                            UPDATE tbl_Venue
+SET fld_Venue_Name = @newVenueName
+WHERE pk_VenueID = @venueId";
+                        using (SqlCommand cmdUpdateVenue = new SqlCommand(updateVenueQuery, db.strCon, transaction))
+                        {
+                            cmdUpdateVenue.Parameters.AddWithValue("@newVenueName", txtVenueName.Text);
+                            cmdUpdateVenue.Parameters.AddWithValue("@venueId", venueId);
+                            cmdUpdateVenue.ExecuteNonQuery();
+                        }
+                    }
+
+                    // Update scope name for all with the same scopeId under this venue
+                    if (txtVenueScopeName.Text != venueScopeName)
+                    {
+                        changesMade = true;
+                        string updateScopeQuery = @"
+                            UPDATE tbl_Venue_Scope
+SET fld_Venue_Scope_Name = @newScopeName
+WHERE pk_Venue_ScopeID = @scopeId";
+                        using (SqlCommand cmdUpdateScope = new SqlCommand(updateScopeQuery, db.strCon, transaction))
+                        {
+                            cmdUpdateScope.Parameters.AddWithValue("@newScopeName", txtVenueScopeName.Text);
+                            cmdUpdateScope.Parameters.AddWithValue("@scopeId", scopeId);
+                            cmdUpdateScope.ExecuteNonQuery();
+                        }
+                    }
+
+                    if (changesMade)
+                    {
+                        transaction.Commit();
+                        MessageBox.Show("Updated Successfully!");
+                        editForm.Close();
+                        RefreshData();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No Changes");
+                        editForm.Close();
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Database connection error: {ex.Message}",
-                                    "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    transaction.Rollback();
+                    MessageBox.Show($"Error updating venue: {ex.Message}\n\nPlease check if the venue name already exists.",
+                                    "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                finally
-                {
-                    if (db.strCon.State == ConnectionState.Open)
-                        db.strCon.Close();
-                }
-            };
-
-
-            editForm.Controls.Add(lblVenueName);
-            editForm.Controls.Add(txtVenueName);
-            editForm.Controls.Add(lblVenueScopeName);
-            editForm.Controls.Add(txtVenueScopeName);
-            editForm.Controls.Add(lblAircon);
-            editForm.Controls.Add(chkAircon);
-            editForm.Controls.Add(lblRateType);
-            editForm.Controls.Add(txtRateType);
-            editForm.Controls.Add(lblFirst4HrsRate);
-            editForm.Controls.Add(txtFirst4HrsRate);
-            editForm.Controls.Add(lblHourlyRate);
-            editForm.Controls.Add(txtHourlyRate);
-            editForm.Controls.Add(lblAdditionalCharge);
-            editForm.Controls.Add(txtAdditionalCharge);
-            editForm.Controls.Add(btnSave);
-
-            editForm.Show();
+            }
         }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Database connection error: {ex.Message}",
+                            "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            if (db.strCon.State == ConnectionState.Open)
+                db.strCon.Close();
+        }
+    };
+
+    editForm.Controls.Add(lblVenueName);
+    editForm.Controls.Add(txtVenueName);
+    editForm.Controls.Add(lblVenueScopeName);
+    editForm.Controls.Add(txtVenueScopeName);
+    editForm.Controls.Add(lblFirst4HrsRate);
+    editForm.Controls.Add(txtFirst4HrsRate);
+    editForm.Controls.Add(lblHourlyRate);
+    editForm.Controls.Add(txtHourlyRate);
+    editForm.Controls.Add(lblAdditionalCharge);
+    editForm.Controls.Add(txtAdditionalCharge);
+    editForm.Controls.Add(lblCatererFee);
+    editForm.Controls.Add(txtCatererFee);
+    editForm.Controls.Add(btnSave);
+
+    editForm.Show();
+}
 
 
 
         // Other existing methods
-        private void dt_Equipments_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+
         private void btn_Edit_Equipment_Click(object sender, EventArgs e) { }
         private void btn_Delete_Equipment_Click(object sender, EventArgs e) { }
         private void dt_Venues_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
@@ -910,11 +636,10 @@ namespace pgso
 
         private void btn_AddScope_Click(object sender, EventArgs e)
         {
-            frm_Add_Scope frm_Add_Scope = new frm_Add_Scope();
-            frm_Add_Scope.ScopeAdded += (s, args) => {
-                RefreshData(); // Refresh when scope is added
-            };
-            frm_Add_Scope.Show();
+            panel_AddScope.Enabled = true;
+            panel_Add_Venue.Enabled = false; // Disable the other panel
+            ShowAddScopeForm();
+            RefreshData();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -924,18 +649,249 @@ namespace pgso
 
         private void txt_Search_Venue_TextChanged(object sender, EventArgs e)
         {
+            currentPage = 1;
             if (venuesTable == null) return;
             string filter = txt_Search_Venue.Text.Replace("'", "''");
             (dt_Venues.DataSource as DataTable).DefaultView.RowFilter =
                 $"[fld_Venue_Name] LIKE '%{filter}%'";
         }
 
-        private void txt_Search_Equipmet_TextChanged(object sender, EventArgs e)
+        private void panel_Add_Venue_Paint(object sender, PaintEventArgs e)
         {
-            if (equipmentsTable == null) return;
-            string filter = txt_Search_Equipmet.Text.Replace("'", "''"); // Escape single quotes
-            (dt_Equipments.DataSource as DataTable).DefaultView.RowFilter =
-                $"[fld_Equipment_Name] LIKE '%{filter}%'";
+
+        }
+
+        //show add venue in the panel
+        private void ShowAddVenueForm()
+        {
+            panel_Add_Venue.Controls.Clear();
+
+            frm_Add_Venues frm_Add_Venues = new frm_Add_Venues();
+            frm_Add_Venues.TopLevel = false;
+            frm_Add_Venues.FormBorderStyle = FormBorderStyle.None;
+            frm_Add_Venues.Dock = DockStyle.Fill;
+
+            frm_Add_Venues.VenueAdded += (s, args) => {
+                RefreshData();
+                panel_Add_Venue.Controls.Clear();
+                // Optionally, show the form again after adding
+                ShowAddVenueForm();
+            };
+
+            panel_Add_Venue.Controls.Add(frm_Add_Venues);
+            frm_Add_Venues.Show();
+        }
+
+        // Add this method to your class
+        private void ShowAddScopeForm()
+        {
+            panel_AddScope.Controls.Clear();
+
+            frm_Add_Scope frmAddScope = new frm_Add_Scope();
+            frmAddScope.TopLevel = false;
+            frmAddScope.FormBorderStyle = FormBorderStyle.None;
+            frmAddScope.Dock = DockStyle.Fill;
+
+            frmAddScope.ScopeAdded += (s, args) => {
+                RefreshData();
+                panel_AddScope.Controls.Clear();
+                // Optionally, show the form again after adding
+                ShowAddScopeForm();
+            };
+
+            panel_AddScope.Controls.Add(frmAddScope);
+            frmAddScope.Show();
+        }
+
+
+
+        //filter and sort
+        private void ApplyFilterAndSort()
+        {
+            if (currentPage < 1) currentPage = 1;
+            if (venuesTable == null) return;
+
+            string filter = "";
+            string sort = "";
+
+            var selected = combo_Filter.SelectedItem?.ToString();
+
+            if (selected == "All" || string.IsNullOrEmpty(selected))
+            {
+                filter = "";
+            }
+            else if (selected == "Airconditioned Yes")
+            {
+                filter = "[fld_Aircon] = True";
+            }
+            else if (selected == "Airconditioned No")
+            {
+                filter = "[fld_Aircon] = False";
+            }
+            else if (venuesTable.AsEnumerable().Any(r => r.Field<string>("fld_Venue_Name") == selected))
+            {
+                filter = $"[fld_Venue_Name] = '{selected.Replace("'", "''")}'";
+            }
+            else if (venuesTable.AsEnumerable().Any(r => r.Field<string>("fld_Rate_Type") == selected))
+            {
+                filter = $"[fld_Rate_Type] = '{selected.Replace("'", "''")}'";
+            }
+
+            // Sorting (unchanged)
+            switch (combo_Sort.SelectedItem?.ToString())
+            {
+                case "ASC":
+                    sort = "[fld_Venue_Name] ASC";
+                    break;
+                case "DESC":
+                    sort = "[fld_Venue_Name] DESC";
+                    break;
+                case "Lowest Rate4":
+                    sort = "[fld_First4Hrs_Rate] ASC";
+                    break;
+                case "Highest Rate4":
+                    sort = "[fld_First4Hrs_Rate] DESC";
+                    break;
+                default:
+                    sort = "";
+                    break;
+            }
+
+            DataView dv = venuesTable.DefaultView;
+            dv.RowFilter = filter;
+            dv.Sort = sort;
+
+            // Pagination logic
+            int totalRows = dv.Count;
+            totalPages = (int)Math.Ceiling(totalRows / (double)pageSize);
+            if (currentPage > totalPages) currentPage = totalPages;
+            if (currentPage < 1) currentPage = 1;
+
+            // Get only the rows for the current page
+            DataTable pageTable = dv.ToTable().Clone();
+            int startIndex = (currentPage - 1) * pageSize;
+            for (int i = startIndex; i < startIndex + pageSize && i < totalRows; i++)
+            {
+                pageTable.ImportRow(dv[i].Row);
+            }
+
+            dt_Venues.DataSource = pageTable;
+
+            // Update page info label
+            lblPageInfo.Text = $"Page {currentPage} of {Math.Max(totalPages, 1)}";
+            btnPrevPage.Enabled = currentPage > 1;
+            btnNextPage.Enabled = currentPage < totalPages;
+        }
+        private void combo_Filter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            currentPage = 1;
+            ApplyFilterAndSort();
+        }
+
+        private void combo_Sort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            currentPage = 1;
+            ApplyFilterAndSort();
+        }
+        private void PopulateFilterCombo()
+        {
+            combo_Filter.Items.Clear();
+            combo_Filter.Items.Add("All");
+
+            if (venuesTable == null) return;
+
+            // Add unique venue names
+            var venueNames = venuesTable.AsEnumerable()
+                .Select(row => row.Field<string>("fld_Venue_Name"))
+                .Distinct()
+                .OrderBy(name => name);
+
+            foreach (var name in venueNames)
+                combo_Filter.Items.Add(name);
+
+            // Store where rate types start
+            rateTypeStartIndex = combo_Filter.Items.Count;
+
+            // Add unique rate types
+            var rateTypes = venuesTable.AsEnumerable()
+                .Select(row => row.Field<string>("fld_Rate_Type"))
+                .Where(rt => !string.IsNullOrWhiteSpace(rt))
+                .Distinct()
+                .OrderBy(rt => rt);
+
+            foreach (var rateType in rateTypes)
+                combo_Filter.Items.Add(rateType);
+
+            // Store where aircon options start
+            airconStartIndex = combo_Filter.Items.Count;
+
+            // Add aircon options
+            combo_Filter.Items.Add("Airconditioned Yes");
+            combo_Filter.Items.Add("Airconditioned No");
+
+            combo_Filter.SelectedIndex = 0;
+        }
+
+        private void combo_Filter_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            ComboBox cb = sender as ComboBox;
+            e.DrawBackground();
+
+            // Draw separator line before rate types
+            if (e.Index == rateTypeStartIndex && rateTypeStartIndex > 1)
+            {
+                using (Pen pen = new Pen(Color.Gray, 1))
+                {
+                    e.Graphics.DrawLine(pen, e.Bounds.Left, e.Bounds.Top, e.Bounds.Right, e.Bounds.Top);
+                }
+            }
+
+            // Draw separator line before aircon options
+            if (e.Index == airconStartIndex && airconStartIndex > 1)
+            {
+                using (Pen pen = new Pen(Color.Gray, 1))
+                {
+                    e.Graphics.DrawLine(pen, e.Bounds.Left, e.Bounds.Top, e.Bounds.Right, e.Bounds.Top);
+                }
+            }
+
+            // Draw the item text
+            string text = cb.Items[e.Index].ToString();
+            using (Brush brush = new SolidBrush(e.ForeColor))
+            {
+                e.Graphics.DrawString(text, e.Font, brush, e.Bounds.Left + 2, e.Bounds.Top + 2);
+            }
+
+            e.DrawFocusRectangle();
+        }
+        //pagionation
+        private void btnPrevPage_Click(object sender, EventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                ApplyFilterAndSort();
+            }
+        }
+
+        private void btnNextPage_Click(object sender, EventArgs e)
+        {
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+                ApplyFilterAndSort();
+            }
+        }
+
+        private void lblPageInfo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel_AddScope_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }

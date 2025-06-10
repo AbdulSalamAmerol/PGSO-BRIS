@@ -6,21 +6,25 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using pgso_connect; 
+
 namespace pgso
 {
+   
     public partial class frm_Add_Equipment: Form
     {
         private SqlConnection conn;
         private SqlCommand cmd;
         private readonly Connection db = new Connection();
-
+        public event EventHandler EquipmentAdded;
         public frm_Add_Equipment()
         {
             InitializeComponent();
+            txt_Quantity.TextChanged += txt_Quantity_TextChanged;
+            txt_Stock.ReadOnly = true; // Make sure this is set
         }
         private void frm_Add_Equipment_Load(object sender, EventArgs e)
         {
@@ -87,21 +91,30 @@ namespace pgso
             }
 
             SqlTransaction transaction = null;
-
+            if (!int.TryParse(txt_Quantity.Text, out int quantity) || quantity < 0)
+            {
+                MessageBox.Show("Please enter a valid quantity.", "Validation Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             try
             {
                 DBConnect();
                 transaction = conn.BeginTransaction();
 
+
                 // 1. Insert into Equipment table and get the new ID
                 cmd = new SqlCommand(
-                    @"INSERT INTO tbl_Equipment (fld_Equipment_Name) 
-                      OUTPUT INSERTED.pk_EquipmentID 
-                      VALUES (@EquipmentName)",
-                    conn, transaction);
+                @"INSERT INTO tbl_Equipment (fld_Equipment_Name, fld_Total_Stock, fld_Remaining_Stock) 
+                          OUTPUT INSERTED.pk_EquipmentID 
+                          VALUES (@EquipmentName, @TotalStock, @RemainingStock)",
+                conn, transaction);
 
                 cmd.Parameters.AddWithValue("@EquipmentName", txt_Equipment_Name_Add.Text);
+                cmd.Parameters.AddWithValue("@TotalStock", quantity);
+                cmd.Parameters.AddWithValue("@RemainingStock", quantity);
                 int newEquipmentId = (int)cmd.ExecuteScalar();
+
 
                 // 2. Insert into Equipment Pricing with the foreign key
                 cmd = new SqlCommand(
@@ -115,10 +128,50 @@ namespace pgso
                 cmd.Parameters.AddWithValue("@EquipmentID", newEquipmentId);
                 cmd.ExecuteNonQuery();
 
+
+                // auditlog start
+                string affectedTable = "tbl_Equipment";
+                string affectedRecordPk = newEquipmentId.ToString();
+                string actionType = "Added Equipment";
+
+                string changedBy = frm_login.LoggedInUserRole;
+                DateTime changedAt = DateTime.Now;
+                int userId = frm_login.LoggedInUserId;
+
+                // Serialize new equipment data for audit log
+                string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                {
+                    EquipmentName = txt_Equipment_Name_Add.Text,
+                    Price = price,
+                    SubsequentPrice = subsequentPrice,
+                    Quantity = quantity
+                });
+
+                using (SqlCommand auditCmd = new SqlCommand(@"
+                INSERT INTO tbl_Audit_Log
+                (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                {
+                    auditCmd.Parameters.AddWithValue("@UserID", userId);
+                    auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                    auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                    auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                    auditCmd.Parameters.AddWithValue("@PrevJson", DBNull.Value); // No previous data for create
+                    auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                    auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
+                    auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                    auditCmd.ExecuteNonQuery();
+                }
+                // end auditlog
+
                 transaction.Commit();
 
                 MessageBox.Show("Equipment added successfully!", "Success",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Raise the event so the parent can refresh
+                EquipmentAdded?.Invoke(this, EventArgs.Empty);
 
                 // Clear form after successful submission
                 ClearForm();
@@ -144,15 +197,18 @@ namespace pgso
 
         private void ClearForm()
         {
-            txt_Equipment_Name_Add.Clear();
-            txt_Price_Add.Clear();
-            txt_Price_Subsequent_Add.Clear();
-            txt_Equipment_Name_Add.Focus();
-        }
+            
+                txt_Equipment_Name_Add.Clear();
+                txt_Price_Add.Clear();
+                txt_Price_Subsequent_Add.Clear();
+                txt_Quantity.Clear();
+                txt_Stock.Clear();
+                txt_Equipment_Name_Add.Focus();
+            }
 
         private void btn_Cancel_Add_Click(object sender, EventArgs e)
         {
-            this.Close();
+            ClearForm();
         }
 
         // Input validation for price fields
@@ -214,5 +270,14 @@ namespace pgso
         {
 
         }
+
+        private void txt_Quantity_TextChanged(object sender, EventArgs e)
+        {
+            txt_Stock.Text = txt_Quantity.Text;
+        }
+
+
     }
+
+
 }

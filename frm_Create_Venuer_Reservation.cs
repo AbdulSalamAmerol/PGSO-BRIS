@@ -1,35 +1,51 @@
-﻿using System;
+﻿using Interop.WIA;
+using pgso_connect;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using pgso_connect;
+//using WIA;
+
 
 namespace pgso
 {
     public partial class frm_Create_Venuer_Reservation : Form
     {
+        private byte[] scannedImageBytes;
+
         private SqlConnection conn;
         private SqlCommand cmd;
         private int selectedVenueID;  // Class-level variable to store selected venue ID
         private List<DateTime> reservedDates; // List to store reserved dates
-        private string contactPlaceholder = "09685744...";
+        
         private bool isContactPlaceholderActive = true;
         private decimal additionalCharge = 0m;
+        private decimal currentCatererFee = 0m;
+
+        // Add at the top of your class
+        private DataTable clientInfoTable;
+        private DataTable requestingPersonTable;
+        private readonly string comboNamePlaceholder = "First Name, Middle Name, Surname";
+        private Color comboNamePlaceholderColor = Color.Gray;
+        private Color comboNameNormalColor = SystemColors.WindowText;
+
         public frm_Create_Venuer_Reservation()
         {
             InitializeComponent();
-           
+
+
             radio_Yes.Checked = false;
             radio_No.Checked = false;
             txt_contact.MaxLength = 11; // Limit to 12 characters
             txt_rate.TextChanged += FormatDecimalWithCommas;
             txt_Succeeding_Hour.TextChanged += FormatDecimalWithCommas;
             txt_Total.TextChanged += FormatDecimalWithCommas;
-            SetContactPlaceholder();
-            txt_contact.Enter += Txt_Contact_Enter;
-            txt_contact.Leave += Txt_Contact_Leave;
+            combo_Name.Validating += combo_Name_Validating;
 
             // Set up time pickers
             TimeStart.Format = DateTimePickerFormat.Custom;
@@ -51,7 +67,8 @@ namespace pgso
             TimeEnd.Format = DateTimePickerFormat.Custom;
             TimeEnd.CustomFormat = "hh:mm tt";
             LoadVenues();
-
+           this.Size = new Size(680, 643); // Initial form size
+          
             CalculateNumberOfHour();
 
             TimeStart.ValueChanged += Time_ValueChanged;
@@ -64,19 +81,41 @@ namespace pgso
             combo_Request.Items.Add("Walk In");
             CalculateTotalAmount();
             txt_controlnum.Text = GenerateControlNumber();
-
+            combo_Special.Items.AddRange(new[] { "PWD", "SENIOR CITIZEN", "OTHERS" });
+            combo_Special.DropDownStyle = ComboBoxStyle.DropDownList;
             // Set MinDate to prevent selecting past dates
             date_of_use_start.MinDate = DateTime.Now.Date;
             date_of_use_end.MinDate = DateTime.Now.Date;
 
             // Set DropDownStyle to DropDownList during initialization
             combo_Request.DropDownStyle = ComboBoxStyle.DropDownList;
+            // combo_Special.Enabled = false;
+            combo_Name.AutoCompleteMode = AutoCompleteMode.None;
+            combo_Name.AutoCompleteSource = AutoCompleteSource.None;
+
+            // Allow typing and dropdown selection
+            combo_Name.DropDownStyle = ComboBoxStyle.DropDown;
+
+            combo_Name.SelectionChangeCommitted += combo_Name_SelectionChangeCommitted;
+            InitializeRequestingPersonAutocomplete();
+            combo_Name.TextUpdate += combo_Name_TextUpdate;
+            combo_Name.SelectedIndexChanged += combo_Name_SelectedIndexChanged;
+
+            // Set placeholder initially
+            SetComboNamePlaceholder();
+
+            // Wire up events
+            combo_Name.GotFocus += Combo_Name_GotFocus;
+            combo_Name.LostFocus += Combo_Name_LostFocus;
 
         }
         private void frm_createvenuereservation_Load(object sender, EventArgs e)
         {
+            radio_Yes.Checked = true;   // Auto-check Yes
+            radio_No.Checked = false;   // Ensure No is unchecked
+
             LoadVenues();
-             date_of_use_start.ValueChanged += date_of_use_start_ValueChanged;
+            date_of_use_start.ValueChanged += date_of_use_start_ValueChanged;
             date_of_use_end.ValueChanged += date_of_use_end_ValueChanged;
             TimeStart.ValueChanged += TimeStart_ValueChanged;
             TimeEnd.ValueChanged += TimeEnd_ValueChanged;
@@ -86,7 +125,7 @@ namespace pgso
             DisableManualInput(date_of_use_end);
             DisableManualInput(TimeStart);
             DisableManualInput(TimeEnd);
-        
+
         }
 
         // Open database connection
@@ -113,42 +152,109 @@ namespace pgso
                 conn.Dispose();
             }
         }
+        private void InitializeRequestingPersonAutocomplete()
+        {
+            try
+            {
+                DBConnect();
+                string query = @"SELECT pk_Requesting_PersonID, fld_Surname, fld_First_Name, fld_Middle_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Requesting_Office FROM tbl_Requesting_Person";
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, conn))
+                {
+                    requestingPersonTable = new DataTable();
+                    adapter.Fill(requestingPersonTable);
+                }
 
+                combo_Name.Items.Clear();
+
+                // Group by all name fields and office for uniqueness
+                var groups = requestingPersonTable.AsEnumerable()
+                    .GroupBy(row => new
+                    {
+                        Surname = (row["fld_Surname"]?.ToString().Trim() ?? ""),
+                        FirstName = (row["fld_First_Name"]?.ToString().Trim() ?? ""),
+                        MiddleName = (row["fld_Middle_Name"]?.ToString().Trim() ?? ""),
+                        Office = (row["fld_Requesting_Office"]?.ToString().Trim() ?? "")
+                    });
+
+                foreach (var group in groups)
+                {
+                    string display = group.Key.Surname;
+                    if (!string.IsNullOrEmpty(group.Key.FirstName))
+                        display += ", " + group.Key.FirstName;
+                    if (!string.IsNullOrEmpty(group.Key.MiddleName))
+                        display += " " + group.Key.MiddleName;
+                    display = display.Trim();
+
+                    if (!string.IsNullOrEmpty(group.Key.Office))
+                        display += $" ({group.Key.Office})";
+
+                    combo_Name.Items.Add(display);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading requesting person info: " + ex.Message);
+            }
+            finally
+            {
+                DBClose();
+            }
+        }
+        private void InitializeClientInfoAutocomplete()
+        {
+            try
+            {
+                DBConnect();
+                // Fetch all client info
+                string query = @"SELECT pk_ClientID, fld_Fname, fld_Street, fld_Barangay, fld_Municipality, fld_Province, fld_Contact, fld_Office 
+                 FROM tbl_Client_Info";
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, conn))
+                {
+                    clientInfoTable = new DataTable();
+                    adapter.Fill(clientInfoTable);
+                }
+
+                // Prepare autocomplete source
+                var autoCompleteCollection = new AutoCompleteStringCollection();
+                foreach (DataRow row in clientInfoTable.Rows)
+                {
+                    string fullName = row["fld_Fname"].ToString().Trim();
+                    autoCompleteCollection.Add(fullName);
+                }
+
+                combo_Name.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                combo_Name.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                combo_Name.AutoCompleteCustomSource = autoCompleteCollection;
+
+                // Also set as dropdown items for selection
+                combo_Name.Items.Clear();
+                foreach (string name in autoCompleteCollection)
+                {
+                    combo_Name.Items.Add(name);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading client info: " + ex.Message);
+            }
+            finally
+            {
+                DBClose();
+            }
+        }
         // Calculate the number of hours
         private void Time_ValueChanged(object sender, EventArgs e)
         {
             CalculateNumberOfHour();
         }
 
-        private void SetContactPlaceholder()
-        {
-            txt_contact.Text = contactPlaceholder;
-            txt_contact.ForeColor = System.Drawing.Color.Gray;
-            isContactPlaceholderActive = true;
-        }
+        
 
-        private void RemoveContactPlaceholder()
-        {
-            if (isContactPlaceholderActive)
-            {
-                txt_contact.Text = "";
-                txt_contact.ForeColor = System.Drawing.Color.Black;
-                isContactPlaceholderActive = false;
-            }
-        }
+       
 
-        private void Txt_Contact_Enter(object sender, EventArgs e)
-        {
-            RemoveContactPlaceholder();
-        }
+        
 
-        private void Txt_Contact_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txt_contact.Text))
-            {
-                SetContactPlaceholder();
-            }
-        }
+       
 
         private void DisableManualInput(DateTimePicker dateTimePicker)
         {
@@ -288,22 +394,43 @@ namespace pgso
             try
             {
                 DBConnect();
-                cmd = new SqlCommand("SELECT DISTINCT fld_Rate_Type FROM tbl_Venue_Pricing WHERE fk_VenueID = @VenueID", conn);
+                cmd = new SqlCommand(
+                    "SELECT DISTINCT fld_Rate_Type FROM tbl_Venue_Pricing WHERE fk_VenueID = @VenueID AND fld_Rate_Type IN ('Regular', 'Special')", conn);
                 cmd.Parameters.AddWithValue("@VenueID", venueID);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 DataTable dt = new DataTable();
                 dt.Load(reader);
 
-                combo_ReservationType.DataSource = dt;
-                combo_ReservationType.ValueMember = "fld_Rate_Type";
-                combo_ReservationType.DisplayMember = "fld_Rate_Type";
-
                 reader.Close();
+
+                // Ensure the column exists before adding PGNV
+                if (!dt.Columns.Contains("fld_Rate_Type"))
+                {
+                    dt.Columns.Add("fld_Rate_Type", typeof(string));
+                }
+
+                // Manually add PGNV as an extra option
+                DataRow pgnvRow = dt.NewRow();
+                pgnvRow["fld_Rate_Type"] = "PGNV";
+                dt.Rows.Add(pgnvRow);
+
+                // Only assign if there are rows
+                if (dt.Rows.Count > 0)
+                {
+                    combo_ReservationType.DataSource = dt;
+                    combo_ReservationType.ValueMember = "fld_Rate_Type";
+                    combo_ReservationType.DisplayMember = "fld_Rate_Type";
+                }
+                else
+                {
+                    combo_ReservationType.DataSource = null;
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error loading reservation types: " + ex.Message);
+                combo_ReservationType.DataSource = null;
             }
             finally
             {
@@ -320,10 +447,9 @@ namespace pgso
 
                 int currentYear = DateTime.Now.Year;
 
-                // Query to get the MAX control number for current year
                 cmd = new SqlCommand(
-                    "SELECT MAX(fld_Control_Number) FROM tbl_Reservation " +
-                    "WHERE fld_Control_Number LIKE 'CN-___-" + currentYear + "'", conn);
+                    "SELECT MAX(fld_Control_Number) FROM tbl_Reservation WHERE fld_Control_Number LIKE @pattern", conn);
+                cmd.Parameters.AddWithValue("@pattern", $"CN-{currentYear}-____");
 
                 object result = cmd.ExecuteScalar();
                 string lastControlNumber = result != DBNull.Value && result != null ? result.ToString() : null;
@@ -332,26 +458,23 @@ namespace pgso
 
                 if (!string.IsNullOrEmpty(lastControlNumber))
                 {
-                    // Extract the numeric part (positions 3-5: CN-001-2025 → 001)
-                    string numberPart = lastControlNumber.Substring(3, 3);
+                    string numberPart = lastControlNumber.Substring(8, 4);
                     if (int.TryParse(numberPart, out int lastNumber))
                     {
                         nextNumber = lastNumber + 1;
-
-                        // Reset to 1 if we exceed 999
-                        if (nextNumber > 999)
+                        if (nextNumber > 9999)
                         {
                             nextNumber = 1;
                         }
                     }
                 }
 
-                return $"CN-{nextNumber:D3}-{currentYear}";
+                return $"CN-{currentYear}-{nextNumber:D4}";
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error generating control number: " + ex.Message);
-                return $"CN-001-{DateTime.Now.Year}"; // Fallback
+                return $"CN-{DateTime.Now.Year}-0001"; // Fallback
             }
             finally
             {
@@ -372,6 +495,9 @@ namespace pgso
                 LoadReservationTypesByVenue(selectedVenueID);
                 LoadVenueScope(selectedVenueID);
                 LoadReservedDates(selectedVenueID);
+                // Load caterer fee for the selected venue
+                LoadCatererFee(selectedVenueID);
+
 
                 // Reset panel state until scope is selected
                 panel_Aircon.Enabled = false;
@@ -410,10 +536,11 @@ namespace pgso
                 {
                     totalAmount = initialRate;
                 }
-
-                totalAmount += additionalCharge; // Add this line
-
+                decimal catererFee = 0m;
+                decimal.TryParse(txt_Caterer_Fee.Text.Replace(",", ""), out catererFee);
+                totalAmount += catererFee;
                 txt_Total.Text = totalAmount.ToString("N2");
+
             }
             else
             {
@@ -432,12 +559,24 @@ namespace pgso
                 if (!IsReservationTypeAndScopeSelected())
                     return;
 
+                // Handle PGNV case - set rates to zero but keep aircon enabled
+                if (combo_ReservationType.SelectedValue.ToString().Equals("PGNV", StringComparison.OrdinalIgnoreCase))
+                {
+                    txt_rate.Text = "0.00";
+                    txt_Succeeding_Hour.Text = "0.00";
+                    additionalCharge = 0m;
+                    panel_Aircon.Enabled = true;  // Keep aircon panel enabled for PGNV
+                    CalculateTotalAmount();
+                    return;  // Exit early for PGNV
+                }
+
+                // Rest of your existing LoadRate logic for non-PGNV cases
                 string rateQuery = @"
-SELECT pk_Venue_PricingID, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Aircon, fld_Additional_Charge
-FROM tbl_Venue_Pricing 
-WHERE fk_VenueID = @VenueID 
-AND fk_Venue_ScopeID = @VenueScopeID 
-AND fld_Rate_Type = @RateType";
+            SELECT pk_Venue_PricingID, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Aircon, fld_Additional_Charge
+            FROM tbl_Venue_Pricing 
+            WHERE fk_VenueID = @VenueID 
+            AND fk_Venue_ScopeID = @VenueScopeID 
+            AND fld_Rate_Type = @RateType";
 
                 DBConnect();
                 using (SqlCommand rateCmd = new SqlCommand(rateQuery, conn))
@@ -453,7 +592,9 @@ AND fld_Rate_Type = @RateType";
                             // Update rates
                             txt_rate.Text = reader["fld_First4Hrs_Rate"].ToString();
                             txt_Succeeding_Hour.Text = reader["fld_Hourly_Rate"].ToString();
-                            additionalCharge = reader["fld_Additional_Charge"] != DBNull.Value ? Convert.ToDecimal(reader["fld_Additional_Charge"]) : 0m;
+                            additionalCharge = reader["fld_Additional_Charge"] != DBNull.Value ?
+                                Convert.ToDecimal(reader["fld_Additional_Charge"]) : 0m;
+
                             // Update panel based on fld_Aircon
                             if (reader["fld_Aircon"] == DBNull.Value)
                             {
@@ -495,7 +636,7 @@ AND fld_Rate_Type = @RateType";
         {
             decimal totalAmount = 0;
 
-            
+
 
             // Update the txt_Total with the aggregated total amount
             txt_Total.Text = totalAmount.ToString("0.00");
@@ -520,7 +661,11 @@ AND fld_Rate_Type = @RateType";
             {
                 return; // Cancel submission if user selects No
             }
-
+            if (combo_Name.Text == comboNamePlaceholder)
+            {
+                MessageBox.Show("Please enter a valid name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             // Validate time conflict
             if (HasTimeConflict(startDate, endDate, startTime, endTime, selectedVenueID))
             {
@@ -549,8 +694,8 @@ AND fld_Rate_Type = @RateType";
             }
 
             // Validate contact number
-            string contactNumber = isContactPlaceholderActive ? "" : txt_contact.Text;
-            if (string.IsNullOrEmpty(contactNumber) || !IsValidContactNumber(contactNumber))
+            string contactNumber = txt_contact.Text;
+            if (string.IsNullOrWhiteSpace(contactNumber) || !IsValidContactNumber(contactNumber))
             {
                 MessageBox.Show("Contact number is invalid. Please enter a valid contact number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -572,67 +717,133 @@ AND fld_Rate_Type = @RateType";
                 transaction = conn.BeginTransaction();
 
                 // Step 1: Insert into tbl_Requesting_Person
-                cmd = new SqlCommand(@"
-INSERT INTO tbl_Requesting_Person 
-(fld_Surname, fld_First_Name, fld_Middle_Name, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office) 
-OUTPUT INSERTED.pk_Requesting_PersonID 
-VALUES (@Surname, @FirstName, @MiddleName, @Address, @ContactNumber, @RequestOrigin, @Requesting_Office)", conn, transaction);
+                // Parse name in the format: "Surname, Firstname MiddleName"
+                string input = combo_Name.Text.Trim();
+                string surname = "", firstName = "", middleName = "";
 
-                cmd.Parameters.AddWithValue("@Surname", txt_surname.Text);
-                cmd.Parameters.AddWithValue("@FirstName", txt_firstname.Text);
-                cmd.Parameters.AddWithValue("@MiddleName", txt_Middle_Name.Text);
+                // Split by comma first
+                var parts = input.Split(new[] { ',' }, 2);
+                if (parts.Length == 2)
+                {
+                    surname = parts[0].Trim();
+                    var firstAndMiddle = parts[1].Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (firstAndMiddle.Length > 0)
+                        firstName = firstAndMiddle[0];
+                    if (firstAndMiddle.Length > 1)
+                        middleName = string.Join(" ", firstAndMiddle.Skip(1));
+                }
+                else
+                {
+                    // fallback: treat the whole as first name
+                    firstName = input;
+                }
+
+                cmd = new SqlCommand(@"
+    INSERT INTO tbl_Requesting_Person 
+    (fld_First_Name, fld_Middle_Name, fld_Surname, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office, fld_Is_Special) 
+    OUTPUT INSERTED.pk_Requesting_PersonID 
+    VALUES (@FirstName, @MiddleName, @Surname, @Address, @ContactNumber, @RequestOrigin, @Requesting_Office, @fld_Is_Special)", conn, transaction);
+
+                cmd.Parameters.AddWithValue("@FirstName", firstName);
+                cmd.Parameters.AddWithValue("@MiddleName", middleName);
+                cmd.Parameters.AddWithValue("@Surname", surname);
                 cmd.Parameters.AddWithValue("@Address", txt_address.Text);
                 cmd.Parameters.AddWithValue("@ContactNumber", contactNumber);
                 cmd.Parameters.AddWithValue("@RequestOrigin", combo_Request.Text);
                 cmd.Parameters.AddWithValue("@Requesting_Office", txt_Requesting_Office.Text);
+                cmd.Parameters.AddWithValue("@fld_Is_Special", combo_Special.Text);
 
                 int personID = (int)cmd.ExecuteScalar();
-
-                // Step 2: Get venue pricing ID (modified to handle NULL fld_Aircon)
+                // Step 2: Get or create venue pricing ID
                 int venueID = selectedVenueID;
                 int venueScopeID = (int)combo_scope.SelectedValue;
                 string reservationType = combo_ReservationType.SelectedValue.ToString();
+                int venuePricingID;
 
-                string pricingQuery = @"
-SELECT pk_Venue_PricingID 
-FROM tbl_Venue_Pricing 
-WHERE fk_VenueID = @VenueID 
-AND fk_Venue_ScopeID = @VenueScopeID 
-AND fld_Rate_Type = @RateType 
-AND (fld_Aircon = @UsesAircon OR (fld_Aircon IS NULL AND @UsesAircon IS NULL))";
-
-                cmd = new SqlCommand(pricingQuery, conn, transaction);
-                cmd.Parameters.AddWithValue("@VenueID", venueID);
-                cmd.Parameters.AddWithValue("@VenueScopeID", venueScopeID);
-                cmd.Parameters.AddWithValue("@RateType", reservationType);
-
-                // Handle aircon parameter based on panel state
-                if (panel_Aircon.Enabled)
+                if (reservationType.Equals("PGNV", StringComparison.OrdinalIgnoreCase))
                 {
-                    cmd.Parameters.AddWithValue("@UsesAircon", radio_Yes.Checked);
+                    string pgnvQuery = @"
+                SELECT pk_Venue_PricingID 
+                FROM tbl_Venue_Pricing 
+                WHERE fk_VenueID = @VenueID 
+                AND fk_Venue_ScopeID = @VenueScopeID 
+                AND fld_Rate_Type = 'PGNV'";
+
+                    cmd = new SqlCommand(pgnvQuery, conn, transaction);
+                    cmd.Parameters.AddWithValue("@VenueID", venueID);
+                    cmd.Parameters.AddWithValue("@VenueScopeID", venueScopeID);
+
+                    object pgnvResult = cmd.ExecuteScalar();
+
+                    if (pgnvResult != null)
+                    {
+                        venuePricingID = (int)pgnvResult;
+                    }
+                    else
+                    {
+                        string insertPgnv = @"
+                    INSERT INTO tbl_Venue_Pricing 
+                    (fk_VenueID, fk_Venue_ScopeID, fld_Rate_Type, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Aircon)
+                    VALUES (@VenueID, @VenueScopeID, 'PGNV', 0, 0, @UsesAircon);
+                    SELECT SCOPE_IDENTITY();";
+
+                        cmd = new SqlCommand(insertPgnv, conn, transaction);
+                        cmd.Parameters.AddWithValue("@VenueID", venueID);
+                        cmd.Parameters.AddWithValue("@VenueScopeID", venueScopeID);
+                        cmd.Parameters.AddWithValue("@UsesAircon", radio_Yes.Checked);
+
+                        venuePricingID = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+
+                    txt_rate.Text = "0.00";
+                    txt_Succeeding_Hour.Text = "0.00";
+                    additionalCharge = 0m;
                 }
                 else
                 {
-                    cmd.Parameters.AddWithValue("@UsesAircon", DBNull.Value);
+                    string pricingQuery = @"
+                SELECT pk_Venue_PricingID 
+                FROM tbl_Venue_Pricing 
+                WHERE fk_VenueID = @VenueID 
+                AND fk_Venue_ScopeID = @VenueScopeID 
+                AND fld_Rate_Type = @RateType 
+                AND (fld_Aircon = @UsesAircon OR (fld_Aircon IS NULL AND @UsesAircon IS NULL))";
+
+                    cmd = new SqlCommand(pricingQuery, conn, transaction);
+                    cmd.Parameters.AddWithValue("@VenueID", venueID);
+                    cmd.Parameters.AddWithValue("@VenueScopeID", venueScopeID);
+                    cmd.Parameters.AddWithValue("@RateType", reservationType);
+
+                    if (panel_Aircon.Enabled)
+                    {
+                        cmd.Parameters.AddWithValue("@UsesAircon", radio_Yes.Checked);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@UsesAircon", DBNull.Value);
+                    }
+
+                    object pricingResult = cmd.ExecuteScalar();
+                    if (pricingResult == null)
+                    {
+                        throw new Exception("Could not find matching pricing record for the selected venue, scope, and aircon combination.");
+                    }
+                    venuePricingID = (int)pricingResult;
                 }
 
-                object pricingResult = cmd.ExecuteScalar();
-                if (pricingResult == null)
-                {
-                    throw new Exception("Could not find matching pricing record for the selected venue, scope, and aircon combination.");
-                }
-                int venuePricingID = (int)pricingResult;
+                // Step 3: Use personID as clientID (no more tbl_Client_Info)
+                int clientID = personID;
 
-                // Step 3: Insert into tbl_Reservation
+                // Step 4: Insert into tbl_Reservation (now includes fk_ClientID)
                 cmd = new SqlCommand(@"
-INSERT INTO tbl_Reservation 
-(fld_Control_Number, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time, fld_Activity_Name, 
-fld_Number_Of_Participants, fld_Reservation_Status, fld_Reservation_Type, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Total_Amount, 
-fk_Requesting_PersonID, fk_VenueID, fk_Venue_PricingID, fk_Venue_ScopeID, fld_Created_At) 
-OUTPUT INSERTED.pk_ReservationID 
-VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityName, 
-@NumberOfParticipants, @ReservationStatus, @ReservationType, @FirstFourHrs, @SucceedingHrs, @TotalAmount,
-@RequestingPersonID, @VenueID, @VenuePricingID, @VenueScopeID, @CreatedAt)", conn, transaction);
+    INSERT INTO tbl_Reservation 
+    (fld_Control_Number, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time, fld_Activity_Name, 
+     fld_Number_Of_Participants, fld_Reservation_Status, fld_Reservation_Type, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Total_Amount, 
+     fk_Requesting_PersonID, fk_ClientID, fk_VenueID, fk_Venue_PricingID, fk_Venue_ScopeID, fld_Created_At, fld_Scanned_Document, fld_Caterer_Fee) 
+    OUTPUT INSERTED.pk_ReservationID 
+    VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityName, 
+            @NumberOfParticipants, @ReservationStatus, @ReservationType, @FirstFourHrs, @SucceedingHrs, @TotalAmount,
+            @RequestingPersonID, @ClientID, @VenueID, @VenuePricingID, @VenueScopeID, @CreatedAt, @ScannedDoc, @CatererFee)", conn, transaction);
 
                 cmd.Parameters.AddWithValue("@ControlNumber", txt_controlnum.Text);
                 cmd.Parameters.AddWithValue("@StartDate", startDate);
@@ -641,47 +852,73 @@ VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityNam
                 cmd.Parameters.AddWithValue("@EndTime", endTime);
                 cmd.Parameters.AddWithValue("@ActivityName", txt_activity.Text);
                 cmd.Parameters.AddWithValue("@NumberOfParticipants", num_participants.Value);
-
                 cmd.Parameters.AddWithValue("@SucceedingHrs", decimal.Parse(txt_Succeeding_Hour.Text.Replace(",", "")));
                 cmd.Parameters.AddWithValue("@FirstFourHrs", decimal.Parse(txt_rate.Text.Replace(",", "")));
-
                 cmd.Parameters.AddWithValue("@ReservationStatus", "Pending");
                 cmd.Parameters.AddWithValue("@ReservationType", "Venue");
                 cmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
                 cmd.Parameters.AddWithValue("@RequestingPersonID", personID);
+                cmd.Parameters.AddWithValue("@ClientID", clientID); // This is now the same as personID
                 cmd.Parameters.AddWithValue("@VenueID", venueID);
                 cmd.Parameters.AddWithValue("@VenuePricingID", venuePricingID);
                 cmd.Parameters.AddWithValue("@VenueScopeID", venueScopeID);
                 cmd.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
+                cmd.Parameters.Add("@ScannedDoc", SqlDbType.VarBinary).Value = scannedImageBytes ?? (object)DBNull.Value;
+                cmd.Parameters.AddWithValue("@CatererFee", decimal.Parse(txt_Caterer_Fee.Text.Replace(",", "")));
 
                 int reservationID = (int)cmd.ExecuteScalar();
+                
+                
+                //auditlog start
+                string affectedTable = "tbl_Reservation";
+                string affectedRecordPk = reservationID.ToString();
+                string actionType = "Created a Venue Reservation";
 
-                // Step 4: Insert into tbl_Reservation_Venues
-                using (SqlCommand venueCmd = new SqlCommand(@"
-INSERT INTO tbl_Reservation_Venues 
-(fk_ReservationID, fk_VenueID, fk_Venue_ScopeID, fld_Start_Date, fld_End_Date, 
-fld_Start_Time, fld_End_Time, fld_Total_Amount, fld_Participants) 
-VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate, 
-        @StartTime, @EndTime, @TotalAmount, @Participants)", conn, transaction))
+                string changedBy = frm_login.LoggedInUserRole;
+                string Uname = frm_login.LoggedInUserRole;
+                DateTime changedAt = DateTime.Now;
+                int userId = frm_login.LoggedInUserId;
+                // Optionally, serialize new data as JSON (for simplicity, just key fields here)
+                string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
                 {
-                    venueCmd.Parameters.AddWithValue("@ReservationID", reservationID);
-                    venueCmd.Parameters.AddWithValue("@VenueID", venueID);
-                    venueCmd.Parameters.AddWithValue("@ScopeID", venueScopeID);
-                    venueCmd.Parameters.AddWithValue("@StartDate", startDate);
-                    venueCmd.Parameters.AddWithValue("@EndDate", endDate);
-                    venueCmd.Parameters.AddWithValue("@StartTime", startTime);
-                    venueCmd.Parameters.AddWithValue("@EndTime", endTime);
-                    venueCmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
-                    venueCmd.Parameters.AddWithValue("@Participants", num_participants.Value);
+                    ControlNumber = txt_controlnum.Text,
+                    Activity = txt_activity.Text,
+                    VenueID = selectedVenueID,
+                    StartDate = startDate,
+                    EndDate = endDate,
+                    StartTime = startTime,
+                    EndTime = endTime,
+                    TotalAmount = totalAmount
+                });
+                MessageBox.Show("Username: " + frm_login.LoggedInUsername);
+                // Insert audit log
+                using (SqlCommand auditCmd = new SqlCommand(@"
+                    INSERT INTO tbl_Audit_Log
+                    (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                    VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                {
+                    auditCmd.Parameters.AddWithValue("@UserID", userId);
+                    auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                    auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                    auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                    auditCmd.Parameters.AddWithValue("@PrevJson", DBNull.Value); // No previous data for create
+                    auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                    auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
 
-                    venueCmd.ExecuteNonQuery();
+                    auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                    auditCmd.ExecuteNonQuery();
                 }
+
+                //end auditlog
 
                 // Commit transaction
                 transaction.Commit();
 
                 MessageBox.Show("Reservation submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                var billingForm = new frm_Billing();
+                billingForm.Show();
+                this.Close(); // Close the reservation form after submission
 
                 // Refresh control number and clear form
                 txt_controlnum.Text = GenerateControlNumber();
@@ -740,6 +977,33 @@ VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate,
         {
             combo_ReservationType.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            string selectedRateType = "";
+            if (combo_ReservationType.SelectedValue != null)
+                selectedRateType = combo_ReservationType.SelectedValue.ToString();
+
+            if (selectedRateType.Equals("Special", StringComparison.OrdinalIgnoreCase))
+            {
+                combo_Special.Enabled = true;
+                button1.Enabled = true; // Enable scan button
+            }
+            else
+            {
+                combo_Special.Enabled = false;
+                combo_Special.SelectedIndex = -1;
+                button1.Enabled = false; // Disable scan button
+            }
+
+            // If PGNV is selected, set rates to zero but keep aircon panel enabled
+            if (selectedRateType.Equals("PGNV", StringComparison.OrdinalIgnoreCase))
+            {
+                txt_rate.Text = "0.00";
+                txt_Succeeding_Hour.Text = "0.00";
+                additionalCharge = 0m;
+                panel_Aircon.Enabled = true;  // Keep aircon enabled
+                CalculateTotalAmount();
+                return;
+            }
+
             if (IsReservationTypeAndScopeSelected())
             {
                 LoadRate();
@@ -796,7 +1060,7 @@ VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate,
         // Helper method to validate the contact number
         private bool IsValidContactNumber(string contactNumber)
         {
-      
+
             // Ensure the contact number is 10-15 digits long and may contain spaces, dashes, and parentheses
             string cleanedContactNumber = new string(contactNumber.Where(char.IsDigit).ToArray());
             return cleanedContactNumber.Length >= 10 && cleanedContactNumber.Length <= 15;
@@ -818,9 +1082,9 @@ VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate,
             try
             {
                 // Clear textboxes
-                txt_surname.Clear();
-                txt_firstname.Clear();
-                txt_Middle_Name.Clear(); // Clear Middle Name
+              //  txt_surname.Clear();
+               
+              //  txt_Middle_Name.Clear(); // Clear Middle Name
                 txt_address.Clear();
                 txt_contact.Clear();
                 txt_activity.Clear();
@@ -837,7 +1101,7 @@ VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate,
                 date_of_use_end.Value = DateTime.Now;
                 TimeStart.Value = DateTime.Now;
                 TimeEnd.Value = DateTime.Now;
-
+                SetComboNamePlaceholder();
                 // Reset ComboBoxes to default selection
                 if (combo_venues.Items.Count > 0)
                     combo_venues.SelectedIndex = 0;
@@ -847,11 +1111,15 @@ VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate,
                     combo_ReservationType.SelectedIndex = 0;
                 if (combo_Request.Items.Count > 0)
                     combo_Request.SelectedIndex = -1; // Reset Request Origin
-
+                if (combo_Name.Items.Count > 0)
+                    combo_Name.SelectedIndex = -1;
                 // Reset RadioButtons
                 radio_Yes.Checked = false;
                 radio_No.Checked = false;
 
+                this.Size = new Size(680, 643); // Reset form size after clearing
+                pictureBox1.Image = null;
+                scannedImageBytes = null;
 
                 // Reload Venues and Scope
                 LoadVenues();
@@ -881,10 +1149,10 @@ VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate,
             {
                 DBConnect();
                 cmd = new SqlCommand(@"
-            SELECT fld_Start_Date, fld_End_Date 
-            FROM tbl_Reservation 
-            WHERE fk_VenueID = @VenueID 
-              AND fld_Reservation_Status IN ('Confirmed', 'Pending')", conn);
+                    SELECT fld_Start_Date, fld_End_Date 
+                    FROM tbl_Reservation 
+                    WHERE fk_VenueID = @VenueID 
+                      AND fld_Reservation_Status IN ('Confirmed', 'Pending')", conn);
                 cmd.Parameters.AddWithValue("@VenueID", venueID);
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -942,6 +1210,10 @@ VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate,
                                                              // Re-subscribe to the event
                 date_of_use_start.ValueChanged += date_of_use_start_ValueChanged;
             }
+
+            // Always set end date to match start date
+            date_of_use_end.Value = date_of_use_start.Value;
+
         }
 
 
@@ -1114,27 +1386,27 @@ VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate,
 
         }
 
-        
+
         private bool HasTimeConflict(DateTime startDate, DateTime endDate, TimeSpan startTime, TimeSpan endTime, int venueID)
         {
             try
             {
                 DBConnect();
                 string query = @"
-            SELECT 1 
-            FROM tbl_Reservation r
-            JOIN tbl_Reservation_Venues rv ON r.pk_ReservationID = rv.fk_ReservationID
-            WHERE r.fk_VenueID = @VenueID
-            AND r.fld_Reservation_Status IN ('Confirmed', 'Pending')
-            AND (
-                -- Existing reservation starts during new reservation
-                (rv.fld_Start_Date <= @EndDate AND rv.fld_End_Date >= @StartDate)
-                AND (
-                    -- Time overlap conditions
-                    (rv.fld_Start_Time < @EndTime AND rv.fld_End_Time > @StartTime)
-                    OR -- Multi-day reservation that covers our time window
-                    (rv.fld_Start_Date < rv.fld_End_Date)
-                )
+                    SELECT 1 
+                    FROM tbl_Reservation r
+                    JOIN tbl_Reservation_Venues rv ON r.pk_ReservationID = rv.fk_ReservationID
+                    WHERE r.fk_VenueID = @VenueID
+                    AND r.fld_Reservation_Status IN ('Confirmed', 'Pending')
+                    AND (
+                        -- Existing reservation starts during new reservation
+                        (rv.fld_Start_Date <= @EndDate AND rv.fld_End_Date >= @StartDate)
+                        AND (
+                            -- Time overlap conditions
+                            (rv.fld_Start_Time < @EndTime AND rv.fld_End_Time > @StartTime)
+                            OR -- Multi-day reservation that covers our time window
+                            (rv.fld_Start_Date < rv.fld_End_Date)
+                        )
             )";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -1198,6 +1470,203 @@ VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate,
             return true;
         }
 
+        //scan
+        private void ScanDocument()
+        {
+            try
+            {
+                // Show "Please wait" dialog
+                using (var waitForm = new Form()
+                {
+                    FormBorderStyle = FormBorderStyle.None,
+                    StartPosition = FormStartPosition.CenterScreen,
+                    Width = 300,
+                    Height = 100,
+                    TopMost = true,
+                    ControlBox = false
+                })
+                {
+                    var label = new Label()
+                    {
+                        Text = "Initializing scanner...",
+                        Dock = DockStyle.Fill,
+                        TextAlign = ContentAlignment.MiddleCenter
+                    };
+                    waitForm.Controls.Add(label);
+                    waitForm.Show();
+                    Application.DoEvents();
+
+                    // Find scanners
+                    var deviceManager = new DeviceManager();
+                    List<DeviceInfo> scanners = new List<DeviceInfo>();
+
+                    for (int i = 1; i <= deviceManager.DeviceInfos.Count; i++)
+                    {
+                        if (deviceManager.DeviceInfos[i].Type == WiaDeviceType.ScannerDeviceType)
+                        {
+                            scanners.Add(deviceManager.DeviceInfos[i]);
+                        }
+                    }
+
+                    if (scanners.Count == 0)
+                    {
+                        waitForm.Close();
+                        MessageBox.Show("No scanners found. Please connect a scanner and try again.");
+                        return;
+                    }
+
+                    // Select scanner
+                    DeviceInfo selectedScanner = null;
+                    if (scanners.Count == 1)
+                    {
+                        selectedScanner = scanners[0];
+                        label.Text = $"Using scanner: {selectedScanner.Properties["Name"].get_Value()}";
+                    }
+                    else
+                    {
+                        waitForm.Close();
+                        using (var scannerSelectForm = new Form()
+                        {
+                            Text = "Select Scanner",
+                            Width = 350,
+                            Height = 220,
+                            StartPosition = FormStartPosition.CenterScreen
+                        })
+                        {
+                            ListBox scannerList = new ListBox() { Dock = DockStyle.Fill };
+                            foreach (var scanner in scanners)
+                            {
+                                scannerList.Items.Add(scanner.Properties["Name"].get_Value());
+                            }
+
+                            Button selectButton = new Button()
+                            {
+                                Text = "Select",
+                                Dock = DockStyle.Bottom
+                            };
+
+                            selectButton.Click += (s, e) =>
+                            {
+                                if (scannerList.SelectedIndex >= 0)
+                                {
+                                    selectedScanner = scanners[scannerList.SelectedIndex];
+                                    scannerSelectForm.DialogResult = DialogResult.OK;
+                                }
+                            };
+
+                            scannerSelectForm.Controls.Add(scannerList);
+                            scannerSelectForm.Controls.Add(selectButton);
+
+                            if (scannerSelectForm.ShowDialog() != DialogResult.OK)
+                            {
+                                return;
+                            }
+                        }
+                        waitForm.Show();
+                        label.Text = $"Scanning with {selectedScanner.Properties["Name"].get_Value()}...";
+                        Application.DoEvents();
+                    }
+
+                    // Perform scan
+                    try
+                    {
+                        var device = selectedScanner.Connect();
+                        var item = device.Items[1];
+
+                        // Set scan settings: Color, 150 DPI, remove scan quality property
+                        try
+                        {
+                            const string wiaColorMode = "6146";
+                            const string wiaResolution = "6147";
+                            // Removed wiaScanQuality
+
+                            SetWIAProperty(item.Properties, wiaColorMode, 1); // Color
+                            SetWIAProperty(item.Properties, wiaResolution, 150); // 150 DPI
+                                                                                 // Removed: SetWIAProperty(item.Properties, wiaScanQuality, 100);
+                        }
+                        catch { /* Ignore if not supported */ }
+
+                        label.Text = "Scanning document...";
+                        Application.DoEvents();
+
+                        // Use JPEG format for smaller files
+                        var imageFile = (ImageFile)item.Transfer("{B96B3CAE-0728-11D3-9D7B-0000F81EF32E}"); // JPEG GUID.
+
+                        // Save to byte array
+                        var imageBytes = (byte[])imageFile.FileData.get_BinaryData();
+                        scannedImageBytes = imageBytes;
+
+                        // Display preview and resize form after scan
+                        if (pictureBox1.InvokeRequired)
+                        {
+                            pictureBox1.Invoke(new Action(() =>
+                            {
+                                pictureBox1.Image?.Dispose();
+                                using (var ms = new MemoryStream(imageBytes))
+                                {
+                                    pictureBox1.Image = Image.FromStream(ms);
+                                }
+                                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                                this.Size = new Size(932, 613); // Set form size after scan
+                            }));
+                        }
+                        else
+                        {
+                            pictureBox1.Image?.Dispose();
+                            using (var ms = new MemoryStream(imageBytes))
+                            {
+                                pictureBox1.Image = Image.FromStream(ms);
+                            }
+                            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                            this.Size = new Size(932, 613); // Set form size after scan
+                        }
+                    }
+                    finally
+                    {
+                        // Ensure scanner is properly released
+                        Marshal.ReleaseComObject(selectedScanner);
+                    }
+                }
+            }
+            catch (COMException ex)
+            {
+                string errorMessage = ex.ErrorCode switch
+                {
+                    -2145320939 => "Scanner is busy or not responding",
+                    -2145320960 => "Paper jam or scanner error",
+                    _ => $"Scanner error: {ex.Message} (Error code: {ex.ErrorCode})"
+                };
+                MessageBox.Show(errorMessage, "Scanning Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SetScannerSettings(IItem item)
+        {
+            try
+            {
+                const string wiaColorMode = "6146";
+                const string wiaResolution = "6147";
+
+                // Set color mode to color (1)
+                SetWIAProperty(item.Properties, wiaColorMode, 1);
+
+                // Set resolution to 300 DPI
+                SetWIAProperty(item.Properties, wiaResolution, 300);
+            }
+            catch { /* Ignore if scanner doesn't support these settings */ }
+        }
+
+
+        private void SetWIAProperty(IProperties properties, object propName, object propValue)
+        {
+            Property prop = properties.get_Item(ref propName);
+            prop.set_Value(ref propValue);
+        }
+
         private void panel_Aircon_Paint(object sender, PaintEventArgs e)
         {
 
@@ -1213,12 +1682,258 @@ VALUES (@ReservationID, @VenueID, @ScopeID, @StartDate, @EndDate,
 
         }
 
-        private void btn_Billing_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
-            using (var BillingForm = new frm_Billing())
+
+        }
+
+        private void combo_Special_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (combo_Special.SelectedItem == null)
+                return;
+
+            string selected = combo_Special.SelectedItem.ToString();
+
+            switch (selected)
             {
-                BillingForm.ShowDialog();
+                case "PWD":
+                    // Optionally, show a message or enable a textbox for ID number, etc.
+                    // Example: MessageBox.Show("PWD selected.");
+                    break;
+                case "SENIOR CITIZEN":
+                    // Optionally, show a message or enable a textbox for ID number, etc.
+                    // Example: MessageBox.Show("Senior Citizen selected.");
+                    break;
+                case "OTHERS":
+                    // Optionally, show a textbox or dialog for user to specify details
+                    // Example: MessageBox.Show("Please specify the details for 'OTHERS'.");
+                    break;
+                default:
+                    // No action needed
+                    break;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ScanDocument();
+        }
+
+
+        //
+        // Call this in your constructor or form load
+        // Example: InitializeClientInfoAutocomplete();
+
+        private void combo_Name_TextUpdate(object sender, EventArgs e)
+        { // Prevent out-of-range access
+          //if (combo_Name.SelectedIndex < 0 || combo_Name.SelectedIndex >= combo_Name.Items.Count) return;
+
+            combo_Name.DroppedDown = true;
+        }
+
+        private void combo_Name_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {// Prevent out-of-range access
+            if (combo_Name.SelectedIndex < 0 || combo_Name.SelectedIndex >= combo_Name.Items.Count)
+                return;
+            string input = combo_Name.Text.Trim();
+
+            // Remove office part if present
+            int idx = input.LastIndexOf(" (");
+            if (idx > 0 && input.EndsWith(")"))
+            {
+                input = input.Substring(0, idx).Trim();
+                combo_Name.Text = input;
+            }
+
+            // Optionally, reformat to match the correct format from the table
+            foreach (DataRow row in requestingPersonTable.Rows)
+            {
+                string formatted = $"{row["fld_Surname"]}, {row["fld_First_Name"]} {row["fld_Middle_Name"]}".Trim();
+                if (string.Equals(input, formatted, StringComparison.OrdinalIgnoreCase))
+                {
+                    combo_Name.Text = formatted;
+                    return;
+                }
+            }
+        }
+        private void combo_Name_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Prevent out-of-range access
+            if (combo_Name.SelectedIndex < 0 || combo_Name.SelectedIndex >= combo_Name.Items.Count)
+                return;
+            if (requestingPersonTable == null || requestingPersonTable.Rows.Count == 0)
+                return;
+
+            string selected = combo_Name.SelectedItem.ToString();
+
+            // Extract name and office if present
+            string namePart = selected;
+            string officePart = null;
+            int idx = selected.LastIndexOf(" (");
+            if (idx > 0 && selected.EndsWith(")"))
+            {
+                namePart = selected.Substring(0, idx);
+                officePart = selected.Substring(idx + 2, selected.Length - idx - 3); // remove " (" and ")"
+            }
+
+            // Set only the name (no office) in the ComboBox text
+            combo_Name.Text = namePart.Trim();
+            combo_Name.DroppedDown = false; // Optionally close dropdown
+
+            // Parse name
+            var parts = namePart.Split(new[] { ',' }, 2);
+            if (parts.Length < 2) return;
+            string surname = parts[0].Trim();
+            string rest = parts[1].Trim();
+            string[] nameParts = rest.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string firstName = nameParts.Length > 0 ? nameParts[0] : "";
+            string middleName = nameParts.Length > 1 ? string.Join(" ", nameParts.Skip(1)) : "";
+
+            // Find the correct row (with office if available)
+            DataRow match = requestingPersonTable.AsEnumerable()
+                .FirstOrDefault(row =>
+                    row["fld_Surname"].ToString().Trim().Equals(surname, StringComparison.OrdinalIgnoreCase) &&
+                    row["fld_First_Name"].ToString().Trim().Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
+                    row["fld_Middle_Name"].ToString().Trim().Equals(middleName, StringComparison.OrdinalIgnoreCase) &&
+                    (officePart == null || row["fld_Requesting_Office"].ToString().Trim().Equals(officePart, StringComparison.OrdinalIgnoreCase))
+                );
+
+            if (match == null) return;
+
+            txt_address.Text = match["fld_Requesting_Person_Address"].ToString();
+            txt_contact.Text = match["fld_Contact_Number"].ToString();
+            txt_Requesting_Office.Text = match["fld_Requesting_Office"].ToString();
+        }
+
+        private void combo_Name_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (combo_Name.SelectedIndex < 0 || requestingPersonTable == null || requestingPersonTable.Rows.Count == 0)
+                return;
+
+            string selected = combo_Name.SelectedItem.ToString();
+
+            // Extract name and office if present
+            string namePart = selected;
+            string officePart = null;
+            int idx = selected.LastIndexOf(" (");
+            if (idx > 0 && selected.EndsWith(")"))
+            {
+                namePart = selected.Substring(0, idx);
+                officePart = selected.Substring(idx + 2, selected.Length - idx - 3); // remove " (" and ")"
+            }
+
+            // Use BeginInvoke to set the text after ComboBox finishes its update
+            combo_Name.BeginInvoke(new Action(() =>
+            {
+                combo_Name.Text = namePart.Trim();
+                combo_Name.SelectionStart = combo_Name.Text.Length;
+                combo_Name.SelectionLength = 0;
+            }));
+
+            // Parse name
+            var parts = namePart.Split(new[] { ',' }, 2);
+            if (parts.Length < 2) return;
+            string surname = parts[0].Trim();
+            string rest = parts[1].Trim();
+            string[] nameParts = rest.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string firstName = nameParts.Length > 0 ? nameParts[0] : "";
+            string middleName = nameParts.Length > 1 ? string.Join(" ", nameParts.Skip(1)) : "";
+
+            // Find the correct row (with office if available)
+            DataRow match = requestingPersonTable.AsEnumerable()
+                .FirstOrDefault(row =>
+                    row["fld_Surname"].ToString().Trim().Equals(surname, StringComparison.OrdinalIgnoreCase) &&
+                    row["fld_First_Name"].ToString().Trim().Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
+                    row["fld_Middle_Name"].ToString().Trim().Equals(middleName, StringComparison.OrdinalIgnoreCase) &&
+                    (officePart == null || row["fld_Requesting_Office"].ToString().Trim().Equals(officePart, StringComparison.OrdinalIgnoreCase))
+                );
+
+            if (match == null) return;
+
+            txt_address.Text = match["fld_Requesting_Person_Address"].ToString();
+            txt_contact.Text = match["fld_Contact_Number"].ToString();
+            txt_Requesting_Office.Text = match["fld_Requesting_Office"].ToString();
+        }
+        private void LoadCatererFee(int venueID)
+        {
+            try
+            {
+                DBConnect();
+                using (SqlCommand cmd = new SqlCommand("SELECT fld_Caterer_Fee FROM tbl_Venue_Pricing WHERE fk_VenueID = @VenueID", conn))
+                {
+                    cmd.Parameters.AddWithValue("@VenueID", venueID);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        currentCatererFee = Convert.ToDecimal(result);
+                        txt_Caterer_Fee.Text = currentCatererFee.ToString("N2");
+                        // Auto-check the checkbox if there is a caterer fee
+                        chk_UseCatererFee.Checked = currentCatererFee > 0;
+                    }
+                    else
+                    {
+                        currentCatererFee = 0m;
+                        txt_Caterer_Fee.Text = "0.00";
+                        chk_UseCatererFee.Checked = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading caterer fee: " + ex.Message);
+                currentCatererFee = 0m;
+                txt_Caterer_Fee.Text = "0.00";
+                chk_UseCatererFee.Checked = false;
+            }
+            finally
+            {
+                DBClose();
+            }
+        }
+
+        private void chk_UseCatererFee_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_UseCatererFee.Checked)
+            {
+                txt_Caterer_Fee.Text = currentCatererFee.ToString("N2");
+            }
+            else
+            {
+                txt_Caterer_Fee.Text = "0.00";
+            }
+            CalculateTotalAmount(); // If caterer fee is part of total
+        }
+
+        // Helper to set placeholder
+        private void SetComboNamePlaceholder()
+        {
+            if (string.IsNullOrWhiteSpace(combo_Name.Text))
+            {
+                combo_Name.Text = comboNamePlaceholder;
+                combo_Name.ForeColor = comboNamePlaceholderColor;
+            }
+        }
+
+        // Remove placeholder when focused
+        private void Combo_Name_GotFocus(object sender, EventArgs e)
+        {
+            if (combo_Name.Text == comboNamePlaceholder)
+            {
+                combo_Name.Text = "";
+                combo_Name.ForeColor = comboNameNormalColor;
+            }
+        }
+
+        // Restore placeholder if empty on losing focus
+        private void Combo_Name_LostFocus(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(combo_Name.Text))
+            {
+                SetComboNamePlaceholder();
+            }
+        }
+
     }
+
+
 }
