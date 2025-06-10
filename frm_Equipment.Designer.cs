@@ -138,8 +138,8 @@
             // Item
             // 
             this.Item.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Item.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Item.DefaultCellStyle = dataGridViewCellStyle2;
             this.Item.HeaderText = "Item";
             this.Item.Name = "Item";
             this.Item.ReadOnly = true;
@@ -199,9 +199,9 @@
             // fld_Total_Amount
             // 
             this.fld_Total_Amount.DataPropertyName = "fld_Total_Amount";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fld_Total_Amount.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fld_Total_Amount.DefaultCellStyle = dataGridViewCellStyle3;
             this.fld_Total_Amount.FillWeight = 57.44501F;
             this.fld_Total_Amount.HeaderText = "Total";
             this.fld_Total_Amount.Name = "fld_Total_Amount";

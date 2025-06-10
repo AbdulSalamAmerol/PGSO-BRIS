@@ -26,22 +26,130 @@ namespace pgso.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-DG6NT1C;Initial Catalog=db_pgso;Integrated Security=True;Encr" +
-            "ypt=False;TrustServerCertificate=True")]
-        public string strCon {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=ab" +
+            "z123;Encrypt=False;TrustServerCertificate=True")]
+        public string BRIS_EXPERIMENT_3_0ConnectionString {
             get {
-                return ((string)(this["strCon"]));
+                return ((string)(this["BRIS_EXPERIMENT_3_0ConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Savedusername {
+            get {
+                return ((string)(this["Savedusername"]));
+            }
+            set {
+                this["Savedusername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Savedusertype {
+            get {
+                return ((string)(this["Savedusertype"]));
+            }
+            set {
+                this["Savedusertype"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RememberMe {
+            get {
+                return ((bool)(this["RememberMe"]));
+            }
+            set {
+                this["RememberMe"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool remember {
+            get {
+                return ((bool)(this["remember"]));
+            }
+            set {
+                this["remember"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RememberedUsername {
+            get {
+                return ((string)(this["RememberedUsername"]));
+            }
+            set {
+                this["RememberedUsername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RememberedUsertype {
+            get {
+                return ((string)(this["RememberedUsertype"]));
+            }
+            set {
+                this["RememberedUsertype"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RememberMeChecked {
+            get {
+                return ((bool)(this["RememberMeChecked"]));
+            }
+            set {
+                this["RememberMeChecked"] = value;
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=ab" +
-            "z123;Encrypt=False;TrustServerCertificate=True")]
-        public string BRIS_EXPERIMENT_3_0ConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;Integrated Security=Tr" +
+            "ue;Encrypt=False;TrustServerCertificate=True")]
+        public string strCon {
             get {
-                return ((string)(this["BRIS_EXPERIMENT_3_0ConnectionString"]));
+                return ((string)(this["strCon"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Saveusertype {
+            get {
+                return ((string)(this["Saveusertype"]));
+            }
+            set {
+                this["Saveusertype"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string setting {
+            get {
+                return ((string)(this["setting"]));
+            }
+            set {
+                this["setting"] = value;
             }
         }
     }
