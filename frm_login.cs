@@ -230,7 +230,7 @@ namespace pgso
                     else
                     {
                         Properties.Settings.Default.RememberedUsername = "";
-                        Properties.Settings.Default.RememberedUserType = "";
+                        Properties.Settings.Default.RememberedUsertype = "";
                         Properties.Settings.Default.RememberMeChecked = false;
                         Properties.Settings.Default.Save();
 
@@ -299,6 +299,11 @@ namespace pgso
                 TXT_username.SelectionLength = 0;
                 TXT_username.ForeColor = Color.Black;
             }
+        }
+
+        private void frm_login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

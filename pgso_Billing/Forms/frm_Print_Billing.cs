@@ -35,22 +35,41 @@
                 }
             }
 
-            private void LoadBillingDetails()
-            {
-                var billingRecords = repo_Billing.GetBillingRecordsByReservationId(_reservationId);
+        private void LoadBillingDetails()
+        {
+            var billingRecords = repo_Billing.GetBillingRecordsByReservationId(_reservationId);
 
-                if (billingRecords == null || billingRecords.Count == 0)
+            if (billingRecords == null || billingRecords.Count == 0)
+            {
+                MessageBox.Show("No revenue details found for this reservation.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Close();
+            }
+            else
+            {
+                _billingData = billingRecords; // ✅ Store the full list correctly
+
+                // ✅ Output fld_Username for each record
+                foreach (var record in billingRecords)
                 {
-                    MessageBox.Show("No revenue details found for this reservation.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    this.Close();
-                }
-                else
-                {
-                    _billingData = billingRecords; // ✅ Store the full list correctly
+                    Console.WriteLine("fld_Username: " + record.fld_Username);
+                    System.Diagnostics.Debug.WriteLine("fld_Username: " + record.fld_Username);
                 }
             }
 
-            private void DisplayReport()
+            Console.WriteLine("Records count: " + billingRecords.Count);
+            foreach (var record in billingRecords)
+            {
+                Console.WriteLine("Record object: " + record);
+            }
+
+            foreach (var record in billingRecords)
+            {
+                Console.WriteLine($"fld_Username: '{record.fld_Username}");
+            }
+        }
+
+
+        private void DisplayReport()
             {
                 if (_billingData == null || _billingData.Count == 0) return;
 
@@ -68,8 +87,6 @@
                 Print_Billing_Report_Viewer.RefreshReport();
             }
 
-
-
-
         }
+
     }

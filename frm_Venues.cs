@@ -152,23 +152,23 @@ namespace pgso
                 {
                     connection.Open();
                     string query = @"
-    SELECT
-        r.fld_Control_number, 
-        r.fld_Reservation_Status,
-        r.fld_Created_At,
-        r.fld_Total_Amount,
-        v.fld_Venue_Name AS fld_Venue_Name,
-        rp.fld_First_Name,
-        (SELECT TOP 1 vp.fld_Rate_Type 
-         FROM tbl_Venue_Pricing vp 
-         WHERE vp.fk_VenueID = r.fk_VenueID AND vp.fk_Venue_ScopeID = r.fk_Venue_ScopeID) AS fld_Rate_Type,
-        r.fld_Scanned_Document AS fld_Scanned_Document,
-        FORMAT(r.fld_Start_Date, 'M/d/yyyy') AS [Date]
-    FROM tbl_Reservation r
-    LEFT JOIN tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-    LEFT JOIN tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
-    WHERE r.fld_Reservation_Type = 'Venue'
-    ORDER BY r.fld_Created_At DESC";
+                    SELECT
+                        r.fld_Control_number, 
+                        r.fld_Reservation_Status,
+                        r.fld_Created_At,
+                        r.fld_Total_Amount,
+                        v.fld_Venue_Name AS fld_Venue_Name,
+                        rp.fld_First_Name,
+                        (SELECT TOP 1 vp.fld_Rate_Type 
+                         FROM tbl_Venue_Pricing vp 
+                         WHERE vp.fk_VenueID = r.fk_VenueID AND vp.fk_Venue_ScopeID = r.fk_Venue_ScopeID) AS fld_Rate_Type,
+                        r.fld_Scanned_Document AS fld_Scanned_Document,
+                        FORMAT(r.fld_Start_Date, 'M/d/yyyy') AS [Date]
+                    FROM tbl_Reservation r
+                    LEFT JOIN tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                    LEFT JOIN tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
+                    WHERE r.fld_Reservation_Type = 'Venue'
+                    ORDER BY r.fld_Created_At DESC";
                     var dataTable = new DataTable();
                     using (var adapter = new SqlDataAdapter(query, connection))
                     {
@@ -256,8 +256,8 @@ namespace pgso
             combobox_Filter.Items.Add("Regular");
             combobox_Filter.Items.Add("Special");
             combobox_Filter.Items.Add("------");
-            combobox_Filter.Items.Add("With Pricing"); // <-- Add this
-            combobox_Filter.Items.Add("No Price");     // <-- Add this
+            combobox_Filter.Items.Add("With Pricing"); 
+            combobox_Filter.Items.Add("No Price");     
             combobox_Filter.Items.Add("------");
 
             /// Add venues (existing code)

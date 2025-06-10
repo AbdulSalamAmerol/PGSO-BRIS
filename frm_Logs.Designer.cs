@@ -52,6 +52,8 @@
             // dt_Audit
             // 
             this.dt_Audit.AllowUserToAddRows = false;
+            this.dt_Audit.AllowUserToResizeColumns = false;
+            this.dt_Audit.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dt_Audit.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dt_Audit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -148,6 +150,29 @@
             this.Column4.HeaderText = "Time";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
+            // 
+            // searchbox
+            // 
+            this.searchbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchbox.BackColor = System.Drawing.Color.Silver;
+            this.searchbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchbox.Location = new System.Drawing.Point(1703, 13);
+            this.searchbox.Name = "searchbox";
+            this.searchbox.Size = new System.Drawing.Size(177, 26);
+            this.searchbox.TabIndex = 1;
+            this.searchbox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // btnGeneratePDFadm
+            // 
+            this.btnGeneratePDFadm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGeneratePDFadm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGeneratePDFadm.Location = new System.Drawing.Point(1737, 964);
+            this.btnGeneratePDFadm.Name = "btnGeneratePDFadm";
+            this.btnGeneratePDFadm.Size = new System.Drawing.Size(143, 43);
+            this.btnGeneratePDFadm.TabIndex = 2;
+            this.btnGeneratePDFadm.Text = "Generate PDF";
+            this.btnGeneratePDFadm.UseVisualStyleBackColor = true;
+            this.btnGeneratePDFadm.Click += new System.EventHandler(this.btnGeneratePDFadm_Click);
             // 
             // frm_Logs
             // 

@@ -120,8 +120,16 @@ namespace pgso.pgso_Billing
                 btn_Change_Reservation_info.Enabled = false;
             }
 
-            lbl_OR.Text = billingDetails.fld_OR.ToString();
-            lbl_OR.Visible = billingDetails.fld_OR > 0;
+            if (billingDetails.fld_OR == 0)
+            {
+                lbl_OR.Visible = false; // hides the label entirely
+            }
+            else
+            {
+                lbl_OR.Text = billingDetails.fld_OR.ToString();
+                lbl_OR.Visible = true;
+            }
+            lbl_OR.Visible = billingDetails.fld_OR != null;
             // Format reservation dates (start and end)
             lbl_Reservation_Dates.Text = $"{billingDetails.fld_Start_Date.ToString("MM/dd/yyyy")} - {billingDetails.fld_End_Date.ToString("MM/dd/yyyy")}";
 
@@ -237,7 +245,7 @@ namespace pgso.pgso_Billing
             lbl_Paid_Amount_2.Text = billingDetails.fld_Amount_Paid_Overtime.ToString("C");
 
             lbl_Balance_2.Text = (billingDetails.fld_Overtime_Fee - billingDetails.fld_Amount_Paid_Overtime).ToString("C");
-            Console.WriteLine("WHATAFAKER  "+billingDetails.fld_Amount_Paid_Overtime);
+            Console.WriteLine(billingDetails.fld_Amount_Paid_Overtime);
         }
 
         private void HideOvertimeAndRefundDetails(Model_Billing billingDetails)

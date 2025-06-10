@@ -64,6 +64,9 @@
             this.pk_Venue_PricingID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EditVenue = new System.Windows.Forms.DataGridViewImageColumn();
             this.DeleteVenue = new System.Windows.Forms.DataGridViewImageColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel_Add_Venue = new System.Windows.Forms.Panel();
+            this.panel_AddScope = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -227,6 +230,8 @@
             // dt_Venues
             // 
             this.dt_Venues.AllowUserToAddRows = false;
+            this.dt_Venues.AllowUserToResizeColumns = false;
+            this.dt_Venues.AllowUserToResizeRows = false;
             this.dt_Venues.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dt_Venues.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -413,6 +418,32 @@
             this.DeleteVenue.Name = "DeleteVenue";
             this.DeleteVenue.ReadOnly = true;
             this.DeleteVenue.Width = 60;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.label2.Location = new System.Drawing.Point(2, 3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 18);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Venues";
+            // 
+            // panel_Add_Venue
+            // 
+            this.panel_Add_Venue.Location = new System.Drawing.Point(12, 24);
+            this.panel_Add_Venue.Name = "panel_Add_Venue";
+            this.panel_Add_Venue.Size = new System.Drawing.Size(966, 159);
+            this.panel_Add_Venue.TabIndex = 7;
+            this.panel_Add_Venue.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Add_Venue_Paint);
+            // 
+            // panel_AddScope
+            // 
+            this.panel_AddScope.Location = new System.Drawing.Point(992, 24);
+            this.panel_AddScope.Name = "panel_AddScope";
+            this.panel_AddScope.Size = new System.Drawing.Size(909, 159);
+            this.panel_AddScope.TabIndex = 8;
+            this.panel_AddScope.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_AddScope_Paint);
             // 
             // frm_Manage_Venue
             // 

@@ -230,5 +230,6 @@ namespace pgso
         private ToolStripMenuItem clientToolStripMenuItem;
         private ToolStripMenuItem auditLogsToolStripMenuItem;
         private Button btn_logout;
+
     }
 }

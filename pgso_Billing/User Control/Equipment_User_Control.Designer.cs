@@ -65,8 +65,6 @@
             this.textBox15 = new System.Windows.Forms.TextBox();
             this.lbl_Reservation_Status = new System.Windows.Forms.TextBox();
             this.textBox10 = new System.Windows.Forms.TextBox();
-            this.lbl_Rate_Type = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
             this.lbl_OR = new System.Windows.Forms.TextBox();
             this.tb_OR = new System.Windows.Forms.TextBox();
             this.btn_Confirm_Reservation = new System.Windows.Forms.Button();
@@ -427,8 +425,6 @@
             this.pnl_Billing_Details.Controls.Add(this.textBox15);
             this.pnl_Billing_Details.Controls.Add(this.lbl_Reservation_Status);
             this.pnl_Billing_Details.Controls.Add(this.textBox10);
-            this.pnl_Billing_Details.Controls.Add(this.lbl_Rate_Type);
-            this.pnl_Billing_Details.Controls.Add(this.textBox14);
             this.pnl_Billing_Details.Controls.Add(this.lbl_OR);
             this.pnl_Billing_Details.Controls.Add(this.tb_OR);
             this.pnl_Billing_Details.Controls.Add(this.btn_Confirm_Reservation);
@@ -528,37 +524,6 @@
             this.textBox10.Text = "STATUS:";
             this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // lbl_Rate_Type
-            // 
-            this.lbl_Rate_Type.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Rate_Type.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Rate_Type.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Rate_Type.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.lbl_Rate_Type.Location = new System.Drawing.Point(777, 485);
-            this.lbl_Rate_Type.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
-            this.lbl_Rate_Type.Name = "lbl_Rate_Type";
-            this.lbl_Rate_Type.ReadOnly = true;
-            this.lbl_Rate_Type.Size = new System.Drawing.Size(123, 23);
-            this.lbl_Rate_Type.TabIndex = 146;
-            this.lbl_Rate_Type.Text = "...";
-            // 
-            // textBox14
-            // 
-            this.textBox14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox14.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox14.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox14.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
-            this.textBox14.Location = new System.Drawing.Point(640, 485);
-            this.textBox14.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox14.MinimumSize = new System.Drawing.Size(0, 25);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.ReadOnly = true;
-            this.textBox14.Size = new System.Drawing.Size(121, 23);
-            this.textBox14.TabIndex = 145;
-            this.textBox14.Text = "RATE TYPE:";
-            this.textBox14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // lbl_OR
             // 
             this.lbl_OR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
@@ -602,7 +567,7 @@
             this.btn_Confirm_Reservation.TabIndex = 142;
             this.btn_Confirm_Reservation.Text = "Confirm Reservation";
             this.btn_Confirm_Reservation.UseVisualStyleBackColor = false;
-            this.btn_Confirm_Reservation.Click += new System.EventHandler(this.btn_Confirm_Reservation_Click_1);
+            this.btn_Confirm_Reservation.Click += new System.EventHandler(this.btn_Confirm_Reservation_Click);
             // 
             // btn_Cancel_Reservation
             // 
@@ -616,7 +581,7 @@
             this.btn_Cancel_Reservation.TabIndex = 141;
             this.btn_Cancel_Reservation.Text = "Cancel Reservation";
             this.btn_Cancel_Reservation.UseVisualStyleBackColor = false;
-            this.btn_Cancel_Reservation.Click += new System.EventHandler(this.btn_Cancel_Reservation_Click_1);
+            this.btn_Cancel_Reservation.Click += new System.EventHandler(this.btn_Cancel_Reservation_Click);
             // 
             // button1
             // 
@@ -953,8 +918,6 @@
         private System.Windows.Forms.TextBox tb_OR;
         private System.Windows.Forms.TextBox lbl_Reservation_Status;
         private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox lbl_Rate_Type;
-        private System.Windows.Forms.TextBox textBox14;
         private System.Windows.Forms.TextBox lbl_Control_Number;
         private System.Windows.Forms.TextBox textBox15;
     }

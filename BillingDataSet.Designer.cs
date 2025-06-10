@@ -381,6 +381,8 @@ namespace pgso {
             
             private global::System.Data.DataColumn columnfld_Cancellation_Reason;
             
+            private global::System.Data.DataColumn columnfld_Username;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public BillingDataTableDataTable() {
@@ -824,6 +826,14 @@ namespace pgso {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn fld_UsernameColumn {
+                get {
+                    return this.columnfld_Username;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -910,7 +920,8 @@ namespace pgso {
                         System.DateTime fld_Start_Date_Eq, 
                         string fld_OT_Hours, 
                         System.DateTime fld_End_Date_Eq, 
-                        string fld_Cancellation_Reason) {
+                        string fld_Cancellation_Reason, 
+                        string fld_Username) {
                 BillingDataTableRow rowBillingDataTableRow = ((BillingDataTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         pk_ReservationID,
@@ -963,7 +974,8 @@ namespace pgso {
                         fld_Start_Date_Eq,
                         fld_OT_Hours,
                         fld_End_Date_Eq,
-                        fld_Cancellation_Reason};
+                        fld_Cancellation_Reason,
+                        fld_Username};
                 rowBillingDataTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBillingDataTableRow);
                 return rowBillingDataTableRow;
@@ -1037,6 +1049,7 @@ namespace pgso {
                 this.columnfld_OT_Hours = base.Columns["fld_OT_Hours"];
                 this.columnfld_End_Date_Eq = base.Columns["fld_End_Date_Eq"];
                 this.columnfld_Cancellation_Reason = base.Columns["fld_Cancellation_Reason"];
+                this.columnfld_Username = base.Columns["fld_Username"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1144,6 +1157,8 @@ namespace pgso {
                 base.Columns.Add(this.columnfld_End_Date_Eq);
                 this.columnfld_Cancellation_Reason = new global::System.Data.DataColumn("fld_Cancellation_Reason", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfld_Cancellation_Reason);
+                this.columnfld_Username = new global::System.Data.DataColumn("fld_Username", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfld_Username);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2116,6 +2131,22 @@ namespace pgso {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string fld_Username {
+                get {
+                    try {
+                        return ((string)(this[this.tableBillingDataTable.fld_UsernameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'fld_Username\' in table \'BillingDataTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBillingDataTable.fld_UsernameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Ispk_ReservationIDNull() {
                 return this.IsNull(this.tableBillingDataTable.pk_ReservationIDColumn);
             }
@@ -2724,6 +2755,18 @@ namespace pgso {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setfld_Cancellation_ReasonNull() {
                 this[this.tableBillingDataTable.fld_Cancellation_ReasonColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isfld_UsernameNull() {
+                return this.IsNull(this.tableBillingDataTable.fld_UsernameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setfld_UsernameNull() {
+                this[this.tableBillingDataTable.fld_UsernameColumn] = global::System.Convert.DBNull;
             }
         }
         

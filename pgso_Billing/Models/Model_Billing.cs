@@ -9,6 +9,9 @@ namespace pgso.Billing.Models
         // Full Name 
         public string fld_Full_Name => $"{fld_First_Name} {(string.IsNullOrEmpty(fld_Middle_Name) ? "" : fld_Middle_Name + " ")}{fld_Surname}".Trim();
 
+        //User
+        public string fld_Username { get; set; }
+
         // Requesting Person Details
         public int pk_Requesting_PersonID { get; set; }
         public string fld_Surname { get; set; }

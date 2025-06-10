@@ -23,7 +23,7 @@ namespace pgso
         private DataTable clientInfoTable = new DataTable();
         private bool isClientInfoLoaded = false;
         private DataTable requestingPersonTable = new DataTable();
-        private readonly string comboNamePlaceholder = "First Name, Middle Name, Surname";
+        private readonly string comboNamePlaceholder = "Surname, First Name Middle Name";
         private Color comboNamePlaceholderColor = Color.Gray;
         private Color comboNameNormalColor = SystemColors.WindowText;
 
@@ -96,7 +96,7 @@ namespace pgso
  
             dgv_Selected_Equipments.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-
+        
         private void DBConnect()
         {
             try
@@ -216,29 +216,28 @@ namespace pgso
 
         private void LoadUtilities()
         {
+            string query = "SELECT pk_EquipmentID, fld_Equipment_Name FROM tbl_Equipment";
             try
             {
-                DBConnect();
-                string query = "SELECT pk_EquipmentID, fld_Equipment_Name FROM tbl_Equipment";
-                cmd = new SqlCommand(query, conn);
-                SqlDataReader reader = cmd.ExecuteReader();
+                var db = new Connection();
+                using (var conn = db.strCon)
+                using (var cmd = new SqlCommand(query, conn))
+                {
+                    conn.Open();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        DataTable dt = new DataTable();
+                        dt.Load(reader);
 
-                DataTable dt = new DataTable();
-                dt.Load(reader);
-
-                combo_Utility.DataSource = dt;
-                combo_Utility.ValueMember = "pk_EquipmentID";
-                combo_Utility.DisplayMember = "fld_Equipment_Name";
-
-                reader.Close();
+                        combo_Utility.DataSource = dt;
+                        combo_Utility.ValueMember = "pk_EquipmentID";
+                        combo_Utility.DisplayMember = "fld_Equipment_Name";
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error loading utilities: " + ex.Message);
-            }
-            finally
-            {
-                DBClose();
             }
         }
 
@@ -613,12 +612,12 @@ namespace pgso
                     ControlNumber = txt_Control_Num.Text,
                     Activity = txt_Activity.Text,
                    
-                    StartDate = Date_Start,
-                    EndDate = Date_End,
+                    //StartDate = Date_Start,
+                    //EndDate = Date_End,
            
                     TotalAmount = totalAmount
                 });
-                MessageBox.Show("Username: " + frm_login.LoggedInUsername);
+
                 // Insert audit log
                 using (SqlCommand auditCmd = new SqlCommand(@"
                     INSERT INTO tbl_Audit_Log
@@ -642,8 +641,13 @@ namespace pgso
                 transaction.Commit();
                 MessageBox.Show("Reservation submitted successfully!");
                 var billingForm = new frm_Billing();
-                billingForm.Show();
+                billingForm.ShowDialog();
+                frm_Dashboard.NeedsCalendarRefresh = true;
+                RefreshCalendarView();
                 this.Close();
+                // ...
+                RefreshCalendarView();
+
                 // Clear form
                 selectedEquipmentList.Clear();
                 UpdateSelectedEquipmentDisplay();

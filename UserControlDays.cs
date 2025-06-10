@@ -104,21 +104,22 @@ namespace pgso
                 lbl_Equipment.Text = string.Empty;
                 lbl_Equipment.Visible = false;
 
-                Connection db = new Connection();
-                if (db.strCon.State == ConnectionState.Closed)
-                    db.strCon.Open();
+                var db = new Connection();
+                var conn = db.strCon;
+                if (conn.State == ConnectionState.Closed)
+                    conn.Open();
 
                 // Venue counts
                 int venuePending = 0, venueConfirmed = 0;
                 string venueQuery = @"
-                SELECT r.fld_Reservation_Status, COUNT(DISTINCT r.fld_Control_Number) AS TotalCount
-                FROM tbl_Reservation r
-                LEFT JOIN tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
-                WHERE @SelectedDate BETWEEN r.fld_Start_Date AND r.fld_End_Date
-                AND r.fld_Reservation_Status IN ('Pending', 'Confirmed')
-                AND r.fld_Reservation_Type IN ('Venue', 'Both')
-                GROUP BY r.fld_Reservation_Status";
-                using (SqlCommand venueCmd = new SqlCommand(venueQuery, db.strCon))
+            SELECT r.fld_Reservation_Status, COUNT(DISTINCT r.fld_Control_Number) AS TotalCount
+            FROM tbl_Reservation r
+            LEFT JOIN tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
+            WHERE @SelectedDate BETWEEN r.fld_Start_Date AND r.fld_End_Date
+            AND r.fld_Reservation_Status IN ('Pending', 'Confirmed')
+            AND r.fld_Reservation_Type IN ('Venue', 'Both')
+            GROUP BY r.fld_Reservation_Status";
+                using (SqlCommand venueCmd = new SqlCommand(venueQuery, conn))
                 {
                     venueCmd.Parameters.AddWithValue("@SelectedDate", date);
                     using (var reader = venueCmd.ExecuteReader())
@@ -136,13 +137,13 @@ namespace pgso
                 // Equipment counts
                 int equipmentPending = 0, equipmentConfirmed = 0;
                 string equipmentQuery = @"
-                SELECT fld_Reservation_Status, COUNT(*) AS TotalCount
-                FROM tbl_Reservation
-                WHERE fld_Reservation_Status IN ('Pending', 'Confirmed')
-                  AND fld_Reservation_Type IN ('Equipment', 'Both')
-                  AND @SelectedDate BETWEEN fld_Start_Date AND fld_End_Date
-                GROUP BY fld_Reservation_Status";
-                using (SqlCommand equipmentCmd = new SqlCommand(equipmentQuery, db.strCon))
+            SELECT fld_Reservation_Status, COUNT(*) AS TotalCount
+            FROM tbl_Reservation
+            WHERE fld_Reservation_Status IN ('Pending', 'Confirmed')
+              AND fld_Reservation_Type IN ('Equipment', 'Both')
+              AND @SelectedDate BETWEEN fld_Start_Date AND fld_End_Date
+            GROUP BY fld_Reservation_Status";
+                using (SqlCommand equipmentCmd = new SqlCommand(equipmentQuery, conn))
                 {
                     equipmentCmd.Parameters.AddWithValue("@SelectedDate", date);
                     using (var reader = equipmentCmd.ExecuteReader())
@@ -173,7 +174,6 @@ namespace pgso
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
 
 

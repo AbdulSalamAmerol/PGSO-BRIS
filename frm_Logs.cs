@@ -1,9 +1,10 @@
-﻿using System.Configuration;
-using System.Data.SqlClient;
+﻿using System;
+using System.Configuration;
 using System.Data;
-using System.Windows.Forms;
-using System;
+using System.Data.SqlClient;
+using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 
 namespace pgso
 {
@@ -56,6 +57,9 @@ namespace pgso
 
                     // Bind data to DataGridView
                     dt_Audit.DataSource = dt;
+                  
+                    NormalizeDataGridViewStyle();
+
                 }
             }
             catch (Exception ex)
@@ -80,17 +84,24 @@ namespace pgso
             foreach (DataRow row in originalDataTable.Rows)
             {
                 DataRow newRow = filteredDataTable.NewRow();
-                newRow["Username"] = row["fld_Username"];
-                newRow["UserType"] = row["fld_Changed_By"];
-                newRow["Action"] = row["fld_ActionType"];
+                newRow["Username"] = row["fld_Username"]?.ToString().Trim();
+                newRow["UserType"] = row["fld_Changed_By"]?.ToString().Trim();
+                newRow["Action"] = row["fld_ActionType"]?.ToString().Trim();
                 newRow["Time"] = row["fld_Changed_At"];
                 filteredDataTable.Rows.Add(newRow);
             }
+
 
             return filteredDataTable;
 
         }
 
+        private void NormalizeDataGridViewStyle()
+        {
+            // Set a consistent style for all rows
+            dt_Audit.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Regular);
+            dt_Audit.AlternatingRowsDefaultCellStyle = dt_Audit.DefaultCellStyle;
+        }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {

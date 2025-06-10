@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -34,12 +35,42 @@ namespace pgso.pgso_Billing.User_Control
         public Equipment_User_Control(Model_Billing billingDetailsList, Repo_Billing repoBilling)
         {
             InitializeComponent();
+            dgv_Equipment_Billing_Records.CellValueChanged += dgv_Equipment_Billing_Records_CellValueChanged;
+            dgv_Equipment_Billing_Records.CurrentCellDirtyStateChanged += (s, e) =>
+            {
+                if (dgv_Equipment_Billing_Records.IsCurrentCellDirty)
+                {
+                    dgv_Equipment_Billing_Records.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                }
+            };
             btn_Add_Equipment_Billing.ForeColor = Color.FromArgb(242, 239, 231);
             _billingDetails = billingDetailsList; // Store the passed-in model
             _repoBilling = repoBilling; // ✅ Store the repository
             LoadBillingDetails(billingDetailsList);
             LoadBillingDetails(_billingDetails);  // Reload the data after deletion
         }
+
+        private void dgv_Equipment_Billing_Records_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return; // Ignore header row
+
+            var row = dgv_Equipment_Billing_Records.Rows[e.RowIndex];
+
+            try
+            {
+                int qty = Convert.ToInt32(row.Cells["col_Quantity"].Value ?? 0);
+                int returned = Convert.ToInt32(row.Cells["col_Quantity_Returned"].Value ?? 0);
+                int damaged = Convert.ToInt32(row.Cells["col_Quantity_Damaged"].Value ?? 0);
+                int unreturned = qty - (returned + damaged);
+
+                row.Cells["col_Unreturned"].Value = unreturned;
+            }
+            catch
+            {
+                // Optional: Show error or ignore if invalid input
+            }
+        }
+
 
         public void LoadBillingDetails(Model_Billing billingDetailsList)
         {
@@ -67,6 +98,17 @@ namespace pgso.pgso_Billing.User_Control
                 BindingSource equipmentBindingSource = new BindingSource();
                 equipmentBindingSource.DataSource = equipmentDetails;
                 dgv_Equipment_Billing_Records.DataSource = equipmentBindingSource;
+                foreach (DataGridViewRow row in dgv_Equipment_Billing_Records.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    int qty = Convert.ToInt32(row.Cells["col_Quantity"].Value ?? 0);
+                    int returned = Convert.ToInt32(row.Cells["col_Quantity_Returned"].Value ?? 0);
+                    int damaged = Convert.ToInt32(row.Cells["col_Quantity_Damaged"].Value ?? 0);
+                    int unreturned = qty - (returned + damaged);
+
+                    row.Cells["col_Unreturned"].Value = unreturned;
+                }
             }
             catch (Exception ex)
             {
@@ -74,21 +116,21 @@ namespace pgso.pgso_Billing.User_Control
             }
             lbl_Control_Number.Text = billingDetailsList.fld_Control_Number;
             lbl_Requesting_Person.Text = $"{billingDetailsList.fld_First_Name} {billingDetailsList.fld_Middle_Name} {billingDetailsList.fld_Surname}";
-            lbl_Requesting_Office.Text = billingDetailsList.fld_Requesting_Person_Address;
+            lbl_Requesting_Office.Text = billingDetailsList.fld_Requesting_Office;
             lbl_Origin_Request.Text = billingDetailsList.fld_Request_Origin;
             lbl_Contact_Number.Text = billingDetailsList.fld_Contact_Number;
             lbl_Address.Text = billingDetailsList.fld_Requesting_Person_Address;
             lbl_Reservation_Dates.Text = $"{billingDetailsList.fld_Start_Date.ToString("MM/dd/yyyy")} - {billingDetailsList.fld_End_Date.ToString("MM/dd/yyyy")}";
-            lbl_Rate_Type.Text = billingDetailsList.fld_Rate_Type;
             lbl_Reservation_Status.Text = billingDetailsList.fld_Reservation_Status;
             lbl_fld_Total_Amount.Text = billingDetailsList.fld_Total_Amount.ToString("C");
 
-            bool showOR = billingDetailsList.fld_OR != null && billingDetailsList.fld_OR != 0;
+            bool showOR = billingDetailsList.fld_OR != null;
             lbl_OR.Visible = tb_OR.Visible = showOR;
 
             if (showOR)
             {
-                lbl_OR.Text = billingDetailsList.fld_OR.ToString();
+                int orValue = Convert.ToInt32(billingDetailsList.fld_OR);
+                lbl_OR.Text = orValue == 0 ? "PLGU" : orValue.ToString();
             }
             // First, center align *everything* by default
             dgv_Equipment_Billing_Records.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -235,18 +277,14 @@ namespace pgso.pgso_Billing.User_Control
                         LoadBillingDetails(_billingDetails);
 
                         RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); // 🔁 Notify parent to refresh billing
-                        
+
                     }
                     else
                     {
                         MessageBox.Show("Failed to update reservation status to 'Confirmed'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Approval process cancelled or OR Number entry failed.",
-                                    "Approval Cancelled", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+               
             }
         }
 

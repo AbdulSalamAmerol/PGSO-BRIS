@@ -74,10 +74,9 @@
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
       <HintPath>packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
-    <Reference Include="Interop.WIA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Interop.WIA">
+      <HintPath>obj\Debug\Interop.WIA.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>..\..\..\..\..\..\Temp\Interop.WIA.dll</HintPath>
     </Reference>
     <Reference Include="itext.barcodes, Version=9.1.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>packages\itext.9.1.0\lib\net461\itext.barcodes.dll</HintPath>
@@ -198,11 +197,12 @@
   <ItemGroup>
     <Compile Include="BillingDataSet.cs">
       <DependentUpon>BillingDataSet.xsd</DependentUpon>
+      <SubType>code</SubType>
     </Compile>
     <Compile Include="BillingDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>BillingDataSet.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Class_Pdf_Generator.cs" />
     <Compile Include="Form1.cs">
@@ -504,7 +504,7 @@
     <EmbeddedResource Include="frm_Equipment_Edit.resx">
       <DependentUpon>frm_Equipment_Edit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_login.resx">
+    <EmbeddedResource Include="frm_Login.resx">
       <DependentUpon>frm_login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Logs.resx">
@@ -781,7 +781,6 @@
     <None Include="packages\System.ValueTuple.4.6.1\lib\netstandard2.0\_._" />
     <None Include="packages\System.ValueTuple.4.6.1\PACKAGE.md" />
     <None Include="packages\System.ValueTuple.4.6.1\System.ValueTuple.4.6.1.nupkg" />
-    <None Include="pgso_TemporaryKey.pfx" />
     <None Include="Properties\DataSources\pgso.Billing.Models.class_Equipment_Billing.datasource" />
     <None Include="Properties\DataSources\pgso.Billing.Models.class_Venue_Billing.datasource" />
     <None Include="Properties\Settings.settings">
@@ -1177,16 +1176,15 @@
     <Folder Include="pgso_Billing\Queries\" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
+    <COMReference Include="WIA">
+      <Guid>{94A0E92D-43C0-494E-AC29-FD45948A5221}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets" Condition="Exists('packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" />

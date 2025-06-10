@@ -29,10 +29,14 @@ namespace pgso.pgso_Billing.Forms
                 MessageBox.Show("Start Date cannot be after End Date.", "Invalid Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            // Ensure a payment status is selected
+            if (cmb_Payment_Status.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a payment status.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            // Get selected payment status (default to "All" if nothing is selected)
-            string paymentStatus = cmb_Payment_Status.SelectedItem?.ToString().Trim() ?? "All";
-
+            string paymentStatus = cmb_Payment_Status.SelectedItem.ToString().Trim();
             // Get selected reservation type (default to "All" if nothing is selected)
             string reservationType = cmb_Venue_Or_Equipment.SelectedItem?.ToString().Trim() ?? "All";
 

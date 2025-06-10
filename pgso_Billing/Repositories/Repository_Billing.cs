@@ -12,7 +12,7 @@ namespace pgso.Billing.Repositories
     public class Repo_Billing
     {
 
-        private string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;Persist Security Info=True;User ID=sa;Password=abz123;Encrypt=False;";
+        private string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
 
 
         public List<Model_Billing> GetAllBillingRecords()
@@ -72,7 +72,7 @@ namespace pgso.Billing.Repositories
 
                                    
                                     p.pk_PaymentID,
-                                    p.fld_Created_At,
+                                    r.fld_Created_At,
                                     p.fld_Amount_Due,
                                     p.fld_Amount_Paid,
                                     p.fld_Payment_Status,
@@ -90,20 +90,21 @@ namespace pgso.Billing.Repositories
                                     re.fld_Date_Returned,
                                     re.fld_Quantity_Returned,
                                     re.fld_Quantity_Damaged,
-                                    p. fld_Amount_Paid_Overtime,
-                                    r. fld_OT_Payment_Status
+                                    p.fld_Amount_Paid_Overtime,
+                                    r.fld_OT_Payment_Status,
+                                    u.fld_Username
 
-
-                                FROM dbo.tbl_Reservation r
-                                LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-                                LEFT JOIN dbo.tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
-                                LEFT JOIN dbo.tbl_Venue_Pricing vp ON r.fk_Venue_PricingID = vp.pk_Venue_PricingID
-                                LEFT JOIN dbo.tbl_Venue_Scope vs ON r.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
-                                LEFT JOIN dbo.tbl_Reservation_Equipment re ON r.pk_ReservationID = re.fk_ReservationID
-                                LEFT JOIN dbo.tbl_Equipment e ON re.fk_EquipmentID = e.pk_EquipmentID
-                                LEFT JOIN dbo.tbl_Equipment_Pricing ep ON re.fk_Equipment_PricingID = ep.pk_Equipment_PricingID
-                                LEFT JOIN dbo.tbl_Payment p ON r.pk_ReservationID = p.fk_ReservationID
-                                ORDER BY  r.pk_ReservationID DESC";
+                                    FROM dbo.tbl_Reservation r
+                                    LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                                    LEFT JOIN dbo.tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
+                                    LEFT JOIN dbo.tbl_Venue_Pricing vp ON r.fk_Venue_PricingID = vp.pk_Venue_PricingID
+                                    LEFT JOIN dbo.tbl_Venue_Scope vs ON r.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
+                                    LEFT JOIN dbo.tbl_Reservation_Equipment re ON r.pk_ReservationID = re.fk_ReservationID
+                                    LEFT JOIN dbo.tbl_Equipment e ON re.fk_EquipmentID = e.pk_EquipmentID
+                                    LEFT JOIN dbo.tbl_Equipment_Pricing ep ON re.fk_Equipment_PricingID = ep.pk_Equipment_PricingID
+                                    LEFT JOIN dbo.tbl_Payment p ON r.pk_ReservationID = p.fk_ReservationID
+                                    LEFT JOIN dbo.tbl_User u ON r.fk_UserID = u.pk_UserID
+                                    ORDER BY r.pk_ReservationID DESC";
 
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -113,8 +114,6 @@ namespace pgso.Billing.Repositories
                         {
                             int reservationId = reader.GetInt32(0);
                             string controlNumber = reader.GetString(1);
-
-                            Console.WriteLine($"📝 Fetched Reservation: {reservationId}, {controlNumber}");
 
                             Model_Billing billing = new Model_Billing
                             {
@@ -180,7 +179,9 @@ namespace pgso.Billing.Repositories
                                 fld_Quantity_Returned = reader.IsDBNull(48) ? 0 : reader.GetInt32(48),
                                 fld_Quantity_Damaged = reader.IsDBNull(49) ? 0 : reader.GetInt32(49),
                                 fld_Amount_Paid_Overtime = reader.IsDBNull(50) ? 0 : reader.GetDecimal(50),
-                                fld_OT_Payment_Status = reader.IsDBNull(51) ? "" : reader.GetString(51)
+                                fld_OT_Payment_Status = reader.IsDBNull(51) ? "" : reader.GetString(51),
+                                fld_Username = reader.IsDBNull(52) ? "" : reader.GetString(52) 
+
                             };
 
 
@@ -254,7 +255,7 @@ namespace pgso.Billing.Repositories
                         re.fld_Total_Equipment_Cost,
 
                         p.pk_PaymentID,
-                        p.fld_Created_At,
+                        r.fld_Created_At,
                         p.fld_Amount_Due,
                         p.fld_Amount_Paid,
                         p.fld_Payment_Status,
@@ -268,7 +269,9 @@ namespace pgso.Billing.Repositories
                         re.fld_End_Date_Eq,
                         p.fld_Amount_Paid_Overtime,
                         r.fld_OT_Payment_Status,
-                        fld_Cancellation_Reason 
+                        r.fld_Cancellation_Reason,
+                        u.fld_Username,
+                        vp.fld_Additional_Charge
                         
 
                     FROM dbo.tbl_Reservation r
@@ -280,6 +283,7 @@ namespace pgso.Billing.Repositories
                     LEFT JOIN dbo.tbl_Equipment e ON re.fk_EquipmentID = e.pk_EquipmentID
                     LEFT JOIN dbo.tbl_Equipment_Pricing ep ON re.fk_Equipment_PricingID = ep.pk_Equipment_PricingID
                     LEFT JOIN dbo.tbl_Payment p ON r.pk_ReservationID = p.fk_ReservationID
+                    LEFT JOIN dbo.tbl_User u ON r.fk_UserID = u.pk_UserID
                     WHERE r.pk_ReservationID = @reservationId";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -345,7 +349,10 @@ namespace pgso.Billing.Repositories
                                     fld_End_Date_Eq = reader.IsDBNull(44) ? DateTime.MinValue : reader.GetDateTime(44),
                                     fld_Amount_Paid_Overtime = reader.IsDBNull(45) ? 0 : reader.GetDecimal(45),
                                     fld_OT_Payment_Status = reader.IsDBNull(46) ? "" : reader.GetString(46),
-                                    fld_Cancellation_Reason = reader.IsDBNull(47) ? "" : reader.GetString(47)
+                                    fld_Cancellation_Reason = reader.IsDBNull(47) ? "" : reader.GetString(47),
+                                    fld_Username = reader.IsDBNull(48) ? "testAdminPGSO" : reader.GetString(48),
+                                    fld_Additional_Charge = reader.IsDBNull(49) ? 0 : reader.GetDecimal(49)
+
                                 };
 
                                 billingRecords.Add(billing);
@@ -1996,50 +2003,50 @@ namespace pgso.Billing.Repositories
 
         public bool UpdateReservationORNumber(int reservationID, string orNumber)
         {
-            // Basic validation for the input OR number (optional but recommended)
-            if (string.IsNullOrWhiteSpace(orNumber))
-            {
-                // Decide how to handle invalid input - maybe return false or throw exception
-                return false; // Can't update with an empty OR number
-            }
-
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {
                     conn.Open();
                     string query = @"
-                    UPDATE tbl_Reservation
-                    SET fld_OR = @ORNumber
-                    WHERE pk_ReservationID = @ReservationID";
+UPDATE tbl_Reservation
+SET fld_OR = @ORNumber
+WHERE pk_ReservationID = @ReservationID";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        // Use parameters to prevent SQL injection
-                        cmd.Parameters.AddWithValue("@ORNumber", orNumber);
+                        if (string.IsNullOrWhiteSpace(orNumber))
+                        {
+                            // If orNumber is empty, default to "00000"
+                            cmd.Parameters.AddWithValue("@ORNumber", "00000"); // CHANGED FROM "PLGU"
+                        }
+                        else
+                        {
+                            // Otherwise, use the provided orNumber (which would be "00000" in the PGNV case from btn_OR_Confirm_Click)
+                            cmd.Parameters.AddWithValue("@ORNumber", orNumber);
+                        }
+
                         cmd.Parameters.AddWithValue("@ReservationID", reservationID);
 
                         int rowsAffected = cmd.ExecuteNonQuery();
-
-                        // Return true if one row was updated, false otherwise
+                        // Consider logging here for debugging:
+                        // Console.WriteLine($"UpdateReservationORNumber: ID={reservationID}, OR='{cmd.Parameters["@ORNumber"].Value}', RowsAffected={rowsAffected}");
                         return rowsAffected == 1;
                     }
                 }
                 catch (SqlException ex)
                 {
-                    // Log the exception (using your preferred logging mechanism)
                     Console.WriteLine("SQL Error updating OR Number: " + ex.Message);
-                    // Consider more specific error handling or logging here
-                    return false; // Indicate failure
+                    return false;
                 }
                 catch (Exception ex)
                 {
-                    // Log unexpected errors
                     Console.WriteLine("General Error updating OR Number: " + ex.Message);
-                    return false; // Indicate failure
+                    return false;
                 }
             }
         }
+
 
 
         public bool CheckORExists(string orNumber)
@@ -2712,8 +2719,28 @@ namespace pgso.Billing.Repositories
             }
         }
 
+        // FOR PGNV or any rate type that skips OR number 
+       public string GetRateTypeForReservation(int reservationId)
+{
+    using (var conn = new SqlConnection(connectionString))
+    {
+        conn.Open();
+        using (var cmd = new SqlCommand(@"
+            SELECT vp.fld_Rate_Type
+            FROM tbl_Reservation r
+            INNER JOIN tbl_Venue_Pricing vp ON r.fk_Venue_PricingID = vp.pk_Venue_PricingID
+            WHERE r.pk_ReservationID = @ReservationId", conn))
+        {
+            cmd.Parameters.AddWithValue("@ReservationId", reservationId);
+            var result = cmd.ExecuteScalar();
+            return result?.ToString(); // Return null if not found
+        }
+    }
+}
 
-        
+
+
+
 
     } // End Class Repo_Billing
 

@@ -387,7 +387,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>PSGO BILLING RECORD REPORT</Value>
+                    <Value>PGSO BILLING RECORD REPORT</Value>
                     <Style>
                       <FontSize>20pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -2142,7 +2142,7 @@
             <Top>2.2118in</Top>
             <Left>9.60356in</Left>
             <Height>0.25in</Height>
-            <Width>2.39643in</Width>
+            <Width>2.39646in</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>

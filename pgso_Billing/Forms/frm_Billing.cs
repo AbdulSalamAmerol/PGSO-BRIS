@@ -55,7 +55,7 @@ namespace pgso
             }
         }
 
-        //FILTERING
+     
         private void frm_Billing_Load(object sender, EventArgs e)
         {
             this.MinimumSize = new Size(1920, 1200);
@@ -93,39 +93,56 @@ namespace pgso
             ////FILTERING
             cmb_Billing_Filter.Items.Clear();
             cmb_Billing_Filter.Items.AddRange(new string[] { "All", "Pending", "Confirmed", "Cancelled" });
-            cmb_Billing_Filter.SelectedIndex = 0; // Default to "All"
             cmb_Billing_Filter.SelectedIndexChanged += cmb_Billing_Filter_SelectedIndexChanged;
+            cmb_Billing_Filter.SelectedIndex = 1; // Default to "Pending"
+            
             //SORTING
             cmb_Billing_Sort.Items.Clear();
             cmb_Billing_Sort.Items.AddRange(new string[] { "Control Number", "Reservation Date", "Requesting Person", "Reservation Type", "Reservation Status", "Amount Due" });
             cmb_Billing_Sort.SelectedIndex = 0; // Default selection
             cmb_Billing_Sort.SelectedIndexChanged += cmb_Billing_Sort_SelectedIndexChanged;
-        }
-
-        private void cmb_Billing_Sort_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ApplySortingAndFiltering();
+            ApplySearchFilter(""); // ✅ This will apply default filter + sort on load
         }
 
         private void cmb_Billing_Filter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ApplySortingAndFiltering();
+            ApplySearchFilter(sb_Billing_Search_Bar.Text.Trim().ToLower());
         }
 
-        private void ApplySortingAndFiltering()
+        private void cmb_Billing_Sort_SelectedIndexChanged(object sender, EventArgs e)
         {
-            IEnumerable<Model_Billing> filtered = all_billing_model;
+            ApplySearchFilter(sb_Billing_Search_Bar.Text.Trim().ToLower());
+        }
 
-            // Filter by status if not "All"
+        private void ApplySearchFilter(string searchTerm)
+        {
+            IEnumerable<Model_Billing> filtered = groupedBillingData;
+
+            if (groupedBillingData == null)
+                return;
+
+            // Apply filter
             string filterValue = cmb_Billing_Filter.SelectedItem?.ToString();
             if (!string.IsNullOrEmpty(filterValue) && filterValue != "All")
             {
-                filtered = filtered.Where(b => b.fld_Reservation_Status == filterValue);
+                filtered = filtered.Where(b => b.fld_Reservation_Status.Equals(filterValue, StringComparison.OrdinalIgnoreCase));
             }
 
-            // Sort by selected column
-            string sortBy = cmb_Billing_Sort.SelectedItem?.ToString();
+            // Apply search
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                filtered = filtered.Where(item =>
+                    (item.fld_Control_Number?.ToLower().Contains(searchTerm) ?? false) ||
+                    (item.fld_Full_Name?.ToLower().Contains(searchTerm) ?? false) ||
+                    (item.fld_Venue_Name?.ToLower().Contains(searchTerm) ?? false) ||
+                    (item.fld_Reservation_Type?.ToLower().Contains(searchTerm) ?? false) ||
+                    (item.fld_Reservation_Status?.ToLower().Contains(searchTerm) ?? false) ||
+                    (item.EquipmentNames.Any(equipment => equipment.ToLower().Contains(searchTerm)))
+                );
+            }
 
+            // Apply sort
+            string sortBy = cmb_Billing_Sort.SelectedItem?.ToString();
             switch (sortBy)
             {
                 case "Control Number":
@@ -144,9 +161,7 @@ namespace pgso
                     filtered = filtered.OrderByDescending(b => b.fld_Reservation_Status);
                     break;
                 case "Amount Due":
-                    filtered = filtered.OrderByDescending(b => b.fld_Amount_Due);
-                    break;
-                default:
+                    filtered = filtered.OrderByDescending(b => b.fld_Total_Amount);
                     break;
             }
 
@@ -154,6 +169,11 @@ namespace pgso
             dgv_Billing_Records.DataSource = dgv_billing_binding_source;
         }
 
+        //Search Bar
+        private void sb_Billing_Search_Bar_TextChanged(object sender, EventArgs e)
+        {
+            ApplySearchFilter(sb_Billing_Search_Bar.Text.Trim().ToLower());
+        }
 
 
         // Block all resizes
@@ -169,30 +189,7 @@ namespace pgso
             base.WndProc(ref m);
         }
 
-        //Search Bar
-        private void sb_Billing_Search_Bar_TextChanged(object sender, EventArgs e)
-        {
-            string searchTerm = sb_Billing_Search_Bar.Text.Trim().ToLower();
-
-            if (string.IsNullOrEmpty(searchTerm))
-            {
-                // ✅ Restore the grouped dataset (prevents missing equipment names)
-                dgv_billing_binding_source.DataSource = groupedBillingData;
-            }
-            else
-            {
-                var filteredData = groupedBillingData.Where(item =>
-                    (item.fld_Control_Number?.ToLower().Contains(searchTerm) ?? false) ||
-                    (item.fld_Full_Name?.ToLower().Contains(searchTerm) ?? false) ||
-                    (item.fld_Venue_Name?.ToLower().Contains(searchTerm) ?? false) ||
-                    (item.fld_Reservation_Type?.ToLower().Contains(searchTerm) ?? false) ||
-                    (item.fld_Reservation_Status?.ToLower().Contains(searchTerm) ?? false) ||
-                    (item.EquipmentNames.Any(equipment => equipment.ToLower().Contains(searchTerm)))
-                ).ToList();
-
-                dgv_billing_binding_source.DataSource = filteredData;
-            }
-        }// 🔍 Fixed Search Method
+       
 
         private Dictionary<int, Model_Billing> billingDetailsCache = new Dictionary<int, Model_Billing>(); //for cache
         private Model_Billing GetBillingDetailsByReservationID(int reservationID)
@@ -337,59 +334,56 @@ namespace pgso
         private void dgv_Billing_Records_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             // Check if it's a data row (ignore header and new row placeholder)
-            if (e.RowIndex >= 0 && e.RowIndex < this.dgv_Billing_Records.Rows.Count && !this.dgv_Billing_Records.Rows[e.RowIndex].IsNewRow)
+            if (e.RowIndex >= 0 && e.RowIndex < dgv_Billing_Records.Rows.Count && !dgv_Billing_Records.Rows[e.RowIndex].IsNewRow)
             {
-                // Get the current row being formatted
-                DataGridViewRow row = this.dgv_Billing_Records.Rows[e.RowIndex];
+                DataGridViewRow row = dgv_Billing_Records.Rows[e.RowIndex];
                 string statusColumnName = "col_Reservation_Status";
 
                 try
                 {
-                    // Get the value from the specified status column for the current row
                     object cellValue = row.Cells[statusColumnName].Value;
+                    var billing = row.DataBoundItem as Model_Billing;
 
-                    // Check if the value is not null and equals "Cancelled" (case-sensitive)
-                    if (cellValue != null && cellValue != DBNull.Value && cellValue.ToString() == "Cancelled")
+                    if (billing != null && billing.fld_Created_At != null)
                     {
+                        TimeSpan timeSinceCreated = DateTime.Now - billing.fld_Created_At;
 
-                        row.DefaultCellStyle.BackColor = Color.FromArgb(255, 228, 225);
+                        if (cellValue?.ToString() == "Pending" && timeSinceCreated.TotalHours >= 72)
+                        {
+                            // 🔥 Expired pending reservation (3+ days old)
+                            row.DefaultCellStyle.BackColor = Color.FromArgb(255, 228, 225); // RED
+                            row.DefaultCellStyle.ForeColor = Color.Black;
+                        }
+                        else
+                        {
+                            // Handle regular color coding
+                            if (cellValue?.ToString() == "Cancelled")
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(200, 220, 255); // BLUE
 
+                            else if (cellValue?.ToString() == "Confirmed")
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(225, 255, 225); // GREEN
+                               
+                            else if (cellValue?.ToString() == "Pending")
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 255); // WHITE
+                                row.DefaultCellStyle.ForeColor = Color.Black;
+                        }
                     }
-
-                    if (cellValue != null && cellValue != DBNull.Value && cellValue.ToString() == "Confirmed")
-                    {
-                        row.DefaultCellStyle.BackColor = Color.FromArgb(225, 235, 245);
-                    }
-
-                    if (cellValue != null && cellValue != DBNull.Value && cellValue.ToString() == "Pending")
-                    {
-                        row.DefaultCellStyle.BackColor = Color.FromArgb(242, 239, 231);
-                    }
-
-
                 }
                 catch (Exception ex)
                 {
-                    // Optional: Log error if the column name is wrong or other issues occur
                     Console.WriteLine($"Error during cell formatting: {ex.Message}");
-                    // Ensure a default color even if an error occurs
                     row.DefaultCellStyle.BackColor = Color.White;
-
-                
                 }
-                
+
                 // Alignment logic
                 string columnName = dgv_Billing_Records.Columns[e.ColumnIndex].Name;
-                if (columnName == "fld_Control_Number" || columnName == "col_Print")
-                {
+                if (columnName == "fld_Control_Number" || columnName == "col_Print" || columnName == "fld_Full_Name")
                     e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                }
                 else
-                {
-                    e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                }
+                    e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
         }
+
 
 
 
@@ -569,9 +563,6 @@ namespace pgso
             }
         }
 
-
-
-
         private async Task<bool> UpdateReservationStatusAsync(int reservationID, string newStatus)
         {
             try
@@ -636,13 +627,11 @@ namespace pgso
             reportBillingForm.ShowDialog(); // Opens the form as a modal dialog
 
         }
-        
+
         private void RefreshBillingRecords(int? highlightReservationID = null)
         {
             try
             {
-                
-
                 all_billing_model = repo_billing.GetAllBillingRecords() ?? new List<Model_Billing>();
 
                 if (all_billing_model.Count == 0)
@@ -652,12 +641,13 @@ namespace pgso
                     return;
                 }
 
-                // Group the data
+                // ✅ Update grouped data
                 groupedBillingData = GroupAndFormatBillingData(all_billing_model);
-                dgv_Billing_Records.DataSource = groupedBillingData;
-                dgv_Billing_Records.Refresh();
 
-                // Reselect the row if a reservation ID is passed
+                // ✅ Re-apply filter, search, and sort
+                ApplySearchFilter(sb_Billing_Search_Bar.Text.Trim().ToLower());
+
+                // ✅ Highlight row if needed
                 if (highlightReservationID.HasValue)
                 {
                     bool rowFound = false;
@@ -665,11 +655,11 @@ namespace pgso
                     {
                         if (Convert.ToInt32(row.Cells["pk_ReservationID"].Value) == highlightReservationID.Value)
                         {
-                            row.Selected = true; // Select the entire row
+                            row.Selected = true;
 
-                            // Set the CurrentCell to any visible cell (avoiding invisible cells)
-                            dgv_Billing_Records.CurrentCell = row.Cells.Cast<DataGridViewCell>()
-                                .FirstOrDefault(c => c.Visible); // Ensure we use a visible cell
+                            dgv_Billing_Records.CurrentCell = row.Cells
+                                .Cast<DataGridViewCell>()
+                                .FirstOrDefault(c => c.Visible);
 
                             rowFound = true;
                             break;
@@ -678,7 +668,6 @@ namespace pgso
 
                     if (rowFound)
                     {
-                        // Scroll to the selected row
                         var selectedRow = dgv_Billing_Records.Rows
                             .Cast<DataGridViewRow>()
                             .FirstOrDefault(r => r.Selected);
@@ -686,7 +675,6 @@ namespace pgso
                         if (selectedRow != null)
                         {
                             dgv_Billing_Records.FirstDisplayedScrollingRowIndex = selectedRow.Index;
-                           
                         }
                     }
                     else
@@ -701,6 +689,7 @@ namespace pgso
             }
         }
 
+
         // DGV Grouping and Formatting
         private List<Model_Billing> GroupAndFormatBillingData(List<Model_Billing> billingData)
         {
@@ -713,7 +702,8 @@ namespace pgso
                         item.fld_Reservation_Type,
                         item.fld_Start_Date,
                         item.fld_Total_Amount,
-                        item.fld_Reservation_Status
+                        item.fld_Reservation_Status,
+                        item.fld_Created_At
                     })
                     .Select(group =>
                     {
@@ -897,6 +887,11 @@ namespace pgso
         }
 
         private void cmb_Billing_Filter_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

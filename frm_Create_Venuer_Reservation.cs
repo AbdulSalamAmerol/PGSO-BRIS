@@ -1,6 +1,4 @@
-﻿using Interop.WIA;
-using pgso_connect;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-//using WIA;
+using WIA;
 
 
 namespace pgso
@@ -30,7 +28,7 @@ namespace pgso
         // Add at the top of your class
         private DataTable clientInfoTable;
         private DataTable requestingPersonTable;
-        private readonly string comboNamePlaceholder = "First Name, Middle Name, Surname";
+        private readonly string comboNamePlaceholder = "Surname, First Name Middle Name";
         private Color comboNamePlaceholderColor = Color.Gray;
         private Color comboNameNormalColor = SystemColors.WindowText;
 
@@ -320,38 +318,36 @@ namespace pgso
         // Load venues and populate combo_venues
         private void LoadVenues()
         {
+            string query = "SELECT pk_VenueID, fld_Venue_Name FROM tbl_Venue";
             try
             {
-                DBConnect();
-                cmd = new SqlCommand("SELECT pk_VenueID, fld_Venue_Name FROM tbl_Venue", conn);
-                SqlDataReader reader = cmd.ExecuteReader();
+                var db = new Connection();
+                using (var conn = db.strCon)
+                using (var cmd = new SqlCommand(query, conn))
+                {
+                    conn.Open();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        DataTable dt = new DataTable();
+                        dt.Load(reader);
 
-                DataTable dt = new DataTable();
-                dt.Load(reader);
+                        DataRow placeholderRow = dt.NewRow();
+                        placeholderRow["pk_VenueID"] = -1;
+                        placeholderRow["fld_Venue_Name"] = "Choose venue";
+                        dt.Rows.InsertAt(placeholderRow, 0);
 
-                // Insert placeholder row at the top with pk_VenueID = -1
-                DataRow placeholderRow = dt.NewRow();
-                placeholderRow["pk_VenueID"] = -1; // Use -1 as a placeholder value
-                placeholderRow["fld_Venue_Name"] = "Choose venue";
-                dt.Rows.InsertAt(placeholderRow, 0);
-
-                combo_venues.DataSource = dt;
-                combo_venues.ValueMember = "pk_VenueID";
-                combo_venues.DisplayMember = "fld_Venue_Name";
-                combo_venues.SelectedIndex = 0; // Show placeholder by default
-
-                reader.Close();
+                        combo_venues.DataSource = dt;
+                        combo_venues.ValueMember = "pk_VenueID";
+                        combo_venues.DisplayMember = "fld_Venue_Name";
+                        combo_venues.SelectedIndex = 0;
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error loading venues: " + ex.Message);
             }
-            finally
-            {
-                DBClose();
-            }
         }
-
 
 
         // Load venue scope for selected venue
@@ -758,7 +754,6 @@ namespace pgso
                 int venueID = selectedVenueID;
                 int venueScopeID = (int)combo_scope.SelectedValue;
                 string reservationType = combo_ReservationType.SelectedValue.ToString();
-                int venuePricingID;
 
                 if (reservationType.Equals("PGNV", StringComparison.OrdinalIgnoreCase))
                 {
@@ -890,7 +885,7 @@ namespace pgso
                     EndTime = endTime,
                     TotalAmount = totalAmount
                 });
-                MessageBox.Show("Username: " + frm_login.LoggedInUsername);
+              
                 // Insert audit log
                 using (SqlCommand auditCmd = new SqlCommand(@"
                     INSERT INTO tbl_Audit_Log
@@ -915,11 +910,15 @@ namespace pgso
                 // Commit transaction
                 transaction.Commit();
 
-                MessageBox.Show("Reservation submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Reservation submitted successfully!");
                 var billingForm = new frm_Billing();
-                billingForm.Show();
-                this.Close(); // Close the reservation form after submission
-
+                billingForm.ShowDialog();
+                frm_Dashboard.NeedsCalendarRefresh = true;
+                RefreshCalendarView();
+                this.Close();
+                // ...
+                RefreshCalendarView();
+                // Remove RefreshCalendarView(); -- let Dashboard handle the refresh
                 // Refresh control number and clear form
                 txt_controlnum.Text = GenerateControlNumber();
                 btn_clearform_Click(sender, e);
@@ -1766,6 +1765,166 @@ namespace pgso
 
             string selected = combo_Name.SelectedItem.ToString();
 
+            // Extract name and office if present
+            string namePart = selected;
+            string officePart = null;
+            int idx = selected.LastIndexOf(" (");
+            if (idx > 0 && selected.EndsWith(")"))
+            {
+                namePart = selected.Substring(0, idx);
+                officePart = selected.Substring(idx + 2, selected.Length - idx - 3); // remove " (" and ")"
+            }
+
+            // Set only the name (no office) in the ComboBox text
+            combo_Name.Text = namePart.Trim();
+            combo_Name.DroppedDown = false; // Optionally close dropdown
+
+            // Parse name
+            var parts = namePart.Split(new[] { ',' }, 2);
+            if (parts.Length < 2) return;
+            string surname = parts[0].Trim();
+            string rest = parts[1].Trim();
+            string[] nameParts = rest.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string firstName = nameParts.Length > 0 ? nameParts[0] : "";
+            string middleName = nameParts.Length > 1 ? string.Join(" ", nameParts.Skip(1)) : "";
+
+            // Find the correct row (with office if available)
+            DataRow match = requestingPersonTable.AsEnumerable()
+                .FirstOrDefault(row =>
+                    row["fld_Surname"].ToString().Trim().Equals(surname, StringComparison.OrdinalIgnoreCase) &&
+                    row["fld_First_Name"].ToString().Trim().Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
+                    row["fld_Middle_Name"].ToString().Trim().Equals(middleName, StringComparison.OrdinalIgnoreCase) &&
+                    (officePart == null || row["fld_Requesting_Office"].ToString().Trim().Equals(officePart, StringComparison.OrdinalIgnoreCase))
+                );
+
+            if (match == null) return;
+
+            txt_address.Text = match["fld_Requesting_Person_Address"].ToString();
+            txt_contact.Text = match["fld_Contact_Number"].ToString();
+            txt_Requesting_Office.Text = match["fld_Requesting_Office"].ToString();
+        }
+
+        private void combo_Name_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (combo_Name.SelectedIndex < 0 || requestingPersonTable == null || requestingPersonTable.Rows.Count == 0)
+                return;
+
+            string selected = combo_Name.SelectedItem.ToString();
+
+            // Extract name and office if present
+            string namePart = selected;
+            string officePart = null;
+            int idx = selected.LastIndexOf(" (");
+            if (idx > 0 && selected.EndsWith(")"))
+            {
+                namePart = selected.Substring(0, idx);
+                officePart = selected.Substring(idx + 2, selected.Length - idx - 3); // remove " (" and ")"
+            }
+
+            // Use BeginInvoke to set the text after ComboBox finishes its update
+            combo_Name.BeginInvoke(new Action(() =>
+            {
+                combo_Name.Text = namePart.Trim();
+                combo_Name.SelectionStart = combo_Name.Text.Length;
+                combo_Name.SelectionLength = 0;
+            }));
+
+            // Parse name
+            var parts = namePart.Split(new[] { ',' }, 2);
+            if (parts.Length < 2) return;
+            string surname = parts[0].Trim();
+            string rest = parts[1].Trim();
+            string[] nameParts = rest.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string firstName = nameParts.Length > 0 ? nameParts[0] : "";
+            string middleName = nameParts.Length > 1 ? string.Join(" ", nameParts.Skip(1)) : "";
+
+            // Find the correct row (with office if available)
+            DataRow match = requestingPersonTable.AsEnumerable()
+                .FirstOrDefault(row =>
+                    row["fld_Surname"].ToString().Trim().Equals(surname, StringComparison.OrdinalIgnoreCase) &&
+                    row["fld_First_Name"].ToString().Trim().Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
+                    row["fld_Middle_Name"].ToString().Trim().Equals(middleName, StringComparison.OrdinalIgnoreCase) &&
+                    (officePart == null || row["fld_Requesting_Office"].ToString().Trim().Equals(officePart, StringComparison.OrdinalIgnoreCase))
+                );
+
+            if (match == null) return;
+
+            txt_address.Text = match["fld_Requesting_Person_Address"].ToString();
+            txt_contact.Text = match["fld_Contact_Number"].ToString();
+            txt_Requesting_Office.Text = match["fld_Requesting_Office"].ToString();
+        }
+        private void LoadCatererFee(int venueID)
+        {
+            try
+            {
+                DBConnect();
+                using (SqlCommand cmd = new SqlCommand("SELECT fld_Caterer_Fee FROM tbl_Venue_Pricing WHERE fk_VenueID = @VenueID", conn))
+                {
+                    cmd.Parameters.AddWithValue("@VenueID", venueID);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        currentCatererFee = Convert.ToDecimal(result);
+                        txt_Caterer_Fee.Text = currentCatererFee.ToString("N2");
+                        // Auto-check the checkbox if there is a caterer fee
+                        chk_UseCatererFee.Checked = currentCatererFee > 0;
+                    }
+                    else
+                    {
+                        currentCatererFee = 0m;
+                        txt_Caterer_Fee.Text = "0.00";
+                        chk_UseCatererFee.Checked = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading caterer fee: " + ex.Message);
+                currentCatererFee = 0m;
+                txt_Caterer_Fee.Text = "0.00";
+                chk_UseCatererFee.Checked = false;
+            }
+            finally
+            {
+                DBClose();
+            }
+        }
+
+        private void chk_UseCatererFee_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_UseCatererFee.Checked)
+            {
+                txt_Caterer_Fee.Text = currentCatererFee.ToString("N2");
+            }
+            else
+            {
+                txt_Caterer_Fee.Text = "0.00";
+            }
+            CalculateTotalAmount(); // If caterer fee is part of total
+        }
+
+        // Helper to set placeholder
+        private void SetComboNamePlaceholder()
+        {
+            if (string.IsNullOrWhiteSpace(combo_Name.Text))
+            {
+                combo_Name.Text = comboNamePlaceholder;
+                combo_Name.ForeColor = comboNamePlaceholderColor;
+            }
+        }
+
+        // Remove placeholder when focused
+        private void Combo_Name_GotFocus(object sender, EventArgs e)
+        {
+            if (combo_Name.Text == comboNamePlaceholder)
+            {
+                combo_Name.Text = "";
+                combo_Name.ForeColor = comboNameNormalColor;
+            }
+        }
+
+        // Restore placeholder if empty on losing focus
+        private void Combo_Name_LostFocus(object sender, EventArgs e)
             // Extract name and office if present
             string namePart = selected;
             string officePart = null;

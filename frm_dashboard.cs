@@ -21,6 +21,7 @@ namespace pgso
         private ComboBox cmbMonth;
         private NumericUpDown numYear;
         private Connection db = new Connection();
+        public static bool NeedsCalendarRefresh = false;
         //dashboard properties
         public frm_Dashboard()
         {
@@ -387,11 +388,10 @@ namespace pgso
         private void billingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frm_Billing Billing = new frm_Billing();
-    
-     
-    
-       
             Billing.ShowDialog();
+
+            // After Billing closes, refresh the calendar display
+            DisplayCalendar(); // This will reload frm_Calendar and thus refresh UserControlDays
         }
 
         private void equipmentToolStripMenuItem2_Click(object sender, EventArgs e)
@@ -569,6 +569,15 @@ namespace pgso
             catch (Exception ex)
             {
                 MessageBox.Show("Error loading audit logs: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+            if (NeedsCalendarRefresh)
+            {
+                DisplayCalendar(); // This reloads the calendar and UserControlDays
+                NeedsCalendarRefresh = false;
             }
         }
 

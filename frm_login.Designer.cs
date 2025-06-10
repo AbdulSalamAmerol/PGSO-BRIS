@@ -199,6 +199,7 @@ namespace pgso
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frm_login";
             this.Text = "frm_login";
+            this.Load += new System.EventHandler(this.frm_login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PicB_logo)).EndInit();
             this.panel_bg_pgso.ResumeLayout(false);
             this.panel_bg_pgso.PerformLayout();

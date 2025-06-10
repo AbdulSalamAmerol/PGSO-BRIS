@@ -45,6 +45,71 @@
             this.btn_Change_Reservation_info = new System.Windows.Forms.Button();
             this.lbl_Is_Aircon = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.tb_Extension_Status = new System.Windows.Forms.TextBox();
+            this.lbl_OR_2 = new System.Windows.Forms.TextBox();
+            this.tb_Status = new System.Windows.Forms.TextBox();
+            this.lbl_Rate_Type2 = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.tb_Rate_Type = new System.Windows.Forms.TextBox();
+            this.OR2 = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.tb7 = new System.Windows.Forms.TextBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.lbl_Balance_2 = new System.Windows.Forms.TextBox();
+            this.lbl_Total_Amount_2 = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.lbl_h2 = new System.Windows.Forms.Label();
+            this.tb12 = new System.Windows.Forms.TextBox();
+            this.tb11 = new System.Windows.Forms.TextBox();
+            this.tb10 = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.tb2 = new System.Windows.Forms.TextBox();
+            this.tb5 = new System.Windows.Forms.TextBox();
+            this.tb4 = new System.Windows.Forms.TextBox();
+            this.tb6 = new System.Windows.Forms.TextBox();
+            this.tb3 = new System.Windows.Forms.TextBox();
+            this.tb1 = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.lbl_h1 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox24 = new System.Windows.Forms.TextBox();
+            this.tb8 = new System.Windows.Forms.TextBox();
+            this.lbl_Paid_Amount_2 = new System.Windows.Forms.TextBox();
+            this.lbl_OT_Hours = new System.Windows.Forms.TextBox();
+            this.lbl_Overtime_Fee = new System.Windows.Forms.TextBox();
+            this.lbl_Base_Charge_Amount = new System.Windows.Forms.TextBox();
+            this.lbl_Refund_Amount = new System.Windows.Forms.TextBox();
+            this.textBox32 = new System.Windows.Forms.TextBox();
+            this.tb9 = new System.Windows.Forms.TextBox();
+            this.lbl_OT_Hourly_Charge = new System.Windows.Forms.TextBox();
+            this.lbl_Balance = new System.Windows.Forms.TextBox();
+            this.textBox29 = new System.Windows.Forms.TextBox();
+            this.textBox58 = new System.Windows.Forms.TextBox();
+            this.textBox33 = new System.Windows.Forms.TextBox();
+            this.lbl_Paid_Amount = new System.Windows.Forms.TextBox();
+            this.lbl_Additional_Charge = new System.Windows.Forms.TextBox();
+            this.textBox55 = new System.Windows.Forms.TextBox();
+            this.lbl_Total_Amount = new System.Windows.Forms.TextBox();
+            this.textBox46 = new System.Windows.Forms.TextBox();
+            this.textBox51 = new System.Windows.Forms.TextBox();
+            this.lbl_Additional_Hours_Amount = new System.Windows.Forms.TextBox();
+            this.lbl_Venue_Name_Transact = new System.Windows.Forms.TextBox();
+            this.textBox34 = new System.Windows.Forms.TextBox();
+            this.textBox45 = new System.Windows.Forms.TextBox();
+            this.textBox39 = new System.Windows.Forms.TextBox();
+            this.textBox43 = new System.Windows.Forms.TextBox();
+            this.lbl_Total_Hour = new System.Windows.Forms.TextBox();
+            this.lbl_Additional_Hourly_Charge = new System.Windows.Forms.TextBox();
+            this.lbl_Venue_Scope_Transact = new System.Windows.Forms.TextBox();
             this.lbl_Rate_Type = new System.Windows.Forms.TextBox();
             this.textBox35 = new System.Windows.Forms.TextBox();
             this.textBox36 = new System.Windows.Forms.TextBox();
@@ -72,71 +137,6 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.lbl_Venue_Scope_Transact = new System.Windows.Forms.TextBox();
-            this.lbl_Additional_Hourly_Charge = new System.Windows.Forms.TextBox();
-            this.lbl_Total_Hour = new System.Windows.Forms.TextBox();
-            this.textBox43 = new System.Windows.Forms.TextBox();
-            this.textBox39 = new System.Windows.Forms.TextBox();
-            this.textBox45 = new System.Windows.Forms.TextBox();
-            this.textBox34 = new System.Windows.Forms.TextBox();
-            this.lbl_Venue_Name_Transact = new System.Windows.Forms.TextBox();
-            this.lbl_Additional_Hours_Amount = new System.Windows.Forms.TextBox();
-            this.textBox51 = new System.Windows.Forms.TextBox();
-            this.textBox46 = new System.Windows.Forms.TextBox();
-            this.lbl_Total_Amount = new System.Windows.Forms.TextBox();
-            this.textBox55 = new System.Windows.Forms.TextBox();
-            this.lbl_Additional_Charge = new System.Windows.Forms.TextBox();
-            this.lbl_Paid_Amount = new System.Windows.Forms.TextBox();
-            this.textBox33 = new System.Windows.Forms.TextBox();
-            this.textBox58 = new System.Windows.Forms.TextBox();
-            this.textBox29 = new System.Windows.Forms.TextBox();
-            this.lbl_Balance = new System.Windows.Forms.TextBox();
-            this.lbl_OT_Hourly_Charge = new System.Windows.Forms.TextBox();
-            this.tb9 = new System.Windows.Forms.TextBox();
-            this.textBox32 = new System.Windows.Forms.TextBox();
-            this.lbl_Refund_Amount = new System.Windows.Forms.TextBox();
-            this.lbl_Base_Charge_Amount = new System.Windows.Forms.TextBox();
-            this.lbl_Overtime_Fee = new System.Windows.Forms.TextBox();
-            this.lbl_OT_Hours = new System.Windows.Forms.TextBox();
-            this.lbl_Paid_Amount_2 = new System.Windows.Forms.TextBox();
-            this.tb8 = new System.Windows.Forms.TextBox();
-            this.textBox24 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.lbl_h1 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.tb1 = new System.Windows.Forms.TextBox();
-            this.tb3 = new System.Windows.Forms.TextBox();
-            this.tb6 = new System.Windows.Forms.TextBox();
-            this.tb4 = new System.Windows.Forms.TextBox();
-            this.tb5 = new System.Windows.Forms.TextBox();
-            this.tb2 = new System.Windows.Forms.TextBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.tb10 = new System.Windows.Forms.TextBox();
-            this.tb11 = new System.Windows.Forms.TextBox();
-            this.tb12 = new System.Windows.Forms.TextBox();
-            this.lbl_h2 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.lbl_Total_Amount_2 = new System.Windows.Forms.TextBox();
-            this.lbl_Balance_2 = new System.Windows.Forms.TextBox();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.tb7 = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.OR2 = new System.Windows.Forms.TextBox();
-            this.tb_Rate_Type = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.lbl_Rate_Type2 = new System.Windows.Forms.TextBox();
-            this.tb_Status = new System.Windows.Forms.TextBox();
-            this.lbl_OR_2 = new System.Windows.Forms.TextBox();
-            this.tb_Extension_Status = new System.Windows.Forms.TextBox();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.pnl_Billing_Details.SuspendLayout();
             this.panel5.SuspendLayout();
             this.SuspendLayout();
@@ -201,11 +201,11 @@
             // 
             this.lbl_Reservation_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Reservation_Status.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Reservation_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Reservation_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Reservation_Status.ForeColor = System.Drawing.SystemColors.MenuText;
             this.lbl_Reservation_Status.Location = new System.Drawing.Point(770, 454);
             this.lbl_Reservation_Status.Name = "lbl_Reservation_Status";
-            this.lbl_Reservation_Status.Size = new System.Drawing.Size(119, 23);
+            this.lbl_Reservation_Status.Size = new System.Drawing.Size(119, 22);
             this.lbl_Reservation_Status.TabIndex = 62;
             this.lbl_Reservation_Status.Text = "...";
             // 
@@ -347,7 +347,6 @@
             this.lbl_OR.ReadOnly = true;
             this.lbl_OR.Size = new System.Drawing.Size(190, 23);
             this.lbl_OR.TabIndex = 51;
-            this.lbl_OR.Text = "DESCRIPTION";
             // 
             // tb_OR
             // 
@@ -421,18 +420,1028 @@
             this.textBox1.Text = "With Aircon";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.panel5.Controls.Add(this.tb_Extension_Status);
+            this.panel5.Controls.Add(this.lbl_OR_2);
+            this.panel5.Controls.Add(this.tb_Status);
+            this.panel5.Controls.Add(this.lbl_Rate_Type2);
+            this.panel5.Controls.Add(this.label25);
+            this.panel5.Controls.Add(this.tb_Rate_Type);
+            this.panel5.Controls.Add(this.OR2);
+            this.panel5.Controls.Add(this.label20);
+            this.panel5.Controls.Add(this.tb7);
+            this.panel5.Controls.Add(this.label47);
+            this.panel5.Controls.Add(this.label46);
+            this.panel5.Controls.Add(this.label45);
+            this.panel5.Controls.Add(this.label44);
+            this.panel5.Controls.Add(this.label43);
+            this.panel5.Controls.Add(this.lbl_Balance_2);
+            this.panel5.Controls.Add(this.lbl_Total_Amount_2);
+            this.panel5.Controls.Add(this.label34);
+            this.panel5.Controls.Add(this.lbl_h2);
+            this.panel5.Controls.Add(this.tb12);
+            this.panel5.Controls.Add(this.tb11);
+            this.panel5.Controls.Add(this.tb10);
+            this.panel5.Controls.Add(this.label27);
+            this.panel5.Controls.Add(this.tb2);
+            this.panel5.Controls.Add(this.tb5);
+            this.panel5.Controls.Add(this.tb4);
+            this.panel5.Controls.Add(this.tb6);
+            this.panel5.Controls.Add(this.tb3);
+            this.panel5.Controls.Add(this.tb1);
+            this.panel5.Controls.Add(this.label19);
+            this.panel5.Controls.Add(this.label16);
+            this.panel5.Controls.Add(this.lbl_h1);
+            this.panel5.Controls.Add(this.label8);
+            this.panel5.Controls.Add(this.label5);
+            this.panel5.Controls.Add(this.label3);
+            this.panel5.Controls.Add(this.label1);
+            this.panel5.Controls.Add(this.textBox24);
+            this.panel5.Controls.Add(this.tb8);
+            this.panel5.Controls.Add(this.lbl_Paid_Amount_2);
+            this.panel5.Controls.Add(this.lbl_OT_Hours);
+            this.panel5.Controls.Add(this.lbl_Overtime_Fee);
+            this.panel5.Controls.Add(this.lbl_Base_Charge_Amount);
+            this.panel5.Controls.Add(this.lbl_Refund_Amount);
+            this.panel5.Controls.Add(this.textBox32);
+            this.panel5.Controls.Add(this.tb9);
+            this.panel5.Controls.Add(this.lbl_OT_Hourly_Charge);
+            this.panel5.Controls.Add(this.lbl_Balance);
+            this.panel5.Controls.Add(this.textBox29);
+            this.panel5.Controls.Add(this.textBox58);
+            this.panel5.Controls.Add(this.textBox33);
+            this.panel5.Controls.Add(this.lbl_Paid_Amount);
+            this.panel5.Controls.Add(this.lbl_Additional_Charge);
+            this.panel5.Controls.Add(this.textBox55);
+            this.panel5.Controls.Add(this.lbl_Total_Amount);
+            this.panel5.Controls.Add(this.textBox46);
+            this.panel5.Controls.Add(this.textBox51);
+            this.panel5.Controls.Add(this.lbl_Additional_Hours_Amount);
+            this.panel5.Controls.Add(this.lbl_Venue_Name_Transact);
+            this.panel5.Controls.Add(this.textBox34);
+            this.panel5.Controls.Add(this.textBox45);
+            this.panel5.Controls.Add(this.textBox39);
+            this.panel5.Controls.Add(this.textBox43);
+            this.panel5.Controls.Add(this.lbl_Total_Hour);
+            this.panel5.Controls.Add(this.lbl_Additional_Hourly_Charge);
+            this.panel5.Controls.Add(this.lbl_Venue_Scope_Transact);
+            this.panel5.Font = new System.Drawing.Font("Yu Gothic", 8.25F);
+            this.panel5.Location = new System.Drawing.Point(0, 511);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(912, 637);
+            this.panel5.TabIndex = 44;
+            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
+            // 
+            // tb_Extension_Status
+            // 
+            this.tb_Extension_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb_Extension_Status.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb_Extension_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_Extension_Status.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.tb_Extension_Status.Location = new System.Drawing.Point(770, 304);
+            this.tb_Extension_Status.Name = "tb_Extension_Status";
+            this.tb_Extension_Status.Size = new System.Drawing.Size(119, 23);
+            this.tb_Extension_Status.TabIndex = 66;
+            this.tb_Extension_Status.Text = "...";
+            // 
+            // lbl_OR_2
+            // 
+            this.lbl_OR_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_OR_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_OR_2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_OR_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_OR_2.ForeColor = System.Drawing.Color.Red;
+            this.lbl_OR_2.Location = new System.Drawing.Point(327, 333);
+            this.lbl_OR_2.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_OR_2.MinimumSize = new System.Drawing.Size(4, 25);
+            this.lbl_OR_2.Name = "lbl_OR_2";
+            this.lbl_OR_2.ReadOnly = true;
+            this.lbl_OR_2.Size = new System.Drawing.Size(189, 23);
+            this.lbl_OR_2.TabIndex = 62;
+            this.lbl_OR_2.Text = "DESCRIPTION";
+            this.lbl_OR_2.TextChanged += new System.EventHandler(this.lbl_OR_2_TextChanged);
+            // 
+            // tb_Status
+            // 
+            this.tb_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb_Status.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb_Status.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
+            this.tb_Status.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.tb_Status.Location = new System.Drawing.Point(633, 305);
+            this.tb_Status.Margin = new System.Windows.Forms.Padding(0);
+            this.tb_Status.Name = "tb_Status";
+            this.tb_Status.ReadOnly = true;
+            this.tb_Status.Size = new System.Drawing.Size(121, 23);
+            this.tb_Status.TabIndex = 65;
+            this.tb_Status.Text = "STATUS:";
+            this.tb_Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbl_Rate_Type2
+            // 
+            this.lbl_Rate_Type2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Rate_Type2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Rate_Type2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Rate_Type2.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold);
+            this.lbl_Rate_Type2.Location = new System.Drawing.Point(770, 334);
+            this.lbl_Rate_Type2.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Rate_Type2.MinimumSize = new System.Drawing.Size(0, 25);
+            this.lbl_Rate_Type2.Name = "lbl_Rate_Type2";
+            this.lbl_Rate_Type2.ReadOnly = true;
+            this.lbl_Rate_Type2.Size = new System.Drawing.Size(119, 23);
+            this.lbl_Rate_Type2.TabIndex = 64;
+            this.lbl_Rate_Type2.Text = "...";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
+            this.label25.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label25.Location = new System.Drawing.Point(0, 293);
+            this.label25.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label25.MinimumSize = new System.Drawing.Size(912, 8);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(912, 8);
+            this.label25.TabIndex = 160;
+            // 
+            // tb_Rate_Type
+            // 
+            this.tb_Rate_Type.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb_Rate_Type.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb_Rate_Type.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb_Rate_Type.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
+            this.tb_Rate_Type.Location = new System.Drawing.Point(633, 334);
+            this.tb_Rate_Type.Margin = new System.Windows.Forms.Padding(0);
+            this.tb_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
+            this.tb_Rate_Type.Name = "tb_Rate_Type";
+            this.tb_Rate_Type.ReadOnly = true;
+            this.tb_Rate_Type.Size = new System.Drawing.Size(121, 23);
+            this.tb_Rate_Type.TabIndex = 63;
+            this.tb_Rate_Type.Text = "RATE TYPE:";
+            this.tb_Rate_Type.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // OR2
+            // 
+            this.OR2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.OR2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.OR2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.OR2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OR2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.OR2.Location = new System.Drawing.Point(9, 334);
+            this.OR2.Margin = new System.Windows.Forms.Padding(0);
+            this.OR2.Name = "OR2";
+            this.OR2.ReadOnly = true;
+            this.OR2.Size = new System.Drawing.Size(310, 23);
+            this.OR2.TabIndex = 61;
+            this.OR2.Text = "OFFICIAL RECEIPT NUMBER:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.BackColor = System.Drawing.Color.Gray;
+            this.label20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label20.Location = new System.Drawing.Point(-1, 367);
+            this.label20.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label20.MinimumSize = new System.Drawing.Size(912, 4);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(912, 4);
+            this.label20.TabIndex = 158;
+            // 
+            // tb7
+            // 
+            this.tb7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb7.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb7.Location = new System.Drawing.Point(8, 421);
+            this.tb7.Margin = new System.Windows.Forms.Padding(0);
+            this.tb7.MinimumSize = new System.Drawing.Size(2, 25);
+            this.tb7.Multiline = true;
+            this.tb7.Name = "tb7";
+            this.tb7.ReadOnly = true;
+            this.tb7.Size = new System.Drawing.Size(163, 25);
+            this.tb7.TabIndex = 149;
+            this.tb7.Text = "Extension Charge";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label47.Location = new System.Drawing.Point(717, 184);
+            this.label47.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label47.MinimumSize = new System.Drawing.Size(2, 112);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(2, 112);
+            this.label47.TabIndex = 148;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label46.Location = new System.Drawing.Point(717, 408);
+            this.label46.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label46.MinimumSize = new System.Drawing.Size(2, 255);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(2, 255);
+            this.label46.TabIndex = 147;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label45.Location = new System.Drawing.Point(565, 408);
+            this.label45.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label45.MinimumSize = new System.Drawing.Size(2, 45);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(2, 45);
+            this.label45.TabIndex = 146;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label44.Location = new System.Drawing.Point(565, 40);
+            this.label44.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label44.MinimumSize = new System.Drawing.Size(2, 96);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(2, 96);
+            this.label44.TabIndex = 145;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label43.Location = new System.Drawing.Point(717, 40);
+            this.label43.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label43.MinimumSize = new System.Drawing.Size(2, 145);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(2, 145);
+            this.label43.TabIndex = 144;
+            // 
+            // lbl_Balance_2
+            // 
+            this.lbl_Balance_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Balance_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Balance_2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Balance_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.lbl_Balance_2.Location = new System.Drawing.Point(717, 596);
+            this.lbl_Balance_2.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Balance_2.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Balance_2.Name = "lbl_Balance_2";
+            this.lbl_Balance_2.ReadOnly = true;
+            this.lbl_Balance_2.Size = new System.Drawing.Size(149, 22);
+            this.lbl_Balance_2.TabIndex = 131;
+            this.lbl_Balance_2.Text = "Amount";
+            this.lbl_Balance_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbl_Total_Amount_2
+            // 
+            this.lbl_Total_Amount_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Total_Amount_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Total_Amount_2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Total_Amount_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.lbl_Total_Amount_2.Location = new System.Drawing.Point(717, 503);
+            this.lbl_Total_Amount_2.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Total_Amount_2.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Total_Amount_2.Name = "lbl_Total_Amount_2";
+            this.lbl_Total_Amount_2.ReadOnly = true;
+            this.lbl_Total_Amount_2.Size = new System.Drawing.Size(149, 22);
+            this.lbl_Total_Amount_2.TabIndex = 130;
+            this.lbl_Total_Amount_2.Text = "..........";
+            this.lbl_Total_Amount_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.BackColor = System.Drawing.Color.Gray;
+            this.label34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label34.Location = new System.Drawing.Point(-1, 574);
+            this.label34.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label34.MinimumSize = new System.Drawing.Size(912, 4);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(912, 4);
+            this.label34.TabIndex = 124;
+            // 
+            // lbl_h2
+            // 
+            this.lbl_h2.AutoSize = true;
+            this.lbl_h2.BackColor = System.Drawing.Color.Gray;
+            this.lbl_h2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_h2.Location = new System.Drawing.Point(-1, 490);
+            this.lbl_h2.MaximumSize = new System.Drawing.Size(912, 4);
+            this.lbl_h2.MinimumSize = new System.Drawing.Size(912, 2);
+            this.lbl_h2.Name = "lbl_h2";
+            this.lbl_h2.Size = new System.Drawing.Size(912, 4);
+            this.lbl_h2.TabIndex = 121;
+            // 
+            // tb12
+            // 
+            this.tb12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb12.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb12.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.tb12.Location = new System.Drawing.Point(589, 596);
+            this.tb12.Margin = new System.Windows.Forms.Padding(0);
+            this.tb12.MinimumSize = new System.Drawing.Size(2, 25);
+            this.tb12.Name = "tb12";
+            this.tb12.ReadOnly = true;
+            this.tb12.Size = new System.Drawing.Size(113, 22);
+            this.tb12.TabIndex = 120;
+            this.tb12.Text = "BALANCE";
+            this.tb12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tb11
+            // 
+            this.tb11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb11.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb11.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.tb11.Location = new System.Drawing.Point(544, 540);
+            this.tb11.Margin = new System.Windows.Forms.Padding(0);
+            this.tb11.MinimumSize = new System.Drawing.Size(2, 25);
+            this.tb11.Name = "tb11";
+            this.tb11.ReadOnly = true;
+            this.tb11.Size = new System.Drawing.Size(158, 22);
+            this.tb11.TabIndex = 119;
+            this.tb11.Text = "PAID AMOUNT";
+            this.tb11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tb10
+            // 
+            this.tb10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb10.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb10.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.tb10.Location = new System.Drawing.Point(517, 508);
+            this.tb10.Margin = new System.Windows.Forms.Padding(0);
+            this.tb10.MinimumSize = new System.Drawing.Size(2, 25);
+            this.tb10.Name = "tb10";
+            this.tb10.ReadOnly = true;
+            this.tb10.Size = new System.Drawing.Size(185, 22);
+            this.tb10.TabIndex = 118;
+            this.tb10.Text = "TOTAL AMOUNT";
+            this.tb10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.BackColor = System.Drawing.Color.Gray;
+            this.label27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label27.Location = new System.Drawing.Point(-1, 405);
+            this.label27.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label27.MinimumSize = new System.Drawing.Size(912, 2);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(912, 2);
+            this.label27.TabIndex = 113;
+            // 
+            // tb2
+            // 
+            this.tb2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb2.Location = new System.Drawing.Point(9, 378);
+            this.tb2.Margin = new System.Windows.Forms.Padding(0);
+            this.tb2.MinimumSize = new System.Drawing.Size(0, 25);
+            this.tb2.Name = "tb2";
+            this.tb2.ReadOnly = true;
+            this.tb2.Size = new System.Drawing.Size(137, 22);
+            this.tb2.TabIndex = 108;
+            this.tb2.Text = "DESCRIPTION";
+            // 
+            // tb5
+            // 
+            this.tb5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb5.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb5.Location = new System.Drawing.Point(551, 376);
+            this.tb5.Margin = new System.Windows.Forms.Padding(0);
+            this.tb5.MinimumSize = new System.Drawing.Size(0, 25);
+            this.tb5.Name = "tb5";
+            this.tb5.ReadOnly = true;
+            this.tb5.Size = new System.Drawing.Size(175, 22);
+            this.tb5.TabIndex = 107;
+            this.tb5.Text = "HOURLY CHARGE";
+            this.tb5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tb4
+            // 
+            this.tb4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb4.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb4.Location = new System.Drawing.Point(371, 376);
+            this.tb4.Margin = new System.Windows.Forms.Padding(0);
+            this.tb4.Name = "tb4";
+            this.tb4.ReadOnly = true;
+            this.tb4.Size = new System.Drawing.Size(146, 22);
+            this.tb4.TabIndex = 109;
+            this.tb4.Text = "TOTAL HOURS";
+            // 
+            // tb6
+            // 
+            this.tb6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb6.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb6.Location = new System.Drawing.Point(759, 376);
+            this.tb6.Margin = new System.Windows.Forms.Padding(0);
+            this.tb6.MinimumSize = new System.Drawing.Size(0, 25);
+            this.tb6.Name = "tb6";
+            this.tb6.ReadOnly = true;
+            this.tb6.Size = new System.Drawing.Size(107, 22);
+            this.tb6.TabIndex = 111;
+            this.tb6.Text = "TOTAL";
+            this.tb6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tb3
+            // 
+            this.tb3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb3.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb3.Location = new System.Drawing.Point(192, 378);
+            this.tb3.Margin = new System.Windows.Forms.Padding(0);
+            this.tb3.MinimumSize = new System.Drawing.Size(0, 19);
+            this.tb3.Name = "tb3";
+            this.tb3.ReadOnly = true;
+            this.tb3.Size = new System.Drawing.Size(79, 22);
+            this.tb3.TabIndex = 110;
+            this.tb3.Text = "DETAIL";
+            // 
+            // tb1
+            // 
+            this.tb1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
+            this.tb1.Location = new System.Drawing.Point(9, 305);
+            this.tb1.Margin = new System.Windows.Forms.Padding(0);
+            this.tb1.MinimumSize = new System.Drawing.Size(2, 25);
+            this.tb1.Name = "tb1";
+            this.tb1.ReadOnly = true;
+            this.tb1.Size = new System.Drawing.Size(382, 23);
+            this.tb1.TabIndex = 102;
+            this.tb1.Text = "MISCELLANEOUS BILLING DETAILS";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.BackColor = System.Drawing.Color.Gray;
+            this.label19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label19.Location = new System.Drawing.Point(-1, 183);
+            this.label19.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label19.MinimumSize = new System.Drawing.Size(912, 4);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(912, 4);
+            this.label19.TabIndex = 100;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.Gray;
+            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label16.Location = new System.Drawing.Point(0, 0);
+            this.label16.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label16.MinimumSize = new System.Drawing.Size(912, 4);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(912, 4);
+            this.label16.TabIndex = 95;
+            // 
+            // lbl_h1
+            // 
+            this.lbl_h1.AutoSize = true;
+            this.lbl_h1.BackColor = System.Drawing.Color.Gray;
+            this.lbl_h1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_h1.Location = new System.Drawing.Point(0, 453);
+            this.lbl_h1.MaximumSize = new System.Drawing.Size(687, 2);
+            this.lbl_h1.MinimumSize = new System.Drawing.Size(912, 2);
+            this.lbl_h1.Name = "lbl_h1";
+            this.lbl_h1.Size = new System.Drawing.Size(912, 2);
+            this.lbl_h1.TabIndex = 90;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Gray;
+            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label8.Location = new System.Drawing.Point(-1, 255);
+            this.label8.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label8.MinimumSize = new System.Drawing.Size(912, 4);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(912, 4);
+            this.label8.TabIndex = 86;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label5.Location = new System.Drawing.Point(-1, 40);
+            this.label5.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label5.MinimumSize = new System.Drawing.Size(912, 2);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(912, 2);
+            this.label5.TabIndex = 84;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label3.Location = new System.Drawing.Point(-1, 136);
+            this.label3.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label3.MinimumSize = new System.Drawing.Size(912, 2);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(912, 2);
+            this.label3.TabIndex = 82;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.label1.Location = new System.Drawing.Point(0, 88);
+            this.label1.MaximumSize = new System.Drawing.Size(687, 2);
+            this.label1.MinimumSize = new System.Drawing.Size(912, 2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(912, 2);
+            this.label1.TabIndex = 80;
+            // 
+            // textBox24
+            // 
+            this.textBox24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox24.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox24.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox24.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox24.Location = new System.Drawing.Point(572, 52);
+            this.textBox24.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox24.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox24.Name = "textBox24";
+            this.textBox24.ReadOnly = true;
+            this.textBox24.Size = new System.Drawing.Size(137, 20);
+            this.textBox24.TabIndex = 79;
+            this.textBox24.Text = "...";
+            this.textBox24.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox24.TextChanged += new System.EventHandler(this.textBox24_TextChanged);
+            // 
+            // tb8
+            // 
+            this.tb8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb8.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb8.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F);
+            this.tb8.Location = new System.Drawing.Point(194, 413);
+            this.tb8.Margin = new System.Windows.Forms.Padding(0);
+            this.tb8.MinimumSize = new System.Drawing.Size(2, 25);
+            this.tb8.Multiline = true;
+            this.tb8.Name = "tb8";
+            this.tb8.ReadOnly = true;
+            this.tb8.Size = new System.Drawing.Size(145, 36);
+            this.tb8.TabIndex = 78;
+            this.tb8.Text = "Hours beyond Initial Reservation ";
+            // 
+            // lbl_Paid_Amount_2
+            // 
+            this.lbl_Paid_Amount_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Paid_Amount_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Paid_Amount_2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Paid_Amount_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.lbl_Paid_Amount_2.Location = new System.Drawing.Point(717, 539);
+            this.lbl_Paid_Amount_2.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Paid_Amount_2.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Paid_Amount_2.Name = "lbl_Paid_Amount_2";
+            this.lbl_Paid_Amount_2.ReadOnly = true;
+            this.lbl_Paid_Amount_2.Size = new System.Drawing.Size(149, 22);
+            this.lbl_Paid_Amount_2.TabIndex = 69;
+            this.lbl_Paid_Amount_2.Text = "..........";
+            this.lbl_Paid_Amount_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbl_OT_Hours
+            // 
+            this.lbl_OT_Hours.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_OT_Hours.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_OT_Hours.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_OT_Hours.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_OT_Hours.Location = new System.Drawing.Point(441, 421);
+            this.lbl_OT_Hours.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_OT_Hours.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_OT_Hours.Name = "lbl_OT_Hours";
+            this.lbl_OT_Hours.ReadOnly = true;
+            this.lbl_OT_Hours.Size = new System.Drawing.Size(67, 20);
+            this.lbl_OT_Hours.TabIndex = 59;
+            this.lbl_OT_Hours.Text = "0 HR/S";
+            this.lbl_OT_Hours.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.lbl_OT_Hours.TextChanged += new System.EventHandler(this.lbl_OT_Hours_TextChanged);
+            // 
+            // lbl_Overtime_Fee
+            // 
+            this.lbl_Overtime_Fee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Overtime_Fee.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Overtime_Fee.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Overtime_Fee.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Overtime_Fee.Location = new System.Drawing.Point(717, 418);
+            this.lbl_Overtime_Fee.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Overtime_Fee.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Overtime_Fee.Name = "lbl_Overtime_Fee";
+            this.lbl_Overtime_Fee.ReadOnly = true;
+            this.lbl_Overtime_Fee.Size = new System.Drawing.Size(149, 20);
+            this.lbl_Overtime_Fee.TabIndex = 55;
+            this.lbl_Overtime_Fee.Text = "..........";
+            this.lbl_Overtime_Fee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbl_Base_Charge_Amount
+            // 
+            this.lbl_Base_Charge_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Base_Charge_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Base_Charge_Amount.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Base_Charge_Amount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Base_Charge_Amount.Location = new System.Drawing.Point(717, 51);
+            this.lbl_Base_Charge_Amount.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Base_Charge_Amount.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Base_Charge_Amount.Name = "lbl_Base_Charge_Amount";
+            this.lbl_Base_Charge_Amount.ReadOnly = true;
+            this.lbl_Base_Charge_Amount.Size = new System.Drawing.Size(149, 20);
+            this.lbl_Base_Charge_Amount.TabIndex = 58;
+            this.lbl_Base_Charge_Amount.Text = "..........";
+            this.lbl_Base_Charge_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbl_Refund_Amount
+            // 
+            this.lbl_Refund_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Refund_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Refund_Amount.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Refund_Amount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Refund_Amount.Location = new System.Drawing.Point(717, 462);
+            this.lbl_Refund_Amount.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Refund_Amount.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Refund_Amount.Name = "lbl_Refund_Amount";
+            this.lbl_Refund_Amount.ReadOnly = true;
+            this.lbl_Refund_Amount.Size = new System.Drawing.Size(149, 20);
+            this.lbl_Refund_Amount.TabIndex = 64;
+            this.lbl_Refund_Amount.Text = "..........";
+            this.lbl_Refund_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox32
+            // 
+            this.textBox32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox32.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox32.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox32.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox32.Location = new System.Drawing.Point(9, 11);
+            this.textBox32.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox32.MinimumSize = new System.Drawing.Size(0, 25);
+            this.textBox32.Name = "textBox32";
+            this.textBox32.ReadOnly = true;
+            this.textBox32.Size = new System.Drawing.Size(137, 22);
+            this.textBox32.TabIndex = 43;
+            this.textBox32.Text = "DESCRIPTION";
+            // 
+            // tb9
+            // 
+            this.tb9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.tb9.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb9.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tb9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb9.Location = new System.Drawing.Point(8, 462);
+            this.tb9.Margin = new System.Windows.Forms.Padding(0);
+            this.tb9.MinimumSize = new System.Drawing.Size(2, 25);
+            this.tb9.Multiline = true;
+            this.tb9.Name = "tb9";
+            this.tb9.ReadOnly = true;
+            this.tb9.Size = new System.Drawing.Size(237, 25);
+            this.tb9.TabIndex = 59;
+            this.tb9.Text = "REFUND AMOUNT";
+            // 
+            // lbl_OT_Hourly_Charge
+            // 
+            this.lbl_OT_Hourly_Charge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_OT_Hourly_Charge.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_OT_Hourly_Charge.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_OT_Hourly_Charge.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_OT_Hourly_Charge.Location = new System.Drawing.Point(565, 418);
+            this.lbl_OT_Hourly_Charge.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_OT_Hourly_Charge.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_OT_Hourly_Charge.Name = "lbl_OT_Hourly_Charge";
+            this.lbl_OT_Hourly_Charge.ReadOnly = true;
+            this.lbl_OT_Hourly_Charge.Size = new System.Drawing.Size(137, 20);
+            this.lbl_OT_Hourly_Charge.TabIndex = 49;
+            this.lbl_OT_Hourly_Charge.Text = "...";
+            this.lbl_OT_Hourly_Charge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lbl_Balance
+            // 
+            this.lbl_Balance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Balance.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Balance.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Balance.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.lbl_Balance.Location = new System.Drawing.Point(717, 262);
+            this.lbl_Balance.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Balance.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Balance.Name = "lbl_Balance";
+            this.lbl_Balance.ReadOnly = true;
+            this.lbl_Balance.Size = new System.Drawing.Size(149, 22);
+            this.lbl_Balance.TabIndex = 62;
+            this.lbl_Balance.Text = "..........";
+            this.lbl_Balance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox29
+            // 
+            this.textBox29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox29.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox29.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox29.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox29.Location = new System.Drawing.Point(551, 9);
+            this.textBox29.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox29.MinimumSize = new System.Drawing.Size(0, 25);
+            this.textBox29.Name = "textBox29";
+            this.textBox29.ReadOnly = true;
+            this.textBox29.Size = new System.Drawing.Size(175, 22);
+            this.textBox29.TabIndex = 38;
+            this.textBox29.Text = "HOURLY CHARGE";
+            this.textBox29.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox58
+            // 
+            this.textBox58.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox58.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox58.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox58.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
+            this.textBox58.Location = new System.Drawing.Point(589, 266);
+            this.textBox58.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox58.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox58.Name = "textBox58";
+            this.textBox58.ReadOnly = true;
+            this.textBox58.Size = new System.Drawing.Size(113, 22);
+            this.textBox58.TabIndex = 61;
+            this.textBox58.Text = "BALANCE";
+            this.textBox58.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox33
+            // 
+            this.textBox33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox33.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox33.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox33.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox33.Location = new System.Drawing.Point(371, 10);
+            this.textBox33.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox33.Name = "textBox33";
+            this.textBox33.ReadOnly = true;
+            this.textBox33.Size = new System.Drawing.Size(146, 22);
+            this.textBox33.TabIndex = 45;
+            this.textBox33.Text = "TOTAL HOURS";
+            // 
+            // lbl_Paid_Amount
+            // 
+            this.lbl_Paid_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Paid_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Paid_Amount.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Paid_Amount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.lbl_Paid_Amount.Location = new System.Drawing.Point(717, 223);
+            this.lbl_Paid_Amount.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Paid_Amount.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Paid_Amount.Name = "lbl_Paid_Amount";
+            this.lbl_Paid_Amount.ReadOnly = true;
+            this.lbl_Paid_Amount.Size = new System.Drawing.Size(149, 22);
+            this.lbl_Paid_Amount.TabIndex = 60;
+            this.lbl_Paid_Amount.Text = "..........";
+            this.lbl_Paid_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbl_Additional_Charge
+            // 
+            this.lbl_Additional_Charge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Additional_Charge.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Additional_Charge.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Additional_Charge.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Additional_Charge.Location = new System.Drawing.Point(717, 148);
+            this.lbl_Additional_Charge.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Additional_Charge.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Additional_Charge.Name = "lbl_Additional_Charge";
+            this.lbl_Additional_Charge.ReadOnly = true;
+            this.lbl_Additional_Charge.Size = new System.Drawing.Size(149, 20);
+            this.lbl_Additional_Charge.TabIndex = 56;
+            this.lbl_Additional_Charge.Text = "..........";
+            this.lbl_Additional_Charge.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox55
+            // 
+            this.textBox55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox55.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox55.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox55.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
+            this.textBox55.Location = new System.Drawing.Point(544, 223);
+            this.textBox55.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox55.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox55.Name = "textBox55";
+            this.textBox55.ReadOnly = true;
+            this.textBox55.Size = new System.Drawing.Size(158, 22);
+            this.textBox55.TabIndex = 59;
+            this.textBox55.Text = "PAID AMOUNT";
+            this.textBox55.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbl_Total_Amount
+            // 
+            this.lbl_Total_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Total_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Total_Amount.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Total_Amount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.lbl_Total_Amount.Location = new System.Drawing.Point(717, 189);
+            this.lbl_Total_Amount.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Total_Amount.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Total_Amount.Name = "lbl_Total_Amount";
+            this.lbl_Total_Amount.ReadOnly = true;
+            this.lbl_Total_Amount.Size = new System.Drawing.Size(149, 22);
+            this.lbl_Total_Amount.TabIndex = 55;
+            this.lbl_Total_Amount.Text = "..........";
+            this.lbl_Total_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox46
+            // 
+            this.textBox46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox46.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox46.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox46.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox46.Location = new System.Drawing.Point(759, 9);
+            this.textBox46.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox46.MinimumSize = new System.Drawing.Size(0, 25);
+            this.textBox46.Name = "textBox46";
+            this.textBox46.ReadOnly = true;
+            this.textBox46.Size = new System.Drawing.Size(107, 22);
+            this.textBox46.TabIndex = 47;
+            this.textBox46.Text = "TOTAL";
+            this.textBox46.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox51
+            // 
+            this.textBox51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox51.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox51.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox51.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
+            this.textBox51.Location = new System.Drawing.Point(517, 191);
+            this.textBox51.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox51.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox51.Name = "textBox51";
+            this.textBox51.ReadOnly = true;
+            this.textBox51.Size = new System.Drawing.Size(185, 22);
+            this.textBox51.TabIndex = 58;
+            this.textBox51.Text = "TOTAL AMOUNT";
+            this.textBox51.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbl_Additional_Hours_Amount
+            // 
+            this.lbl_Additional_Hours_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Additional_Hours_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Additional_Hours_Amount.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Additional_Hours_Amount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Additional_Hours_Amount.Location = new System.Drawing.Point(717, 99);
+            this.lbl_Additional_Hours_Amount.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Additional_Hours_Amount.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Additional_Hours_Amount.Name = "lbl_Additional_Hours_Amount";
+            this.lbl_Additional_Hours_Amount.ReadOnly = true;
+            this.lbl_Additional_Hours_Amount.Size = new System.Drawing.Size(149, 20);
+            this.lbl_Additional_Hours_Amount.TabIndex = 48;
+            this.lbl_Additional_Hours_Amount.Text = "..........";
+            this.lbl_Additional_Hours_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbl_Venue_Name_Transact
+            // 
+            this.lbl_Venue_Name_Transact.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Venue_Name_Transact.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Venue_Name_Transact.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Venue_Name_Transact.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Venue_Name_Transact.Location = new System.Drawing.Point(9, 42);
+            this.lbl_Venue_Name_Transact.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Venue_Name_Transact.MinimumSize = new System.Drawing.Size(2, 15);
+            this.lbl_Venue_Name_Transact.Name = "lbl_Venue_Name_Transact";
+            this.lbl_Venue_Name_Transact.ReadOnly = true;
+            this.lbl_Venue_Name_Transact.Size = new System.Drawing.Size(195, 20);
+            this.lbl_Venue_Name_Transact.TabIndex = 52;
+            this.lbl_Venue_Name_Transact.Text = "....";
+            // 
+            // textBox34
+            // 
+            this.textBox34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox34.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox34.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox34.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox34.Location = new System.Drawing.Point(448, 54);
+            this.textBox34.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox34.MinimumSize = new System.Drawing.Size(0, 25);
+            this.textBox34.Name = "textBox34";
+            this.textBox34.ReadOnly = true;
+            this.textBox34.Size = new System.Drawing.Size(60, 20);
+            this.textBox34.TabIndex = 46;
+            this.textBox34.Text = "4 HR/S";
+            this.textBox34.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // textBox45
+            // 
+            this.textBox45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox45.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox45.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox45.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F);
+            this.textBox45.Location = new System.Drawing.Point(8, 148);
+            this.textBox45.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox45.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox45.Multiline = true;
+            this.textBox45.Name = "textBox45";
+            this.textBox45.ReadOnly = true;
+            this.textBox45.Size = new System.Drawing.Size(200, 25);
+            this.textBox45.TabIndex = 55;
+            this.textBox45.Text = "Operational Expenses";
+            // 
+            // textBox39
+            // 
+            this.textBox39.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox39.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox39.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox39.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox39.Location = new System.Drawing.Point(410, -22);
+            this.textBox39.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox39.MinimumSize = new System.Drawing.Size(0, 25);
+            this.textBox39.Name = "textBox39";
+            this.textBox39.ReadOnly = true;
+            this.textBox39.Size = new System.Drawing.Size(102, 20);
+            this.textBox39.TabIndex = 46;
+            this.textBox39.Text = "Amount";
+            // 
+            // textBox43
+            // 
+            this.textBox43.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.textBox43.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox43.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox43.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F);
+            this.textBox43.Location = new System.Drawing.Point(9, 92);
+            this.textBox43.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox43.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox43.Multiline = true;
+            this.textBox43.Name = "textBox43";
+            this.textBox43.ReadOnly = true;
+            this.textBox43.Size = new System.Drawing.Size(294, 44);
+            this.textBox43.TabIndex = 54;
+            this.textBox43.Text = "Each Succeeding Hour After 4 hours";
+            // 
+            // lbl_Total_Hour
+            // 
+            this.lbl_Total_Hour.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Total_Hour.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Total_Hour.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Total_Hour.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Total_Hour.Location = new System.Drawing.Point(448, 102);
+            this.lbl_Total_Hour.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Total_Hour.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Total_Hour.Name = "lbl_Total_Hour";
+            this.lbl_Total_Hour.ReadOnly = true;
+            this.lbl_Total_Hour.Size = new System.Drawing.Size(60, 20);
+            this.lbl_Total_Hour.TabIndex = 47;
+            this.lbl_Total_Hour.Text = "0 HR/S";
+            this.lbl_Total_Hour.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbl_Additional_Hourly_Charge
+            // 
+            this.lbl_Additional_Hourly_Charge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Additional_Hourly_Charge.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Additional_Hourly_Charge.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Additional_Hourly_Charge.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Additional_Hourly_Charge.Location = new System.Drawing.Point(572, 102);
+            this.lbl_Additional_Hourly_Charge.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Additional_Hourly_Charge.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Additional_Hourly_Charge.Name = "lbl_Additional_Hourly_Charge";
+            this.lbl_Additional_Hourly_Charge.ReadOnly = true;
+            this.lbl_Additional_Hourly_Charge.Size = new System.Drawing.Size(137, 20);
+            this.lbl_Additional_Hourly_Charge.TabIndex = 49;
+            this.lbl_Additional_Hourly_Charge.Text = "...";
+            this.lbl_Additional_Hourly_Charge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lbl_Additional_Hourly_Charge.TextChanged += new System.EventHandler(this.lbl_Additional_Hourly_Charge_TextChanged);
+            // 
+            // lbl_Venue_Scope_Transact
+            // 
+            this.lbl_Venue_Scope_Transact.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Venue_Scope_Transact.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Venue_Scope_Transact.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Venue_Scope_Transact.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Venue_Scope_Transact.Location = new System.Drawing.Point(9, 65);
+            this.lbl_Venue_Scope_Transact.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Venue_Scope_Transact.MinimumSize = new System.Drawing.Size(2, 15);
+            this.lbl_Venue_Scope_Transact.Name = "lbl_Venue_Scope_Transact";
+            this.lbl_Venue_Scope_Transact.ReadOnly = true;
+            this.lbl_Venue_Scope_Transact.Size = new System.Drawing.Size(196, 20);
+            this.lbl_Venue_Scope_Transact.TabIndex = 53;
+            this.lbl_Venue_Scope_Transact.Text = "....";
+            // 
             // lbl_Rate_Type
             // 
             this.lbl_Rate_Type.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
             this.lbl_Rate_Type.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lbl_Rate_Type.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Rate_Type.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.lbl_Rate_Type.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Rate_Type.Location = new System.Drawing.Point(770, 480);
             this.lbl_Rate_Type.Margin = new System.Windows.Forms.Padding(0);
             this.lbl_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
             this.lbl_Rate_Type.Name = "lbl_Rate_Type";
             this.lbl_Rate_Type.ReadOnly = true;
-            this.lbl_Rate_Type.Size = new System.Drawing.Size(119, 23);
+            this.lbl_Rate_Type.Size = new System.Drawing.Size(119, 22);
             this.lbl_Rate_Type.TabIndex = 35;
             this.lbl_Rate_Type.Text = "...";
             // 
@@ -810,1016 +1819,6 @@
             this.textBox3.Size = new System.Drawing.Size(297, 22);
             this.textBox3.TabIndex = 0;
             this.textBox3.Text = "CLIENT INFORMATION";
-            // 
-            // lbl_Venue_Scope_Transact
-            // 
-            this.lbl_Venue_Scope_Transact.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Venue_Scope_Transact.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Venue_Scope_Transact.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Venue_Scope_Transact.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Venue_Scope_Transact.Location = new System.Drawing.Point(9, 65);
-            this.lbl_Venue_Scope_Transact.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Venue_Scope_Transact.MinimumSize = new System.Drawing.Size(2, 15);
-            this.lbl_Venue_Scope_Transact.Name = "lbl_Venue_Scope_Transact";
-            this.lbl_Venue_Scope_Transact.ReadOnly = true;
-            this.lbl_Venue_Scope_Transact.Size = new System.Drawing.Size(196, 20);
-            this.lbl_Venue_Scope_Transact.TabIndex = 53;
-            this.lbl_Venue_Scope_Transact.Text = "....";
-            // 
-            // lbl_Additional_Hourly_Charge
-            // 
-            this.lbl_Additional_Hourly_Charge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Additional_Hourly_Charge.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Additional_Hourly_Charge.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Additional_Hourly_Charge.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Additional_Hourly_Charge.Location = new System.Drawing.Point(572, 102);
-            this.lbl_Additional_Hourly_Charge.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Additional_Hourly_Charge.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Additional_Hourly_Charge.Name = "lbl_Additional_Hourly_Charge";
-            this.lbl_Additional_Hourly_Charge.ReadOnly = true;
-            this.lbl_Additional_Hourly_Charge.Size = new System.Drawing.Size(137, 25);
-            this.lbl_Additional_Hourly_Charge.TabIndex = 49;
-            this.lbl_Additional_Hourly_Charge.Text = "...";
-            this.lbl_Additional_Hourly_Charge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.lbl_Additional_Hourly_Charge.TextChanged += new System.EventHandler(this.lbl_Additional_Hourly_Charge_TextChanged);
-            // 
-            // lbl_Total_Hour
-            // 
-            this.lbl_Total_Hour.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Total_Hour.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Total_Hour.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Total_Hour.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Total_Hour.Location = new System.Drawing.Point(448, 102);
-            this.lbl_Total_Hour.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Total_Hour.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Total_Hour.Name = "lbl_Total_Hour";
-            this.lbl_Total_Hour.ReadOnly = true;
-            this.lbl_Total_Hour.Size = new System.Drawing.Size(60, 25);
-            this.lbl_Total_Hour.TabIndex = 47;
-            this.lbl_Total_Hour.Text = "0 HRS";
-            this.lbl_Total_Hour.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox43
-            // 
-            this.textBox43.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox43.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox43.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox43.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F);
-            this.textBox43.Location = new System.Drawing.Point(9, 92);
-            this.textBox43.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox43.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox43.Multiline = true;
-            this.textBox43.Name = "textBox43";
-            this.textBox43.ReadOnly = true;
-            this.textBox43.Size = new System.Drawing.Size(294, 44);
-            this.textBox43.TabIndex = 54;
-            this.textBox43.Text = "Each Succeeding Hour After 4 hours";
-            // 
-            // textBox39
-            // 
-            this.textBox39.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox39.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox39.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox39.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox39.Location = new System.Drawing.Point(410, -22);
-            this.textBox39.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox39.MinimumSize = new System.Drawing.Size(0, 25);
-            this.textBox39.Name = "textBox39";
-            this.textBox39.ReadOnly = true;
-            this.textBox39.Size = new System.Drawing.Size(102, 25);
-            this.textBox39.TabIndex = 46;
-            this.textBox39.Text = "Amount";
-            // 
-            // textBox45
-            // 
-            this.textBox45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox45.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox45.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox45.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F);
-            this.textBox45.Location = new System.Drawing.Point(8, 148);
-            this.textBox45.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox45.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox45.Multiline = true;
-            this.textBox45.Name = "textBox45";
-            this.textBox45.ReadOnly = true;
-            this.textBox45.Size = new System.Drawing.Size(200, 25);
-            this.textBox45.TabIndex = 55;
-            this.textBox45.Text = "Operational Expences";
-            // 
-            // textBox34
-            // 
-            this.textBox34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox34.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox34.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox34.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox34.Location = new System.Drawing.Point(448, 54);
-            this.textBox34.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox34.MinimumSize = new System.Drawing.Size(0, 25);
-            this.textBox34.Name = "textBox34";
-            this.textBox34.ReadOnly = true;
-            this.textBox34.Size = new System.Drawing.Size(60, 25);
-            this.textBox34.TabIndex = 46;
-            this.textBox34.Text = "4 HRS";
-            this.textBox34.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_Venue_Name_Transact
-            // 
-            this.lbl_Venue_Name_Transact.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Venue_Name_Transact.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Venue_Name_Transact.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Venue_Name_Transact.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Venue_Name_Transact.Location = new System.Drawing.Point(9, 42);
-            this.lbl_Venue_Name_Transact.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Venue_Name_Transact.MinimumSize = new System.Drawing.Size(2, 15);
-            this.lbl_Venue_Name_Transact.Name = "lbl_Venue_Name_Transact";
-            this.lbl_Venue_Name_Transact.ReadOnly = true;
-            this.lbl_Venue_Name_Transact.Size = new System.Drawing.Size(195, 20);
-            this.lbl_Venue_Name_Transact.TabIndex = 52;
-            this.lbl_Venue_Name_Transact.Text = "....";
-            // 
-            // lbl_Additional_Hours_Amount
-            // 
-            this.lbl_Additional_Hours_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Additional_Hours_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Additional_Hours_Amount.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Additional_Hours_Amount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Additional_Hours_Amount.Location = new System.Drawing.Point(717, 99);
-            this.lbl_Additional_Hours_Amount.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Additional_Hours_Amount.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Additional_Hours_Amount.Name = "lbl_Additional_Hours_Amount";
-            this.lbl_Additional_Hours_Amount.ReadOnly = true;
-            this.lbl_Additional_Hours_Amount.Size = new System.Drawing.Size(149, 25);
-            this.lbl_Additional_Hours_Amount.TabIndex = 48;
-            this.lbl_Additional_Hours_Amount.Text = "..........";
-            this.lbl_Additional_Hours_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox51
-            // 
-            this.textBox51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox51.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox51.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox51.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox51.Location = new System.Drawing.Point(517, 191);
-            this.textBox51.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox51.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox51.Name = "textBox51";
-            this.textBox51.ReadOnly = true;
-            this.textBox51.Size = new System.Drawing.Size(185, 25);
-            this.textBox51.TabIndex = 58;
-            this.textBox51.Text = "TOTAL AMOUNT";
-            this.textBox51.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox46
-            // 
-            this.textBox46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox46.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox46.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox46.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox46.Location = new System.Drawing.Point(759, 9);
-            this.textBox46.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox46.MinimumSize = new System.Drawing.Size(0, 25);
-            this.textBox46.Name = "textBox46";
-            this.textBox46.ReadOnly = true;
-            this.textBox46.Size = new System.Drawing.Size(107, 25);
-            this.textBox46.TabIndex = 47;
-            this.textBox46.Text = "TOTAL";
-            this.textBox46.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_Total_Amount
-            // 
-            this.lbl_Total_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Total_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Total_Amount.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Total_Amount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.lbl_Total_Amount.Location = new System.Drawing.Point(717, 189);
-            this.lbl_Total_Amount.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Total_Amount.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Total_Amount.Name = "lbl_Total_Amount";
-            this.lbl_Total_Amount.ReadOnly = true;
-            this.lbl_Total_Amount.Size = new System.Drawing.Size(149, 25);
-            this.lbl_Total_Amount.TabIndex = 55;
-            this.lbl_Total_Amount.Text = "..........";
-            this.lbl_Total_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox55
-            // 
-            this.textBox55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox55.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox55.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox55.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox55.Location = new System.Drawing.Point(544, 223);
-            this.textBox55.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox55.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox55.Name = "textBox55";
-            this.textBox55.ReadOnly = true;
-            this.textBox55.Size = new System.Drawing.Size(158, 25);
-            this.textBox55.TabIndex = 59;
-            this.textBox55.Text = "PAID AMOUNT";
-            this.textBox55.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_Additional_Charge
-            // 
-            this.lbl_Additional_Charge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Additional_Charge.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Additional_Charge.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Additional_Charge.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Additional_Charge.Location = new System.Drawing.Point(717, 148);
-            this.lbl_Additional_Charge.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Additional_Charge.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Additional_Charge.Name = "lbl_Additional_Charge";
-            this.lbl_Additional_Charge.ReadOnly = true;
-            this.lbl_Additional_Charge.Size = new System.Drawing.Size(149, 25);
-            this.lbl_Additional_Charge.TabIndex = 56;
-            this.lbl_Additional_Charge.Text = "..........";
-            this.lbl_Additional_Charge.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_Paid_Amount
-            // 
-            this.lbl_Paid_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Paid_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Paid_Amount.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Paid_Amount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.lbl_Paid_Amount.Location = new System.Drawing.Point(717, 223);
-            this.lbl_Paid_Amount.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Paid_Amount.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Paid_Amount.Name = "lbl_Paid_Amount";
-            this.lbl_Paid_Amount.ReadOnly = true;
-            this.lbl_Paid_Amount.Size = new System.Drawing.Size(149, 25);
-            this.lbl_Paid_Amount.TabIndex = 60;
-            this.lbl_Paid_Amount.Text = "..........";
-            this.lbl_Paid_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox33
-            // 
-            this.textBox33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox33.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox33.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox33.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox33.Location = new System.Drawing.Point(371, 10);
-            this.textBox33.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox33.Name = "textBox33";
-            this.textBox33.ReadOnly = true;
-            this.textBox33.Size = new System.Drawing.Size(146, 22);
-            this.textBox33.TabIndex = 45;
-            this.textBox33.Text = "TOTAL HOURS";
-            // 
-            // textBox58
-            // 
-            this.textBox58.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox58.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox58.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox58.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox58.Location = new System.Drawing.Point(589, 266);
-            this.textBox58.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox58.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox58.Name = "textBox58";
-            this.textBox58.ReadOnly = true;
-            this.textBox58.Size = new System.Drawing.Size(113, 25);
-            this.textBox58.TabIndex = 61;
-            this.textBox58.Text = "BALANCE";
-            this.textBox58.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // textBox29
-            // 
-            this.textBox29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox29.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox29.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox29.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox29.Location = new System.Drawing.Point(551, 9);
-            this.textBox29.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox29.MinimumSize = new System.Drawing.Size(0, 25);
-            this.textBox29.Name = "textBox29";
-            this.textBox29.ReadOnly = true;
-            this.textBox29.Size = new System.Drawing.Size(175, 25);
-            this.textBox29.TabIndex = 38;
-            this.textBox29.Text = "HOURLY CHARGE";
-            this.textBox29.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_Balance
-            // 
-            this.lbl_Balance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Balance.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Balance.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Balance.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.lbl_Balance.Location = new System.Drawing.Point(717, 262);
-            this.lbl_Balance.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Balance.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Balance.Name = "lbl_Balance";
-            this.lbl_Balance.ReadOnly = true;
-            this.lbl_Balance.Size = new System.Drawing.Size(149, 25);
-            this.lbl_Balance.TabIndex = 62;
-            this.lbl_Balance.Text = "..........";
-            this.lbl_Balance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_OT_Hourly_Charge
-            // 
-            this.lbl_OT_Hourly_Charge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_OT_Hourly_Charge.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_OT_Hourly_Charge.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_OT_Hourly_Charge.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_OT_Hourly_Charge.Location = new System.Drawing.Point(565, 418);
-            this.lbl_OT_Hourly_Charge.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_OT_Hourly_Charge.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_OT_Hourly_Charge.Name = "lbl_OT_Hourly_Charge";
-            this.lbl_OT_Hourly_Charge.ReadOnly = true;
-            this.lbl_OT_Hourly_Charge.Size = new System.Drawing.Size(137, 25);
-            this.lbl_OT_Hourly_Charge.TabIndex = 49;
-            this.lbl_OT_Hourly_Charge.Text = "...";
-            this.lbl_OT_Hourly_Charge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // tb9
-            // 
-            this.tb9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb9.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb9.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb9.Location = new System.Drawing.Point(8, 462);
-            this.tb9.Margin = new System.Windows.Forms.Padding(0);
-            this.tb9.MinimumSize = new System.Drawing.Size(2, 25);
-            this.tb9.Multiline = true;
-            this.tb9.Name = "tb9";
-            this.tb9.ReadOnly = true;
-            this.tb9.Size = new System.Drawing.Size(237, 25);
-            this.tb9.TabIndex = 59;
-            this.tb9.Text = "REFUND AMOUNT";
-            // 
-            // textBox32
-            // 
-            this.textBox32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox32.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox32.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox32.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox32.Location = new System.Drawing.Point(9, 11);
-            this.textBox32.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox32.MinimumSize = new System.Drawing.Size(0, 25);
-            this.textBox32.Name = "textBox32";
-            this.textBox32.ReadOnly = true;
-            this.textBox32.Size = new System.Drawing.Size(137, 25);
-            this.textBox32.TabIndex = 43;
-            this.textBox32.Text = "DESCRIPTION";
-            // 
-            // lbl_Refund_Amount
-            // 
-            this.lbl_Refund_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Refund_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Refund_Amount.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Refund_Amount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Refund_Amount.Location = new System.Drawing.Point(717, 462);
-            this.lbl_Refund_Amount.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Refund_Amount.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Refund_Amount.Name = "lbl_Refund_Amount";
-            this.lbl_Refund_Amount.ReadOnly = true;
-            this.lbl_Refund_Amount.Size = new System.Drawing.Size(149, 25);
-            this.lbl_Refund_Amount.TabIndex = 64;
-            this.lbl_Refund_Amount.Text = "..........";
-            this.lbl_Refund_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_Base_Charge_Amount
-            // 
-            this.lbl_Base_Charge_Amount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Base_Charge_Amount.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Base_Charge_Amount.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Base_Charge_Amount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Base_Charge_Amount.Location = new System.Drawing.Point(717, 51);
-            this.lbl_Base_Charge_Amount.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Base_Charge_Amount.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Base_Charge_Amount.Name = "lbl_Base_Charge_Amount";
-            this.lbl_Base_Charge_Amount.ReadOnly = true;
-            this.lbl_Base_Charge_Amount.Size = new System.Drawing.Size(149, 25);
-            this.lbl_Base_Charge_Amount.TabIndex = 58;
-            this.lbl_Base_Charge_Amount.Text = "..........";
-            this.lbl_Base_Charge_Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_Overtime_Fee
-            // 
-            this.lbl_Overtime_Fee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Overtime_Fee.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Overtime_Fee.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Overtime_Fee.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Overtime_Fee.Location = new System.Drawing.Point(717, 418);
-            this.lbl_Overtime_Fee.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Overtime_Fee.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Overtime_Fee.Name = "lbl_Overtime_Fee";
-            this.lbl_Overtime_Fee.ReadOnly = true;
-            this.lbl_Overtime_Fee.Size = new System.Drawing.Size(149, 25);
-            this.lbl_Overtime_Fee.TabIndex = 55;
-            this.lbl_Overtime_Fee.Text = "..........";
-            this.lbl_Overtime_Fee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_OT_Hours
-            // 
-            this.lbl_OT_Hours.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_OT_Hours.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_OT_Hours.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_OT_Hours.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_OT_Hours.Location = new System.Drawing.Point(441, 421);
-            this.lbl_OT_Hours.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_OT_Hours.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_OT_Hours.Name = "lbl_OT_Hours";
-            this.lbl_OT_Hours.ReadOnly = true;
-            this.lbl_OT_Hours.Size = new System.Drawing.Size(67, 25);
-            this.lbl_OT_Hours.TabIndex = 59;
-            this.lbl_OT_Hours.Text = "0 HRS";
-            this.lbl_OT_Hours.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.lbl_OT_Hours.TextChanged += new System.EventHandler(this.lbl_OT_Hours_TextChanged);
-            // 
-            // lbl_Paid_Amount_2
-            // 
-            this.lbl_Paid_Amount_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Paid_Amount_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Paid_Amount_2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Paid_Amount_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.lbl_Paid_Amount_2.Location = new System.Drawing.Point(717, 539);
-            this.lbl_Paid_Amount_2.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Paid_Amount_2.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Paid_Amount_2.Name = "lbl_Paid_Amount_2";
-            this.lbl_Paid_Amount_2.ReadOnly = true;
-            this.lbl_Paid_Amount_2.Size = new System.Drawing.Size(149, 25);
-            this.lbl_Paid_Amount_2.TabIndex = 69;
-            this.lbl_Paid_Amount_2.Text = "..........";
-            this.lbl_Paid_Amount_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // tb8
-            // 
-            this.tb8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb8.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb8.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F);
-            this.tb8.Location = new System.Drawing.Point(194, 413);
-            this.tb8.Margin = new System.Windows.Forms.Padding(0);
-            this.tb8.MinimumSize = new System.Drawing.Size(2, 25);
-            this.tb8.Multiline = true;
-            this.tb8.Name = "tb8";
-            this.tb8.ReadOnly = true;
-            this.tb8.Size = new System.Drawing.Size(145, 36);
-            this.tb8.TabIndex = 78;
-            this.tb8.Text = "Hours beyond Initial Reservation ";
-            // 
-            // textBox24
-            // 
-            this.textBox24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox24.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox24.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox24.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox24.Location = new System.Drawing.Point(572, 52);
-            this.textBox24.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox24.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox24.Name = "textBox24";
-            this.textBox24.ReadOnly = true;
-            this.textBox24.Size = new System.Drawing.Size(137, 25);
-            this.textBox24.TabIndex = 79;
-            this.textBox24.Text = "...";
-            this.textBox24.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox24.TextChanged += new System.EventHandler(this.textBox24_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.label1.Location = new System.Drawing.Point(0, 88);
-            this.label1.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label1.MinimumSize = new System.Drawing.Size(912, 2);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(912, 2);
-            this.label1.TabIndex = 80;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label3.Location = new System.Drawing.Point(-1, 136);
-            this.label3.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label3.MinimumSize = new System.Drawing.Size(912, 2);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(912, 2);
-            this.label3.TabIndex = 82;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label5.Location = new System.Drawing.Point(-1, 40);
-            this.label5.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label5.MinimumSize = new System.Drawing.Size(912, 2);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(912, 2);
-            this.label5.TabIndex = 84;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.Gray;
-            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label8.Location = new System.Drawing.Point(-1, 255);
-            this.label8.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label8.MinimumSize = new System.Drawing.Size(912, 4);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(912, 4);
-            this.label8.TabIndex = 86;
-            // 
-            // lbl_h1
-            // 
-            this.lbl_h1.AutoSize = true;
-            this.lbl_h1.BackColor = System.Drawing.Color.Gray;
-            this.lbl_h1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbl_h1.Location = new System.Drawing.Point(0, 453);
-            this.lbl_h1.MaximumSize = new System.Drawing.Size(687, 2);
-            this.lbl_h1.MinimumSize = new System.Drawing.Size(912, 2);
-            this.lbl_h1.Name = "lbl_h1";
-            this.lbl_h1.Size = new System.Drawing.Size(912, 2);
-            this.lbl_h1.TabIndex = 90;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.BackColor = System.Drawing.Color.Gray;
-            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label16.Location = new System.Drawing.Point(0, 0);
-            this.label16.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label16.MinimumSize = new System.Drawing.Size(912, 4);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(912, 4);
-            this.label16.TabIndex = 95;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.BackColor = System.Drawing.Color.Gray;
-            this.label19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label19.Location = new System.Drawing.Point(-1, 183);
-            this.label19.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label19.MinimumSize = new System.Drawing.Size(912, 4);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(912, 4);
-            this.label19.TabIndex = 100;
-            // 
-            // tb1
-            // 
-            this.tb1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
-            this.tb1.Location = new System.Drawing.Point(9, 305);
-            this.tb1.Margin = new System.Windows.Forms.Padding(0);
-            this.tb1.MinimumSize = new System.Drawing.Size(2, 25);
-            this.tb1.Name = "tb1";
-            this.tb1.ReadOnly = true;
-            this.tb1.Size = new System.Drawing.Size(382, 25);
-            this.tb1.TabIndex = 102;
-            this.tb1.Text = "MISCELLANEOUS BILLING DETAILS";
-            // 
-            // tb3
-            // 
-            this.tb3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb3.Location = new System.Drawing.Point(192, 378);
-            this.tb3.Margin = new System.Windows.Forms.Padding(0);
-            this.tb3.MinimumSize = new System.Drawing.Size(0, 19);
-            this.tb3.Name = "tb3";
-            this.tb3.ReadOnly = true;
-            this.tb3.Size = new System.Drawing.Size(79, 22);
-            this.tb3.TabIndex = 110;
-            this.tb3.Text = "DETAIL";
-            // 
-            // tb6
-            // 
-            this.tb6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb6.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb6.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb6.Location = new System.Drawing.Point(759, 376);
-            this.tb6.Margin = new System.Windows.Forms.Padding(0);
-            this.tb6.MinimumSize = new System.Drawing.Size(0, 25);
-            this.tb6.Name = "tb6";
-            this.tb6.ReadOnly = true;
-            this.tb6.Size = new System.Drawing.Size(107, 25);
-            this.tb6.TabIndex = 111;
-            this.tb6.Text = "TOTAL";
-            this.tb6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // tb4
-            // 
-            this.tb4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb4.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb4.Location = new System.Drawing.Point(371, 376);
-            this.tb4.Margin = new System.Windows.Forms.Padding(0);
-            this.tb4.Name = "tb4";
-            this.tb4.ReadOnly = true;
-            this.tb4.Size = new System.Drawing.Size(146, 22);
-            this.tb4.TabIndex = 109;
-            this.tb4.Text = "TOTAL HOURS";
-            // 
-            // tb5
-            // 
-            this.tb5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb5.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb5.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb5.Location = new System.Drawing.Point(551, 376);
-            this.tb5.Margin = new System.Windows.Forms.Padding(0);
-            this.tb5.MinimumSize = new System.Drawing.Size(0, 25);
-            this.tb5.Name = "tb5";
-            this.tb5.ReadOnly = true;
-            this.tb5.Size = new System.Drawing.Size(175, 25);
-            this.tb5.TabIndex = 107;
-            this.tb5.Text = "HOURLY CHARGE";
-            this.tb5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // tb2
-            // 
-            this.tb2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb2.Location = new System.Drawing.Point(9, 378);
-            this.tb2.Margin = new System.Windows.Forms.Padding(0);
-            this.tb2.MinimumSize = new System.Drawing.Size(0, 25);
-            this.tb2.Name = "tb2";
-            this.tb2.ReadOnly = true;
-            this.tb2.Size = new System.Drawing.Size(137, 25);
-            this.tb2.TabIndex = 108;
-            this.tb2.Text = "DESCRIPTION";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.BackColor = System.Drawing.Color.Gray;
-            this.label27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label27.Location = new System.Drawing.Point(-1, 405);
-            this.label27.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label27.MinimumSize = new System.Drawing.Size(912, 2);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(912, 2);
-            this.label27.TabIndex = 113;
-            // 
-            // tb10
-            // 
-            this.tb10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb10.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb10.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.tb10.Location = new System.Drawing.Point(517, 508);
-            this.tb10.Margin = new System.Windows.Forms.Padding(0);
-            this.tb10.MinimumSize = new System.Drawing.Size(2, 25);
-            this.tb10.Name = "tb10";
-            this.tb10.ReadOnly = true;
-            this.tb10.Size = new System.Drawing.Size(185, 25);
-            this.tb10.TabIndex = 118;
-            this.tb10.Text = "TOTAL AMOUNT";
-            this.tb10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // tb11
-            // 
-            this.tb11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb11.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb11.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.tb11.Location = new System.Drawing.Point(544, 540);
-            this.tb11.Margin = new System.Windows.Forms.Padding(0);
-            this.tb11.MinimumSize = new System.Drawing.Size(2, 25);
-            this.tb11.Name = "tb11";
-            this.tb11.ReadOnly = true;
-            this.tb11.Size = new System.Drawing.Size(158, 25);
-            this.tb11.TabIndex = 119;
-            this.tb11.Text = "PAID AMOUNT";
-            this.tb11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // tb12
-            // 
-            this.tb12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb12.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb12.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.tb12.Location = new System.Drawing.Point(589, 596);
-            this.tb12.Margin = new System.Windows.Forms.Padding(0);
-            this.tb12.MinimumSize = new System.Drawing.Size(2, 25);
-            this.tb12.Name = "tb12";
-            this.tb12.ReadOnly = true;
-            this.tb12.Size = new System.Drawing.Size(113, 25);
-            this.tb12.TabIndex = 120;
-            this.tb12.Text = "BALANCE";
-            this.tb12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_h2
-            // 
-            this.lbl_h2.AutoSize = true;
-            this.lbl_h2.BackColor = System.Drawing.Color.Gray;
-            this.lbl_h2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbl_h2.Location = new System.Drawing.Point(-1, 490);
-            this.lbl_h2.MaximumSize = new System.Drawing.Size(912, 4);
-            this.lbl_h2.MinimumSize = new System.Drawing.Size(912, 2);
-            this.lbl_h2.Name = "lbl_h2";
-            this.lbl_h2.Size = new System.Drawing.Size(912, 4);
-            this.lbl_h2.TabIndex = 121;
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.BackColor = System.Drawing.Color.Gray;
-            this.label34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label34.Location = new System.Drawing.Point(-1, 574);
-            this.label34.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label34.MinimumSize = new System.Drawing.Size(912, 4);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(912, 4);
-            this.label34.TabIndex = 124;
-            // 
-            // lbl_Total_Amount_2
-            // 
-            this.lbl_Total_Amount_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Total_Amount_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Total_Amount_2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Total_Amount_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.lbl_Total_Amount_2.Location = new System.Drawing.Point(717, 503);
-            this.lbl_Total_Amount_2.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Total_Amount_2.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Total_Amount_2.Name = "lbl_Total_Amount_2";
-            this.lbl_Total_Amount_2.ReadOnly = true;
-            this.lbl_Total_Amount_2.Size = new System.Drawing.Size(149, 25);
-            this.lbl_Total_Amount_2.TabIndex = 130;
-            this.lbl_Total_Amount_2.Text = "..........";
-            this.lbl_Total_Amount_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_Balance_2
-            // 
-            this.lbl_Balance_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Balance_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Balance_2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Balance_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.lbl_Balance_2.Location = new System.Drawing.Point(717, 596);
-            this.lbl_Balance_2.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Balance_2.MinimumSize = new System.Drawing.Size(2, 25);
-            this.lbl_Balance_2.Name = "lbl_Balance_2";
-            this.lbl_Balance_2.ReadOnly = true;
-            this.lbl_Balance_2.Size = new System.Drawing.Size(149, 25);
-            this.lbl_Balance_2.TabIndex = 131;
-            this.lbl_Balance_2.Text = "Amount";
-            this.lbl_Balance_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label43.Location = new System.Drawing.Point(717, 40);
-            this.label43.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label43.MinimumSize = new System.Drawing.Size(2, 145);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(2, 145);
-            this.label43.TabIndex = 144;
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label44.Location = new System.Drawing.Point(565, 40);
-            this.label44.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label44.MinimumSize = new System.Drawing.Size(2, 96);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(2, 96);
-            this.label44.TabIndex = 145;
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label45.Location = new System.Drawing.Point(565, 408);
-            this.label45.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label45.MinimumSize = new System.Drawing.Size(2, 45);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(2, 45);
-            this.label45.TabIndex = 146;
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label46.Location = new System.Drawing.Point(717, 408);
-            this.label46.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label46.MinimumSize = new System.Drawing.Size(2, 255);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(2, 255);
-            this.label46.TabIndex = 147;
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label47.Location = new System.Drawing.Point(717, 184);
-            this.label47.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label47.MinimumSize = new System.Drawing.Size(2, 112);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(2, 112);
-            this.label47.TabIndex = 148;
-            // 
-            // tb7
-            // 
-            this.tb7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb7.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb7.Location = new System.Drawing.Point(8, 421);
-            this.tb7.Margin = new System.Windows.Forms.Padding(0);
-            this.tb7.MinimumSize = new System.Drawing.Size(2, 25);
-            this.tb7.Multiline = true;
-            this.tb7.Name = "tb7";
-            this.tb7.ReadOnly = true;
-            this.tb7.Size = new System.Drawing.Size(163, 25);
-            this.tb7.TabIndex = 149;
-            this.tb7.Text = "Overtime Charge";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.BackColor = System.Drawing.Color.Gray;
-            this.label20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label20.Location = new System.Drawing.Point(-1, 367);
-            this.label20.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label20.MinimumSize = new System.Drawing.Size(912, 4);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(912, 4);
-            this.label20.TabIndex = 158;
-            // 
-            // OR2
-            // 
-            this.OR2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.OR2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.OR2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.OR2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OR2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.OR2.Location = new System.Drawing.Point(9, 334);
-            this.OR2.Margin = new System.Windows.Forms.Padding(0);
-            this.OR2.Name = "OR2";
-            this.OR2.ReadOnly = true;
-            this.OR2.Size = new System.Drawing.Size(310, 23);
-            this.OR2.TabIndex = 61;
-            this.OR2.Text = "OFFICIAL RECEIPT NUMBER:";
-            // 
-            // tb_Rate_Type
-            // 
-            this.tb_Rate_Type.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb_Rate_Type.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_Rate_Type.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb_Rate_Type.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
-            this.tb_Rate_Type.Location = new System.Drawing.Point(633, 334);
-            this.tb_Rate_Type.Margin = new System.Windows.Forms.Padding(0);
-            this.tb_Rate_Type.MinimumSize = new System.Drawing.Size(0, 25);
-            this.tb_Rate_Type.Name = "tb_Rate_Type";
-            this.tb_Rate_Type.ReadOnly = true;
-            this.tb_Rate_Type.Size = new System.Drawing.Size(121, 25);
-            this.tb_Rate_Type.TabIndex = 63;
-            this.tb_Rate_Type.Text = "RATE TYPE:";
-            this.tb_Rate_Type.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            this.label25.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label25.Location = new System.Drawing.Point(0, 293);
-            this.label25.MaximumSize = new System.Drawing.Size(687, 2);
-            this.label25.MinimumSize = new System.Drawing.Size(912, 8);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(912, 8);
-            this.label25.TabIndex = 160;
-            // 
-            // lbl_Rate_Type2
-            // 
-            this.lbl_Rate_Type2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_Rate_Type2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_Rate_Type2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_Rate_Type2.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold);
-            this.lbl_Rate_Type2.Location = new System.Drawing.Point(770, 334);
-            this.lbl_Rate_Type2.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_Rate_Type2.MinimumSize = new System.Drawing.Size(0, 25);
-            this.lbl_Rate_Type2.Name = "lbl_Rate_Type2";
-            this.lbl_Rate_Type2.ReadOnly = true;
-            this.lbl_Rate_Type2.Size = new System.Drawing.Size(119, 25);
-            this.lbl_Rate_Type2.TabIndex = 64;
-            this.lbl_Rate_Type2.Text = "...";
-            // 
-            // tb_Status
-            // 
-            this.tb_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb_Status.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_Status.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tb_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
-            this.tb_Status.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.tb_Status.Location = new System.Drawing.Point(633, 305);
-            this.tb_Status.Margin = new System.Windows.Forms.Padding(0);
-            this.tb_Status.Name = "tb_Status";
-            this.tb_Status.ReadOnly = true;
-            this.tb_Status.Size = new System.Drawing.Size(121, 23);
-            this.tb_Status.TabIndex = 65;
-            this.tb_Status.Text = "STATUS:";
-            this.tb_Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_OR_2
-            // 
-            this.lbl_OR_2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.lbl_OR_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbl_OR_2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lbl_OR_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_OR_2.ForeColor = System.Drawing.Color.Red;
-            this.lbl_OR_2.Location = new System.Drawing.Point(327, 333);
-            this.lbl_OR_2.Margin = new System.Windows.Forms.Padding(0);
-            this.lbl_OR_2.MinimumSize = new System.Drawing.Size(4, 25);
-            this.lbl_OR_2.Name = "lbl_OR_2";
-            this.lbl_OR_2.ReadOnly = true;
-            this.lbl_OR_2.Size = new System.Drawing.Size(189, 25);
-            this.lbl_OR_2.TabIndex = 62;
-            this.lbl_OR_2.Text = "DESCRIPTION";
-            this.lbl_OR_2.TextChanged += new System.EventHandler(this.lbl_OR_2_TextChanged);
-            // 
-            // tb_Extension_Status
-            // 
-            this.tb_Extension_Status.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.tb_Extension_Status.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_Extension_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_Extension_Status.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.tb_Extension_Status.Location = new System.Drawing.Point(770, 304);
-            this.tb_Extension_Status.Name = "tb_Extension_Status";
-            this.tb_Extension_Status.Size = new System.Drawing.Size(119, 23);
-            this.tb_Extension_Status.TabIndex = 66;
-            this.tb_Extension_Status.Text = "...";
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.panel5.Controls.Add(this.tb_Extension_Status);
-            this.panel5.Controls.Add(this.lbl_OR_2);
-            this.panel5.Controls.Add(this.tb_Status);
-            this.panel5.Controls.Add(this.lbl_Rate_Type2);
-            this.panel5.Controls.Add(this.label25);
-            this.panel5.Controls.Add(this.tb_Rate_Type);
-            this.panel5.Controls.Add(this.OR2);
-            this.panel5.Controls.Add(this.label20);
-            this.panel5.Controls.Add(this.tb7);
-            this.panel5.Controls.Add(this.label47);
-            this.panel5.Controls.Add(this.label46);
-            this.panel5.Controls.Add(this.label45);
-            this.panel5.Controls.Add(this.label44);
-            this.panel5.Controls.Add(this.label43);
-            this.panel5.Controls.Add(this.lbl_Balance_2);
-            this.panel5.Controls.Add(this.lbl_Total_Amount_2);
-            this.panel5.Controls.Add(this.label34);
-            this.panel5.Controls.Add(this.lbl_h2);
-            this.panel5.Controls.Add(this.tb12);
-            this.panel5.Controls.Add(this.tb11);
-            this.panel5.Controls.Add(this.tb10);
-            this.panel5.Controls.Add(this.label27);
-            this.panel5.Controls.Add(this.tb2);
-            this.panel5.Controls.Add(this.tb5);
-            this.panel5.Controls.Add(this.tb4);
-            this.panel5.Controls.Add(this.tb6);
-            this.panel5.Controls.Add(this.tb3);
-            this.panel5.Controls.Add(this.tb1);
-            this.panel5.Controls.Add(this.label19);
-            this.panel5.Controls.Add(this.label16);
-            this.panel5.Controls.Add(this.lbl_h1);
-            this.panel5.Controls.Add(this.label8);
-            this.panel5.Controls.Add(this.label5);
-            this.panel5.Controls.Add(this.label3);
-            this.panel5.Controls.Add(this.label1);
-            this.panel5.Controls.Add(this.textBox24);
-            this.panel5.Controls.Add(this.tb8);
-            this.panel5.Controls.Add(this.lbl_Paid_Amount_2);
-            this.panel5.Controls.Add(this.lbl_OT_Hours);
-            this.panel5.Controls.Add(this.lbl_Overtime_Fee);
-            this.panel5.Controls.Add(this.lbl_Base_Charge_Amount);
-            this.panel5.Controls.Add(this.lbl_Refund_Amount);
-            this.panel5.Controls.Add(this.textBox32);
-            this.panel5.Controls.Add(this.tb9);
-            this.panel5.Controls.Add(this.lbl_OT_Hourly_Charge);
-            this.panel5.Controls.Add(this.lbl_Balance);
-            this.panel5.Controls.Add(this.textBox29);
-            this.panel5.Controls.Add(this.textBox58);
-            this.panel5.Controls.Add(this.textBox33);
-            this.panel5.Controls.Add(this.lbl_Paid_Amount);
-            this.panel5.Controls.Add(this.lbl_Additional_Charge);
-            this.panel5.Controls.Add(this.textBox55);
-            this.panel5.Controls.Add(this.lbl_Total_Amount);
-            this.panel5.Controls.Add(this.textBox46);
-            this.panel5.Controls.Add(this.textBox51);
-            this.panel5.Controls.Add(this.lbl_Additional_Hours_Amount);
-            this.panel5.Controls.Add(this.lbl_Venue_Name_Transact);
-            this.panel5.Controls.Add(this.textBox34);
-            this.panel5.Controls.Add(this.textBox45);
-            this.panel5.Controls.Add(this.textBox39);
-            this.panel5.Controls.Add(this.textBox43);
-            this.panel5.Controls.Add(this.lbl_Total_Hour);
-            this.panel5.Controls.Add(this.lbl_Additional_Hourly_Charge);
-            this.panel5.Controls.Add(this.lbl_Venue_Scope_Transact);
-            this.panel5.Font = new System.Drawing.Font("Yu Gothic", 8.25F);
-            this.panel5.Location = new System.Drawing.Point(0, 511);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(912, 637);
-            this.panel5.TabIndex = 44;
-            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
             // Venue_User_Control
             // 

@@ -17,7 +17,10 @@ namespace pgso.pgso_Billing.Forms
         
         private TimeSpan _initialStartTime;
         private TimeSpan _initialEndTime;
+        private TimeSpan _initialStartDate; // Store initial date duration for validation
+        private TimeSpan _initialEndDate; // Store initial date duration for validation
         private TimeSpan _initialDuration;
+        private TimeSpan _initialDateDuration; // Store initial date duration for validation
         // Use the specific reservation ID passed in
         private int _reservationID;
         private Model_Billing _originalBillingInfo; // Store original details
@@ -93,7 +96,6 @@ namespace pgso.pgso_Billing.Forms
                 {
                     scopeList = new List<KeyValuePair<int, string>>();
                 }
-
                 cmb_Venue_Scope.SelectedIndexChanged -= cmb_Venue_Scope_SelectedIndexChanged;
                 cmb_Venue_Scope.DataSource = null;
                 cmb_Venue_Scope.DisplayMember = "Value";
@@ -132,8 +134,6 @@ namespace pgso.pgso_Billing.Forms
             }
         }
 
-
-
         private void LoadReservationDetails()
         {
             try
@@ -161,10 +161,15 @@ namespace pgso.pgso_Billing.Forms
                 DateTime baseDate = DateTime.Today;
                 dtp_Start_Time.Value = baseDate + details.fld_Start_Time;
                 dtp_End_Time.Value = baseDate + details.fld_End_Time;
+
                 _initialStartTime = dtp_Start_Time.Value.TimeOfDay;
                 _initialEndTime = dtp_End_Time.Value.TimeOfDay;
-                _initialDuration = _initialEndTime - _initialStartTime;
 
+                _initialStartDate = dtp_Start_Date.Value.TimeOfDay; // Store initial date duration for validation
+                _initialEndDate = dtp_End_Date.Value.TimeOfDay; // Store initial date duration for validation
+
+                _initialDuration = _initialEndTime - _initialStartTime;
+                _initialDateDuration = _initialEndDate - _initialStartDate; // Store initial date duration for validation
                 // Set venue
                 if (cmb_Venue.DataSource != null && details.fk_VenueID.HasValue)
                 {
@@ -262,22 +267,21 @@ namespace pgso.pgso_Billing.Forms
             decimal totalAmount = 0;
             double totalHours = duration.TotalHours;
 
-            // Use a small tolerance for floating point comparisons
-            const double tolerance = 0.0001;
             const double fourHours = 4.0;
 
-            if (totalHours <= (fourHours + tolerance)) // Handle up to 4 hours
+            if (totalHours <= fourHours)
             {
                 totalAmount = first4HrsRate;
             }
-            else // More than 4 hours
+            else
             {
-                // Calculate hours exceeding the first 4, rounding up to the next whole hour
                 double excessHours = Math.Ceiling(totalHours - fourHours);
                 totalAmount = first4HrsRate + ((decimal)excessHours * hourlyRate);
             }
+
             return totalAmount;
         }
+
 
         // --- SAVE BUTTON CLICK HANDLER ---
         private void btn_Save_Click(object sender, EventArgs e)
@@ -309,6 +313,7 @@ namespace pgso.pgso_Billing.Forms
             TimeSpan startTime = dtp_Start_Time.Value.TimeOfDay;
             TimeSpan endTime = dtp_End_Time.Value.TimeOfDay;
             TimeSpan newDuration = endTime - startTime;
+            TimeSpan newDateDuration = endDate - startDate;
             int venueId = (int)cmb_Venue.SelectedValue;
             int venueScopeId = (int)cmb_Venue_Scope.SelectedValue;
             // Aircon status depends on checkbox visibility and state
@@ -323,6 +328,14 @@ namespace pgso.pgso_Billing.Forms
                 {
                     MessageBox.Show("Cannot change the total number of hours.",
                                     "Time Change Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    dtp_Start_Date.Focus();
+                    return;
+                }
+
+                if(newDateDuration != _initialDateDuration)
+                {
+                    MessageBox.Show("Error Changing Reservation Dates.",
+                                    "Date Change Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     dtp_Start_Date.Focus();
                     return;
                 }

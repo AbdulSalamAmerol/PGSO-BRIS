@@ -133,65 +133,60 @@ namespace pgso
         private DataTable GetReservationsForMonth(int year, int month)
         {
             DataTable reservations = new DataTable();
+            string query = @"
+        SELECT 
+            r.fld_Control_Number,
+            r.fld_Reservation_Type,
+            r.fld_Reservation_Status,
+            r.fld_Start_Date AS Venue_Start_Date,
+            r.fld_End_Date AS Venue_End_Date,
+            v.fld_Venue_Name,
+            re.fld_Start_Date_Eq,
+            re.fld_End_Date_Eq,
+            re.fld_Equipment_Status,
+            e.fld_Equipment_Name
+        FROM tbl_Reservation r
+        LEFT JOIN tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
+        LEFT JOIN tbl_Reservation_Equipment re ON r.pk_ReservationID = re.fk_ReservationID
+        LEFT JOIN tbl_Equipment e ON re.fk_EquipmentID = e.pk_EquipmentID
+        WHERE 
+            (
+                (YEAR(r.fld_Start_Date) = @Year AND MONTH(r.fld_Start_Date) = @Month)
+                OR
+                (YEAR(r.fld_End_Date) = @Year AND MONTH(r.fld_End_Date) = @Month)
+            )
+            OR
+            (
+                (YEAR(re.fld_Start_Date_Eq) = @Year AND MONTH(re.fld_Start_Date_Eq) = @Month)
+                OR
+                (YEAR(re.fld_End_Date_Eq) = @Year AND MONTH(re.fld_End_Date_Eq) = @Month)
+            )
+            AND (
+                (re.fld_Equipment_Status IS NULL)
+                OR
+                (re.fld_Equipment_Status IN ('Confirmed', 'Pending'))
+            )";
+
             try
             {
-                // Simplified query that just gets all reservations for the month
-                string query = @"
-SELECT 
-    r.fld_Control_Number,
-    r.fld_Reservation_Type,
-    r.fld_Reservation_Status,
-    r.fld_Start_Date AS Venue_Start_Date,
-    r.fld_End_Date AS Venue_End_Date,
-    v.fld_Venue_Name,
-    re.fld_Start_Date_Eq,
-    re.fld_End_Date_Eq,
-    re.fld_Equipment_Status,
-    e.fld_Equipment_Name
-FROM tbl_Reservation r
-LEFT JOIN tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
-LEFT JOIN tbl_Reservation_Equipment re ON r.pk_ReservationID = re.fk_ReservationID
-LEFT JOIN tbl_Equipment e ON re.fk_EquipmentID = e.pk_EquipmentID
-WHERE 
-    (
-        (YEAR(r.fld_Start_Date) = @Year AND MONTH(r.fld_Start_Date) = @Month)
-        OR
-        (YEAR(r.fld_End_Date) = @Year AND MONTH(r.fld_End_Date) = @Month)
-    )
-    OR
-    (
-        (YEAR(re.fld_Start_Date_Eq) = @Year AND MONTH(re.fld_Start_Date_Eq) = @Month)
-        OR
-        (YEAR(re.fld_End_Date_Eq) = @Year AND MONTH(re.fld_End_Date_Eq) = @Month)
-    )
-    AND (
-        (re.fld_Equipment_Status IS NULL)
-        OR
-        (re.fld_Equipment_Status IN ('Confirmed', 'Pending'))
-    )";
-
-                using (SqlCommand cmd = new SqlCommand(query, db.strCon))
+                var db = new Connection();
+                using (var conn = db.strCon)
+                using (var cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@Year", year);
                     cmd.Parameters.AddWithValue("@Month", month);
 
-                    db.strCon.Open();
-                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    conn.Open();
+                    using (var da = new SqlDataAdapter(cmd))
                     {
                         da.Fill(reservations);
                     }
-                    db.strCon.Close();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error fetching reservations: " + ex.Message, "Database Error",
-                               MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                if (db.strCon.State == ConnectionState.Open)
-                    db.strCon.Close();
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return reservations;
         }
@@ -209,6 +204,28 @@ WHERE
         {
             frm_Calendar_Equipments frm_Calendar_Equipments = new frm_Calendar_Equipments();
             frm_Calendar_Equipments.Show();
+        }
+        private void RefreshCalendarView()
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is frm_Calendar calendarForm)
+                {
+                    if (calendarForm.InvokeRequired)
+                    {
+                        calendarForm.Invoke(new Action(() =>
+                        {
+                            calendarForm.RefreshCalendar();
+                            calendarForm.BringToFront();
+                        }));
+                    }
+                    else
+                    {
+                        calendarForm.RefreshCalendar();
+                        calendarForm.BringToFront();
+                    }
+                }
+            }
         }
     }
 }
