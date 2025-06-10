@@ -121,8 +121,8 @@ namespace pgso.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;Integrated Security=Tr" +
-            "ue;Encrypt=False;TrustServerCertificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-DG6NT1C;Initial Catalog=gso;Integrated Security=True;Encrypt=" +
+            "False;TrustServerCertificate=True")]
         public string strCon {
             get {
                 return ((string)(this["strCon"]));
