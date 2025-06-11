@@ -126,7 +126,7 @@ namespace pgso.pgso_Billing.Forms
                 });
 
                 // Use the same connection string as Repo_Billing
-                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+                string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
