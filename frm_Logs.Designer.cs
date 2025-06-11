@@ -34,12 +34,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this._BRIS_EXPERIMENT_3_0DataSet1 = new pgso._BRIS_EXPERIMENT_3_0DataSet();
             this.dt_Audit = new System.Windows.Forms.DataGridView();
+            this.searchbox = new System.Windows.Forms.TextBox();
+            this.btnGeneratePDFadm = new System.Windows.Forms.Button();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.searchbox = new System.Windows.Forms.TextBox();
-            this.btnGeneratePDFadm = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dt_Audit)).BeginInit();
             this.SuspendLayout();
@@ -99,6 +99,29 @@
             this.dt_Audit.Size = new System.Drawing.Size(1852, 910);
             this.dt_Audit.TabIndex = 0;
             this.dt_Audit.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_Audit_CellContentClick);
+            // 
+            // searchbox
+            // 
+            this.searchbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchbox.BackColor = System.Drawing.Color.Silver;
+            this.searchbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchbox.Location = new System.Drawing.Point(1703, 13);
+            this.searchbox.Name = "searchbox";
+            this.searchbox.Size = new System.Drawing.Size(177, 26);
+            this.searchbox.TabIndex = 1;
+            this.searchbox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // btnGeneratePDFadm
+            // 
+            this.btnGeneratePDFadm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGeneratePDFadm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGeneratePDFadm.Location = new System.Drawing.Point(1737, 964);
+            this.btnGeneratePDFadm.Name = "btnGeneratePDFadm";
+            this.btnGeneratePDFadm.Size = new System.Drawing.Size(143, 43);
+            this.btnGeneratePDFadm.TabIndex = 2;
+            this.btnGeneratePDFadm.Text = "Generate PDF";
+            this.btnGeneratePDFadm.UseVisualStyleBackColor = true;
+            this.btnGeneratePDFadm.Click += new System.EventHandler(this.btnGeneratePDFadm_Click);
             // 
             // Column1
             // 

@@ -48,6 +48,9 @@
             this.btn_AddScope = new System.Windows.Forms.Button();
             this.btn_Add_Venue = new System.Windows.Forms.Button();
             this.dt_Venues = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel_Add_Venue = new System.Windows.Forms.Panel();
+            this.panel_AddScope = new System.Windows.Forms.Panel();
             this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Venue_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Venue_Scope_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -278,6 +281,32 @@
             this.dt_Venues.Size = new System.Drawing.Size(1882, 711);
             this.dt_Venues.TabIndex = 5;
             this.dt_Venues.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_Venues_CellContentClick);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.label2.Location = new System.Drawing.Point(2, 3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 18);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Venues";
+            // 
+            // panel_Add_Venue
+            // 
+            this.panel_Add_Venue.Location = new System.Drawing.Point(12, 24);
+            this.panel_Add_Venue.Name = "panel_Add_Venue";
+            this.panel_Add_Venue.Size = new System.Drawing.Size(966, 159);
+            this.panel_Add_Venue.TabIndex = 7;
+            this.panel_Add_Venue.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Add_Venue_Paint);
+            // 
+            // panel_AddScope
+            // 
+            this.panel_AddScope.Location = new System.Drawing.Point(992, 24);
+            this.panel_AddScope.Name = "panel_AddScope";
+            this.panel_AddScope.Size = new System.Drawing.Size(909, 159);
+            this.panel_AddScope.TabIndex = 8;
+            this.panel_AddScope.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_AddScope_Paint);
             // 
             // Item
             // 

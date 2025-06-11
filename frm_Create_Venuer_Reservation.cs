@@ -22,7 +22,7 @@ namespace pgso
         private SqlCommand cmd;
         private int selectedVenueID;  // Class-level variable to store selected venue ID
         private List<DateTime> reservedDates; // List to store reserved dates
-        
+
         private bool isContactPlaceholderActive = true;
         private decimal additionalCharge = 0m;
         private decimal currentCatererFee = 0m;
@@ -67,8 +67,8 @@ namespace pgso
             TimeEnd.Format = DateTimePickerFormat.Custom;
             TimeEnd.CustomFormat = "hh:mm tt";
             LoadVenues();
-           this.Size = new Size(680, 643); // Initial form size
-          
+            this.Size = new Size(680, 643); // Initial form size
+
             CalculateNumberOfHour();
 
             TimeStart.ValueChanged += Time_ValueChanged;
@@ -248,13 +248,13 @@ namespace pgso
             CalculateNumberOfHour();
         }
 
-        
 
-       
 
-        
 
-       
+
+
+
+
 
         private void DisableManualInput(DateTimePicker dateTimePicker)
         {
@@ -865,8 +865,8 @@ namespace pgso
                 cmd.Parameters.AddWithValue("@CatererFee", decimal.Parse(txt_Caterer_Fee.Text.Replace(",", "")));
 
                 int reservationID = (int)cmd.ExecuteScalar();
-                
-                
+
+
                 //auditlog start
                 string affectedTable = "tbl_Reservation";
                 string affectedRecordPk = reservationID.ToString();
@@ -888,7 +888,7 @@ namespace pgso
                     EndTime = endTime,
                     TotalAmount = totalAmount
                 });
-              
+
                 // Insert audit log
                 using (SqlCommand auditCmd = new SqlCommand(@"
                     INSERT INTO tbl_Audit_Log
@@ -916,8 +916,8 @@ namespace pgso
                 MessageBox.Show("Reservation submitted successfully!");
                 var billingForm = new frm_Billing();
                 billingForm.ShowDialog();
+
                 frm_Dashboard.NeedsCalendarRefresh = true;
-                RefreshCalendarView();
                 this.Close();
                 // ...
                 RefreshCalendarView();
@@ -1084,9 +1084,9 @@ namespace pgso
             try
             {
                 // Clear textboxes
-              //  txt_surname.Clear();
-               
-              //  txt_Middle_Name.Clear(); // Clear Middle Name
+                //  txt_surname.Clear();
+
+                //  txt_Middle_Name.Clear(); // Clear Middle Name
                 txt_address.Clear();
                 txt_contact.Clear();
                 txt_activity.Clear();
