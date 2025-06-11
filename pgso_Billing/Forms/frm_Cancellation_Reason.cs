@@ -4,8 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -94,6 +96,71 @@ namespace pgso.pgso_Billing.Forms
 
                 }
 
+                // auditlog start
+                string affectedTable = "tbl_Reservation";
+                string affectedRecordPk = _reservationId.ToString();
+                string actionType = "Cancelled Reservation";
+                string changedBy = frm_login.LoggedInUserRole;
+                DateTime changedAt = DateTime.Now;
+                int userId = frm_login.LoggedInUserId;
+
+                // Optionally, serialize previous data (e.g., previous status)
+                string prevDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                {
+                    Status = currentStatus
+                });
+
+                // Serialize new data (after cancellation)
+                string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                {
+                    ControlNumber = _billingDetail.fld_Control_Number,
+                    Activity = _billingDetail.fld_Activity_Name,
+                    VenueID = _billingDetail.fk_VenueID,
+                    StartDate = _billingDetail.fld_Start_Date,
+                    EndDate = _billingDetail.fld_End_Date,
+                    StartTime = _billingDetail.fld_Start_Time,
+                    EndTime = _billingDetail.fld_End_Time,
+                    TotalAmount = _billingDetail.fld_Total_Amount,
+                    CancellationReason = cancellationReason,
+                    Status = "Cancelled"
+                });
+
+                // Use the same connection string as Repo_Billing
+                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    using (SqlTransaction transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (SqlCommand auditCmd = new SqlCommand(@"
+                INSERT INTO tbl_Audit_Log
+                (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                            {
+                                auditCmd.Parameters.AddWithValue("@UserID", userId);
+                                auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                                auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                                auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                                auditCmd.Parameters.AddWithValue("@PrevJson", prevDataJson);
+                                auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                                auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
+                                auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                                auditCmd.ExecuteNonQuery();
+                            }
+                            transaction.Commit();
+                        }
+                        catch
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
+                    }
+                }
+                // end auditlog
 
 
             }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -81,6 +82,72 @@ namespace pgso.pgso_Billing.Forms
 
             if (success)
             {
+                // auditlog start
+                string affectedTable = "tbl_Reservation_Equipment";
+                string affectedRecordPk = _selectedEquipment.pk_Reservation_EquipmentID?.ToString() ?? "0";
+                string actionType = "Equipment Returned";
+                string changedBy = frm_login.LoggedInUserRole;
+                DateTime changedAt = DateTime.Now;
+                int userId = frm_login.LoggedInUserId;
+
+                // Serialize previous data (before update)
+                string prevDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                {
+                    ReservationID = _selectedEquipment.pk_ReservationID,
+                    EquipmentID = _selectedEquipment.fk_EquipmentID,
+                    EquipmentName = _selectedEquipment.fld_Equipment_Name,
+                    QuantityIssued = _selectedEquipment.fld_Quantity,
+                    QuantityReturned = _selectedEquipment.fld_Quantity_Returned,
+                    QuantityDamaged = _selectedEquipment.fld_Quantity_Damaged
+                });
+
+                // Serialize new data (after update)
+                string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                {
+                    ReservationID = _selectedEquipment.pk_ReservationID,
+                    EquipmentID = _selectedEquipment.fk_EquipmentID,
+                    EquipmentName = _selectedEquipment.fld_Equipment_Name,
+                    QuantityIssued = _selectedEquipment.fld_Quantity,
+                    QuantityReturned = _selectedEquipment.fld_Quantity_Returned + returnNow,
+                    QuantityDamaged = _selectedEquipment.fld_Quantity_Damaged + damaged
+                });
+
+                // Use the same connection string as Repo_Billing
+                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    using (SqlTransaction transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (SqlCommand auditCmd = new SqlCommand(@"
+                        INSERT INTO tbl_Audit_Log
+                        (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                        VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                                {
+                                auditCmd.Parameters.AddWithValue("@UserID", userId);
+                                auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                                auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                                auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                                auditCmd.Parameters.AddWithValue("@PrevJson", prevDataJson);
+                                auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                                auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
+                                auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                                auditCmd.ExecuteNonQuery();
+                            }
+                            transaction.Commit();
+                        }
+                        catch
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
+                    }
+                }
+                // end auditlog
                 MessageBox.Show("Return updated successfully.");
                 OnEquipmentReturned?.Invoke();
                 this.Close();

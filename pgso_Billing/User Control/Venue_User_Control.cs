@@ -1,15 +1,16 @@
-﻿using pgso.Billing.Repositories;
-using pgso.Billing.Models;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System;
-using System.Linq;
+﻿using pgso.Billing.Models;
+using pgso.Billing.Repositories;
 using pgso.pgso_Billing.Forms;
-using System.Drawing;
 using pgso.Properties;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Drawing;
 using System.IO;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Reflection.Emit;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace pgso.pgso_Billing
 {
@@ -43,10 +44,80 @@ namespace pgso.pgso_Billing
                     MessageBox.Show("Only Confirmed reservations can be extended.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+                // --- AUDIT LOG: Capture previous state before extension ---
+                var prevData = new
+                {
+                    ControlNumber = _billingDetails.fld_Control_Number,
+                    Status = _billingDetails.fld_Reservation_Status,
+                    OTHours = _billingDetails.fld_OT_Hours,
+                    ORExtension = _billingDetails.fld_OR_Extension,
+                    ExtensionStatus = _billingDetails.fld_Extension_Status
+                };
 
                 OnRequestVenueExtension?.Invoke(_billingDetails.pk_ReservationID, reservationStatus); // Optionally pass status
                 _billingDetails = _repoBilling.GetBillingDetailsByReservationID(_billingDetails.pk_ReservationID);
                 LoadBillingDetails(_billingDetails);
+
+                // --- AUDIT LOG: Capture new state after extension ---
+                var newData = new
+                {
+                    ControlNumber = _billingDetails.fld_Control_Number,
+                    Status = _billingDetails.fld_Reservation_Status,
+                    OTHours = _billingDetails.fld_OT_Hours,
+                    ORExtension = _billingDetails.fld_OR_Extension,
+                    ExtensionStatus = _billingDetails.fld_Extension_Status
+                };
+
+                // --- AUDIT LOG START ---
+                string affectedTable = "tbl_Reservation";
+                string affectedRecordPk = _billingDetails.pk_ReservationID.ToString();
+                string actionType = "Extended Reservation";
+                string changedBy = frm_login.LoggedInUserRole;
+                DateTime changedAt = DateTime.Now;
+                int userId = frm_login.LoggedInUserId;
+
+                string prevDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(prevData);
+                string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(newData);
+
+                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    using (SqlTransaction transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (SqlCommand auditCmd = new SqlCommand(@"
+                        INSERT INTO tbl_Audit_Log
+                        (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                        VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                            {
+                                auditCmd.Parameters.AddWithValue("@UserID", userId);
+                                auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                                auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                                auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                                auditCmd.Parameters.AddWithValue("@PrevJson", prevDataJson);
+                                auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                                auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
+                                auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                                auditCmd.ExecuteNonQuery();
+                            }
+                            transaction.Commit();
+                        }
+                        catch
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
+                    }
+                }
+                // --- AUDIT LOG END ---
+
+
+
+
 
                 RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); // 🔁 Notify parent to refresh billing
             }
@@ -68,6 +139,23 @@ namespace pgso.pgso_Billing
                 return;
             }
 
+            // --- AUDIT LOG: Capture previous state before edit ---
+            var prevData = new
+            {
+                ControlNumber = _billingDetails.fld_Control_Number,
+                Status = _billingDetails.fld_Reservation_Status,
+                StartDate = _billingDetails.fld_Start_Date,
+                EndDate = _billingDetails.fld_End_Date,
+                StartTime = _billingDetails.fld_Start_Time,
+                EndTime = _billingDetails.fld_End_Time,
+                VenueName = _billingDetails.fld_Venue_Name,
+                VenueScope = _billingDetails.fld_Venue_Scope_Name,
+                OTHours = _billingDetails.fld_OT_Hours,
+                ORExtension = _billingDetails.fld_OR_Extension,
+                ExtensionStatus = _billingDetails.fld_Extension_Status,
+                TotalAmount = _billingDetails.fld_Total_Amount
+            };
+
             frm_Edit_Venue_Reservation_Info editForm = new frm_Edit_Venue_Reservation_Info(_billingDetails);
 
             var result = editForm.ShowDialog();
@@ -82,6 +170,70 @@ namespace pgso.pgso_Billing
                     _billingDetails = updatedDetails;
                     LoadBillingDetails(_billingDetails);
                 }
+
+                // --- AUDIT LOG: Capture new state after edit ---
+                var newData = new
+                {
+                    ControlNumber = _billingDetails.fld_Control_Number,
+                    Status = _billingDetails.fld_Reservation_Status,
+                    StartDate = _billingDetails.fld_Start_Date,
+                    EndDate = _billingDetails.fld_End_Date,
+                    StartTime = _billingDetails.fld_Start_Time,
+                    EndTime = _billingDetails.fld_End_Time,
+                    VenueName = _billingDetails.fld_Venue_Name,
+                    VenueScope = _billingDetails.fld_Venue_Scope_Name,
+                    OTHours = _billingDetails.fld_OT_Hours,
+                    ORExtension = _billingDetails.fld_OR_Extension,
+                    ExtensionStatus = _billingDetails.fld_Extension_Status,
+                    TotalAmount = _billingDetails.fld_Total_Amount
+                };
+
+                // --- AUDIT LOG START ---
+                string affectedTable = "tbl_Reservation";
+                string affectedRecordPk = _billingDetails.pk_ReservationID.ToString();
+                string actionType = "Edited Reservation Info";
+                string changedBy = frm_login.LoggedInUserRole;
+                DateTime changedAt = DateTime.Now;
+                int userId = frm_login.LoggedInUserId;
+
+                string prevDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(prevData);
+                string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(newData);
+
+                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    using (SqlTransaction transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (SqlCommand auditCmd = new SqlCommand(@"
+                        INSERT INTO tbl_Audit_Log
+                        (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                        VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                            {
+                                auditCmd.Parameters.AddWithValue("@UserID", userId);
+                                auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                                auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                                auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                                auditCmd.Parameters.AddWithValue("@PrevJson", prevDataJson);
+                                auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                                auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
+                                auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                                auditCmd.ExecuteNonQuery();
+                            }
+                            transaction.Commit();
+                        }
+                        catch
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
+                    }
+                }
+                // --- AUDIT LOG END ---
 
                 // 🔔 Trigger refresh event to inform frm_Billing
                 RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID);
@@ -423,6 +575,61 @@ namespace pgso.pgso_Billing
             using (var extension = new frm_Extension_Slip(_billingDetails.pk_ReservationID))
             {
                 extension.ShowDialog();
+                // --- AUDIT LOG START ---
+                string affectedTable = "tbl_Reservation";
+                string affectedRecordPk = _billingDetails.pk_ReservationID.ToString();
+                string actionType = "Generated Extension Slip";
+                string changedBy = frm_login.LoggedInUserRole;
+                DateTime changedAt = DateTime.Now;
+                int userId = frm_login.LoggedInUserId;
+
+                // No previous data for slip generation
+                string prevDataJson = DBNull.Value.ToString();
+
+                // New data: log the slip generation event
+                string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                {
+                    ControlNumber = _billingDetails.fld_Control_Number,
+                    Status = _billingDetails.fld_Reservation_Status,
+                    OTHours = _billingDetails.fld_OT_Hours,
+                    ORExtension = _billingDetails.fld_OR_Extension
+                });
+
+                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    using (SqlTransaction transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (SqlCommand auditCmd = new SqlCommand(@"
+                        INSERT INTO tbl_Audit_Log
+                        (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                        VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                            {
+                                auditCmd.Parameters.AddWithValue("@UserID", userId);
+                                auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                                auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                                auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                                auditCmd.Parameters.AddWithValue("@PrevJson", prevDataJson);
+                                auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                                auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
+                                auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                                auditCmd.ExecuteNonQuery();
+                            }
+                            transaction.Commit();
+                        }
+                        catch
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
+                    }
+                }
+                // --- AUDIT LOG END ---
             }
         }
 
@@ -431,6 +638,60 @@ namespace pgso.pgso_Billing
             using (var cancellation = new frm_Cancellation_Slip(_billingDetails.pk_ReservationID))
             {
                 cancellation.ShowDialog();
+                // --- AUDIT LOG START ---
+                string affectedTable = "tbl_Reservation";
+                string affectedRecordPk = _billingDetails.pk_ReservationID.ToString();
+                string actionType = "Generated Cancellation Slip";
+                string changedBy = frm_login.LoggedInUserRole;
+                DateTime changedAt = DateTime.Now;
+                int userId = frm_login.LoggedInUserId;
+
+                // Previous data: status before slip generation
+                string prevDataJson = DBNull.Value.ToString(); // No previous data for slip generation
+
+                // New data: log the slip generation event
+                string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                {
+                    ControlNumber = _billingDetails.fld_Control_Number,
+                    Status = _billingDetails.fld_Reservation_Status,
+                    CancellationReason = _billingDetails.fld_Cancellation_Reason
+                });
+
+                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    using (SqlTransaction transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (SqlCommand auditCmd = new SqlCommand(@"
+                        INSERT INTO tbl_Audit_Log
+                        (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                        VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                            {
+                                auditCmd.Parameters.AddWithValue("@UserID", userId);
+                                auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                                auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                                auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                                auditCmd.Parameters.AddWithValue("@PrevJson", prevDataJson);
+                                auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                                auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
+                                auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                                auditCmd.ExecuteNonQuery();
+                            }
+                            transaction.Commit();
+                        }
+                        catch
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
+                    }
+                }
+                // --- AUDIT LOG END ---
             }
         }
 
@@ -443,8 +704,66 @@ namespace pgso.pgso_Billing
                 
                     _billingDetails = _repoBilling.GetBillingDetailsByReservationID(_billingDetails.pk_ReservationID);
                     LoadBillingDetails(_billingDetails);
+                // --- AUDIT LOG START ---
+                string affectedTable = "tbl_Reservation";
+                string affectedRecordPk = _billingDetails.pk_ReservationID.ToString();
+                string actionType = "Cancelled Reservation";
+                string changedBy = frm_login.LoggedInUserRole;
+                DateTime changedAt = DateTime.Now;
+                int userId = frm_login.LoggedInUserId;
 
-                    RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); // 🔁 Notify parent to refresh billing
+                // Previous data: status is before cancellation
+                string prevDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                {
+                    ControlNumber = _billingDetails.fld_Control_Number,
+                    Status = "Confirmed", // or use the actual previous status if you store it
+                    CancellationReason = (string)null
+                });
+
+                // New data: status is now "Cancelled"
+                string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                {
+                    ControlNumber = _billingDetails.fld_Control_Number,
+                    Status = "Cancelled",
+                    CancellationReason = _billingDetails.fld_Cancellation_Reason
+                });
+
+                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    using (SqlTransaction transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (SqlCommand auditCmd = new SqlCommand(@"
+                            INSERT INTO tbl_Audit_Log
+                            (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                            VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                            {
+                                auditCmd.Parameters.AddWithValue("@UserID", userId);
+                                auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                                auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                                auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                                auditCmd.Parameters.AddWithValue("@PrevJson", prevDataJson);
+                                auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                                auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
+                                auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                                auditCmd.ExecuteNonQuery();
+                            }
+                            transaction.Commit();
+                        }
+                        catch
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
+                    }
+                }
+                // --- AUDIT LOG END ---
+                RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); // 🔁 Notify parent to refresh billing
                 
             }
         }
@@ -471,6 +790,66 @@ namespace pgso.pgso_Billing
 
                     if (statusUpdateSuccess)
                     {
+                        // --- AUDIT LOG START ---
+                        string affectedTable = "tbl_Reservation";
+                        string affectedRecordPk = _billingDetails.pk_ReservationID.ToString();
+                        string actionType = "Confirmed a Reservation";
+                        string changedBy = frm_login.LoggedInUserRole;
+                        DateTime changedAt = DateTime.Now;
+                        int userId = frm_login.LoggedInUserId;
+
+                        // Previous data: status is still "Pending"
+                        string prevDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                        {
+                            ControlNumber = _billingDetails.fld_Control_Number,
+                            Status = "Pending",
+                            ORNumber = officialReceiptNumber
+                        });
+
+                        // New data: status is now "Confirmed"
+                        string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                        {
+                            ControlNumber = _billingDetails.fld_Control_Number,
+                            Status = "Confirmed",
+                            ORNumber = officialReceiptNumber
+                        });
+
+                        string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+
+                        using (SqlConnection conn = new SqlConnection(connectionString))
+                        {
+                            conn.Open();
+                            using (SqlTransaction transaction = conn.BeginTransaction())
+                            {
+                                try
+                                {
+                                    using (SqlCommand auditCmd = new SqlCommand(@"
+                                        INSERT INTO tbl_Audit_Log
+                                        (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                                        VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                                    {
+                                        auditCmd.Parameters.AddWithValue("@UserID", userId);
+                                        auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                                        auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                                        auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                                        auditCmd.Parameters.AddWithValue("@PrevJson", prevDataJson);
+                                        auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                                        auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
+                                        auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                                        auditCmd.ExecuteNonQuery();
+                                    }
+                                    transaction.Commit();
+                                }
+                                catch
+                                {
+                                    transaction.Rollback();
+                                    throw;
+                                }
+                            }
+                        }
+                        // --- AUDIT LOG END ---
+
                         MessageBox.Show($"Reservation approved successfully with OR# {officialReceiptNumber}.",
                                         "Approved", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

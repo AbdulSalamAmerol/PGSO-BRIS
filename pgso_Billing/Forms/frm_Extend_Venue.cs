@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -85,6 +86,84 @@ namespace pgso.pgso_Billing.Forms
                 var result = await repo_Billing.UpdateReservationExtension(_reservationID, roundedHours, orExtensionInt);
                 if (result)
                 {
+
+                    // auditlog start
+                    string affectedTable = "tbl_Reservation";
+                    string affectedRecordPk = _reservationID.ToString();
+                    string actionType = "Extended Reservation";
+                    string changedBy = frm_login.LoggedInUserRole;
+                    DateTime changedAt = DateTime.Now;
+                    int userId = frm_login.LoggedInUserId;
+
+                    // Fetch previous data before the update
+                    var prevBillingData = await repo_Billing.GetCurrentExtensionDetails(_reservationID);
+
+                    // Serialize previous data (before extension)
+                    string prevDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                    {
+                        ControlNumber = prevBillingData.fld_Control_Number,
+                        Activity = prevBillingData.fld_Activity_Name,
+                        StartDate = prevBillingData.fld_Start_Date,
+                        EndDate = prevBillingData.fld_End_Date,
+                        StartTime = prevBillingData.fld_Start_Time,
+                        EndTime = prevBillingData.fld_End_Time,
+                        OTHours = prevBillingData.fld_OT_Hours,
+                        ORExtension = prevBillingData.fld_OR_Extension,
+                        TotalAmount = prevBillingData.fld_Total_Amount,
+                        Status = prevBillingData.fld_Reservation_Status
+                    });
+
+                    // Serialize new data (after extension)
+                    string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                    {
+                        ControlNumber = prevBillingData.fld_Control_Number,
+                        Activity = prevBillingData.fld_Activity_Name,
+                        StartDate = prevBillingData.fld_Start_Date,
+                        EndDate = prevBillingData.fld_End_Date,
+                        StartTime = prevBillingData.fld_Start_Time,
+                        EndTime = prevBillingData.fld_End_Time,
+                        OTHours = int.TryParse(tb_Extend_Venue.Text.Trim(), out int newOtHours) ? newOtHours : prevBillingData.fld_OT_Hours,
+                        ORExtension = int.TryParse(tb_OR_Extension.Text.Trim(), out int newOrExt) ? newOrExt : prevBillingData.fld_OR_Extension,
+                        TotalAmount = prevBillingData.fld_Total_Amount, // Update if you recalculate
+                        Status = prevBillingData.fld_Reservation_Status // Update if status changes
+                    });
+
+                    // Use the same connection string as Repo_Billing
+                    string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+                        using (SqlTransaction transaction = conn.BeginTransaction())
+                        {
+                            try
+                            {
+                                using (SqlCommand auditCmd = new SqlCommand(@"
+                                    INSERT INTO tbl_Audit_Log
+                                    (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                                    VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                                {
+                                    auditCmd.Parameters.AddWithValue("@UserID", userId);
+                                    auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                                    auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                                    auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                                    auditCmd.Parameters.AddWithValue("@PrevJson", prevDataJson);
+                                    auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                                    auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
+                                    auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                                    auditCmd.ExecuteNonQuery();
+                                }
+                                transaction.Commit();
+                            }
+                            catch
+                            {
+                                transaction.Rollback();
+                                throw;
+                            }
+                        }
+                    }
+                    // end auditlog
                     MessageBox.Show("Reservation extended successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     RequestBillingRefresh?.Invoke(_reservationID);
                     this.Close();

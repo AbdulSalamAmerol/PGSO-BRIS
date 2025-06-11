@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -441,6 +442,78 @@ namespace pgso.pgso_Billing.Forms
                 // --- 6. Provide Feedback --- (Keep existing feedback)
                 if (success)
                 {
+                    // auditlog start
+                    string affectedTable = "tbl_Reservation";
+                    string affectedRecordPk = _reservationID.ToString();
+                    string actionType = "Updated Reservation Info";
+                    string changedBy = frm_login.LoggedInUserRole;
+                    DateTime changedAt = DateTime.Now;
+                    int userId = frm_login.LoggedInUserId;
+
+                    // Serialize previous data (before update)
+                    string prevDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                    {
+                        ControlNumber = _originalBillingInfo.fld_Control_Number,
+                        Activity = _originalBillingInfo.fld_Activity_Name,
+                        VenueID = _originalBillingInfo.fk_VenueID,
+                        StartDate = _originalBillingInfo.fld_Start_Date,
+                        EndDate = _originalBillingInfo.fld_End_Date,
+                        StartTime = _originalBillingInfo.fld_Start_Time,
+                        EndTime = _originalBillingInfo.fld_End_Time,
+                        TotalAmount = _originalBillingInfo.fld_Total_Amount,
+                        Status = _originalBillingInfo.fld_Reservation_Status
+                    });
+
+                    // Serialize new data (after update)
+                    string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                    {
+                        ControlNumber = _originalBillingInfo.fld_Control_Number,
+                        Activity = _originalBillingInfo.fld_Activity_Name,
+                        VenueID = venueId,
+                        StartDate = startDate,
+                        EndDate = endDate,
+                        StartTime = startTime,
+                        EndTime = endTime,
+                        TotalAmount = totalAmount,
+                        Status = _originalBillingInfo.fld_Reservation_Status // or updated status if changed
+                    });
+
+                    // Use the same connection string as Repo_Billing
+                    string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+                        using (SqlTransaction transaction = conn.BeginTransaction())
+                        {
+                            try
+                            {
+                                using (SqlCommand auditCmd = new SqlCommand(@"
+                INSERT INTO tbl_Audit_Log
+                (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                                {
+                                    auditCmd.Parameters.AddWithValue("@UserID", userId);
+                                    auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                                    auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                                    auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                                    auditCmd.Parameters.AddWithValue("@PrevJson", prevDataJson);
+                                    auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                                    auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
+                                    auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                                    auditCmd.ExecuteNonQuery();
+                                }
+                                transaction.Commit();
+                            }
+                            catch
+                            {
+                                transaction.Rollback();
+                                throw;
+                            }
+                        }
+                    }
+                    // end auditlog
                     MessageBox.Show("Reservation updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ReservationUpdated?.Invoke(this, EventArgs.Empty);
                     this.DialogResult = DialogResult.OK; // 🟢 Important!
@@ -450,7 +523,9 @@ namespace pgso.pgso_Billing.Forms
                 {
                     MessageBox.Show("Failed to update the reservation. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                
             }
+
             catch (Exception ex) { /* ... handle error ... */ }
         }
 

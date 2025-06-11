@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace pgso.pgso_Billing.Forms
@@ -47,18 +48,184 @@ namespace pgso.pgso_Billing.Forms
                     frm_Report_Billing_Venue reportForm =
                         new frm_Report_Billing_Venue(startDate, endDate, paymentStatus, reservationType);
                     reportForm.ShowDialog();
+                    // auditlog start
+                    string affectedTable = "Report";
+                    string affectedRecordPk = Guid.NewGuid().ToString(); // No PK, so use a unique identifier for the log
+                    string actionType = "Generated a Billing Report for Venue";
+                    string changedBy = frm_login.LoggedInUserRole;
+                    DateTime changedAt = DateTime.Now;
+                    int userId = frm_login.LoggedInUserId;
+
+                    string prevDataJson = DBNull.Value.ToString(); // No previous data for report generation
+
+                    string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                    {
+                        ReportType = selectedReport,
+                        StartDate = startDate,
+                        EndDate = endDate,
+                        PaymentStatus = paymentStatus,
+                        ReservationType = reservationType
+                    });
+
+                    // Use the same connection string as Repo_Billing
+                    string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+                        using (SqlTransaction transaction = conn.BeginTransaction())
+                        {
+                            try
+                            {
+                                using (SqlCommand auditCmd = new SqlCommand(@"
+                                INSERT INTO tbl_Audit_Log
+                                (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                                VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                                {
+                                    auditCmd.Parameters.AddWithValue("@UserID", userId);
+                                    auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                                    auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                                    auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                                    auditCmd.Parameters.AddWithValue("@PrevJson", prevDataJson);
+                                    auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                                    auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
+                                    auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                                    auditCmd.ExecuteNonQuery();
+                                }
+                                transaction.Commit();
+                            }
+                            catch
+                            {
+                                transaction.Rollback();
+                                throw;
+                            }
+                        }
+                    }
+                    // end auditlog
                 }
                 else if (reservationType == "Equipment")
                 {
                     frm_Report_Billing_Equipment reportForm =
                         new frm_Report_Billing_Equipment(startDate, endDate, paymentStatus, reservationType);
                     reportForm.ShowDialog();
+                    // auditlog start
+                    string affectedTable = "Report";
+                    string affectedRecordPk = Guid.NewGuid().ToString(); // No PK, so use a unique identifier for the log
+                    string actionType = "Generated a Billing Report fro Equipment";
+                    string changedBy = frm_login.LoggedInUserRole;
+                    DateTime changedAt = DateTime.Now;
+                    int userId = frm_login.LoggedInUserId;
+
+                    string prevDataJson = DBNull.Value.ToString(); // No previous data for report generation
+
+                    string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                    {
+                        ReportType = selectedReport,
+                        StartDate = startDate,
+                        EndDate = endDate,
+                        PaymentStatus = paymentStatus,
+                        ReservationType = reservationType
+                    });
+
+                    // Use the same connection string as Repo_Billing
+                    string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+                        using (SqlTransaction transaction = conn.BeginTransaction())
+                        {
+                            try
+                            {
+                                using (SqlCommand auditCmd = new SqlCommand(@"
+                                INSERT INTO tbl_Audit_Log
+                                (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                                VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                                {
+                                    auditCmd.Parameters.AddWithValue("@UserID", userId);
+                                    auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                                    auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                                    auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                                    auditCmd.Parameters.AddWithValue("@PrevJson", prevDataJson);
+                                    auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                                    auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
+                                    auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                                    auditCmd.ExecuteNonQuery();
+                                }
+                                transaction.Commit();
+                            }
+                            catch
+                            {
+                                transaction.Rollback();
+                                throw;
+                            }
+                        }
+                    }
+                    // end auditlog
                 }
                 else if (reservationType == "ALL")
                 {
                     frm_Report_Billing_Venue_And_Equipment reportForm =
                         new frm_Report_Billing_Venue_And_Equipment(startDate, endDate, paymentStatus, reservationType);
                     reportForm.ShowDialog();
+
+                    // auditlog start
+                    string affectedTable = "Report";
+                    string affectedRecordPk = Guid.NewGuid().ToString(); // No PK, so use a unique identifier for the log
+                    string actionType = "Generated a Billing Report both Venue and Equipment";
+                    string changedBy = frm_login.LoggedInUserRole;
+                    DateTime changedAt = DateTime.Now;
+                    int userId = frm_login.LoggedInUserId;
+
+                    string prevDataJson = DBNull.Value.ToString(); // No previous data for report generation
+
+                    string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                    {
+                        ReportType = selectedReport,
+                        StartDate = startDate,
+                        EndDate = endDate,
+                        PaymentStatus = paymentStatus,
+                        ReservationType = reservationType
+                    });
+
+                    // Use the same connection string as Repo_Billing
+                    string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+                        using (SqlTransaction transaction = conn.BeginTransaction())
+                        {
+                            try
+                            {
+                                using (SqlCommand auditCmd = new SqlCommand(@"
+                                INSERT INTO tbl_Audit_Log
+                                (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                                VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                                {
+                                    auditCmd.Parameters.AddWithValue("@UserID", userId);
+                                    auditCmd.Parameters.AddWithValue("@Table", affectedTable);
+                                    auditCmd.Parameters.AddWithValue("@RecordPK", affectedRecordPk);
+                                    auditCmd.Parameters.AddWithValue("@ActionType", actionType);
+                                    auditCmd.Parameters.AddWithValue("@PrevJson", prevDataJson);
+                                    auditCmd.Parameters.AddWithValue("@NewJson", newDataJson);
+                                    auditCmd.Parameters.AddWithValue("@ChangedBy", changedBy);
+                                    auditCmd.Parameters.AddWithValue("@ChangedAt", changedAt);
+
+                                    auditCmd.ExecuteNonQuery();
+                                }
+                                transaction.Commit();
+                            }
+                            catch
+                            {
+                                transaction.Rollback();
+                                throw;
+                            }
+                        }
+                    }
+                    // end auditlog
                 }
                 else
                 {
