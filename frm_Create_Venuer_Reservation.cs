@@ -521,8 +521,8 @@ namespace pgso
         private void CalculateTotalAmount()
         {
             if (decimal.TryParse(txt_rate.Text.Replace(",", ""), out decimal initialRate) &&
-    double.TryParse(txtx_Num_Hours.Text.Replace(",", ""), out double numberOfHours) &&
-    decimal.TryParse(txt_Succeeding_Hour.Text.Replace(",", ""), out decimal hourlyRate))
+                double.TryParse(txtx_Num_Hours.Text.Replace(",", ""), out double numberOfHours) &&
+                decimal.TryParse(txt_Succeeding_Hour.Text.Replace(",", ""), out decimal hourlyRate))
             {
                 decimal totalAmount;
 
@@ -537,8 +537,11 @@ namespace pgso
                 decimal catererFee = 0m;
                 decimal.TryParse(txt_Caterer_Fee.Text.Replace(",", ""), out catererFee);
                 totalAmount += catererFee;
-                txt_Total.Text = totalAmount.ToString("N2");
 
+                // Add additional charge
+                totalAmount += additionalCharge;
+
+                txt_Total.Text = totalAmount.ToString("N2");
             }
             else
             {

@@ -243,10 +243,11 @@ namespace pgso
             this.panel2.Controls.Add(this.txt_rate);
             this.panel2.Controls.Add(this.txt_Total);
             this.panel2.Controls.Add(this.label26);
-            this.panel2.Location = new System.Drawing.Point(15, 659);
+            this.panel2.Location = new System.Drawing.Point(39, 620);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(599, 84);
             this.panel2.TabIndex = 68;
+            this.panel2.Visible = false;
             // 
             // label25
             // 
