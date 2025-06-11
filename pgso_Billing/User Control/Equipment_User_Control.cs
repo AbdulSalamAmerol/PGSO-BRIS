@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static iText.Kernel.Pdf.Colorspace.PdfPattern;
+using System.Globalization;
 
 // WHAT TO ADD NEXT
 
@@ -122,7 +123,7 @@ namespace pgso.pgso_Billing.User_Control
             lbl_Address.Text = billingDetailsList.fld_Requesting_Person_Address;
             lbl_Reservation_Dates.Text = $"{billingDetailsList.fld_Start_Date.ToString("MM/dd/yyyy")} - {billingDetailsList.fld_End_Date.ToString("MM/dd/yyyy")}";
             lbl_Reservation_Status.Text = billingDetailsList.fld_Reservation_Status;
-            lbl_fld_Total_Amount.Text = billingDetailsList.fld_Total_Amount.ToString("C");
+            lbl_fld_Total_Amount.Text = billingDetailsList.fld_Total_Amount.ToString("C", new CultureInfo("en-PH"));
 
             bool showOR = billingDetailsList.fld_OR != null;
             lbl_OR.Visible = tb_OR.Visible = showOR;

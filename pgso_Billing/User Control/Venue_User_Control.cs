@@ -11,6 +11,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace pgso.pgso_Billing
 {
@@ -79,7 +80,7 @@ namespace pgso.pgso_Billing
                 string prevDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(prevData);
                 string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(newData);
 
-                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+                string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
@@ -199,7 +200,7 @@ namespace pgso.pgso_Billing
                 string prevDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(prevData);
                 string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(newData);
 
-                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+                string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
@@ -333,11 +334,11 @@ namespace pgso.pgso_Billing
             lbl_Is_Aircon.Text = billingDetails.fld_Aircon ? "Yes" : "No";
 
             // Venue pricing details (based on hourly charges, etc.)
-            lbl_Base_Charge_Amount.Text = billingDetails.fld_First4Hrs_Rate.ToString("C");
-            lbl_Additional_Hourly_Charge.Text = billingDetails.fld_Hourly_Rate.ToString("C");
-            lbl_Additional_Charge.Text = billingDetails.fld_Additional_Charge.ToString("C");
+            lbl_Base_Charge_Amount.Text = billingDetails.fld_First4Hrs_Rate.ToString("C", new CultureInfo("en-PH"));
+            lbl_Additional_Hourly_Charge.Text = billingDetails.fld_Hourly_Rate.ToString("C", new CultureInfo("en-PH"));
+            lbl_Additional_Charge.Text = billingDetails.fld_Additional_Charge.ToString("C", new CultureInfo("en-PH"));
             lbl_Total_Hour.Text = (billingDetails.Total_Hours - 4).ToString("F0") + " HRS";
-            lbl_Additional_Hours_Amount.Text = (billingDetails.fld_Hourly_Rate * (decimal)(billingDetails.Total_Hours - 4)).ToString("C");
+            lbl_Additional_Hours_Amount.Text = (billingDetails.fld_Hourly_Rate * (decimal)(billingDetails.Total_Hours - 4)).ToString("C", new CultureInfo("en-PH"));
 
             // If you are showing equipment details (if available)
             lbl_Venue_Name_Transact.Text = billingDetails.fld_Venue_Name;
@@ -375,28 +376,28 @@ namespace pgso.pgso_Billing
 
             // Calculated charges based on overtime
             lbl_OT_Hours.Text = billingDetails.fld_OT_Hours.ToString() + " HRS";
-            lbl_OT_Hourly_Charge.Text = billingDetails.fld_Hourly_Rate.ToString("C");
-            lbl_Overtime_Fee.Text = (billingDetails.fld_OT_Hours * billingDetails.fld_Hourly_Rate).ToString("C");
+            lbl_OT_Hourly_Charge.Text = billingDetails.fld_Hourly_Rate.ToString("C", new CultureInfo("en-PH"));
+            lbl_Overtime_Fee.Text = (billingDetails.fld_OT_Hours * billingDetails.fld_Hourly_Rate).ToString("C", new CultureInfo("en-PH"));
 
             // Payment details
             lbl_Paid_Amount.Text = billingDetails.fld_Amount_Paid.ToString("C");
             decimal otCharge = billingDetails.fld_OT_Hours * billingDetails.fld_Hourly_Rate;
 
-            lbl_Total_Amount.Text = (billingDetails.fld_Additional_Charge+billingDetails.fld_First4Hrs_Rate + ((decimal)(billingDetails.Total_Hours - 4) * billingDetails.fld_Hourly_Rate)).ToString("C");
-            lbl_Balance.Text = ((billingDetails.fld_Additional_Charge + billingDetails.fld_First4Hrs_Rate + ((decimal)(billingDetails.Total_Hours - 4) * billingDetails.fld_Hourly_Rate)) - billingDetails.fld_Amount_Paid).ToString("C");
-            lbl_Refund_Amount.Text = (billingDetails.fld_Cancellation_Fee).ToString("C");
+            lbl_Total_Amount.Text = (billingDetails.fld_Additional_Charge+billingDetails.fld_First4Hrs_Rate + ((decimal)(billingDetails.Total_Hours - 4) * billingDetails.fld_Hourly_Rate)).ToString("C", new CultureInfo("en-PH"));
+            lbl_Balance.Text = ((billingDetails.fld_Additional_Charge + billingDetails.fld_First4Hrs_Rate + ((decimal)(billingDetails.Total_Hours - 4) * billingDetails.fld_Hourly_Rate)) - billingDetails.fld_Amount_Paid).ToString("C", new CultureInfo("en-PH"));
+            lbl_Refund_Amount.Text = (billingDetails.fld_Cancellation_Fee).ToString("C", new CultureInfo("en-PH"));
 
             //lbl_Final_Amount_Paid.Text = (billingDetails.fld_Final_Amount_Paid).ToString("C");
-            lbl_Overtime_Fee.Text = billingDetails.fld_Overtime_Fee.ToString("C");
-            textBox24.Text = (billingDetails.fld_First4Hrs_Rate / 4).ToString("C");
-            lbl_Total_Amount_2.Text = (billingDetails.fld_Overtime_Fee+billingDetails.fld_Cancellation_Fee).ToString("C");
+            lbl_Overtime_Fee.Text = billingDetails.fld_Overtime_Fee.ToString("C", new CultureInfo("en-PH"));
+            textBox24.Text = (billingDetails.fld_First4Hrs_Rate / 4).ToString("C", new CultureInfo("en-PH"));
+            lbl_Total_Amount_2.Text = (billingDetails.fld_Overtime_Fee+billingDetails.fld_Cancellation_Fee).ToString("C", new CultureInfo("en-PH"));
 
 
 
 
-            lbl_Paid_Amount_2.Text = billingDetails.fld_Amount_Paid_Overtime.ToString("C");
+            lbl_Paid_Amount_2.Text = billingDetails.fld_Amount_Paid_Overtime.ToString("C", new CultureInfo("en-PH"));
 
-            lbl_Balance_2.Text = (billingDetails.fld_Overtime_Fee - billingDetails.fld_Amount_Paid_Overtime).ToString("C");
+            lbl_Balance_2.Text = (billingDetails.fld_Overtime_Fee - billingDetails.fld_Amount_Paid_Overtime).ToString("C", new CultureInfo("en-PH"));
             Console.WriteLine(billingDetails.fld_Amount_Paid_Overtime);
         }
 
@@ -595,7 +596,7 @@ namespace pgso.pgso_Billing
                     ORExtension = _billingDetails.fld_OR_Extension
                 });
 
-                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+                string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
@@ -657,7 +658,7 @@ namespace pgso.pgso_Billing
                     CancellationReason = _billingDetails.fld_Cancellation_Reason
                 });
 
-                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+                string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
@@ -728,7 +729,7 @@ namespace pgso.pgso_Billing
                     CancellationReason = _billingDetails.fld_Cancellation_Reason
                 });
 
-                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+                string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
@@ -814,7 +815,7 @@ namespace pgso.pgso_Billing
                             ORNumber = officialReceiptNumber
                         });
 
-                        string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+                        string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
 
                         using (SqlConnection conn = new SqlConnection(connectionString))
                         {

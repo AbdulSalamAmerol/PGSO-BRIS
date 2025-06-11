@@ -811,7 +811,6 @@ namespace pgso
 
         public void OpenExtendVenueForm(int reservationID)
         {
-            MessageBox.Show("Opening Extend Venue Form...");
             frm_Extend_Venue extendForm = new frm_Extend_Venue(reservationID);
 
             // Subscribe to the event BEFORE showing the form

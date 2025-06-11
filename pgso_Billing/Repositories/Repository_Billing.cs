@@ -12,7 +12,7 @@ namespace pgso.Billing.Repositories
     public class Repo_Billing
     {
 
-        private string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+        private string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
       // private string connectionString = "Data Source=DESKTOP-DG6NT1C;Initial Catalog=gso;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
 
         public List<Model_Billing> GetAllBillingRecords()

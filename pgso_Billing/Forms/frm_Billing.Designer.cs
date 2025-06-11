@@ -28,23 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle85 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle86 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle96 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle97 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle98 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle87 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle88 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle89 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle90 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle91 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle92 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle93 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle94 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle95 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_Billing));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnl_Billing_Details = new System.Windows.Forms.Panel();
-            this.pb_Logo = new System.Windows.Forms.PictureBox();
             this.dgv_Billing_Records = new System.Windows.Forms.DataGridView();
             this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Date_Created = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,8 +83,8 @@
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn3 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn4 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.pb_Logo = new System.Windows.Forms.PictureBox();
             this.pnl_Billing_Details.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_Logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Billing_Records)).BeginInit();
             this.tlp_Billing_UControls.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -93,6 +92,7 @@
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Logo)).BeginInit();
             this.SuspendLayout();
             // 
             // pnl_Billing_Details
@@ -101,24 +101,11 @@
             this.pnl_Billing_Details.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pnl_Billing_Details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_Billing_Details.Controls.Add(this.pb_Logo);
-            this.pnl_Billing_Details.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_Billing_Details.Location = new System.Drawing.Point(997, 11);
-            this.pnl_Billing_Details.MaximumSize = new System.Drawing.Size(872, 1150);
-            this.pnl_Billing_Details.MinimumSize = new System.Drawing.Size(912, 1150);
+            this.pnl_Billing_Details.Margin = new System.Windows.Forms.Padding(0);
             this.pnl_Billing_Details.Name = "pnl_Billing_Details";
-            this.pnl_Billing_Details.Size = new System.Drawing.Size(912, 1150);
+            this.pnl_Billing_Details.Size = new System.Drawing.Size(912, 1036);
             this.pnl_Billing_Details.TabIndex = 6;
-            // 
-            // pb_Logo
-            // 
-            this.pb_Logo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pb_Logo.BackgroundImage")));
-            this.pb_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pb_Logo.Location = new System.Drawing.Point(-1, -1);
-            this.pb_Logo.Margin = new System.Windows.Forms.Padding(30);
-            this.pb_Logo.Name = "pb_Logo";
-            this.pb_Logo.Size = new System.Drawing.Size(912, 1150);
-            this.pb_Logo.TabIndex = 0;
-            this.pb_Logo.TabStop = false;
             // 
             // dgv_Billing_Records
             // 
@@ -127,23 +114,23 @@
             this.dgv_Billing_Records.AllowUserToOrderColumns = true;
             this.dgv_Billing_Records.AllowUserToResizeColumns = false;
             this.dgv_Billing_Records.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            this.dgv_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle85.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle85.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle85.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle85.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            dataGridViewCellStyle85.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
+            this.dgv_Billing_Records.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle85;
             this.dgv_Billing_Records.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_Billing_Records.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgv_Billing_Records.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Billing_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle86.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle86.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            dataGridViewCellStyle86.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle86.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle86.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            dataGridViewCellStyle86.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
+            dataGridViewCellStyle86.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Billing_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle86;
             this.dgv_Billing_Records.ColumnHeadersHeight = 40;
             this.dgv_Billing_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_Billing_Records.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -163,14 +150,14 @@
             this.col_Cancel,
             this.col_Extend});
             this.dgv_Billing_Records.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_Billing_Records.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle96.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle96.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            dataGridViewCellStyle96.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle96.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle96.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            dataGridViewCellStyle96.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
+            dataGridViewCellStyle96.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_Billing_Records.DefaultCellStyle = dataGridViewCellStyle96;
             this.dgv_Billing_Records.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_Billing_Records.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
             this.dgv_Billing_Records.Location = new System.Drawing.Point(11, 100);
@@ -178,19 +165,19 @@
             this.dgv_Billing_Records.MultiSelect = false;
             this.dgv_Billing_Records.Name = "dgv_Billing_Records";
             this.dgv_Billing_Records.ReadOnly = true;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Billing_Records.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle97.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle97.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle97.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle97.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle97.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle97.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Billing_Records.RowHeadersDefaultCellStyle = dataGridViewCellStyle97;
             this.dgv_Billing_Records.RowHeadersVisible = false;
             this.dgv_Billing_Records.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv_Billing_Records.RowsDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle98.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv_Billing_Records.RowsDefaultCellStyle = dataGridViewCellStyle98;
             this.dgv_Billing_Records.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Billing_Records.Size = new System.Drawing.Size(975, 1050);
+            this.dgv_Billing_Records.Size = new System.Drawing.Size(975, 920);
             this.dgv_Billing_Records.TabIndex = 0;
             this.dgv_Billing_Records.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Billing_Records_CellContentClick);
             this.dgv_Billing_Records.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgv_Billing_Records_CellFormatting);
@@ -199,8 +186,8 @@
             // 
             this.fld_Control_Number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.fld_Control_Number.DataPropertyName = "fld_Control_Number";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.fld_Control_Number.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle87.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.fld_Control_Number.DefaultCellStyle = dataGridViewCellStyle87;
             this.fld_Control_Number.FillWeight = 15F;
             this.fld_Control_Number.HeaderText = "CONTROL NUMBER";
             this.fld_Control_Number.Name = "fld_Control_Number";
@@ -222,8 +209,8 @@
             // 
             this.col_Start_Date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.col_Start_Date.DataPropertyName = "fld_Start_Date";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Start_Date.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle88.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Start_Date.DefaultCellStyle = dataGridViewCellStyle88;
             this.col_Start_Date.FillWeight = 5F;
             this.col_Start_Date.HeaderText = "RESERVATION DATE";
             this.col_Start_Date.MinimumWidth = 10;
@@ -237,8 +224,8 @@
             // 
             this.pk_ReservationID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.pk_ReservationID.DataPropertyName = "pk_ReservationID";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.pk_ReservationID.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle89.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.pk_ReservationID.DefaultCellStyle = dataGridViewCellStyle89;
             this.pk_ReservationID.FillWeight = 5F;
             this.pk_ReservationID.HeaderText = "ID";
             this.pk_ReservationID.MinimumWidth = 10;
@@ -252,8 +239,8 @@
             // 
             this.fld_Full_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.fld_Full_Name.DataPropertyName = "fld_Full_Name";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.fld_Full_Name.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle90.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.fld_Full_Name.DefaultCellStyle = dataGridViewCellStyle90;
             this.fld_Full_Name.FillWeight = 15F;
             this.fld_Full_Name.HeaderText = "REQUESTING PERSON";
             this.fld_Full_Name.Name = "fld_Full_Name";
@@ -275,8 +262,8 @@
             // 
             this.col_Reservation_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_Reservation_Type.DataPropertyName = "fld_Reservation_Type";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Reservation_Type.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle91.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Reservation_Type.DefaultCellStyle = dataGridViewCellStyle91;
             this.col_Reservation_Type.FillWeight = 10F;
             this.col_Reservation_Type.HeaderText = "Reservation Type";
             this.col_Reservation_Type.Name = "col_Reservation_Type";
@@ -288,8 +275,8 @@
             // 
             this.col_Venue_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_Venue_Name.DataPropertyName = "fld_Venue_Name";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Venue_Name.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle92.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Venue_Name.DefaultCellStyle = dataGridViewCellStyle92;
             this.col_Venue_Name.FillWeight = 15F;
             this.col_Venue_Name.HeaderText = "Venue Name";
             this.col_Venue_Name.Name = "col_Venue_Name";
@@ -301,8 +288,8 @@
             // 
             this.col_Equipment_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_Equipment_Name.DataPropertyName = "fld_Equipment_Name";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Equipment_Name.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle93.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Equipment_Name.DefaultCellStyle = dataGridViewCellStyle93;
             this.col_Equipment_Name.FillWeight = 10F;
             this.col_Equipment_Name.HeaderText = "Equipment Name";
             this.col_Equipment_Name.Name = "col_Equipment_Name";
@@ -314,8 +301,8 @@
             // 
             this.col_Amount_Due.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.col_Amount_Due.DataPropertyName = "fld_Total_Amount";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Amount_Due.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle94.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Amount_Due.DefaultCellStyle = dataGridViewCellStyle94;
             this.col_Amount_Due.FillWeight = 10F;
             this.col_Amount_Due.HeaderText = "TOTAL";
             this.col_Amount_Due.Name = "col_Amount_Due";
@@ -326,8 +313,8 @@
             // 
             this.col_Reservation_Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.col_Reservation_Status.DataPropertyName = "fld_Reservation_Status";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Reservation_Status.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle95.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Reservation_Status.DefaultCellStyle = dataGridViewCellStyle95;
             this.col_Reservation_Status.FillWeight = 7F;
             this.col_Reservation_Status.HeaderText = "STATUS";
             this.col_Reservation_Status.Name = "col_Reservation_Status";
@@ -386,19 +373,18 @@
             // 
             this.tlp_Billing_UControls.ColumnCount = 3;
             this.tlp_Billing_UControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 11F));
-            this.tlp_Billing_UControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_Billing_UControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlp_Billing_UControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 11F));
             this.tlp_Billing_UControls.Controls.Add(this.dgv_Billing_Records, 1, 1);
             this.tlp_Billing_UControls.Controls.Add(this.panel1, 1, 0);
             this.tlp_Billing_UControls.Dock = System.Windows.Forms.DockStyle.Left;
             this.tlp_Billing_UControls.Location = new System.Drawing.Point(0, 11);
-            this.tlp_Billing_UControls.MaximumSize = new System.Drawing.Size(1037, 1150);
-            this.tlp_Billing_UControls.MinimumSize = new System.Drawing.Size(997, 1150);
             this.tlp_Billing_UControls.Name = "tlp_Billing_UControls";
-            this.tlp_Billing_UControls.RowCount = 2;
+            this.tlp_Billing_UControls.RowCount = 3;
             this.tlp_Billing_UControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlp_Billing_UControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_Billing_UControls.Size = new System.Drawing.Size(997, 1150);
+            this.tlp_Billing_UControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tlp_Billing_UControls.Size = new System.Drawing.Size(997, 1030);
             this.tlp_Billing_UControls.TabIndex = 4;
             // 
             // panel1
@@ -608,7 +594,7 @@
             this.flp_Top.MaximumSize = new System.Drawing.Size(0, 10);
             this.flp_Top.MinimumSize = new System.Drawing.Size(0, 11);
             this.flp_Top.Name = "flp_Top";
-            this.flp_Top.Size = new System.Drawing.Size(1902, 11);
+            this.flp_Top.Size = new System.Drawing.Size(1904, 11);
             this.flp_Top.TabIndex = 5;
             // 
             // dataGridViewImageColumn1
@@ -655,25 +641,34 @@
             this.dataGridViewImageColumn4.ReadOnly = true;
             this.dataGridViewImageColumn4.Visible = false;
             // 
+            // pb_Logo
+            // 
+            this.pb_Logo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pb_Logo.BackgroundImage")));
+            this.pb_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pb_Logo.Location = new System.Drawing.Point(-1, -1);
+            this.pb_Logo.Margin = new System.Windows.Forms.Padding(30);
+            this.pb_Logo.Name = "pb_Logo";
+            this.pb_Logo.Size = new System.Drawing.Size(899, 670);
+            this.pb_Logo.TabIndex = 0;
+            this.pb_Logo.TabStop = false;
+            // 
             // frm_Billing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            this.ClientSize = new System.Drawing.Size(1902, 1159);
+            this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Controls.Add(this.pnl_Billing_Details);
             this.Controls.Add(this.tlp_Billing_UControls);
             this.Controls.Add(this.flp_Top);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1918, 1198);
             this.Name = "frm_Billing";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PGSO BILLING";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frm_Billing_Load);
             this.pnl_Billing_Details.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pb_Logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Billing_Records)).EndInit();
             this.tlp_Billing_UControls.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -686,6 +681,7 @@
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Logo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -696,7 +692,6 @@
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn3;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn4;
-        private System.Windows.Forms.PictureBox pb_Logo;
         private System.Windows.Forms.TableLayoutPanel tlp_Billing_UControls;
         public System.Windows.Forms.DataGridView dgv_Billing_Records;
         private System.Windows.Forms.FlowLayoutPanel flp_Top;
@@ -732,5 +727,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.PictureBox pb_Logo;
     }
 }
