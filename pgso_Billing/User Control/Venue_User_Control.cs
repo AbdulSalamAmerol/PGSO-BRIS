@@ -248,6 +248,7 @@ namespace pgso.pgso_Billing
             pnl_Billing_Details.Visible = true;
 
             // Populate the labels with values from the billingDetails model
+            lbl_Service_Fee.Text = billingDetails.fld_Caterer_Fee.ToString("C", new CultureInfo("en-PH"));
             lbl_Control_Number.Text = billingDetails.fld_Control_Number;
             lbl_Activity_Name.Text = billingDetails.fld_Activity_Name;
             lbl_Requesting_Person.Text = $"{billingDetails.fld_First_Name} {billingDetails.fld_Middle_Name} {billingDetails.fld_Surname}";
@@ -380,11 +381,11 @@ namespace pgso.pgso_Billing
             lbl_Overtime_Fee.Text = (billingDetails.fld_OT_Hours * billingDetails.fld_Hourly_Rate).ToString("C", new CultureInfo("en-PH"));
 
             // Payment details
-            lbl_Paid_Amount.Text = billingDetails.fld_Amount_Paid.ToString("C");
+            lbl_Paid_Amount.Text = billingDetails.fld_Amount_Paid.ToString("C", new CultureInfo("en-PH"));
             decimal otCharge = billingDetails.fld_OT_Hours * billingDetails.fld_Hourly_Rate;
 
-            lbl_Total_Amount.Text = (billingDetails.fld_Additional_Charge+billingDetails.fld_First4Hrs_Rate + ((decimal)(billingDetails.Total_Hours - 4) * billingDetails.fld_Hourly_Rate)).ToString("C", new CultureInfo("en-PH"));
-            lbl_Balance.Text = ((billingDetails.fld_Additional_Charge + billingDetails.fld_First4Hrs_Rate + ((decimal)(billingDetails.Total_Hours - 4) * billingDetails.fld_Hourly_Rate)) - billingDetails.fld_Amount_Paid).ToString("C", new CultureInfo("en-PH"));
+            lbl_Total_Amount.Text = (billingDetails.fld_Additional_Charge+billingDetails.fld_First4Hrs_Rate + ((decimal)(billingDetails.Total_Hours - 4) * billingDetails.fld_Hourly_Rate)+billingDetails.fld_Caterer_Fee).ToString("C", new CultureInfo("en-PH"));
+            lbl_Balance.Text = ((billingDetails.fld_Additional_Charge + billingDetails.fld_First4Hrs_Rate + ((decimal)(billingDetails.Total_Hours - 4) * billingDetails.fld_Hourly_Rate)+billingDetails.fld_Caterer_Fee) - billingDetails.fld_Amount_Paid).ToString("C", new CultureInfo("en-PH"));
             lbl_Refund_Amount.Text = (billingDetails.fld_Cancellation_Fee).ToString("C", new CultureInfo("en-PH"));
 
             //lbl_Final_Amount_Paid.Text = (billingDetails.fld_Final_Amount_Paid).ToString("C");

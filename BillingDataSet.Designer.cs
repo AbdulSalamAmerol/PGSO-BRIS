@@ -383,6 +383,8 @@ namespace pgso {
             
             private global::System.Data.DataColumn columnfld_Username;
             
+            private global::System.Data.DataColumn columnfld_Caterer_Fee_;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public BillingDataTableDataTable() {
@@ -834,6 +836,14 @@ namespace pgso {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn fld_Caterer_Fee_Column {
+                get {
+                    return this.columnfld_Caterer_Fee_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -921,7 +931,8 @@ namespace pgso {
                         string fld_OT_Hours, 
                         System.DateTime fld_End_Date_Eq, 
                         string fld_Cancellation_Reason, 
-                        string fld_Username) {
+                        string fld_Username, 
+                        decimal fld_Caterer_Fee_) {
                 BillingDataTableRow rowBillingDataTableRow = ((BillingDataTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         pk_ReservationID,
@@ -975,7 +986,8 @@ namespace pgso {
                         fld_OT_Hours,
                         fld_End_Date_Eq,
                         fld_Cancellation_Reason,
-                        fld_Username};
+                        fld_Username,
+                        fld_Caterer_Fee_};
                 rowBillingDataTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBillingDataTableRow);
                 return rowBillingDataTableRow;
@@ -1050,6 +1062,7 @@ namespace pgso {
                 this.columnfld_End_Date_Eq = base.Columns["fld_End_Date_Eq"];
                 this.columnfld_Cancellation_Reason = base.Columns["fld_Cancellation_Reason"];
                 this.columnfld_Username = base.Columns["fld_Username"];
+                this.columnfld_Caterer_Fee_ = base.Columns["fld_Caterer_Fee "];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1159,6 +1172,8 @@ namespace pgso {
                 base.Columns.Add(this.columnfld_Cancellation_Reason);
                 this.columnfld_Username = new global::System.Data.DataColumn("fld_Username", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfld_Username);
+                this.columnfld_Caterer_Fee_ = new global::System.Data.DataColumn("fld_Caterer_Fee ", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfld_Caterer_Fee_);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2147,6 +2162,22 @@ namespace pgso {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal fld_Caterer_Fee_ {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableBillingDataTable.fld_Caterer_Fee_Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'fld_Caterer_Fee \' in table \'BillingDataTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBillingDataTable.fld_Caterer_Fee_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Ispk_ReservationIDNull() {
                 return this.IsNull(this.tableBillingDataTable.pk_ReservationIDColumn);
             }
@@ -2767,6 +2798,18 @@ namespace pgso {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setfld_UsernameNull() {
                 this[this.tableBillingDataTable.fld_UsernameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isfld_Caterer_Fee_Null() {
+                return this.IsNull(this.tableBillingDataTable.fld_Caterer_Fee_Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setfld_Caterer_Fee_Null() {
+                this[this.tableBillingDataTable.fld_Caterer_Fee_Column] = global::System.Convert.DBNull;
             }
         }
         

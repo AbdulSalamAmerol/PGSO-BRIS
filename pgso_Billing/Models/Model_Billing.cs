@@ -39,6 +39,7 @@ namespace pgso.Billing.Models
         public string fld_OT_Payment_Status { get;set; }
         public string fld_Cancellation_Reason { get; set; }
         public string fld_Extension_Status { get; set; }    
+        public decimal fld_Caterer_Fee { get; set; }
 
         // Venue Details
         public int? pk_VenueID { get; set; }

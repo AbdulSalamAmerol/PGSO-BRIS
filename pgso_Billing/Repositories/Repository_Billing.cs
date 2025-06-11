@@ -92,7 +92,8 @@ namespace pgso.Billing.Repositories
                                     re.fld_Quantity_Damaged,
                                     p.fld_Amount_Paid_Overtime,
                                     r.fld_OT_Payment_Status,
-                                    u.fld_Username
+                                    u.fld_Username,
+                                    r.fld_Caterer_Fee 
 
                                     FROM dbo.tbl_Reservation r
                                     LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
@@ -180,7 +181,10 @@ namespace pgso.Billing.Repositories
                                 fld_Quantity_Damaged = reader.IsDBNull(49) ? 0 : reader.GetInt32(49),
                                 fld_Amount_Paid_Overtime = reader.IsDBNull(50) ? 0 : reader.GetDecimal(50),
                                 fld_OT_Payment_Status = reader.IsDBNull(51) ? "" : reader.GetString(51),
-                                fld_Username = reader.IsDBNull(52) ? "" : reader.GetString(52) 
+                                fld_Username = reader.IsDBNull(52) ? "" : reader.GetString(52),
+
+                                // Caterer Fee
+                                fld_Caterer_Fee = reader.IsDBNull(53) ? 0 : reader.GetDecimal(53)
 
                             };
 
@@ -271,7 +275,8 @@ namespace pgso.Billing.Repositories
                         r.fld_OT_Payment_Status,
                         r.fld_Cancellation_Reason,
                         u.fld_Username,
-                        vp.fld_Additional_Charge
+                        vp.fld_Additional_Charge,
+                        r.fld_Caterer_Fee 
                         
 
                     FROM dbo.tbl_Reservation r
@@ -351,7 +356,8 @@ namespace pgso.Billing.Repositories
                                     fld_OT_Payment_Status = reader.IsDBNull(46) ? "" : reader.GetString(46),
                                     fld_Cancellation_Reason = reader.IsDBNull(47) ? "" : reader.GetString(47),
                                     fld_Username = reader.IsDBNull(48) ? "testAdminPGSO" : reader.GetString(48),
-                                    fld_Additional_Charge = reader.IsDBNull(49) ? 0 : reader.GetDecimal(49)
+                                    fld_Additional_Charge = reader.IsDBNull(49) ? 0 : reader.GetDecimal(49),
+                                    fld_Caterer_Fee = reader.IsDBNull(50) ? 0 : reader.GetDecimal(50)
 
                                 };
 
@@ -436,7 +442,8 @@ namespace pgso.Billing.Repositories
                             p.fld_Refund_Amount,
                             p.fld_Cancellation_Fee,
                             p.fld_Final_Amount_Paid,
-                            p.fld_Overtime_Fee
+                            p.fld_Overtime_Fee,
+                            r.fld_Caterer_Fee 
 
                         FROM dbo.tbl_Reservation r
                         LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
@@ -521,7 +528,8 @@ namespace pgso.Billing.Repositories
                                     fld_Refund_Amount = reader.IsDBNull(43) ? 0 : reader.GetDecimal(43),
                                     fld_Cancellation_Fee = reader.IsDBNull(44) ? 0 : reader.GetDecimal(44),
                                     fld_Final_Amount_Paid = reader.IsDBNull(45) ? 0 : reader.GetDecimal(45),
-                                    fld_Overtime_Fee = reader.IsDBNull(46) ? 0 : reader.GetDecimal(46)
+                                    fld_Overtime_Fee = reader.IsDBNull(46) ? 0 : reader.GetDecimal(46),
+                                    fld_Caterer_Fee = reader.IsDBNull(50) ? 0 : reader.GetDecimal(50)
 
                                 });
                             }
@@ -605,7 +613,8 @@ namespace pgso.Billing.Repositories
                             p.fld_Amount_Paid_Overtime,
                             r.fld_OT_Payment_Status,
                             r.fld_OR_Extension,
-                            r.fld_Extension_Status
+                            r.fld_Extension_Status,
+                            r.fld_Caterer_Fee 
                         FROM dbo.tbl_Reservation r
                         LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
                         LEFT JOIN dbo.tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
@@ -679,7 +688,8 @@ namespace pgso.Billing.Repositories
                                     fld_Amount_Paid_Overtime = reader.IsDBNull(49) ? 0 : reader.GetDecimal(49),
                                     fld_OT_Payment_Status = reader.IsDBNull(50) ? "" : reader.GetString(50),
                                     fld_OR_Extension = reader.IsDBNull(51) ? 0 : reader.GetInt32(51),    
-                                    fld_Extension_Status = reader.IsDBNull(52) ? "" : reader.GetString(52)
+                                    fld_Extension_Status = reader.IsDBNull(52) ? "" : reader.GetString(52),
+                                    fld_Caterer_Fee = reader.IsDBNull(53) ? 0 : reader.GetDecimal(53)
                                 };
                             }
                         }
@@ -789,103 +799,6 @@ namespace pgso.Billing.Repositories
                 }
             }
         }
-
-
-        //////
-        /*
-        public async Task<bool> UpdateReservationExtension(int reservationID, int otHours, int orExtension)
-        {
-
-            try
-            {
-                // Step 0: Check existing OT hours
-                string checkQuery = "SELECT fld_OT_Hours FROM tbl_Reservation WHERE pk_ReservationID = @reservationID";
-                int existingOT = 0;
-
-                using (SqlConnection checkConn = new SqlConnection(connectionString))
-                using (SqlCommand checkCmd = new SqlCommand(checkQuery, checkConn))
-                {
-                    checkCmd.Parameters.AddWithValue("@reservationID", reservationID);
-                    await checkConn.OpenAsync();
-                    object result = await checkCmd.ExecuteScalarAsync();
-                    existingOT = result != DBNull.Value ? Convert.ToInt32(result) : 0;
-                }
-
-                // Block update only if trying to change an already existing otHours
-                if (existingOT > 0 && otHours != existingOT)
-                {
-                    MessageBox.Show("Overtime Hours Already Exist in the Database", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
-                }
-
-
-                // Step 1: Get hourly rate and base amount
-                var hourlyRateTask = GetHourlyRate(reservationID);
-                var baseAmountTask = GetBaseAmount(reservationID);
-                await Task.WhenAll(hourlyRateTask, baseAmountTask);
-
-                decimal hourlyRate = hourlyRateTask.Result;
-                decimal baseAmount = baseAmountTask.Result;
-
-                // Step 2: Recalculate total amounts
-                decimal newOvertimeFee = otHours * hourlyRate;
-                decimal newFinalAmountPaid = baseAmount + newOvertimeFee;
-                decimal newTotalAmount = baseAmount + newOvertimeFee;
-
-                // Step 3: Update records
-                string query = @"
-                                UPDATE p
-                                SET
-                                    p.fld_Final_Amount_Paid = @newFinalAmountPaid,
-                                    p.fld_Overtime_Fee = @newOvertimeFee
-                                FROM tbl_Payment p
-                                JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
-                                WHERE r.pk_ReservationID = @reservationID;
-
-                                IF @orExtension > 0
-                                BEGIN
-                                    UPDATE p
-                                    SET p.fld_Amount_Paid_Overtime = @newOvertimeFee
-                                    FROM tbl_Payment p
-                                    JOIN tbl_Reservation r ON r.pk_ReservationID = p.fk_ReservationID
-                                    WHERE r.pk_ReservationID = @reservationID;
-                                END
-                                IF @orExtension != 
-                                BEGIN
-                                    UPDATE tbl_Reservation
-                                    SET
-                                        fld_Total_Amount = @totalAmount,
-                                        fld_OT_Hours = @otHours,
-                                        fld_OR_Extension = @orExtension
-                                    WHERE pk_ReservationID = @reservationID;";
-
-                    using (SqlConnection conn = new SqlConnection(connectionString))
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@otHours", otHours);
-                        cmd.Parameters.AddWithValue("@newFinalAmountPaid", newFinalAmountPaid);
-                        cmd.Parameters.AddWithValue("@newOvertimeFee", newOvertimeFee);
-                        cmd.Parameters.AddWithValue("@reservationID", reservationID);
-                        cmd.Parameters.AddWithValue("@orExtension", orExtension);
-                        cmd.Parameters.AddWithValue("@totalAmount", newTotalAmount);
-
-                        await conn.OpenAsync();
-                        int rowsAffected = await cmd.ExecuteNonQueryAsync();
-                        return rowsAffected > 0;
-                    }
-            }
-            catch (SqlException sqlEx)
-            {
-                Console.WriteLine($"SQL Error updating reservation {reservationID}: {sqlEx.Message}");
-                return false;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"General Error updating reservation {reservationID}: {ex.Message}");
-                return false;
-            }
-        }
-        */
         public async Task<bool> UpdateReservationExtension(int reservationID, int otHours, int orExtension)
         {
             try

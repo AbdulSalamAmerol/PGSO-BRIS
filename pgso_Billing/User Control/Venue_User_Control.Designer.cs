@@ -140,7 +140,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox18 = new System.Windows.Forms.TextBox();
+            this.lbl_Service_Fee = new System.Windows.Forms.TextBox();
             this.pnl_Billing_Details.SuspendLayout();
             this.panel5.SuspendLayout();
             this.SuspendLayout();
@@ -427,7 +427,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.panel5.Controls.Add(this.textBox18);
+            this.panel5.Controls.Add(this.lbl_Service_Fee);
             this.panel5.Controls.Add(this.textBox13);
             this.panel5.Controls.Add(this.label4);
             this.panel5.Controls.Add(this.label2);
@@ -1866,21 +1866,21 @@
             this.textBox13.TabIndex = 163;
             this.textBox13.Text = "Catering Services Fee";
             // 
-            // textBox18
+            // lbl_Service_Fee
             // 
-            this.textBox18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.textBox18.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox18.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox18.Location = new System.Drawing.Point(733, 146);
-            this.textBox18.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox18.MinimumSize = new System.Drawing.Size(2, 25);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.ReadOnly = true;
-            this.textBox18.Size = new System.Drawing.Size(133, 25);
-            this.textBox18.TabIndex = 164;
-            this.textBox18.Text = "..........";
-            this.textBox18.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.lbl_Service_Fee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.lbl_Service_Fee.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbl_Service_Fee.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbl_Service_Fee.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Service_Fee.Location = new System.Drawing.Point(733, 146);
+            this.lbl_Service_Fee.Margin = new System.Windows.Forms.Padding(0);
+            this.lbl_Service_Fee.MinimumSize = new System.Drawing.Size(2, 25);
+            this.lbl_Service_Fee.Name = "lbl_Service_Fee";
+            this.lbl_Service_Fee.ReadOnly = true;
+            this.lbl_Service_Fee.Size = new System.Drawing.Size(133, 25);
+            this.lbl_Service_Fee.TabIndex = 164;
+            this.lbl_Service_Fee.Text = "..........";
+            this.lbl_Service_Fee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Venue_User_Control
             // 
@@ -2012,6 +2012,6 @@
         private System.Windows.Forms.TextBox textBox13;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox18;
+        private System.Windows.Forms.TextBox lbl_Service_Fee;
     }
 }
