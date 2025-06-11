@@ -783,6 +783,7 @@
     <None Include="packages\System.ValueTuple.4.6.1\lib\netstandard2.0\_._" />
     <None Include="packages\System.ValueTuple.4.6.1\PACKAGE.md" />
     <None Include="packages\System.ValueTuple.4.6.1\System.ValueTuple.4.6.1.nupkg" />
+    <None Include="pgso_TemporaryKey.pfx" />
     <None Include="Properties\DataSources\pgso.Billing.Models.class_Equipment_Billing.datasource" />
     <None Include="Properties\DataSources\pgso.Billing.Models.class_Venue_Billing.datasource" />
     <None Include="Properties\Settings.settings">
