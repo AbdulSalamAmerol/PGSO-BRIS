@@ -288,29 +288,29 @@ namespace pgso
                 txt.SelectionStart = txt.Text.Length;
             }
         }
+        private double _unroundedTotalHours = 0;
 
         private void CalculateNumberOfHour()
-        {
-            DateTime startDateTime = date_of_use_start.Value.Date + TimeStart.Value.TimeOfDay;
-            DateTime endDateTime = date_of_use_end.Value.Date + TimeEnd.Value.TimeOfDay;
+        {    // Remove seconds and milliseconds from TimeStart and TimeEnd
+            DateTime startDateTime = date_of_use_start.Value.Date
+       + new TimeSpan(TimeStart.Value.TimeOfDay.Hours, TimeStart.Value.TimeOfDay.Minutes, 0);
+            DateTime endDateTime = date_of_use_end.Value.Date
+                + new TimeSpan(TimeEnd.Value.TimeOfDay.Hours, TimeEnd.Value.TimeOfDay.Minutes, 0);
 
             TimeSpan difference = endDateTime - startDateTime;
-            double numberOfHours = difference.TotalHours;
 
-            // Check if the number of hours is negative
-            if (numberOfHours < 0)
+            if (difference.TotalMinutes < 0)
             {
                 MessageBox.Show("The number of hours must not be negative. Please adjust the start and end times.",
                                 "Invalid Number of Hours", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                // Reset the number of hours to 0
                 txtx_Num_Hours.Text = "0.00";
-                return; // Exit the method
+                _unroundedTotalHours = 0;
+                return;
             }
 
-            txtx_Num_Hours.Text = numberOfHours.ToString("0.00");
+            _unroundedTotalHours = difference.TotalHours;
+            txtx_Num_Hours.Text = _unroundedTotalHours.ToString(); // show full precision. for display
 
-            // Force calculation after updating hours
             CalculateTotalAmount();
         }
 
@@ -401,12 +401,17 @@ namespace pgso
                 dt.Load(reader);
 
                 reader.Close();
+                // Add placeholder at the top
+                DataRow placeholderRow = dt.NewRow();
+                placeholderRow["fld_Rate_Type"] = "--Select--";
+                dt.Rows.InsertAt(placeholderRow, 0);
 
                 // Ensure the column exists before adding PGNV
                 if (!dt.Columns.Contains("fld_Rate_Type"))
                 {
                     dt.Columns.Add("fld_Rate_Type", typeof(string));
                 }
+
 
                 // Manually add PGNV as an extra option
                 DataRow pgnvRow = dt.NewRow();
@@ -514,32 +519,30 @@ namespace pgso
         // Check if both reservation type and venue scope are selected
         private bool IsReservationTypeAndScopeSelected()
         {
-            return combo_ReservationType.SelectedValue != null && combo_scope.SelectedValue != null;
+            return combo_ReservationType.SelectedValue != null
+                && combo_ReservationType.SelectedValue.ToString() != "-- Select Rate Type --"
+                && combo_scope.SelectedValue != null;
         }
 
         // Calculate total amount
         private void CalculateTotalAmount()
         {
-            if (decimal.TryParse(txt_rate.Text.Replace(",", ""), out decimal initialRate) &&
-                double.TryParse(txtx_Num_Hours.Text.Replace(",", ""), out double numberOfHours) &&
+            if (decimal.TryParse(txt_rate.Text.Replace(",", ""), out decimal first4HrsRate) &&
                 decimal.TryParse(txt_Succeeding_Hour.Text.Replace(",", ""), out decimal hourlyRate))
             {
-                decimal totalAmount;
+                decimal totalAmount = first4HrsRate;
 
-                if (numberOfHours > 4)
+                if (_unroundedTotalHours > 4)
                 {
-                    totalAmount = initialRate + (hourlyRate * (decimal)(numberOfHours - 4));
+                    double succeedingHours = Math.Ceiling(_unroundedTotalHours - 4);
+                    totalAmount += hourlyRate * (decimal)succeedingHours;
                 }
-                else
-                {
-                    totalAmount = initialRate;
-                }
+
+                totalAmount += additionalCharge;
+
                 decimal catererFee = 0m;
                 decimal.TryParse(txt_Caterer_Fee.Text.Replace(",", ""), out catererFee);
                 totalAmount += catererFee;
-
-                // Add additional charge
-                totalAmount += additionalCharge;
 
                 txt_Total.Text = totalAmount.ToString("N2");
             }
@@ -573,11 +576,11 @@ namespace pgso
 
                 // Rest of your existing LoadRate logic for non-PGNV cases
                 string rateQuery = @"
-            SELECT pk_Venue_PricingID, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Aircon, fld_Additional_Charge
-            FROM tbl_Venue_Pricing 
-            WHERE fk_VenueID = @VenueID 
-            AND fk_Venue_ScopeID = @VenueScopeID 
-            AND fld_Rate_Type = @RateType";
+                    SELECT pk_Venue_PricingID, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Aircon, fld_Additional_Charge
+                    FROM tbl_Venue_Pricing 
+                    WHERE fk_VenueID = @VenueID 
+                    AND fk_Venue_ScopeID = @VenueScopeID 
+                    AND fld_Rate_Type = @RateType";
 
                 DBConnect();
                 using (SqlCommand rateCmd = new SqlCommand(rateQuery, conn))
@@ -632,6 +635,13 @@ namespace pgso
             }
         }
 
+        public event EventHandler ReservationSubmitted;
+
+        // Call this method after successful DB submission
+        private void OnReservationSubmitted()
+        {
+            ReservationSubmitted?.Invoke(this, EventArgs.Empty);
+        }
 
         private void UpdateTotalAmount()
         {
@@ -693,7 +703,11 @@ namespace pgso
                 MessageBox.Show("Please select a venue, scope, and reservation type.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
+            if (combo_ReservationType.SelectedValue == null || combo_ReservationType.SelectedValue.ToString() == "-- Select Rate Type --")
+            {
+                MessageBox.Show("Please select a valid rate type.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             // Validate contact number
             string contactNumber = txt_contact.Text;
             if (string.IsNullOrWhiteSpace(contactNumber) || !IsValidContactNumber(contactNumber))
@@ -740,10 +754,10 @@ namespace pgso
                 }
 
                 cmd = new SqlCommand(@"
-    INSERT INTO tbl_Requesting_Person 
-    (fld_First_Name, fld_Middle_Name, fld_Surname, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office, fld_Is_Special) 
-    OUTPUT INSERTED.pk_Requesting_PersonID 
-    VALUES (@FirstName, @MiddleName, @Surname, @Address, @ContactNumber, @RequestOrigin, @Requesting_Office, @fld_Is_Special)", conn, transaction);
+                INSERT INTO tbl_Requesting_Person 
+                (fld_First_Name, fld_Middle_Name, fld_Surname, fld_Requesting_Person_Address, fld_Contact_Number, fld_Request_Origin, fld_Requesting_Office, fld_Is_Special) 
+                OUTPUT INSERTED.pk_Requesting_PersonID 
+                VALUES (@FirstName, @MiddleName, @Surname, @Address, @ContactNumber, @RequestOrigin, @Requesting_Office, @fld_Is_Special)", conn, transaction);
 
                 cmd.Parameters.AddWithValue("@FirstName", firstName);
                 cmd.Parameters.AddWithValue("@MiddleName", middleName);
@@ -837,14 +851,14 @@ namespace pgso
 
                 // Step 4: Insert into tbl_Reservation (now includes fk_ClientID)
                 cmd = new SqlCommand(@"
-    INSERT INTO tbl_Reservation 
-    (fld_Control_Number, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time, fld_Activity_Name, 
-     fld_Number_Of_Participants, fld_Reservation_Status, fld_Reservation_Type, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Total_Amount, 
-     fk_Requesting_PersonID, fk_ClientID, fk_VenueID, fk_Venue_PricingID, fk_Venue_ScopeID, fld_Created_At, fld_Scanned_Document, fld_Caterer_Fee) 
-    OUTPUT INSERTED.pk_ReservationID 
-    VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityName, 
-            @NumberOfParticipants, @ReservationStatus, @ReservationType, @FirstFourHrs, @SucceedingHrs, @TotalAmount,
-            @RequestingPersonID, @ClientID, @VenueID, @VenuePricingID, @VenueScopeID, @CreatedAt, @ScannedDoc, @CatererFee)", conn, transaction);
+            INSERT INTO tbl_Reservation 
+            (fld_Control_Number, fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time, fld_Activity_Name, 
+             fld_Number_Of_Participants, fld_Reservation_Status, fld_Reservation_Type, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Total_Amount, 
+             fk_Requesting_PersonID, fk_ClientID, fk_VenueID, fk_Venue_PricingID, fk_Venue_ScopeID, fld_Created_At, fld_Scanned_Document, fld_Hours, fld_Caterer_Fee) 
+            OUTPUT INSERTED.pk_ReservationID 
+            VALUES (@ControlNumber, @StartDate, @EndDate, @StartTime, @EndTime, @ActivityName, 
+                    @NumberOfParticipants, @ReservationStatus, @ReservationType, @FirstFourHrs, @SucceedingHrs, @TotalAmount,
+                    @RequestingPersonID, @ClientID, @VenueID, @VenuePricingID, @VenueScopeID, @CreatedAt, @ScannedDoc, @fldHours, @CatererFee)", conn, transaction);
 
                 cmd.Parameters.AddWithValue("@ControlNumber", txt_controlnum.Text);
                 cmd.Parameters.AddWithValue("@StartDate", startDate);
@@ -865,6 +879,7 @@ namespace pgso
                 cmd.Parameters.AddWithValue("@VenueScopeID", venueScopeID);
                 cmd.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
                 cmd.Parameters.Add("@ScannedDoc", SqlDbType.VarBinary).Value = scannedImageBytes ?? (object)DBNull.Value;
+                cmd.Parameters.AddWithValue("@fldHours", int.TryParse(txtx_Num_Hours.Text.Replace(",", ""), out int hours) ? hours : 0);
                 cmd.Parameters.AddWithValue("@CatererFee", decimal.Parse(txt_Caterer_Fee.Text.Replace(",", "")));
 
                 int reservationID = (int)cmd.ExecuteScalar();
@@ -917,9 +932,10 @@ namespace pgso
                 transaction.Commit();
 
                 MessageBox.Show("Reservation submitted successfully!");
+              
                 var billingForm = new frm_Billing();
                 billingForm.ShowDialog();
-
+                OnReservationSubmitted();
                 frm_Dashboard.NeedsCalendarRefresh = true;
                 this.Close();
                 // ...
@@ -998,13 +1014,18 @@ namespace pgso
                 button1.Enabled = false; // Disable scan button
             }
 
-            // If PGNV is selected, set rates to zero but keep aircon panel enabled
+            // If PGNV is selected, set rates and caterer fee to zero
             if (selectedRateType.Equals("PGNV", StringComparison.OrdinalIgnoreCase))
             {
                 txt_rate.Text = "0.00";
                 txt_Succeeding_Hour.Text = "0.00";
                 additionalCharge = 0m;
                 panel_Aircon.Enabled = true;  // Keep aircon enabled
+
+                // Set caterer fee to zero and uncheck the box
+                txt_Caterer_Fee.Text = "0.00";
+                chk_UseCatererFee.Checked = false;
+
                 CalculateTotalAmount();
                 return;
             }
@@ -1014,29 +1035,31 @@ namespace pgso
                 LoadRate();
             }
         }
+
         private void combo_scope_SelectedIndexChanged(object sender, EventArgs e)
         {
             combo_scope.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            // Only update the price if both scope and rate type are selected
             if (IsReservationTypeAndScopeSelected())
             {
-                LoadRate(); // This will update panel_Aircon based on fld_Aircon
+                LoadRate();
             }
             else
             {
-                // No valid selection yet - disable panel
-                panel_Aircon.Enabled = false;
-                radio_Yes.Checked = false;
-                radio_No.Checked = false;
+                txt_rate.Text = "0.00";
+                txt_Succeeding_Hour.Text = "0.00";
+                txt_Total.Text = "0.00";
             }
+        
         }
         private void TimeStart_ValueChanged(object sender, EventArgs e)
         {
             // Force AM time
-            if (TimeStart.Value.Hour >= 12)
+           /* if (TimeStart.Value.Hour >= 12)
             {
                 TimeStart.Value = TimeStart.Value.Date.AddHours(TimeStart.Value.Hour - 12);
-            }
+            }*/
             if (IsReservationTypeAndScopeSelected())
             {
                 LoadRate();
@@ -1045,10 +1068,10 @@ namespace pgso
         private void TimeEnd_ValueChanged(object sender, EventArgs e)
         {
             // Force PM time
-            if (TimeEnd.Value.Hour < 12)
+           /* if (TimeEnd.Value.Hour < 12)
             {
                 TimeEnd.Value = TimeEnd.Value.Date.AddHours(TimeEnd.Value.Hour + 12);
-            }
+            }*/
             if (IsReservationTypeAndScopeSelected())
             {
                 LoadRate();
@@ -1481,7 +1504,7 @@ namespace pgso
             try
             {
                 // Show "Please wait" dialog
-                using (var waitForm = new Form()
+                Form waitForm = new Form()
                 {
                     FormBorderStyle = FormBorderStyle.None,
                     StartPosition = FormStartPosition.CenterScreen,
@@ -1489,133 +1512,138 @@ namespace pgso
                     Height = 100,
                     TopMost = true,
                     ControlBox = false
-                })
+                };
+                var label = new Label()
                 {
-                    var label = new Label()
+                    Text = "Initializing scanner...",
+                    Dock = DockStyle.Fill,
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
+                waitForm.Controls.Add(label);
+                waitForm.Show();
+                Application.DoEvents();
+
+                // Find scanners
+                var deviceManager = new DeviceManager();
+                List<DeviceInfo> scanners = new List<DeviceInfo>();
+
+                for (int i = 1; i <= deviceManager.DeviceInfos.Count; i++)
+                {
+                    if (deviceManager.DeviceInfos[i].Type == WiaDeviceType.ScannerDeviceType)
                     {
-                        Text = "Initializing scanner...",
+                        scanners.Add(deviceManager.DeviceInfos[i]);
+                    }
+                }
+
+                if (scanners.Count == 0)
+                {
+                    waitForm.Close();
+                    waitForm.Dispose();
+                    MessageBox.Show("No scanners found. Please connect a scanner and try again.");
+                    return;
+                }
+
+                // Select scanner
+                DeviceInfo selectedScanner = null;
+                if (scanners.Count == 1)
+                {
+                    selectedScanner = scanners[0];
+                    label.Text = $"Using scanner: {selectedScanner.Properties["Name"].get_Value()}";
+                }
+                else
+                {
+                    waitForm.Close();
+                    waitForm.Dispose();
+                    using (var scannerSelectForm = new Form()
+                    {
+                        Text = "Select Scanner",
+                        Width = 350,
+                        Height = 220,
+                        StartPosition = FormStartPosition.CenterScreen
+                    })
+                    {
+                        ListBox scannerList = new ListBox() { Dock = DockStyle.Fill };
+                        foreach (var scanner in scanners)
+                        {
+                            scannerList.Items.Add(scanner.Properties["Name"].get_Value());
+                        }
+
+                        Button selectButton = new Button()
+                        {
+                            Text = "Select",
+                            Dock = DockStyle.Bottom
+                        };
+
+                        selectButton.Click += (s, e) =>
+                        {
+                            if (scannerList.SelectedIndex >= 0)
+                            {
+                                selectedScanner = scanners[scannerList.SelectedIndex];
+                                scannerSelectForm.DialogResult = DialogResult.OK;
+                            }
+                        };
+
+                        scannerSelectForm.Controls.Add(scannerList);
+                        scannerSelectForm.Controls.Add(selectButton);
+
+                        if (scannerSelectForm.ShowDialog() != DialogResult.OK)
+                        {
+                            return;
+                        }
+                    }
+                    // Recreate waitForm after scanner selection
+                    waitForm = new Form()
+                    {
+                        FormBorderStyle = FormBorderStyle.None,
+                        StartPosition = FormStartPosition.CenterScreen,
+                        Width = 300,
+                        Height = 100,
+                        TopMost = true,
+                        ControlBox = false
+                    };
+                    label = new Label()
+                    {
+                        Text = $"Scanning with {selectedScanner.Properties["Name"].get_Value()}...",
                         Dock = DockStyle.Fill,
                         TextAlign = ContentAlignment.MiddleCenter
                     };
                     waitForm.Controls.Add(label);
                     waitForm.Show();
                     Application.DoEvents();
+                }
 
-                    // Find scanners
-                    var deviceManager = new DeviceManager();
-                    List<DeviceInfo> scanners = new List<DeviceInfo>();
+                // Perform scan
+                try
+                {
+                    var device = selectedScanner.Connect();
+                    var item = device.Items[1];
 
-                    for (int i = 1; i <= deviceManager.DeviceInfos.Count; i++)
-                    {
-                        if (deviceManager.DeviceInfos[i].Type == WiaDeviceType.ScannerDeviceType)
-                        {
-                            scanners.Add(deviceManager.DeviceInfos[i]);
-                        }
-                    }
-
-                    if (scanners.Count == 0)
-                    {
-                        waitForm.Close();
-                        MessageBox.Show("No scanners found. Please connect a scanner and try again.");
-                        return;
-                    }
-
-                    // Select scanner
-                    DeviceInfo selectedScanner = null;
-                    if (scanners.Count == 1)
-                    {
-                        selectedScanner = scanners[0];
-                        label.Text = $"Using scanner: {selectedScanner.Properties["Name"].get_Value()}";
-                    }
-                    else
-                    {
-                        waitForm.Close();
-                        using (var scannerSelectForm = new Form()
-                        {
-                            Text = "Select Scanner",
-                            Width = 350,
-                            Height = 220,
-                            StartPosition = FormStartPosition.CenterScreen
-                        })
-                        {
-                            ListBox scannerList = new ListBox() { Dock = DockStyle.Fill };
-                            foreach (var scanner in scanners)
-                            {
-                                scannerList.Items.Add(scanner.Properties["Name"].get_Value());
-                            }
-
-                            Button selectButton = new Button()
-                            {
-                                Text = "Select",
-                                Dock = DockStyle.Bottom
-                            };
-
-                            selectButton.Click += (s, e) =>
-                            {
-                                if (scannerList.SelectedIndex >= 0)
-                                {
-                                    selectedScanner = scanners[scannerList.SelectedIndex];
-                                    scannerSelectForm.DialogResult = DialogResult.OK;
-                                }
-                            };
-
-                            scannerSelectForm.Controls.Add(scannerList);
-                            scannerSelectForm.Controls.Add(selectButton);
-
-                            if (scannerSelectForm.ShowDialog() != DialogResult.OK)
-                            {
-                                return;
-                            }
-                        }
-                        waitForm.Show();
-                        label.Text = $"Scanning with {selectedScanner.Properties["Name"].get_Value()}...";
-                        Application.DoEvents();
-                    }
-
-                    // Perform scan
+                    // Set scan settings: Color, 150 DPI, remove scan quality property
                     try
                     {
-                        var device = selectedScanner.Connect();
-                        var item = device.Items[1];
+                        const string wiaColorMode = "6146";
+                        const string wiaResolution = "6147";
+                        // Removed wiaScanQuality
 
-                        // Set scan settings: Color, 150 DPI, remove scan quality property
-                        try
-                        {
-                            const string wiaColorMode = "6146";
-                            const string wiaResolution = "6147";
-                            // Removed wiaScanQuality
+                        SetWIAProperty(item.Properties, wiaColorMode, 1); // Color
+                        SetWIAProperty(item.Properties, wiaResolution, 150); // 150 DPI
+                    }
+                    catch { /* Ignore if not supported */ }
 
-                            SetWIAProperty(item.Properties, wiaColorMode, 1); // Color
-                            SetWIAProperty(item.Properties, wiaResolution, 150); // 150 DPI
-                                                                                 // Removed: SetWIAProperty(item.Properties, wiaScanQuality, 100);
-                        }
-                        catch { /* Ignore if not supported */ }
+                    label.Text = "Scanning document...";
+                    Application.DoEvents();
 
-                        label.Text = "Scanning document...";
-                        Application.DoEvents();
+                    // Use JPEG format for smaller files
+                    var imageFile = (ImageFile)item.Transfer("{B96B3CAE-0728-11D3-9D7B-0000F81EF32E}"); // JPEG GUID.
 
-                        // Use JPEG format for smaller files
-                        var imageFile = (ImageFile)item.Transfer("{B96B3CAE-0728-11D3-9D7B-0000F81EF32E}"); // JPEG GUID.
+                    // Save to byte array
+                    var imageBytes = (byte[])imageFile.FileData.get_BinaryData();
+                    scannedImageBytes = imageBytes;
 
-                        // Save to byte array
-                        var imageBytes = (byte[])imageFile.FileData.get_BinaryData();
-                        scannedImageBytes = imageBytes;
-
-                        // Display preview and resize form after scan
-                        if (pictureBox1.InvokeRequired)
-                        {
-                            pictureBox1.Invoke(new Action(() =>
-                            {
-                                pictureBox1.Image?.Dispose();
-                                using (var ms = new MemoryStream(imageBytes))
-                                {
-                                    pictureBox1.Image = Image.FromStream(ms);
-                                }
-                                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                                this.Size = new Size(932, 613); // Set form size after scan
-                            }));
-                        }
-                        else
+                    // Display preview and resize form after scan
+                    if (pictureBox1.InvokeRequired)
+                    {
+                        pictureBox1.Invoke(new Action(() =>
                         {
                             pictureBox1.Image?.Dispose();
                             using (var ms = new MemoryStream(imageBytes))
@@ -1624,13 +1652,25 @@ namespace pgso
                             }
                             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
                             this.Size = new Size(932, 613); // Set form size after scan
-                        }
+                        }));
                     }
-                    finally
+                    else
                     {
-                        // Ensure scanner is properly released
-                        Marshal.ReleaseComObject(selectedScanner);
+                        pictureBox1.Image?.Dispose();
+                        using (var ms = new MemoryStream(imageBytes))
+                        {
+                            pictureBox1.Image = Image.FromStream(ms);
+                        }
+                        pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                        this.Size = new Size(932, 613); // Set form size after scan
                     }
+                }
+                finally
+                {
+                    // Ensure scanner is properly released
+                    Marshal.ReleaseComObject(selectedScanner);
+                    waitForm.Close();
+                    waitForm.Dispose();
                 }
             }
             catch (COMException ex)
@@ -1647,6 +1687,8 @@ namespace pgso
             {
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            Scanned?.Invoke(this, EventArgs.Empty);
         }
 
         private void SetScannerSettings(IItem item)
@@ -1718,6 +1760,7 @@ namespace pgso
                     break;
             }
         }
+        public event EventHandler Scanned;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -1898,17 +1941,26 @@ namespace pgso
 
         private void chk_UseCatererFee_CheckedChanged(object sender, EventArgs e)
         {
-            if (chk_UseCatererFee.Checked)
+            // If PGNV is selected, always set to zero and uncheck
+            if (combo_ReservationType.SelectedValue != null &&
+                combo_ReservationType.SelectedValue.ToString().Equals("PGNV", StringComparison.OrdinalIgnoreCase))
             {
-                txt_Caterer_Fee.Text = currentCatererFee.ToString("N2");
+                txt_Caterer_Fee.Text = "0.00";
+                chk_UseCatererFee.Checked = false;
             }
             else
             {
-                txt_Caterer_Fee.Text = "0.00";
+                if (chk_UseCatererFee.Checked)
+                {
+                    txt_Caterer_Fee.Text = currentCatererFee.ToString("N2");
+                }
+                else
+                {
+                    txt_Caterer_Fee.Text = "0.00";
+                }
             }
             CalculateTotalAmount(); // If caterer fee is part of total
         }
-
         // Helper to set placeholder
         private void SetComboNamePlaceholder()
         {

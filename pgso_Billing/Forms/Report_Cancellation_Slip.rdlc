@@ -303,7 +303,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>4.41145cm</Top>
+        <Top>4.13395cm</Top>
         <Left>2.40323cm</Left>
         <Height>1.18209cm</Height>
         <Width>3.58465cm</Width>
@@ -543,7 +543,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>6.22909cm</Top>
+        <Top>5.59409cm</Top>
         <Left>2.40323cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
@@ -618,7 +618,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>6.22909cm</Top>
+        <Top>5.59409cm</Top>
         <Left>6.43781cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
@@ -648,7 +648,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>6.62909cm</Top>
+        <Top>5.99409cm</Top>
         <Left>2.40323cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
@@ -723,7 +723,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>6.62909cm</Top>
+        <Top>5.99409cm</Top>
         <Left>6.43781cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
@@ -753,7 +753,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>7.82909cm</Top>
+        <Top>7.19409cm</Top>
         <Left>2.40324cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85818cm</Width>
@@ -838,7 +838,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>7.82909cm</Top>
+        <Top>7.19409cm</Top>
         <Left>6.43782cm</Left>
         <Height>0.4cm</Height>
         <Width>11.03098cm</Width>
@@ -868,7 +868,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>7.42909cm</Top>
+        <Top>6.79409cm</Top>
         <Left>2.40323cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
@@ -943,7 +943,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>7.42909cm</Top>
+        <Top>6.79409cm</Top>
         <Left>6.43781cm</Left>
         <Height>0.4cm</Height>
         <Width>11.03098cm</Width>
@@ -973,7 +973,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>7.02909cm</Top>
+        <Top>6.39409cm</Top>
         <Left>2.40323cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
@@ -1005,7 +1005,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>7.02909cm</Top>
+        <Top>6.39409cm</Top>
         <Left>6.43781cm</Left>
         <Height>0.4cm</Height>
         <Width>10.97538cm</Width>
@@ -1380,7 +1380,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>22.20481cm</Top>
+        <Top>21.90731cm</Top>
         <Left>2.40054cm</Left>
         <Height>1.18209cm</Height>
         <Width>3.58465cm</Width>
@@ -1620,7 +1620,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>24.00245cm</Top>
+        <Top>23.36745cm</Top>
         <Left>2.40054cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
@@ -1695,7 +1695,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>24.00245cm</Top>
+        <Top>23.36745cm</Top>
         <Left>6.43512cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
@@ -1725,7 +1725,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>24.40245cm</Top>
+        <Top>23.76745cm</Top>
         <Left>2.40054cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
@@ -1800,7 +1800,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>24.40245cm</Top>
+        <Top>23.76745cm</Top>
         <Left>6.43512cm</Left>
         <Height>0.4cm</Height>
         <Width>11.00452cm</Width>
@@ -1830,7 +1830,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>25.60245cm</Top>
+        <Top>24.96745cm</Top>
         <Left>2.40054cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
@@ -1911,7 +1911,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>25.60245cm</Top>
+        <Top>24.96745cm</Top>
         <Left>6.43782cm</Left>
         <Height>0.4cm</Height>
         <Width>11.03098cm</Width>
@@ -1941,7 +1941,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>25.20245cm</Top>
+        <Top>24.56745cm</Top>
         <Left>2.40054cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
@@ -2016,7 +2016,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>25.20245cm</Top>
+        <Top>24.56745cm</Top>
         <Left>6.43512cm</Left>
         <Height>0.4cm</Height>
         <Width>11.03098cm</Width>
@@ -2046,7 +2046,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>24.80245cm</Top>
+        <Top>24.16745cm</Top>
         <Left>2.40054cm</Left>
         <Height>0.4cm</Height>
         <Width>3.85819cm</Width>
@@ -2078,7 +2078,7 @@ This Province</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>24.76717cm</Top>
+        <Top>24.13217cm</Top>
         <Left>6.43512cm</Left>
         <Height>0.4cm</Height>
         <Width>10.97807cm</Width>
@@ -2204,7 +2204,7 @@ This Province</Value>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>8.44168cm</Top>
+        <Top>7.80668cm</Top>
         <Left>2.43096cm</Left>
         <Height>0.4cm</Height>
         <Width>6.41173cm</Width>
@@ -2667,7 +2667,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>8.89161cm</Top>
+        <Top>8.25661cm</Top>
         <Left>3.2288cm</Left>
         <Height>1cm</Height>
         <Width>14.24125cm</Width>
@@ -2689,7 +2689,7 @@ This Province</Value>
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.42496cm</Width>
+              <Width>2.42767cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2752,10 +2752,10 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>12.42078cm</Top>
+        <Top>12.27967cm</Top>
         <Left>15.04509cm</Left>
         <Height>0.5cm</Height>
-        <Width>2.42496cm</Width>
+        <Width>2.42767cm</Width>
         <ZIndex>53</ZIndex>
         <Style>
           <Border>
@@ -3096,7 +3096,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>9.89161cm</Top>
+        <Top>9.25661cm</Top>
         <Left>3.2288cm</Left>
         <Height>1cm</Height>
         <Width>14.24125cm</Width>
@@ -3294,7 +3294,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>10.89161cm</Top>
+        <Top>10.25661cm</Top>
         <Left>3.2288cm</Left>
         <Height>0.5cm</Height>
         <Width>14.24124cm</Width>
@@ -3413,7 +3413,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>11.39161cm</Top>
+        <Top>10.75661cm</Top>
         <Left>3.2288cm</Left>
         <Height>0.5cm</Height>
         <Width>14.24124cm</Width>
@@ -3495,7 +3495,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>12.42078cm</Top>
+        <Top>12.27967cm</Top>
         <Left>12.59367cm</Left>
         <Height>0.5cm</Height>
         <Width>2.45142cm</Width>
@@ -3705,7 +3705,6 @@ This Province</Value>
                         <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -3726,8 +3725,8 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>11.92078cm</Top>
-        <Left>3.22486cm</Left>
+        <Top>11.77967cm</Top>
+        <Left>3.23152cm</Left>
         <Height>0.5cm</Height>
         <Width>14.24124cm</Width>
         <ZIndex>62</ZIndex>
@@ -4192,7 +4191,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>26.71123cm</Top>
+        <Top>26.07623cm</Top>
         <Left>3.16835cm</Left>
         <Height>1cm</Height>
         <Width>14.24125cm</Width>
@@ -4277,7 +4276,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>30.2404cm</Top>
+        <Top>30.11151cm</Top>
         <Left>14.98464cm</Left>
         <Height>0.5cm</Height>
         <Width>2.42496cm</Width>
@@ -4621,7 +4620,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>27.71123cm</Top>
+        <Top>27.07623cm</Top>
         <Left>3.16835cm</Left>
         <Height>1cm</Height>
         <Width>14.24125cm</Width>
@@ -4819,7 +4818,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>28.71123cm</Top>
+        <Top>28.07623cm</Top>
         <Left>3.16835cm</Left>
         <Height>0.5cm</Height>
         <Width>14.24124cm</Width>
@@ -4938,7 +4937,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>29.21123cm</Top>
+        <Top>28.57623cm</Top>
         <Left>3.16835cm</Left>
         <Height>0.5cm</Height>
         <Width>14.24124cm</Width>
@@ -5020,7 +5019,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>30.2404cm</Top>
+        <Top>30.11151cm</Top>
         <Left>12.53322cm</Left>
         <Height>0.5cm</Height>
         <Width>2.45142cm</Width>
@@ -5136,7 +5135,7 @@ This Province</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>BillingDataset</DataSetName>
-        <Top>29.7404cm</Top>
+        <Top>29.61151cm</Top>
         <Left>3.16441cm</Left>
         <Height>0.5cm</Height>
         <Width>14.24124cm</Width>
@@ -5168,7 +5167,7 @@ This Province</Value>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>26.27595cm</Top>
+        <Top>25.64095cm</Top>
         <Left>2.40054cm</Left>
         <Height>0.4cm</Height>
         <Width>6.41173cm</Width>
@@ -5180,6 +5179,244 @@ This Province</Value>
           </Border>
         </Style>
       </Textbox>
+      <Tablix Name="Tablix29">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>11.81765cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.42631cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.5cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox78">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Caterer Fee</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox51</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox79">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!fld_Caterer_Fee.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <Format>'₱'#,0.00</Format>
+                                <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox53</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>5pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details10" />
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>BillingDataset</DataSetName>
+        <Top>11.30717cm</Top>
+        <Left>3.2288cm</Left>
+        <Height>0.5cm</Height>
+        <Width>14.24396cm</Width>
+        <ZIndex>71</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Tablix>
+      <Tablix Name="Tablix30">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>11.81765cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.42631cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.5cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox80">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Caterer Fee</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox51</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox81">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!fld_Caterer_Fee.Value</Value>
+                              <Style>
+                                <FontFamily>Calibri</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <Format>'₱'#,0.00</Format>
+                                <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox53</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>5pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details11" />
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>BillingDataset</DataSetName>
+        <Top>29.07623cm</Top>
+        <Left>3.16169cm</Left>
+        <Height>0.5cm</Height>
+        <Width>14.24396cm</Width>
+        <ZIndex>72</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(Sum(IIf(IsNothing(Fields!fld_Equipment_Name.Value) Or Fields!fld_Quantity.Value = 0, 1, 0)) &gt; 0, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+            <Width>0.25pt</Width>
+          </Border>
+        </Style>
+      </Tablix>
     </ReportItems>
     <Height>13.61875in</Height>
     <Style>

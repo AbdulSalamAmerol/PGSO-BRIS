@@ -168,7 +168,7 @@ namespace pgso
             }
             else if (selected == "Pending" || selected == "Cancelled" || selected == "Confirmed")
             {
-                bindingSource.Filter = $"fld_Equipment_Status = '{selected}'";
+                bindingSource.Filter = $"fld_Reservation_Status = '{selected}'";
             }
             else
             {
@@ -189,25 +189,25 @@ namespace pgso
             }
 
             // Color the entire row based on the equipment status
-            if (dt_equipment.Columns.Contains("fld_Equipment_Status"))
+            if (dt_equipment.Columns.Contains("fld_Reservation_Status"))
             {
-                var statusCell = dt_equipment.Rows[e.RowIndex].Cells["fld_Equipment_Status"];
+                var statusCell = dt_equipment.Rows[e.RowIndex].Cells["fld_Reservation_Status"];
                 if (statusCell.Value != null)
                 {
                     string status = statusCell.Value.ToString();
                     if (status.Equals("Confirmed", StringComparison.OrdinalIgnoreCase))
                     {
-                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(225, 235, 245);
+                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(225, 255, 225);
                         dt_equipment.Rows[e.RowIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
                     }
                     else if (status.Equals("Pending", StringComparison.OrdinalIgnoreCase))
                     {
-                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(242, 239, 231);
+                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
                         dt_equipment.Rows[e.RowIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
                     }
                     else if (status.Equals("Cancelled", StringComparison.OrdinalIgnoreCase))
                     {
-                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(255, 228, 225);
+                        dt_equipment.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(200, 220, 255);
                         dt_equipment.Rows[e.RowIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
                     }
                     else
@@ -226,7 +226,7 @@ namespace pgso
                 DataGridViewRow row = dt_equipment.Rows[e.RowIndex];
 
                 txt_CN.Text = row.Cells["fld_Control_number"].Value.ToString();
-                txt_Status.Text = row.Cells["fld_Equipment_Status"].Value.ToString();
+                txt_Status.Text = row.Cells["fld_Reservation_Status"].Value.ToString();
                 txt_Equipment_Name.Text = row.Cells["fld_Equipment_Name"].Value.ToString();
                 txt_Quantity.Text = row.Cells["fld_Quantity"].Value.ToString();
 
@@ -354,34 +354,34 @@ namespace pgso
                     db.strCon.Open();
 
                 string queryApproved = @"
-    SELECT 
-        r.fld_Control_number, 
-        rpe.fld_Equipment_Status,
-        r.fld_Created_At,
-        rpe.fld_Equipment_Status,
-        e.fld_Equipment_Name,
-        rpe.fld_Quantity,
-        r.fld_Total_Amount,
-        '₱' + CONVERT(VARCHAR, CAST(r.fld_Total_Amount AS MONEY), 1) AS fld_Total_Amount,
-        rp.fld_First_Name,
+                    SELECT 
+                        r.fld_Control_number, 
+                        r.fld_Reservation_Status,
+                        r.fld_Created_At,
+                        r.fld_Reservation_Status,
+                        e.fld_Equipment_Name,
+                        rpe.fld_Quantity,
+                        r.fld_Total_Amount,
+                        '₱' + CONVERT(VARCHAR, CAST(r.fld_Total_Amount AS MONEY), 1) AS fld_Total_Amount,
+                        rp.fld_First_Name,
        
-        CASE 
-            WHEN rpe.fld_Start_Date_Eq = rpe.fld_End_Date_Eq 
-                THEN FORMAT(rpe.fld_Start_Date_Eq, 'M/d/yyyy')
-            ELSE 
-                FORMAT(rpe.fld_Start_Date_Eq, 'M/d/yyyy') + ' - ' + FORMAT(rpe.fld_End_Date_Eq, 'M/d/yyyy')
-        END AS Date
-    FROM 
-        tbl_Reservation r
-    LEFT JOIN
-        tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
-    LEFT JOIN
-        tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
-    LEFT JOIN
-        tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-    WHERE  
-        r.fld_Reservation_Type = 'Equipment'
-    ORDER BY r.fld_Created_At DESC"; // Changed to DESC for newest first
+                        CASE 
+                            WHEN rpe.fld_Start_Date_Eq = rpe.fld_End_Date_Eq 
+                                THEN FORMAT(rpe.fld_Start_Date_Eq, 'M/d/yyyy')
+                            ELSE 
+                                FORMAT(rpe.fld_Start_Date_Eq, 'M/d/yyyy') + ' - ' + FORMAT(rpe.fld_End_Date_Eq, 'M/d/yyyy')
+                        END AS Date
+                    FROM 
+                        tbl_Reservation r
+                    LEFT JOIN
+                        tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
+                    LEFT JOIN
+                        tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
+                    LEFT JOIN
+                        tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                    WHERE  
+                        r.fld_Reservation_Type = 'Equipment'
+                    ORDER BY r.fld_Control_number DESC"; // Changed to DESC for newest first
 
                 LoadData(queryApproved, dt_equipment, "Approved");
             }
@@ -478,7 +478,7 @@ namespace pgso
 
         private void btn_Update_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show(
+           /* var result = MessageBox.Show(
                 "Are you sure you want to update?",
                 "Confirm Submission",
                 MessageBoxButtons.YesNo,
@@ -555,7 +555,7 @@ namespace pgso
             catch (Exception ex)
             {
                 MessageBox.Show($"Error updating reservation: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            }*/
         }
 
         private void txt_Total_TextChanged(object sender, EventArgs e)

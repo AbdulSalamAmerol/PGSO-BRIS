@@ -36,12 +36,19 @@
             this.dt_Audit = new System.Windows.Forms.DataGridView();
             this.searchbox = new System.Windows.Forms.TextBox();
             this.btnGeneratePDFadm = new System.Windows.Forms.Button();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblPageInfo = new System.Windows.Forms.Label();
+            this.btnNextPage = new System.Windows.Forms.Button();
+            this.btnPrevPage = new System.Windows.Forms.Button();
+            this.Username = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UserType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Action = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrevData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dt_Audit)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // _BRIS_EXPERIMENT_3_0DataSet1
@@ -72,10 +79,12 @@
             this.dt_Audit.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dt_Audit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dt_Audit.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4});
+            this.Username,
+            this.UserType,
+            this.Action,
+            this.PrevData,
+            this.NewData,
+            this.Time});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -123,62 +132,95 @@
             this.btnGeneratePDFadm.UseVisualStyleBackColor = true;
             this.btnGeneratePDFadm.Click += new System.EventHandler(this.btnGeneratePDFadm_Click);
             // 
-            // Column1
+            // panel3
             // 
-            this.Column1.DataPropertyName = "fld_Username";
-            this.Column1.HeaderText = "Username";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
+            this.panel3.Controls.Add(this.lblPageInfo);
+            this.panel3.Controls.Add(this.btnNextPage);
+            this.panel3.Controls.Add(this.btnPrevPage);
+            this.panel3.Location = new System.Drawing.Point(1491, 4);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(193, 38);
+            this.panel3.TabIndex = 34;
             // 
-            // Column2
+            // lblPageInfo
             // 
-            this.Column2.DataPropertyName = "fld_Changed_By";
-            this.Column2.HeaderText = "User Type";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
+            this.lblPageInfo.AutoSize = true;
+            this.lblPageInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPageInfo.Location = new System.Drawing.Point(55, 11);
+            this.lblPageInfo.Name = "lblPageInfo";
+            this.lblPageInfo.Size = new System.Drawing.Size(75, 16);
+            this.lblPageInfo.TabIndex = 17;
+            this.lblPageInfo.Text = "lblPageInfo";
+            this.lblPageInfo.Click += new System.EventHandler(this.lblPageInfo_Click);
             // 
-            // Column3
+            // btnNextPage
             // 
-            this.Column3.DataPropertyName = "fld_ActionType";
-            this.Column3.HeaderText = "Action";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
+            this.btnNextPage.Location = new System.Drawing.Point(136, 8);
+            this.btnNextPage.Name = "btnNextPage";
+            this.btnNextPage.Size = new System.Drawing.Size(46, 23);
+            this.btnNextPage.TabIndex = 1;
+            this.btnNextPage.Text = ">>";
+            this.btnNextPage.UseVisualStyleBackColor = true;
+            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
             // 
-            // Column4
+            // btnPrevPage
             // 
-            this.Column4.DataPropertyName = "fld_Changed_At";
-            this.Column4.HeaderText = "Time";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
+            this.btnPrevPage.Location = new System.Drawing.Point(3, 8);
+            this.btnPrevPage.Name = "btnPrevPage";
+            this.btnPrevPage.Size = new System.Drawing.Size(46, 23);
+            this.btnPrevPage.TabIndex = 0;
+            this.btnPrevPage.Text = "<<";
+            this.btnPrevPage.UseVisualStyleBackColor = true;
+            this.btnPrevPage.Click += new System.EventHandler(this.btnPrevPage_Click);
             // 
-            // searchbox
+            // Username
             // 
-            this.searchbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchbox.BackColor = System.Drawing.Color.Silver;
-            this.searchbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchbox.Location = new System.Drawing.Point(1703, 13);
-            this.searchbox.Name = "searchbox";
-            this.searchbox.Size = new System.Drawing.Size(177, 26);
-            this.searchbox.TabIndex = 1;
-            this.searchbox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.Username.DataPropertyName = "fld_Username";
+            this.Username.HeaderText = "Username";
+            this.Username.Name = "Username";
+            this.Username.ReadOnly = true;
             // 
-            // btnGeneratePDFadm
+            // UserType
             // 
-            this.btnGeneratePDFadm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGeneratePDFadm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGeneratePDFadm.Location = new System.Drawing.Point(1737, 964);
-            this.btnGeneratePDFadm.Name = "btnGeneratePDFadm";
-            this.btnGeneratePDFadm.Size = new System.Drawing.Size(143, 43);
-            this.btnGeneratePDFadm.TabIndex = 2;
-            this.btnGeneratePDFadm.Text = "Generate PDF";
-            this.btnGeneratePDFadm.UseVisualStyleBackColor = true;
-            this.btnGeneratePDFadm.Click += new System.EventHandler(this.btnGeneratePDFadm_Click);
+            this.UserType.DataPropertyName = "fld_Changed_By";
+            this.UserType.HeaderText = "User Type";
+            this.UserType.Name = "UserType";
+            this.UserType.ReadOnly = true;
+            // 
+            // Action
+            // 
+            this.Action.DataPropertyName = "fld_ActionType";
+            this.Action.HeaderText = "Action";
+            this.Action.Name = "Action";
+            this.Action.ReadOnly = true;
+            // 
+            // PrevData
+            // 
+            this.PrevData.DataPropertyName = "PrevData";
+            this.PrevData.HeaderText = "Previous Data";
+            this.PrevData.Name = "PrevData";
+            this.PrevData.ReadOnly = true;
+            // 
+            // NewData
+            // 
+            this.NewData.DataPropertyName = "NewData";
+            this.NewData.HeaderText = "New Data";
+            this.NewData.Name = "NewData";
+            this.NewData.ReadOnly = true;
+            // 
+            // Time
+            // 
+            this.Time.DataPropertyName = "fld_Changed_At";
+            this.Time.HeaderText = "Time";
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
             // 
             // frm_Logs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 1061);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.btnGeneratePDFadm);
             this.Controls.Add(this.searchbox);
             this.Controls.Add(this.dt_Audit);
@@ -187,6 +229,8 @@
             this.Load += new System.EventHandler(this.frm_Logs_Load);
             ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dt_Audit)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,9 +242,15 @@
         private System.Windows.Forms.DataGridView dt_Audit;
         private System.Windows.Forms.TextBox searchbox;
         private System.Windows.Forms.Button btnGeneratePDFadm;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label lblPageInfo;
+        private System.Windows.Forms.Button btnNextPage;
+        private System.Windows.Forms.Button btnPrevPage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Username;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Action;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrevData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NewData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
     }
 }

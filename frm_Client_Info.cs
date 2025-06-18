@@ -170,20 +170,20 @@ namespace pgso
 
                 // In LoadRequestingPersonData, update the SELECT part of your query:
                 string query = $@"
-SELECT 
-    MIN(pk_Requesting_PersonID) AS pk_Requesting_PersonID,
-    fld_First_Name,
-    fld_Middle_Name,
-    fld_Surname,
-    fld_Requesting_Office AS [Office],
-    MIN(fld_Contact_Number) AS [Contact],
-    MIN(fld_Requesting_Person_Address) AS [Address],
-    MIN(fld_Request_Origin) AS [Origin]
-FROM tbl_Requesting_Person
-{whereClause}
-GROUP BY fld_Surname, fld_First_Name, fld_Middle_Name, fld_Requesting_Office
-ORDER BY fld_Surname, fld_First_Name
-OFFSET {offset} ROWS FETCH NEXT {pageSize} ROWS ONLY";
+                    SELECT 
+                        MIN(pk_Requesting_PersonID) AS pk_Requesting_PersonID,
+                        fld_First_Name,
+                        fld_Middle_Name,
+                        fld_Surname,
+                        fld_Requesting_Office AS [Office],
+                        MIN(fld_Contact_Number) AS [Contact],
+                        MIN(fld_Requesting_Person_Address) AS [Address],
+                        MIN(fld_Request_Origin) AS [Origin]
+                    FROM tbl_Requesting_Person
+                    {whereClause}
+                    GROUP BY fld_Surname, fld_First_Name, fld_Middle_Name, fld_Requesting_Office
+                    ORDER BY fld_Surname, fld_First_Name
+                    OFFSET {offset} ROWS FETCH NEXT {pageSize} ROWS ONLY";
 
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -274,15 +274,15 @@ OFFSET {offset} ROWS FETCH NEXT {pageSize} ROWS ONLY";
                 DBConnect();
 
                 string updateQuery = @"
-            UPDATE tbl_Requesting_Person
-            SET
-                fld_First_Name = @FirstName,
-                fld_Middle_Name = @MiddleName,
-                fld_Surname = @Surname,
-                fld_Contact_Number = @Contact,
-                fld_Requesting_Office = @Office,
-                fld_Requesting_Person_Address = @Address
-            WHERE pk_Requesting_PersonID = @PersonID";
+                    UPDATE tbl_Requesting_Person
+                    SET
+                        fld_First_Name = @FirstName,
+                        fld_Middle_Name = @MiddleName,
+                        fld_Surname = @Surname,
+                        fld_Contact_Number = @Contact,
+                        fld_Requesting_Office = @Office,
+                        fld_Requesting_Person_Address = @Address
+                    WHERE pk_Requesting_PersonID = @PersonID";
 
                 using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
                 {
@@ -396,9 +396,9 @@ OFFSET {offset} ROWS FETCH NEXT {pageSize} ROWS ONLY";
 
                 // Count total records for pagination
                 string countQuery = @"
-            SELECT COUNT(*) 
-            FROM tbl_Reservation
-            WHERE fk_Requesting_PersonID = @PersonID";
+                    SELECT COUNT(*) 
+                    FROM tbl_Reservation
+                    WHERE fk_Requesting_PersonID = @PersonID";
 
                 using (SqlCommand countCmd = new SqlCommand(countQuery, conn))
                 {
@@ -412,13 +412,13 @@ OFFSET {offset} ROWS FETCH NEXT {pageSize} ROWS ONLY";
 
                 // Count reservations by status (unchanged)
                 string statusQuery = @"
-            SELECT 
-                SUM(CASE WHEN fld_Reservation_Status = 'Pending' THEN 1 ELSE 0 END) AS PendingCount,
-                SUM(CASE WHEN fld_Reservation_Status = 'Cancelled' THEN 1 ELSE 0 END) AS CancelledCount,
-                SUM(CASE WHEN fld_Reservation_Status = 'Confirmed' THEN 1 ELSE 0 END) AS ConfirmedCount,
-                COUNT(*) AS TotalCount
-            FROM tbl_Reservation
-            WHERE fk_Requesting_PersonID = @PersonID";
+                    SELECT 
+                        SUM(CASE WHEN fld_Reservation_Status = 'Pending' THEN 1 ELSE 0 END) AS PendingCount,
+                        SUM(CASE WHEN fld_Reservation_Status = 'Cancelled' THEN 1 ELSE 0 END) AS CancelledCount,
+                        SUM(CASE WHEN fld_Reservation_Status = 'Confirmed' THEN 1 ELSE 0 END) AS ConfirmedCount,
+                        COUNT(*) AS TotalCount
+                    FROM tbl_Reservation
+                    WHERE fk_Requesting_PersonID = @PersonID";
 
                 using (SqlCommand countCmd = new SqlCommand(statusQuery, conn))
                 {
@@ -437,16 +437,15 @@ OFFSET {offset} ROWS FETCH NEXT {pageSize} ROWS ONLY";
 
                 // Load reservation details with pagination
                 string detailsQuery = $@"
-            SELECT 
-                fld_Control_Number AS [Control Number],
-                fld_Created_At AS [Request Date],
-                fld_Reservation_Type AS [Reservation Type],
-                fld_Reservation_Status AS [Status]
-            FROM tbl_Reservation
-            WHERE fk_Requesting_PersonID = @PersonID
-            ORDER BY fld_Created_At DESC
-            OFFSET {offset} ROWS FETCH NEXT {pageSize1} ROWS ONLY";
-
+                    SELECT 
+                        fld_Control_Number AS [Control Number],
+                        fld_Created_At AS [Request Date],
+                        fld_Reservation_Type AS [Reservation Type],
+                        fld_Reservation_Status AS [Status]
+                    FROM tbl_Reservation
+                    WHERE fk_Requesting_PersonID = @PersonID
+                    ORDER BY CAST(RIGHT(fld_Control_Number, 4) AS INT) DESC
+                    OFFSET {offset} ROWS FETCH NEXT {pageSize1} ROWS ONLY";
                 using (SqlCommand detailsCmd = new SqlCommand(detailsQuery, conn))
                 {
                     detailsCmd.Parameters.AddWithValue("@PersonID", personId);
@@ -567,14 +566,14 @@ OFFSET {offset} ROWS FETCH NEXT {pageSize} ROWS ONLY";
                 // 4. Load reservation details with pagination
                 // (Pagination is optional here; you can add it if needed)
                 string detailsQuery = $@"
-            SELECT 
-                fld_Control_Number AS [Control Number],
-                fld_Created_At AS [Request Date],
-                fld_Reservation_Type AS [Reservation Type],
-                fld_Reservation_Status AS [Status]
-            FROM tbl_Reservation
-            WHERE fk_Requesting_PersonID IN ({idList})
-            ORDER BY fld_Created_At DESC";
+                SELECT 
+                    fld_Control_Number AS [Control Number],
+                    fld_Created_At AS [Request Date],
+                    fld_Reservation_Type AS [Reservation Type],
+                    fld_Reservation_Status AS [Status]
+                FROM tbl_Reservation
+                WHERE fk_Requesting_PersonID IN ({idList})
+                ORDER BY CAST(RIGHT(fld_Control_Number, 4) AS INT) DESC";
 
                 using (SqlCommand detailsCmd = new SqlCommand(detailsQuery, conn))
                 {
@@ -594,6 +593,11 @@ OFFSET {offset} ROWS FETCH NEXT {pageSize} ROWS ONLY";
             {
                 DBClose();
             }
+        }
+
+        private void dgv_Additional_Info_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

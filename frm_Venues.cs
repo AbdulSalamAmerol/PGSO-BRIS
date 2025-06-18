@@ -153,22 +153,22 @@ namespace pgso
                     connection.Open();
                     string query = @"
                     SELECT
+                        r.pk_ReservationID,
                         r.fld_Control_number, 
                         r.fld_Reservation_Status,
                         r.fld_Created_At,
                         r.fld_Total_Amount,
                         v.fld_Venue_Name AS fld_Venue_Name,
                         rp.fld_First_Name,
-                        (SELECT TOP 1 vp.fld_Rate_Type 
-                         FROM tbl_Venue_Pricing vp 
-                         WHERE vp.fk_VenueID = r.fk_VenueID AND vp.fk_Venue_ScopeID = r.fk_Venue_ScopeID) AS fld_Rate_Type,
+                        vp.fld_Rate_Type, -- Get the actual rate type from the correct pricing row
                         r.fld_Scanned_Document AS fld_Scanned_Document,
                         FORMAT(r.fld_Start_Date, 'M/d/yyyy') AS [Date]
                     FROM tbl_Reservation r
                     LEFT JOIN tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
                     LEFT JOIN tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
+                    LEFT JOIN tbl_Venue_Pricing vp ON r.fk_Venue_PricingID = vp.pk_Venue_PricingID
                     WHERE r.fld_Reservation_Type = 'Venue'
-                    ORDER BY r.fld_Created_At DESC";
+                   ORDER BY r.fld_Control_number DESC";
                     var dataTable = new DataTable();
                     using (var adapter = new SqlDataAdapter(query, connection))
                     {
@@ -211,6 +211,7 @@ namespace pgso
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void LoadVenueNames()
         {
             try
@@ -365,33 +366,33 @@ namespace pgso
                     connection.Open();
 
                     string query = @"
-SELECT 
-    r.fld_Reservation_Status AS Status,
-    rp.fld_First_Name AS FirstName, 
-    rp.fld_Middle_Name AS MiddleName,      -- Add this
-    rp.fld_Surname AS LastName,          -- Add this
-    rp.fld_Requesting_Person_Address AS Address,
-    rp.fld_Requesting_Office AS Office,
-    rp.fld_Contact_Number AS ContactNumber,
-    r.fld_Activity_Name AS ActivityName,
-    r.fld_Number_Of_Participants AS Participants,
-    v.fld_Venue_Name AS VenueName,
-    vs.fld_Venue_Scope_Name AS Scope,
-    vp.fld_Rate_Type AS RateType,
-    r.fld_Start_Date AS StartDate,
-    r.fld_End_Date AS EndDate,
-    r.fld_Start_Time AS StartTime,
-    r.fld_End_Time AS EndTime
-FROM tbl_Reservation r
-LEFT JOIN tbl_Requesting_Person rp 
-    ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-LEFT JOIN tbl_Venue v 
-    ON r.fk_VenueID = v.pk_VenueID
-LEFT JOIN tbl_Venue_Scope vs 
-    ON r.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
-LEFT JOIN tbl_Venue_Pricing vp 
-    ON (r.fk_VenueID = vp.fk_VenueID AND r.fk_Venue_ScopeID = vp.fk_Venue_ScopeID)
-WHERE r.fld_Control_number = @ControlNumber";
+                SELECT 
+                    r.fld_Reservation_Status AS Status,
+                    rp.fld_First_Name AS FirstName, 
+                    rp.fld_Middle_Name AS MiddleName,
+                    rp.fld_Surname AS LastName,
+                    rp.fld_Requesting_Person_Address AS Address,
+                    rp.fld_Requesting_Office AS Office,
+                    rp.fld_Contact_Number AS ContactNumber,
+                    r.fld_Activity_Name AS ActivityName,
+                    r.fld_Number_Of_Participants AS Participants,
+                    v.fld_Venue_Name AS VenueName,
+                    vs.fld_Venue_Scope_Name AS Scope,
+                    vp.fld_Rate_Type AS RateType, -- Correct rate type
+                    r.fld_Start_Date AS StartDate,
+                    r.fld_End_Date AS EndDate,
+                    r.fld_Start_Time AS StartTime,
+                    r.fld_End_Time AS EndTime
+                FROM tbl_Reservation r
+                LEFT JOIN tbl_Requesting_Person rp 
+                    ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                LEFT JOIN tbl_Venue v 
+                    ON r.fk_VenueID = v.pk_VenueID
+                LEFT JOIN tbl_Venue_Scope vs 
+                    ON r.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
+                LEFT JOIN tbl_Venue_Pricing vp 
+                    ON r.fk_Venue_PricingID = vp.pk_Venue_PricingID -- <--- THIS IS THE KEY CHANGE
+                WHERE r.fld_Control_number = @ControlNumber";
 
                     using (var command = new SqlCommand(query, connection))
                     {
@@ -403,15 +404,13 @@ WHERE r.fld_Control_number = @ControlNumber";
 
                             if (reader.Read())
                             {
-                                // Combine first, middle, and last name
+                                // ... (rest of your code is unchanged)
                                 string firstName = reader["FirstName"]?.ToString() ?? "";
                                 string middleName = reader["MiddleName"]?.ToString() ?? "";
                                 string lastName = reader["LastName"]?.ToString() ?? "";
                                 string fullName = $"{firstName} {middleName} {lastName}".Replace("  ", " ").Trim();
 
                                 txt_FName.Text = string.IsNullOrWhiteSpace(fullName) ? "N/A" : fullName;
-
-                                // Debug output for contact number
                                 var contactNumber = reader["ContactNumber"]?.ToString() ?? "N/A";
                                 Debug.WriteLine($"Setting contact number to: {contactNumber}");
                                 txt_Contact.Text = contactNumber;
@@ -422,9 +421,9 @@ WHERE r.fld_Control_number = @ControlNumber";
                                 txt_Participants.Text = reader["Participants"]?.ToString() ?? "0";
                                 txt_Venue.Text = reader["VenueName"]?.ToString() ?? "N/A";
                                 txt_Scope.Text = reader["Scope"]?.ToString() ?? "N/A";
-                                txt_Type.Text = reader["RateType"]?.ToString() ?? "N/A";
+                                txt_Type.Text = reader["RateType"]?.ToString() ?? "N/A"; // <-- This will now always be correct
 
-                                // Date/time aggregation for all rows
+                                // ... (rest of your code unchanged)
                                 do
                                 {
                                     string startDate = reader["StartDate"] != DBNull.Value
@@ -454,7 +453,6 @@ WHERE r.fld_Control_number = @ControlNumber";
                                 // No data found, clear fields
                                 Debug.WriteLine("No data found for control number");
                                 txt_FName.Text = "N/A";
-                                // txt_LName.Text = "N/A";
                                 txt_Contact.Text = "N/A";
                                 txt_Address.Text = "N/A";
                                 txt_Office.Text = "N/A";
@@ -476,6 +474,7 @@ WHERE r.fld_Control_number = @ControlNumber";
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         private void UpdatePagedData()
@@ -640,16 +639,16 @@ WHERE r.fld_Control_number = @ControlNumber";
                     string status = statusCell.Value.ToString();
                     if (status.Equals("Confirmed", StringComparison.OrdinalIgnoreCase))
                     {
-                        dt_all.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(225, 235, 245);
+                        dt_all.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(225, 255, 225);
                     }
                     else if (status.Equals("Pending", StringComparison.OrdinalIgnoreCase))
                     {
-                        dt_all.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(242, 239, 231);
+                        dt_all.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(255, 255, 255);
                         dt_all.Rows[e.RowIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
                     }
                     else if (status.Equals("Cancelled", StringComparison.OrdinalIgnoreCase))
                     {
-                        dt_all.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(255, 228, 225);
+                        dt_all.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(200, 220, 255);
                         dt_all.Rows[e.RowIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
                     }
                     else

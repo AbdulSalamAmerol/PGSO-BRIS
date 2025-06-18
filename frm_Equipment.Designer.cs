@@ -34,14 +34,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dt_equipment = new System.Windows.Forms.DataGridView();
-            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Equipment_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Created = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Equipment_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Total_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_Information = new System.Windows.Forms.Panel();
             this.label17 = new System.Windows.Forms.Label();
             this.txt_Contact = new System.Windows.Forms.TextBox();
@@ -81,6 +73,14 @@
             this.lblPageInfo = new System.Windows.Forms.Label();
             this.btnNextPage = new System.Windows.Forms.Button();
             this.btnPrevPage = new System.Windows.Forms.Button();
+            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Equipment_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Created = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Reservation_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Total_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dt_equipment)).BeginInit();
             this.panel_Information.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -109,7 +109,7 @@
             this.fld_Equipment_Name,
             this.Date,
             this.Created,
-            this.fld_Equipment_Status,
+            this.fld_Reservation_Status,
             this.fld_Total_Amount});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
@@ -134,78 +134,6 @@
             this.dt_equipment.Size = new System.Drawing.Size(1507, 881);
             this.dt_equipment.TabIndex = 1;
             this.dt_equipment.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_equipment_CellContentClick);
-            // 
-            // Item
-            // 
-            this.Item.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Item.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Item.HeaderText = "Item";
-            this.Item.Name = "Item";
-            this.Item.ReadOnly = true;
-            this.Item.Width = 50;
-            // 
-            // fld_Control_Number
-            // 
-            this.fld_Control_Number.DataPropertyName = "fld_Control_Number";
-            this.fld_Control_Number.FillWeight = 57.44501F;
-            this.fld_Control_Number.HeaderText = "Control Number";
-            this.fld_Control_Number.Name = "fld_Control_Number";
-            this.fld_Control_Number.ReadOnly = true;
-            // 
-            // fld_Quantity
-            // 
-            this.fld_Quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.fld_Quantity.DataPropertyName = "fld_Quantity";
-            this.fld_Quantity.FillWeight = 355.33F;
-            this.fld_Quantity.HeaderText = "Quantity";
-            this.fld_Quantity.Name = "fld_Quantity";
-            this.fld_Quantity.ReadOnly = true;
-            this.fld_Quantity.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.fld_Quantity.Width = 85;
-            // 
-            // fld_Equipment_Name
-            // 
-            this.fld_Equipment_Name.DataPropertyName = "fld_Equipment_Name";
-            this.fld_Equipment_Name.FillWeight = 57.44501F;
-            this.fld_Equipment_Name.HeaderText = "Equipment";
-            this.fld_Equipment_Name.Name = "fld_Equipment_Name";
-            this.fld_Equipment_Name.ReadOnly = true;
-            // 
-            // Date
-            // 
-            this.Date.DataPropertyName = "Date";
-            this.Date.FillWeight = 57.44501F;
-            this.Date.HeaderText = "Date of Use";
-            this.Date.Name = "Date";
-            this.Date.ReadOnly = true;
-            // 
-            // Created
-            // 
-            this.Created.DataPropertyName = "fld_Created_At";
-            this.Created.FillWeight = 57.44501F;
-            this.Created.HeaderText = "Date Requested";
-            this.Created.Name = "Created";
-            this.Created.ReadOnly = true;
-            // 
-            // fld_Equipment_Status
-            // 
-            this.fld_Equipment_Status.DataPropertyName = "fld_Equipment_Status";
-            this.fld_Equipment_Status.FillWeight = 57.44501F;
-            this.fld_Equipment_Status.HeaderText = "Status";
-            this.fld_Equipment_Status.Name = "fld_Equipment_Status";
-            this.fld_Equipment_Status.ReadOnly = true;
-            // 
-            // fld_Total_Amount
-            // 
-            this.fld_Total_Amount.DataPropertyName = "fld_Total_Amount";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fld_Total_Amount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.fld_Total_Amount.FillWeight = 57.44501F;
-            this.fld_Total_Amount.HeaderText = "Total";
-            this.fld_Total_Amount.Name = "fld_Total_Amount";
-            this.fld_Total_Amount.ReadOnly = true;
             // 
             // panel_Information
             // 
@@ -624,6 +552,78 @@
             this.btnPrevPage.UseVisualStyleBackColor = true;
             this.btnPrevPage.Click += new System.EventHandler(this.btnPrevPage_Click);
             // 
+            // Item
+            // 
+            this.Item.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Item.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Item.HeaderText = "Item";
+            this.Item.Name = "Item";
+            this.Item.ReadOnly = true;
+            this.Item.Width = 50;
+            // 
+            // fld_Control_Number
+            // 
+            this.fld_Control_Number.DataPropertyName = "fld_Control_Number";
+            this.fld_Control_Number.FillWeight = 57.44501F;
+            this.fld_Control_Number.HeaderText = "Control Number";
+            this.fld_Control_Number.Name = "fld_Control_Number";
+            this.fld_Control_Number.ReadOnly = true;
+            // 
+            // fld_Quantity
+            // 
+            this.fld_Quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.fld_Quantity.DataPropertyName = "fld_Quantity";
+            this.fld_Quantity.FillWeight = 355.33F;
+            this.fld_Quantity.HeaderText = "Quantity";
+            this.fld_Quantity.Name = "fld_Quantity";
+            this.fld_Quantity.ReadOnly = true;
+            this.fld_Quantity.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.fld_Quantity.Width = 85;
+            // 
+            // fld_Equipment_Name
+            // 
+            this.fld_Equipment_Name.DataPropertyName = "fld_Equipment_Name";
+            this.fld_Equipment_Name.FillWeight = 57.44501F;
+            this.fld_Equipment_Name.HeaderText = "Equipment";
+            this.fld_Equipment_Name.Name = "fld_Equipment_Name";
+            this.fld_Equipment_Name.ReadOnly = true;
+            // 
+            // Date
+            // 
+            this.Date.DataPropertyName = "Date";
+            this.Date.FillWeight = 57.44501F;
+            this.Date.HeaderText = "Date of Use";
+            this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
+            // 
+            // Created
+            // 
+            this.Created.DataPropertyName = "fld_Created_At";
+            this.Created.FillWeight = 57.44501F;
+            this.Created.HeaderText = "Date Requested";
+            this.Created.Name = "Created";
+            this.Created.ReadOnly = true;
+            // 
+            // fld_Reservation_Status
+            // 
+            this.fld_Reservation_Status.DataPropertyName = "fld_Reservation_Status";
+            this.fld_Reservation_Status.FillWeight = 57.44501F;
+            this.fld_Reservation_Status.HeaderText = "Status";
+            this.fld_Reservation_Status.Name = "fld_Reservation_Status";
+            this.fld_Reservation_Status.ReadOnly = true;
+            // 
+            // fld_Total_Amount
+            // 
+            this.fld_Total_Amount.DataPropertyName = "fld_Total_Amount";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fld_Total_Amount.DefaultCellStyle = dataGridViewCellStyle3;
+            this.fld_Total_Amount.FillWeight = 57.44501F;
+            this.fld_Total_Amount.HeaderText = "Total";
+            this.fld_Total_Amount.Name = "fld_Total_Amount";
+            this.fld_Total_Amount.ReadOnly = true;
+            // 
             // frm_Equipment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -698,7 +698,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Equipment_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn Created;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Equipment_Status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Reservation_Status;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Total_Amount;
     }
 }

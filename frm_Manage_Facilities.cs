@@ -336,7 +336,6 @@ namespace pgso
         }
 
 
-       
 
         // Helper methods
         private int GetVenueId(string venueName, SqlTransaction transaction)

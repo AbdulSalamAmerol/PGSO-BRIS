@@ -351,7 +351,6 @@
             this.txt_FName.ReadOnly = true;
             this.txt_FName.Size = new System.Drawing.Size(204, 26);
             this.txt_FName.TabIndex = 49;
-            this.txt_FName.Text = "Venue Reservation Details for Date";
             this.txt_FName.TextChanged += new System.EventHandler(this.txt_FName_TextChanged);
             // 
             // txt_CN
