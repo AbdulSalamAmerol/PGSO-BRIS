@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_Manage_Equipment));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -46,6 +47,8 @@
             this.combo_Sort = new System.Windows.Forms.ComboBox();
             this.btn_Add_Equipment = new System.Windows.Forms.Button();
             this.dt_Equipments = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.Items = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Equipment_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fld_Equipment_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,22 +57,10 @@
             this.fld_Total_Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.Delete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.combo_Sort = new System.Windows.Forms.ComboBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.lblPageInfo = new System.Windows.Forms.Label();
-            this.btnNextPage = new System.Windows.Forms.Button();
-            this.btnPrevPage = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dt_Equipments)).BeginInit();
-            this.panel5.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -213,28 +204,47 @@
             this.fld_Total_Stock,
             this.Edit,
             this.Delete});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dt_Equipments.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dt_Equipments.DefaultCellStyle = dataGridViewCellStyle5;
             this.dt_Equipments.Location = new System.Drawing.Point(7, 57);
             this.dt_Equipments.Name = "dt_Equipments";
             this.dt_Equipments.ReadOnly = true;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dt_Equipments.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dt_Equipments.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dt_Equipments.RowHeadersVisible = false;
             this.dt_Equipments.Size = new System.Drawing.Size(1859, 660);
             this.dt_Equipments.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(111, 24);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Equipment";
+            // 
+            // panel2
+            // 
+            this.panel2.Enabled = false;
+            this.panel2.Location = new System.Drawing.Point(12, 33);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(897, 165);
+            this.panel2.TabIndex = 4;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // Items
             // 
@@ -290,6 +300,10 @@
             // Edit
             // 
             this.Edit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle4.NullValue")));
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(2);
+            this.Edit.DefaultCellStyle = dataGridViewCellStyle4;
             this.Edit.FillWeight = 171.7778F;
             this.Edit.HeaderText = "Edit";
             this.Edit.Image = ((System.Drawing.Image)(resources.GetObject("Edit.Image")));
@@ -315,106 +329,6 @@
             this.Delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Delete.Width = 60;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 24);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Equipment";
-            // 
-            // panel2
-            // 
-            this.panel2.Enabled = false;
-            this.panel2.Location = new System.Drawing.Point(12, 33);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(897, 165);
-            this.panel2.TabIndex = 4;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.label4);
-            this.panel5.Controls.Add(this.txt_Search_Equipmet);
-            this.panel5.Controls.Add(this.label2);
-            this.panel5.Controls.Add(this.combo_Sort);
-            this.panel5.Location = new System.Drawing.Point(122, 14);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(481, 37);
-            this.panel5.TabIndex = 36;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(23, 13);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 20);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Search:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(246, 11);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Sort by:";
-            // 
-            // combo_Sort
-            // 
-            this.combo_Sort.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.combo_Sort.FormattingEnabled = true;
-            this.combo_Sort.Location = new System.Drawing.Point(315, 3);
-            this.combo_Sort.Name = "combo_Sort";
-            this.combo_Sort.Size = new System.Drawing.Size(153, 28);
-            this.combo_Sort.TabIndex = 0;
-            this.combo_Sort.SelectedIndexChanged += new System.EventHandler(this.combo_Sort_SelectedIndexChanged);
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.lblPageInfo);
-            this.panel3.Controls.Add(this.btnNextPage);
-            this.panel3.Controls.Add(this.btnPrevPage);
-            this.panel3.Location = new System.Drawing.Point(1661, 13);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(205, 38);
-            this.panel3.TabIndex = 37;
-            // 
-            // lblPageInfo
-            // 
-            this.lblPageInfo.AutoSize = true;
-            this.lblPageInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPageInfo.Location = new System.Drawing.Point(55, 11);
-            this.lblPageInfo.Name = "lblPageInfo";
-            this.lblPageInfo.Size = new System.Drawing.Size(89, 20);
-            this.lblPageInfo.TabIndex = 17;
-            this.lblPageInfo.Text = "lblPageInfo";
-            // 
-            // btnNextPage
-            // 
-            this.btnNextPage.Location = new System.Drawing.Point(150, 8);
-            this.btnNextPage.Name = "btnNextPage";
-            this.btnNextPage.Size = new System.Drawing.Size(46, 23);
-            this.btnNextPage.TabIndex = 1;
-            this.btnNextPage.Text = ">>";
-            this.btnNextPage.UseVisualStyleBackColor = true;
-            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
-            // 
-            // btnPrevPage
-            // 
-            this.btnPrevPage.Location = new System.Drawing.Point(3, 8);
-            this.btnPrevPage.Name = "btnPrevPage";
-            this.btnPrevPage.Size = new System.Drawing.Size(46, 23);
-            this.btnPrevPage.TabIndex = 0;
-            this.btnPrevPage.Text = "<<";
-            this.btnPrevPage.UseVisualStyleBackColor = true;
-            this.btnPrevPage.Click += new System.EventHandler(this.btnPrevPage_Click);
-            // 
             // frm_Manage_Equipment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -427,9 +341,6 @@
             this.Text = "frm_Manage_Equipment";
             this.Load += new System.EventHandler(this.frm_Manage_Equipment_Load);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dt_Equipments)).EndInit();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -446,14 +357,6 @@
         private System.Windows.Forms.TextBox txt_Search_Equipmet;
         private System.Windows.Forms.Button btn_Add_Equipment;
         private System.Windows.Forms.DataGridView dt_Equipments;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Items;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Equipment_Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Equipment_Price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Equipment_Price_Subsequent;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Remaining_Stock;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Total_Stock;
-        private System.Windows.Forms.DataGridViewImageColumn Edit;
-        private System.Windows.Forms.DataGridViewImageColumn Delete;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel5;
@@ -464,5 +367,13 @@
         private System.Windows.Forms.Label lblPageInfo;
         private System.Windows.Forms.Button btnNextPage;
         private System.Windows.Forms.Button btnPrevPage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Items;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Equipment_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Equipment_Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Equipment_Price_Subsequent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Remaining_Stock;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fld_Total_Stock;
+        private System.Windows.Forms.DataGridViewImageColumn Edit;
+        private System.Windows.Forms.DataGridViewImageColumn Delete;
     }
 }

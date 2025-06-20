@@ -62,8 +62,9 @@ namespace pgso
             // 
             // calendarToolStripMenuItem
             // 
+            this.calendarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("calendarToolStripMenuItem.Image")));
             this.calendarToolStripMenuItem.Name = "calendarToolStripMenuItem";
-            this.calendarToolStripMenuItem.Size = new System.Drawing.Size(85, 25);
+            this.calendarToolStripMenuItem.Size = new System.Drawing.Size(101, 25);
             this.calendarToolStripMenuItem.Text = "Calendar";
             this.calendarToolStripMenuItem.Click += new System.EventHandler(this.calendarToolStripMenuItem_Click);
             // 
@@ -132,35 +133,37 @@ namespace pgso
             // venueToolStripMenuItem2
             // 
             this.venueToolStripMenuItem2.Name = "venueToolStripMenuItem2";
-            this.venueToolStripMenuItem2.Size = new System.Drawing.Size(155, 24);
+            this.venueToolStripMenuItem2.Size = new System.Drawing.Size(180, 24);
             this.venueToolStripMenuItem2.Text = "Venue";
             this.venueToolStripMenuItem2.Click += new System.EventHandler(this.venueToolStripMenuItem2_Click);
             // 
             // equipmentToolStripMenuItem2
             // 
             this.equipmentToolStripMenuItem2.Name = "equipmentToolStripMenuItem2";
-            this.equipmentToolStripMenuItem2.Size = new System.Drawing.Size(155, 24);
+            this.equipmentToolStripMenuItem2.Size = new System.Drawing.Size(180, 24);
             this.equipmentToolStripMenuItem2.Text = "Equipment";
             this.equipmentToolStripMenuItem2.Click += new System.EventHandler(this.equipmentToolStripMenuItem2_Click);
             // 
             // clientToolStripMenuItem
             // 
             this.clientToolStripMenuItem.Name = "clientToolStripMenuItem";
-            this.clientToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.clientToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.clientToolStripMenuItem.Text = "Client";
             this.clientToolStripMenuItem.Click += new System.EventHandler(this.clientToolStripMenuItem_Click);
             // 
             // billingToolStripMenuItem
             // 
+            this.billingToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("billingToolStripMenuItem.Image")));
             this.billingToolStripMenuItem.Name = "billingToolStripMenuItem";
-            this.billingToolStripMenuItem.Size = new System.Drawing.Size(62, 25);
+            this.billingToolStripMenuItem.Size = new System.Drawing.Size(78, 25);
             this.billingToolStripMenuItem.Text = "Billing";
             this.billingToolStripMenuItem.Click += new System.EventHandler(this.billingToolStripMenuItem_Click);
             // 
             // auditLogsToolStripMenuItem
             // 
+            this.auditLogsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("auditLogsToolStripMenuItem.Image")));
             this.auditLogsToolStripMenuItem.Name = "auditLogsToolStripMenuItem";
-            this.auditLogsToolStripMenuItem.Size = new System.Drawing.Size(97, 25);
+            this.auditLogsToolStripMenuItem.Size = new System.Drawing.Size(113, 25);
             this.auditLogsToolStripMenuItem.Text = "Audit Logs";
             this.auditLogsToolStripMenuItem.Click += new System.EventHandler(this.auditLogsToolStripMenuItem_Click_1);
             // 

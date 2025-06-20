@@ -32,16 +32,25 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_Client_Info));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel_dgv = new System.Windows.Forms.Panel();
             this.dgv_Client = new System.Windows.Forms.DataGridView();
+            this.pk_Requesting_PersonID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_First_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Middle_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Office = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Contact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Province = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Delete = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label26 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -70,11 +79,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.combo_Sort = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.lbl_paging = new System.Windows.Forms.Label();
-            this.btn_Next = new System.Windows.Forms.Button();
-            this.btn_Prev = new System.Windows.Forms.Button();
             this.dgv_Additional_Info = new System.Windows.Forms.DataGridView();
+            this.ContolNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Event = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_Total = new System.Windows.Forms.Label();
             this.lbl_Confirmed = new System.Windows.Forms.Label();
             this.lbl_Cancelled = new System.Windows.Forms.Label();
@@ -83,27 +92,18 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pk_Requesting_PersonID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_First_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Middle_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Office = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Contact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Province = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Delete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.ContolNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Event = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lbl_paging = new System.Windows.Forms.Label();
+            this.btn_Next = new System.Windows.Forms.Button();
+            this.btn_Prev = new System.Windows.Forms.Button();
             this.panel_dgv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Client)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Additional_Info)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_dgv
@@ -164,17 +164,85 @@
             this.dgv_Client.Size = new System.Drawing.Size(1444, 807);
             this.dgv_Client.TabIndex = 0;
             // 
+            // pk_Requesting_PersonID
+            // 
+            this.pk_Requesting_PersonID.DataPropertyName = "pk_Requesting_PersonID";
+            this.pk_Requesting_PersonID.HeaderText = "ID";
+            this.pk_Requesting_PersonID.Name = "pk_Requesting_PersonID";
+            this.pk_Requesting_PersonID.Visible = false;
+            // 
+            // fld_First_name
+            // 
+            this.fld_First_name.DataPropertyName = "fld_First_name";
+            this.fld_First_name.HeaderText = "First Name";
+            this.fld_First_name.Name = "fld_First_name";
+            // 
+            // fld_Middle_Name
+            // 
+            this.fld_Middle_Name.DataPropertyName = "fld_Middle_Name";
+            this.fld_Middle_Name.HeaderText = "Middle Name";
+            this.fld_Middle_Name.Name = "fld_Middle_Name";
+            // 
+            // fld_Surname
+            // 
+            this.fld_Surname.DataPropertyName = "fld_Surname";
+            this.fld_Surname.HeaderText = "Surname";
+            this.fld_Surname.Name = "fld_Surname";
+            // 
+            // Office
+            // 
+            this.Office.DataPropertyName = "Office";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Office.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Office.HeaderText = "Office";
+            this.Office.Name = "Office";
+            // 
+            // Contact
+            // 
+            this.Contact.DataPropertyName = "Contact";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Contact.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Contact.HeaderText = "Contact";
+            this.Contact.Name = "Contact";
+            // 
+            // Address
+            // 
+            this.Address.DataPropertyName = "Address";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Address.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Address.HeaderText = "Address";
+            this.Address.Name = "Address";
+            // 
+            // fld_Province
+            // 
+            this.fld_Province.DataPropertyName = "Origin";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.fld_Province.DefaultCellStyle = dataGridViewCellStyle5;
+            this.fld_Province.HeaderText = "Origin";
+            this.fld_Province.Name = "fld_Province";
+            this.fld_Province.Visible = false;
+            // 
+            // dgv_Delete
+            // 
+            this.dgv_Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dgv_Delete.HeaderText = "Delete";
+            this.dgv_Delete.Image = ((System.Drawing.Image)(resources.GetObject("dgv_Delete.Image")));
+            this.dgv_Delete.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dgv_Delete.Name = "dgv_Delete";
+            this.dgv_Delete.ReadOnly = true;
+            this.dgv_Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Delete.Visible = false;
+            this.dgv_Delete.Width = 65;
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel1.Controls.Add(this.label26);
             this.panel1.Controls.Add(this.label14);
-            this.panel1.Controls.Add(this.btn_Clear);
             this.panel1.Controls.Add(this.txt_Surname_Edit);
             this.panel1.Controls.Add(this.label22);
             this.panel1.Controls.Add(this.txt_Contact_Edit);
             this.panel1.Controls.Add(this.txt_MiddleName_Edit);
-            this.panel1.Controls.Add(this.btn_Update);
             this.panel1.Controls.Add(this.label23);
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.txt_Office_Edit);
@@ -185,7 +253,7 @@
             this.panel1.Controls.Add(this.label10);
             this.panel1.Location = new System.Drawing.Point(1535, 45);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(377, 261);
+            this.panel1.Size = new System.Drawing.Size(377, 227);
             this.panel1.TabIndex = 2;
             // 
             // label26
@@ -214,7 +282,8 @@
             this.btn_Clear.BackColor = System.Drawing.Color.MistyRose;
             this.btn_Clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Clear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Clear.Location = new System.Drawing.Point(176, 217);
+            this.btn_Clear.ForeColor = System.Drawing.Color.Cornsilk;
+            this.btn_Clear.Location = new System.Drawing.Point(1607, 12);
             this.btn_Clear.Name = "btn_Clear";
             this.btn_Clear.Size = new System.Drawing.Size(75, 32);
             this.btn_Clear.TabIndex = 30;
@@ -265,12 +334,14 @@
             this.btn_Update.BackColor = System.Drawing.Color.PaleGreen;
             this.btn_Update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Update.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Update.Location = new System.Drawing.Point(257, 217);
+            this.btn_Update.ForeColor = System.Drawing.Color.Cornsilk;
+            this.btn_Update.Location = new System.Drawing.Point(1688, 12);
             this.btn_Update.Name = "btn_Update";
             this.btn_Update.Size = new System.Drawing.Size(75, 32);
             this.btn_Update.TabIndex = 29;
             this.btn_Update.Text = "Update";
             this.btn_Update.UseVisualStyleBackColor = false;
+            this.btn_Update.Visible = false;
             this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
             // 
             // label23
@@ -458,7 +529,6 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.dgv_Additional_Info);
             this.panel2.Controls.Add(this.lbl_Total);
             this.panel2.Controls.Add(this.lbl_Confirmed);
@@ -468,51 +538,10 @@
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(1494, 331);
+            this.panel2.Location = new System.Drawing.Point(1494, 278);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(418, 577);
+            this.panel2.Size = new System.Drawing.Size(418, 630);
             this.panel2.TabIndex = 35;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.lbl_paging);
-            this.panel4.Controls.Add(this.btn_Next);
-            this.panel4.Controls.Add(this.btn_Prev);
-            this.panel4.Location = new System.Drawing.Point(222, 121);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(193, 38);
-            this.panel4.TabIndex = 33;
-            // 
-            // lbl_paging
-            // 
-            this.lbl_paging.AutoSize = true;
-            this.lbl_paging.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_paging.Location = new System.Drawing.Point(55, 11);
-            this.lbl_paging.Name = "lbl_paging";
-            this.lbl_paging.Size = new System.Drawing.Size(44, 16);
-            this.lbl_paging.TabIndex = 17;
-            this.lbl_paging.Text = "label8";
-            this.lbl_paging.Click += new System.EventHandler(this.lbl_paging_Click);
-            // 
-            // btn_Next
-            // 
-            this.btn_Next.Location = new System.Drawing.Point(136, 8);
-            this.btn_Next.Name = "btn_Next";
-            this.btn_Next.Size = new System.Drawing.Size(46, 23);
-            this.btn_Next.TabIndex = 1;
-            this.btn_Next.Text = ">>";
-            this.btn_Next.UseVisualStyleBackColor = true;
-            this.btn_Next.Click += new System.EventHandler(this.btn_Next_Click);
-            // 
-            // btn_Prev
-            // 
-            this.btn_Prev.Location = new System.Drawing.Point(3, 8);
-            this.btn_Prev.Name = "btn_Prev";
-            this.btn_Prev.Size = new System.Drawing.Size(46, 23);
-            this.btn_Prev.TabIndex = 0;
-            this.btn_Prev.Text = "<<";
-            this.btn_Prev.UseVisualStyleBackColor = true;
-            this.btn_Prev.Click += new System.EventHandler(this.btn_Prev_Click);
             // 
             // dgv_Additional_Info
             // 
@@ -542,7 +571,7 @@
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_Additional_Info.DefaultCellStyle = dataGridViewCellStyle10;
-            this.dgv_Additional_Info.Location = new System.Drawing.Point(10, 165);
+            this.dgv_Additional_Info.Location = new System.Drawing.Point(10, 91);
             this.dgv_Additional_Info.Name = "dgv_Additional_Info";
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
@@ -553,8 +582,35 @@
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_Additional_Info.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dgv_Additional_Info.RowHeadersVisible = false;
-            this.dgv_Additional_Info.Size = new System.Drawing.Size(405, 397);
+            this.dgv_Additional_Info.Size = new System.Drawing.Size(405, 471);
             this.dgv_Additional_Info.TabIndex = 42;
+            this.dgv_Additional_Info.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Additional_Info_CellContentClick);
+            // 
+            // ContolNumber
+            // 
+            this.ContolNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ContolNumber.DataPropertyName = "Control Number";
+            this.ContolNumber.HeaderText = "CN";
+            this.ContolNumber.Name = "ContolNumber";
+            this.ContolNumber.Width = 120;
+            // 
+            // Date
+            // 
+            this.Date.DataPropertyName = "Request Date";
+            this.Date.HeaderText = "Date";
+            this.Date.Name = "Date";
+            // 
+            // Type
+            // 
+            this.Type.DataPropertyName = "Reservation Type";
+            this.Type.HeaderText = "Type";
+            this.Type.Name = "Type";
+            // 
+            // Event
+            // 
+            this.Event.DataPropertyName = "Status";
+            this.Event.HeaderText = "Status";
+            this.Event.Name = "Event";
             // 
             // lbl_Total
             // 
@@ -636,111 +692,61 @@
             this.label1.TabIndex = 34;
             this.label1.Text = "Pending";
             // 
-            // pk_Requesting_PersonID
+            // panel4
             // 
-            this.pk_Requesting_PersonID.DataPropertyName = "pk_Requesting_PersonID";
-            this.pk_Requesting_PersonID.HeaderText = "ID";
-            this.pk_Requesting_PersonID.Name = "pk_Requesting_PersonID";
-            this.pk_Requesting_PersonID.Visible = false;
+            this.panel4.Controls.Add(this.lbl_paging);
+            this.panel4.Controls.Add(this.btn_Next);
+            this.panel4.Controls.Add(this.btn_Prev);
+            this.panel4.Location = new System.Drawing.Point(1703, 6);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(193, 38);
+            this.panel4.TabIndex = 33;
+            this.panel4.Visible = false;
             // 
-            // fld_First_name
+            // lbl_paging
             // 
-            this.fld_First_name.DataPropertyName = "fld_First_name";
-            this.fld_First_name.HeaderText = "First Name";
-            this.fld_First_name.Name = "fld_First_name";
+            this.lbl_paging.AutoSize = true;
+            this.lbl_paging.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_paging.Location = new System.Drawing.Point(55, 11);
+            this.lbl_paging.Name = "lbl_paging";
+            this.lbl_paging.Size = new System.Drawing.Size(44, 16);
+            this.lbl_paging.TabIndex = 17;
+            this.lbl_paging.Text = "label8";
+            this.lbl_paging.Click += new System.EventHandler(this.lbl_paging_Click);
             // 
-            // fld_Middle_Name
+            // btn_Next
             // 
-            this.fld_Middle_Name.DataPropertyName = "fld_Middle_Name";
-            this.fld_Middle_Name.HeaderText = "Middle Name";
-            this.fld_Middle_Name.Name = "fld_Middle_Name";
+            this.btn_Next.Location = new System.Drawing.Point(136, 8);
+            this.btn_Next.Name = "btn_Next";
+            this.btn_Next.Size = new System.Drawing.Size(46, 23);
+            this.btn_Next.TabIndex = 1;
+            this.btn_Next.Text = ">>";
+            this.btn_Next.UseVisualStyleBackColor = true;
+            this.btn_Next.Click += new System.EventHandler(this.btn_Next_Click);
             // 
-            // fld_Surname
+            // btn_Prev
             // 
-            this.fld_Surname.DataPropertyName = "fld_Surname";
-            this.fld_Surname.HeaderText = "Surname";
-            this.fld_Surname.Name = "fld_Surname";
-            // 
-            // Office
-            // 
-            this.Office.DataPropertyName = "Office";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Office.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Office.HeaderText = "Office";
-            this.Office.Name = "Office";
-            // 
-            // Contact
-            // 
-            this.Contact.DataPropertyName = "Contact";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Contact.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Contact.HeaderText = "Contact";
-            this.Contact.Name = "Contact";
-            // 
-            // Address
-            // 
-            this.Address.DataPropertyName = "Address";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Address.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Address.HeaderText = "Address";
-            this.Address.Name = "Address";
-            // 
-            // fld_Province
-            // 
-            this.fld_Province.DataPropertyName = "Origin";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.fld_Province.DefaultCellStyle = dataGridViewCellStyle5;
-            this.fld_Province.HeaderText = "Origin";
-            this.fld_Province.Name = "fld_Province";
-            // 
-            // dgv_Delete
-            // 
-            this.dgv_Delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dgv_Delete.HeaderText = "Delete";
-            this.dgv_Delete.Image = ((System.Drawing.Image)(resources.GetObject("dgv_Delete.Image")));
-            this.dgv_Delete.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dgv_Delete.Name = "dgv_Delete";
-            this.dgv_Delete.ReadOnly = true;
-            this.dgv_Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Delete.Visible = false;
-            this.dgv_Delete.Width = 65;
-            // 
-            // ContolNumber
-            // 
-            this.ContolNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ContolNumber.DataPropertyName = "Control Number";
-            this.ContolNumber.HeaderText = "CN";
-            this.ContolNumber.Name = "ContolNumber";
-            this.ContolNumber.Width = 120;
-            // 
-            // Date
-            // 
-            this.Date.DataPropertyName = "Request Date";
-            this.Date.HeaderText = "Date";
-            this.Date.Name = "Date";
-            // 
-            // Type
-            // 
-            this.Type.DataPropertyName = "Reservation Type";
-            this.Type.HeaderText = "Type";
-            this.Type.Name = "Type";
-            // 
-            // Event
-            // 
-            this.Event.DataPropertyName = "Status";
-            this.Event.HeaderText = "Status";
-            this.Event.Name = "Event";
+            this.btn_Prev.Location = new System.Drawing.Point(3, 8);
+            this.btn_Prev.Name = "btn_Prev";
+            this.btn_Prev.Size = new System.Drawing.Size(46, 23);
+            this.btn_Prev.TabIndex = 0;
+            this.btn_Prev.Text = "<<";
+            this.btn_Prev.UseVisualStyleBackColor = true;
+            this.btn_Prev.Click += new System.EventHandler(this.btn_Prev_Click);
             // 
             // frm_Client_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 1061);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.btn_Clear);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel_dgv);
+            this.Controls.Add(this.btn_Update);
             this.Name = "frm_Client_Info";
             this.Text = "frm_Client_Info";
             this.panel_dgv.ResumeLayout(false);
@@ -753,9 +759,9 @@
             this.panel5.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Additional_Info)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_Additional_Info)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -804,6 +810,10 @@
         private System.Windows.Forms.Label lbl_paging;
         private System.Windows.Forms.Button btn_Next;
         private System.Windows.Forms.Button btn_Prev;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ContolNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Event;
         private System.Windows.Forms.DataGridViewTextBoxColumn pk_Requesting_PersonID;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_First_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Middle_Name;
@@ -813,9 +823,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Province;
         private System.Windows.Forms.DataGridViewImageColumn dgv_Delete;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ContolNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Event;
     }
 }

@@ -410,6 +410,13 @@ namespace pgso
                 }
             }
         }
+        public event EventHandler ReservationSubmittedEq;
+
+        // Call this method after successful DB submission
+        private void OnReservationSubmittedEq()
+        {
+            ReservationSubmittedEq?.Invoke(this, EventArgs.Empty);
+        }
 
         private void btn_submit_Click_1(object sender, EventArgs e)
         {
@@ -641,6 +648,7 @@ namespace pgso
                 transaction.Commit();
                 MessageBox.Show("Reservation submitted successfully!");
                 var billingForm = new frm_Billing();
+                OnReservationSubmittedEq();
                 billingForm.ShowDialog();
                 frm_Dashboard.NeedsCalendarRefresh = true;
                 RefreshCalendarView();

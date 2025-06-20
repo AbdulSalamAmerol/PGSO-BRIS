@@ -86,6 +86,7 @@ namespace pgso
             this.txt_address = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -96,6 +97,7 @@ namespace pgso
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.panel1.Controls.Add(this.label22);
             this.panel1.Controls.Add(this.chk_UseCatererFee);
             this.panel1.Controls.Add(this.txt_Caterer_Fee);
             this.panel1.Controls.Add(this.label19);
@@ -152,7 +154,7 @@ namespace pgso
             // 
             this.chk_UseCatererFee.AutoSize = true;
             this.chk_UseCatererFee.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk_UseCatererFee.Location = new System.Drawing.Point(420, 508);
+            this.chk_UseCatererFee.Location = new System.Drawing.Point(420, 516);
             this.chk_UseCatererFee.Name = "chk_UseCatererFee";
             this.chk_UseCatererFee.Size = new System.Drawing.Size(119, 24);
             this.chk_UseCatererFee.TabIndex = 78;
@@ -163,7 +165,7 @@ namespace pgso
             // txt_Caterer_Fee
             // 
             this.txt_Caterer_Fee.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Caterer_Fee.Location = new System.Drawing.Point(191, 506);
+            this.txt_Caterer_Fee.Location = new System.Drawing.Point(191, 514);
             this.txt_Caterer_Fee.Name = "txt_Caterer_Fee";
             this.txt_Caterer_Fee.Size = new System.Drawing.Size(223, 26);
             this.txt_Caterer_Fee.TabIndex = 77;
@@ -173,7 +175,7 @@ namespace pgso
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.Color.Black;
-            this.label19.Location = new System.Drawing.Point(35, 512);
+            this.label19.Location = new System.Drawing.Point(35, 520);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(99, 20);
             this.label19.TabIndex = 76;
@@ -184,7 +186,7 @@ namespace pgso
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.Black;
-            this.label18.Location = new System.Drawing.Point(35, 478);
+            this.label18.Location = new System.Drawing.Point(35, 486);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(82, 20);
             this.label18.TabIndex = 73;
@@ -215,7 +217,7 @@ namespace pgso
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button1.Location = new System.Drawing.Point(289, 538);
+            this.button1.Location = new System.Drawing.Point(289, 546);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(108, 30);
             this.button1.TabIndex = 70;
@@ -227,7 +229,7 @@ namespace pgso
             // 
             this.combo_Special.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combo_Special.FormattingEnabled = true;
-            this.combo_Special.Location = new System.Drawing.Point(191, 470);
+            this.combo_Special.Location = new System.Drawing.Point(191, 478);
             this.combo_Special.Name = "combo_Special";
             this.combo_Special.Size = new System.Drawing.Size(442, 28);
             this.combo_Special.TabIndex = 69;
@@ -243,9 +245,9 @@ namespace pgso
             this.panel2.Controls.Add(this.txt_rate);
             this.panel2.Controls.Add(this.txt_Total);
             this.panel2.Controls.Add(this.label26);
-            this.panel2.Location = new System.Drawing.Point(39, 620);
+            this.panel2.Location = new System.Drawing.Point(125, 566);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(599, 84);
+            this.panel2.Size = new System.Drawing.Size(88, 26);
             this.panel2.TabIndex = 68;
             this.panel2.Visible = false;
             // 
@@ -501,7 +503,7 @@ namespace pgso
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.Black;
-            this.label17.Location = new System.Drawing.Point(35, 442);
+            this.label17.Location = new System.Drawing.Point(35, 450);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(86, 20);
             this.label17.TabIndex = 49;
@@ -523,7 +525,7 @@ namespace pgso
             // 
             this.combo_ReservationType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combo_ReservationType.FormattingEnabled = true;
-            this.combo_ReservationType.Location = new System.Drawing.Point(191, 434);
+            this.combo_ReservationType.Location = new System.Drawing.Point(191, 442);
             this.combo_ReservationType.Name = "combo_ReservationType";
             this.combo_ReservationType.Size = new System.Drawing.Size(442, 28);
             this.combo_ReservationType.TabIndex = 48;
@@ -640,7 +642,7 @@ namespace pgso
             this.btn_clearform.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_clearform.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_clearform.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btn_clearform.Location = new System.Drawing.Point(405, 538);
+            this.btn_clearform.Location = new System.Drawing.Point(405, 546);
             this.btn_clearform.Name = "btn_clearform";
             this.btn_clearform.Size = new System.Drawing.Size(111, 30);
             this.btn_clearform.TabIndex = 17;
@@ -654,7 +656,7 @@ namespace pgso
             this.btn_submit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_submit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_submit.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btn_submit.Location = new System.Drawing.Point(525, 538);
+            this.btn_submit.Location = new System.Drawing.Point(525, 546);
             this.btn_submit.Name = "btn_submit";
             this.btn_submit.Size = new System.Drawing.Size(108, 30);
             this.btn_submit.TabIndex = 16;
@@ -743,6 +745,17 @@ namespace pgso
             this.label1.TabIndex = 0;
             this.label1.Text = "Requesting Person:";
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ForeColor = System.Drawing.Color.Red;
+            this.label22.Location = new System.Drawing.Point(192, 428);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(262, 13);
+            this.label22.TabIndex = 79;
+            this.label22.Text = "*Always reselect the rate type if the scope is changed.";
+            // 
             // frm_Create_Venuer_Reservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -829,5 +842,6 @@ namespace pgso
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox txt_Caterer_Fee;
         private System.Windows.Forms.CheckBox chk_UseCatererFee;
+        private System.Windows.Forms.Label label22;
     }
 }

@@ -333,13 +333,15 @@ namespace pgso.pgso_Billing
             lbl_Rate_Type.Text = billingDetails.fld_Rate_Type;
             lbl_Rate_Type2.Text = billingDetails.fld_Rate_Type;
             lbl_Is_Aircon.Text = billingDetails.fld_Aircon ? "Yes" : "No";
+            var succeedingHours = Math.Max(0, Math.Ceiling(billingDetails.Total_Hours - 4));
 
             // Venue pricing details (based on hourly charges, etc.)
             lbl_Base_Charge_Amount.Text = billingDetails.fld_First4Hrs_Rate.ToString("C", new CultureInfo("en-PH"));
             lbl_Additional_Hourly_Charge.Text = billingDetails.fld_Hourly_Rate.ToString("C", new CultureInfo("en-PH"));
             lbl_Additional_Charge.Text = billingDetails.fld_Additional_Charge.ToString("C", new CultureInfo("en-PH"));
-            lbl_Total_Hour.Text = (billingDetails.Total_Hours - 4).ToString("F0") + " HRS";
-            lbl_Additional_Hours_Amount.Text = (billingDetails.fld_Hourly_Rate * (decimal)(billingDetails.Total_Hours - 4)).ToString("C", new CultureInfo("en-PH"));
+
+            lbl_Total_Hour.Text = $"{succeedingHours} HRS";
+            lbl_Additional_Hours_Amount.Text = (billingDetails.fld_Hourly_Rate * (decimal)succeedingHours).ToString("C", new CultureInfo("en-PH"));
 
             // If you are showing equipment details (if available)
             lbl_Venue_Name_Transact.Text = billingDetails.fld_Venue_Name;
@@ -384,8 +386,8 @@ namespace pgso.pgso_Billing
             lbl_Paid_Amount.Text = billingDetails.fld_Amount_Paid.ToString("C", new CultureInfo("en-PH"));
             decimal otCharge = billingDetails.fld_OT_Hours * billingDetails.fld_Hourly_Rate;
 
-            lbl_Total_Amount.Text = (billingDetails.fld_Additional_Charge+billingDetails.fld_First4Hrs_Rate + ((decimal)(billingDetails.Total_Hours - 4) * billingDetails.fld_Hourly_Rate)+billingDetails.fld_Caterer_Fee).ToString("C", new CultureInfo("en-PH"));
-            lbl_Balance.Text = ((billingDetails.fld_Additional_Charge + billingDetails.fld_First4Hrs_Rate + ((decimal)(billingDetails.Total_Hours - 4) * billingDetails.fld_Hourly_Rate)+billingDetails.fld_Caterer_Fee) - billingDetails.fld_Amount_Paid).ToString("C", new CultureInfo("en-PH"));
+            lbl_Total_Amount.Text = (billingDetails.fld_Additional_Charge+billingDetails.fld_First4Hrs_Rate + ((decimal)Math.Ceiling(billingDetails.Total_Hours - 4) * billingDetails.fld_Hourly_Rate)+billingDetails.fld_Caterer_Fee).ToString("C", new CultureInfo("en-PH"));
+            lbl_Balance.Text = ((billingDetails.fld_Additional_Charge + billingDetails.fld_First4Hrs_Rate + ((decimal)Math.Ceiling(billingDetails.Total_Hours - 4) * billingDetails.fld_Hourly_Rate)+billingDetails.fld_Caterer_Fee) - billingDetails.fld_Amount_Paid).ToString("C", new CultureInfo("en-PH"));
             lbl_Refund_Amount.Text = (billingDetails.fld_Cancellation_Fee).ToString("C", new CultureInfo("en-PH"));
 
             //lbl_Final_Amount_Paid.Text = (billingDetails.fld_Final_Amount_Paid).ToString("C");

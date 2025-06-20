@@ -516,7 +516,6 @@
             this.txt_Fname.ReadOnly = true;
             this.txt_Fname.Size = new System.Drawing.Size(190, 26);
             this.txt_Fname.TabIndex = 2;
-            this.txt_Fname.Text = "Equipment Reservation in Date";
             this.txt_Fname.TextChanged += new System.EventHandler(this.txt_Fname_TextChanged);
             // 
             // label1

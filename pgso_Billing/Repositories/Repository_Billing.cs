@@ -1304,154 +1304,6 @@ namespace pgso.Billing.Repositories
 
 
 
-        // START Datagrid Equipment User Control CRUD
-        /*
-        public List<Model_Billing> GetReservationEquipment()
-        { 
-            var model_Billing_equipment_reservations = new List<Model_Billing>();
-
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-                    Console.WriteLine("✅ Fetching Reservation Equipment Data");
-                    string query = @"
-                    SELECT 
-                        rp.pk_Requesting_PersonID,
-                        rp.fld_Surname,
-                        rp.fld_First_Name,
-                        rp.fld_Middle_Name,
-                        rp.fld_Requesting_Person_Address,
-                        rp.fld_Contact_Number,
-                        rp.fld_Request_Origin,
-
-                        r.pk_ReservationID,
-                        r.fld_Control_Number,
-                        r.fld_Reservation_Type,
-                        r.fld_Start_Date,
-                        r.fld_End_Date,
-                        r.fld_Activity_Name,
-                        r.fld_Total_Amount,
-
-                        re.fk_EquipmentID,
-                        e.fld_Equipment_Name,
-                        re.fk_Equipment_PricingID,
-                        ep.fld_Equipment_Price,
-                        ep.fld_Equipment_Price_Subsequent,
-                        re.fld_Quantity,
-                        re.fld_Number_Of_Days,
-                        re.fld_Total_Equipment_Cost,
-                        r.fld_OT_Hours,
-
-                        p.pk_PaymentID,
-                        p.fld_Created_At,
-                        p.fld_Amount_Due,
-                        p.fld_Amount_Paid,
-                        p.fld_Payment_Status,
-                        p.fld_Payment_Date,
-                        p.fld_Refund_Amount,
-                        p.fld_Cancellation_Fee,
-                        p.fld_Final_Amount_Paid,
-                        p.fld_Overtime_Fee,
-                        re.pk_Reservation_EquipmentID,
-                        r.fld_Reservation_Status
-        
-     
-
-                    FROM dbo.tbl_Reservation r
-                    LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-                    LEFT JOIN dbo.tbl_Reservation_Equipment re ON r.pk_ReservationID = re.fk_ReservationID
-                    LEFT JOIN dbo.tbl_Equipment e ON re.fk_EquipmentID = e.pk_EquipmentID
-                    LEFT JOIN dbo.tbl_Equipment_Pricing ep ON re.fk_Equipment_PricingID = ep.pk_Equipment_PricingID
-                    LEFT JOIN dbo.tbl_Payment p ON r.pk_ReservationID = p.fk_ReservationID
-                    WHERE r.pk_ReservationID = @ReservationID
-                    ORDER BY re.pk_Reservation_EquipmentID DESC";
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-
-                                Model_Billing model_Billing_equipment_reservation = new Model_Billing();
-
-                                // Fill in Requesting Person details
-                                model_Billing_equipment_reservation.pk_Requesting_PersonID = reader.IsDBNull(0) ? 0 : reader.GetInt32(0);
-                                model_Billing_equipment_reservation.fld_Surname = reader.IsDBNull(1) ? "" : reader.GetString(1);
-                                model_Billing_equipment_reservation.fld_First_Name = reader.IsDBNull(2) ? "" : reader.GetString(2);
-                                model_Billing_equipment_reservation.fld_Middle_Name = reader.IsDBNull(3) ? "" : reader.GetString(3);
-                                model_Billing_equipment_reservation.fld_Requesting_Person_Address = reader.IsDBNull(4) ? "" : reader.GetString(4);
-                                model_Billing_equipment_reservation.fld_Contact_Number = reader.IsDBNull(5) ? "" : reader.GetString(5);
-                                model_Billing_equipment_reservation.fld_Request_Origin = reader.IsDBNull(6) ? "" : reader.GetString(6);
-
-                                // Fill in Reservation details
-                                model_Billing_equipment_reservation.pk_ReservationID = reader.GetInt32(7);
-                                model_Billing_equipment_reservation.fld_Control_Number = reader.GetString(8);
-                                model_Billing_equipment_reservation.fld_Reservation_Type = reader.GetString(9);
-                                model_Billing_equipment_reservation.fld_Start_Date = reader.GetDateTime(10);
-                                model_Billing_equipment_reservation.fld_End_Date = reader.GetDateTime(11);
-                                model_Billing_equipment_reservation.fld_Activity_Name = reader.IsDBNull(12) ? "" : reader.GetString(12);
-                                model_Billing_equipment_reservation.fld_Total_Amount = reader.IsDBNull(13) ? 0 : reader.GetDecimal(13);
-
-                                // Fill in Equipment details
-                                model_Billing_equipment_reservation.fk_EquipmentID = reader.IsDBNull(14) ? 0 : reader.GetInt32(14);
-                                model_Billing_equipment_reservation.fld_Equipment_Name = reader.IsDBNull(15) ? "" : reader.GetString(15);
-                                model_Billing_equipment_reservation.fk_Equipment_PricingID = reader.IsDBNull(16) ? 0 : reader.GetInt32(16);
-                                model_Billing_equipment_reservation.fld_Equipment_Price = reader.IsDBNull(17) ? 0 : reader.GetDecimal(17);
-                                model_Billing_equipment_reservation.fld_Equipment_Price_Subsequent = reader.IsDBNull(18) ? 0 : reader.GetDecimal(18);
-                                model_Billing_equipment_reservation.fld_Quantity = reader.IsDBNull(19) ? 0 : reader.GetInt32(19);
-                                model_Billing_equipment_reservation.fld_Number_Of_Days = reader.IsDBNull(20) ? 0 : reader.GetInt32(20);
-                                model_Billing_equipment_reservation.fld_Total_Equipment_Cost = reader.IsDBNull(21) ? 0 : reader.GetDecimal(21);
-                                model_Billing_equipment_reservation.fld_OT_Days = reader.IsDBNull(22) ? 0 : reader.GetInt32(22);
-
-                                // Fill in Payment details
-                                model_Billing_equipment_reservation.pk_PaymentID = reader.IsDBNull(23) ? 0 : reader.GetInt32(23);
-                                model_Billing_equipment_reservation.fld_Created_At = reader.IsDBNull(24) ? DateTime.MinValue : reader.GetDateTime(24);
-                                model_Billing_equipment_reservation.fld_Amount_Due = reader.IsDBNull(25) ? 0 : reader.GetDecimal(25);
-                                model_Billing_equipment_reservation.fld_Amount_Paid = reader.IsDBNull(26) ? 0 : reader.GetDecimal(26);
-                                model_Billing_equipment_reservation.fld_Payment_Status = reader.IsDBNull(27) ? "Unknown" : reader.GetString(27);
-                                model_Billing_equipment_reservation.fld_Payment_Date = reader.IsDBNull(28) ? (DateTime?)null : reader.GetDateTime(28);
-                                model_Billing_equipment_reservation.fld_Refund_Amount = reader.IsDBNull(29) ? 0 : reader.GetDecimal(29);
-                                model_Billing_equipment_reservation.fld_Cancellation_Fee = reader.IsDBNull(30) ? 0 : reader.GetDecimal(30);
-                                model_Billing_equipment_reservation.fld_Final_Amount_Paid = reader.IsDBNull(31) ? 0 : reader.GetDecimal(31);
-                                model_Billing_equipment_reservation.fld_Overtime_Fee = reader.IsDBNull(32) ? 0 : reader.GetDecimal(32);
-
-                                // Additional Equipment Reservation details
-                                model_Billing_equipment_reservation.pk_Reservation_EquipmentID = reader.IsDBNull(33) ? 0 : reader.GetInt32(33);
-                                model_Billing_equipment_reservation.fld_Reservation_Status = reader.IsDBNull(34) ? "" : reader.GetString(34);
-
-                                // Add the filled model to the list
-                                model_Billing_equipment_reservations.Add(model_Billing_equipment_reservation);
-
-
-
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("❌ Database error: " + ex.Message);
-            }
-
-            return model_Billing_equipment_reservations; 
-        }
-        */
-
-
-
-
-        /// END
-        /// 
-
-        /// START OF CHAT GPT CRUD
-
-        // Repository_Billing.cs
-
-
 
         // Method to fetch all equipment
         public List<dynamic> GetAllEquipments()
@@ -1481,36 +1333,6 @@ namespace pgso.Billing.Repositories
 
             return equipmentList;
         }
-
-        // Duplicate so i commented it out
-
-        // Method to fetch Venue equipment
-        /*
-        public List<dynamic> GetAllVenue()
-        {
-            List<dynamic> venueList = new List<dynamic>();
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "SELECT pk_VenueID, fld_Venue_Name FROM tbl_Venue ORDER BY fld_Venue_Name";
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    conn.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            venueList.Add(new
-                            {
-                                pk_VenueID = reader.GetInt32(0),
-                                fld_Venue_Name = reader.GetString(1)
-                            });
-                        }
-                    } // ✅ reader is closed here
-                }
-            }
-            return venueList;
-        }
-        */
 
         // Method to fetch equipment pricing by equipment ID
         public dynamic GetEquipmentPricingByEquipmentID(int equipmentID)
@@ -1573,173 +1395,6 @@ namespace pgso.Billing.Repositories
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
-
-
-        // Method to fetch all equipment pricing
-        /*public List<dynamic> GetAllEquipmentPricing()
-        {
-            List<dynamic> pricingList = new List<dynamic>();
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = @"
-        SELECT pk_Equipment_PricingID, fld_Equipment_Price, fld_Equipment_Price_Subsequent
-        FROM tbl_Equipment_Pricing";
-
-                SqlCommand cmd = new SqlCommand(query, conn);
-                conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    int id = reader.GetInt32(0);
-                    decimal basePrice = reader.GetDecimal(1);
-                    decimal subsequentPrice = reader.GetDecimal(2);
-
-                    pricingList.Add(new
-                    {
-                        pk_Equipment_PricingID = id,
-                        DisplayName = $"Base: ₱{basePrice:0.00}, Next: ₱{subsequentPrice:0.00}"
-                    });
-                }
-            }
-
-            return pricingList;
-        }*/
-
-        // Method to calculate the equipment cost
-        /*public decimal CalculateEquipmentCost(int pricingID, int quantity, int days)
-        {
-            decimal basePrice = 0;
-            decimal subsequentPrice = 0;
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "SELECT fld_Equipment_Price, fld_Equipment_Price_Subsequent FROM tbl_Equipment_Pricing WHERE pk_Equipment_PricingID = @PricingID";
-
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@PricingID", pricingID);
-                conn.Open();
-
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    basePrice = reader.GetDecimal(0);
-                    subsequentPrice = reader.GetDecimal(1);
-                }
-            }
-
-            // First day uses base price, subsequent days use subsequent price
-            decimal totalCost = (basePrice * quantity) + (subsequentPrice * (days - 1) * quantity);
-            return totalCost;
-        }*/
-
-
-
-
-        // Method to get billing details by reservation ID
-        /*public Model_Billing GetBillingDetailsByReservationID2(int reservationID)
-        {
-            var model = new Model_Billing();
-
-            using (var connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-
-                // Get reservation details
-                string reservationQuery = "SELECT * FROM tbl_Reservation WHERE pk_ReservationID = @ReservationID";
-                using (var command = new SqlCommand(reservationQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@ReservationID", reservationID);
-                    using (var reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            model.pk_ReservationID = Convert.ToInt32(reader["pk_ReservationID"]);
-                            model.fld_Control_Number = reader["fld_Control_Number"].ToString();
-                            model.fld_First_Name = reader["fld_First_Name"].ToString();
-                            model.fld_Middle_Name = reader["fld_Middle_Name"].ToString();
-                            model.fld_Surname = reader["fld_Surname"].ToString();
-                            model.fld_Requesting_Person_Address = reader["fld_Requesting_Person_Address"].ToString();
-                            model.fld_Request_Origin = reader["fld_Request_Origin"].ToString();
-                            model.fld_Contact_Number = reader["fld_Contact_Number"].ToString();
-                            model.fld_Start_Date = Convert.ToDateTime(reader["fld_Start_Date"]);
-                            model.fld_End_Date = Convert.ToDateTime(reader["fld_End_Date"]);
-                            model.fld_Reservation_Status = reader["fld_Reservation_Status"].ToString();
-                            model.fld_Total_Amount = Convert.ToDecimal(reader["fld_Total_Amount"]);
-                            model.fld_OT_Hours = Convert.ToInt32(reader["fld_OT_Hours"]);
-                        }
-                    }
-                }
-
-                // Get equipment reservation details
-                string equipmentQuery = "SELECT * FROM tbl_Reservation_Equipment WHERE pk_ReservationID = @ReservationID";
-                using (var command = new SqlCommand(equipmentQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@ReservationID", reservationID);
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var equipmentName = reader["fld_Equipment_Name"].ToString();
-                            model.EquipmentNames.Add(equipmentName);
-
-                            int equipmentID = Convert.ToInt32(reader["fk_EquipmentID"]);
-                            int pricingID = Convert.ToInt32(reader["fk_Equipment_PricingID"]);
-
-                            // Fetch pricing details
-                            string pricingQuery = "SELECT * FROM tbl_Equipment_Pricing WHERE pk_Equipment_PricingID = @PricingID";
-                            using (var pricingCommand = new SqlCommand(pricingQuery, connection))
-                            {
-                                pricingCommand.Parameters.AddWithValue("@PricingID", pricingID);
-                                using (var pricingReader = pricingCommand.ExecuteReader())
-                                {
-                                    if (pricingReader.Read())
-                                    {
-                                        model.fld_Equipment_Price = Convert.ToDecimal(pricingReader["fld_Equipment_Price"]);
-                                        model.fld_Equipment_Price_Subsequent = Convert.ToDecimal(pricingReader["fld_Equipment_Price_Subsequent"]);
-                                        model.fld_Total_Equipment_Cost = model.fld_Equipment_Price * Convert.ToInt32(reader["fld_Quantity"]) * Convert.ToInt32(reader["fld_Number_Of_Days"]);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            return model;
-        }*/
-
-        // Method to get equipment pricing by pricing ID
-        /*public Model_Billing GetEquipmentPricingByPricingID(int pricingID)
-        {
-            var model = new Model_Billing();
-
-            string query = "SELECT * FROM tbl_Equipment_Pricing WHERE pk_Equipment_PricingID = @PricingID";
-
-            using (var connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-
-                using (var command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@PricingID", pricingID);
-
-                    using (var reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            model.pk_Equipment_PricingID = Convert.ToInt32(reader["pk_Equipment_PricingID"]);
-                            model.fld_Equipment_Price = Convert.ToDecimal(reader["fld_Equipment_Price"]);
-                            model.fld_Equipment_Price_Subsequent = Convert.ToDecimal(reader["fld_Equipment_Price_Subsequent"]);
-                        }
-                    }
-                }
-            }
-
-            return model;
-        }*/
-
 
         public bool UpdateReservationTotalAmount(int reservationID)
         {
@@ -1922,9 +1577,9 @@ namespace pgso.Billing.Repositories
                 {
                     conn.Open();
                     string query = @"
-UPDATE tbl_Reservation
-SET fld_OR = @ORNumber
-WHERE pk_ReservationID = @ReservationID";
+                    UPDATE tbl_Reservation
+                    SET fld_OR = @ORNumber
+                    WHERE pk_ReservationID = @ReservationID";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
@@ -2019,65 +1674,6 @@ WHERE pk_ReservationID = @ReservationID";
         }
 
 
-        /// END OF CHAT GPT CRUD
-        /// 
-
-        /// START OF GEMINI EDIT RESERVATION INFO
-
-        // Method to get full details for one reservation
-        /*
-        public Model_Billing GetReservationDetails(int reservationID)
-        {
-            Model_Billing details = null;
-            // SQL to select all necessary fields from tbl_Reservation JOINED with others if needed
-            string sql = @"SELECT
-                           pk_ReservationID, fk_VenueID, fk_Venue_ScopeID,
-                           fld_Start_Date, fld_End_Date, fld_Start_Time, fld_End_Time,
-                           fk_Venue_PricingID, fld_Reservation_Type -- Add other fields as needed
-                       FROM tbl_Reservation
-                       WHERE pk_ReservationID = @ReservationID";
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            using (SqlCommand cmd = new SqlCommand(sql, conn))
-            {
-                cmd.Parameters.AddWithValue("@ReservationID", reservationID);
-                try
-                {
-                    conn.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            details = new Model_Billing
-                            {
-                                pk_ReservationID = reader.GetInt32(reader.GetOrdinal("pk_ReservationID")),
-                                fk_VenueID = reader.IsDBNull(reader.GetOrdinal("fk_VenueID")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("fk_VenueID")),
-                                fk_Venue_ScopeID = reader.IsDBNull(reader.GetOrdinal("fk_Venue_ScopeID")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("fk_Venue_ScopeID")),
-                                fld_Start_Date = reader.GetDateTime(reader.GetOrdinal("fld_Start_Date")),
-                                fld_End_Date = reader.GetDateTime(reader.GetOrdinal("fld_End_Date")),
-                                fld_Start_Time = reader.GetTimeSpan(reader.GetOrdinal("fld_Start_Time")),
-                                fld_End_Time = reader.GetTimeSpan(reader.GetOrdinal("fld_End_Time")),
-                                fk_Venue_PricingID = reader.IsDBNull(reader.GetOrdinal("fk_Venue_PricingID")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("fk_Venue_PricingID")),
-                                fld_Reservation_Type = reader.GetString(reader.GetOrdinal("fld_Reservation_Type"))
-                                // Map other properties from Model_Billing if needed
-                            };
-
-                            // We need to infer Aircon status from fk_Venue_PricingID if not stored directly
-                            // This requires another lookup or JOIN in the initial query
-                            // For simplicity, let's assume we determine it later or add it to Model_Billing
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // Log error
-                    Console.WriteLine("Error fetching reservation details: " + ex.Message);
-                    throw; // Re-throw or handle as appropriate
-                }
-            }
-            return details;
-        }
-        */
 
         // Method to get Venue List (assuming it returns ID and Name)
         public List<KeyValuePair<int, string>> GetAllVenue()
@@ -2271,14 +1867,6 @@ WHERE pk_ReservationID = @ReservationID";
                 }
             }
         }
-
-
-        /// END OF GEMINI EDIT RESERVATION INFO
-
-
-        // START GEMINI 2.5
-
-        // --- Inside Repo_Billing.cs ---
 
         // Modify to accept optional venueId
         public List<KeyValuePair<int, string>> GetAllVenueScopes(int? venueId = null)
@@ -2657,12 +2245,11 @@ WHERE pk_ReservationID = @ReservationID";
 
      // End Class Repo_Billing
 
-    // Add to Model_Billing.cs:
-    // public string fld_Rate_Type_From_Pricing { get; set; }
 
 
-    // END GEMINI 2.5
 
+    } 
+}
     public Model_Billing GetEquipmentReservationByID(int reservationEquipmentID)
         {
             Model_Billing result = null;
