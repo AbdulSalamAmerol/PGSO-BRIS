@@ -80,7 +80,7 @@ namespace pgso.pgso_Billing.User_Control
             btn_Delete_Equipment_Billing.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
             btn_Add_Equipment_Billing.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
             btn_Return.Enabled = (billingDetailsList.fld_Reservation_Status == "Confirmed");
-
+            btn_Edit.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
 
             try
             {
@@ -341,5 +341,28 @@ namespace pgso.pgso_Billing.User_Control
         {
 
         }
+
+        private void btn_Edit_Click(object sender, EventArgs e)
+        {
+            if (dgv_Equipment_Billing_Records.CurrentRow?.DataBoundItem is Model_Billing selectedItem)
+            {
+                if (selectedItem.pk_Reservation_EquipmentID <= 0)
+                {
+                    MessageBox.Show("Invalid record selected.");
+                    return;
+                }
+
+                var editForm = new frm_Edit_Equipment_Billing(selectedItem.pk_Reservation_EquipmentID.Value);
+                if (editForm.ShowDialog() == DialogResult.OK)
+                {
+                    LoadBillingDetails(_billingDetails); // Refresh grid
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select an equipment record to edit.");
+            }
+        }
+
     }
 }

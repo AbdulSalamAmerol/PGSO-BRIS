@@ -274,6 +274,12 @@
     <Compile Include="pgso_Billing\Forms\frm_Cancellation_Slip.Designer.cs">
       <DependentUpon>frm_Cancellation_Slip.cs</DependentUpon>
     </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Edit_Equipment_Billing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pgso_Billing\Forms\frm_Edit_Equipment_Billing.Designer.cs">
+      <DependentUpon>frm_Edit_Equipment_Billing.cs</DependentUpon>
+    </Compile>
     <Compile Include="pgso_Billing\Forms\frm_Edit_Reservation_Info.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -569,6 +575,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Cancellation_Slip.resx">
       <DependentUpon>frm_Cancellation_Slip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pgso_Billing\Forms\frm_Edit_Equipment_Billing.resx">
+      <DependentUpon>frm_Edit_Equipment_Billing.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pgso_Billing\Forms\frm_Edit_Reservation_Info.resx">
       <DependentUpon>frm_Edit_Reservation_Info.cs</DependentUpon>
