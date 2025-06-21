@@ -2240,15 +2240,6 @@ namespace pgso.Billing.Repositories
         }
 
 
-
-
-
-     // End Class Repo_Billing
-
-
-
-
-
     public Model_Billing GetEquipmentReservationByID(int reservationEquipmentID)
         {
             Model_Billing result = null;
