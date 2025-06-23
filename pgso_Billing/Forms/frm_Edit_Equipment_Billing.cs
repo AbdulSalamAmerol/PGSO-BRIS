@@ -20,13 +20,23 @@ namespace pgso.pgso_Billing.Forms
         {
             InitializeComponent();
             _reservationEquipmentID = reservationEquipmentID;
-            LoadEquipmentDropdown();
+            this.Load += new System.EventHandler(this.frm_Edit_Equipment_Billing_Load);
+    
         }
+
+
 
         private void frm_Edit_Equipment_Billing_Load(object sender, EventArgs e)
         {
             LoadEquipmentDropdown();
             LoadExistingReservation();
+            LoadInventory();
+        }
+
+        private void LoadInventory()
+        {
+            var inventory = _repo.GetAllEquipmentInventory();
+            dgv_Equipment_Inventory.DataSource = inventory;
         }
 
         private void LoadEquipmentDropdown()
@@ -110,5 +120,52 @@ namespace pgso.pgso_Billing.Forms
             }
         }
 
+        private void cmb_Equipment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                // Ensure something is selected in the combo box
+                if (cmb_Equipment.SelectedValue is int selectedEquipmentID)
+                {
+                    // Fetch pricing for the selected equipment
+                    var pricing = _repo.GetEquipmentPricingByEquipmentID(selectedEquipmentID);
+
+                    // If pricing data is available
+                    if (pricing != null)
+                    {
+                        // Update textboxes with the fetched pricing details
+                        lbl_Standard_Price.Text = pricing.fld_Equipment_Price.ToString("C");
+                        lbl_Subsequent_Price.Text = pricing.fld_Equipment_Price_Subsequent.ToString("C");
+                    }
+                    else
+                    {
+                        MessageBox.Show(" No pricing found for the selected equipment.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(" Please select a valid equipment item.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(" Error: " + ex.Message);
+            }
+        }
+        private void frm_Add_Equipment_Billing_Load_1(object sender, EventArgs e)
+        {
+            this.tbl_EquipmentTableAdapter1.Fill(this._BRIS_EXPERIMENT_3_0DataSet1.tbl_Equipment);
+            this.tbl_EquipmentTableAdapter.Fill(this._BRIS_EXPERIMENT_3_0DataSet.tbl_Equipment);
+
+        }
+
+        private void btn_Cancel_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to cancel and close this form?", "Confirm Cancel", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
     }
 }

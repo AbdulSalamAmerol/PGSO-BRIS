@@ -19,14 +19,9 @@ namespace pgso.pgso_Billing.Forms
             LoadEquipmentDropdown();
         }
 
-        private void frm_Add_Equipment_Billing_Load(object sender, EventArgs e)
-        {
-            LoadEquipmentDropdown();
-        }
-
         private void LoadEquipmentDropdown()
         {
-            var equipmentList = _repo.GetAllEquipments(); // Get a list of { pk_EquipmentID, fld_Equipment_Name }
+            var equipmentList = _repo.GetAllEquipments(); // Get a list of EquipmentID, Equipment Names }
             cmb_Equipment.DisplayMember = "fld_Equipment_Name";
             cmb_Equipment.ValueMember = "pk_EquipmentID";
             cmb_Equipment.DataSource = equipmentList;
@@ -101,12 +96,6 @@ namespace pgso.pgso_Billing.Forms
                 if (success)
                 {
                     bool updateSuccess = _repo.UpdateReservationTotalAmount(_reservationID);
-
-                    if (updateSuccess)
-                        MessageBox.Show(" Equipment reservation added successfully, and total amount updated.");
-                    else
-                        MessageBox.Show("⚠ Equipment reservation added, but failed to update total amount.");
-
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -120,12 +109,10 @@ namespace pgso.pgso_Billing.Forms
                 MessageBox.Show(" Error: " + ex.Message);
             }
         }
-
+        // Add Equipment Billing Form DGV
         private void frm_Add_Equipment_Billing_Load_1(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the '_BRIS_EXPERIMENT_3_0DataSet1.tbl_Equipment' table. You can move, or remove it, as needed.
             this.tbl_EquipmentTableAdapter1.Fill(this._BRIS_EXPERIMENT_3_0DataSet1.tbl_Equipment);
-            // TODO: This line of code loads data into the '_BRIS_EXPERIMENT_3_0DataSet.tbl_Equipment' table. You can move, or remove it, as needed.
             this.tbl_EquipmentTableAdapter.Fill(this._BRIS_EXPERIMENT_3_0DataSet.tbl_Equipment);
 
         }

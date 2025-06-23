@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -40,18 +40,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Cancel = new System.Windows.Forms.Button();
-            this.tbl_EquipmentTableAdapter1 = new pgso._BRIS_EXPERIMENT_3_0DataSet1TableAdapters.tbl_EquipmentTableAdapter();
-            this.tbl_EquipmentTableAdapter = new pgso._BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_EquipmentTableAdapter();
-            this.tblEquipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this._BRIS_EXPERIMENT_3_0DataSet = new pgso._BRIS_EXPERIMENT_3_0DataSet();
-            this._BRIS_EXPERIMENT_3_0DataSet1 = new pgso._BRIS_EXPERIMENT_3_0DataSet1();
-            this.tblEquipmentBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.fldRemainingStockDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fldTotalStockDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fldEquipmentNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pkEquipmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label7 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv_Equipment_Inventory = new System.Windows.Forms.DataGridView();
+            this.tblEquipmentBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this._BRIS_EXPERIMENT_3_0DataSet1 = new pgso._BRIS_EXPERIMENT_3_0DataSet1();
             this.dtp_End_Date_Eq = new System.Windows.Forms.DateTimePicker();
             this.dtp_Start_Date_Eq = new System.Windows.Forms.DateTimePicker();
             this.lbl_Subsequent_Price = new System.Windows.Forms.TextBox();
@@ -60,13 +52,25 @@
             this.num_Quantity = new System.Windows.Forms.NumericUpDown();
             this.cmb_Equipment = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tbl_EquipmentTableAdapter1 = new pgso._BRIS_EXPERIMENT_3_0DataSet1TableAdapters.tbl_EquipmentTableAdapter();
+            this.tbl_EquipmentTableAdapter = new pgso._BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_EquipmentTableAdapter();
+            this.tblEquipmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this._BRIS_EXPERIMENT_3_0DataSet = new pgso._BRIS_EXPERIMENT_3_0DataSet();
+            this.billingDataSet = new pgso.BillingDataSet();
+            this.billingDataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fldRemainingStockDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fldTotalStockDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pkEquipmentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fldEquipmentNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Equipment_Inventory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblEquipmentBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Quantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblEquipmentBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tblEquipmentBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Quantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.billingDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.billingDataTableBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -80,7 +84,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btn_Cancel);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.dataGridView1);
+            this.panel1.Controls.Add(this.dgv_Equipment_Inventory);
             this.panel1.Controls.Add(this.dtp_End_Date_Eq);
             this.panel1.Controls.Add(this.dtp_Start_Date_Eq);
             this.panel1.Controls.Add(this.lbl_Subsequent_Price);
@@ -183,69 +187,7 @@
             this.btn_Cancel.TabIndex = 84;
             this.btn_Cancel.Text = "CANCEL";
             this.btn_Cancel.UseVisualStyleBackColor = false;
-            // 
-            // tbl_EquipmentTableAdapter1
-            // 
-            this.tbl_EquipmentTableAdapter1.ClearBeforeFill = true;
-            // 
-            // tbl_EquipmentTableAdapter
-            // 
-            this.tbl_EquipmentTableAdapter.ClearBeforeFill = true;
-            // 
-            // tblEquipmentBindingSource
-            // 
-            this.tblEquipmentBindingSource.DataMember = "tbl_Equipment";
-            this.tblEquipmentBindingSource.DataSource = this._BRIS_EXPERIMENT_3_0DataSet;
-            // 
-            // _BRIS_EXPERIMENT_3_0DataSet
-            // 
-            this._BRIS_EXPERIMENT_3_0DataSet.DataSetName = "_BRIS_EXPERIMENT_3_0DataSet";
-            this._BRIS_EXPERIMENT_3_0DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // _BRIS_EXPERIMENT_3_0DataSet1
-            // 
-            this._BRIS_EXPERIMENT_3_0DataSet1.DataSetName = "_BRIS_EXPERIMENT_3_0DataSet1";
-            this._BRIS_EXPERIMENT_3_0DataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // tblEquipmentBindingSource1
-            // 
-            this.tblEquipmentBindingSource1.DataMember = "tbl_Equipment";
-            this.tblEquipmentBindingSource1.DataSource = this._BRIS_EXPERIMENT_3_0DataSet1;
-            // 
-            // fldRemainingStockDataGridViewTextBoxColumn
-            // 
-            this.fldRemainingStockDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.fldRemainingStockDataGridViewTextBoxColumn.DataPropertyName = "fld_Remaining_Stock";
-            this.fldRemainingStockDataGridViewTextBoxColumn.HeaderText = "REMAINING EQUIPMENTS";
-            this.fldRemainingStockDataGridViewTextBoxColumn.Name = "fldRemainingStockDataGridViewTextBoxColumn";
-            this.fldRemainingStockDataGridViewTextBoxColumn.ReadOnly = true;
-            this.fldRemainingStockDataGridViewTextBoxColumn.Width = 152;
-            // 
-            // fldTotalStockDataGridViewTextBoxColumn
-            // 
-            this.fldTotalStockDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.fldTotalStockDataGridViewTextBoxColumn.DataPropertyName = "fld_Total_Stock";
-            this.fldTotalStockDataGridViewTextBoxColumn.HeaderText = "TOTAL EQUIPMENTS";
-            this.fldTotalStockDataGridViewTextBoxColumn.Name = "fldTotalStockDataGridViewTextBoxColumn";
-            this.fldTotalStockDataGridViewTextBoxColumn.ReadOnly = true;
-            this.fldTotalStockDataGridViewTextBoxColumn.Width = 129;
-            // 
-            // fldEquipmentNameDataGridViewTextBoxColumn
-            // 
-            this.fldEquipmentNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.fldEquipmentNameDataGridViewTextBoxColumn.DataPropertyName = "fld_Equipment_Name";
-            this.fldEquipmentNameDataGridViewTextBoxColumn.HeaderText = "EQUIPMENT LIST";
-            this.fldEquipmentNameDataGridViewTextBoxColumn.Name = "fldEquipmentNameDataGridViewTextBoxColumn";
-            this.fldEquipmentNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // pkEquipmentIDDataGridViewTextBoxColumn
-            // 
-            this.pkEquipmentIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.pkEquipmentIDDataGridViewTextBoxColumn.DataPropertyName = "pk_EquipmentID";
-            this.pkEquipmentIDDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.pkEquipmentIDDataGridViewTextBoxColumn.Name = "pkEquipmentIDDataGridViewTextBoxColumn";
-            this.pkEquipmentIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.pkEquipmentIDDataGridViewTextBoxColumn.Visible = false;
+            this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
             // 
             // label7
             // 
@@ -260,45 +202,55 @@
             this.label7.Text = "EDIT EQUIPMENT RESERVATION FORM";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // dataGridView1
+            // dgv_Equipment_Inventory
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.pkEquipmentIDDataGridViewTextBoxColumn,
+            this.dgv_Equipment_Inventory.AllowUserToAddRows = false;
+            this.dgv_Equipment_Inventory.AllowUserToDeleteRows = false;
+            this.dgv_Equipment_Inventory.AllowUserToResizeColumns = false;
+            this.dgv_Equipment_Inventory.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
+            this.dgv_Equipment_Inventory.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv_Equipment_Inventory.AutoGenerateColumns = false;
+            this.dgv_Equipment_Inventory.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            this.dgv_Equipment_Inventory.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgv_Equipment_Inventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Equipment_Inventory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.fldEquipmentNameDataGridViewTextBoxColumn,
+            this.pkEquipmentIDDataGridViewTextBoxColumn,
             this.fldTotalStockDataGridViewTextBoxColumn,
             this.fldRemainingStockDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.tblEquipmentBindingSource1;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
-            this.dataGridView1.Location = new System.Drawing.Point(30, 207);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(520, 321);
-            this.dataGridView1.StandardTab = true;
-            this.dataGridView1.TabIndex = 83;
+            this.dgv_Equipment_Inventory.DataSource = this.tblEquipmentBindingSource1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_Equipment_Inventory.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgv_Equipment_Inventory.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(106)))), ((int)(((byte)(113)))));
+            this.dgv_Equipment_Inventory.Location = new System.Drawing.Point(30, 207);
+            this.dgv_Equipment_Inventory.MultiSelect = false;
+            this.dgv_Equipment_Inventory.Name = "dgv_Equipment_Inventory";
+            this.dgv_Equipment_Inventory.ReadOnly = true;
+            this.dgv_Equipment_Inventory.RowHeadersVisible = false;
+            this.dgv_Equipment_Inventory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Equipment_Inventory.Size = new System.Drawing.Size(520, 321);
+            this.dgv_Equipment_Inventory.StandardTab = true;
+            this.dgv_Equipment_Inventory.TabIndex = 83;
+            // 
+            // tblEquipmentBindingSource1
+            // 
+            this.tblEquipmentBindingSource1.DataMember = "tbl_Equipment";
+            this.tblEquipmentBindingSource1.DataSource = this._BRIS_EXPERIMENT_3_0DataSet1;
+            // 
+            // _BRIS_EXPERIMENT_3_0DataSet1
+            // 
+            this._BRIS_EXPERIMENT_3_0DataSet1.DataSetName = "_BRIS_EXPERIMENT_3_0DataSet1";
+            this._BRIS_EXPERIMENT_3_0DataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // dtp_End_Date_Eq
             // 
@@ -381,6 +333,7 @@
             this.cmb_Equipment.Name = "cmb_Equipment";
             this.cmb_Equipment.Size = new System.Drawing.Size(150, 24);
             this.cmb_Equipment.TabIndex = 76;
+            this.cmb_Equipment.SelectedIndexChanged += new System.EventHandler(this.cmb_Equipment_SelectedIndexChanged);
             // 
             // panel2
             // 
@@ -392,6 +345,70 @@
             this.panel2.Size = new System.Drawing.Size(584, 604);
             this.panel2.TabIndex = 93;
             // 
+            // tbl_EquipmentTableAdapter1
+            // 
+            this.tbl_EquipmentTableAdapter1.ClearBeforeFill = true;
+            // 
+            // tbl_EquipmentTableAdapter
+            // 
+            this.tbl_EquipmentTableAdapter.ClearBeforeFill = true;
+            // 
+            // tblEquipmentBindingSource
+            // 
+            this.tblEquipmentBindingSource.DataMember = "tbl_Equipment";
+            this.tblEquipmentBindingSource.DataSource = this._BRIS_EXPERIMENT_3_0DataSet;
+            // 
+            // _BRIS_EXPERIMENT_3_0DataSet
+            // 
+            this._BRIS_EXPERIMENT_3_0DataSet.DataSetName = "_BRIS_EXPERIMENT_3_0DataSet";
+            this._BRIS_EXPERIMENT_3_0DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // billingDataSet
+            // 
+            this.billingDataSet.DataSetName = "BillingDataSet";
+            this.billingDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // billingDataTableBindingSource
+            // 
+            this.billingDataTableBindingSource.DataMember = "BillingDataTable";
+            this.billingDataTableBindingSource.DataSource = this.billingDataSet;
+            // 
+            // fldRemainingStockDataGridViewTextBoxColumn
+            // 
+            this.fldRemainingStockDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.fldRemainingStockDataGridViewTextBoxColumn.DataPropertyName = "fld_Remaining_Stock";
+            this.fldRemainingStockDataGridViewTextBoxColumn.HeaderText = "REMAINING EQUIPMENTS";
+            this.fldRemainingStockDataGridViewTextBoxColumn.Name = "fldRemainingStockDataGridViewTextBoxColumn";
+            this.fldRemainingStockDataGridViewTextBoxColumn.ReadOnly = true;
+            this.fldRemainingStockDataGridViewTextBoxColumn.Width = 152;
+            // 
+            // fldTotalStockDataGridViewTextBoxColumn
+            // 
+            this.fldTotalStockDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.fldTotalStockDataGridViewTextBoxColumn.DataPropertyName = "fld_Total_Stock";
+            this.fldTotalStockDataGridViewTextBoxColumn.HeaderText = "TOTAL EQUIPMENTS";
+            this.fldTotalStockDataGridViewTextBoxColumn.Name = "fldTotalStockDataGridViewTextBoxColumn";
+            this.fldTotalStockDataGridViewTextBoxColumn.ReadOnly = true;
+            this.fldTotalStockDataGridViewTextBoxColumn.Width = 129;
+            // 
+            // pkEquipmentIDDataGridViewTextBoxColumn
+            // 
+            this.pkEquipmentIDDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.pkEquipmentIDDataGridViewTextBoxColumn.DataPropertyName = "pk_EquipmentID";
+            this.pkEquipmentIDDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.pkEquipmentIDDataGridViewTextBoxColumn.Name = "pkEquipmentIDDataGridViewTextBoxColumn";
+            this.pkEquipmentIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.pkEquipmentIDDataGridViewTextBoxColumn.Visible = false;
+            this.pkEquipmentIDDataGridViewTextBoxColumn.Width = 43;
+            // 
+            // fldEquipmentNameDataGridViewTextBoxColumn
+            // 
+            this.fldEquipmentNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.fldEquipmentNameDataGridViewTextBoxColumn.DataPropertyName = "fld_Equipment_Name";
+            this.fldEquipmentNameDataGridViewTextBoxColumn.HeaderText = "EQUIPMENT LIST";
+            this.fldEquipmentNameDataGridViewTextBoxColumn.Name = "fldEquipmentNameDataGridViewTextBoxColumn";
+            this.fldEquipmentNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // frm_Edit_Equipment_Billing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -402,12 +419,14 @@
             this.Text = "frm_Edit_Equipment_Billing";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Equipment_Inventory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblEquipmentBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Quantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblEquipmentBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._BRIS_EXPERIMENT_3_0DataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tblEquipmentBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Quantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.billingDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.billingDataTableBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -424,11 +443,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_Cancel;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pkEquipmentIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fldEquipmentNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fldTotalStockDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fldRemainingStockDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridView dgv_Equipment_Inventory;
         private System.Windows.Forms.BindingSource tblEquipmentBindingSource1;
         private _BRIS_EXPERIMENT_3_0DataSet1 _BRIS_EXPERIMENT_3_0DataSet1;
         private System.Windows.Forms.DateTimePicker dtp_End_Date_Eq;
@@ -443,5 +458,11 @@
         private _BRIS_EXPERIMENT_3_0DataSetTableAdapters.tbl_EquipmentTableAdapter tbl_EquipmentTableAdapter;
         private System.Windows.Forms.BindingSource tblEquipmentBindingSource;
         private _BRIS_EXPERIMENT_3_0DataSet _BRIS_EXPERIMENT_3_0DataSet;
+        private BillingDataSet billingDataSet;
+        private System.Windows.Forms.BindingSource billingDataTableBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fldEquipmentNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pkEquipmentIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fldTotalStockDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fldRemainingStockDataGridViewTextBoxColumn;
     }
 }

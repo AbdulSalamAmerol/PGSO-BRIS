@@ -27,7 +27,7 @@ namespace pgso.pgso_Billing.Forms
         private Model_Billing _originalBillingInfo; // Store original details
         private Repo_Billing _repo = new Repo_Billing();
 
-        // Constants for Rate Types (Recommended)
+        // Constants for Rate Types 
         private const string RATE_TYPE_REGULAR = "Regular";
         private const string RATE_TYPE_SPECIAL = "Special";
         private const string RATE_TYPE_PGNV = "PGNV";
@@ -51,17 +51,15 @@ namespace pgso.pgso_Billing.Forms
 
             // Load dropdowns first (without triggering SelectedIndexChanged events initially)
             LoadVenueDropdown();
-            // Load all scopes initially might be okay, or load empty and let venue selection populate it
-            LoadVenueScopeDropdown(null); // Load empty or all initially
-
+            // Load all scopes initially
+            LoadVenueScopeDropdown(null); 
             // Then load specific data for this reservation
             LoadReservationDetails();
+            cb_Catering.Checked = _originalBillingInfo.fld_Caterer_Fee == 1000m;
         }
 
         private void LoadVenueDropdown()
         {
-            try
-            {
                 var venueList = _repo.GetAllVenue();
                 // Temporarily remove handler to prevent firing during load
                 cmb_Venue.SelectedIndexChanged -= cmb_Venue_SelectedIndexChanged;
@@ -72,15 +70,11 @@ namespace pgso.pgso_Billing.Forms
                 cmb_Venue.SelectedIndex = -1;
                 // Re-attach handler
                 cmb_Venue.SelectedIndexChanged += cmb_Venue_SelectedIndexChanged;
-            }
-            catch (Exception ex) { /* ... handle error ... */ }
         }
 
         // Modified to accept venueId for filtering
         private void LoadVenueScopeDropdown(int? venueId)
         {
-            try
-            {
                 List<KeyValuePair<int, string>> scopeList;
 
                 if (venueId.HasValue)
@@ -104,11 +98,6 @@ namespace pgso.pgso_Billing.Forms
                 cmb_Venue_Scope.DataSource = scopeList;
                 cmb_Venue_Scope.SelectedIndex = -1;
                 cmb_Venue_Scope.SelectedIndexChanged += cmb_Venue_Scope_SelectedIndexChanged;
-            }
-            catch (Exception ex)
-            {
-                // Handle exception appropriately
-            }
         }
 
         private string GetFriendlyScopeName(string internalScopeName)
@@ -140,7 +129,7 @@ namespace pgso.pgso_Billing.Forms
             try
             {
                 Model_Billing details = _repo.GetReservationDetails(_reservationID);
-
+                
                 if (details == null)
                 {
                     MessageBox.Show("Reservation not found.");
@@ -154,6 +143,7 @@ namespace pgso.pgso_Billing.Forms
                     cmb_Venue.Enabled = false;
                     cmb_Venue_Scope.Enabled = false;
                     cb_Aircon.Enabled = false;
+                    cb_Catering.Enabled = false;
                 }
 
                 // Populate date/time pickers
@@ -192,7 +182,7 @@ namespace pgso.pgso_Billing.Forms
                     cmb_Venue_Scope.SelectedIndexChanged += cmb_Venue_Scope_SelectedIndexChanged;
                 }
 
-                // ✅ Let this handle visibility and Checked state from DB
+                // Let this handle visibility and Checked state from DB
                 UpdateAirconCheckboxVisibility(details.pk_ReservationID);
             }
             catch (Exception ex)
@@ -257,10 +247,7 @@ namespace pgso.pgso_Billing.Forms
             }
         }
 
-
-
-
-
+        
 
         // --- Calculation Helper ---
         private decimal CalculateTotalAmount(TimeSpan duration, decimal first4HrsRate, decimal hourlyRate)
@@ -282,7 +269,6 @@ namespace pgso.pgso_Billing.Forms
 
             return totalAmount;
         }
-
 
         // --- SAVE BUTTON CLICK HANDLER ---
         private void btn_Save_Click(object sender, EventArgs e)
@@ -370,11 +356,10 @@ namespace pgso.pgso_Billing.Forms
                     return;
                 }
 
-
                 decimal totalAmount = 0m;
                 Repo_Billing.VenuePricingResult pricing = null;
                 int finalPricingId = -1; // Need to store the ID
-
+                decimal? cateringFee = null;    
                 // --- Handle PGNV Rate Type ---
                 if (rateType == RATE_TYPE_PGNV)
                 {
@@ -422,6 +407,17 @@ namespace pgso.pgso_Billing.Forms
 
                     // Call calculation helper
                     totalAmount = CalculateTotalAmount(totalDuration, pricing.First4HrsRate, pricing.HourlyRate);
+     
+                    if (cb_Catering.Checked)
+                    {
+                        cateringFee = 1000m;
+                        totalAmount += 1000m;
+                    }
+                    if (pricing.AdditionalCharge.HasValue && pricing.AdditionalCharge.Value > 0)
+                    {
+                        totalAmount += pricing.AdditionalCharge.Value;
+                        
+                    }
                 }
 
                 // --- 5. Update the Reservation Record via Repository ---
@@ -436,6 +432,7 @@ namespace pgso.pgso_Billing.Forms
                     finalPricingId, // Use the determined ID
                     pricing.First4HrsRate, // Use potentially zeroed rate for PGNV
                     pricing.HourlyRate,    // Use potentially zeroed rate for PGNV
+                    cateringFee,
                     totalAmount            // Pass calculated amount
                 );
 
@@ -476,10 +473,12 @@ namespace pgso.pgso_Billing.Forms
                         EndTime = endTime,
                         TotalAmount = totalAmount,
                         Status = _originalBillingInfo.fld_Reservation_Status // or updated status if changed
-                    });
+                    }
+                    
+                    );
 
                     // Use the same connection string as Repo_Billing
-                    string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
+                    string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
 
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
@@ -489,9 +488,9 @@ namespace pgso.pgso_Billing.Forms
                             try
                             {
                                 using (SqlCommand auditCmd = new SqlCommand(@"
-                INSERT INTO tbl_Audit_Log
-                (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
-                VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
+                                INSERT INTO tbl_Audit_Log
+                                (fk_UserID, fld_Affected_Table, fld_Affected_Record_PK, fld_ActionType, fld_Previous_Data_Json, fld_New_Data_Json, fld_Changed_By, fld_Changed_At)
+                                VALUES (@UserID, @Table, @RecordPK, @ActionType, @PrevJson, @NewJson, @ChangedBy, @ChangedAt)", conn, transaction))
                                 {
                                     auditCmd.Parameters.AddWithValue("@UserID", userId);
                                     auditCmd.Parameters.AddWithValue("@Table", affectedTable);
@@ -543,39 +542,5 @@ namespace pgso.pgso_Billing.Forms
             }
         }
 
-
-        // --- Other Recommendations / Optional Code ---
-
-        // Recommendation: Disable form controls during long operations (like DB calls)
-        private void SetBusy(bool busy)
-        {
-            // Example: Disable save/cancel buttons, show a progress indicator
-            btn_Save.Enabled = !busy;
-            btn_Cancel.Enabled = !busy; // Assuming btn_Cancel exists
-            this.Cursor = busy ? Cursors.WaitCursor : Cursors.Default;
-            // Consider disabling other controls too
-        }
-
-        // Call SetBusy(true) at start of DB operations (e.g., in LoadReservationDetails, btn_Save_Click)
-        // Call SetBusy(false) in finally blocks or after operation completes
-
-
-        // Recommendation: More Specific Error Handling
-        // Instead of generic catch (Exception ex), catch specific exceptions like SqlException
-        // Log the full exception details (ex.ToString()) for better debugging
-
-
-        // Recommendation: Consider using async/await for DB operations
-        // To keep the UI responsive during database calls, especially loading.
-        // Example (conceptual):
-        // private async void LoadReservationDetailsAsync() {
-        //     SetBusy(true);
-        //     try {
-        //         Model_Billing details = await Task.Run(() => _repo.GetReservationDetails(_reservationID));
-        //         // ... update controls on UI thread ...
-        //     } catch (Exception ex) { /* handle */ }
-        //     finally { SetBusy(false); }
-        // }
-
-    } // End Class frm_Edit_Venue_Reservation_Info
-} // End Namespace
+    } 
+} 

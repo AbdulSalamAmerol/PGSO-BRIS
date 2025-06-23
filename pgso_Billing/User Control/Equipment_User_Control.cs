@@ -81,7 +81,8 @@ namespace pgso.pgso_Billing.User_Control
             btn_Add_Equipment_Billing.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
             btn_Return.Enabled = (billingDetailsList.fld_Reservation_Status == "Confirmed");
             btn_Edit.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
-
+            btn_Confirm_Reservation.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
+            btn_Cancel_Reservation.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending" || billingDetailsList.fld_Reservation_Status == "Confirmed");
             try
             {
                 var reservationID = billingDetailsList.pk_ReservationID;
@@ -190,19 +191,10 @@ namespace pgso.pgso_Billing.User_Control
 
                         if (success)
                         {
-                            MessageBox.Show("✅ Equipment reservation deleted successfully.");
+                            MessageBox.Show("Equipment reservation deleted successfully.");
 
                             // Update the total amount for the reservation
                             bool updateSuccess = repo_billing.UpdateReservationTotalAmount(reservationID);
-
-                            if (updateSuccess)
-                            {
-                                MessageBox.Show("✅ Reservation total amount updated successfully.");
-                            }
-                            else
-                            {
-                                MessageBox.Show("⚠️ Failed to update reservation total amount.");
-                            }
 
                             // Re-fetch the updated billing details to refresh the label
                             _billingDetails = repo_billing.GetBillingDetailsByReservationID(reservationID);  // You need a method to fetch the updated billing details
@@ -253,6 +245,7 @@ namespace pgso.pgso_Billing.User_Control
 
         private async void btn_Confirm_Reservation_Click(object sender, EventArgs e)
         {
+
             if (_billingDetails.fld_Reservation_Status != "Pending")
             {
                 MessageBox.Show("Only 'Pending' reservations can be approved.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -272,13 +265,10 @@ namespace pgso.pgso_Billing.User_Control
 
                     if (statusUpdateSuccess)
                     {
-                        MessageBox.Show($"Reservation approved successfully with OR# {officialReceiptNumber}.",
-                                        "Approved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                         _billingDetails = _repoBilling.GetBillingDetailsByReservationID(_billingDetails.pk_ReservationID);
                         LoadBillingDetails(_billingDetails);
 
-                        RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); // 🔁 Notify parent to refresh billing
+                        RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); //Notify parent to refresh billing
 
                     }
                     else
@@ -292,23 +282,34 @@ namespace pgso.pgso_Billing.User_Control
 
         private void btn_Cancel_Reservation_Click(object sender, EventArgs e)
         {
+            var repo = new Repo_Billing();
+            bool allReturnedOrDamaged = repo.IsAllEquipmentReturnedOrDamaged(_billingDetails.pk_ReservationID);
+
+            if (!allReturnedOrDamaged)
+            {
+                MessageBox.Show("Cannot cancel reservation. All equipment must be returned or reported as damaged.",
+                                "Cancellation Blocked",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             using (var cancelForm = new frm_Cancellation_Reason(_billingDetails.pk_ReservationID))
             {
-                // 🔗 Wire the event from the form to this control
                 cancelForm.RequestBillingRefresh += (reservationId) =>
                 {
-                    var updatedDetails = new Repo_Billing().GetBillingDetailsByReservationID(reservationId ?? _billingDetails.pk_ReservationID);
+                    var updatedDetails = repo.GetBillingDetailsByReservationID(reservationId ?? _billingDetails.pk_ReservationID);
                     if (updatedDetails != null)
                     {
                         _billingDetails = updatedDetails;
                         LoadBillingDetails(_billingDetails);
-                        RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); // Notify frm_Billing
+                        RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID);
                     }
                 };
 
-                var result = cancelForm.ShowDialog();
+                cancelForm.ShowDialog();
             }
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
