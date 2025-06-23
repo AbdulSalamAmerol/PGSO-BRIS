@@ -355,7 +355,7 @@ namespace pgso.Billing.Repositories
                                     fld_Amount_Paid_Overtime = reader.IsDBNull(45) ? 0 : reader.GetDecimal(45),
                                     fld_OT_Payment_Status = reader.IsDBNull(46) ? "" : reader.GetString(46),
                                     fld_Cancellation_Reason = reader.IsDBNull(47) ? "" : reader.GetString(47),
-                                    fld_Username = reader.IsDBNull(48) ? "testAdminPGSO" : reader.GetString(48),
+                                    fld_Username = reader.IsDBNull(48) ? frm_login.username : reader.GetString(48),
                                     fld_Additional_Charge = reader.IsDBNull(49) ? 0 : reader.GetDecimal(49),
                                     fld_Caterer_Fee = reader.IsDBNull(50) ? 0 : reader.GetDecimal(50)
 

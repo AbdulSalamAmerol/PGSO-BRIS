@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>pgso</RootNamespace>
     <AssemblyName>pgso</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <FileAlignment>512</FileAlignment>
@@ -18,7 +18,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>C:\Users\PITD-38594\Documents\RBRIS Setup\</PublishUrl>
+    <PublishUrl>\\172.17.16.125\C%24\inetpub\wwwroot\RBIS\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -28,12 +28,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://172.17.16.125/</InstallUrl>
+    <InstallUrl>http://172.17.16.125/RBIS/</InstallUrl>
+    <PublisherName>GO-PITD</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
-    <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>3</ApplicationRevision>
+    <WebPage>index.htm</WebPage>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
+    <UseApplicationTrust>true</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -57,8 +59,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>
-    </StartupObject>
+    <StartupObject>pgso.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>5356BACBBA3FFB46E920207B98496687ECFE2910</ManifestCertificateThumbprint>
@@ -72,6 +73,13 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>RBIS.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
       <HintPath>packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
@@ -784,6 +792,7 @@
     <None Include="packages\System.ValueTuple.4.6.1\PACKAGE.md" />
     <None Include="packages\System.ValueTuple.4.6.1\System.ValueTuple.4.6.1.nupkg" />
     <None Include="pgso_TemporaryKey.pfx" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\DataSources\pgso.Billing.Models.class_Equipment_Billing.datasource" />
     <None Include="Properties\DataSources\pgso.Billing.Models.class_Venue_Billing.datasource" />
     <None Include="Properties\Settings.settings">
@@ -1158,6 +1167,7 @@
     <Content Include="packages\System.ValueTuple.4.6.1\lib\net462\System.ValueTuple.xml" />
     <Content Include="packages\System.ValueTuple.4.6.1\lib\net47\System.ValueTuple.dll" />
     <Content Include="packages\System.ValueTuple.4.6.1\lib\net47\System.ValueTuple.xml" />
+    <Content Include="RBIS.ico" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1201,6 +1211,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets" Condition="Exists('packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

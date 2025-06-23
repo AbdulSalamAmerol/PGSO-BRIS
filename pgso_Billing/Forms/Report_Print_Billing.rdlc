@@ -2418,7 +2418,7 @@ Switch(
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="PGSO("&amp; Fields!fld_Username.Value &amp;")"&amp; Format(Now(), "M/d/yy h:mm tt")</Value>
+                <Value>="Generated from RBIS by: "&amp; Fields!fld_Username.Value &amp;" "&amp; Format(Now(), "M/d/yy h:mm tt")</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>9pt</FontSize>
@@ -2432,7 +2432,7 @@ Switch(
           </Paragraph>
         </Paragraphs>
         <Top>6.24252in</Top>
-        <Left>2.46205cm</Left>
+        <Left>2.46207cm</Left>
         <Height>0.4cm</Height>
         <Width>10.90259cm</Width>
         <ZIndex>30</ZIndex>
@@ -4875,7 +4875,7 @@ This Province</Value>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="PGSO(" &amp; Fields!fld_Username.Value &amp; ")" &amp; Format(Now, "M/d/yy h:mm tt")</Value>
+                <Value>="Generated from RBIS by: "&amp; Fields!fld_Username.Value &amp;" "&amp; Format(Now(), "M/d/yy h:mm tt")</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                   <FontSize>9pt</FontSize>
@@ -4956,7 +4956,7 @@ This Province</Value>
       </Line>
       <Line Name="Line6">
         <Top>6.24252in</Top>
-        <Left>0.96932in</Left>
+        <Left>0.9589in</Left>
         <Height>0in</Height>
         <Width>5.92091in</Width>
         <ZIndex>66</ZIndex>

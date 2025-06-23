@@ -128,9 +128,9 @@ namespace pgso
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(278, 64);
+            this.pictureBox1.Location = new System.Drawing.Point(278, 67);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(23, 25);
+            this.pictureBox1.Size = new System.Drawing.Size(23, 18);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
@@ -197,6 +197,7 @@ namespace pgso
             this.Controls.Add(this.lb_pitd);
             this.Controls.Add(this.PicB_logo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_login";
             this.Text = "frm_login";
             this.Load += new System.EventHandler(this.frm_login_Load);

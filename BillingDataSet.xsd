@@ -67,7 +67,8 @@
               <xs:element name="fld_End_Date_Eq" msprop:Generator_ColumnPropNameInTable="fld_End_Date_EqColumn" msprop:Generator_ColumnPropNameInRow="fld_End_Date_Eq" msprop:Generator_UserColumnName="fld_End_Date_Eq" msprop:Generator_ColumnVarNameInTable="columnfld_End_Date_Eq" type="xs:dateTime" minOccurs="0" />
               <xs:element name="fld_Cancellation_Reason" msprop:Generator_ColumnPropNameInTable="fld_Cancellation_ReasonColumn" msprop:Generator_ColumnPropNameInRow="fld_Cancellation_Reason" msprop:Generator_UserColumnName="fld_Cancellation_Reason" msprop:Generator_ColumnVarNameInTable="columnfld_Cancellation_Reason" type="xs:string" minOccurs="0" />
               <xs:element name="fld_Username" msprop:Generator_ColumnPropNameInTable="fld_UsernameColumn" msprop:Generator_ColumnPropNameInRow="fld_Username" msprop:Generator_UserColumnName="fld_Username" msprop:Generator_ColumnVarNameInTable="columnfld_Username" type="xs:string" minOccurs="0" />
-              <xs:element name="fld_Caterer_Fee" msprop:Generator_UserColumnName="fld_Caterer_Fee" msprop:Generator_ColumnPropNameInTable="fld_Caterer_FeeColumn" msprop:Generator_ColumnPropNameInRow="fld_Caterer_Fee" msprop:Generator_ColumnVarNameInTable="columnfld_Caterer_Fee" type="xs:decimal" minOccurs="0" />
+              <xs:element name="fld_Caterer_Fee" msprop:Generator_ColumnPropNameInTable="fld_Caterer_FeeColumn" msprop:Generator_ColumnPropNameInRow="fld_Caterer_Fee" msprop:Generator_UserColumnName="fld_Caterer_Fee" msprop:Generator_ColumnVarNameInTable="columnfld_Caterer_Fee" type="xs:decimal" minOccurs="0" />
+              <xs:element name="fldUsername" msprop:Generator_ColumnPropNameInRow="fldUsername" msprop:Generator_ColumnPropNameInTable="fldUsernameColumn" msprop:Generator_ColumnVarNameInTable="columnfldUsername" msprop:Generator_UserColumnName="fldUsername" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
