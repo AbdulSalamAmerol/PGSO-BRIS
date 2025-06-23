@@ -285,7 +285,7 @@ namespace pgso.pgso_Billing.User_Control
             var repo = new Repo_Billing();
             bool allReturnedOrDamaged = repo.IsAllEquipmentReturnedOrDamaged(_billingDetails.pk_ReservationID);
 
-            if (!allReturnedOrDamaged)
+            if (!allReturnedOrDamaged && (_billingDetails.fld_Reservation_Status != "Pending"))
             {
                 MessageBox.Show("Cannot cancel reservation. All equipment must be returned or reported as damaged.",
                                 "Cancellation Blocked",

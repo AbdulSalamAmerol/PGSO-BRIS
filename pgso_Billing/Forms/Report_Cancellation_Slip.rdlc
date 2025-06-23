@@ -1023,10 +1023,10 @@ This Province</Value>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="PGSO("&amp; Fields!fld_Username.Value &amp;")"&amp; Format(Now(), "M/d/yy h:mm tt")</Value>
+                <Value>="Generated from RBIS by: "&amp; Fields!fld_Username.Value &amp;" "&amp; Format(Now(), "M/d/yy h:mm tt")</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <Format>MMM d, yyyy</Format>
                 </Style>
               </TextRun>
@@ -1057,7 +1057,7 @@ This Province</Value>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -2096,10 +2096,10 @@ This Province</Value>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="PGSO("&amp; Fields!fld_Username.Value &amp;")"&amp; Format(Now(), "M/d/yy h:mm tt")</Value>
+                <Value>="Generated from RBIS by: "&amp; Fields!fld_Username.Value &amp;" "&amp; Format(Now(), "M/d/yy h:mm tt")</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <Format>MMM d, yyyy</Format>
                 </Style>
               </TextRun>
@@ -2130,7 +2130,7 @@ This Province</Value>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -5684,10 +5684,18 @@ This Province</Value>
           <DataField>fld_Username</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="fld_Caterer_Fee">
+          <DataField>fld_Caterer_Fee</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="fldUsername">
+          <DataField>fldUsername</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>BillingDataSet</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\amero\source\repos\pgso\BillingDataSet.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Projects\pgso\BillingDataSet.xsd</rd:SchemaPath>
         <rd:TableName>BillingDataTable</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />

@@ -1463,10 +1463,10 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Generated from the RBIS: " &amp; Format(Now(), "M/d/yy h:mm tt") &amp; " by " &amp; Fields!fld_Username.Value</Value>
+                  <Value>="Generated from RBIS by: "&amp; Fields!fld_Username.Value &amp;" "&amp; Format(Now(), "M/d/yy h:mm tt")</Value>
                   <Style>
                     <FontFamily>Calibri</FontFamily>
-                    <FontSize>9pt</FontSize>
+                    <FontSize>8pt</FontSize>
                   </Style>
                 </TextRun>
               </TextRuns>
@@ -1478,7 +1478,38 @@
           <Top>0.14111cm</Top>
           <Left>2.32437cm</Left>
           <Height>0.4cm</Height>
-          <Width>15.01264cm</Width>
+          <Width>8.00118cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+              <Width>0.25pt</Width>
+            </Border>
+          </Style>
+        </Textbox>
+        <Textbox Name="txt_Date_of_Use8">
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>GO - PITD</Value>
+                  <Style>
+                    <FontStyle>Italic</FontStyle>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <Top>0.05556in</Top>
+          <Left>13.64231cm</Left>
+          <Height>0.4cm</Height>
+          <Width>3.69474cm</Width>
+          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>

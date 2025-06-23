@@ -305,5 +305,10 @@ namespace pgso
         {
 
         }
+
+        private void btn_Close_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

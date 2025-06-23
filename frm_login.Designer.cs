@@ -31,34 +31,25 @@ namespace pgso
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_login));
-            this.PicB_logo = new System.Windows.Forms.PictureBox();
             this.lb_pitd = new System.Windows.Forms.Label();
             this.panel_bg_pgso = new System.Windows.Forms.Panel();
             this.lb_pgis = new System.Windows.Forms.Label();
             this.lb_pgso = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel_grop_login = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_Login = new System.Windows.Forms.Button();
             this.CB_remember = new System.Windows.Forms.CheckBox();
             this.TXT_password = new System.Windows.Forms.TextBox();
             this.TXT_username = new System.Windows.Forms.TextBox();
             this.LB_datetime = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.PicB_logo)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PicB_logo = new System.Windows.Forms.PictureBox();
+            this.btn_Close = new System.Windows.Forms.Button();
             this.panel_bg_pgso.SuspendLayout();
             this.panel_grop_login.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicB_logo)).BeginInit();
             this.SuspendLayout();
-            // 
-            // PicB_logo
-            // 
-            this.PicB_logo.Image = ((System.Drawing.Image)(resources.GetObject("PicB_logo.Image")));
-            this.PicB_logo.Location = new System.Drawing.Point(115, 52);
-            this.PicB_logo.Name = "PicB_logo";
-            this.PicB_logo.Size = new System.Drawing.Size(100, 71);
-            this.PicB_logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PicB_logo.TabIndex = 0;
-            this.PicB_logo.TabStop = false;
             // 
             // lb_pitd
             // 
@@ -114,6 +105,7 @@ namespace pgso
             // panel_grop_login
             // 
             this.panel_grop_login.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_grop_login.Controls.Add(this.btn_Close);
             this.panel_grop_login.Controls.Add(this.pictureBox1);
             this.panel_grop_login.Controls.Add(this.btn_Login);
             this.panel_grop_login.Controls.Add(this.CB_remember);
@@ -122,19 +114,8 @@ namespace pgso
             this.panel_grop_login.Controls.Add(this.LB_datetime);
             this.panel_grop_login.Location = new System.Drawing.Point(7, 238);
             this.panel_grop_login.Name = "panel_grop_login";
-            this.panel_grop_login.Size = new System.Drawing.Size(310, 166);
+            this.panel_grop_login.Size = new System.Drawing.Size(310, 197);
             this.panel_grop_login.TabIndex = 4;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(278, 67);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(23, 18);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // btn_Login
             // 
@@ -186,11 +167,45 @@ namespace pgso
             this.LB_datetime.Size = new System.Drawing.Size(0, 13);
             this.LB_datetime.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(278, 67);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(23, 18);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // PicB_logo
+            // 
+            this.PicB_logo.Image = ((System.Drawing.Image)(resources.GetObject("PicB_logo.Image")));
+            this.PicB_logo.Location = new System.Drawing.Point(115, 52);
+            this.PicB_logo.Name = "PicB_logo";
+            this.PicB_logo.Size = new System.Drawing.Size(100, 71);
+            this.PicB_logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PicB_logo.TabIndex = 0;
+            this.PicB_logo.TabStop = false;
+            // 
+            // btn_Close
+            // 
+            this.btn_Close.BackColor = System.Drawing.Color.Green;
+            this.btn_Close.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Close.ForeColor = System.Drawing.Color.White;
+            this.btn_Close.Location = new System.Drawing.Point(8, 153);
+            this.btn_Close.Name = "btn_Close";
+            this.btn_Close.Size = new System.Drawing.Size(292, 31);
+            this.btn_Close.TabIndex = 7;
+            this.btn_Close.Text = "Close";
+            this.btn_Close.UseVisualStyleBackColor = false;
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
+            // 
             // frm_login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(323, 417);
+            this.ClientSize = new System.Drawing.Size(323, 444);
             this.Controls.Add(this.panel_grop_login);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel_bg_pgso);
@@ -201,12 +216,12 @@ namespace pgso
             this.Name = "frm_login";
             this.Text = "frm_login";
             this.Load += new System.EventHandler(this.frm_login_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.PicB_logo)).EndInit();
             this.panel_bg_pgso.ResumeLayout(false);
             this.panel_bg_pgso.PerformLayout();
             this.panel_grop_login.ResumeLayout(false);
             this.panel_grop_login.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicB_logo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,5 +242,6 @@ namespace pgso
         private System.Windows.Forms.TextBox TXT_password;
         private System.Windows.Forms.TextBox TXT_username;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btn_Close;
     }
 }

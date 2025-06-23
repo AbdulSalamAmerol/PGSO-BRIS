@@ -2421,7 +2421,7 @@ Switch(
                 <Value>="Generated from RBIS by: "&amp; Fields!fld_Username.Value &amp;" "&amp; Format(Now(), "M/d/yy h:mm tt")</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <Format>MMM d, yyyy</Format>
                 </Style>
               </TextRun>
@@ -2452,7 +2452,7 @@ Switch(
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -4878,7 +4878,7 @@ This Province</Value>
                 <Value>="Generated from RBIS by: "&amp; Fields!fld_Username.Value &amp;" "&amp; Format(Now(), "M/d/yy h:mm tt")</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                   <Format>MMM d, yyyy</Format>
                 </Style>
               </TextRun>
@@ -4909,7 +4909,7 @@ This Province</Value>
                 <Style>
                   <FontStyle>Italic</FontStyle>
                   <FontFamily>Calibri</FontFamily>
-                  <FontSize>9pt</FontSize>
+                  <FontSize>8pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -5474,6 +5474,10 @@ This Province</Value>
         <Field Name="fld_Caterer_Fee">
           <DataField>fld_Caterer_Fee</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="fldUsername">
+          <DataField>fldUsername</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

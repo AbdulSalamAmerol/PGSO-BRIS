@@ -80,7 +80,7 @@ namespace pgso.pgso_Billing
                 string prevDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(prevData);
                 string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(newData);
 
-                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+                string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
@@ -200,7 +200,7 @@ namespace pgso.pgso_Billing
                 string prevDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(prevData);
                 string newDataJson = Newtonsoft.Json.JsonConvert.SerializeObject(newData);
 
-                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+                string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
@@ -599,7 +599,7 @@ namespace pgso.pgso_Billing
                     ORExtension = _billingDetails.fld_OR_Extension
                 });
 
-                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+                string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
@@ -661,7 +661,7 @@ namespace pgso.pgso_Billing
                     CancellationReason = _billingDetails.fld_Cancellation_Reason
                 });
 
-                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+                string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
@@ -732,7 +732,7 @@ namespace pgso.pgso_Billing
                     CancellationReason = _billingDetails.fld_Cancellation_Reason
                 });
 
-                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+                string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
@@ -818,7 +818,7 @@ namespace pgso.pgso_Billing
                             ORNumber = officialReceiptNumber
                         });
 
-                        string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+                        string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
 
                         using (SqlConnection conn = new SqlConnection(connectionString))
                         {
