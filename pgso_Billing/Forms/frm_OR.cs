@@ -67,6 +67,7 @@ namespace pgso.pgso_Billing.Forms
                     try
                     {
                         success = _repository.UpdateReservationORNumber(_reservationId, orNumberPGNV);
+
                     }
                     catch (Exception ex)
                     {
@@ -76,6 +77,9 @@ namespace pgso.pgso_Billing.Forms
 
                     if (success)
                     {
+                        // Update Confirmation Date
+                        _repository.UpdateConfirmationDate(_reservationId, DateTime.Now);
+
                         MessageBox.Show("Official Receipt number updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.EnteredORNumber = orNumberPGNV;
                         this.DialogResult = DialogResult.OK;
@@ -145,6 +149,8 @@ namespace pgso.pgso_Billing.Forms
 
                     if (success)
                     {
+                        // Update Confirmation Date
+                        _repository.UpdateConfirmationDate(_reservationId, DateTime.Now);
                         MessageBox.Show("Official Receipt number updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.EnteredORNumber = orNumber;
                         this.DialogResult = DialogResult.OK;

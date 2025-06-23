@@ -12,8 +12,8 @@ namespace pgso.Billing.Repositories
     public class Repo_Billing
     {
 
-        private string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
-      // private string connectionString = "Data Source=DESKTOP-DG6NT1C;Initial Catalog=gso;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
+        private string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
+        // private string connectionString = "Data Source=DESKTOP-DG6NT1C;Initial Catalog=gso;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
 
         public List<Model_Billing> GetAllBillingRecords()
         {
@@ -93,7 +93,8 @@ namespace pgso.Billing.Repositories
                                     p.fld_Amount_Paid_Overtime,
                                     r.fld_OT_Payment_Status,
                                     u.fld_Username,
-                                    r.fld_Caterer_Fee 
+                                    r.fld_Caterer_Fee,
+                                    r.fld_Confirmation_Date
 
                                     FROM dbo.tbl_Reservation r
                                     LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
@@ -184,8 +185,9 @@ namespace pgso.Billing.Repositories
                                 fld_Username = reader.IsDBNull(52) ? "" : reader.GetString(52),
 
                                 // Caterer Fee
-                                fld_Caterer_Fee = reader.IsDBNull(53) ? 0 : reader.GetDecimal(53)
-
+                                fld_Caterer_Fee = reader.IsDBNull(53) ? 0 : reader.GetDecimal(53),
+                                // Confirmation Date
+                                fld_Confirmation_Date = reader.IsDBNull(54) ? DateTime.MinValue : reader.GetDateTime(54)
                             };
 
 
@@ -204,7 +206,7 @@ namespace pgso.Billing.Repositories
             return billings;
         }
 
-        
+
 
         // Get Billing Records by Reservation ID (RDLC of frm_Print_Billing)
         public List<Model_Billing> GetBillingRecordsByReservationId(int reservationId)
@@ -687,7 +689,7 @@ namespace pgso.Billing.Repositories
                                     fld_OR = reader.IsDBNull(48) ? 0 : reader.GetInt32(48),
                                     fld_Amount_Paid_Overtime = reader.IsDBNull(49) ? 0 : reader.GetDecimal(49),
                                     fld_OT_Payment_Status = reader.IsDBNull(50) ? "" : reader.GetString(50),
-                                    fld_OR_Extension = reader.IsDBNull(51) ? 0 : reader.GetInt32(51),    
+                                    fld_OR_Extension = reader.IsDBNull(51) ? 0 : reader.GetInt32(51),
                                     fld_Extension_Status = reader.IsDBNull(52) ? "" : reader.GetString(52),
                                     fld_Caterer_Fee = reader.IsDBNull(53) ? 0 : reader.GetDecimal(53)
                                 };
@@ -1743,6 +1745,7 @@ namespace pgso.Billing.Repositories
             public int PricingID { get; set; }
             public decimal First4HrsRate { get; set; }
             public decimal HourlyRate { get; set; }
+            public decimal? AdditionalCharge { get; set; }  // ⬅️ This is the new line
             public bool Found { get; set; } = false; // Flag to indicate if found
         }
 
@@ -1750,12 +1753,12 @@ namespace pgso.Billing.Repositories
         {
             VenuePricingResult result = new VenuePricingResult();
             string sql = @"
-            SELECT pk_Venue_PricingID, fld_First4Hrs_Rate, fld_Hourly_Rate
-            FROM tbl_Venue_Pricing
-            WHERE fk_VenueID = @VenueID
-              AND fk_Venue_ScopeID = @ScopeID
-              AND fld_Aircon = @Aircon
-              AND fld_Rate_Type = @RateType";
+    SELECT pk_Venue_PricingID, fld_First4Hrs_Rate, fld_Hourly_Rate, fld_Additional_Charge
+    FROM tbl_Venue_Pricing
+    WHERE fk_VenueID = @VenueID
+      AND fk_Venue_ScopeID = @ScopeID
+      AND fld_Aircon = @Aircon
+      AND fld_Rate_Type = @RateType";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(sql, conn))
@@ -1763,7 +1766,7 @@ namespace pgso.Billing.Repositories
                 cmd.Parameters.AddWithValue("@VenueID", venueId);
                 cmd.Parameters.AddWithValue("@ScopeID", scopeId);
                 cmd.Parameters.AddWithValue("@Aircon", aircon);
-                cmd.Parameters.AddWithValue("@RateType", rateType ?? (object)DBNull.Value); // Handle null rateType
+                cmd.Parameters.AddWithValue("@RateType", rateType ?? (object)DBNull.Value);
 
                 try
                 {
@@ -1775,20 +1778,22 @@ namespace pgso.Billing.Repositories
                             result.PricingID = reader.GetInt32(reader.GetOrdinal("pk_Venue_PricingID"));
                             result.First4HrsRate = reader.GetDecimal(reader.GetOrdinal("fld_First4Hrs_Rate"));
                             result.HourlyRate = reader.GetDecimal(reader.GetOrdinal("fld_Hourly_Rate"));
+                            result.AdditionalCharge = reader.IsDBNull(reader.GetOrdinal("fld_Additional_Charge"))
+                                ? (decimal?)null
+                                : reader.GetDecimal(reader.GetOrdinal("fld_Additional_Charge"));
                             result.Found = true;
                         }
-                        // No else needed, Found defaults to false
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Log error
                     Console.WriteLine("Error fetching pricing details: " + ex.Message);
-                    throw; // Re-throw or handle
+                    throw;
                 }
             }
             return result;
         }
+
 
         // Method to get Aircon status based on PricingID (if needed)
         public bool? GetAirconStatusFromPricing(int? pricingId)
@@ -1821,21 +1826,34 @@ namespace pgso.Billing.Repositories
         }
 
         // Method to update the reservation
-        public bool UpdateVenueReservation(int reservationID, DateTime startDate, DateTime endDate, TimeSpan startTime, TimeSpan endTime, int venueId, int scopeId, int venuePricingId, decimal first4HrsRate, decimal hourlyRate)
+        public bool UpdateVenueReservation(
+    int reservationID,
+    DateTime startDate,
+    DateTime endDate,
+    TimeSpan startTime,
+    TimeSpan endTime,
+    int venueId,
+    int scopeId,
+    int venuePricingId,
+    decimal first4HrsRate,
+    decimal hourlyRate,
+    decimal? cateringFee,
+    decimal totalAmount)
         {
             string sql = @"
-            UPDATE tbl_Reservation SET
-                fld_Start_Date = @StartDate,
-                fld_End_Date = @EndDate,
-                fld_Start_Time = @StartTime,
-                fld_End_Time = @EndTime,
-                fk_VenueID = @VenueID,
-                fk_Venue_ScopeID = @ScopeID,
-                fk_Venue_PricingID = @VenuePricingID,
-                fld_First4Hrs_Rate = @First4HrsRate,
-                fld_Hourly_Rate = @HourlyRate
-                -- Add fld_Total_Amount, fld_OT_Hours updates here if calculated
-            WHERE pk_ReservationID = @ReservationID";
+    UPDATE tbl_Reservation SET
+        fld_Start_Date = @StartDate,
+        fld_End_Date = @EndDate,
+        fld_Start_Time = @StartTime,
+        fld_End_Time = @EndTime,
+        fk_VenueID = @VenueID,
+        fk_Venue_ScopeID = @ScopeID,
+        fk_Venue_PricingID = @VenuePricingID,
+        fld_First4Hrs_Rate = @First4HrsRate,
+        fld_Hourly_Rate = @HourlyRate,
+        fld_Caterer_Fee = @CateringFee,
+        fld_Total_Amount = @TotalAmount
+    WHERE pk_ReservationID = @ReservationID";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(sql, conn))
@@ -1849,24 +1867,24 @@ namespace pgso.Billing.Repositories
                 cmd.Parameters.Add("@VenuePricingID", SqlDbType.Int).Value = venuePricingId;
                 cmd.Parameters.Add("@First4HrsRate", SqlDbType.Decimal).Value = first4HrsRate;
                 cmd.Parameters.Add("@HourlyRate", SqlDbType.Decimal).Value = hourlyRate;
+                cmd.Parameters.Add("@CateringFee", SqlDbType.Decimal).Value = (object)cateringFee ?? DBNull.Value;
+                cmd.Parameters.Add("@TotalAmount", SqlDbType.Decimal).Value = totalAmount;
                 cmd.Parameters.Add("@ReservationID", SqlDbType.Int).Value = reservationID;
-
-                // Add parameters for TotalAmount, OTHours if needed
 
                 try
                 {
                     conn.Open();
                     int rowsAffected = cmd.ExecuteNonQuery();
-                    return rowsAffected > 0; // Return true if update was successful
+                    return rowsAffected > 0;
                 }
                 catch (Exception ex)
                 {
-                    // Log error
                     Console.WriteLine("Error updating reservation: " + ex.Message);
-                    return false; // Indicate failure
+                    return false;
                 }
             }
         }
+
 
         // Modify to accept optional venueId
         public List<KeyValuePair<int, string>> GetAllVenueScopes(int? venueId = null)
@@ -1927,7 +1945,7 @@ namespace pgso.Billing.Repositories
             SELECT TOP 1 fld_Aircon
             FROM tbl_Venue_Pricing
             WHERE fk_VenueID = @VenueID AND fk_Venue_ScopeID = @ScopeID
-            ORDER BY fld_Aircon DESC"; 
+            ORDER BY fld_Aircon DESC";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -1946,7 +1964,7 @@ namespace pgso.Billing.Repositories
 
             return isAirconUsed;
         }
-        
+
         public bool GetAirconUsageForReservation(int reservationId)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -1988,6 +2006,7 @@ namespace pgso.Billing.Repositories
                 }
             }
         }
+
 
         // Method to check if Aircon option exists for a Venue/Scope
         public bool CheckAirconAvailability(int venueId, int? scopeId)
@@ -2056,45 +2075,45 @@ namespace pgso.Billing.Repositories
 
         // Modify UpdateVenueReservation to accept totalAmount and update the field
         // frm_Edit_Reservation_Info.cs
-                    public bool UpdateVenueReservation
-                    (
-                        int reservationID,
-                        DateTime startDate,
-                        DateTime endDate,
-                        TimeSpan startTime,
-                        TimeSpan endTime,
-                        int venueId,
-                        int scopeId,
-                        int venuePricingId,
-                        decimal first4HrsRate,
-                        decimal hourlyRate,
-                        decimal totalAmount // base amount before additional charge
-                    )
+        public bool UpdateVenueReservation
+        (
+            int reservationID,
+            DateTime startDate,
+            DateTime endDate,
+            TimeSpan startTime,
+            TimeSpan endTime,
+            int venueId,
+            int scopeId,
+            int venuePricingId,
+            decimal first4HrsRate,
+            decimal hourlyRate,
+            decimal totalAmount // base amount before additional charge
+        )
+        {
+            decimal additionalCharge = 0;
+
+            // Step 1: Fetch fld_Additional_Charge from tbl_Venue_Pricing
+            string getChargeSql = "SELECT fld_Additional_Charge FROM tbl_Venue_Pricing WHERE pk_Venue_PricingID = @PricingID";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                using (SqlCommand getChargeCmd = new SqlCommand(getChargeSql, conn))
+                {
+                    getChargeCmd.Parameters.Add("@PricingID", SqlDbType.Int).Value = venuePricingId;
+                    conn.Open();
+                    object result = getChargeCmd.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
                     {
-                        decimal additionalCharge = 0;
+                        additionalCharge = Convert.ToDecimal(result);
+                    }
+                    conn.Close();
+                }
 
-                        // Step 1: Fetch fld_Additional_Charge from tbl_Venue_Pricing
-                        string getChargeSql = "SELECT fld_Additional_Charge FROM tbl_Venue_Pricing WHERE pk_Venue_PricingID = @PricingID";
+                // Add the additional charge to the total amount
+                totalAmount += additionalCharge;
 
-                        using (SqlConnection conn = new SqlConnection(connectionString))
-                        {
-                            using (SqlCommand getChargeCmd = new SqlCommand(getChargeSql, conn))
-                            {
-                                getChargeCmd.Parameters.Add("@PricingID", SqlDbType.Int).Value = venuePricingId;
-                                conn.Open();
-                                object result = getChargeCmd.ExecuteScalar();
-                                if (result != null && result != DBNull.Value)
-                                {
-                                    additionalCharge = Convert.ToDecimal(result);
-                                }
-                                conn.Close();
-                            }
-
-                            // Add the additional charge to the total amount
-                            totalAmount += additionalCharge;
-
-                            // Step 2: Update the reservation with new total
-                            string updateSql = @"
+                // Step 2: Update the reservation with new total
+                string updateSql = @"
                                                 UPDATE tbl_Reservation SET
                                                     fld_Start_Date = @StartDate,
                                                     fld_End_Date = @EndDate,
@@ -2108,34 +2127,34 @@ namespace pgso.Billing.Repositories
                                                     fld_Total_Amount = @TotalAmount
                                                 WHERE pk_ReservationID = @ReservationID";
 
-                            using (SqlCommand updateCmd = new SqlCommand(updateSql, conn))
-                            {
-                                updateCmd.Parameters.Add("@StartDate", SqlDbType.Date).Value = startDate;
-                                updateCmd.Parameters.Add("@EndDate", SqlDbType.Date).Value = endDate;
-                                updateCmd.Parameters.Add("@StartTime", SqlDbType.Time).Value = startTime;
-                                updateCmd.Parameters.Add("@EndTime", SqlDbType.Time).Value = endTime;
-                                updateCmd.Parameters.Add("@VenueID", SqlDbType.Int).Value = venueId;
-                                updateCmd.Parameters.Add("@ScopeID", SqlDbType.Int).Value = scopeId;
-                                updateCmd.Parameters.Add("@VenuePricingID", SqlDbType.Int).Value = venuePricingId;
-                                updateCmd.Parameters.Add("@First4HrsRate", SqlDbType.Decimal).Value = first4HrsRate;
-                                updateCmd.Parameters.Add("@HourlyRate", SqlDbType.Decimal).Value = hourlyRate;
-                                updateCmd.Parameters.Add("@TotalAmount", SqlDbType.Decimal).Value = totalAmount;
-                                updateCmd.Parameters.Add("@ReservationID", SqlDbType.Int).Value = reservationID;
+                using (SqlCommand updateCmd = new SqlCommand(updateSql, conn))
+                {
+                    updateCmd.Parameters.Add("@StartDate", SqlDbType.Date).Value = startDate;
+                    updateCmd.Parameters.Add("@EndDate", SqlDbType.Date).Value = endDate;
+                    updateCmd.Parameters.Add("@StartTime", SqlDbType.Time).Value = startTime;
+                    updateCmd.Parameters.Add("@EndTime", SqlDbType.Time).Value = endTime;
+                    updateCmd.Parameters.Add("@VenueID", SqlDbType.Int).Value = venueId;
+                    updateCmd.Parameters.Add("@ScopeID", SqlDbType.Int).Value = scopeId;
+                    updateCmd.Parameters.Add("@VenuePricingID", SqlDbType.Int).Value = venuePricingId;
+                    updateCmd.Parameters.Add("@First4HrsRate", SqlDbType.Decimal).Value = first4HrsRate;
+                    updateCmd.Parameters.Add("@HourlyRate", SqlDbType.Decimal).Value = hourlyRate;
+                    updateCmd.Parameters.Add("@TotalAmount", SqlDbType.Decimal).Value = totalAmount;
+                    updateCmd.Parameters.Add("@ReservationID", SqlDbType.Int).Value = reservationID;
 
-                                try
-                                {
-                                    conn.Open();
-                                    int rowsAffected = updateCmd.ExecuteNonQuery();
-                                    return rowsAffected > 0;
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine("Error updating reservation: " + ex.Message);
-                                    return false;
-                                }
-                            }
-                        }
+                    try
+                    {
+                        conn.Open();
+                        int rowsAffected = updateCmd.ExecuteNonQuery();
+                        return rowsAffected > 0;
                     }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error updating reservation: " + ex.Message);
+                        return false;
+                    }
+                }
+            }
+        }
 
 
         // Make sure your GetReservationDetails fetches the fld_Rate_Type from tbl_Venue_Pricing
@@ -2147,7 +2166,7 @@ namespace pgso.Billing.Repositories
             string sql = @"SELECT
                        r.pk_ReservationID, r.fk_VenueID, r.fk_Venue_ScopeID,
                        r.fld_Start_Date, r.fld_End_Date, r.fld_Start_Time, r.fld_End_Time,
-                       r.fk_Venue_PricingID, r.fld_Reservation_Type,
+                       r.fk_Venue_PricingID, r.fld_Reservation_Type, r.fld_Caterer_Fee,
                        vp.fld_Rate_Type, -- Fetch Rate Type from Pricing Table
                        r.fld_Reservation_Status
                    FROM tbl_Reservation r
@@ -2158,8 +2177,7 @@ namespace pgso.Billing.Repositories
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
                 cmd.Parameters.AddWithValue("@ReservationID", reservationID);
-                try
-                {
+
                     conn.Open();
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -2176,14 +2194,14 @@ namespace pgso.Billing.Repositories
                                 fld_End_Time = reader.GetTimeSpan(reader.GetOrdinal("fld_End_Time")),
                                 fk_Venue_PricingID = reader.IsDBNull(reader.GetOrdinal("fk_Venue_PricingID")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("fk_Venue_PricingID")),
                                 fld_Reservation_Type = reader.GetString(reader.GetOrdinal("fld_Reservation_Type")),
-                                // Add a property in Model_Billing for this:
                                 fld_Rate_Type = reader.IsDBNull(reader.GetOrdinal("fld_Rate_Type")) ? null : reader.GetString(reader.GetOrdinal("fld_Rate_Type")),
-                                fld_Reservation_Status = reader.IsDBNull(reader.GetOrdinal("fld_Reservation_Status")) ? null : reader.GetString(reader.GetOrdinal("fld_Reservation_Status"))
+                                fld_Reservation_Status = reader.IsDBNull(reader.GetOrdinal("fld_Reservation_Status")) ? null : reader.GetString(reader.GetOrdinal("fld_Reservation_Status")),
+                                fld_Caterer_Fee = reader.IsDBNull(reader.GetOrdinal("fld_Caterer_Fee"))? 0m: reader.GetDecimal(reader.GetOrdinal("fld_Caterer_Fee"))
+
+
                             };
                         }
                     }
-                }
-                catch (Exception ex) { /* ... handle error ... */ }
             }
             return details;
         }
@@ -2221,29 +2239,227 @@ namespace pgso.Billing.Repositories
         }
 
         // FOR PGNV or any rate type that skips OR number 
-       public string GetRateTypeForReservation(int reservationId)
-{
-    using (var conn = new SqlConnection(connectionString))
-    {
-        conn.Open();
-        using (var cmd = new SqlCommand(@"
+        public string GetRateTypeForReservation(int reservationId)
+        {
+            using (var conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand(@"
             SELECT vp.fld_Rate_Type
             FROM tbl_Reservation r
             INNER JOIN tbl_Venue_Pricing vp ON r.fk_Venue_PricingID = vp.pk_Venue_PricingID
             WHERE r.pk_ReservationID = @ReservationId", conn))
-        {
-            cmd.Parameters.AddWithValue("@ReservationId", reservationId);
-            var result = cmd.ExecuteScalar();
-            return result?.ToString(); // Return null if not found
+                {
+                    cmd.Parameters.AddWithValue("@ReservationId", reservationId);
+                    var result = cmd.ExecuteScalar();
+                    return result?.ToString(); // Return null if not found
+                }
+            }
         }
+
+
+    public Model_Billing GetEquipmentReservationByID(int reservationEquipmentID)
+        {
+            Model_Billing result = null;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(@"
+            SELECT 
+                re.pk_Reservation_EquipmentID,
+                re.fk_ReservationID,
+                re.fk_EquipmentID,
+                re.fk_Equipment_PricingID,
+                re.fld_Quantity,
+                re.fld_Number_Of_Days,
+                re.fld_Total_Equipment_Cost,
+                re.fld_Start_Date_Eq,
+                re.fld_End_Date_Eq,
+                eq.fld_Equipment_Name
+            FROM tbl_Reservation_Equipment re
+            INNER JOIN tbl_Equipment eq ON eq.pk_EquipmentID = re.fk_EquipmentID
+            WHERE re.pk_Reservation_EquipmentID = @ID", conn))
+                {
+                    cmd.Parameters.AddWithValue("@ID", reservationEquipmentID);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            result = new Model_Billing
+                            {
+                                pk_Reservation_EquipmentID = reader.GetInt32(reader.GetOrdinal("pk_Reservation_EquipmentID")),
+                                fk_EquipmentID = reader.GetInt32(reader.GetOrdinal("fk_EquipmentID")),
+                                fk_Equipment_PricingID = reader.GetInt32(reader.GetOrdinal("fk_Equipment_PricingID")),
+                                fld_Quantity = reader.GetInt32(reader.GetOrdinal("fld_Quantity")),
+                                fld_Number_Of_Days = reader.GetInt32(reader.GetOrdinal("fld_Number_Of_Days")),
+                                fld_Total_Equipment_Cost = reader.GetDecimal(reader.GetOrdinal("fld_Total_Equipment_Cost")),
+                                fld_Start_Date_Eq = reader.GetDateTime(reader.GetOrdinal("fld_Start_Date_Eq")),
+                                fld_End_Date_Eq = reader.GetDateTime(reader.GetOrdinal("fld_End_Date_Eq")),
+                                fld_Equipment_Name = reader.GetString(reader.GetOrdinal("fld_Equipment_Name"))
+                            };
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public bool UpdateEditEquipmentReservation(
+    int pk_Reservation_EquipmentID,
+    int fk_EquipmentID,
+    int fk_Equipment_PricingID,
+    int fld_Quantity,
+    int fld_Number_Of_Days,
+    decimal fld_Total_Equipment_Cost,
+    DateTime fld_Start_Date_Eq,
+    DateTime fld_End_Date_Eq)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(@"
+            UPDATE tbl_Reservation_Equipment
+            SET 
+                fk_EquipmentID = @fk_EquipmentID,
+                fk_Equipment_PricingID = @fk_Equipment_PricingID,
+                fld_Quantity = @fld_Quantity,
+                fld_Number_Of_Days = @fld_Number_Of_Days,
+                fld_Total_Equipment_Cost = @fld_Total_Equipment_Cost,
+                fld_Start_Date_Eq = @fld_Start_Date_Eq,
+                fld_End_Date_Eq = @fld_End_Date_Eq
+            WHERE pk_Reservation_EquipmentID = @pk_Reservation_EquipmentID", conn))
+                {
+                    cmd.Parameters.AddWithValue("@fk_EquipmentID", fk_EquipmentID);
+                    cmd.Parameters.AddWithValue("@fk_Equipment_PricingID", fk_Equipment_PricingID);
+                    cmd.Parameters.AddWithValue("@fld_Quantity", fld_Quantity);
+                    cmd.Parameters.AddWithValue("@fld_Number_Of_Days", fld_Number_Of_Days);
+                    cmd.Parameters.AddWithValue("@fld_Total_Equipment_Cost", fld_Total_Equipment_Cost);
+                    cmd.Parameters.AddWithValue("@fld_Start_Date_Eq", fld_Start_Date_Eq);
+                    cmd.Parameters.AddWithValue("@fld_End_Date_Eq", fld_End_Date_Eq);
+                    cmd.Parameters.AddWithValue("@pk_Reservation_EquipmentID", pk_Reservation_EquipmentID);
+
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public int GetReservationIDFromEquipmentReservation(int pk_Reservation_EquipmentID)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(@"
+            SELECT fk_ReservationID
+            FROM tbl_Reservation_Equipment
+            WHERE pk_Reservation_EquipmentID = @ID", conn))
+                {
+                    cmd.Parameters.AddWithValue("@ID", pk_Reservation_EquipmentID);
+                    object result = cmd.ExecuteScalar();
+                    return result != null ? Convert.ToInt32(result) : 0;
+                }
+            }
+        }
+
+        // Method to get all equipment for a reservation for edit equipment reservation form
+
+        public List<Model_Billing> GetAllEquipmentInventory()
+        {
+            List<Model_Billing> equipmentList = new List<Model_Billing>();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT pk_EquipmentID, fld_Equipment_Name, fld_Total_Stock, fld_Remaining_Stock FROM tbl_Equipment ORDER BY pk_EquipmentID";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        equipmentList.Add(new Model_Billing
+                        {
+                            pk_EquipmentID = reader.GetInt32(0),
+                            fld_Equipment_Name = reader.GetString(1),
+                            fld_Total_Stock = reader.GetInt32(2),
+                            fld_Remaining_Stock = reader.GetInt32(3)
+                        });
+                    }
+                }
+            }
+
+            return equipmentList;
+        }
+
+        // Method to check if all equipment is returned
+        public bool IsAllEquipmentReturnedOrDamaged(int reservationID)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"
+            SELECT COUNT(*)
+            FROM tbl_Reservation_Equipment
+            WHERE fk_ReservationID = @ReservationID
+              AND (ISNULL(fld_Quantity_Returned, 0) + ISNULL(fld_Quantity_Damaged, 0)) < fld_Quantity";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ReservationID", reservationID);
+                    conn.Open();
+                    int notFullyReturned = (int)cmd.ExecuteScalar();
+                    return notFullyReturned == 0; // ✅ true = all returned or damaged
+                }
+            }
+        }
+
+        // Method to set DateTimeNow for fld_Confirmation_Date
+        public bool UpdateConfirmationDate(int reservationId, DateTime confirmationDate)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "UPDATE tbl_Reservation SET fld_Confirmation_Date = @ConfirmationDate WHERE pk_ReservationID = @ReservationID";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ConfirmationDate", confirmationDate.Date);
+                    cmd.Parameters.AddWithValue("@ReservationID", reservationId);
+                    conn.Open();
+                    int rows = cmd.ExecuteNonQuery();
+                    return rows > 0;
+                }
+            }
+        }
+
+        // Venue Completed Reservation Method
+        public bool MarkReservationAsCompleted(int reservationId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = @"
+            UPDATE tbl_Reservation
+            SET fld_Reservation_Status = 'Completed'
+            WHERE pk_ReservationID = @ReservationID
+              AND fld_Reservation_Status NOT IN ('Completed', 'Cancelled')
+              AND fld_Reservation_Type = 'Venue'";  // ✅ Only apply to Venue type
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ReservationID", reservationId);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+        }
+
+
+
     }
-}
-
-
-
-
-
-    } 
 }
 
 

@@ -40,6 +40,8 @@ namespace pgso.Billing.Models
         public string fld_Cancellation_Reason { get; set; }
         public string fld_Extension_Status { get; set; }    
         public decimal fld_Caterer_Fee { get; set; }
+        public DateTime? fld_Confirmation_Date { get; set; }
+
 
         // Venue Details
         public int? pk_VenueID { get; set; }
@@ -62,6 +64,7 @@ namespace pgso.Billing.Models
         // Reserved Equipment Details
         public int? pk_Reservation_EquipmentID { get; set; }
         public int? fk_EquipmentID { get; set; }
+        public int pk_EquipmentID { get; set; }
         public string fld_Equipment_Name { get; set; }
         public int? fk_Equipment_PricingID { get; set; }
         public decimal fld_Equipment_Price { get; set; }

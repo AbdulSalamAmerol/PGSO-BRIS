@@ -1,14 +1,8 @@
 ﻿using pgso.Billing.Models;
 using pgso.Billing.Repositories;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,17 +11,15 @@ namespace pgso.pgso_Billing.Forms
     public partial class frm_Cancellation_Reason : Form
     {
         private readonly int _reservationId;
-        private Model_Billing _billingDetail; // changed to a single object
+        private Model_Billing _billingDetail; 
         private readonly Repo_Billing _repoBilling = new Repo_Billing();
-        public event Action<int, string> OnRequestVenueExtension;// Check if extension is applicable
-
+        public event Action<int, string> OnRequestVenueExtension;
         public event Action<int?> RequestBillingRefresh;
         public frm_Cancellation_Reason(int reservationID)
         {
             InitializeComponent();
             _reservationId = reservationID;
-
-            // You can load billing record here or elsewhere
+            // load billing record 
             var billingRecords = _repoBilling.GetBillingRecordsByReservationId(_reservationId);
             _billingDetail = billingRecords?.FirstOrDefault();
         }
@@ -126,7 +118,7 @@ namespace pgso.pgso_Billing.Forms
                 });
 
                 // Use the same connection string as Repo_Billing
-                string connectionString = "Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False;TrustServerCertificate=True";
+                string connectionString = "Data Source=KIMABZ\\SQL;Initial Catalog=BRIS_EXPERIMENT_3.0;User ID=sa;Password=abz123;Encrypt=False;TrustServerCertificate=True";
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {

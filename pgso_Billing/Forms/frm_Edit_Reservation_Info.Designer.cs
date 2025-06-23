@@ -46,6 +46,8 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.cb_Catering = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -210,7 +212,7 @@
             this.btn_Save.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Save.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Save.Location = new System.Drawing.Point(368, 180);
+            this.btn_Save.Location = new System.Drawing.Point(368, 188);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(110, 50);
             this.btn_Save.TabIndex = 74;
@@ -224,7 +226,7 @@
             this.btn_Cancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Cancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(239)))), ((int)(((byte)(231)))));
-            this.btn_Cancel.Location = new System.Drawing.Point(484, 180);
+            this.btn_Cancel.Location = new System.Drawing.Point(484, 188);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(110, 50);
             this.btn_Cancel.TabIndex = 75;
@@ -260,6 +262,8 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.cb_Catering);
+            this.panel1.Controls.Add(this.textBox4);
             this.panel1.Controls.Add(this.cb_Aircon);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.textBox1);
@@ -292,6 +296,32 @@
             this.label1.Size = new System.Drawing.Size(316, 26);
             this.label1.TabIndex = 76;
             this.label1.Text = "EDIT RESERVATION FORM\r\n";
+            // 
+            // textBox4
+            // 
+            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(203)))), ((int)(((byte)(208)))));
+            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox4.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox4.Font = new System.Drawing.Font("Arial", 10F);
+            this.textBox4.Location = new System.Drawing.Point(22, 173);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(0);
+            this.textBox4.MinimumSize = new System.Drawing.Size(2, 25);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(86, 25);
+            this.textBox4.TabIndex = 77;
+            this.textBox4.Text = "CATERING";
+            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // cb_Catering
+            // 
+            this.cb_Catering.AutoSize = true;
+            this.cb_Catering.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_Catering.Location = new System.Drawing.Point(128, 175);
+            this.cb_Catering.Name = "cb_Catering";
+            this.cb_Catering.Size = new System.Drawing.Size(15, 14);
+            this.cb_Catering.TabIndex = 78;
+            this.cb_Catering.UseVisualStyleBackColor = true;
             // 
             // frm_Edit_Venue_Reservation_Info
             // 
@@ -331,5 +361,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox cb_Catering;
+        private System.Windows.Forms.TextBox textBox4;
     }
 }
