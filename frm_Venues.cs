@@ -378,7 +378,7 @@ namespace pgso
                     r.fld_Number_Of_Participants AS Participants,
                     v.fld_Venue_Name AS VenueName,
                     vs.fld_Venue_Scope_Name AS Scope,
-                    vp.fld_Rate_Type AS RateType, -- Correct rate type
+                    vp.fld_Rate_Type AS RateType,
                     r.fld_Start_Date AS StartDate,
                     r.fld_End_Date AS EndDate,
                     r.fld_Start_Time AS StartTime,
@@ -391,7 +391,7 @@ namespace pgso
                 LEFT JOIN tbl_Venue_Scope vs 
                     ON r.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
                 LEFT JOIN tbl_Venue_Pricing vp 
-                    ON r.fk_Venue_PricingID = vp.pk_Venue_PricingID -- <--- THIS IS THE KEY CHANGE
+                    ON r.fk_Venue_PricingID = vp.pk_Venue_PricingID
                 WHERE r.fld_Control_number = @ControlNumber";
 
                     using (var command = new SqlCommand(query, connection))
@@ -404,13 +404,20 @@ namespace pgso
 
                             if (reader.Read())
                             {
-                                // ... (rest of your code is unchanged)
-                                string firstName = reader["FirstName"]?.ToString() ?? "";
+                                /*string firstName = reader["FirstName"]?.ToString() ?? "";
                                 string middleName = reader["MiddleName"]?.ToString() ?? "";
                                 string lastName = reader["LastName"]?.ToString() ?? "";
                                 string fullName = $"{firstName} {middleName} {lastName}".Replace("  ", " ").Trim();
 
-                                txt_FName.Text = string.IsNullOrWhiteSpace(fullName) ? "N/A" : fullName;
+                                txt_FName.Text = string.IsNullOrWhiteSpace(fullName) ? "N/A" : fullName;*/
+
+                                txt_FName.Text = reader["FirstName"]?.ToString() ?? "N/A";
+                                txt_MName.Text = reader["MiddleName"]?.ToString() ?? "N/A";
+                                txt_LName.Text = reader["LastName"]?.ToString() ?? "N/A";
+                                txt_FName.Text = reader["FirstName"]?.ToString();
+                                txt_FName.Tag = txt_FName.Text?.Trim();
+
+
                                 var contactNumber = reader["ContactNumber"]?.ToString() ?? "N/A";
                                 Debug.WriteLine($"Setting contact number to: {contactNumber}");
                                 txt_Contact.Text = contactNumber;
@@ -421,9 +428,7 @@ namespace pgso
                                 txt_Participants.Text = reader["Participants"]?.ToString() ?? "0";
                                 txt_Venue.Text = reader["VenueName"]?.ToString() ?? "N/A";
                                 txt_Scope.Text = reader["Scope"]?.ToString() ?? "N/A";
-                                txt_Type.Text = reader["RateType"]?.ToString() ?? "N/A"; // <-- This will now always be correct
-
-                                // ... (rest of your code unchanged)
+                                txt_Type.Text = reader["RateType"]?.ToString() ?? "N/A"; 
                                 do
                                 {
                                     string startDate = reader["StartDate"] != DBNull.Value
@@ -518,18 +523,11 @@ namespace pgso
 
         private void btn_Update_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Are you sure you want to update?",
+                "Confirm Submission", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                != DialogResult.Yes)
+                return;
 
-            var result = MessageBox.Show(
-                "Are you sure you want to update?",
-                "Confirm Submission",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result != DialogResult.Yes)
-            {
-
-                return; // Cancel submission if user selects No
-            }
             if (string.IsNullOrEmpty(currentControlNumber))
             {
                 MessageBox.Show("Please select a reservation first.", "Error",
@@ -537,48 +535,54 @@ namespace pgso
                 return;
             }
 
+            // 1️⃣ Get original first name from tag (stored in LoadReservationDetails)
+            string originalFirst = txt_FName.Tag?.ToString().Trim() ?? "";
+
+            Debug.WriteLine($"[DEBUG] Original first name to match: '{originalFirst}'");
+
             try
             {
-                using (var connection = new SqlConnection(db.strCon.ConnectionString))
+                using (var conn = new SqlConnection(db.strCon.ConnectionString))
                 {
-                    connection.Open();
-
-                    // Update tbl_Reservation for the status
-                    string reservationQuery = @"
-                UPDATE tbl_Reservation 
-                SET fld_Reservation_Status = @Status
-                WHERE fld_Control_number = @ControlNumber";
-
-                    using (var command = new SqlCommand(reservationQuery, connection))
+                    conn.Open();
+                    using (var tran = conn.BeginTransaction())
                     {
-                        command.Parameters.AddWithValue("@Status", txt_Status.Text.Trim());
-                        command.Parameters.AddWithValue("@ControlNumber", currentControlNumber);
-                        command.ExecuteNonQuery();
+                        // 📌 Update reservation status for current reservation
+                        using (var cmd = conn.CreateCommand())
+                        {
+                            cmd.Transaction = tran;
+                            cmd.CommandText = @"
+                        UPDATE tbl_Reservation
+                        SET fld_Reservation_Status = @Status
+                        WHERE fld_Control_number = @ControlNumber;";
+                            cmd.Parameters.AddWithValue("@Status", txt_Status.Text.Trim());
+                            cmd.Parameters.AddWithValue("@ControlNumber", currentControlNumber);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // ✅ Bulk update all rows that share the original first name
+                        using (var cmd = conn.CreateCommand())
+                        {
+                            cmd.Transaction = tran;
+                            cmd.CommandText = @"
+                        UPDATE tbl_Requesting_Person
+                        SET fld_First_Name = @NewFirst,
+                            fld_Requesting_Person_Address = @NewAddress,
+                            fld_Contact_Number = @NewContact
+                        WHERE fld_First_Name = @OldFirst;";
+                            cmd.Parameters.AddWithValue("@NewFirst", txt_FName.Text.Trim());
+                            cmd.Parameters.AddWithValue("@NewAddress", txt_Address.Text.Trim());
+                            cmd.Parameters.AddWithValue("@NewContact", txt_Contact.Text.Trim());
+                            cmd.Parameters.AddWithValue("@OldFirst", originalFirst);
+
+                            int affected = cmd.ExecuteNonQuery();
+   
+                        }
+
+                        tran.Commit();
                     }
 
-                    // Update tbl_Requesting_Person for the first name, last name, and address
-                    string personQuery = @"
-                    UPDATE tbl_Requesting_Person
-                    SET fld_First_Name = @FirstName,
-                        fld_Requesting_Person_Address = @Address,
-                        fld_Contact_Number = @ContactNumber
-                    WHERE pk_Requesting_PersonID = 
-                        (SELECT fk_Requesting_PersonID 
-                         FROM tbl_Reservation 
-                         WHERE fld_Control_number = @ControlNumber)";
-
-                    using (var command = new SqlCommand(personQuery, connection))
-                    {
-                        command.Parameters.AddWithValue("@FirstName", txt_FName.Text.Trim());
-                        // command.Parameters.AddWithValue("@LastName", txt_LName.Text.Trim());
-                        command.Parameters.AddWithValue("@ContactNumber", txt_Contact.Text.Trim());
-                        command.Parameters.AddWithValue("@Address", txt_Address.Text.Trim());
-                        command.Parameters.AddWithValue("@ControlNumber", currentControlNumber);
-                        command.ExecuteNonQuery();
-                    }
-
-                    // Display success message only once after both updates
-                    MessageBox.Show("Reservation updated successfully!", "Success",
+                    MessageBox.Show("Camera reservation updated successfully!", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadReservationData();
                     btn_Update.Enabled = false;
@@ -587,10 +591,16 @@ namespace pgso
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating reservation: {ex.Message}", "Error",
+                MessageBox.Show($"Error updating: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
+
+
+
 
 
 
@@ -871,7 +881,7 @@ namespace pgso
                 UpdatePagedData();
             }
         }
-
+        
         private void lblPageInfo_Click(object sender, EventArgs e)
         {
 

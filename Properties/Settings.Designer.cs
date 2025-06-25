@@ -122,7 +122,7 @@ namespace pgso.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025" +
-            ";Encrypt=False;TrustServerCertificate=True")]
+            ";Encrypt=False")]
         public string strCon {
             get {
                 return ((string)(this["strCon"]));

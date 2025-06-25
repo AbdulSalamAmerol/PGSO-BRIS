@@ -9,7 +9,7 @@ namespace pgso
     public partial class frm_Equipment_Edit : Form
     {
         // Fields
-        private Connection db = new Connection(); // Use the Connection class
+        Connection db = new Connection(); // Use the Connection class
         private BindingSource bindingSource = new BindingSource();
         public event EventHandler DashboardRefreshRequested;
         private const string SearchPlaceholder = "Search by control number, equipment, or name...";
@@ -75,7 +75,9 @@ namespace pgso
 
             // Only these fields should enable the update button
             txt_Fname.TextChanged += Control_ValueChanged;
-           
+            txt_Mname.TextChanged += Control_ValueChanged;
+            txt_Sname.TextChanged += Control_ValueChanged;
+
             txt_Requesting_Office.TextChanged += Control_ValueChanged;
             txt_Address.TextChanged += Control_ValueChanged;
         }
@@ -217,29 +219,29 @@ namespace pgso
                     db.strCon.Open();
 
                 string query = @"
-    SELECT 
-        rp.fld_First_Name, 
-        rp.fld_Middle_Name,
-        rp.fld_Surname,
-        rp.fld_Requesting_Office,
-        rp.fld_Requesting_Person_Address,
-        rpe.fld_Start_Date_Eq,
-        rpe.fld_End_Date_Eq,
-        rpe.fld_Number_Of_Days,
-        r.fld_Activity_Name,
-        r.fld_Reservation_Type,
-        rpe.fld_Quantity,
-        rpe.fld_Total_Equipment_Cost
-    FROM 
-        tbl_Reservation r
-    LEFT JOIN 
-        tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-    LEFT JOIN 
-        tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
-    LEFT JOIN
-        tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
-    WHERE 
-        r.fld_Control_number = @ControlNumber AND e.fld_Equipment_Name = @EquipmentName";
+                SELECT 
+                    rp.fld_First_Name as FirstName, 
+                    rp.fld_Middle_Name as MiddleName,
+                    rp.fld_Surname as Surname,
+                    rp.fld_Requesting_Office,
+                    rp.fld_Requesting_Person_Address,
+                    rpe.fld_Start_Date_Eq,
+                    rpe.fld_End_Date_Eq,
+                    rpe.fld_Number_Of_Days,
+                    r.fld_Activity_Name,
+                    r.fld_Reservation_Type,
+                    rpe.fld_Quantity,
+                    rpe.fld_Total_Equipment_Cost
+                FROM 
+                    tbl_Reservation r
+                LEFT JOIN 
+                    tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                LEFT JOIN 
+                    tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
+                LEFT JOIN
+                    tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
+                WHERE 
+                    r.fld_Control_number = @ControlNumber AND e.fld_Equipment_Name = @EquipmentName";
 
                 using (SqlCommand cmd = new SqlCommand(query, db.strCon))
                 {
@@ -250,14 +252,11 @@ namespace pgso
                     {
                         if (reader.Read())
                         {
-                            // Populate the fields with the specific equipment details
-                            // Concatenate first, middle, and surname
-                            string firstName = reader["fld_First_Name"]?.ToString() ?? "";
-                            string middleName = reader["fld_Middle_Name"]?.ToString() ?? "";
-                            string surname = reader["fld_Surname"]?.ToString() ?? "";
-                            string fullName = $"{firstName} {middleName} {surname}".Replace("  ", " ").Trim();
+                            txt_Fname.Text = reader["FirstName"]?.ToString() ?? "N/A";
+                            txt_Mname.Text = reader["MiddleName"]?.ToString() ?? "N/A";
+                            txt_Sname.Text = reader["Surname"]?.ToString() ?? "N/A";
 
-                            txt_Fname.Text = string.IsNullOrWhiteSpace(fullName) ? "N/A" : fullName;
+
 
                             txt_Requesting_Office.Text = reader["fld_Requesting_Office"].ToString();
                             txt_Address.Text = reader["fld_Requesting_Person_Address"].ToString();
@@ -326,35 +325,35 @@ namespace pgso
                     db.strCon.Open();
 
                 string query = @"
-        SELECT
-            r.fld_Control_number,
-            rpe.fld_Equipment_Status,
-            r.fld_Created_At,
-            e.fld_Equipment_Name,
-            rpe.fld_Quantity,
-            r.fld_Total_Amount,
-            '₱' + CONVERT(VARCHAR, CAST(r.fld_Total_Amount AS MONEY), 1) AS fld_Total_Amount,
-            rp.fld_First_Name,
-            rp.fld_Surname,
-            r.fld_Reservation_Status, -- Add this line
-            CASE
-                WHEN rpe.fld_Start_Date_Eq = rpe.fld_End_Date_Eq
-                    THEN FORMAT(rpe.fld_Start_Date_Eq, 'M/d/yyyy')
-                ELSE
-                    FORMAT(rpe.fld_Start_Date_Eq, 'M/d/yyyy') + ' - ' + FORMAT(rpe.fld_End_Date_Eq, 'M/d/yyyy')
-            END AS Date
-        FROM
-            tbl_Reservation r
-        LEFT JOIN
-            tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
-        LEFT JOIN
-            tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
-        LEFT JOIN
-            tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-        WHERE
-            r.fld_Reservation_Type = 'Equipment'
-            AND rpe.fld_Equipment_Status IN ('Pending', 'Confirmed')
-            AND r.fld_Reservation_Status <> 'Cancelled'"; // Exclude cancelled
+                SELECT
+                    r.fld_Control_number,
+                    rpe.fld_Equipment_Status,
+                    r.fld_Created_At,
+                    e.fld_Equipment_Name,
+                    rpe.fld_Quantity,
+                    r.fld_Total_Amount,
+                    '₱' + CONVERT(VARCHAR, CAST(r.fld_Total_Amount AS MONEY), 1) AS fld_Total_Amount,
+                    rp.fld_First_Name,
+                    rp.fld_Surname,
+                    r.fld_Reservation_Status, -- Add this line
+                    CASE
+                        WHEN rpe.fld_Start_Date_Eq = rpe.fld_End_Date_Eq
+                            THEN FORMAT(rpe.fld_Start_Date_Eq, 'M/d/yyyy')
+                        ELSE
+                            FORMAT(rpe.fld_Start_Date_Eq, 'M/d/yyyy') + ' - ' + FORMAT(rpe.fld_End_Date_Eq, 'M/d/yyyy')
+                    END AS Date
+                FROM
+                    tbl_Reservation r
+                LEFT JOIN
+                    tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
+                LEFT JOIN
+                    tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
+                LEFT JOIN
+                    tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                WHERE
+                    r.fld_Reservation_Type = 'Equipment'
+                    AND rpe.fld_Equipment_Status IN ('Pending', 'Confirmed')
+                    AND r.fld_Reservation_Status <> 'Cancelled'"; // Exclude cancelled
 
                 // Add date filtering condition if a date is selected
                 if (_selectedDate != DateTime.MinValue)
@@ -424,6 +423,7 @@ namespace pgso
                 bindingSource.Filter = $"fld_Control_number LIKE '%{filterText}%' OR fld_Equipment_Name LIKE '%{filterText}%' OR fld_First_Name LIKE '%{filterText}%' OR fld_Surname LIKE '%{filterText}%'";
             }
         }
+        /*
 
         private void btn_Update_Click(object sender, EventArgs e)
         {
@@ -503,7 +503,7 @@ namespace pgso
             {
                 MessageBox.Show($"Error updating reservation: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }*/
 
         // Other event handlers that don't need implementation
         private void txt_Total_TextChanged(object sender, EventArgs e) { }
@@ -514,6 +514,7 @@ namespace pgso
 
         private void btn_Update_Click_1(object sender, EventArgs e)
         {
+            Connection concon = new Connection();
             var result = MessageBox.Show(
                "Are you sure you want to update?",
                "Confirm Submission",
@@ -533,7 +534,8 @@ namespace pgso
 
             try
             {
-                using (var connection = new SqlConnection(db.strCon.ConnectionString))
+                using (var connection = new SqlConnection(concon.strCon.ConnectionString))
+                //using (var connection = new SqlConnection("Data Source=172.17.16.125;Initial Catalog=RBIS;User ID=RBIS;Password=Nvsuojt_2025;Encrypt=False"))
                 {
                     connection.Open();
 
@@ -554,20 +556,23 @@ namespace pgso
 
                     // Update requesting person details
                     string personQuery = @"
-                UPDATE tbl_Requesting_Person
-                SET fld_First_Name = @FirstName,
-                    fld_Surname = @LastName,
-                    fld_Requesting_Office = @RequestingOffice,
-                    fld_Requesting_Person_Address = @Address
-                WHERE pk_Requesting_PersonID = 
-                    (SELECT fk_Requesting_PersonID 
-                     FROM tbl_Reservation 
-                     WHERE fld_Control_number = @ControlNumber)";
+                        UPDATE tbl_Requesting_Person
+                        SET fld_First_Name = @FirstName,
+                            fld_Middle_Name= @Mname,
+                            fld_Surname = @LastName,
+                            fld_Requesting_Office = @RequestingOffice,
+                            fld_Requesting_Person_Address = @Address
+                        WHERE pk_Requesting_PersonID = 
+                            (SELECT fk_Requesting_PersonID 
+                             FROM tbl_Reservation 
+                             WHERE fld_Control_number = @ControlNumber)";
 
                     using (var command = new SqlCommand(personQuery, connection))
                     {
                         command.Parameters.AddWithValue("@FirstName", txt_Fname.Text.Trim());
-                        
+                        command.Parameters.AddWithValue("@Mname", txt_Mname.Text.Trim());
+                        command.Parameters.AddWithValue("@LastName", txt_Sname.Text.Trim());
+
                         command.Parameters.AddWithValue("@RequestingOffice", txt_Requesting_Office.Text.Trim());
                         command.Parameters.AddWithValue("@Address", txt_Address.Text.Trim());
                         command.Parameters.AddWithValue("@ControlNumber", txt_CN.Text.Trim());

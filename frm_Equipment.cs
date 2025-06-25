@@ -1,8 +1,9 @@
-﻿using System;
+﻿using pgso_connect;
+using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Windows.Forms;
-using pgso_connect;
 
 namespace pgso
 {
@@ -18,6 +19,7 @@ namespace pgso
         private int pageSize = 30; // Change as needed
         private int totalRecords = 0;
         private int totalPages = 0;
+        private bool hasChanges = false;
         // Method to raise the event
         protected virtual void OnDashboardRefreshRequested()
         {
@@ -247,31 +249,31 @@ namespace pgso
                 if (db.strCon.State == ConnectionState.Closed)
                     db.strCon.Open();
 
-                string query = @"
-    SELECT 
-        rp.fld_First_Name, 
-        rp.fld_Middle_Name,         -- Add this
-        rp.fld_Surname,           -- Add this
-        rp.fld_Requesting_Office,
-        rp.fld_Requesting_Person_Address,
-        rp.fld_Contact_Number,
-        rpe.fld_Start_Date_Eq,
-        rpe.fld_End_Date_Eq,
-        rpe.fld_Number_Of_Days,
-        r.fld_Activity_Name,
-        r.fld_Reservation_Type,
-        rpe.fld_Quantity,
-        rpe.fld_Total_Equipment_Cost
-    FROM 
-        tbl_Reservation r
-    LEFT JOIN 
-        tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-    LEFT JOIN 
-        tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
-    LEFT JOIN
-        tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
-    WHERE 
-        r.fld_Control_number = @ControlNumber AND e.fld_Equipment_Name = @EquipmentName";
+                    string query = @"
+                    SELECT 
+                        rp.fld_First_Name as FirstName, 
+                        rp.fld_Middle_Name as MiddleName,         -- Add this
+                        rp.fld_Surname as LastName,           -- Add this
+                        rp.fld_Requesting_Office,
+                        rp.fld_Requesting_Person_Address,
+                        rp.fld_Contact_Number,
+                        rpe.fld_Start_Date_Eq,
+                        rpe.fld_End_Date_Eq,
+                        rpe.fld_Number_Of_Days,
+                        r.fld_Activity_Name,
+                        r.fld_Reservation_Type,
+                        rpe.fld_Quantity,
+                        rpe.fld_Total_Equipment_Cost
+                    FROM 
+                        tbl_Reservation r
+                    LEFT JOIN 
+                        tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                    LEFT JOIN 
+                        tbl_Reservation_Equipment rpe ON r.pk_ReservationID = rpe.fk_ReservationID
+                    LEFT JOIN
+                        tbl_Equipment e ON rpe.fk_EquipmentID = e.pk_EquipmentID
+                    WHERE 
+                        r.fld_Control_number = @ControlNumber AND e.fld_Equipment_Name = @EquipmentName";
 
                 using (SqlCommand cmd = new SqlCommand(query, db.strCon))
                 {
@@ -283,12 +285,17 @@ namespace pgso
                         if (reader.Read())
                         {
                             // Combine first, middle, and last name
-                            string firstName = reader["fld_First_Name"]?.ToString() ?? "";
-                            string middleName = reader["fld_Middle_Name"]?.ToString() ?? "";
-                            string lastName = reader["fld_Surname"]?.ToString() ?? "";
-                            string fullName = $"{firstName} {middleName} {lastName}".Replace("  ", " ").Trim();
+                            /*  string firstName = reader["fld_First_Name"]?.ToString() ?? "";
+                              string middleName = reader["fld_Middle_Name"]?.ToString() ?? "";
+                              string lastName = reader["fld_Surname"]?.ToString() ?? "";
+                              string fullName = $"{firstName} {middleName} {lastName}".Replace("  ", " ").Trim();
 
-                            txt_Fname.Text = string.IsNullOrWhiteSpace(fullName) ? "N/A" : fullName;
+                              txt_Fname.Text = string.IsNullOrWhiteSpace(fullName) ? "N/A" : fullName;*/
+                            txt_Fname.Text = reader["FirstName"]?.ToString() ?? "N/A";
+                          txt_Mname.Text = reader["MiddleName"]?.ToString() ?? "N/A";
+                            txt_Sname.Text = reader["LastName"]?.ToString() ?? "N/A";
+                            txt_Fname.Text = reader["FirstName"]?.ToString();
+                            txt_Fname.Tag = txt_Fname.Text?.Trim();
 
                             txt_Requesting_Office.Text = reader["fld_Requesting_Office"].ToString();
                             txt_Address.Text = reader["fld_Requesting_Person_Address"].ToString();
@@ -419,7 +426,7 @@ namespace pgso
 
                 if (tempDt.Rows.Count == 0)
                 {
-                    MessageBox.Show($"No {status} records found.", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"No Equipment records found.", "No Data", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 allData.Clear();
                 using (SqlCommand cmd = new SqlCommand(query, db.strCon))
@@ -478,84 +485,78 @@ namespace pgso
 
         private void btn_Update_Click(object sender, EventArgs e)
         {
-           /* var result = MessageBox.Show(
-                "Are you sure you want to update?",
-                "Confirm Submission",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result != DialogResult.Yes)
-            {
+            Connection concon = new Connection();
+            if (MessageBox.Show("Are you sure you want to update?",
+                "Confirm Submission", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                != DialogResult.Yes)
                 return;
-            }
 
             if (string.IsNullOrEmpty(txt_CN.Text))
             {
-                MessageBox.Show("Please select a reservation first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a reservation first.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            // 1️⃣ Get original first name from tag (stored in LoadReservationDetails)
+            string originalFirst = txt_Fname.Tag?.ToString().Trim() ?? "";
+
+            Debug.WriteLine($"[DEBUG] Original first name to match: '{originalFirst}'");
+
             try
             {
-                using (var connection = new SqlConnection(db.strCon.ConnectionString))
+                using (var conn = new SqlConnection(concon.strCon.ConnectionString))
                 {
-                    connection.Open();
-
-                    // Update equipment status in tbl_Reservation_Equipment
-                    string equipmentStatusQuery = @"
-            UPDATE tbl_Reservation_Equipment
-            SET fld_Equipment_Status = @Status
-            WHERE fk_ReservationID = (SELECT pk_ReservationID FROM tbl_Reservation WHERE fld_Control_number = @ControlNumber)
-              AND fk_EquipmentID = (SELECT pk_EquipmentID FROM tbl_Equipment WHERE fld_Equipment_Name = @EquipmentName)";
-
-                    using (var command = new SqlCommand(equipmentStatusQuery, connection))
+                    conn.Open();
+                    using (var tran = conn.BeginTransaction())
                     {
-                        command.Parameters.AddWithValue("@Status", txt_Status.Text.Trim());
-                        command.Parameters.AddWithValue("@ControlNumber", txt_CN.Text.Trim());
-                        command.Parameters.AddWithValue("@EquipmentName", txt_Equipment_Name.Text.Trim());
-                        command.ExecuteNonQuery();
+                        // 📌 Update reservation status for current reservation
+                        using (var cmd = conn.CreateCommand())
+                        {
+                            cmd.Transaction = tran;
+                            cmd.CommandText = @"
+                        UPDATE tbl_Reservation
+                        SET fld_Reservation_Status = @Status
+                        WHERE fld_Control_number = @ControlNumber;";
+                            cmd.Parameters.AddWithValue("@Status", txt_Status.Text.Trim());
+                            cmd.Parameters.AddWithValue("@ControlNumber", txt_CN.Text);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // ✅ Bulk update all rows that share the original first name
+                        using (var cmd = conn.CreateCommand())
+                        {
+                            cmd.Transaction = tran;
+                            cmd.CommandText = @"
+                        UPDATE tbl_Requesting_Person
+                        SET fld_First_Name = @NewFirst,
+                            fld_Requesting_Person_Address = @NewAddress,
+                            fld_Contact_Number = @NewContact
+                        WHERE fld_First_Name = @OldFirst;";
+                            cmd.Parameters.AddWithValue("@NewFirst", txt_Fname.Text.Trim());
+                            cmd.Parameters.AddWithValue("@NewAddress", txt_Address.Text.Trim());
+                            cmd.Parameters.AddWithValue("@NewContact", txt_Contact.Text.Trim());
+                            cmd.Parameters.AddWithValue("@OldFirst", originalFirst);
+
+                            int affected = cmd.ExecuteNonQuery();
+
+                        }
+
+                        tran.Commit();
                     }
 
-                    // Update requesting person details including contact number
-                    string personQuery = @"
-            UPDATE tbl_Requesting_Person
-            SET fld_First_Name = @FirstName,
-                
-                fld_Requesting_Office = @RequestingOffice,
-                fld_Requesting_Person_Address = @Address,
-                fld_Contact_Number = @ContactNumber
-            WHERE pk_Requesting_PersonID = 
-                (SELECT fk_Requesting_PersonID 
-                 FROM tbl_Reservation 
-                 WHERE fld_Control_number = @ControlNumber)";
-
-                    using (var command = new SqlCommand(personQuery, connection))
-                    {
-                        command.Parameters.AddWithValue("@FirstName", txt_Fname.Text.Trim());
-                        
-                        command.Parameters.AddWithValue("@RequestingOffice", txt_Requesting_Office.Text.Trim());
-                        command.Parameters.AddWithValue("@Address", txt_Address.Text.Trim());
-                        command.Parameters.AddWithValue("@ContactNumber", txt_Contact.Text.Trim());
-                        command.Parameters.AddWithValue("@ControlNumber", txt_CN.Text.Trim());
-                        int rowsAffected = command.ExecuteNonQuery();
-
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Reservation updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            RefreshData();
-                            btn_Update.Enabled = false;
-                        }
-                        else
-                        {
-                            MessageBox.Show("No changes were made.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
+                    MessageBox.Show("Camera reservation updated successfully!", "Success",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    RefreshData();
+                    btn_Update.Enabled = false;
+                    hasChanges = false;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating reservation: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
+                MessageBox.Show($"Error updating: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void txt_Total_TextChanged(object sender, EventArgs e)
@@ -646,6 +647,11 @@ namespace pgso
         }
 
         private void txt_Fname_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_Sname_TextChanged(object sender, EventArgs e)
         {
 
         }

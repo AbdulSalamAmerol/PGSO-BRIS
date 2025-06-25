@@ -152,6 +152,7 @@ namespace pgso
         // Datagrid Cell Content Click
         private async void dgv_Billing_Records_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
                 return;
             // Check if the clicked cell is not a header row

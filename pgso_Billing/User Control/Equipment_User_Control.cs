@@ -358,6 +358,8 @@ namespace pgso.pgso_Billing.User_Control
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
                     LoadBillingDetails(_billingDetails); // Refresh grid
+                    //Refresh datagridview after edit
+                    EquipmentBillingUpdated?.Invoke(this, EventArgs.Empty);
                 }
             }
             else

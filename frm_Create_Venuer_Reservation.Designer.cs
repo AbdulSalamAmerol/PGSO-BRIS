@@ -31,6 +31,7 @@ namespace pgso
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label22 = new System.Windows.Forms.Label();
             this.chk_UseCatererFee = new System.Windows.Forms.CheckBox();
             this.txt_Caterer_Fee = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -86,7 +87,6 @@ namespace pgso
             this.txt_address = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -150,6 +150,17 @@ namespace pgso
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ForeColor = System.Drawing.Color.Red;
+            this.label22.Location = new System.Drawing.Point(192, 428);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(262, 13);
+            this.label22.TabIndex = 79;
+            this.label22.Text = "*Always reselect the rate type if the scope is changed.";
+            // 
             // chk_UseCatererFee
             // 
             this.chk_UseCatererFee.AutoSize = true;
@@ -198,7 +209,7 @@ namespace pgso
             this.combo_Name.FormattingEnabled = true;
             this.combo_Name.Location = new System.Drawing.Point(189, 144);
             this.combo_Name.Name = "combo_Name";
-            this.combo_Name.Size = new System.Drawing.Size(441, 28);
+            this.combo_Name.Size = new System.Drawing.Size(440, 28);
             this.combo_Name.TabIndex = 72;
             this.combo_Name.SelectedIndexChanged += new System.EventHandler(this.combo_Name_SelectedIndexChanged);
             // 
@@ -245,9 +256,9 @@ namespace pgso
             this.panel2.Controls.Add(this.txt_rate);
             this.panel2.Controls.Add(this.txt_Total);
             this.panel2.Controls.Add(this.label26);
-            this.panel2.Location = new System.Drawing.Point(125, 566);
+            this.panel2.Location = new System.Drawing.Point(688, 36);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(88, 26);
+            this.panel2.Size = new System.Drawing.Size(188, 51);
             this.panel2.TabIndex = 68;
             this.panel2.Visible = false;
             // 
@@ -744,17 +755,6 @@ namespace pgso
             this.label1.Size = new System.Drawing.Size(149, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Requesting Person:";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.ForeColor = System.Drawing.Color.Red;
-            this.label22.Location = new System.Drawing.Point(192, 428);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(262, 13);
-            this.label22.TabIndex = 79;
-            this.label22.Text = "*Always reselect the rate type if the scope is changed.";
             // 
             // frm_Create_Venuer_Reservation
             // 

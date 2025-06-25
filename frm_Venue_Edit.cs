@@ -169,28 +169,28 @@ ORDER BY r.fld_Created_At DESC";
                 {
                     connection.Open();
                     string query = @"
-SELECT 
-    r.fld_Reservation_Status AS Status,
-    rp.fld_First_Name AS FirstName, 
-    rp.fld_Middle_Name AS MiddleName,
-    rp.fld_Surname AS Surname,
-    rp.fld_Requesting_Person_Address AS Address,
-    rp.fld_Requesting_Office AS Office,
-    r.fld_Activity_Name AS ActivityName,
-    r.fld_Number_Of_Participants AS Participants,
-    v.fld_Venue_Name AS VenueName,
-    vs.fld_Venue_Scope_Name AS Scope,
-    vp.fld_Rate_Type AS RateType,
-    r.fld_Start_Date AS StartDate,
-    r.fld_End_Date AS EndDate,
-    r.fld_Start_Time AS StartTime,
-    r.fld_End_Time AS EndTime
-FROM tbl_Reservation r
-LEFT JOIN tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
-LEFT JOIN tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
-LEFT JOIN tbl_Venue_Scope vs ON r.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
-LEFT JOIN tbl_Venue_Pricing vp ON (r.fk_VenueID = vp.fk_VenueID AND r.fk_Venue_ScopeID = vp.fk_Venue_ScopeID)
-WHERE r.fld_Control_number = @ControlNumber";
+                    SELECT 
+                        r.fld_Reservation_Status AS Status,
+                        rp.fld_First_Name AS FirstName, 
+                        rp.fld_Middle_Name AS MiddleName,
+                        rp.fld_Surname AS Surname,
+                        rp.fld_Requesting_Person_Address AS Address,
+                        rp.fld_Requesting_Office AS Office,
+                        r.fld_Activity_Name AS ActivityName,
+                        r.fld_Number_Of_Participants AS Participants,
+                        v.fld_Venue_Name AS VenueName,
+                        vs.fld_Venue_Scope_Name AS Scope,
+                        vp.fld_Rate_Type AS RateType,
+                        r.fld_Start_Date AS StartDate,
+                        r.fld_End_Date AS EndDate,
+                        r.fld_Start_Time AS StartTime,
+                        r.fld_End_Time AS EndTime
+                    FROM tbl_Reservation r
+                    LEFT JOIN tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
+                    LEFT JOIN tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
+                    LEFT JOIN tbl_Venue_Scope vs ON r.fk_Venue_ScopeID = vs.pk_Venue_ScopeID
+                    LEFT JOIN tbl_Venue_Pricing vp ON (r.fk_VenueID = vp.fk_VenueID AND r.fk_Venue_ScopeID = vp.fk_Venue_ScopeID)
+                    WHERE r.fld_Control_number = @ControlNumber";
                     using (var command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ControlNumber", controlNumber);
@@ -202,12 +202,10 @@ WHERE r.fld_Control_number = @ControlNumber";
                             while (reader.Read())
                             {
                                 // Concatenate first, middle, and surname
-                                string firstName = reader["FirstName"]?.ToString() ?? "";
-                                string middleName = reader["MiddleName"]?.ToString() ?? "";
-                                string surname = reader["Surname"]?.ToString() ?? "";
-                                string fullName = $"{firstName} {middleName} {surname}".Replace("  ", " ").Trim();
+                                txt_FName.Text = reader["FirstName"]?.ToString() ?? "N/A";
+                                txt_MName.Text = reader["MiddleName"]?.ToString() ?? "N/A";
+                                txt_LName.Text = reader["Surname"]?.ToString() ?? "N/A";
 
-                                txt_FName.Text = string.IsNullOrWhiteSpace(fullName) ? "N/A" : fullName;
 
                                 txt_Address.Text = reader["Address"]?.ToString() ?? "N/A";
                                 txt_Office.Text = reader["Office"]?.ToString() ?? "N/A";
@@ -306,11 +304,12 @@ WHERE r.fld_Control_number = @ControlNumber";
                         command.ExecuteNonQuery();
                     }
 
-                    // Update requesting person details
+                    /// ✅ Update requesting person details
                     string personQuery = @"
                         UPDATE tbl_Requesting_Person
                         SET fld_First_Name = @FirstName,
-
+                            fld_Middle_Name = @MiddleName,
+                            fld_Surname = @Surname,
                             fld_Requesting_Person_Address = @Address
                         WHERE pk_Requesting_PersonID = 
                             (SELECT fk_Requesting_PersonID 
@@ -320,11 +319,13 @@ WHERE r.fld_Control_number = @ControlNumber";
                     using (var command = new SqlCommand(personQuery, connection))
                     {
                         command.Parameters.AddWithValue("@FirstName", txt_FName.Text.Trim());
-   
+                        command.Parameters.AddWithValue("@MiddleName", txt_MName.Text.Trim());
+                        command.Parameters.AddWithValue("@Surname", txt_LName.Text.Trim());
                         command.Parameters.AddWithValue("@Address", txt_Address.Text.Trim());
                         command.Parameters.AddWithValue("@ControlNumber", currentControlNumber);
                         command.ExecuteNonQuery();
                     }
+
 
                     MessageBox.Show("Reservation updated successfully!", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -445,62 +446,66 @@ WHERE r.fld_Control_number = @ControlNumber";
 
         private void btn_Update_Click_1(object sender, EventArgs e)
         {
+
             var result = MessageBox.Show(
-                "Are you sure you want to update?",
-                "Confirm Submission",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+            "Are you sure you want to update?",
+            "Confirm Submission",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
 
             if (result != DialogResult.Yes)
             {
-                return; // Cancel submission if user selects No
+                return; // Cancel if user says No
             }
+
             if (string.IsNullOrEmpty(currentControlNumber))
             {
                 MessageBox.Show("Please select a reservation first.", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
+            
             try
             {
                 using (var connection = new SqlConnection(db.strCon.ConnectionString))
                 {
                     connection.Open();
 
-                    // Optionally use a transaction
                     using (var transaction = connection.BeginTransaction())
                     {
-                        // Update tbl_Reservation for the status
+                        // ✅ Update Reservation Status
                         string reservationQuery = @"
                     UPDATE tbl_Reservation 
                     SET fld_Reservation_Status = @Status
                     WHERE fld_Control_number = @ControlNumber";
 
-                        using (var command = new SqlCommand(reservationQuery, connection, transaction))
+                        using (var cmdReservation = new SqlCommand(reservationQuery, connection, transaction))
                         {
-                            command.Parameters.AddWithValue("@Status", txt_Status.Text.Trim());
-                            command.Parameters.AddWithValue("@ControlNumber", currentControlNumber);
-                            command.ExecuteNonQuery();
+                            cmdReservation.Parameters.AddWithValue("@Status", txt_Status.Text.Trim());
+                            cmdReservation.Parameters.AddWithValue("@ControlNumber", currentControlNumber);
+                            cmdReservation.ExecuteNonQuery();
                         }
 
-                        // Update tbl_Requesting_Person for the first name, last name, and address
+                        // ✅ Update Requesting Person's Name and Address
                         string personQuery = @"
                     UPDATE tbl_Requesting_Person
                     SET fld_First_Name = @FirstName,
- 
+                        fld_Middle_Name = @MiddleName,
+                        fld_Surname = @Surname,
                         fld_Requesting_Person_Address = @Address
                     WHERE pk_Requesting_PersonID = 
                         (SELECT fk_Requesting_PersonID 
                          FROM tbl_Reservation 
                          WHERE fld_Control_number = @ControlNumber)";
 
-                        using (var command = new SqlCommand(personQuery, connection, transaction))
+                        using (var cmdPerson = new SqlCommand(personQuery, connection, transaction))
                         {
-                            command.Parameters.AddWithValue("@FirstName", txt_FName.Text.Trim());
-                            command.Parameters.AddWithValue("@Address", txt_Address.Text.Trim());
-                            command.Parameters.AddWithValue("@ControlNumber", currentControlNumber);
-                            command.ExecuteNonQuery();
+                            cmdPerson.Parameters.AddWithValue("@FirstName", txt_FName.Text.Trim());
+                            cmdPerson.Parameters.AddWithValue("@MiddleName", txt_MName.Text.Trim());
+                            cmdPerson.Parameters.AddWithValue("@Surname", txt_LName.Text.Trim());
+                            cmdPerson.Parameters.AddWithValue("@Address", txt_Address.Text.Trim());
+                            cmdPerson.Parameters.AddWithValue("@ControlNumber", currentControlNumber);
+                            cmdPerson.ExecuteNonQuery();
                         }
 
                         transaction.Commit();
@@ -508,7 +513,8 @@ WHERE r.fld_Control_number = @ControlNumber";
 
                     MessageBox.Show("Reservation updated successfully!", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadReservationData(selectedDate); // <-- Corrected
+
+                    LoadReservationData(selectedDate); // Refresh grid
                     btn_Update.Enabled = false;
                     hasChanges = false;
                 }

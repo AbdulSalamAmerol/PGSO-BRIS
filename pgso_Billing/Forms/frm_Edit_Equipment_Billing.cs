@@ -118,6 +118,7 @@ namespace pgso.pgso_Billing.Forms
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+
         }
 
         private void cmb_Equipment_SelectedIndexChanged(object sender, EventArgs e)

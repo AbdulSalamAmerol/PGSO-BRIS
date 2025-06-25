@@ -81,50 +81,50 @@ namespace pgso
                     "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        // Class‑level fields to hold the original name values
+        private string originalFirst, originalMiddle, originalSurname;
+
         private void dgv_Client_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dgv_Client.Rows[e.RowIndex];
-                string firstName = row.Cells["fld_First_Name"]?.Value?.ToString() ?? "";
-                string middleName = row.Cells["fld_Middle_Name"]?.Value?.ToString() ?? "";
-                string surname = row.Cells["fld_Surname"]?.Value?.ToString() ?? "";
+            if (e.RowIndex < 0) return; // Avoid header row
 
-                // Use the new method to load all reservations under the same name
-                LoadReservationInfoByName(firstName, middleName, surname);
+            DataGridViewRow row = dgv_Client.Rows[e.RowIndex];
 
-                // Assign each field to its respective textbox
-                txt_Fname_Edit.Text = firstName;
-                txt_MiddleName_Edit.Text = middleName;
-                txt_Surname_Edit.Text = surname;
-                txt_Contact_Edit.Text = row.Cells["Contact"]?.Value?.ToString() ?? "";
-                txt_Office_Edit.Text = row.Cells["Office"]?.Value?.ToString() ?? "";
-                txt_Address_Edit.Text = row.Cells["Address"]?.Value?.ToString() ?? "";
+            originalFirst = row.Cells["fld_First_Name"]?.Value?.ToString() ?? "";
+            originalMiddle = row.Cells["fld_Middle_Name"]?.Value?.ToString() ?? "";
+            originalSurname = row.Cells["fld_Surname"]?.Value?.ToString() ?? "";
 
-                btn_Update.Enabled = false;
-                txt_Fname_Edit.ReadOnly = true;
-                txt_MiddleName_Edit.ReadOnly = true;
-                txt_Surname_Edit.ReadOnly = true;
-                txt_Contact_Edit.ReadOnly = true;
-                txt_Office_Edit.ReadOnly = true;
-                txt_Address_Edit.ReadOnly = true;
-            }
+            // Assign text boxes — you likely already have:
+            txt_Fname_Edit.Text = originalFirst;
+            txt_MiddleName_Edit.Text = originalMiddle;
+            txt_Surname_Edit.Text = originalSurname;
+            // ... contact, office, address, etc.
+
+            // **Important**: trigger loading reservations by name here:
+            LoadReservationInfoByName(originalFirst, originalMiddle, originalSurname);
+
+            btn_Update.Enabled = false;
+            txt_Fname_Edit.ReadOnly = true;
+            txt_MiddleName_Edit.ReadOnly = true;
+            txt_Surname_Edit.ReadOnly = true;
+            txt_Contact_Edit.ReadOnly = true;
+            txt_Office_Edit.ReadOnly = true;
+            txt_Address_Edit.ReadOnly = true;
         }
+
 
         private void dgv_Client_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                // Make textboxes read-only
-                txt_Fname_Edit.ReadOnly = false;
-                txt_MiddleName_Edit.ReadOnly = false;
-                txt_Surname_Edit.ReadOnly = false;
-                txt_Contact_Edit.ReadOnly = false;
-                txt_Office_Edit.ReadOnly = false;
-                txt_Address_Edit.ReadOnly = false;
+            if (e.RowIndex < 0) return;
 
-                btn_Update.Enabled = true;
-            }
+            txt_Fname_Edit.ReadOnly = false;
+            txt_MiddleName_Edit.ReadOnly = false;
+            txt_Surname_Edit.ReadOnly = false;
+            txt_Contact_Edit.ReadOnly = false;
+            txt_Office_Edit.ReadOnly = false;
+            txt_Address_Edit.ReadOnly = false;
+
+            btn_Update.Enabled = true;
         }
         private void LoadRequestingPersonData(string searchTerm = "", string office = "All Offices")
         {
@@ -242,50 +242,30 @@ namespace pgso
 
         private void btn_Update_Click(object sender, EventArgs e)
         {
-            // Get the selected row
-            if (dgv_Client.CurrentRow == null)
-            {
-                MessageBox.Show("Please select a record to update.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            if (dgv_Client.CurrentRow == null) return;
+            int personId = Convert.ToInt32(dgv_Client.CurrentRow.Cells["pk_Requesting_PersonID"].Value);
 
-            // Get the primary key of the selected row
-            var row = dgv_Client.CurrentRow;
-            if (row.Cells["pk_Requesting_PersonID"].Value == null)
-            {
-                MessageBox.Show("Unable to determine the selected record's ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            int personId = Convert.ToInt32(row.Cells["pk_Requesting_PersonID"].Value);
-
-            // Validate required fields (add more as needed)
+            // Validate:
             if (string.IsNullOrWhiteSpace(txt_Fname_Edit.Text) ||
                 string.IsNullOrWhiteSpace(txt_Surname_Edit.Text) ||
-                string.IsNullOrWhiteSpace(txt_Contact_Edit.Text) ||
-                string.IsNullOrWhiteSpace(txt_Office_Edit.Text) ||
-                string.IsNullOrWhiteSpace(txt_Address_Edit.Text))
+                string.IsNullOrWhiteSpace(txt_Contact_Edit.Text)) { /* show error */ return; }
+
+            DBConnect();
+            using (var tran = conn.BeginTransaction())
             {
-                MessageBox.Show("Please fill in all required fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            try
-            {
-                DBConnect();
-
-                string updateQuery = @"
-                    UPDATE tbl_Requesting_Person
-                    SET
-                        fld_First_Name = @FirstName,
-                        fld_Middle_Name = @MiddleName,
-                        fld_Surname = @Surname,
-                        fld_Contact_Number = @Contact,
-                        fld_Requesting_Office = @Office,
-                        fld_Requesting_Person_Address = @Address
-                    WHERE pk_Requesting_PersonID = @PersonID";
-
-                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                // 1️⃣ Update single selected row
+                using (var cmd = conn.CreateCommand())
                 {
+                    cmd.Transaction = tran;
+                    cmd.CommandText = @"
+                UPDATE tbl_Requesting_Person
+                SET fld_First_Name = @FirstName,
+                    fld_Middle_Name = @MiddleName,
+                    fld_Surname = @Surname,
+                    fld_Contact_Number = @Contact,
+                    fld_Requesting_Office = @Office,
+                    fld_Requesting_Person_Address = @Address
+                WHERE pk_Requesting_PersonID = @PersonID;";
                     cmd.Parameters.AddWithValue("@FirstName", txt_Fname_Edit.Text.Trim());
                     cmd.Parameters.AddWithValue("@MiddleName", txt_MiddleName_Edit.Text.Trim());
                     cmd.Parameters.AddWithValue("@Surname", txt_Surname_Edit.Text.Trim());
@@ -293,28 +273,43 @@ namespace pgso
                     cmd.Parameters.AddWithValue("@Office", txt_Office_Edit.Text.Trim());
                     cmd.Parameters.AddWithValue("@Address", txt_Address_Edit.Text.Trim());
                     cmd.Parameters.AddWithValue("@PersonID", personId);
-
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Record updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadRequestingPersonData();
-                        btn_Update.Enabled = false;
-                    }
-                    else
-                    {
-                        MessageBox.Show("No record was updated. Please check your selection.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                    cmd.ExecuteNonQuery();
                 }
+
+                // 2️⃣ Bulk-update all entries sharing the original full name
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.Transaction = tran;
+                    cmd.CommandText = @"
+                UPDATE tbl_Requesting_Person
+                SET fld_First_Name = @NewFirst,
+                    fld_Middle_Name = @NewMiddle,
+                    fld_Surname = @NewSurname,
+                    fld_Contact_Number = @NewContact,
+                    fld_Requesting_Office = @NewOffice,
+                    fld_Requesting_Person_Address = @NewAddress
+                WHERE fld_First_Name = @OldFirst
+                  AND fld_Middle_Name = @OldMiddle
+                  AND fld_Surname = @OldSurname;";
+                    cmd.Parameters.AddWithValue("@NewFirst", txt_Fname_Edit.Text.Trim());
+                    cmd.Parameters.AddWithValue("@NewMiddle", txt_MiddleName_Edit.Text.Trim());
+                    cmd.Parameters.AddWithValue("@NewSurname", txt_Surname_Edit.Text.Trim());
+                    cmd.Parameters.AddWithValue("@NewContact", txt_Contact_Edit.Text.Trim());
+                    cmd.Parameters.AddWithValue("@NewOffice", txt_Office_Edit.Text.Trim());
+                    cmd.Parameters.AddWithValue("@NewAddress", txt_Address_Edit.Text.Trim());
+                    cmd.Parameters.AddWithValue("@OldFirst", originalFirst);
+                    cmd.Parameters.AddWithValue("@OldMiddle", originalMiddle);
+                    cmd.Parameters.AddWithValue("@OldSurname", originalSurname);
+                    cmd.ExecuteNonQuery();
+                }
+
+                tran.Commit();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error updating record: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                DBClose();
-            }
+
+            MessageBox.Show("All matching client records updated!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LoadRequestingPersonData();
+            btn_Update.Enabled = false;
+            DBClose();
         }
 
         private void btnNextPage_Click(object sender, EventArgs e)
@@ -492,6 +487,11 @@ namespace pgso
             btn_Next.Enabled = currentPage1 < totalPages1;
         }
         private void lbl_paging_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgv_Client_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

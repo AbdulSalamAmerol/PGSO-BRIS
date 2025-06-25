@@ -28,12 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dt_equipment = new System.Windows.Forms.DataGridView();
+            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Equipment_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Created = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Reservation_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fld_Total_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_Information = new System.Windows.Forms.Panel();
             this.label17 = new System.Windows.Forms.Label();
             this.txt_Contact = new System.Windows.Forms.TextBox();
@@ -73,14 +81,10 @@
             this.lblPageInfo = new System.Windows.Forms.Label();
             this.btnNextPage = new System.Windows.Forms.Button();
             this.btnPrevPage = new System.Windows.Forms.Button();
-            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Control_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Equipment_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Created = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Reservation_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fld_Total_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txt_Mname = new System.Windows.Forms.TextBox();
+            this.label = new System.Windows.Forms.Label();
+            this.txt_Sname = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dt_equipment)).BeginInit();
             this.panel_Information.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -93,14 +97,14 @@
             this.dt_equipment.AllowUserToResizeColumns = false;
             this.dt_equipment.AllowUserToResizeRows = false;
             this.dt_equipment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dt_equipment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dt_equipment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.dt_equipment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dt_equipment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Item,
@@ -111,34 +115,110 @@
             this.Created,
             this.fld_Reservation_Status,
             this.fld_Total_Amount});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dt_equipment.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dt_equipment.DefaultCellStyle = dataGridViewCellStyle19;
             this.dt_equipment.Location = new System.Drawing.Point(15, 64);
             this.dt_equipment.Name = "dt_equipment";
             this.dt_equipment.ReadOnly = true;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dt_equipment.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dt_equipment.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
             this.dt_equipment.RowHeadersVisible = false;
             this.dt_equipment.Size = new System.Drawing.Size(1507, 881);
             this.dt_equipment.TabIndex = 1;
             this.dt_equipment.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_equipment_CellContentClick);
             // 
+            // Item
+            // 
+            this.Item.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Item.DefaultCellStyle = dataGridViewCellStyle17;
+            this.Item.HeaderText = "Item";
+            this.Item.Name = "Item";
+            this.Item.ReadOnly = true;
+            this.Item.Width = 50;
+            // 
+            // fld_Control_Number
+            // 
+            this.fld_Control_Number.DataPropertyName = "fld_Control_Number";
+            this.fld_Control_Number.FillWeight = 57.44501F;
+            this.fld_Control_Number.HeaderText = "Control Number";
+            this.fld_Control_Number.Name = "fld_Control_Number";
+            this.fld_Control_Number.ReadOnly = true;
+            // 
+            // fld_Quantity
+            // 
+            this.fld_Quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.fld_Quantity.DataPropertyName = "fld_Quantity";
+            this.fld_Quantity.FillWeight = 355.33F;
+            this.fld_Quantity.HeaderText = "Quantity";
+            this.fld_Quantity.Name = "fld_Quantity";
+            this.fld_Quantity.ReadOnly = true;
+            this.fld_Quantity.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.fld_Quantity.Width = 85;
+            // 
+            // fld_Equipment_Name
+            // 
+            this.fld_Equipment_Name.DataPropertyName = "fld_Equipment_Name";
+            this.fld_Equipment_Name.FillWeight = 57.44501F;
+            this.fld_Equipment_Name.HeaderText = "Equipment";
+            this.fld_Equipment_Name.Name = "fld_Equipment_Name";
+            this.fld_Equipment_Name.ReadOnly = true;
+            // 
+            // Date
+            // 
+            this.Date.DataPropertyName = "Date";
+            this.Date.FillWeight = 57.44501F;
+            this.Date.HeaderText = "Date of Use";
+            this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
+            // 
+            // Created
+            // 
+            this.Created.DataPropertyName = "fld_Created_At";
+            this.Created.FillWeight = 57.44501F;
+            this.Created.HeaderText = "Date Requested";
+            this.Created.Name = "Created";
+            this.Created.ReadOnly = true;
+            // 
+            // fld_Reservation_Status
+            // 
+            this.fld_Reservation_Status.DataPropertyName = "fld_Reservation_Status";
+            this.fld_Reservation_Status.FillWeight = 57.44501F;
+            this.fld_Reservation_Status.HeaderText = "Status";
+            this.fld_Reservation_Status.Name = "fld_Reservation_Status";
+            this.fld_Reservation_Status.ReadOnly = true;
+            // 
+            // fld_Total_Amount
+            // 
+            this.fld_Total_Amount.DataPropertyName = "fld_Total_Amount";
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fld_Total_Amount.DefaultCellStyle = dataGridViewCellStyle18;
+            this.fld_Total_Amount.FillWeight = 57.44501F;
+            this.fld_Total_Amount.HeaderText = "Total";
+            this.fld_Total_Amount.Name = "fld_Total_Amount";
+            this.fld_Total_Amount.ReadOnly = true;
+            // 
             // panel_Information
             // 
             this.panel_Information.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_Information.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel_Information.Controls.Add(this.label);
+            this.panel_Information.Controls.Add(this.txt_Sname);
+            this.panel_Information.Controls.Add(this.label14);
+            this.panel_Information.Controls.Add(this.txt_Mname);
             this.panel_Information.Controls.Add(this.label17);
             this.panel_Information.Controls.Add(this.txt_Contact);
             this.panel_Information.Controls.Add(this.label7);
@@ -167,25 +247,25 @@
             this.panel_Information.Controls.Add(this.txt_CN);
             this.panel_Information.Location = new System.Drawing.Point(1548, 64);
             this.panel_Information.Name = "panel_Information";
-            this.panel_Information.Size = new System.Drawing.Size(364, 473);
+            this.panel_Information.Size = new System.Drawing.Size(364, 602);
             this.panel_Information.TabIndex = 8;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(16, 112);
+            this.label17.Location = new System.Drawing.Point(16, 181);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(68, 20);
+            this.label17.Size = new System.Drawing.Size(69, 20);
             this.label17.TabIndex = 50;
-            this.label17.Text = "Address";
+            this.label17.Text = "Contact:";
             // 
             // txt_Contact
             // 
+            this.txt_Contact.Enabled = false;
             this.txt_Contact.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Contact.Location = new System.Drawing.Point(158, 102);
+            this.txt_Contact.Location = new System.Drawing.Point(158, 171);
             this.txt_Contact.Name = "txt_Contact";
-            this.txt_Contact.ReadOnly = true;
             this.txt_Contact.Size = new System.Drawing.Size(190, 26);
             this.txt_Contact.TabIndex = 49;
             // 
@@ -205,20 +285,19 @@
             this.btn_Update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Update.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Update.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btn_Update.Location = new System.Drawing.Point(271, 426);
+            this.btn_Update.Location = new System.Drawing.Point(273, 495);
             this.btn_Update.Name = "btn_Update";
             this.btn_Update.Size = new System.Drawing.Size(75, 35);
             this.btn_Update.TabIndex = 33;
             this.btn_Update.Text = "Update";
             this.btn_Update.UseVisualStyleBackColor = false;
-            this.btn_Update.Visible = false;
             this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(16, 144);
+            this.label15.Location = new System.Drawing.Point(16, 213);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(68, 20);
             this.label15.TabIndex = 32;
@@ -227,7 +306,7 @@
             // txt_Requesting_Office
             // 
             this.txt_Requesting_Office.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Requesting_Office.Location = new System.Drawing.Point(158, 166);
+            this.txt_Requesting_Office.Location = new System.Drawing.Point(158, 235);
             this.txt_Requesting_Office.Name = "txt_Requesting_Office";
             this.txt_Requesting_Office.ReadOnly = true;
             this.txt_Requesting_Office.Size = new System.Drawing.Size(190, 26);
@@ -238,7 +317,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(16, 308);
+            this.label9.Location = new System.Drawing.Point(16, 377);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(127, 20);
             this.label9.TabIndex = 28;
@@ -247,7 +326,7 @@
             // txt_Number_of_Days
             // 
             this.txt_Number_of_Days.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Number_of_Days.Location = new System.Drawing.Point(156, 298);
+            this.txt_Number_of_Days.Location = new System.Drawing.Point(156, 367);
             this.txt_Number_of_Days.Name = "txt_Number_of_Days";
             this.txt_Number_of_Days.ReadOnly = true;
             this.txt_Number_of_Days.Size = new System.Drawing.Size(190, 26);
@@ -258,7 +337,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(16, 404);
+            this.label11.Location = new System.Drawing.Point(16, 473);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(129, 20);
             this.label11.TabIndex = 23;
@@ -267,7 +346,7 @@
             // txt_Total
             // 
             this.txt_Total.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Total.Location = new System.Drawing.Point(158, 394);
+            this.txt_Total.Location = new System.Drawing.Point(158, 463);
             this.txt_Total.Name = "txt_Total";
             this.txt_Total.ReadOnly = true;
             this.txt_Total.Size = new System.Drawing.Size(190, 26);
@@ -279,7 +358,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(18, 372);
+            this.label10.Location = new System.Drawing.Point(18, 441);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 20);
             this.label10.TabIndex = 21;
@@ -289,7 +368,7 @@
             // 
             this.txt_Status.BackColor = System.Drawing.SystemColors.Control;
             this.txt_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Status.Location = new System.Drawing.Point(158, 362);
+            this.txt_Status.Location = new System.Drawing.Point(158, 431);
             this.txt_Status.Name = "txt_Status";
             this.txt_Status.ReadOnly = true;
             this.txt_Status.Size = new System.Drawing.Size(190, 26);
@@ -299,7 +378,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(17, 340);
+            this.label8.Location = new System.Drawing.Point(17, 409);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(72, 20);
             this.label8.TabIndex = 15;
@@ -308,7 +387,7 @@
             // txt_Purpose
             // 
             this.txt_Purpose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Purpose.Location = new System.Drawing.Point(158, 330);
+            this.txt_Purpose.Location = new System.Drawing.Point(158, 399);
             this.txt_Purpose.Name = "txt_Purpose";
             this.txt_Purpose.ReadOnly = true;
             this.txt_Purpose.Size = new System.Drawing.Size(190, 26);
@@ -318,7 +397,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(17, 271);
+            this.label6.Location = new System.Drawing.Point(17, 340);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(99, 20);
             this.label6.TabIndex = 11;
@@ -327,7 +406,7 @@
             // txt_Date_Start
             // 
             this.txt_Date_Start.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Date_Start.Location = new System.Drawing.Point(158, 261);
+            this.txt_Date_Start.Location = new System.Drawing.Point(158, 330);
             this.txt_Date_Start.Name = "txt_Date_Start";
             this.txt_Date_Start.ReadOnly = true;
             this.txt_Date_Start.Size = new System.Drawing.Size(188, 26);
@@ -337,7 +416,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(17, 239);
+            this.label5.Location = new System.Drawing.Point(17, 308);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 20);
             this.label5.TabIndex = 9;
@@ -346,7 +425,7 @@
             // txt_Quantity
             // 
             this.txt_Quantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Quantity.Location = new System.Drawing.Point(158, 229);
+            this.txt_Quantity.Location = new System.Drawing.Point(158, 298);
             this.txt_Quantity.Name = "txt_Quantity";
             this.txt_Quantity.ReadOnly = true;
             this.txt_Quantity.Size = new System.Drawing.Size(190, 26);
@@ -356,7 +435,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(17, 207);
+            this.label4.Location = new System.Drawing.Point(17, 276);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(90, 20);
             this.label4.TabIndex = 7;
@@ -365,7 +444,7 @@
             // txt_Equipment_Name
             // 
             this.txt_Equipment_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Equipment_Name.Location = new System.Drawing.Point(158, 197);
+            this.txt_Equipment_Name.Location = new System.Drawing.Point(158, 266);
             this.txt_Equipment_Name.Name = "txt_Equipment_Name";
             this.txt_Equipment_Name.ReadOnly = true;
             this.txt_Equipment_Name.Size = new System.Drawing.Size(190, 26);
@@ -375,7 +454,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(16, 176);
+            this.label3.Location = new System.Drawing.Point(16, 245);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(137, 20);
             this.label3.TabIndex = 5;
@@ -383,10 +462,10 @@
             // 
             // txt_Address
             // 
+            this.txt_Address.Enabled = false;
             this.txt_Address.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Address.Location = new System.Drawing.Point(158, 134);
+            this.txt_Address.Location = new System.Drawing.Point(158, 203);
             this.txt_Address.Name = "txt_Address";
-            this.txt_Address.ReadOnly = true;
             this.txt_Address.Size = new System.Drawing.Size(190, 26);
             this.txt_Address.TabIndex = 4;
             this.txt_Address.TextChanged += new System.EventHandler(this.txt_Address_TextChanged);
@@ -403,10 +482,10 @@
             // 
             // txt_Fname
             // 
+            this.txt_Fname.Enabled = false;
             this.txt_Fname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Fname.Location = new System.Drawing.Point(158, 64);
+            this.txt_Fname.Location = new System.Drawing.Point(158, 71);
             this.txt_Fname.Name = "txt_Fname";
-            this.txt_Fname.ReadOnly = true;
             this.txt_Fname.Size = new System.Drawing.Size(190, 26);
             this.txt_Fname.TabIndex = 2;
             this.txt_Fname.TextChanged += new System.EventHandler(this.txt_Fname_TextChanged);
@@ -552,77 +631,42 @@
             this.btnPrevPage.UseVisualStyleBackColor = true;
             this.btnPrevPage.Click += new System.EventHandler(this.btnPrevPage_Click);
             // 
-            // Item
+            // label14
             // 
-            this.Item.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Item.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Item.HeaderText = "Item";
-            this.Item.Name = "Item";
-            this.Item.ReadOnly = true;
-            this.Item.Width = 50;
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(15, 106);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(103, 20);
+            this.label14.TabIndex = 52;
+            this.label14.Text = "Middle name:";
             // 
-            // fld_Control_Number
+            // txt_Mname
             // 
-            this.fld_Control_Number.DataPropertyName = "fld_Control_Number";
-            this.fld_Control_Number.FillWeight = 57.44501F;
-            this.fld_Control_Number.HeaderText = "Control Number";
-            this.fld_Control_Number.Name = "fld_Control_Number";
-            this.fld_Control_Number.ReadOnly = true;
+            this.txt_Mname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Mname.Location = new System.Drawing.Point(156, 103);
+            this.txt_Mname.Name = "txt_Mname";
+            this.txt_Mname.Size = new System.Drawing.Size(190, 26);
+            this.txt_Mname.TabIndex = 51;
             // 
-            // fld_Quantity
+            // label
             // 
-            this.fld_Quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.fld_Quantity.DataPropertyName = "fld_Quantity";
-            this.fld_Quantity.FillWeight = 355.33F;
-            this.fld_Quantity.HeaderText = "Quantity";
-            this.fld_Quantity.Name = "fld_Quantity";
-            this.fld_Quantity.ReadOnly = true;
-            this.fld_Quantity.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.fld_Quantity.Width = 85;
+            this.label.AutoSize = true;
+            this.label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label.Location = new System.Drawing.Point(15, 138);
+            this.label.Name = "label";
+            this.label.Size = new System.Drawing.Size(78, 20);
+            this.label.TabIndex = 54;
+            this.label.Text = "Surname:";
             // 
-            // fld_Equipment_Name
+            // txt_Sname
             // 
-            this.fld_Equipment_Name.DataPropertyName = "fld_Equipment_Name";
-            this.fld_Equipment_Name.FillWeight = 57.44501F;
-            this.fld_Equipment_Name.HeaderText = "Equipment";
-            this.fld_Equipment_Name.Name = "fld_Equipment_Name";
-            this.fld_Equipment_Name.ReadOnly = true;
-            // 
-            // Date
-            // 
-            this.Date.DataPropertyName = "Date";
-            this.Date.FillWeight = 57.44501F;
-            this.Date.HeaderText = "Date of Use";
-            this.Date.Name = "Date";
-            this.Date.ReadOnly = true;
-            // 
-            // Created
-            // 
-            this.Created.DataPropertyName = "fld_Created_At";
-            this.Created.FillWeight = 57.44501F;
-            this.Created.HeaderText = "Date Requested";
-            this.Created.Name = "Created";
-            this.Created.ReadOnly = true;
-            // 
-            // fld_Reservation_Status
-            // 
-            this.fld_Reservation_Status.DataPropertyName = "fld_Reservation_Status";
-            this.fld_Reservation_Status.FillWeight = 57.44501F;
-            this.fld_Reservation_Status.HeaderText = "Status";
-            this.fld_Reservation_Status.Name = "fld_Reservation_Status";
-            this.fld_Reservation_Status.ReadOnly = true;
-            // 
-            // fld_Total_Amount
-            // 
-            this.fld_Total_Amount.DataPropertyName = "fld_Total_Amount";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fld_Total_Amount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.fld_Total_Amount.FillWeight = 57.44501F;
-            this.fld_Total_Amount.HeaderText = "Total";
-            this.fld_Total_Amount.Name = "fld_Total_Amount";
-            this.fld_Total_Amount.ReadOnly = true;
+            this.txt_Sname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Sname.Location = new System.Drawing.Point(156, 135);
+            this.txt_Sname.Name = "txt_Sname";
+            this.txt_Sname.Size = new System.Drawing.Size(190, 26);
+            this.txt_Sname.TabIndex = 53;
+            this.txt_Sname.TextChanged += new System.EventHandler(this.txt_Sname_TextChanged);
             // 
             // frm_Equipment
             // 
@@ -700,5 +744,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Created;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Reservation_Status;
         private System.Windows.Forms.DataGridViewTextBoxColumn fld_Total_Amount;
+        private System.Windows.Forms.Label label;
+        private System.Windows.Forms.TextBox txt_Sname;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txt_Mname;
     }
 }
