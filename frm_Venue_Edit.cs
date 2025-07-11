@@ -304,7 +304,7 @@ ORDER BY r.fld_Created_At DESC";
                         command.ExecuteNonQuery();
                     }
 
-                    /// ✅ Update requesting person details
+                    ///  Update requesting person details
                     string personQuery = @"
                         UPDATE tbl_Requesting_Person
                         SET fld_First_Name = @FirstName,
@@ -473,7 +473,7 @@ ORDER BY r.fld_Created_At DESC";
 
                     using (var transaction = connection.BeginTransaction())
                     {
-                        // ✅ Update Reservation Status
+                        //  Update Reservation Status
                         string reservationQuery = @"
                     UPDATE tbl_Reservation 
                     SET fld_Reservation_Status = @Status
@@ -486,7 +486,7 @@ ORDER BY r.fld_Created_At DESC";
                             cmdReservation.ExecuteNonQuery();
                         }
 
-                        // ✅ Update Requesting Person's Name and Address
+                        //  Update Requesting Person's Name and Address
                         string personQuery = @"
                     UPDATE tbl_Requesting_Person
                     SET fld_First_Name = @FirstName,

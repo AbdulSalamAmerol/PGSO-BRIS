@@ -65,11 +65,11 @@ namespace pgso.pgso_Billing.Forms
             if (_revenueData == null || _revenueData.Count == 0) return;
             try
             {
-                // ✅ Clear existing data sources
+                //  Clear existing data sources
                 Report_Viewer_Equipment_Revenue.LocalReport.DataSources.Clear();
             Report_Viewer_Equipment_Revenue.LocalReport.ReportEmbeddedResource = "pgso.pgso_Billing.Forms.Report_Billing_Equipment.rdlc";
 
-            // ✅ Add the dataset to the report
+            //  Add the dataset to the report
             ReportDataSource rds = new ReportDataSource("BillingDataset", _revenueData);
             Report_Viewer_Equipment_Revenue.LocalReport.DataSources.Add(rds);
 
@@ -79,7 +79,7 @@ namespace pgso.pgso_Billing.Forms
             Report_Viewer_Equipment_Revenue.LocalReport.SetParameters(new ReportParameter("ReservationType", _reservationType));
 
 
-            // ✅ Refresh the report to apply changes
+            //  Refresh the report to apply changes
             Report_Viewer_Equipment_Revenue.RefreshReport();
             }
             catch (LocalProcessingException ex)

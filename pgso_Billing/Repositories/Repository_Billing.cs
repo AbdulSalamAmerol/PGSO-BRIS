@@ -196,7 +196,7 @@ namespace pgso.Billing.Repositories
                     }
                 }
 
-                Console.WriteLine("✅ Total Records Retrieved: " + billings.Count);
+                Console.WriteLine(" Total Records Retrieved: " + billings.Count);
             }
             catch (Exception ex)
             {
@@ -219,7 +219,7 @@ namespace pgso.Billing.Repositories
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    Console.WriteLine($"✅ Fetching billing data for Reservation ID: {reservationId}");
+                    Console.WriteLine($" Fetching billing data for Reservation ID: {reservationId}");
 
                     string query = @"
                     SELECT 
@@ -387,7 +387,7 @@ namespace pgso.Billing.Repositories
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    Console.WriteLine("✅ Fetching Revenue Data");
+                    Console.WriteLine(" Fetching Revenue Data");
 
                     string query = @"
                         SELECT 
@@ -467,7 +467,7 @@ namespace pgso.Billing.Repositories
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        // ✅ Add parameters
+                        //  Add parameters
                         cmd.Parameters.AddWithValue("@StartDate", startDate);
                         cmd.Parameters.AddWithValue("@EndDate", endDate);
                         cmd.Parameters.AddWithValue("@PaymentStatus", paymentStatus);
@@ -538,7 +538,7 @@ namespace pgso.Billing.Repositories
                         }
                     }
                 }
-                Console.WriteLine($"✅ Total Revenue Records Retrieved: {revenueData.Count}");
+                Console.WriteLine($" Total Revenue Records Retrieved: {revenueData.Count}");
             }
             catch (Exception ex)
             {
@@ -616,7 +616,11 @@ namespace pgso.Billing.Repositories
                             r.fld_OT_Payment_Status,
                             r.fld_OR_Extension,
                             r.fld_Extension_Status,
-                            r.fld_Caterer_Fee 
+                            r.fld_Caterer_Fee,
+                            r.fld_Confirmation_Date,
+                            re.fld_Quantity_Returned,
+                            re.fld_Quantity_Damaged
+
                         FROM dbo.tbl_Reservation r
                         LEFT JOIN dbo.tbl_Requesting_Person rp ON r.fk_Requesting_PersonID = rp.pk_Requesting_PersonID
                         LEFT JOIN dbo.tbl_Venue v ON r.fk_VenueID = v.pk_VenueID
@@ -691,7 +695,10 @@ namespace pgso.Billing.Repositories
                                     fld_OT_Payment_Status = reader.IsDBNull(50) ? "" : reader.GetString(50),
                                     fld_OR_Extension = reader.IsDBNull(51) ? 0 : reader.GetInt32(51),
                                     fld_Extension_Status = reader.IsDBNull(52) ? "" : reader.GetString(52),
-                                    fld_Caterer_Fee = reader.IsDBNull(53) ? 0 : reader.GetDecimal(53)
+                                    fld_Caterer_Fee = reader.IsDBNull(53) ? 0 : reader.GetDecimal(53),
+                                    fld_Confirmation_Date = reader.IsDBNull(54) ? (DateTime?)null : reader.GetDateTime(54),
+                                    fld_Quantity_Returned = reader.IsDBNull(55) ? 0 : reader.GetInt32(55),
+                                    fld_Quantity_Damaged = reader.IsDBNull(56) ? 0 : reader.GetInt32(56)
                                 };
                             }
                         }
@@ -1329,7 +1336,7 @@ namespace pgso.Billing.Repositories
                                 fld_Equipment_Name = reader.GetString(1)
                             });
                         }
-                    } // ✅ reader is closed here
+                    } //  reader is closed here
                 }
             }
 
@@ -1364,7 +1371,7 @@ namespace pgso.Billing.Repositories
                                 fld_Equipment_Price_Subsequent = reader.GetDecimal(2)
                             };
                         }
-                    } // ✅ reader is closed here
+                    } //  reader is closed here
                 }
             }
 
@@ -1480,7 +1487,7 @@ namespace pgso.Billing.Repositories
                         transaction.Rollback();
                         return false;
                     }
-                    reader.Close(); // ✅ close it before next command
+                    reader.Close(); //  close it before next command
 
                     // Step 2: Check current remaining and total stock
                     cmd = new SqlCommand(@"
@@ -1505,7 +1512,7 @@ namespace pgso.Billing.Repositories
                         transaction.Rollback();
                         return false;
                     }
-                    reader2.Close(); // ✅
+                    reader2.Close(); // 
 
                     // Step 3: Check if adding back the quantity would exceed total stock
                     if (remainingStock + quantityToReturn > totalStock)
@@ -2413,7 +2420,7 @@ namespace pgso.Billing.Repositories
                     cmd.Parameters.AddWithValue("@ReservationID", reservationID);
                     conn.Open();
                     int notFullyReturned = (int)cmd.ExecuteScalar();
-                    return notFullyReturned == 0; // ✅ true = all returned or damaged
+                    return notFullyReturned == 0; //  true = all returned or damaged
                 }
             }
         }
@@ -2445,8 +2452,8 @@ namespace pgso.Billing.Repositories
             UPDATE tbl_Reservation
             SET fld_Reservation_Status = 'Completed'
             WHERE pk_ReservationID = @ReservationID
-              AND fld_Reservation_Status NOT IN ('Completed', 'Cancelled')
-              AND fld_Reservation_Type = 'Venue'";  // ✅ Only apply to Venue type
+              AND fld_Reservation_Status NOT IN ('Completed', 'Cancelled')";
+
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -2457,7 +2464,36 @@ namespace pgso.Billing.Repositories
             }
         }
 
+        public bool AreAllEquipmentReturnedOrDamaged(int reservationId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString)) // connectionString is defined here
+            {
+                conn.Open();
+                string checkQuery = @"
+            SELECT fld_Quantity, fld_Quantity_Returned, fld_Quantity_Damaged
+            FROM tbl_Reservation_Equipment
+            WHERE fk_ReservationID = @ReservationID";
 
+                using (SqlCommand cmd = new SqlCommand(checkQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ReservationID", reservationId);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int qty = Convert.ToInt32(reader["fld_Quantity"]);
+                            int returned = Convert.ToInt32(reader["fld_Quantity_Returned"]);
+                            int damaged = Convert.ToInt32(reader["fld_Quantity_Damaged"]);
+                            int remaining = qty - (returned + damaged);
+
+                            if (remaining != 0)
+                                return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
 
     }
 }

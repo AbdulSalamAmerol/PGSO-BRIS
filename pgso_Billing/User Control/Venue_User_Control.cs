@@ -19,7 +19,7 @@ namespace pgso.pgso_Billing
     {
        
         public event Action<int?> RequestBillingRefresh;
-        private Repo_Billing _repoBilling; // ✅ Add this field
+        private Repo_Billing _repoBilling; //  Add this field
         public event Action<int, string> OnRequestVenueExtension;// Check if extension is applicable
         private Model_Billing _billingDetails;
         // Constructor that accepts Model_Billing
@@ -27,8 +27,8 @@ namespace pgso.pgso_Billing
         {
             InitializeComponent();
 
-            _billingDetails = billingDetails; // ✅ Store for later use
-            _repoBilling = repoBilling; // ✅ Store the repository
+            _billingDetails = billingDetails; //  Store for later use
+            _repoBilling = repoBilling; //  Store the repository
             LoadBillingDetails(billingDetails); // Populate the fields on creation
             int reservationID = billingDetails.pk_ReservationID;
             Console.WriteLine("CHECK billingDetails.fld_Reservation_Status" + billingDetails.fld_Reservation_Status);
@@ -132,7 +132,7 @@ namespace pgso.pgso_Billing
 
         private void btn_Change_Reservation_info_Click(object sender, EventArgs e)
         {
-            // ✅ Only allow if status is Confirmed or Pending
+            //  Only allow if status is Confirmed or Pending
             if (_billingDetails.fld_Reservation_Status != "Confirmed" && _billingDetails.fld_Reservation_Status != "Pending")
             {
                 MessageBox.Show("You can only edit reservations that are Confirmed or Pending.",
@@ -246,7 +246,7 @@ namespace pgso.pgso_Billing
         {
             HideOvertimeAndRefundDetails(_billingDetails);
             pnl_Billing_Details.Visible = true;
-
+           
             // Populate the labels with values from the billingDetails model
             lbl_Service_Fee.Text = billingDetails.fld_Caterer_Fee.ToString("C", new CultureInfo("en-PH"));
             lbl_Control_Number.Text = billingDetails.fld_Control_Number;
@@ -297,6 +297,16 @@ namespace pgso.pgso_Billing
             lbl_Venue_Name.Text = billingDetails.fld_Venue_Name;
             lbl_Venue_Scope.Text = billingDetails.fld_Venue_Scope_Name;
 
+            if (billingDetails.fld_Reservation_Status == "Completed" || billingDetails.fld_Reservation_Status == "Pending" || billingDetails.fld_Reservation_Status == "Cancelled")
+            {
+                btn_Complete_Reservation.Enabled = false;
+                btn_Extension_Slip.Enabled = false;
+            }
+            else
+            {
+                btn_Complete_Reservation.Enabled = true;
+      
+            }
             string scopeName_Detail = billingDetails.fld_Venue_Scope_Name;
 
             switch (scopeName_Detail)
@@ -891,6 +901,92 @@ namespace pgso.pgso_Billing
         {
 
         }
+
+        private void btn_Complete_Reservation_Click(object sender, EventArgs e)
+        {
+            if (_billingDetails == null)
+            {
+                MessageBox.Show("Reservation details are missing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            /* FOR DEBUGING PURPOSES ONLY 
+            MessageBox.Show($@"
+                Rate Type: {_billingDetails.fld_Rate_Type}
+                Status: {_billingDetails.fld_Reservation_Status}
+                End Date: {_billingDetails.fld_End_Date}
+                Confirmation Date: {_billingDetails.fld_Confirmation_Date}
+                OR: {_billingDetails.fld_OR}
+                OT Hours: {_billingDetails.fld_OT_Hours}
+                OR Extension: {_billingDetails.fld_OR_Extension}
+                ", "Debug Values");
+            */
+            bool isPGNV = _billingDetails.fld_Rate_Type.Equals("PGNV", StringComparison.OrdinalIgnoreCase);
+
+            //  PGNV: Only apply 2 constraints
+            if (isPGNV)
+            {
+                if (DateTime.Now <= _billingDetails.fld_End_Date)
+                {
+                    MessageBox.Show("Reservation has not ended yet. It can only be completed after the end date.", "Too Early", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (_billingDetails.fld_Reservation_Status != "Confirmed")
+                {
+                    MessageBox.Show("Only reservations with 'Confirmed' status can be completed.", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            else // 🔒 Regular validation for non-PGNV
+            {
+                if (_billingDetails.fld_Reservation_Status != "Confirmed")
+                {
+                    MessageBox.Show("Only reservations with 'Confirmed' status can be completed.", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!_billingDetails.fld_Confirmation_Date.HasValue)
+                {
+                    MessageBox.Show("Cannot complete reservation without a confirmation date.", "Missing Confirmation Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (DateTime.Now <= _billingDetails.fld_End_Date)
+                {
+                    MessageBox.Show("Reservation has not ended yet. It can only be completed after the end date.", "Too Early", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (_billingDetails.fld_OR == null || _billingDetails.fld_OR <= 0)
+                {
+                    MessageBox.Show("A valid Official Receipt (OR) number is required to complete the reservation.", "Missing OR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (_billingDetails.fld_OT_Hours > 0)
+                {
+                    if (_billingDetails.fld_OR_Extension == null || _billingDetails.fld_OR_Extension <= 0)
+                    {
+                        MessageBox.Show("Overtime exists, but no valid OR for extension found.", "Missing OR for Overtime", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+            }
+
+            //  All validations passed — mark as completed
+            bool success = _repoBilling.MarkReservationAsCompleted(_billingDetails.pk_ReservationID);
+            if (success)
+            {
+                MessageBox.Show("Reservation marked as Completed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); // 🔁 Trigger UI refresh
+            }
+            else
+            {
+                MessageBox.Show("Failed to mark reservation as Completed. It may already be completed or cancelled.", "No Action Taken", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+
     }
 
 }

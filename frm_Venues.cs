@@ -560,7 +560,7 @@ namespace pgso
                             cmd.ExecuteNonQuery();
                         }
 
-                        // ✅ Bulk update all rows that share the original first name
+                        //  Bulk update all rows that share the original first name
                         using (var cmd = conn.CreateCommand())
                         {
                             cmd.Transaction = tran;

@@ -46,9 +46,9 @@
             }
             else
             {
-                _billingData = billingRecords; // ✅ Store the full list correctly
+                _billingData = billingRecords; //  Store the full list correctly
 
-                // ✅ Output fld_Username for each record
+                //  Output fld_Username for each record
                 foreach (var record in billingRecords)
                 {
                     Console.WriteLine("fld_Username: " + record.fld_Username);

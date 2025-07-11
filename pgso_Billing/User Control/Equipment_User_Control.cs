@@ -21,7 +21,7 @@ namespace pgso.pgso_Billing.User_Control
     public partial class Equipment_User_Control : UserControl
     {
         public event EventHandler EquipmentBillingUpdated;
-        private Repo_Billing _repoBilling; // ✅ Add this field
+        private Repo_Billing _repoBilling; //  Add this field
         public event Action<int?> RequestBillingRefresh;
 
 
@@ -46,7 +46,7 @@ namespace pgso.pgso_Billing.User_Control
             };
             btn_Add_Equipment_Billing.ForeColor = Color.FromArgb(242, 239, 231);
             _billingDetails = billingDetailsList; // Store the passed-in model
-            _repoBilling = repoBilling; // ✅ Store the repository
+            _repoBilling = repoBilling; //  Store the repository
             LoadBillingDetails(billingDetailsList);
             LoadBillingDetails(_billingDetails);  // Reload the data after deletion
         }
@@ -76,7 +76,7 @@ namespace pgso.pgso_Billing.User_Control
         public void LoadBillingDetails(Model_Billing billingDetailsList)
         {
             pnl_Billing_Details.Visible = true;
-        
+
             btn_Delete_Equipment_Billing.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
             btn_Add_Equipment_Billing.Enabled = (billingDetailsList.fld_Reservation_Status == "Pending");
             btn_Return.Enabled = (billingDetailsList.fld_Reservation_Status == "Confirmed");
@@ -89,7 +89,7 @@ namespace pgso.pgso_Billing.User_Control
                 // Fetch equipment reservation records
                 var equipmentDetails = repo_billing.GetEquipmentBillingDetailsByReservationID(reservationID);
 
-                if (equipmentDetails == null )
+                if (equipmentDetails == null)
                 {
                     dgv_Equipment_Billing_Records.DataSource = null;
                     MessageBox.Show("No equipment reservations found for this billing.");
@@ -127,14 +127,16 @@ namespace pgso.pgso_Billing.User_Control
             lbl_Reservation_Status.Text = billingDetailsList.fld_Reservation_Status;
             lbl_fld_Total_Amount.Text = billingDetailsList.fld_Total_Amount.ToString("C", new CultureInfo("en-PH"));
 
-            bool showOR = billingDetailsList.fld_OR != null;
-            lbl_OR.Visible = tb_OR.Visible = showOR;
-
-            if (showOR)
+            if (billingDetailsList.fld_OR == 0)
             {
-                int orValue = Convert.ToInt32(billingDetailsList.fld_OR);
-                lbl_OR.Text = orValue == 0 ? "PLGU" : orValue.ToString();
+                lbl_OR.Visible = false; // hides the label entirely
             }
+            else
+            {
+                lbl_OR.Text = billingDetailsList.fld_OR.ToString();
+                lbl_OR.Visible = true;
+            }
+            lbl_OR.Visible = billingDetailsList.fld_OR != null;
             // First, center align *everything* by default
             dgv_Equipment_Billing_Records.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv_Equipment_Billing_Records.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -276,7 +278,7 @@ namespace pgso.pgso_Billing.User_Control
                         MessageBox.Show("Failed to update reservation status to 'Confirmed'.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-               
+
             }
         }
 
@@ -353,12 +355,19 @@ namespace pgso.pgso_Billing.User_Control
                     MessageBox.Show("Invalid record selected.");
                     return;
                 }
-
                 var editForm = new frm_Edit_Equipment_Billing(selectedItem.pk_Reservation_EquipmentID.Value);
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
-                    LoadBillingDetails(_billingDetails); // Refresh grid
-                    //Refresh datagridview after edit
+                    int reservationID = _billingDetails.pk_ReservationID;
+
+                    // ito yung equipment billing grid
+                    var updatedEquipment = repo_billing.GetEquipmentBillingDetailsByReservationID(reservationID);
+                    dgv_Equipment_Billing_Records.DataSource = updatedEquipment;
+                    // Ito yung billing details object
+                    _billingDetails = repo_billing.GetBillingDetailsByReservationID(reservationID);
+                    // Refresh namn sa UI
+                    LoadBillingDetails(_billingDetails);
+                    // Ping parent refresh
                     EquipmentBillingUpdated?.Invoke(this, EventArgs.Empty);
                 }
             }
@@ -368,5 +377,87 @@ namespace pgso.pgso_Billing.User_Control
             }
         }
 
+        private void btn_Complete_Reservation_Click(object sender, EventArgs e)
+        {
+            if (_billingDetails == null)
+            {
+                MessageBox.Show("Reservation details are missing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+       
+            MessageBox.Show($@"
+                Rate Type: {_billingDetails.fld_Rate_Type}
+                Status: {_billingDetails.fld_Reservation_Status}
+                End Date: {_billingDetails.fld_End_Date}
+                Confirmation Date: {_billingDetails.fld_Confirmation_Date}
+                OR: {_billingDetails.fld_OR}
+                OT Hours: {_billingDetails.fld_OT_Hours}
+                OR Extension: {_billingDetails.fld_OR_Extension}
+                Quantity : {_billingDetails.fld_Quantity}
+                Quantity Returned: {_billingDetails.fld_Quantity_Returned}
+                Quantity Damaged: {_billingDetails.fld_Quantity_Damaged}
+                ", "Debug Values");
+         
+            bool isPGNV = _billingDetails.fld_Rate_Type.Equals("PGNV", StringComparison.OrdinalIgnoreCase);
+   
+            
+                if (_billingDetails.fld_Reservation_Status != "Confirmed")
+                {
+                    MessageBox.Show("Only reservations with 'Confirmed' status can be completed.", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!_billingDetails.fld_Confirmation_Date.HasValue)
+                {
+                    MessageBox.Show("Cannot complete reservation without a confirmation date.", "Missing Confirmation Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                /*if (DateTime.Now <= _billingDetails.fld_End_Date)
+                {
+                    MessageBox.Show("Reservation has not ended yet. It can only be completed after the end date.", "Too Early", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }*/
+
+                if (_billingDetails.fld_OR == null || _billingDetails.fld_OR <= 0)
+                {
+                    MessageBox.Show("A valid Official Receipt (OR) number is required to complete the reservation.", "Missing OR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (_billingDetails.fld_OT_Hours > 0)
+                {
+                    if (_billingDetails.fld_OR_Extension == null || _billingDetails.fld_OR_Extension <= 0)
+                    {
+                        MessageBox.Show("Overtime exists, but no valid OR for extension found.", "Missing OR for Overtime", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
+            if (!_billingDetails.fld_Rate_Type.Equals("PGNV", StringComparison.OrdinalIgnoreCase))
+            {
+                bool allReturned = _repoBilling.AreAllEquipmentReturnedOrDamaged(_billingDetails.pk_ReservationID);
+                if (!allReturned)
+                {
+                    MessageBox.Show("All equipment must be returned or accounted for before completing this reservation.",
+                                    "Incomplete Return", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+
+
+            //  All validations passed — mark as completed
+            bool success = _repoBilling.MarkReservationAsCompleted(_billingDetails.pk_ReservationID);
+            if (success)
+            {
+                MessageBox.Show("Reservation marked as Completed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RequestBillingRefresh?.Invoke(_billingDetails.pk_ReservationID); // 🔁 Trigger UI refresh
+            }
+            else
+            {
+                MessageBox.Show("Failed to mark reservation as Completed. It may already be completed or cancelled.", "No Action Taken", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
-}
+    }

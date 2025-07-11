@@ -73,22 +73,22 @@ SELECT pk_EquipmentID, fld_Equipment_Name, fld_Total_Stock, fld_Remaining_Stock 
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="_BRIS_EXPERIMENT_3_0DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_UserDSName="_BRIS_EXPERIMENT_3_0DataSet1" msprop:Generator_DataSetName="_BRIS_EXPERIMENT_3_0DataSet1">
+  <xs:element name="_BRIS_EXPERIMENT_3_0DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="_BRIS_EXPERIMENT_3_0DataSet1" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="_BRIS_EXPERIMENT_3_0DataSet1">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="tbl_Equipment" msprop:Generator_RowEvHandlerName="tbl_EquipmentRowChangeEventHandler" msprop:Generator_RowDeletedName="tbl_EquipmentRowDeleted" msprop:Generator_RowDeletingName="tbl_EquipmentRowDeleting" msprop:Generator_RowEvArgName="tbl_EquipmentRowChangeEvent" msprop:Generator_TablePropName="tbl_Equipment" msprop:Generator_RowChangedName="tbl_EquipmentRowChanged" msprop:Generator_RowChangingName="tbl_EquipmentRowChanging" msprop:Generator_TableClassName="tbl_EquipmentDataTable" msprop:Generator_RowClassName="tbl_EquipmentRow" msprop:Generator_TableVarName="tabletbl_Equipment" msprop:Generator_UserTableName="tbl_Equipment">
+        <xs:element name="tbl_Equipment" msprop:Generator_RowEvHandlerName="tbl_EquipmentRowChangeEventHandler" msprop:Generator_RowDeletedName="tbl_EquipmentRowDeleted" msprop:Generator_RowDeletingName="tbl_EquipmentRowDeleting" msprop:Generator_RowEvArgName="tbl_EquipmentRowChangeEvent" msprop:Generator_TablePropName="tbl_Equipment" msprop:Generator_RowChangedName="tbl_EquipmentRowChanged" msprop:Generator_UserTableName="tbl_Equipment" msprop:Generator_RowChangingName="tbl_EquipmentRowChanging" msprop:Generator_RowClassName="tbl_EquipmentRow" msprop:Generator_TableClassName="tbl_EquipmentDataTable" msprop:Generator_TableVarName="tabletbl_Equipment">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="pk_EquipmentID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="pk_EquipmentID" msprop:Generator_ColumnPropNameInTable="pk_EquipmentIDColumn" msprop:Generator_ColumnVarNameInTable="columnpk_EquipmentID" msprop:Generator_UserColumnName="pk_EquipmentID" type="xs:int" />
-              <xs:element name="fld_Equipment_Name" msprop:Generator_ColumnPropNameInRow="fld_Equipment_Name" msprop:Generator_ColumnPropNameInTable="fld_Equipment_NameColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Equipment_Name" msprop:Generator_UserColumnName="fld_Equipment_Name">
+              <xs:element name="pk_EquipmentID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="pk_EquipmentIDColumn" msprop:Generator_ColumnPropNameInRow="pk_EquipmentID" msprop:Generator_UserColumnName="pk_EquipmentID" msprop:Generator_ColumnVarNameInTable="columnpk_EquipmentID" type="xs:int" />
+              <xs:element name="fld_Equipment_Name" msprop:Generator_ColumnPropNameInTable="fld_Equipment_NameColumn" msprop:Generator_ColumnPropNameInRow="fld_Equipment_Name" msprop:Generator_UserColumnName="fld_Equipment_Name" msprop:Generator_ColumnVarNameInTable="columnfld_Equipment_Name">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="100" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="fld_Total_Stock" msprop:Generator_ColumnPropNameInRow="fld_Total_Stock" msprop:Generator_ColumnPropNameInTable="fld_Total_StockColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Total_Stock" msprop:Generator_UserColumnName="fld_Total_Stock" type="xs:int" minOccurs="0" />
-              <xs:element name="fld_Remaining_Stock" msprop:Generator_ColumnPropNameInRow="fld_Remaining_Stock" msprop:Generator_ColumnPropNameInTable="fld_Remaining_StockColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Remaining_Stock" msprop:Generator_UserColumnName="fld_Remaining_Stock" type="xs:int" minOccurs="0" />
+              <xs:element name="fld_Total_Stock" msprop:Generator_ColumnPropNameInTable="fld_Total_StockColumn" msprop:Generator_ColumnPropNameInRow="fld_Total_Stock" msprop:Generator_UserColumnName="fld_Total_Stock" msprop:Generator_ColumnVarNameInTable="columnfld_Total_Stock" type="xs:int" minOccurs="0" />
+              <xs:element name="fld_Remaining_Stock" msprop:Generator_ColumnPropNameInTable="fld_Remaining_StockColumn" msprop:Generator_ColumnPropNameInRow="fld_Remaining_Stock" msprop:Generator_UserColumnName="fld_Remaining_Stock" msprop:Generator_ColumnVarNameInTable="columnfld_Remaining_Stock" type="xs:int" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -553,7 +553,7 @@ namespace pgso
         }
 
 
-        //ilagaya yung sinend
+        
 
         // Load rate(from db) based on selected venue, venue scope, reservation type, and aircon selection
         private void LoadRate()
@@ -569,9 +569,9 @@ namespace pgso
                     txt_rate.Text = "0.00";
                     txt_Succeeding_Hour.Text = "0.00";
                     additionalCharge = 0m;
-                    panel_Aircon.Enabled = true;  // Keep aircon panel enabled for PGNV
+                    panel_Aircon.Enabled = true;
                     CalculateTotalAmount();
-                    return;  // Exit early for PGNV
+                    return; // Exit early for PGNV
                 }
 
                 // Rest of your existing LoadRate logic for non-PGNV cases
@@ -787,7 +787,7 @@ namespace pgso
                     cmd = new SqlCommand(pgnvQuery, conn, transaction);
                     cmd.Parameters.AddWithValue("@VenueID", venueID);
                     cmd.Parameters.AddWithValue("@VenueScopeID", venueScopeID);
-
+                    cmd.Parameters.AddWithValue("@ReservationType", reservationType);
                     object pgnvResult = cmd.ExecuteScalar();
 
                     if (pgnvResult != null)
@@ -869,7 +869,10 @@ namespace pgso
                 cmd.Parameters.AddWithValue("@NumberOfParticipants", num_participants.Value);
                 cmd.Parameters.AddWithValue("@SucceedingHrs", decimal.Parse(txt_Succeeding_Hour.Text.Replace(",", "")));
                 cmd.Parameters.AddWithValue("@FirstFourHrs", decimal.Parse(txt_rate.Text.Replace(",", "")));
-                cmd.Parameters.AddWithValue("@ReservationStatus", "Pending");
+                string reservationStatus = combo_ReservationType.SelectedValue.ToString().Equals("PGNV", StringComparison.OrdinalIgnoreCase)
+                ? "Confirmed"
+                : "Pending";
+                cmd.Parameters.AddWithValue("@ReservationStatus", reservationStatus);
                 cmd.Parameters.AddWithValue("@ReservationType", "Venue");
                 cmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
                 cmd.Parameters.AddWithValue("@RequestingPersonID", personID);
@@ -956,7 +959,8 @@ namespace pgso
                 }
                 else
                 {
-                    MessageBox.Show($"Database Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Invalid date and time selection. Please ensure that the start date occurs before the end date, and that the time values reflect a valid real-world scenario.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
             }
             catch (Exception ex)
@@ -1021,7 +1025,7 @@ namespace pgso
                 txt_Succeeding_Hour.Text = "0.00";
                 additionalCharge = 0m;
                 panel_Aircon.Enabled = true;  // Keep aircon enabled
-
+                
                 // Set caterer fee to zero and uncheck the box
                 txt_Caterer_Fee.Text = "0.00";
                 chk_UseCatererFee.Checked = false;
@@ -1072,6 +1076,12 @@ namespace pgso
             {
                 TimeEnd.Value = TimeEnd.Value.Date.AddHours(TimeEnd.Value.Hour + 12);
             }*/
+
+            if(TimeEnd.Value < TimeStart.Value)
+            {
+                MessageBox.Show("End time cannot be earlier than start time.", "Invalid Time", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TimeEnd.Value = TimeStart.Value.AddHours(1); // Reset to one hour after start time
+            }
             if (IsReservationTypeAndScopeSelected())
             {
                 LoadRate();

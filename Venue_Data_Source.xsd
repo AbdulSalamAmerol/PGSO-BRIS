@@ -9,7 +9,7 @@
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable_VenueTableAdapter" GeneratorDataComponentClassName="DataTable_VenueTableAdapter" Name="DataTable_Venue" UserDataComponentName="DataTable_VenueTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="strCon (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="strCon (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT 
@@ -88,105 +88,105 @@ ORDER BY rp.pk_Requesting_PersonID;</CommandText>
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="Venue_Data_Source" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="Venue_Data_Source" msprop:Generator_DataSetName="Venue_Data_Source">
+  <xs:element name="Venue_Data_Source" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="Venue_Data_Source" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Venue_Data_Source">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="DataTable_Venue" msprop:Generator_RowEvHandlerName="DataTable_VenueRowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable_VenueRowDeleted" msprop:Generator_RowDeletingName="DataTable_VenueRowDeleting" msprop:Generator_RowEvArgName="DataTable_VenueRowChangeEvent" msprop:Generator_TablePropName="DataTable_Venue" msprop:Generator_RowChangedName="DataTable_VenueRowChanged" msprop:Generator_RowChangingName="DataTable_VenueRowChanging" msprop:Generator_TableClassName="DataTable_VenueDataTable" msprop:Generator_RowClassName="DataTable_VenueRow" msprop:Generator_TableVarName="tableDataTable_Venue" msprop:Generator_UserTableName="DataTable_Venue">
+        <xs:element name="DataTable_Venue" msprop:Generator_RowEvHandlerName="DataTable_VenueRowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable_VenueRowDeleted" msprop:Generator_RowDeletingName="DataTable_VenueRowDeleting" msprop:Generator_RowEvArgName="DataTable_VenueRowChangeEvent" msprop:Generator_TablePropName="DataTable_Venue" msprop:Generator_RowChangedName="DataTable_VenueRowChanged" msprop:Generator_UserTableName="DataTable_Venue" msprop:Generator_RowChangingName="DataTable_VenueRowChanging" msprop:Generator_RowClassName="DataTable_VenueRow" msprop:Generator_TableClassName="DataTable_VenueDataTable" msprop:Generator_TableVarName="tableDataTable_Venue">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="pk_Requesting_PersonID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="pk_Requesting_PersonID" msprop:Generator_ColumnPropNameInTable="pk_Requesting_PersonIDColumn" msprop:Generator_ColumnVarNameInTable="columnpk_Requesting_PersonID" msprop:Generator_UserColumnName="pk_Requesting_PersonID" type="xs:int" />
-              <xs:element name="fld_Surname" msprop:Generator_ColumnPropNameInRow="fld_Surname" msprop:Generator_ColumnPropNameInTable="fld_SurnameColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Surname" msprop:Generator_UserColumnName="fld_Surname">
+              <xs:element name="pk_Requesting_PersonID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="pk_Requesting_PersonIDColumn" msprop:Generator_ColumnPropNameInRow="pk_Requesting_PersonID" msprop:Generator_UserColumnName="pk_Requesting_PersonID" msprop:Generator_ColumnVarNameInTable="columnpk_Requesting_PersonID" type="xs:int" />
+              <xs:element name="fld_Surname" msprop:Generator_ColumnPropNameInTable="fld_SurnameColumn" msprop:Generator_ColumnPropNameInRow="fld_Surname" msprop:Generator_UserColumnName="fld_Surname" msprop:Generator_ColumnVarNameInTable="columnfld_Surname">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="fld_First_Name" msprop:Generator_ColumnPropNameInRow="fld_First_Name" msprop:Generator_ColumnPropNameInTable="fld_First_NameColumn" msprop:Generator_ColumnVarNameInTable="columnfld_First_Name" msprop:Generator_UserColumnName="fld_First_Name">
+              <xs:element name="fld_First_Name" msprop:Generator_ColumnPropNameInTable="fld_First_NameColumn" msprop:Generator_ColumnPropNameInRow="fld_First_Name" msprop:Generator_UserColumnName="fld_First_Name" msprop:Generator_ColumnVarNameInTable="columnfld_First_Name">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="fld_Middle_Name" msprop:Generator_ColumnPropNameInRow="fld_Middle_Name" msprop:Generator_ColumnPropNameInTable="fld_Middle_NameColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Middle_Name" msprop:Generator_UserColumnName="fld_Middle_Name" minOccurs="0">
+              <xs:element name="fld_Middle_Name" msprop:Generator_ColumnPropNameInTable="fld_Middle_NameColumn" msprop:Generator_ColumnPropNameInRow="fld_Middle_Name" msprop:Generator_UserColumnName="fld_Middle_Name" msprop:Generator_ColumnVarNameInTable="columnfld_Middle_Name" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="fld_Requesting_Person_Address" msprop:Generator_ColumnPropNameInRow="fld_Requesting_Person_Address" msprop:Generator_ColumnPropNameInTable="fld_Requesting_Person_AddressColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Requesting_Person_Address" msprop:Generator_UserColumnName="fld_Requesting_Person_Address">
+              <xs:element name="fld_Requesting_Person_Address" msprop:Generator_ColumnPropNameInTable="fld_Requesting_Person_AddressColumn" msprop:Generator_ColumnPropNameInRow="fld_Requesting_Person_Address" msprop:Generator_UserColumnName="fld_Requesting_Person_Address" msprop:Generator_ColumnVarNameInTable="columnfld_Requesting_Person_Address">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="255" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="fld_Contact_Number" msprop:Generator_ColumnPropNameInRow="fld_Contact_Number" msprop:Generator_ColumnPropNameInTable="fld_Contact_NumberColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Contact_Number" msprop:Generator_UserColumnName="fld_Contact_Number">
+              <xs:element name="fld_Contact_Number" msprop:Generator_ColumnPropNameInTable="fld_Contact_NumberColumn" msprop:Generator_ColumnPropNameInRow="fld_Contact_Number" msprop:Generator_UserColumnName="fld_Contact_Number" msprop:Generator_ColumnVarNameInTable="columnfld_Contact_Number">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="11" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="fld_Request_Origin" msprop:Generator_ColumnPropNameInRow="fld_Request_Origin" msprop:Generator_ColumnPropNameInTable="fld_Request_OriginColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Request_Origin" msprop:Generator_UserColumnName="fld_Request_Origin">
+              <xs:element name="fld_Request_Origin" msprop:Generator_ColumnPropNameInTable="fld_Request_OriginColumn" msprop:Generator_ColumnPropNameInRow="fld_Request_Origin" msprop:Generator_UserColumnName="fld_Request_Origin" msprop:Generator_ColumnVarNameInTable="columnfld_Request_Origin">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="20" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="pk_ReservationID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="pk_ReservationID" msprop:Generator_ColumnPropNameInTable="pk_ReservationIDColumn" msprop:Generator_ColumnVarNameInTable="columnpk_ReservationID" msprop:Generator_UserColumnName="pk_ReservationID" type="xs:int" />
-              <xs:element name="fk_Requesting_PersonID" msprop:Generator_ColumnPropNameInRow="fk_Requesting_PersonID" msprop:Generator_ColumnPropNameInTable="fk_Requesting_PersonIDColumn" msprop:Generator_ColumnVarNameInTable="columnfk_Requesting_PersonID" msprop:Generator_UserColumnName="fk_Requesting_PersonID" type="xs:int" minOccurs="0" />
-              <xs:element name="fk_VenueID" msprop:Generator_ColumnPropNameInRow="fk_VenueID" msprop:Generator_ColumnPropNameInTable="fk_VenueIDColumn" msprop:Generator_ColumnVarNameInTable="columnfk_VenueID" msprop:Generator_UserColumnName="fk_VenueID" type="xs:int" minOccurs="0" />
-              <xs:element name="fld_Venue_Name" msprop:Generator_ColumnPropNameInRow="fld_Venue_Name" msprop:Generator_ColumnPropNameInTable="fld_Venue_NameColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Venue_Name" msprop:Generator_UserColumnName="fld_Venue_Name">
+              <xs:element name="pk_ReservationID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="pk_ReservationIDColumn" msprop:Generator_ColumnPropNameInRow="pk_ReservationID" msprop:Generator_UserColumnName="pk_ReservationID" msprop:Generator_ColumnVarNameInTable="columnpk_ReservationID" type="xs:int" />
+              <xs:element name="fk_Requesting_PersonID" msprop:Generator_ColumnPropNameInTable="fk_Requesting_PersonIDColumn" msprop:Generator_ColumnPropNameInRow="fk_Requesting_PersonID" msprop:Generator_UserColumnName="fk_Requesting_PersonID" msprop:Generator_ColumnVarNameInTable="columnfk_Requesting_PersonID" type="xs:int" minOccurs="0" />
+              <xs:element name="fk_VenueID" msprop:Generator_ColumnPropNameInTable="fk_VenueIDColumn" msprop:Generator_ColumnPropNameInRow="fk_VenueID" msprop:Generator_UserColumnName="fk_VenueID" msprop:Generator_ColumnVarNameInTable="columnfk_VenueID" type="xs:int" minOccurs="0" />
+              <xs:element name="fld_Venue_Name" msprop:Generator_ColumnPropNameInTable="fld_Venue_NameColumn" msprop:Generator_ColumnPropNameInRow="fld_Venue_Name" msprop:Generator_UserColumnName="fld_Venue_Name" msprop:Generator_ColumnVarNameInTable="columnfld_Venue_Name">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="100" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="fk_Venue_PricingID" msprop:Generator_ColumnPropNameInRow="fk_Venue_PricingID" msprop:Generator_ColumnPropNameInTable="fk_Venue_PricingIDColumn" msprop:Generator_ColumnVarNameInTable="columnfk_Venue_PricingID" msprop:Generator_UserColumnName="fk_Venue_PricingID" type="xs:int" minOccurs="0" />
-              <xs:element name="fld_First4Hrs_Rate" msprop:Generator_ColumnPropNameInRow="fld_First4Hrs_Rate" msprop:Generator_ColumnPropNameInTable="fld_First4Hrs_RateColumn" msprop:Generator_ColumnVarNameInTable="columnfld_First4Hrs_Rate" msprop:Generator_UserColumnName="fld_First4Hrs_Rate" type="xs:decimal" />
-              <xs:element name="fld_Hourly_Rate" msprop:Generator_ColumnPropNameInRow="fld_Hourly_Rate" msprop:Generator_ColumnPropNameInTable="fld_Hourly_RateColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Hourly_Rate" msprop:Generator_UserColumnName="fld_Hourly_Rate" type="xs:decimal" />
-              <xs:element name="fld_Additional_Charge" msprop:Generator_ColumnPropNameInRow="fld_Additional_Charge" msprop:Generator_ColumnPropNameInTable="fld_Additional_ChargeColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Additional_Charge" msprop:Generator_UserColumnName="fld_Additional_Charge" type="xs:decimal" />
-              <xs:element name="fk_Venue_ScopeID" msprop:Generator_ColumnPropNameInRow="fk_Venue_ScopeID" msprop:Generator_ColumnPropNameInTable="fk_Venue_ScopeIDColumn" msprop:Generator_ColumnVarNameInTable="columnfk_Venue_ScopeID" msprop:Generator_UserColumnName="fk_Venue_ScopeID" type="xs:int" minOccurs="0" />
-              <xs:element name="fld_Venue_Scope_Name" msprop:Generator_ColumnPropNameInRow="fld_Venue_Scope_Name" msprop:Generator_ColumnPropNameInTable="fld_Venue_Scope_NameColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Venue_Scope_Name" msprop:Generator_UserColumnName="fld_Venue_Scope_Name">
+              <xs:element name="fk_Venue_PricingID" msprop:Generator_ColumnPropNameInTable="fk_Venue_PricingIDColumn" msprop:Generator_ColumnPropNameInRow="fk_Venue_PricingID" msprop:Generator_UserColumnName="fk_Venue_PricingID" msprop:Generator_ColumnVarNameInTable="columnfk_Venue_PricingID" type="xs:int" minOccurs="0" />
+              <xs:element name="fld_First4Hrs_Rate" msprop:Generator_ColumnPropNameInTable="fld_First4Hrs_RateColumn" msprop:Generator_ColumnPropNameInRow="fld_First4Hrs_Rate" msprop:Generator_UserColumnName="fld_First4Hrs_Rate" msprop:Generator_ColumnVarNameInTable="columnfld_First4Hrs_Rate" type="xs:decimal" />
+              <xs:element name="fld_Hourly_Rate" msprop:Generator_ColumnPropNameInTable="fld_Hourly_RateColumn" msprop:Generator_ColumnPropNameInRow="fld_Hourly_Rate" msprop:Generator_UserColumnName="fld_Hourly_Rate" msprop:Generator_ColumnVarNameInTable="columnfld_Hourly_Rate" type="xs:decimal" />
+              <xs:element name="fld_Additional_Charge" msprop:Generator_ColumnPropNameInTable="fld_Additional_ChargeColumn" msprop:Generator_ColumnPropNameInRow="fld_Additional_Charge" msprop:Generator_UserColumnName="fld_Additional_Charge" msprop:Generator_ColumnVarNameInTable="columnfld_Additional_Charge" type="xs:decimal" />
+              <xs:element name="fk_Venue_ScopeID" msprop:Generator_ColumnPropNameInTable="fk_Venue_ScopeIDColumn" msprop:Generator_ColumnPropNameInRow="fk_Venue_ScopeID" msprop:Generator_UserColumnName="fk_Venue_ScopeID" msprop:Generator_ColumnVarNameInTable="columnfk_Venue_ScopeID" type="xs:int" minOccurs="0" />
+              <xs:element name="fld_Venue_Scope_Name" msprop:Generator_ColumnPropNameInTable="fld_Venue_Scope_NameColumn" msprop:Generator_ColumnPropNameInRow="fld_Venue_Scope_Name" msprop:Generator_UserColumnName="fld_Venue_Scope_Name" msprop:Generator_ColumnVarNameInTable="columnfld_Venue_Scope_Name">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="fk_UserID" msprop:Generator_ColumnPropNameInRow="fk_UserID" msprop:Generator_ColumnPropNameInTable="fk_UserIDColumn" msprop:Generator_ColumnVarNameInTable="columnfk_UserID" msprop:Generator_UserColumnName="fk_UserID" type="xs:int" minOccurs="0" />
-              <xs:element name="fld_Control_Number" msprop:Generator_ColumnPropNameInRow="fld_Control_Number" msprop:Generator_ColumnPropNameInTable="fld_Control_NumberColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Control_Number" msprop:Generator_UserColumnName="fld_Control_Number">
+              <xs:element name="fk_UserID" msprop:Generator_ColumnPropNameInTable="fk_UserIDColumn" msprop:Generator_ColumnPropNameInRow="fk_UserID" msprop:Generator_UserColumnName="fk_UserID" msprop:Generator_ColumnVarNameInTable="columnfk_UserID" type="xs:int" minOccurs="0" />
+              <xs:element name="fld_Control_Number" msprop:Generator_ColumnPropNameInTable="fld_Control_NumberColumn" msprop:Generator_ColumnPropNameInRow="fld_Control_Number" msprop:Generator_UserColumnName="fld_Control_Number" msprop:Generator_ColumnVarNameInTable="columnfld_Control_Number">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="20" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="fld_Reservation_Type" msprop:Generator_ColumnPropNameInRow="fld_Reservation_Type" msprop:Generator_ColumnPropNameInTable="fld_Reservation_TypeColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Reservation_Type" msprop:Generator_UserColumnName="fld_Reservation_Type">
+              <xs:element name="fld_Reservation_Type" msprop:Generator_ColumnPropNameInTable="fld_Reservation_TypeColumn" msprop:Generator_ColumnPropNameInRow="fld_Reservation_Type" msprop:Generator_UserColumnName="fld_Reservation_Type" msprop:Generator_ColumnVarNameInTable="columnfld_Reservation_Type">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="20" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="fld_Start_Date" msprop:Generator_ColumnPropNameInRow="fld_Start_Date" msprop:Generator_ColumnPropNameInTable="fld_Start_DateColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Start_Date" msprop:Generator_UserColumnName="fld_Start_Date" type="xs:dateTime" />
-              <xs:element name="fld_End_Date" msprop:Generator_ColumnPropNameInRow="fld_End_Date" msprop:Generator_ColumnPropNameInTable="fld_End_DateColumn" msprop:Generator_ColumnVarNameInTable="columnfld_End_Date" msprop:Generator_UserColumnName="fld_End_Date" type="xs:dateTime" />
-              <xs:element name="fld_Start_Time" msprop:Generator_ColumnPropNameInRow="fld_Start_Time" msprop:Generator_ColumnPropNameInTable="fld_Start_TimeColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Start_Time" msprop:Generator_UserColumnName="fld_Start_Time" type="xs:duration" />
-              <xs:element name="fld_End_Time" msprop:Generator_ColumnPropNameInRow="fld_End_Time" msprop:Generator_ColumnPropNameInTable="fld_End_TimeColumn" msprop:Generator_ColumnVarNameInTable="columnfld_End_Time" msprop:Generator_UserColumnName="fld_End_Time" type="xs:duration" />
-              <xs:element name="fld_Activity_Name" msprop:Generator_ColumnPropNameInRow="fld_Activity_Name" msprop:Generator_ColumnPropNameInTable="fld_Activity_NameColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Activity_Name" msprop:Generator_UserColumnName="fld_Activity_Name">
+              <xs:element name="fld_Start_Date" msprop:Generator_ColumnPropNameInTable="fld_Start_DateColumn" msprop:Generator_ColumnPropNameInRow="fld_Start_Date" msprop:Generator_UserColumnName="fld_Start_Date" msprop:Generator_ColumnVarNameInTable="columnfld_Start_Date" type="xs:dateTime" />
+              <xs:element name="fld_End_Date" msprop:Generator_ColumnPropNameInTable="fld_End_DateColumn" msprop:Generator_ColumnPropNameInRow="fld_End_Date" msprop:Generator_UserColumnName="fld_End_Date" msprop:Generator_ColumnVarNameInTable="columnfld_End_Date" type="xs:dateTime" />
+              <xs:element name="fld_Start_Time" msprop:Generator_ColumnPropNameInTable="fld_Start_TimeColumn" msprop:Generator_ColumnPropNameInRow="fld_Start_Time" msprop:Generator_UserColumnName="fld_Start_Time" msprop:Generator_ColumnVarNameInTable="columnfld_Start_Time" type="xs:duration" />
+              <xs:element name="fld_End_Time" msprop:Generator_ColumnPropNameInTable="fld_End_TimeColumn" msprop:Generator_ColumnPropNameInRow="fld_End_Time" msprop:Generator_UserColumnName="fld_End_Time" msprop:Generator_ColumnVarNameInTable="columnfld_End_Time" type="xs:duration" />
+              <xs:element name="fld_Activity_Name" msprop:Generator_ColumnPropNameInTable="fld_Activity_NameColumn" msprop:Generator_ColumnPropNameInRow="fld_Activity_Name" msprop:Generator_UserColumnName="fld_Activity_Name" msprop:Generator_ColumnVarNameInTable="columnfld_Activity_Name">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="100" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="fld_Number_Of_Participants" msprop:Generator_ColumnPropNameInRow="fld_Number_Of_Participants" msprop:Generator_ColumnPropNameInTable="fld_Number_Of_ParticipantsColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Number_Of_Participants" msprop:Generator_UserColumnName="fld_Number_Of_Participants" type="xs:int" />
-              <xs:element name="fld_Reservation_Status" msprop:Generator_ColumnPropNameInRow="fld_Reservation_Status" msprop:Generator_ColumnPropNameInTable="fld_Reservation_StatusColumn" msprop:Generator_ColumnVarNameInTable="columnfld_Reservation_Status" msprop:Generator_UserColumnName="fld_Reservation_Status" minOccurs="0">
+              <xs:element name="fld_Number_Of_Participants" msprop:Generator_ColumnPropNameInTable="fld_Number_Of_ParticipantsColumn" msprop:Generator_ColumnPropNameInRow="fld_Number_Of_Participants" msprop:Generator_UserColumnName="fld_Number_Of_Participants" msprop:Generator_ColumnVarNameInTable="columnfld_Number_Of_Participants" type="xs:int" />
+              <xs:element name="fld_Reservation_Status" msprop:Generator_ColumnPropNameInTable="fld_Reservation_StatusColumn" msprop:Generator_ColumnPropNameInRow="fld_Reservation_Status" msprop:Generator_UserColumnName="fld_Reservation_Status" msprop:Generator_ColumnVarNameInTable="columnfld_Reservation_Status" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="20" />

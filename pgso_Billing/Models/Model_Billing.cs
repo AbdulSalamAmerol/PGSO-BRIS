@@ -100,8 +100,18 @@ namespace pgso.Billing.Models
         public decimal fld_Amount_Paid_Overtime { get; set; }
 
         // 🔸 Computed Properties
-        public double Total_Hours => Math.Max(0, (fld_End_Time - fld_Start_Time).TotalHours);
+        public double Total_Hours
+        {
+            get
+            {
+                // Combine date and time fields into DateTime
+                DateTime startDateTime = fld_Start_Date.Date + fld_Start_Time;
+                DateTime endDateTime = fld_End_Date.Date + fld_End_Time;
 
+                // Compute duration in hours
+                return Math.Max(0, (endDateTime - startDateTime).TotalHours);
+            }
+        }
 
         // 🔸 Formatting Properties
         public string Formatted_Amount_Due => fld_Amount_Due.ToString("C", new CultureInfo("en-PH"));

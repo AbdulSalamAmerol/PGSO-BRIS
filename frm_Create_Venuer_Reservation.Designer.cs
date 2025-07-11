@@ -256,9 +256,9 @@ namespace pgso
             this.panel2.Controls.Add(this.txt_rate);
             this.panel2.Controls.Add(this.txt_Total);
             this.panel2.Controls.Add(this.label26);
-            this.panel2.Location = new System.Drawing.Point(688, 36);
+            this.panel2.Location = new System.Drawing.Point(662, 68);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(188, 51);
+            this.panel2.Size = new System.Drawing.Size(124, 40);
             this.panel2.TabIndex = 68;
             this.panel2.Visible = false;
             // 
@@ -764,6 +764,7 @@ namespace pgso
             this.ClientSize = new System.Drawing.Size(916, 704);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MinimizeBox = false;
             this.Name = "frm_Create_Venuer_Reservation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create Venue Reservation";

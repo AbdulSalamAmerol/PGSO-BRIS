@@ -7,7 +7,7 @@
     <ProjectGuid>{17E2C7B0-863D-4EB8-8005-B54F0456B61D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>pgso</RootNamespace>
-    <AssemblyName>pgso</AssemblyName>
+    <AssemblyName>RBIS</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
@@ -18,7 +18,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>C:\Proj\</PublishUrl>
+    <PublishUrl>\\172.17.16.125\C%24\inetpub\wwwroot\RBIS\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -32,7 +32,7 @@
     <PublisherName>GO-PITD</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>9</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -75,8 +75,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>RBIS.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -681,62 +680,6 @@
     <None Include="packages\itext7.9.1.0\gnu-agpl-v3.0.md" />
     <None Include="packages\itext7.9.1.0\itext7.9.1.0.nupkg" />
     <None Include="packages\itext7.9.1.0\LICENSE.md" />
-    <None Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\.signature.p7s" />
-    <None Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\buildTransitive\net461\Microsoft.Bcl.AsyncInterfaces.targets" />
-    <None Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\buildTransitive\net462\_._" />
-    <None Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\buildTransitive\net8.0\_._" />
-    <None Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\buildTransitive\netcoreapp2.0\Microsoft.Bcl.AsyncInterfaces.targets" />
-    <None Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\Microsoft.Bcl.AsyncInterfaces.9.0.3.nupkg" />
-    <None Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\PACKAGE.md" />
-    <None Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\.signature.p7s" />
-    <None Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\buildTransitive\net461\Microsoft.Extensions.DependencyInjection.targets" />
-    <None Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\buildTransitive\net462\_._" />
-    <None Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\buildTransitive\net8.0\_._" />
-    <None Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\buildTransitive\netcoreapp2.0\Microsoft.Extensions.DependencyInjection.targets" />
-    <None Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\Microsoft.Extensions.DependencyInjection.9.0.3.nupkg" />
-    <None Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\PACKAGE.md" />
-    <None Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\.signature.p7s" />
-    <None Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\buildTransitive\net461\Microsoft.Extensions.DependencyInjection.Abstractions.targets" />
-    <None Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\buildTransitive\net462\_._" />
-    <None Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\buildTransitive\net8.0\_._" />
-    <None Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\buildTransitive\netcoreapp2.0\Microsoft.Extensions.DependencyInjection.Abstractions.targets" />
-    <None Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3.nupkg" />
-    <None Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\PACKAGE.md" />
-    <None Include="packages\Microsoft.Extensions.Logging.9.0.3\.signature.p7s" />
-    <None Include="packages\Microsoft.Extensions.Logging.9.0.3\buildTransitive\net461\Microsoft.Extensions.Logging.targets" />
-    <None Include="packages\Microsoft.Extensions.Logging.9.0.3\buildTransitive\net462\_._" />
-    <None Include="packages\Microsoft.Extensions.Logging.9.0.3\buildTransitive\net8.0\_._" />
-    <None Include="packages\Microsoft.Extensions.Logging.9.0.3\buildTransitive\netcoreapp2.0\Microsoft.Extensions.Logging.targets" />
-    <None Include="packages\Microsoft.Extensions.Logging.9.0.3\Microsoft.Extensions.Logging.9.0.3.nupkg" />
-    <None Include="packages\Microsoft.Extensions.Logging.9.0.3\PACKAGE.md" />
-    <None Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\.signature.p7s" />
-    <None Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\buildTransitive\net461\Microsoft.Extensions.Logging.Abstractions.targets" />
-    <None Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\buildTransitive\net462\Microsoft.Extensions.Logging.Abstractions.targets" />
-    <None Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\buildTransitive\net8.0\Microsoft.Extensions.Logging.Abstractions.targets" />
-    <None Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\buildTransitive\netcoreapp2.0\Microsoft.Extensions.Logging.Abstractions.targets" />
-    <None Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\buildTransitive\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.targets" />
-    <None Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\Microsoft.Extensions.Logging.Abstractions.9.0.3.nupkg" />
-    <None Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\PACKAGE.md" />
-    <None Include="packages\Microsoft.Extensions.Options.9.0.3\.signature.p7s" />
-    <None Include="packages\Microsoft.Extensions.Options.9.0.3\buildTransitive\net461\Microsoft.Extensions.Options.targets" />
-    <None Include="packages\Microsoft.Extensions.Options.9.0.3\buildTransitive\net462\Microsoft.Extensions.Options.targets" />
-    <None Include="packages\Microsoft.Extensions.Options.9.0.3\buildTransitive\net8.0\Microsoft.Extensions.Options.targets" />
-    <None Include="packages\Microsoft.Extensions.Options.9.0.3\buildTransitive\netcoreapp2.0\Microsoft.Extensions.Options.targets" />
-    <None Include="packages\Microsoft.Extensions.Options.9.0.3\buildTransitive\netstandard2.0\Microsoft.Extensions.Options.targets" />
-    <None Include="packages\Microsoft.Extensions.Options.9.0.3\Microsoft.Extensions.Options.9.0.3.nupkg" />
-    <None Include="packages\Microsoft.Extensions.Options.9.0.3\PACKAGE.md" />
-    <None Include="packages\Microsoft.Extensions.Primitives.9.0.3\.signature.p7s" />
-    <None Include="packages\Microsoft.Extensions.Primitives.9.0.3\buildTransitive\net461\Microsoft.Extensions.Primitives.targets" />
-    <None Include="packages\Microsoft.Extensions.Primitives.9.0.3\buildTransitive\net462\_._" />
-    <None Include="packages\Microsoft.Extensions.Primitives.9.0.3\buildTransitive\net8.0\_._" />
-    <None Include="packages\Microsoft.Extensions.Primitives.9.0.3\buildTransitive\netcoreapp2.0\Microsoft.Extensions.Primitives.targets" />
-    <None Include="packages\Microsoft.Extensions.Primitives.9.0.3\Microsoft.Extensions.Primitives.9.0.3.nupkg" />
-    <None Include="packages\Microsoft.Extensions.Primitives.9.0.3\PACKAGE.md" />
-    <None Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\.signature.p7s" />
-    <None Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\license\License_ReportViewer.rtf" />
-    <None Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0.nupkg" />
-    <None Include="packages\Microsoft.ReportViewer.WinForms.10.0.40219.1\.signature.p7s" />
-    <None Include="packages\Microsoft.ReportViewer.WinForms.10.0.40219.1\Microsoft.ReportViewer.WinForms.10.0.40219.1.nupkg" />
     <None Include="packages\Microsoft.SqlServer.Types.14.0.314.76\.signature.p7s" />
     <None Include="packages\Microsoft.SqlServer.Types.14.0.314.76\license\license_SysClrTypes.rtf" />
     <None Include="packages\Microsoft.SqlServer.Types.14.0.314.76\Microsoft.SqlServer.Types.14.0.314.76.nupkg" />
@@ -905,203 +848,6 @@
     <Content Include="packages\itext.commons.9.1.0\lib\netstandard2.0\itext.commons.dll" />
     <Content Include="packages\itext.commons.9.1.0\lib\netstandard2.0\itext.commons.xml" />
     <Content Include="packages\itext7.9.1.0\ITSC-avatar.png" />
-    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\Icon.png" />
-    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll" />
-    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\lib\net462\Microsoft.Bcl.AsyncInterfaces.xml" />
-    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.dll" />
-    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.xml" />
-    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\lib\netstandard2.1\Microsoft.Bcl.AsyncInterfaces.dll" />
-    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\lib\netstandard2.1\Microsoft.Bcl.AsyncInterfaces.xml" />
-    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\LICENSE.TXT" />
-    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\THIRD-PARTY-NOTICES.TXT" />
-    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.3\useSharedDesignerContext.txt" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\Icon.png" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\lib\net462\Microsoft.Extensions.DependencyInjection.dll" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\lib\net462\Microsoft.Extensions.DependencyInjection.xml" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\lib\net8.0\Microsoft.Extensions.DependencyInjection.dll" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\lib\net8.0\Microsoft.Extensions.DependencyInjection.xml" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\lib\net9.0\Microsoft.Extensions.DependencyInjection.dll" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\lib\net9.0\Microsoft.Extensions.DependencyInjection.xml" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.dll" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.xml" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\lib\netstandard2.1\Microsoft.Extensions.DependencyInjection.dll" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\lib\netstandard2.1\Microsoft.Extensions.DependencyInjection.xml" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\LICENSE.TXT" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\THIRD-PARTY-NOTICES.TXT" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.9.0.3\useSharedDesignerContext.txt" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\Icon.png" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.xml" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\lib\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\lib\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.xml" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\lib\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\lib\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.xml" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.xml" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\lib\netstandard2.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\lib\netstandard2.1\Microsoft.Extensions.DependencyInjection.Abstractions.xml" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\LICENSE.TXT" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\THIRD-PARTY-NOTICES.TXT" />
-    <Content Include="packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.3\useSharedDesignerContext.txt" />
-    <Content Include="packages\Microsoft.Extensions.Logging.9.0.3\Icon.png" />
-    <Content Include="packages\Microsoft.Extensions.Logging.9.0.3\lib\net462\Microsoft.Extensions.Logging.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.9.0.3\lib\net462\Microsoft.Extensions.Logging.xml" />
-    <Content Include="packages\Microsoft.Extensions.Logging.9.0.3\lib\net8.0\Microsoft.Extensions.Logging.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.9.0.3\lib\net8.0\Microsoft.Extensions.Logging.xml" />
-    <Content Include="packages\Microsoft.Extensions.Logging.9.0.3\lib\net9.0\Microsoft.Extensions.Logging.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.9.0.3\lib\net9.0\Microsoft.Extensions.Logging.xml" />
-    <Content Include="packages\Microsoft.Extensions.Logging.9.0.3\lib\netstandard2.0\Microsoft.Extensions.Logging.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.9.0.3\lib\netstandard2.0\Microsoft.Extensions.Logging.xml" />
-    <Content Include="packages\Microsoft.Extensions.Logging.9.0.3\lib\netstandard2.1\Microsoft.Extensions.Logging.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.9.0.3\lib\netstandard2.1\Microsoft.Extensions.Logging.xml" />
-    <Content Include="packages\Microsoft.Extensions.Logging.9.0.3\LICENSE.TXT" />
-    <Content Include="packages\Microsoft.Extensions.Logging.9.0.3\THIRD-PARTY-NOTICES.TXT" />
-    <Content Include="packages\Microsoft.Extensions.Logging.9.0.3\useSharedDesignerContext.txt" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn3.11\cs\cs\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn3.11\cs\de\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn3.11\cs\es\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn3.11\cs\fr\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn3.11\cs\it\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn3.11\cs\ja\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn3.11\cs\ko\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn3.11\cs\Microsoft.Extensions.Logging.Generators.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn3.11\cs\pl\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn3.11\cs\pt-BR\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn3.11\cs\ru\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn3.11\cs\tr\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn3.11\cs\zh-Hans\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn3.11\cs\zh-Hant\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.0\cs\cs\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.0\cs\de\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.0\cs\es\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.0\cs\fr\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.0\cs\it\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.0\cs\ja\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.0\cs\ko\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.0\cs\Microsoft.Extensions.Logging.Generators.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.0\cs\pl\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.0\cs\pt-BR\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.0\cs\ru\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.0\cs\tr\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.0\cs\zh-Hans\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.0\cs\zh-Hant\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.4\cs\cs\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.4\cs\de\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.4\cs\es\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.4\cs\fr\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.4\cs\it\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.4\cs\ja\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.4\cs\ko\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.4\cs\Microsoft.Extensions.Logging.Generators.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.4\cs\pl\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.4\cs\pt-BR\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.4\cs\ru\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.4\cs\tr\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.4\cs\zh-Hans\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\analyzers\dotnet\roslyn4.4\cs\zh-Hant\Microsoft.Extensions.Logging.Generators.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\Icon.png" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\lib\net462\Microsoft.Extensions.Logging.Abstractions.xml" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\lib\net8.0\Microsoft.Extensions.Logging.Abstractions.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\lib\net8.0\Microsoft.Extensions.Logging.Abstractions.xml" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\lib\net9.0\Microsoft.Extensions.Logging.Abstractions.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\lib\net9.0\Microsoft.Extensions.Logging.Abstractions.xml" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.xml" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\LICENSE.TXT" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\THIRD-PARTY-NOTICES.TXT" />
-    <Content Include="packages\Microsoft.Extensions.Logging.Abstractions.9.0.3\useSharedDesignerContext.txt" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\analyzers\dotnet\roslyn4.4\cs\cs\Microsoft.Extensions.Options.SourceGeneration.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\analyzers\dotnet\roslyn4.4\cs\de\Microsoft.Extensions.Options.SourceGeneration.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\analyzers\dotnet\roslyn4.4\cs\es\Microsoft.Extensions.Options.SourceGeneration.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\analyzers\dotnet\roslyn4.4\cs\fr\Microsoft.Extensions.Options.SourceGeneration.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\analyzers\dotnet\roslyn4.4\cs\it\Microsoft.Extensions.Options.SourceGeneration.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\analyzers\dotnet\roslyn4.4\cs\ja\Microsoft.Extensions.Options.SourceGeneration.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\analyzers\dotnet\roslyn4.4\cs\ko\Microsoft.Extensions.Options.SourceGeneration.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\analyzers\dotnet\roslyn4.4\cs\Microsoft.Extensions.Options.SourceGeneration.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\analyzers\dotnet\roslyn4.4\cs\pl\Microsoft.Extensions.Options.SourceGeneration.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\analyzers\dotnet\roslyn4.4\cs\pt-BR\Microsoft.Extensions.Options.SourceGeneration.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\analyzers\dotnet\roslyn4.4\cs\ru\Microsoft.Extensions.Options.SourceGeneration.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\analyzers\dotnet\roslyn4.4\cs\tr\Microsoft.Extensions.Options.SourceGeneration.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\analyzers\dotnet\roslyn4.4\cs\zh-Hans\Microsoft.Extensions.Options.SourceGeneration.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\analyzers\dotnet\roslyn4.4\cs\zh-Hant\Microsoft.Extensions.Options.SourceGeneration.resources.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\Icon.png" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\lib\net462\Microsoft.Extensions.Options.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\lib\net462\Microsoft.Extensions.Options.xml" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\lib\net8.0\Microsoft.Extensions.Options.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\lib\net8.0\Microsoft.Extensions.Options.xml" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\lib\net9.0\Microsoft.Extensions.Options.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\lib\net9.0\Microsoft.Extensions.Options.xml" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\lib\netstandard2.0\Microsoft.Extensions.Options.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\lib\netstandard2.0\Microsoft.Extensions.Options.xml" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\lib\netstandard2.1\Microsoft.Extensions.Options.dll" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\lib\netstandard2.1\Microsoft.Extensions.Options.xml" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\LICENSE.TXT" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\THIRD-PARTY-NOTICES.TXT" />
-    <Content Include="packages\Microsoft.Extensions.Options.9.0.3\useSharedDesignerContext.txt" />
-    <Content Include="packages\Microsoft.Extensions.Primitives.9.0.3\Icon.png" />
-    <Content Include="packages\Microsoft.Extensions.Primitives.9.0.3\lib\net462\Microsoft.Extensions.Primitives.dll" />
-    <Content Include="packages\Microsoft.Extensions.Primitives.9.0.3\lib\net462\Microsoft.Extensions.Primitives.xml" />
-    <Content Include="packages\Microsoft.Extensions.Primitives.9.0.3\lib\net8.0\Microsoft.Extensions.Primitives.dll" />
-    <Content Include="packages\Microsoft.Extensions.Primitives.9.0.3\lib\net8.0\Microsoft.Extensions.Primitives.xml" />
-    <Content Include="packages\Microsoft.Extensions.Primitives.9.0.3\lib\net9.0\Microsoft.Extensions.Primitives.dll" />
-    <Content Include="packages\Microsoft.Extensions.Primitives.9.0.3\lib\net9.0\Microsoft.Extensions.Primitives.xml" />
-    <Content Include="packages\Microsoft.Extensions.Primitives.9.0.3\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll" />
-    <Content Include="packages\Microsoft.Extensions.Primitives.9.0.3\lib\netstandard2.0\Microsoft.Extensions.Primitives.xml" />
-    <Content Include="packages\Microsoft.Extensions.Primitives.9.0.3\LICENSE.TXT" />
-    <Content Include="packages\Microsoft.Extensions.Primitives.9.0.3\THIRD-PARTY-NOTICES.TXT" />
-    <Content Include="packages\Microsoft.Extensions.Primitives.9.0.3\useSharedDesignerContext.txt" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\de\Microsoft.ReportViewer.Common.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\de\Microsoft.ReportViewer.DataVisualization.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\de\Microsoft.ReportViewer.Design.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\de\Microsoft.ReportViewer.WinForms.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\es\Microsoft.ReportViewer.Common.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\es\Microsoft.ReportViewer.DataVisualization.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\es\Microsoft.ReportViewer.Design.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\es\Microsoft.ReportViewer.WinForms.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\fr\Microsoft.ReportViewer.Common.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\fr\Microsoft.ReportViewer.DataVisualization.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\fr\Microsoft.ReportViewer.Design.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\fr\Microsoft.ReportViewer.WinForms.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\it\Microsoft.ReportViewer.Common.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\it\Microsoft.ReportViewer.DataVisualization.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\it\Microsoft.ReportViewer.Design.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\it\Microsoft.ReportViewer.WinForms.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\ja\Microsoft.ReportViewer.Common.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\ja\Microsoft.ReportViewer.DataVisualization.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\ja\Microsoft.ReportViewer.Design.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\ja\Microsoft.ReportViewer.WinForms.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\ko\Microsoft.ReportViewer.Common.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\ko\Microsoft.ReportViewer.DataVisualization.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\ko\Microsoft.ReportViewer.Design.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\ko\Microsoft.ReportViewer.WinForms.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Common.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Common.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.DataVisualization.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Design.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Design.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.WinForms.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.WinForms.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\pt\Microsoft.ReportViewer.Common.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\pt\Microsoft.ReportViewer.DataVisualization.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\pt\Microsoft.ReportViewer.Design.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\pt\Microsoft.ReportViewer.WinForms.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\ru\Microsoft.ReportViewer.Common.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\ru\Microsoft.ReportViewer.DataVisualization.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\ru\Microsoft.ReportViewer.Design.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\ru\Microsoft.ReportViewer.WinForms.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\zh-CHS\Microsoft.ReportViewer.Common.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\zh-CHS\Microsoft.ReportViewer.Design.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\zh-CHT\Microsoft.ReportViewer.Common.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\zh-CHT\Microsoft.ReportViewer.Design.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll" />
-    <Content Include="packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\license\ThirdPartyNotices_ReportViewer.txt" />
-    <Content Include="packages\Microsoft.ReportViewer.WinForms.10.0.40219.1\lib\Microsoft.ReportViewer.WinForms.dll" />
     <Content Include="packages\Microsoft.SqlServer.Types.14.0.314.76\content\SqlServerTypes\readme.htm" />
     <Content Include="packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll" />
     <Content Include="packages\Microsoft.SqlServer.Types.14.0.314.76\nativeBinaries\x64\msvcr120.dll" />

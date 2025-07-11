@@ -75,7 +75,7 @@ namespace pgso
             cmb_Billing_Sort.Items.AddRange(new string[] { "Control Number", "Reservation Date", "Requesting Person", "Reservation Type", "Reservation Status", "Amount Due" });
             cmb_Billing_Sort.SelectedIndex = 0; // Default selection
             cmb_Billing_Sort.SelectedIndexChanged += cmb_Billing_Sort_SelectedIndexChanged;
-            ApplySearchFilter(""); // ✅ This will apply default filter + sort on load
+            ApplySearchFilter(""); //  This will apply default filter + sort on load
         }
         // Filter and Sort Events
         private void cmb_Billing_Filter_SelectedIndexChanged(object sender, EventArgs e)
@@ -278,10 +278,12 @@ namespace pgso
                         else if (cellValue?.ToString() == "Cancelled")
                         {
                             row.DefaultCellStyle.BackColor = Color.FromArgb(200, 220, 255); // BLUE
+                            row.DefaultCellStyle.ForeColor = Color.Black;
                         }
                         else if (cellValue?.ToString() == "Confirmed")
                         {
                             row.DefaultCellStyle.BackColor = Color.FromArgb(225, 255, 225); // GREEN
+                            row.DefaultCellStyle.ForeColor = Color.Black;
                         }
                         else if (cellValue?.ToString() == "Pending")
                         {
@@ -289,19 +291,7 @@ namespace pgso
                             row.DefaultCellStyle.ForeColor = Color.Black;
                         }
                         // Logic for Reservation Venue Completion
-                        if (billing.fld_Reservation_Status == "Confirmed" //The reservation must be in the "Confirmed" status.
-                            && billing.fld_Reservation_Type == "Venue" //  It must be a venue reservation, not equipment.
-                            && billing.fld_Confirmation_Date.HasValue //  There must be a confirmation date (i.e. it’s not null).
-                            && (DateTime.Now - billing.fld_Confirmation_Date.Value).TotalDays >= 5 // The reservation has been confirmed for 5 or more days.
-                            && DateTime.Now > billing.fld_End_Date // The reservation’s end date has passed (i.e. it's already finished).
-                            && (billing.fld_OR != null && billing.fld_OR > 0)) // There is a valid OR (Official Receipt) number (not null, not zero).
-                        {
-                            row.DefaultCellStyle.BackColor = Color.Orange;
-                            row.DefaultCellStyle.ForeColor = Color.White;
-
-                            Repo_Billing repo = new Repo_Billing();
-                            repo.MarkReservationAsCompleted(billing.pk_ReservationID);
-                        }
+                       
 
 
                         // Color rows that are already Completed
